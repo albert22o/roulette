@@ -1,10 +1,10 @@
 ﻿public interface IRouletteWheel
 {
     /// <summary>
-    /// Добавляет шар с именем ballName в рулетку
+    /// Добавляет шар с хешем в рулетку
     /// </summary>
-    /// <param name="ballName"> Имя шара, обязано быть уникальным</param>
-    public void AddBall(string ballName);
+    /// <param name="ballHash"> Хеш шара, обязан быть уникальным</param>
+    public void AddBall(string ballHash, VisualComponent visualComponent);
 
     /// <summary>
     /// Крутит все шары в рулетке
@@ -27,4 +27,18 @@
     /// </summary>
     /// <returns> Информация о шарах, или null, если они не были прокатаны</returns>
     public HitInfo[] GetHitInfo();
+
+    /// <summary>
+    /// Устанавливает цвет поля
+    /// </summary>
+    /// <param name="fieldPosition">Фактическая позиция поля</param>
+    /// <param name="color">Цвет поля</param>
+    public void SetFieldColor(int fieldPosition, string color);
+
+    /// <summary>
+    /// Устанавливает номер поля
+    /// </summary>
+    /// <param name="fieldPosition">Фактическая позиция поля</param>
+    /// <param name="number">Номер поля</param>
+    public void SetFieldNumber(int fieldPosition, int number);
 }
