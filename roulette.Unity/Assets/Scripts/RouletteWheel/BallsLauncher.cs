@@ -17,6 +17,11 @@ public class BallsLauncher : MonoBehaviour
     private List<BallData> ballsToSpawn = new List<BallData>();
     private Coroutine ballLaunching;
 
+    private void Start()
+    {
+        ballsManager.BallInvalid += OnBallInvalid;
+    }
+
 
     public void AddBall(string ballHash, VisualComponent visualComponent)
     {
@@ -73,9 +78,24 @@ public class BallsLauncher : MonoBehaviour
         }
         ballsToSpawn = newBallsToSpawn;
     }
+
+    private void OnBallInvalid(string ballHash)
+    {
+        Debug.Log($"Rerolling invalid ball: {ballHash}");
+
+        var data = ballsToSpawn.Find(b => b.BallHash == ballHash);
+        if (data.BallHash == null)
+        {
+            Debug.LogError("BallData not found for invalid ball!");
+            return;
+        }
+        ballsManager.Clear(ballHash);
+        SpawnBall(data);
+    }
+
 }
 
-internal struct BallData
+internal class BallData
 {
     public string BallHash;
     public VisualComponent VisualComponent;

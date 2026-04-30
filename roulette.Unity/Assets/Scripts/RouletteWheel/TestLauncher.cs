@@ -7,7 +7,7 @@ public class TestLauncher : MonoBehaviour
     [SerializeField] private RouletteWheel rouletteWheel;
     [SerializeField] private VisualComponent[] visualComponents;
 
-    private bool isNeedReroll = true;
+    private bool isNeedReroll = false;
 
 
     private void OnEnable()

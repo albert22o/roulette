@@ -58,7 +58,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
 
     public void ClearBalls()
     {
-        ballsManager.Clear();
+        ballsManager.ClearAll();
         ballsLauncher.Clear();
     }
 

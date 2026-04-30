@@ -4,6 +4,7 @@
     public string BallHash { get; set; }
     public string FieldColor { get; set; }
     public int FieldNumber { get; set; }
+    public int FieldIndex { get; set; }
 }
 
 public enum DozenType

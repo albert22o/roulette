@@ -10,6 +10,7 @@ public class RouletteBallsManager : MonoBehaviour
     [SerializeField] private Transform wheel;
     [SerializeField] private float stopThreshold = 5f;
     [SerializeField] private float stableTimeRequired = 1f;
+    [SerializeField] private float maxDistance;
     [SerializeField] private RouletteWheel rouletteWheel;
     [SerializeField] private Vector3 upAxis = Vector3.up;
 
@@ -17,18 +18,40 @@ public class RouletteBallsManager : MonoBehaviour
 
     private List<float> prevAngles = new List<float>();
     private List<float> stableTimes = new List<float>();
+    private HashSet<string> invalidBalls = new HashSet<string>();
 
     private Dictionary<string, HitInfo> hitsInfo = new Dictionary<string, HitInfo>();
+
     public event Action<HitInfo[]> AllBallsStopped;
 
     private bool isSimulating;
+
+    public event Action<string> BallInvalid;
+
+
+    private void MarkInvalid(Ball ball)
+    {
+        if (!invalidBalls.Contains(ball.Hash))
+        {
+            Debug.LogWarning($"Ball {ball.Hash} marked INVALID");
+            invalidBalls.Add(ball.Hash);
+            BallInvalid?.Invoke(ball.Hash);
+        }
+
+        if (hitsInfo.ContainsKey(ball.Hash))
+        {
+            hitsInfo.Remove(ball.Hash);
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
         if (wheel != null)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(wheel.position, sectorsRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(wheel.position, maxDistance);
         }
     }
 
@@ -44,10 +67,12 @@ public class RouletteBallsManager : MonoBehaviour
     void Update()
     {
         if (isSimulating == false) return;
-        foreach (Ball ball in balls)
+        for (int i = 0; i < balls.Count; i++)
         {
-            CheckBallStopped(ball);
+            CheckBallStopped(balls[i]);
         }
+        invalidBalls.Clear();
+
         if (hitsInfo.Count == balls.Count)
         {
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
@@ -57,6 +82,12 @@ public class RouletteBallsManager : MonoBehaviour
 
     private void CheckBallStopped(Ball ball)
     {
+        if (Vector2.SqrMagnitude(ball.transform.position - wheel.position) > maxDistance * maxDistance)
+        {
+            MarkInvalid(ball);
+            return;
+        }
+
         Vector3 local = wheel.InverseTransformPoint(ball.transform.position);
 
         float deg = GetAngle(local);
@@ -70,21 +101,27 @@ public class RouletteBallsManager : MonoBehaviour
         else
             stableTimes[ballIndex] = 0f;
 
-        if (stableTimes[ballIndex] >= stableTimeRequired
-            && Vector2.SqrMagnitude(ball.transform.position - wheel.position) <= sectorsRadius * sectorsRadius)
+        if (stableTimes[ballIndex] >= stableTimeRequired)
         {
-            int sectorIndex = Mathf.FloorToInt(deg / (360f / rouletteWheel.Fields.Length));
-
-            var field = rouletteWheel.Fields[sectorIndex];
-            if (hitsInfo.ContainsKey(ball.Hash) == false)
+            if (Vector2.SqrMagnitude(ball.transform.position - wheel.position) <= sectorsRadius * sectorsRadius)
             {
-                hitsInfo.Add(ball.Hash, new HitInfo()
+                int sectorIndex = Mathf.FloorToInt(deg / (360f / rouletteWheel.Fields.Length));
+
+                var field = rouletteWheel.Fields[sectorIndex];
+                if (hitsInfo.ContainsKey(ball.Hash) == false)
                 {
-                    BallHash = ball.Hash,
-                    FieldColor = field.Color,
-                    FieldNumber = field.Number,
-                    Dozen = GetDozenByIndex(sectorIndex)
-                });
+                    hitsInfo.Add(ball.Hash, new HitInfo()
+                    {
+                        BallHash = ball.Hash,
+                        FieldColor = field.Color,
+                        FieldNumber = field.Number,
+                        Dozen = GetDozenByIndex(sectorIndex)
+                    });
+                }
+            }
+            else
+            {
+                MarkInvalid(ball);
             }
         }
         else
@@ -118,7 +155,7 @@ public class RouletteBallsManager : MonoBehaviour
         return (angle + 360f) % 360f;
     }
 
-    public void Clear()
+    public void ClearAll()
     {
         for (int i = 0; i < balls.Count; i++)
         {

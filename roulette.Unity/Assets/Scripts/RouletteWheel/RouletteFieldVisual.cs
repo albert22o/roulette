@@ -10,8 +10,7 @@ public class RouletteFieldVisual : MonoBehaviour
 
     [SerializeField] private RouletteColorTable colorTable;
 
-    [SerializeField] private RingSegmentGenerator meshGenerator;
-
+ 
     public void SetField(RouletteWheelField field)
     {
         this.field = field;
@@ -20,10 +19,9 @@ public class RouletteFieldVisual : MonoBehaviour
         field.NumberChanged += OnNumberChanged;
     }
 
-    public void GenerateMesh(float innerRadius, float outerRadius, float height, float angle, int radialSegments)
+    public void GenerateMesh(float angle)
     {
-        meshGenerator.SetParameters(innerRadius, outerRadius, height, angle, radialSegments);
-        meshGenerator.Generate();
+        transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 
 
