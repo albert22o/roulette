@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ea7e6e1aba34141a086d164bede275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 9117743398347639637}
+  ballRigidbody: {fileID: 9117743398347639637}
 --- !u!75 &8265735224379251749
 ConstantForce:
   m_ObjectHideFlags: 0

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Rigidbody ballRigidbody;
 
     public event Action Destroyed;
     public string Hash { get; private set; }
 
     public void Launch(Vector3 velocity)
     {
-        rigidbody.linearVelocity = velocity;
+        ballRigidbody.linearVelocity = velocity;
     }
 
     public void SetHash(string hash)
@@ -25,9 +25,9 @@ public class Ball : MonoBehaviour
 
     public void Freeze()
     {
-        rigidbody.angularVelocity = Vector3.zero;
-        rigidbody.linearVelocity = Vector3.zero;
-        rigidbody.isKinematic = true;
-        rigidbody.interpolation = RigidbodyInterpolation.None;
+        ballRigidbody.angularVelocity = Vector3.zero;
+        ballRigidbody.linearVelocity = Vector3.zero;
+        ballRigidbody.isKinematic = true;
+        ballRigidbody.interpolation = RigidbodyInterpolation.None;
     }
 }

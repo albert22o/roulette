@@ -3,7 +3,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BallVisual : MonoBehaviour
 {
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private Renderer meshRenderer;
     private Ball ball;
     private VisualComponent visualComponent;
     private float scaleMultiplier;
@@ -14,7 +14,7 @@ public class BallVisual : MonoBehaviour
     public void SetVisualComponent(VisualComponent visualComponent)
     {
         this.visualComponent = visualComponent;
-        renderer.material = visualComponent.Material;
+        meshRenderer.material = visualComponent.Material;
     }
 
     public void Initialize(Ball ball, float scaleMultiplier)
