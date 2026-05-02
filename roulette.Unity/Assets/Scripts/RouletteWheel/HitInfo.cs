@@ -11,10 +11,7 @@
     /// Может отличаться от фактической позиции поля
     /// </summary>
     public int FieldNumber { get; set; }
-    /// <summary>
-    /// Позиция поля, на котором остановился шар
-    /// </summary>
-    public int FieldPosition { get; set; }
+    public int FieldIndex { get; set; }
 }
 
 public enum DozenType
