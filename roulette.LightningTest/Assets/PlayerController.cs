@@ -3,6 +3,8 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactable;
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject tableCamera;
-    [SerializeField] private Animator chipAnim;
-    [SerializeField] private GameObject chip;
+    //[SerializeField] private Animator chipAnim;
+    //[SerializeField] private GameObject chip;
+    [SerializeField] public List<GameObject> chipsList;
     //PlayerInput pI;
 
    // private Rigidbody rb;
@@ -86,8 +89,12 @@ public class PlayerController : MonoBehaviour
     //—сылок: 0
     private void OnJump()    //метод, вызываемый системой ввода при нажатии клавиши прыжка
     {
-        if (grounded)        //если персонаж имеет контакт с поверхностью снизу
-            velocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravity);
+        foreach (GameObject chiper in chipsList)
+        {
+            Debug.Log("Scoring");
+            chiper.GetComponent<Animator>().SetTrigger("start");
+            chiper.GetComponent<ChipScript>().ChipEffect().Play();
+        }
     }
 
     //—ообщение Unity | —сылок: 0
@@ -152,8 +159,8 @@ public class PlayerController : MonoBehaviour
     private void OnScoringStart()
     {
         Debug.Log("Scoring");
-        chipAnim.SetTrigger("start");
-        chip.GetComponent<ChipScript>().ChipEffect().Play();
+        //chipAnim.SetTrigger("start");
+        //chip.GetComponent<ChipScript>().ChipEffect().Play();
     }
 
 }
