@@ -1,5 +1,11 @@
-﻿public interface IRouletteWheel
+﻿using System;
+
+public interface IRouletteWheel
 {
+    /// <summary>
+    /// Вызывается когда все шары остановились
+    /// </summary>
+    public event Action<HitInfo[]> AllBallsStopped;
     /// <summary>
     /// Добавляет шар с хешем в рулетку
     /// </summary>
@@ -38,7 +44,7 @@
     /// <summary>
     /// Устанавливает номер поля
     /// </summary>
-    /// <param name="fieldPosition">Фактическая позиция поля</param>
+    /// <param name="fieldIndex">Фактическая позиция поля</param>
     /// <param name="number">Номер поля</param>
-    public void SetFieldNumber(int fieldPosition, int number);
+    public void SetFieldNumber(int fieldIndex, int number);
 }
