@@ -1,10 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class RoundManagerUI : MonoBehaviour
 {
-    [SerializeField] GameObject choiceButtonPrefab;
-    [SerializeField] GameObject colorButtonPrefab;
+    [SerializeField] TextMeshProUGUI balanceText;
+    [SerializeField] TextMeshProUGUI betCountText;
+    [SerializeField] TextMeshProUGUI rerollCountText;
+    
+    [SerializeField] Button spinButton;
+    [SerializeField] Button rerollButton;
 
     private RoundManager roundManager;
 
@@ -12,6 +20,10 @@ public class RoundManagerUI : MonoBehaviour
     public void Construct(RoundManager roundManager)
     {
         this.roundManager = roundManager;
+    }
+
+    public void Init()
+    { 
     }
 }
 

@@ -1,58 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 
 public class BetCalculator
 {
-    public Action OnBetFailed;
+    public event Action<int> GetReward;
 
     private const int ZeroMultiplier = 10;
     private const int NumMultiplier = 5;
     private const int DozenMultiplier = 3;
     private const int ColorMultiplier = 2;
+    private bool active = true;
 
-    private readonly Dictionary<BetInfo, int> bets = new();
+    private readonly BetTable betTable;
+    private readonly BallResults ballResults;
 
-    public void MakeBet(BetInfo betInfo, int amount)
+    public BetCalculator(BallResults ballResults, BetTable betTable)
     {
-        if (!bets.ContainsKey(betInfo))
-            bets.Add(betInfo, 0);
-
-        bets[betInfo] = amount;
-    }
-
-    public int RemoveBet(BetInfo betInfo, int amount)
-    {
-        if (!bets.ContainsKey(betInfo))
-            return 0;
-
-        var takenBet = Math.Max(bets[betInfo], amount);
+        this.ballResults = ballResults;
+        ballResults.BallSelected += OnBallSelected;
         
-        bets[betInfo] -= amount;
-        if (bets[betInfo] <= 0)
-            bets.Remove(betInfo);
-
-        return takenBet;
+        this.betTable = betTable;
     }
 
-    public int ClearBets()
+    public void ChangeState(RoundManager.BetState newState)
     {
-        var totalCleared = 0;
-        foreach (var bet in bets)
-            totalCleared += bet.Value;
+        active = newState == RoundManager.BetState.TakingReward;
 
-        bets.Clear();
-
-        return totalCleared;
+        ballResults.ChangeState(newState);
+        betTable.ChangeState(newState);
     }
 
-    public int GetReward(HitInfo hitInfo)
+    private void OnBallSelected(HitInfo info)
     {
+        if (!active)
+            return;
+
+        betTable.ClearBets();
         var reward = 0;
-
-        foreach (var betInfo in bets.Keys)
-            reward += GetRewardForBet(betInfo, bets[betInfo], hitInfo);
-
-        return reward;
+        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts) 
+        {
+            reward += GetRewardForBet(betInfo, amount, info);
+        }
+        GetReward?.Invoke(reward);
     }
 
     private int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
@@ -71,7 +59,6 @@ public class BetCalculator
         if (betInfo.FieldColor == hitInfo.FieldColor)
             return amount * ColorMultiplier;
 
-        OnBetFailed?.Invoke();
         return amount;
     }
 }
