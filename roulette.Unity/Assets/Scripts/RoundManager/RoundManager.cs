@@ -2,68 +2,81 @@
 
 public class RoundManager
 {
-    public Action OnBetInfoChanged;
-    public bool IsRerollAvailable => rerollCount > 0;
-    public int BetCount => betCount;
-    public int RerollCount => rerollCount;
-    public int BetSum => betSum;
+    public event Action<int> BetCountChanged;
+    public event Action<int> RerollCountChanged;
+    public event Action<int> QuoteChanged;
 
-    private int betCount = 3;
+    public event Action Win;
+    public event Action Lose;     
+
+    public bool IsRerollAvailable => rerollCount > 0 && betState == BetState.TakingReward;
+    public bool IsSpinAvailable => tryCount > 0 && betState == BetState.PlacingBets;
+    public int Goal => goal;
+    public int Quote => quote;
+
+    private int tryCount = 3;
     private int rerollCount = 5;
-    private int betSum = 200;
+    private int quote = 0;
+    private int goal = 1000;
 
+    private BetState betState = BetState.PlacingBets;
     private readonly IRouletteWheel rouletteWheel;
-    private readonly BetCalculator betCalculator = new();
+    private readonly BetCalculator betCalculator;
 
-    public RoundManager(IRouletteWheel rouletteWheel)
+    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator)
     {
         this.rouletteWheel = rouletteWheel;
+        this.betCalculator = betCalculator;
+        betCalculator.GetReward += OnGetReward;
     }
 
-    public void MakeBet(BetInfo betInfo, int amount)
+    public void Spin()
     {
-        if (betSum < amount)
+        if (betState != BetState.PlacingBets)
+            return;
+        if (tryCount <= 0)
             return;
 
-        betSum -= amount;
-        betCalculator.MakeBet(betInfo, amount);
-    }
-
-    public void RemoveBet(BetInfo betInfo, int amount)
-    {
-        var removedBet = betCalculator.RemoveBet(betInfo, amount);
-        betSum += removedBet;
-    }
-
-    public void ClearBets()
-    {
-        betSum += betCalculator.ClearBets();
-    }
-
-    public void ConfirmBet()
-    {
-        if (betCount > 0)
-        {
-            betCount--;
-            return;
-        }
-
+        ChangeState(BetState.TakingReward);
         rouletteWheel.Spin();
+        tryCount--;
+        BetCountChanged?.Invoke(tryCount);
     }
 
     public void Reroll()
     {
-        if (rerollCount > 0)
-        {
-            rerollCount--;
-            rouletteWheel.Spin();
-        }
+        if (betState != BetState.TakingReward)
+            return;
+        if (rerollCount <= 0)
+            return;
+
+        rouletteWheel.Spin();
+        rerollCount--;
+        RerollCountChanged?.Invoke(rerollCount);
     }
 
-    public int GetReward(HitInfo hitInfo)
+    private void OnGetReward(int reward)
     {
-        betSum += betCalculator.ClearBets();
+        quote += reward;
+        if (quote >= goal)
+            Win?.Invoke();
+        else if (tryCount <= 0)
+            Lose?.Invoke();
 
-        return betCalculator.GetReward(hitInfo);
+        QuoteChanged?.Invoke(quote);
+        ChangeState(BetState.PlacingBets);
+    }
+
+    private void ChangeState(BetState newState)
+    {
+        betState = newState;
+        betCalculator.ChangeState(newState);
+    }
+
+    public enum BetState
+    {
+        PlacingBets,
+        TakingReward,
+        NotActive
     }
 }

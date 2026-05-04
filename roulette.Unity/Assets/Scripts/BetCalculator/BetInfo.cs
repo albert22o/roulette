@@ -1,5 +1,12 @@
 ﻿public class BetInfo
 {
+    public BetInfo(int fieldNumber, DozenType dozen, string fieldColor)
+    {
+        FieldNumber = fieldNumber;
+        Dozen = dozen;
+        FieldColor = fieldColor;
+    }
+
     /// <summary>
     /// Номер поля, на котором остановился шар
     /// Может отличаться от фактической позиции поля
