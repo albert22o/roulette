@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TestLauncher : MonoBehaviour
@@ -70,14 +71,14 @@ public class TestLauncher : MonoBehaviour
         "Red","Black","Red","Black","Red","Black"
     };
 
-    private void Awake()
+    private async void Awake()
     {
         if (rouletteWheel == null)
         {
             Debug.LogError("RouletteWheelLoader: RouletteWheel reference is missing!");
             return;
         }
-
+        await Task.Delay(100);
         LoadFields();
     }
 

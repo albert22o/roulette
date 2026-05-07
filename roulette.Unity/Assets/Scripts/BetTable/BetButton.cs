@@ -1,76 +1,91 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 
-[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class BetButton : MonoBehaviour, IPointerClickHandler
 {
-    public UnityEngine.Color? Color
+    public string Color
     {
-        get => BG != null ? BG.color : null;
         set
         {
-            if (value != null && BG != null)
-                BG.color = (UnityEngine.Color)value;
+            if (value != null)
+                BG.color = GetColor(value);
         }
     }
-    public string FieldNum
+    public int FieldNum
     {
-        get => text != null ? text.text : null;
         set
         {
-            if (text != null)
-                text.text = value;
+            fieldNumText.text = value.ToString();
         }
     }
-    public string BetSum
+    public int Amount
     {
-        get => betText != null ? betText.text : null;
         set
         {
-            if (betText != null)
-                betText.text = value;
+            var targetChipCount = Mathf.Max(0, value / 25);
+            var currentCount = stackChips.Count;
+            if (targetChipCount > currentCount)
+            {
+                while (targetChipCount != currentCount)
+                {
+                    stackChips.Push(Instantiate(chipPrefab, spawnChipPoint));
+                    currentCount++;
+                }
+            }
+            else if (targetChipCount < currentCount)
+            {
+                while (targetChipCount != currentCount)
+                {
+                    Destroy(stackChips.Pop());
+                    currentCount--;
+                }
+            }
         }
     }
 
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] TextMeshProUGUI betText;
+    [SerializeField] TextMeshPro fieldNumText;
+    [SerializeField] Transform spawnChipPoint;
+    [SerializeField] GameObject chipPrefab;
 
-    private Image BG;
+    private SpriteRenderer BG;
     private event Action OnRightClick;
-    private event Action OnLightClick;
+    private event Action OnLeftClick;
+    private readonly Stack<GameObject> stackChips = new();
 
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
     {
-        BG = GetComponent<Image>();
-        Color = GetColor(betInfo.FieldColor);
+        BG = GetComponent<SpriteRenderer>();
+        Color = betInfo.FieldColor;
 
-        if (text == null)
+        if (fieldNumText == null)
             Debug.LogError("Text is not assigned in BetButton.");
-        FieldNum = betInfo.FieldNumber.ToString();
+        FieldNum = betInfo.FieldNumber;
 
-        if (betText == null)
+        if (spawnChipPoint == null)
             Debug.LogError("BetText is not assigned in BetButton.");
+        if (chipPrefab == null)
+            Debug.LogError("ChipPrefab is not assigned in BetButton");
 
-        OnLightClick += leftClickCallback;
+        OnLeftClick += leftClickCallback;
         OnRightClick += rightClickCallback;
     }
 
-    private UnityEngine.Color? GetColor(string fieldColor) => fieldColor switch
+    private Color GetColor(string fieldColor) => fieldColor switch
     {
         "Red" => UnityEngine.Color.red,
         "Black" => UnityEngine.Color.black,
-        _ => null
+        _ => UnityEngine.Color.white,
     };
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
-            OnLightClick?.Invoke();
+            OnLeftClick?.Invoke();
         else if (eventData.button == PointerEventData.InputButton.Right)
             OnRightClick?.Invoke();
     }

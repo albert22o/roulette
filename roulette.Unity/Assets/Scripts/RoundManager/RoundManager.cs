@@ -67,7 +67,7 @@ public class RoundManager
         ChangeState(BetState.PlacingBets);
     }
 
-    private void ChangeState(BetState newState)
+    public void ChangeState(BetState newState)
     {
         betState = newState;
         betCalculator.ChangeState(newState);

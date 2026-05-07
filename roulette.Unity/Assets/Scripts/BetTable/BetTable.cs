@@ -7,15 +7,14 @@ public class BetTable
     public event Action<int, int> ChangeAmountByIndex;
     public event Action<int> ChangeAvailableSum;
 
-    public IReadOnlyDictionary<int, BetInfo> PocketMapping => tableConfig.PocketMapping;
     public IEnumerable<(BetInfo, int)> NotNullBetAmounts => betAmounts
         .Where(bet => bet.Value != 0)
-        .Select(bet => (PocketMapping[bet.Key], bet.Value));
+        .Select(bet => (tableConfig.PocketMapping[bet.Key], bet.Value));
 
     private readonly TableConfig tableConfig;
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
-    private bool active;
+    private bool active = true;
     private const int betStep = 25;
 
     public BetTable(TableConfig tableConfig)

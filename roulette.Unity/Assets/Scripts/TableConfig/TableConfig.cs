@@ -25,7 +25,7 @@ public class TableConfig
         { 11, new BetInfo(11, DozenType.First, "Black") },
         { 12, new BetInfo(12, DozenType.First, "Red") },
         { 13, new BetInfo(13, DozenType.Second,"Black") },
-        { 24, new BetInfo(14, DozenType.Second,"Red") },
+        { 14, new BetInfo(14, DozenType.Second,"Red") },
         { 15, new BetInfo(15, DozenType.Second,"Black") },
         { 16, new BetInfo(16, DozenType.Second,"Red") },
         { 17, new BetInfo(17, DozenType.Second,"Black") },
