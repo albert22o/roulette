@@ -11,6 +11,9 @@ public class BetTable
         .Where(bet => bet.Value != 0)
         .Select(bet => (tableConfig.PocketMapping[bet.Key], bet.Value));
 
+    public int AvailableSum => availableBetSum;
+
+    private readonly HashSet<int> betIndexSet = new();
     private readonly TableConfig tableConfig;
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
@@ -34,6 +37,10 @@ public class BetTable
             return;
         if (availableBetSum < betStep)
             return;
+        if (!betIndexSet.Contains(index) 
+            && betIndexSet.Count >= tableConfig.MaxBetsAtBoard)
+            return;
+        betIndexSet.Add(index);
 
         betAmounts[index] += betStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
@@ -50,6 +57,7 @@ public class BetTable
             return;
         if (betAmounts[index] < betStep)
             return;
+        betIndexSet.Remove(index);
 
         betAmounts[index] -= betStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);

@@ -6,6 +6,7 @@ public class TableConfig
     public event Action<int, string> PocketColorChanged;
     public event Action<int, int> PocketNumberChanged;
 
+    public int MaxBetsAtBoard => maxBetsAtBoard;
     public int StartSum => Math.Max(0, startSum);
     public IReadOnlyDictionary<int, BetInfo> PocketMapping => pocketMapping;
 
@@ -50,6 +51,7 @@ public class TableConfig
         { 36, new BetInfo(36, DozenType.Third, "Red") },
     };
     private int startSum = 200;
+    private int maxBetsAtBoard = 2;
 
     public void SetPocketColor(int index, string color)
     {
