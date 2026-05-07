@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 class BetTableView : MonoBehaviour
 {
+    [SerializeField] TextMeshPro alailableSumText;
     [SerializeField] List<BetButton> betButtons = new();
 
     private BetTable betTable;
@@ -19,6 +20,20 @@ class BetTableView : MonoBehaviour
 
     public void Init()
     {
+        if (alailableSumText == null)
+        {
+            Debug.LogError("Не все зависимости проставлены");
+            return;
+        }
+        betTable.ChangeAvailableSum += OnChangeAvailableSum;
+        OnChangeAvailableSum(betTable.AvailableSum);
+
+        if (betButtons.Count < tableConfig.PocketMapping.Count)
+        {
+            Debug.LogError("Не все кнопки для ставок проставлены");
+            return;
+        }
+
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
@@ -29,6 +44,11 @@ class BetTableView : MonoBehaviour
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
         }
+    }
+
+    private void OnChangeAvailableSum(int newSum)
+    {
+        alailableSumText.text = newSum.ToString();
     }
 
     private void OnPocketColorChanged(int index, string color)

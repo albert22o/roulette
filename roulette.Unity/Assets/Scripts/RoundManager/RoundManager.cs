@@ -10,11 +10,13 @@ public class RoundManager
     public event Action Lose;     
 
     public bool IsRerollAvailable => rerollCount > 0 && betState == BetState.TakingReward;
-    public bool IsSpinAvailable => tryCount > 0 && betState == BetState.PlacingBets;
+    public bool IsSpinAvailable => betCount > 0 && betState == BetState.PlacingBets;
     public int Goal => goal;
     public int Quote => quote;
+    public int BetCount => betCount;
+    public int RerollCount => rerollCount;
 
-    private int tryCount = 3;
+    private int betCount = 3;
     private int rerollCount = 5;
     private int quote = 0;
     private int goal = 1000;
@@ -34,13 +36,13 @@ public class RoundManager
     {
         if (betState != BetState.PlacingBets)
             return;
-        if (tryCount <= 0)
+        if (betCount <= 0)
             return;
 
         ChangeState(BetState.TakingReward);
         rouletteWheel.Spin();
-        tryCount--;
-        BetCountChanged?.Invoke(tryCount);
+        betCount--;
+        BetCountChanged?.Invoke(betCount);
     }
 
     public void Reroll()
@@ -60,7 +62,7 @@ public class RoundManager
         quote += reward;
         if (quote >= goal)
             Win?.Invoke();
-        else if (tryCount <= 0)
+        else if (betCount <= 0)
             Lose?.Invoke();
 
         QuoteChanged?.Invoke(quote);

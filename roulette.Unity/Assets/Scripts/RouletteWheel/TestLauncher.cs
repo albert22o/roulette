@@ -33,10 +33,6 @@ public class TestLauncher : MonoBehaviour
         rouletteWheel.AddBall("1", visualComponents[0]);
         rouletteWheel.AddBall("2", visualComponents[1]);
         rouletteWheel.AddBall("3", visualComponents[1]);
-
-        rouletteWheel.Spin();
-        
-        
     }
 
     private void OnAllBallsStopped(HitInfo[] hitsInfo)
