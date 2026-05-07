@@ -5,12 +5,18 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody ballRigidbody;
 
+    private Transform rouletteOrigin;
+
     public event Action Destroyed;
     public string Hash { get; private set; }
 
-    public void Launch(Vector3 velocity)
+    public Vector3 RelativeToRoulettePosition => transform.position - rouletteOrigin.position;
+
+
+    public void Launch(Vector3 velocity, Transform rouletteOrigin)
     {
         ballRigidbody.linearVelocity = velocity;
+        this.rouletteOrigin = rouletteOrigin;
     }
 
     public void SetHash(string hash)

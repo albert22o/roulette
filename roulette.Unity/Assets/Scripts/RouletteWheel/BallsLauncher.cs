@@ -53,12 +53,12 @@ public class BallsLauncher : MonoBehaviour
         var ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
         float velocity = Random.Range(launchVelocityMin, launchVelocityMax);
         ball.SetHash(ballData.BallHash);
-        ball.Launch(transform.right * velocity);
+        ball.Launch(transform.right * velocity, physicalRoulette);
         ballsManager.AddBall(ball);
 
         var ballVisual = Instantiate(ballVisualPrefab, transform.position, Quaternion.identity);
         {
-            ballVisual.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x);
+            ballVisual.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
             ballVisual.SetVisualComponent(ballData.VisualComponent);
         }
     }

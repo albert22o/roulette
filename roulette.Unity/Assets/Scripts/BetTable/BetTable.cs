@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static RoundStateManager;
 
 public class BetTable
 {
     public event Action<int, int> ChangeAmountByIndex;
     public event Action<int> ChangeAvailableSum;
 
-    public IReadOnlyDictionary<int, BetInfo> PocketMapping => tableConfig.PocketMapping;
     public IEnumerable<(BetInfo, int)> NotNullBetAmounts => betAmounts
         .Where(bet => bet.Value != 0)
-        .Select(bet => (PocketMapping[bet.Key], bet.Value));
+        .Select(bet => (tableConfig.PocketMapping[bet.Key], bet.Value));
 
+    public int AvailableSum => availableBetSum;
+
+    private readonly HashSet<int> betIndexSet = new();
     private readonly TableConfig tableConfig;
+    private readonly RoundStateManager roundStateManager;
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
     private bool active;
     private const int betStep = 25;
 
-    public BetTable(TableConfig tableConfig)
+    public BetTable(TableConfig tableConfig, RoundStateManager roundStateManager)
     {
         this.tableConfig = tableConfig;
-
-        betAmounts = tableConfig.PocketMapping.
-            ToDictionary(pocket => pocket.Key, _ => 0);
+        betAmounts = tableConfig.PocketMapping
+            .ToDictionary(pocket => pocket.Key, _ => 0);
         availableBetSum = tableConfig.StartSum;
+
+        this.roundStateManager = roundStateManager;
+        roundStateManager.StateChanged += OnStateChanged;
     }
 
     public void AddBet(int index)
@@ -35,6 +41,10 @@ public class BetTable
             return;
         if (availableBetSum < betStep)
             return;
+        if (!betIndexSet.Contains(index) 
+            && betIndexSet.Count >= tableConfig.MaxBetsAtBoard)
+            return;
+        betIndexSet.Add(index);
 
         betAmounts[index] += betStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
@@ -51,6 +61,7 @@ public class BetTable
             return;
         if (betAmounts[index] < betStep)
             return;
+        betIndexSet.Remove(index);
 
         betAmounts[index] -= betStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
@@ -61,7 +72,9 @@ public class BetTable
 
     public void ClearBets()
     {
-        foreach(var betIndex in betAmounts.Keys)
+        var keys = betAmounts.Keys.ToList();
+        betIndexSet.Clear();
+        foreach(var betIndex in keys)
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
@@ -70,8 +83,8 @@ public class BetTable
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
-    public void ChangeState(RoundManager.BetState newState)
+    private void OnStateChanged(BetState newState)
     {
-        active = newState == RoundManager.BetState.PlacingBets;
+        active = newState == BetState.PlacingBets;
     }
 }

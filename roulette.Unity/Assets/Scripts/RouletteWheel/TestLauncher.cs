@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TestLauncher : MonoBehaviour
@@ -29,13 +30,7 @@ public class TestLauncher : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        rouletteWheel.AddBall("1", visualComponents[0]);
-        rouletteWheel.AddBall("2", visualComponents[1]);
-        rouletteWheel.AddBall("3", visualComponents[1]);
-
-        rouletteWheel.Spin();
-        
-        
+        //rouletteWheel.AddBall("1", visualComponents[0]);
     }
 
     private void OnAllBallsStopped(HitInfo[] hitsInfo)
@@ -70,14 +65,14 @@ public class TestLauncher : MonoBehaviour
         "Red","Black","Red","Black","Red","Black"
     };
 
-    private void Awake()
+    private async void Awake()
     {
         if (rouletteWheel == null)
         {
             Debug.LogError("RouletteWheelLoader: RouletteWheel reference is missing!");
             return;
         }
-
+        await Task.Delay(100);
         LoadFields();
     }
 

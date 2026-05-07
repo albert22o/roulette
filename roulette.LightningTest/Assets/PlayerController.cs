@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+п»їusing Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     //private bool grounded;
 
-    [SerializeField] float gravity = -9.81f;                //сила притяжения
-    Vector3 direction = Vector3.zero;                       //направление перемещения персонажа
-    Vector3 velocity = Vector3.zero;                        //скорость перемещения игрока
-    bool grounded = true;                                   //флаг, определяющий, стоит ли персонаж на поверхности
+    [SerializeField] float gravity = -9.81f;                //СЃРёР»Р° РїСЂРёС‚СЏР¶РµРЅРёСЏ
+    Vector3 direction = Vector3.zero;                       //РЅР°РїСЂР°РІР»РµРЅРёРµ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
+    Vector3 velocity = Vector3.zero;                        //СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РёРіСЂРѕРєР°
+    bool grounded = true;                                   //С„Р»Р°Рі, РѕРїСЂРµРґРµР»СЏСЋС‰РёР№, СЃС‚РѕРёС‚ Р»Рё РїРµСЂСЃРѕРЅР°Р¶ РЅР° РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 
     Quaternion center;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,18 +76,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue movementValue)    //метод, вызываемый системой ввода при нажатии клавиш перемещения
+    private void OnMove(InputValue movementValue)    //РјРµС‚РѕРґ, РІС‹Р·С‹РІР°РµРјС‹Р№ СЃРёСЃС‚РµРјРѕР№ РІРІРѕРґР° РїСЂРё РЅР°Р¶Р°С‚РёРё РєР»Р°РІРёС€ РїРµСЂРµРјРµС‰РµРЅРёСЏ
     {
         if (mainCamera.activeSelf == true)
         {
-            Vector2 movementVector = movementValue.Get<Vector2>();  //можно посмотреть значения вектора при помощи Debug.Log
-                                                                    //расчёт направления перемещения
+            Vector2 movementVector = movementValue.Get<Vector2>();  //РјРѕР¶РЅРѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РІРµРєС‚РѕСЂР° РїСЂРё РїРѕРјРѕС‰Рё Debug.Log
+                                                                    //СЂР°СЃС‡С‘С‚ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ
             direction = new Vector3(movementVector.x, 0, movementVector.y).normalized;
         }
     }
 
-    //Ссылок: 0
-    private void OnJump()    //метод, вызываемый системой ввода при нажатии клавиши прыжка
+    //РЎСЃС‹Р»РѕРє: 0
+    private void OnJump()    //РјРµС‚РѕРґ, РІС‹Р·С‹РІР°РµРјС‹Р№ СЃРёСЃС‚РµРјРѕР№ РІРІРѕРґР° РїСЂРё РЅР°Р¶Р°С‚РёРё РєР»Р°РІРёС€Рё РїСЂС‹Р¶РєР°
     {
         foreach (GameObject chiper in chipsList)
         {
@@ -97,16 +97,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Сообщение Unity | Ссылок: 0
+    //РЎРѕРѕР±С‰РµРЅРёРµ Unity | РЎСЃС‹Р»РѕРє: 0
     private void LateUpdate()
     {
-        grounded = controller.isGrounded;    //получение информации о контакте игрока с поверхностью
-        controller.Move(transform.TransformDirection(direction) * (speed * Time.deltaTime));    //перемещение в плоскости XZ
+        grounded = controller.isGrounded;    //РїРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєРѕРЅС‚Р°РєС‚Рµ РёРіСЂРѕРєР° СЃ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊСЋ
+        controller.Move(transform.TransformDirection(direction) * (speed * Time.deltaTime));    //РїРµСЂРµРјРµС‰РµРЅРёРµ РІ РїР»РѕСЃРєРѕСЃС‚Рё XZ
 
-        if (grounded && velocity.y < 0) velocity.y = 0; //предотвращение прохождения персонажа сквозь поверхность снизу
-        velocity.y += gravity * Time.deltaTime;          //применение силы тяжести
+        if (grounded && velocity.y < 0) velocity.y = 0; //РїСЂРµРґРѕС‚РІСЂР°С‰РµРЅРёРµ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р° СЃРєРІРѕР·СЊ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ СЃРЅРёР·Сѓ
+        velocity.y += gravity * Time.deltaTime;          //РїСЂРёРјРµРЅРµРЅРёРµ СЃРёР»С‹ С‚СЏР¶РµСЃС‚Рё
 
-        controller.Move(velocity * Time.deltaTime);      //перемещение персонажа
+        controller.Move(velocity * Time.deltaTime);      //РїРµСЂРµРјРµС‰РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°
     }
 
     private void CheckForRaycasts()

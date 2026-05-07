@@ -1,9 +1,9 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BallVisual : MonoBehaviour
 {
     [SerializeField] private Renderer meshRenderer;
+    private Transform rouletteOrigin;
     private Ball ball;
     private VisualComponent visualComponent;
     private float scaleMultiplier;
@@ -17,11 +17,12 @@ public class BallVisual : MonoBehaviour
         meshRenderer.material = visualComponent.Material;
     }
 
-    public void Initialize(Ball ball, float scaleMultiplier)
+    public void Initialize(Ball ball, float scaleMultiplier, Transform rouletteOrigin)
     {
         this.ball = ball;
         this.scaleMultiplier = scaleMultiplier;
         ball.Destroyed += OnBallDestroy;
+        this.rouletteOrigin = rouletteOrigin;
     }
 
     private void OnDestroy()
@@ -40,7 +41,7 @@ public class BallVisual : MonoBehaviour
     {
         if (ball == null) return;
 
-        transform.position = ball.transform.position * scaleMultiplier;
+        transform.position = rouletteOrigin.position + ball.RelativeToRoulettePosition * scaleMultiplier;
 
         transform.rotation = ball.transform.rotation;
 
