@@ -8551,7 +8551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1297274385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11692,7 +11692,7 @@ PrefabInstance:
     - target: {fileID: 5411062123730494618, guid: 4967a32f40d3c0043a71ff33a6e6dbea, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: e030573d056038b44bd064a0202eef9f, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5521629138756522324, guid: 4967a32f40d3c0043a71ff33a6e6dbea, type: 3}
       propertyPath: m_Name
       value: Capsule
