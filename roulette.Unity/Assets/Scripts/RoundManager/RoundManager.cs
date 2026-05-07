@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using static RoundStateManager;
 
 public class RoundManager
@@ -45,6 +46,15 @@ public class RoundManager
             return;
 
         roundStateManager.ChangeState(BetState.ChoosingReward);
+
+        // Убрать потом
+        var dummyMaterial = new Material(Shader.Find("Standard"));
+        var visualComponent = new VisualComponent()
+        {
+            Material = dummyMaterial
+        };
+        rouletteWheel.AddBall("1", visualComponent);
+
         rouletteWheel.Spin();
         betCount--;
         BetCountChanged?.Invoke(betCount);
@@ -69,6 +79,9 @@ public class RoundManager
             Win?.Invoke();
         else if (betCount <= 0)
             Lose?.Invoke();
+
+        // Убрать потом
+        rouletteWheel.ClearBalls();
 
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(BetState.PlacingBets);

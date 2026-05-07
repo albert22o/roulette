@@ -160,6 +160,7 @@ public class RouletteBallsManager : MonoBehaviour
         {
             hitsInfo.Remove(balls[i].Hash);
             Destroy(balls[i].gameObject);
+            balls.Remove(balls[i]);
         }
     }
 

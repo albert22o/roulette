@@ -51,7 +51,7 @@ public class TableConfig
         { 36, new BetInfo(36, DozenType.Third, "Red") },
     };
     private int startSum = 200;
-    private int maxBetsAtBoard = 2;
+    private int maxBetsAtBoard = 1;
 
     public void SetPocketColor(int index, string color)
     {

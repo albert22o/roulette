@@ -221,7 +221,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3877207088369082302, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 748560109}
+      addedObject: {fileID: 262537264}
   m_SourcePrefab: {fileID: 100100000, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
 --- !u!1 &229434576
 GameObject:
@@ -324,6 +324,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &262537263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3877207088369082302, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
+  m_PrefabInstance: {fileID: 73463953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &262537264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262537263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658dd158d6d5cf47b737687c0d345ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.1
+  rouletteWheel: {fileID: 262537265}
+  visualComponents:
+  - <Material>k__BackingField: {fileID: 2100000, guid: 24c0c1accc18027499f8090e0eada62b, type: 2}
+  - <Material>k__BackingField: {fileID: 2100000, guid: 011a8e1911df33849bc9b8d8c6a5945c, type: 2}
+--- !u!114 &262537265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1260821769150077766, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
+  m_PrefabInstance: {fileID: 73463953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262537263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ae2a07fb0244346a2d6f3e05bd4b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,39 +846,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &748560105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3877207088369082302, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
-  m_PrefabInstance: {fileID: 73463953}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &748560107 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1260821769150077766, guid: b3e6cff8bac34154ba56d66baea8759c, type: 3}
-  m_PrefabInstance: {fileID: 73463953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748560105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ae2a07fb0244346a2d6f3e05bd4b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &748560109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748560105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c658dd158d6d5cf47b737687c0d345ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0.1
-  rouletteWheel: {fileID: 748560107}
-  visualComponents:
-  - <Material>k__BackingField: {fileID: 2100000, guid: 24c0c1accc18027499f8090e0eada62b, type: 2}
-  - <Material>k__BackingField: {fileID: 2100000, guid: 011a8e1911df33849bc9b8d8c6a5945c, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1395,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2365360498220686691, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -7.204
+      objectReference: {fileID: 0}
     - target: {fileID: 4193114875055083040, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.65
@@ -1438,6 +1442,10 @@ PrefabInstance:
     - target: {fileID: 5822931268044201800, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_Name
       value: RoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856351841506035455, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.975
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

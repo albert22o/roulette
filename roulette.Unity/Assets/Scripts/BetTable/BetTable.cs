@@ -73,6 +73,7 @@ public class BetTable
     public void ClearBets()
     {
         var keys = betAmounts.Keys.ToList();
+        betIndexSet.Clear();
         foreach(var betIndex in keys)
         {
             availableBetSum += betAmounts[betIndex];
