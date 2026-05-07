@@ -17,5 +17,6 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<TableConfig>().AsSingle();
 
+        Container.Bind<RoundStateManager>().AsSingle();
     }
 }

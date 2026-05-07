@@ -31,8 +31,6 @@ public class TestLauncher : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         rouletteWheel.AddBall("1", visualComponents[0]);
-        rouletteWheel.AddBall("2", visualComponents[1]);
-        rouletteWheel.AddBall("3", visualComponents[1]);
     }
 
     private void OnAllBallsStopped(HitInfo[] hitsInfo)

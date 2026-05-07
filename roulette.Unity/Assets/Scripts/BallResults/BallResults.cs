@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static RoundStateManager;
 
 public class BallResults
 {
@@ -9,13 +10,16 @@ public class BallResults
     public event Action<HitInfo> BallSelected;
 
     private readonly Inventory inventory;
-    private readonly List<HitInfo> currentBalls;
+    private readonly RoundStateManager roundStateManager;
+    private readonly List<HitInfo> currentBalls = new();
     private bool active;
 
-    public BallResults(IRouletteWheel rouletteWheel, Inventory inventory)
+    public BallResults(IRouletteWheel rouletteWheel, Inventory inventory, RoundStateManager roundStateManager)
     {
         rouletteWheel.AllBallsStopped += AddBalls;
         this.inventory = inventory;
+        this.roundStateManager = roundStateManager;
+        this.roundStateManager.StateChanged += OnStateChanged;
     }
 
     public void SelectBall(HitInfo hitInfo)
@@ -38,6 +42,8 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
+        SelectBall(balls[0]);
+        return;
         foreach (var ball in balls) 
         {
             // TODO: var visualComponent = inventory.FindBall(ball.BallHash);
@@ -47,8 +53,8 @@ public class BallResults
         }
     }
 
-    public void ChangeState(RoundManager.BetState newState)
+    public void OnStateChanged(BetState newState)
     {
-        active = newState == RoundManager.BetState.TakingReward;
+        active = newState == BetState.ChoosingReward;
     }
 }

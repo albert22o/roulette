@@ -8,5 +8,6 @@ public class Bootstrap : MonoBehaviour
     {
         roundManagerView.Init();
         betTableView.Init();
+
     }
 }

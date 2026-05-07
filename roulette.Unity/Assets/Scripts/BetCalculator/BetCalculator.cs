@@ -1,4 +1,5 @@
 ﻿using System;
+using static RoundStateManager;
 
 public class BetCalculator
 {
@@ -11,22 +12,22 @@ public class BetCalculator
     private bool active = true;
 
     private readonly BetTable betTable;
+    private readonly RoundStateManager roundStateManager;
     private readonly BallResults ballResults;
 
-    public BetCalculator(BallResults ballResults, BetTable betTable)
+    public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
         this.ballResults = ballResults;
         ballResults.BallSelected += OnBallSelected;
         
         this.betTable = betTable;
+        this.roundStateManager = roundStateManager;
+        roundStateManager.StateChanged += OnStateChanged;
     }
 
-    public void ChangeState(RoundManager.BetState newState)
+    public void OnStateChanged(BetState newState)
     {
-        active = newState == RoundManager.BetState.TakingReward;
-
-        ballResults.ChangeState(newState);
-        betTable.ChangeState(newState);
+        active = newState == BetState.ChoosingReward;
     }
 
     private void OnBallSelected(HitInfo info)
@@ -34,12 +35,13 @@ public class BetCalculator
         if (!active)
             return;
 
-        betTable.ClearBets();
         var reward = 0;
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts) 
         {
             reward += GetRewardForBet(betInfo, amount, info);
         }
+        betTable.ClearBets();
+
         GetReward?.Invoke(reward);
     }
 

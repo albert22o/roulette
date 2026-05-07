@@ -1,4 +1,5 @@
 ﻿using System;
+using static RoundStateManager;
 
 public class RoundManager
 {
@@ -9,7 +10,7 @@ public class RoundManager
     public event Action Win;
     public event Action Lose;     
 
-    public bool IsRerollAvailable => rerollCount > 0 && betState == BetState.TakingReward;
+    public bool IsRerollAvailable => rerollCount > 0 && betState == BetState.ChoosingReward;
     public bool IsSpinAvailable => betCount > 0 && betState == BetState.PlacingBets;
     public int Goal => goal;
     public int Quote => quote;
@@ -24,12 +25,16 @@ public class RoundManager
     private BetState betState = BetState.PlacingBets;
     private readonly IRouletteWheel rouletteWheel;
     private readonly BetCalculator betCalculator;
+    private readonly RoundStateManager roundStateManager;
 
-    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator)
+    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator, RoundStateManager roundStateManager)
     {
         this.rouletteWheel = rouletteWheel;
         this.betCalculator = betCalculator;
         betCalculator.GetReward += OnGetReward;
+        
+        this.roundStateManager = roundStateManager;
+        roundStateManager.StateChanged += OnStateChanged;
     }
 
     public void Spin()
@@ -39,7 +44,7 @@ public class RoundManager
         if (betCount <= 0)
             return;
 
-        ChangeState(BetState.TakingReward);
+        roundStateManager.ChangeState(BetState.ChoosingReward);
         rouletteWheel.Spin();
         betCount--;
         BetCountChanged?.Invoke(betCount);
@@ -47,7 +52,7 @@ public class RoundManager
 
     public void Reroll()
     {
-        if (betState != BetState.TakingReward)
+        if (betState != BetState.ChoosingReward)
             return;
         if (rerollCount <= 0)
             return;
@@ -66,19 +71,11 @@ public class RoundManager
             Lose?.Invoke();
 
         QuoteChanged?.Invoke(quote);
-        ChangeState(BetState.PlacingBets);
+        roundStateManager.ChangeState(BetState.PlacingBets);
     }
 
-    public void ChangeState(BetState newState)
+    public void OnStateChanged(BetState newState)
     {
         betState = newState;
-        betCalculator.ChangeState(newState);
-    }
-
-    public enum BetState
-    {
-        PlacingBets,
-        TakingReward,
-        NotActive
     }
 }

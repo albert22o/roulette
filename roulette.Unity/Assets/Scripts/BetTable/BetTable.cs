@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static RoundStateManager;
 
 public class BetTable
 {
@@ -15,18 +16,21 @@ public class BetTable
 
     private readonly HashSet<int> betIndexSet = new();
     private readonly TableConfig tableConfig;
+    private readonly RoundStateManager roundStateManager;
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
-    private bool active = true;
+    private bool active;
     private const int betStep = 25;
 
-    public BetTable(TableConfig tableConfig)
+    public BetTable(TableConfig tableConfig, RoundStateManager roundStateManager)
     {
         this.tableConfig = tableConfig;
-
-        betAmounts = tableConfig.PocketMapping.
-            ToDictionary(pocket => pocket.Key, _ => 0);
+        betAmounts = tableConfig.PocketMapping
+            .ToDictionary(pocket => pocket.Key, _ => 0);
         availableBetSum = tableConfig.StartSum;
+
+        this.roundStateManager = roundStateManager;
+        roundStateManager.StateChanged += OnStateChanged;
     }
 
     public void AddBet(int index)
@@ -68,7 +72,8 @@ public class BetTable
 
     public void ClearBets()
     {
-        foreach(var betIndex in betAmounts.Keys)
+        var keys = betAmounts.Keys.ToList();
+        foreach(var betIndex in keys)
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
@@ -77,8 +82,8 @@ public class BetTable
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
-    public void ChangeState(RoundManager.BetState newState)
+    private void OnStateChanged(BetState newState)
     {
-        active = newState == RoundManager.BetState.PlacingBets;
+        active = newState == BetState.PlacingBets;
     }
 }
