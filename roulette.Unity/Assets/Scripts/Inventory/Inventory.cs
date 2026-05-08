@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CurrencyType
+{
+    GoldenChips,
+    BossChips,
+    BaseMoney
+}
+
 public class Inventory
 {
     private readonly List<Item> balls;
     private readonly List<Item> chips;
 
-    public int GoldenChipsCount { get; private set; }
+    private Dictionary<CurrencyType, int> currencies = new Dictionary<CurrencyType, int>
+    {
+        { CurrencyType.GoldenChips, 0 },
+        { CurrencyType.BossChips, 0 },
+        { CurrencyType.BaseMoney, 0 }
+    };
 
-    public event Action<int> GoldenChipsChanged;
+    public event Action<CurrencyType, int> CurrencyChanged;
     public event Action ItemsChanged;
+
 
     public Inventory(InventoryConfig config)
     {
@@ -64,21 +77,23 @@ public class Inventory
         ItemsChanged?.Invoke();
     }
 
-    public void SetGoldenChips(int count)
+    public void SetCurrency(CurrencyType type, int count)
     {
-        GoldenChipsCount = count;
-        GoldenChipsChanged?.Invoke(GoldenChipsCount);
+        currencies[type] = count;
+        CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void AddGoldenChips(int count)
+    public void AddCurrency(CurrencyType type, int count)
     {
-        GoldenChipsCount += count;
-        GoldenChipsChanged?.Invoke(GoldenChipsCount);
+        currencies[type] += count;
+        CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void RemoveGoldenChips(int count)
+    public void RemoveCurrency(CurrencyType type, int count)
     {
-        GoldenChipsCount = Mathf.Max(0, GoldenChipsCount - count);
-        GoldenChipsChanged?.Invoke(GoldenChipsCount);
+        currencies[type] = Mathf.Max(0, currencies[type] - count);
+        CurrencyChanged?.Invoke(type, currencies[type]);
     }
+
+    public int GetCurrency(CurrencyType type) => currencies[type];
 }

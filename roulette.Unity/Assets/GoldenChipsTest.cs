@@ -14,6 +14,6 @@ public class GoldenChipsTest : MonoBehaviour
 
     void Start()
     {
-        inventory.AddGoldenChips(initMoney);
+        inventory.AddCurrency(CurrencyType.GoldenChips, initMoney);
     }
 }

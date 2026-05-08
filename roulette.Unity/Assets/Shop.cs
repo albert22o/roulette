@@ -8,10 +8,10 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopItemsTable itemsTable;
     [SerializeField] private float tooltipHeight;
 
-    private ShopItemsPool itemsPool = new ();
+    private ShopItemsPool itemsPool = new();
     private Inventory inventory;
 
-    
+
     [Inject]
     public void Construct(Inventory inventory)
     {
@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
 
     private void FillShopPlaces()
     {
-        foreach( ShopPlace place in shopPlaces)
+        foreach (ShopPlace place in shopPlaces)
         {
             place.SetItem(itemsPool.GetRandomItem());
         }
@@ -51,15 +51,15 @@ public class Shop : MonoBehaviour
 
     public bool TryBuy(ShopPlace place)
     {
-        if (inventory.GoldenChipsCount >= place.Item.Cost)
+        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
         {
             if (inventory.TryAddItem(new Item(place.Item)))
-                {
-                inventory.RemoveGoldenChips(place.Item.Cost);
+            {
+                inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
                 Debug.Log(place.Item.NameKey + " bought!");
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }

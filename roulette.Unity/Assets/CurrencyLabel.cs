@@ -2,9 +2,10 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class GoldenChipsLabel : MonoBehaviour
+public class CurrencyLabel : MonoBehaviour
 {
     [SerializeField] private TextMeshPro text;
+    [SerializeField] private CurrencyType currencyType;
     private Inventory inventory;
 
     [Inject]
@@ -15,16 +16,17 @@ public class GoldenChipsLabel : MonoBehaviour
 
     private void OnEnable()
     {
-        inventory.GoldenChipsChanged += UpdateText;
+        inventory.CurrencyChanged += UpdateText;
     }
 
     private void OnDisable()
     {
-        inventory.GoldenChipsChanged -= UpdateText;
+        inventory.CurrencyChanged -= UpdateText;
     }
 
-    private void UpdateText(int count)
+    private void UpdateText(CurrencyType type, int count)
     {
-        text.text = count.ToString();
+        if (currencyType == type)
+            text.text = count.ToString();
     }
 }
