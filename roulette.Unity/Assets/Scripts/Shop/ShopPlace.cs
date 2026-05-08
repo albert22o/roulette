@@ -6,10 +6,10 @@ public class ShopPlace : MonoBehaviour
     [SerializeField] private Shop shop;
     [SerializeField] private TextMeshPro costText;
 
-    public Item Item { get; private set; }
+    public ItemData Item { get; private set; }
 
 
-    public void SetItem(Item item)
+    public void SetItem(ItemData item)
     {
         this.Item = item;
         costText.text = item.Cost.ToString();

@@ -9,7 +9,7 @@ public class ShopItemsPool
         shopItemsTable = table;
     }
 
-    public Item GetRandomItem()
+    public ItemData GetRandomItem()
     {
         var groups = shopItemsTable.Tables;
 

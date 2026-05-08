@@ -1,24 +1,26 @@
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class GoldenChipsLabel : MonoBehaviour
 {
     [SerializeField] private TextMeshPro text;
-    private GoldenChipsController goldenChipsController;
+    private Inventory inventory;
 
-    private void Awake()
+    [Inject]
+    public void Construct(Inventory inventory)
     {
-        goldenChipsController = FindAnyObjectByType<GoldenChipsController>();
+        this.inventory = inventory;
     }
 
     private void OnEnable()
     {
-        goldenChipsController.CountChanged += UpdateText;
+        inventory.GoldenChipsChanged += UpdateText;
     }
 
     private void OnDisable()
     {
-        goldenChipsController.CountChanged += UpdateText;
+        inventory.GoldenChipsChanged -= UpdateText;
     }
 
     private void UpdateText(int count)

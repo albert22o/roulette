@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class Shop : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class Shop : MonoBehaviour
     [SerializeField] private float tooltipHeight;
 
     private ShopItemsPool itemsPool = new ();
-    private GoldenChipsController goldenChipsController;
+    private Inventory inventory;
 
+    
+    [Inject]
+    public void Construct(Inventory inventory)
+    {
+        this.inventory = inventory;
+    }
 
     private void Start()
     {
-        goldenChipsController = FindAnyObjectByType<GoldenChipsController>();
         itemsPool.SetTable(itemsTable);
         FillShopPlaces();
     }
@@ -45,11 +51,18 @@ public class Shop : MonoBehaviour
 
     public bool TryBuy(ShopPlace place)
     {
-        if (goldenChipsController.Count >= place.Item.Cost)
+        if (inventory.GoldenChipsCount >= place.Item.Cost)
         {
-            goldenChipsController.RemoveChips(place.Item.Cost);
-            Debug.Log(place.Item.NameKey + " bought!");
-            return true;
+            if (inventory.TryAddItem(new Item(place.Item)))
+                {
+                inventory.RemoveGoldenChips(place.Item.Cost);
+                Debug.Log(place.Item.NameKey + " bought!");
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
         else
         {
