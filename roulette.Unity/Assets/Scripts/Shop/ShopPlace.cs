@@ -18,7 +18,7 @@ public class ShopPlace : MonoBehaviour
     public void ShowDescription()
     {
         if (Item == null) return;
-        shop.ShowDescription(this);
+        shop.ShowDescription(Item, transform.position);
     }
 
     public void HideDescription()

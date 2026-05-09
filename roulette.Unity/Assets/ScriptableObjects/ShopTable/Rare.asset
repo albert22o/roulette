@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Rare
   m_EditorClassIdentifier: 
   <Items>k__BackingField:
-  - {fileID: 11400000, guid: f0087731bcf0ef0489ddd4a7ae8eeebd, type: 2}
-  - {fileID: 11400000, guid: 51620512bdf99e149ab4d0e3c54acb5a, type: 2}
+  - {fileID: 11400000, guid: aaa14fc40dc6bac4ea3e9aaa14ab28b4, type: 2}
+  - {fileID: 11400000, guid: 71190ac66c9c7554f9ecaab485064281, type: 2}

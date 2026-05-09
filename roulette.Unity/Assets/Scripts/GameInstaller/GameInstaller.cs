@@ -14,6 +14,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<BallResults>().AsSingle();
 
         Container.Bind<IRouletteWheel>().To<RouletteWheel>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<TableConfig>().AsSingle();
 

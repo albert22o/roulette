@@ -21,6 +21,9 @@ public class Inventory
         { CurrencyType.BaseMoney, 0 }
     };
 
+    public IReadOnlyList<Item> Balls => balls;
+    public IReadOnlyList<Item> Chips => chips;
+
     public event Action<CurrencyType, int> CurrencyChanged;
     public event Action ItemsChanged;
 

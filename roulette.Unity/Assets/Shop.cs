@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopTooltip tooltip;
     [SerializeField] private ShopItemsTable itemsTable;
     [SerializeField] private float tooltipHeight;
+    [SerializeField] private float chipSellMultiplier = 0.5f;
+    [SerializeField] private int ballSellCost = 3;
 
     private ShopItemsPool itemsPool = new();
     private Inventory inventory;
@@ -37,11 +40,18 @@ public class Shop : MonoBehaviour
 
     }
 
-    public void ShowDescription(ShopPlace place)
+    public void ShowDescription(Item item, Vector3 position)
     {
         tooltip.gameObject.SetActive(true);
-        tooltip.SetItem(place.Item);
-        tooltip.transform.position = place.transform.position + Vector3.up * tooltipHeight;
+        tooltip.SetItem(item);
+        tooltip.transform.position = position + Vector3.up * tooltipHeight;
+    }
+
+    public void ShowDescription(ItemData itemdata, Vector3 position)
+    {
+        tooltip.gameObject.SetActive(true);
+        tooltip.SetItemData(itemdata);
+        tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
     public void HideDescription()
@@ -53,7 +63,8 @@ public class Shop : MonoBehaviour
     {
         if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
         {
-            if (inventory.TryAddItem(new Item(place.Item)))
+            string id = Guid.NewGuid().ToString();
+            if (inventory.TryAddItem(new Item(place.Item, id)))
             {
                 inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
                 Debug.Log(place.Item.NameKey + " bought!");
@@ -68,6 +79,23 @@ public class Shop : MonoBehaviour
         {
             Debug.Log(place.Item.NameKey + " not enough money!");
             return false;
+        }
+    }
+
+    public void Sell(Item item)
+    {
+        if (item.Data.Type == ItemType.Ball)
+        {
+            if (inventory.Balls.Count > 1)
+            {
+                inventory.AddCurrency(CurrencyType.GoldenChips, ballSellCost);
+                inventory.RemoveItem(item);
+            }
+        }
+        else
+        {
+            inventory.AddCurrency(CurrencyType.GoldenChips, (int)(item.Data.Cost * chipSellMultiplier));
+            inventory.RemoveItem(item);
         }
     }
 }
