@@ -2,12 +2,11 @@
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] BetTableView betTableView;
-    [SerializeField] RoundManagerView roundManagerView;
+    [SerializeField] RoundScopeView roundScopeView;
+    [SerializeField] FirstPersonController firstPersonController;
     void Awake()
     {
-        roundManagerView.Init();
-        betTableView.Init();
-
+        roundScopeView.Init();
+        firstPersonController.Init();
     }
 }

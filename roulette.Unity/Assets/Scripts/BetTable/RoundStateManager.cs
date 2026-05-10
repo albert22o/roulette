@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 public class RoundStateManager
 {
+    private readonly GameStateManager gameStateManager;
+
     public event Action<BetState> StateChanged;
 
-    public RoundStateManager()
+    public RoundStateManager(GameStateManager gameStateManager)
     {
-        Test();
+        this.gameStateManager = gameStateManager;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
-    private async Task Test()
+    private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        await Task.Delay(100);
-        ChangeState(BetState.PlacingBets);
+        if (state == GameStateManager.GameState.BettingСycle)
+            ChangeState(BetState.PlacingBets);
+        else
+            ChangeState(BetState.NotActive);
     }
 
     public void ChangeState(BetState state)

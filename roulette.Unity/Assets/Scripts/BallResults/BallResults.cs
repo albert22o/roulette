@@ -42,6 +42,7 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
+        roundStateManager.ChangeState(BetState.ChoosingReward);
         SelectBall(balls[0]);
         return;
         foreach (var ball in balls) 

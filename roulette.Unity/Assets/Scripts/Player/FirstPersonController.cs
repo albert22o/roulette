@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController),typeof(MeshRenderer),typeof(Collider))]
 public class FirstPersonController : MonoBehaviour
 {
     [Header("Движение")]
@@ -15,6 +17,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float verticalClamp = 85f;
 
     private CharacterController controller;
+    private MeshRenderer render;
+    private Collider playerCollider;
     private Vector3 velocity;
     private float xRotation;
     private bool active = false;
@@ -22,6 +26,13 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 lookInput;
     private bool jumpPressed;
 
+    private GameStateManager gameStateManager;
+
+    [Inject]
+    public void Constuct(GameStateManager gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+    }
 
     public void Init()
     {
@@ -31,9 +42,36 @@ public class FirstPersonController : MonoBehaviour
             return;
         }
         controller = GetComponent<CharacterController>();
+        render = GetComponent<MeshRenderer>();
+        playerCollider = GetComponent<Collider>();
+        Enable();
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState state)
+    {
+        if (state == GameStateManager.GameState.FreeRoam)
+            Enable();
+        else
+            Disable();
+    }
+
+    private void Enable()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         active = true;
+        render.enabled = true;
+        playerCollider.enabled = true;
+    }
+
+    private void Disable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        active = false;
+        render.enabled = false;
+        playerCollider.enabled = false;
     }
 
     private void Update()
@@ -43,13 +81,6 @@ public class FirstPersonController : MonoBehaviour
             HandleMouseLook();
             HandleMovement();    
         }
-    }
-
-    public void Freeze()
-    {
-        active = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public void OnMove(InputValue value) => moveInput = value.Get<Vector2>();

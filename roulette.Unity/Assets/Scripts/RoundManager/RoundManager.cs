@@ -45,7 +45,7 @@ public class RoundManager
         if (betCount <= 0)
             return;
 
-        roundStateManager.ChangeState(BetState.ChoosingReward);
+        roundStateManager.ChangeState(BetState.WheelSpining);
 
         // Убрать потом
         var dummyMaterial = new Material(Shader.Find("Standard"));
