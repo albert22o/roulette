@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class CurrencyLabel : MonoBehaviour
+public class CurrencyView : MonoBehaviour
 {
     [SerializeField] private TextMeshPro text;
     [SerializeField] private CurrencyType currencyType;
@@ -17,6 +17,7 @@ public class CurrencyLabel : MonoBehaviour
     private void OnEnable()
     {
         inventory.CurrencyChanged += UpdateText;
+        UpdateText(currencyType, inventory.GetCurrency(currencyType));
     }
 
     private void OnDisable()

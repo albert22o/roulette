@@ -1,18 +1,30 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class ShopPlace : MonoBehaviour
 {
     [SerializeField] private Shop shop;
-    [SerializeField] private TextMeshPro costText;
+    [SerializeField] private CostView costView;
 
-    public ItemData Item { get; private set; }
+    private ItemData item;
+    public ItemData Item
+    {
+        get => item;
+        private set
+        {
+            item = value;
+            ItemChanged?.Invoke(item);
+        }
+    }
+
+    public event Action<ItemData> ItemChanged;
 
 
     public void SetItem(ItemData item)
     {
-        this.Item = item;
-        costText.text = item.Cost.ToString();
+        Item = item;
+        costView.SetCost(Item.Cost);
     }
 
     public void ShowDescription()
@@ -33,7 +45,7 @@ public class ShopPlace : MonoBehaviour
         {
             Item = null;
             HideDescription();
-            costText.text = "";
+            costView.SetCost(0);
         }
     }
 }
