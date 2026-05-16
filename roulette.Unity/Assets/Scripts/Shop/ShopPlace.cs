@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class ShopPlace : MonoBehaviour
+public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
     [SerializeField] private Shop shop;
     [SerializeField] private CostView costView;
@@ -17,6 +17,8 @@ public class ShopPlace : MonoBehaviour
             ItemChanged?.Invoke(item);
         }
     }
+
+    public bool IsInteractable => Item != null;
 
     public event Action<ItemData> ItemChanged;
 
@@ -47,5 +49,20 @@ public class ShopPlace : MonoBehaviour
             HideDescription();
             costView.SetCost(0);
         }
+    }
+
+    public void Clicked()
+    {
+        Buy();
+    }
+
+    public void HoverEnter()
+    {
+        ShowDescription();
+    }
+
+    public void HoverExit()
+    {
+        HideDescription();
     }
 }

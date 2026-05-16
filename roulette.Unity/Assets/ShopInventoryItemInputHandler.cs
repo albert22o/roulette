@@ -1,10 +1,9 @@
 using UnityEngine;
 using Zenject;
 
-public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable
+public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private ShopInventoryItem inventoryItem;
-    private bool isClicked;
     private Shop shop;
 
     public bool IsInteractable => inventoryItem != null;
@@ -15,26 +14,18 @@ public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable
         this.shop = shop;
     }
 
-    public void OnMouseEnter()
+    public void HoverEnter()
     {
         shop.ShowDescription(inventoryItem.Item, inventoryItem.transform.position);
     }
 
-    public void OnMouseExit()
+    public void HoverExit()
     {
         shop.HideDescription();
-        isClicked = false;
     }
 
-    public void OnMouseDown()
+    public void Clicked()
     {
-        isClicked = true;
-    }
-
-    public void OnMouseUp()
-    {
-        if (isClicked)
-            shop.Sell(inventoryItem.Item);
-        isClicked = false;
+        shop.Sell(inventoryItem.Item);
     }
 }

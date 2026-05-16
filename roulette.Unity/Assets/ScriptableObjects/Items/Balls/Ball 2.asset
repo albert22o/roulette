@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86b79abf01f08bc45bbeb267194e4caa, type: 3}
-  m_Name: Epic ball
+  m_Name: Ball 2
   m_EditorClassIdentifier: 
-  <NameKey>k__BackingField: "\u042D\u043F\u0438\u0447\u0435\u0441\u043A\u0438\u0439
-    \u0448\u0430\u0440"
-  <DescriptionKey>k__BackingField: gwoeimbeprhyehrhew
-  <Cost>k__BackingField: 200
+  <NameKey>k__BackingField: Ball 2
+  <DescriptionKey>k__BackingField: Gemwemrboiher
+  <Cost>k__BackingField: 100
   <Type>k__BackingField: 0
   <VisualComponent>k__BackingField:
-    <Material>k__BackingField: {fileID: 2100000, guid: 4fe8337e5cb61da418995ad04e35bff7, type: 2}
+    <Material>k__BackingField: {fileID: 2100000, guid: 2fbe5b7785793914e9107cae0efe80b8, type: 2}

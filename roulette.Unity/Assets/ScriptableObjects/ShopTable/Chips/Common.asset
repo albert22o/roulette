@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
-  m_Name: Rare
+  m_Name: Common
   m_EditorClassIdentifier: 
   <Items>k__BackingField:
-  - {fileID: 11400000, guid: aaa14fc40dc6bac4ea3e9aaa14ab28b4, type: 2}
-  - {fileID: 11400000, guid: 71190ac66c9c7554f9ecaab485064281, type: 2}
+  - {fileID: 11400000, guid: c936ca85135b1ec478b7a0aacf1463ef, type: 2}

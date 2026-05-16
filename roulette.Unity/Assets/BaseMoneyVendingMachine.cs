@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class BaseMoneyVendingMachine : MonoBehaviour
+public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 {
     [SerializeField] private int initCost = 2;
     [SerializeField] private int nextCostDelta = 1;
@@ -21,6 +21,9 @@ public class BaseMoneyVendingMachine : MonoBehaviour
             CostChanged?.Invoke(cost);
         }
     }
+
+    public bool IsInteractable => true;
+
     public event Action<int> CostChanged;
 
     [Inject]
@@ -49,4 +52,8 @@ public class BaseMoneyVendingMachine : MonoBehaviour
         }
     }
 
+    public void Clicked()
+    {
+        TryBuy();
+    }
 }
