@@ -83,8 +83,8 @@ public class BetTable
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
-    private void OnStateChanged(BetState newState)
+    private void OnStateChanged(RoundState newState)
     {
-        active = newState == BetState.PlacingBets;
+        active = newState == RoundState.PlacingBets;
     }
 }

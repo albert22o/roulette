@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3287391072835549294}
   - component: {fileID: 1872545594907299775}
   - component: {fileID: 8548362096563339515}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FieldNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1584103670993536186}
   - component: {fileID: 4194919758732754528}
   - component: {fileID: 658725084393326555}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,12 +298,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.16007596, y: 0.16000004, z: 0.04578936}
-  m_Center: {x: 0.00003798554, y: 5.5169393e-17, z: -0.008660512}
+  m_Size: {x: 0.16007596, y: 0.16000004, z: 0.1692358}
+  m_Center: {x: 0.00003798554, y: 4.601074e-16, z: -0.07038374}
 --- !u!1 &6656800096395598255
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7474288467868680278}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ Transform:
   m_GameObject: {fileID: 6656800096395598255}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.048}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

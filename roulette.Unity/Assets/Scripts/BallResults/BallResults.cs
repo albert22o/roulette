@@ -13,6 +13,7 @@ public class BallResults
     private readonly RoundStateManager roundStateManager;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
+    private HitInfo tempBall;
 
     public BallResults(IRouletteWheel rouletteWheel, Inventory inventory, RoundStateManager roundStateManager)
     {
@@ -30,6 +31,12 @@ public class BallResults
         RemoveBalls();
     }
 
+    public void SelectBall()
+    {
+        if (tempBall != null)
+            SelectBall(tempBall);
+    }
+
     private void RemoveBalls()
     {
         foreach (var ball in currentBalls) 
@@ -42,8 +49,9 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
-        roundStateManager.ChangeState(BetState.ChoosingReward);
-        SelectBall(balls[0]);
+        roundStateManager.ChangeState(RoundState.ChoosingReward);
+        tempBall = balls[0];
+        //SelectBall(balls[0]);
         return;
         foreach (var ball in balls) 
         {
@@ -54,8 +62,8 @@ public class BallResults
         }
     }
 
-    public void OnStateChanged(BetState newState)
+    public void OnStateChanged(RoundState newState)
     {
-        active = newState == BetState.ChoosingReward;
+        active = newState == RoundState.ChoosingReward;
     }
 }

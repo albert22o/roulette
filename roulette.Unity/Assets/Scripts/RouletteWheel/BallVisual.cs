@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallVisual : MonoBehaviour
 {
@@ -7,9 +7,6 @@ public class BallVisual : MonoBehaviour
     private Ball ball;
     private VisualComponent visualComponent;
     private float scaleMultiplier;
-
-
-
 
     public void SetVisualComponent(VisualComponent visualComponent)
     {

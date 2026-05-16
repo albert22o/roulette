@@ -1,17 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class GameStateManager
 {
     public event Action<GameState> GameStateChanged;
 
+    private GameState? currentState = null;
+    private readonly Queue<GameState> stateQueue = new Queue<GameState>();
+    private bool isProcessing;
+
     public void ChangeGameState(GameState state)
     {
-        GameStateChanged?.Invoke(state);
+        stateQueue.Enqueue(state);
+
+        if (isProcessing)
+            return;
+
+        isProcessing = true;
+
+        while (stateQueue.Count > 0)
+        {
+            var nextState = stateQueue.Dequeue();
+
+            if (currentState == nextState)
+                continue;
+
+            currentState = nextState;
+            GameStateChanged?.Invoke((GameState)currentState);
+        }
+
+        isProcessing = false;
     }
 
     public enum GameState
     {
         FreeRoam,
-        BettingСycle
+        BettingСycle,
+        Shopping,
+        Lose
     }
 }

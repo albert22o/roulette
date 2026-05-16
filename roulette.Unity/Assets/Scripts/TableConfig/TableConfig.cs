@@ -10,6 +10,9 @@ public class TableConfig
     public int StartSum => Math.Max(0, startSum);
     public IReadOnlyDictionary<int, BetInfo> PocketMapping => pocketMapping;
 
+    public int BetCount = 3;
+    public int RerollCount = 5;
+
     private readonly Dictionary<int, BetInfo> pocketMapping = new()
     {
         { 0,  new BetInfo(0,  DozenType.Zero,  "Green") },

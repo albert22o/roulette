@@ -20,15 +20,16 @@ public class RoundStateManagerView : MonoBehaviour
         roundStateManager.StateChanged += OnStateChanged;
     }
 
-    private void OnStateChanged(RoundStateManager.BetState state)
+    private void OnStateChanged(RoundStateManager.RoundState state)
     {
         switch (state) 
         {
-            case RoundStateManager.BetState.NotActive:
+            case RoundStateManager.RoundState.NotActive:
                 rouletteCamera.gameObject.SetActive(false);
                 roundCamera.gameObject.SetActive(false);
                 break;
-            case RoundStateManager.BetState.WheelSpining:
+            case RoundStateManager.RoundState.WheelSpining:
+            case RoundStateManager.RoundState.ChoosingReward:
                 rouletteCamera.gameObject.SetActive(true);
                 roundCamera.gameObject.SetActive(false);
                 break;

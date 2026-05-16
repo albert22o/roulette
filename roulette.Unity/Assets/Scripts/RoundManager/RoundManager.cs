@@ -7,46 +7,95 @@ public class RoundManager
     public event Action<int> BetCountChanged;
     public event Action<int> RerollCountChanged;
     public event Action<int> QuoteChanged;
+    public event Action<int> GoalChanged;
 
     public event Action Win;
-    public event Action Lose;     
 
-    public bool IsRerollAvailable => rerollCount > 0 && betState == BetState.ChoosingReward;
-    public bool IsSpinAvailable => betCount > 0 && betState == BetState.PlacingBets;
-    public int Goal => goal;
-    public int Quote => quote;
-    public int BetCount => betCount;
-    public int RerollCount => rerollCount;
+    public bool AbleToWin => ableToWin;
+
+    public int Goal
+    {
+        get => goal;
+        set
+        {
+            goal = value;
+            GoalChanged?.Invoke(goal);
+        }
+    }
+    
+    public int BetCount
+    {
+        get => betCount;
+        private set
+        {
+            betCount = value;
+            BetCountChanged?.Invoke(betCount);
+        }
+    }
+
+    public int RerollCount
+    {
+        get => rerollCount;
+        private set
+        {
+            rerollCount = value;
+            RerollCountChanged?.Invoke(rerollCount);
+        }
+    }
+
+    public int Quote
+    {
+        get => quote;
+        private set
+        {
+            quote = value;
+            QuoteChanged?.Invoke(quote);
+        }
+    }
 
     private int betCount = 3;
     private int rerollCount = 5;
     private int quote = 0;
     private int goal = 1000;
 
-    private BetState betState = BetState.PlacingBets;
+    private RoundState betState = RoundState.PlacingBets;
+    private bool ableToWin;
+    private readonly ProgressionManager progressionManager;
     private readonly IRouletteWheel rouletteWheel;
-    private readonly BetCalculator betCalculator;
     private readonly RoundStateManager roundStateManager;
+    private readonly TableConfig tableConfig;
 
-    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator, RoundStateManager roundStateManager)
+    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator, RoundStateManager roundStateManager,
+        TableConfig tableConfig, ProgressionManager progressionManager)
     {
         this.rouletteWheel = rouletteWheel;
-        this.betCalculator = betCalculator;
+
         betCalculator.GetReward += OnGetReward;
         
         this.roundStateManager = roundStateManager;
+        this.tableConfig = tableConfig;
+        this.progressionManager = progressionManager;
         roundStateManager.StateChanged += OnStateChanged;
+    }
+
+    public void Reset()
+    {
+        Quote = 0;
+        BetCount = tableConfig.BetCount;
+        RerollCount = tableConfig.RerollCount;
+        Goal = progressionManager.Current.Goal;
     }
 
     public void Spin()
     {
-        if (betState != BetState.PlacingBets)
+        if (betState != RoundState.PlacingBets)
             return;
         if (betCount <= 0)
             return;
 
-        roundStateManager.ChangeState(BetState.WheelSpining);
+        roundStateManager.ChangeState(RoundState.WheelSpining);
 
+        rouletteWheel.ClearBalls();
         // Убрать потом
         var dummyMaterial = new Material(Shader.Find("Standard"));
         var visualComponent = new VisualComponent()
@@ -62,33 +111,52 @@ public class RoundManager
 
     public void Reroll()
     {
-        if (betState != BetState.ChoosingReward)
+        if (betState != RoundState.ChoosingReward)
             return;
         if (rerollCount <= 0)
             return;
+
+        rouletteWheel.ClearBalls();
+        // Убрать потом
+        var dummyMaterial = new Material(Shader.Find("Standard"));
+        var visualComponent = new VisualComponent()
+        {
+            Material = dummyMaterial
+        };
+        rouletteWheel.AddBall("1", visualComponent);
 
         rouletteWheel.Spin();
         rerollCount--;
         RerollCountChanged?.Invoke(rerollCount);
     }
 
+    public void ConfirmWin()
+    {
+        if (!AbleToWin)
+            return;
+        Win?.Invoke();
+        roundStateManager.ChangeState(RoundState.Win);
+    }
+
     private void OnGetReward(int reward)
     {
         quote += reward;
         if (quote >= goal)
-            Win?.Invoke();
+            ableToWin = true;
         else if (betCount <= 0)
-            Lose?.Invoke();
-
-        // Убрать потом
-        rouletteWheel.ClearBalls();
+            roundStateManager.ChangeState(RoundState.Lose);
 
         QuoteChanged?.Invoke(quote);
-        roundStateManager.ChangeState(BetState.PlacingBets);
+        roundStateManager.ChangeState(RoundState.PlacingBets);
     }
 
-    public void OnStateChanged(BetState newState)
+    private void OnStateChanged(RoundState newState)
     {
         betState = newState;
+        if (newState == RoundState.Start)
+        {
+            Reset();
+            roundStateManager.ChangeState(RoundState.PlacingBets);
+        }
     }
 }

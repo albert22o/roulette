@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using UnityEngine;
 using static RoundStateManager;
 
 public class BetCalculator
@@ -12,22 +14,18 @@ public class BetCalculator
     private bool active = true;
 
     private readonly BetTable betTable;
-    private readonly RoundStateManager roundStateManager;
-    private readonly BallResults ballResults;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
-        this.ballResults = ballResults;
-        ballResults.BallSelected += OnBallSelected;
-        
         this.betTable = betTable;
-        this.roundStateManager = roundStateManager;
+
+        ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
-    public void OnStateChanged(BetState newState)
+    public void OnStateChanged(RoundState newState)
     {
-        active = newState == BetState.ChoosingReward;
+        active = newState == RoundState.ChoosingReward;
     }
 
     private void OnBallSelected(HitInfo info)

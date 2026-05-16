@@ -12,6 +12,7 @@ public class RoundManagerView : MonoBehaviour
 
     [SerializeField] TableButton spinButton;
     [SerializeField] TableButton rerollButton;
+    [SerializeField] TableButton confirmWinButton;
 
     private RoundManager roundManager;
 
@@ -30,11 +31,12 @@ public class RoundManagerView : MonoBehaviour
         }
 
         roundManager.BetCountChanged += OnBetCountChanged;
-        roundManager.QuoteChanged += OnQuoteChanged;
+        roundManager.QuoteChanged += OnQuoteOrGoalChanged;
         roundManager.RerollCountChanged += OnRerollCountChanged;
+        roundManager.GoalChanged += OnQuoteOrGoalChanged;
 
         OnBetCountChanged(roundManager.BetCount);
-        OnQuoteChanged(roundManager.Quote);
+        OnQuoteOrGoalChanged(roundManager.Quote);
         OnRerollCountChanged(roundManager.RerollCount);
 
         if (rerollButton == null || spinButton == null)
@@ -45,6 +47,12 @@ public class RoundManagerView : MonoBehaviour
 
         spinButton.Clicked += OnSpinButtonClick;
         rerollButton.Clicked += OnRerollButtonClick;
+        confirmWinButton.Clicked += OnConfirmWinClick;
+    }
+
+    private void OnConfirmWinClick()
+    {
+        roundManager.ConfirmWin();
     }
 
     private void OnSpinButtonClick()
@@ -62,9 +70,10 @@ public class RoundManagerView : MonoBehaviour
         rerollCountText.text = newRerollCount.ToString();
     }
 
-    private void OnQuoteChanged(int newQuote)
+    private void OnQuoteOrGoalChanged(int _)
     {
-        quoteText.text = $"{newQuote}/{roundManager.Goal}";
+        quoteText.text = $"{roundManager.Quote}/{roundManager.Goal}";
+        confirmWinButton.gameObject.SetActive(roundManager.AbleToWin);
     }
 
     private void OnBetCountChanged(int newBet)
