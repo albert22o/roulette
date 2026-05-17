@@ -28,14 +28,7 @@ public class ShopItemsPool
         }
 
 
-        var items = selectedGroup.Items;
 
-        if (items == null || items.Length == 0)
-        {
-            Debug.LogWarning($"Rarity group {selectedGroup.name} has no items!");
-            return null;
-        }
-
-        return items[Random.Range(0, items.Length)];
-}
+        return selectedGroup.GetRandomItem();
+    }
 }

@@ -20,5 +20,6 @@ public class GameInstaller : MonoInstaller
 
         Container.BindInstance(inventoryConfig).AsSingle();
         Container.Bind<Inventory>().AsSingle();
+        Container.Bind<ItemFactory>().AsSingle();
     }
 }

@@ -14,7 +14,8 @@ public class MouseInteraction : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, mask))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IMouseInteractable _))
+            if (hit.collider.gameObject.TryGetComponent(out IMouseInteractable interactable)
+                && interactable.IsInteractable == true)
             {
                 if (hitObject != hit.collider.gameObject)
                 {

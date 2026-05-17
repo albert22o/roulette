@@ -27,5 +27,6 @@ public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable, 
     public void Clicked()
     {
         shop.Sell(inventoryItem.Item);
+        shop.HideDescription();
     }
 }

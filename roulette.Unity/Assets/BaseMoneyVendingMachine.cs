@@ -32,11 +32,6 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
         this.inventory = inventory;
     }
 
-    private void Awake()
-    {
-        ResetCost();
-    }
-
     public void ResetCost()
     {
         Cost = initCost;

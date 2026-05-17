@@ -11,20 +11,35 @@ public class Shop : MonoBehaviour
     [SerializeField] private float chipSellMultiplier = 0.5f;
     [SerializeField] private int ballSellCost = 3;
 
+    [SerializeField] private ShopRerollButton rerollButton;
+    [SerializeField] private BaseMoneyVendingMachine baseMoneyVendingMachine;
+    [SerializeField] private BallsVendingMachine ballsVendingMachine;
+    [SerializeField] private ShopFoodPlace foodPlace;
+
     private ShopItemsPool itemsPool = new();
     private Inventory inventory;
+    private ItemFactory itemFactory;
 
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(Inventory inventory, ItemFactory factory)
     {
         this.inventory = inventory;
+        itemFactory = factory;
     }
 
     private void Start()
     {
         itemsPool.SetTable(itemsTable);
+        OnQuotaUpdated();
+    }
+
+    public void OnQuotaUpdated()
+    {
         FillShopPlaces();
+        rerollButton.ResetCost();
+        baseMoneyVendingMachine.ResetCost();
+        foodPlace.UpdateItem();
     }
 
     private void FillShopPlaces()
@@ -37,7 +52,13 @@ public class Shop : MonoBehaviour
 
     public void Reroll()
     {
-
+        foreach (ShopPlace place in shopPlaces)
+        {
+            if (place.Item != null)
+            {
+                place.SetItem(itemsPool.GetRandomItem());
+            }
+        }
     }
 
     public void ShowDescription(Item item, Vector3 position)
@@ -63,9 +84,10 @@ public class Shop : MonoBehaviour
     {
         if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
         {
-            string id = Guid.NewGuid().ToString();
-            if (inventory.TryAddItem(new Item(place.Item, id)))
+
+            if (inventory.CanAddItem(place.Item))
             {
+                inventory.TryAddItem(itemFactory.Create(place.Item));
                 inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
                 Debug.Log(place.Item.NameKey + " bought!");
                 return true;
