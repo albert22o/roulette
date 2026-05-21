@@ -62,7 +62,7 @@ public class ShopInventory : MonoBehaviour
                 var newBall = container.InstantiatePrefabForComponent<ShopInventoryItem>(ballPrefab);
                 newBall.transform.position = GetFreeBallSpawnPoint().position;
                 newBall.SetItem(inventoryBall);
-                newBall.SetVisualComponent((inventoryBall.Data as BallItemData).VisualComponent);
+                newBall.SetVisualComponent(inventoryBall.Data.VisualComponent);
 
                 balls.Add(newBall);
             }
@@ -105,7 +105,7 @@ public class ShopInventory : MonoBehaviour
                 var newChip = container.InstantiatePrefabForComponent<ShopInventoryItem>(chipPrefab);
                 newChip.transform.position = GetFreeChipSpawnPoint().position;
                 newChip.SetItem(inventoryChip);
-                newChip.SetVisualComponent((inventoryChip.Data as BallItemData).VisualComponent);
+                newChip.SetVisualComponent(inventoryChip.Data.VisualComponent);
 
                 chips.Add(newChip);
             }

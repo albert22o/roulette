@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b79abf01f08bc45bbeb267194e4caa, type: 3}
+  m_Script: {fileID: 11500000, guid: c72c02c1ee8d53e47a7aa0b19b674341, type: 3}
   m_Name: Ball 1
   m_EditorClassIdentifier: 
-  <NameKey>k__BackingField: Ball 1
-  <DescriptionKey>k__BackingField: Gemwemrboiher
-  <Cost>k__BackingField: 100
+  <NameKey>k__BackingField: 
+  <DescriptionKey>k__BackingField: 
+  <Cost>k__BackingField: 0
   <Type>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 0}
   <VisualComponent>k__BackingField:
-    <Material>k__BackingField: {fileID: 2100000, guid: 7b5e884f1329d1c498d18ac6a0056a4b, type: 2}
+    <Material>k__BackingField: {fileID: 0}

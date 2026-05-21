@@ -6,6 +6,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
 {
     [SerializeField] private Shop shop;
     [SerializeField] private CostView costView;
+    [SerializeField] private ItemPlace itemPlace;
 
     private ItemData item;
     public ItemData Item
@@ -27,6 +28,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     {
         Item = item;
         costView.SetCost(Item.Cost);
+        itemPlace.SetItem(item);
     }
 
     public void ShowDescription()
@@ -46,6 +48,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         if (shop.TryBuy(this))
         {
             Item = null;
+            itemPlace.SetItem(null);
             HideDescription();
             costView.SetCost(0);
         }
