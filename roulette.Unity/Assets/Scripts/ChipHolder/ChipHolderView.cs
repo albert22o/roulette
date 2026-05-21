@@ -10,6 +10,8 @@ public class ChipHolderView : MonoBehaviour
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
     [SerializeField] private LayerMask slotLayerMask;
+    [Header("For Test")]
+    [SerializeField] private ChipData[] chips;
 
     private Camera mainCamera;
     private ChipHolder chipHolder;
@@ -20,9 +22,8 @@ public class ChipHolderView : MonoBehaviour
 
     private InputAction clickAction;
     private InputAction pointAction;
-
-    [SerializeField] private ChipData[] chips;
     private ChipSlotView hoveredSlot;
+
 
     [Inject]
     public void Construct(ChipHolder holder)
@@ -33,8 +34,8 @@ public class ChipHolderView : MonoBehaviour
     public void Init(Camera mainCamera)
     {
         this.mainCamera = mainCamera;
-        chipHolder.ChipAdded    += OnChipAdded;
-        chipHolder.ChipRemoved  += OnChipRemoved;
+        chipHolder.ChipAdded += OnChipAdded;
+        chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;
 
         InitSlots();
@@ -48,8 +49,8 @@ public class ChipHolderView : MonoBehaviour
     {
         if (chipHolder != null)
         {
-            chipHolder.ChipAdded    -= OnChipAdded;
-            chipHolder.ChipRemoved  -= OnChipRemoved;
+            chipHolder.ChipAdded -= OnChipAdded;
+            chipHolder.ChipRemoved -= OnChipRemoved;
             chipHolder.ChipsSwapped -= OnChipsSwapped;
         }
 
@@ -57,15 +58,11 @@ public class ChipHolderView : MonoBehaviour
         pointAction?.Dispose();
     }
 
-    // ── Инициализация слотов ──────────────────────────────────────────
-
     private void InitSlots()
     {
         for (int i = 0; i < slotViews.Length; i++)
             slotViews[i].Init(i, slotViews[i].transform.position);
     }
-
-    // ── Input ─────────────────────────────────────────────────────────
 
     private void SetupInput()
     {
@@ -73,7 +70,7 @@ public class ChipHolderView : MonoBehaviour
         pointAction.Enable();
 
         clickAction = new InputAction("Click", binding: "<Mouse>/leftButton");
-        clickAction.started  += _ => TryBeginDrag();
+        clickAction.started += _ => TryBeginDrag();
         clickAction.canceled += _ => EndDrag();
         clickAction.Enable();
     }
@@ -84,12 +81,11 @@ public class ChipHolderView : MonoBehaviour
             UpdateDrag();
     }
 
-    // ── Drag & Drop ───────────────────────────────────────────────────
-
     private void TryBeginDrag()
     {
-        ChipSlotView slot = RaycastSlot();
-        if (slot == null || slot.ChipObject == null) return;
+        var slot = RaycastSlot();
+        if (slot == null || slot.ChipObject == null)
+            return;
 
         isDragging = true;
         draggedFromSlot = slot;
@@ -100,19 +96,21 @@ public class ChipHolderView : MonoBehaviour
 
     private void UpdateDrag()
     {
-        Vector3 worldPos = GetMouseWorldPosition(dragHeight);
-        if (worldPos == Vector3.zero) return;
+        var worldPos = GetMouseWorldPosition(dragHeight);
+        if (worldPos == Vector3.zero)
+            return;
 
         draggedObject.transform.position = worldPos;
-        hoveredSlot = RaycastSlot(); // обновляем каждый кадр
+        hoveredSlot = RaycastSlot(); 
     }
 
     private void EndDrag()
     {
-        if (!isDragging) return;
+        if (!isDragging) 
+            return;
         isDragging = false;
 
-        ChipSlotView targetSlot = hoveredSlot; // берём последний известный
+        var targetSlot = hoveredSlot; 
         hoveredSlot = null;
 
         if (targetSlot != null && targetSlot != draggedFromSlot)
@@ -130,12 +128,9 @@ public class ChipHolderView : MonoBehaviour
         draggedObject = null;
     }
 
-
-    // ── Обработчики ивентов ChipHolder ────────────────────────────────
-
     private void OnChipAdded(int slotIndex, Chip chip)
     {
-        GameObject chipObject = Instantiate(chip.ChipData.Prefab);
+        var chipObject = Instantiate(chip.ChipData.Prefab);
         slotViews[slotIndex].PlaceChip(chipObject);
     }
 
@@ -146,32 +141,32 @@ public class ChipHolderView : MonoBehaviour
 
     private void OnChipsSwapped(int indexA, int indexB)
     {
-        GameObject chipA = slotViews[indexA].ChipObject;
-        GameObject chipB = slotViews[indexB].ChipObject;
+        var chipA = slotViews[indexA].ChipObject;
+        var chipB = slotViews[indexB].ChipObject;
 
-        chipA?.transform.SetParent(null);
-        chipB?.transform.SetParent(null);
+        chipA.transform.SetParent(null);
+        chipB.transform.SetParent(null);
 
         slotViews[indexA].PlaceChip(chipB);
         slotViews[indexB].PlaceChip(chipA);
     }
-    // ── Вспомогательное ───────────────────────────────────────────────
 
     private ChipSlotView RaycastSlot()
     {
-        Vector2 screenPos = pointAction.ReadValue<Vector2>();
-        Ray ray = mainCamera.ScreenPointToRay(screenPos);
+        var screenPos = pointAction.ReadValue<Vector2>();
+        var ray = mainCamera.ScreenPointToRay(screenPos);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, 100f, slotLayerMask)) return null;
+        if (!Physics.Raycast(ray, out var hit, 100f, slotLayerMask))
+            return null;
 
         return hit.collider.GetComponentInParent<ChipSlotView>();
     }
 
     private Vector3 GetMouseWorldPosition(float height)
     {
-        Vector2 screenPos = pointAction.ReadValue<Vector2>();
-        Ray ray = mainCamera.ScreenPointToRay(screenPos);
-        Plane tablePlane = new Plane(Vector3.up, new Vector3(0f, height, 0f));
+        var screenPos = pointAction.ReadValue<Vector2>();
+        var ray = mainCamera.ScreenPointToRay(screenPos);
+        var tablePlane = new Plane(Vector3.up, new Vector3(0f, height, 0f));
 
         if (tablePlane.Raycast(ray, out float distance))
             return ray.GetPoint(distance);
