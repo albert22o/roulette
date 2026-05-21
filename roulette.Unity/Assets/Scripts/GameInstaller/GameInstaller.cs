@@ -27,6 +27,9 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<BetCalculator>().AsSingle();
 
+        Container.Bind<ChipFactory>().AsSingle();
+        Container.Bind<ChipHolder>().AsSingle();
+
         Container.Bind<RoundManager>().AsSingle();
 
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();

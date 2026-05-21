@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using UnityEngine;
 using static RoundStateManager;
 
@@ -7,39 +7,72 @@ public class BetCalculator
 {
     public event Action<int> GetReward;
 
-    private const int ZeroMultiplier = 10;
-    private const int NumMultiplier = 5;
-    private const int DozenMultiplier = 3;
-    private const int ColorMultiplier = 2;
-    private bool active = true;
+    public int ZeroMultiplier { get; set; } = 10;
+    public int NumMultiplier { get; set; } = 5;
+    public int DozenMultiplier { get; set; } = 3;
+    public int ColorMultiplier { get; set; } = 2;
 
-    private readonly BetTable betTable;
+    private readonly Dictionary<int, int> fieldNumberMultipliers = new();
+
+    private readonly Dictionary<DozenType, int> dozenMultipliers = new();
+
+    private readonly Dictionary<string, int> colorMultipliers = new();
+
+    private bool _active = true;
+    private readonly BetTable _betTable;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
-        this.betTable = betTable;
-
+        _betTable = betTable;
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
+
+    public void ModifyFieldNumberMultiplier(int fieldNumber, int delta)
+    {
+        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
+            ? m
+            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
+        fieldNumberMultipliers[fieldNumber] = current + delta;
+    }
+
+    public void ModifyDozenMultiplier(DozenType dozen, int delta)
+    {
+        var current = dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
+        dozenMultipliers[dozen] = current + delta;
+    }
+
+    public void ModifyColorMultiplier(string color, int delta)
+    {
+        var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
+        colorMultipliers[color] = current + delta;
+    }
+
+    public void ResetFieldNumberMultiplier(int fieldNumber) =>
+        fieldNumberMultipliers.Remove(fieldNumber);
+
+    public void ResetDozenMultiplier(DozenType dozen) =>
+        dozenMultipliers.Remove(dozen);
+
+    public void ResetColorMultiplier(string color) =>
+        colorMultipliers.Remove(color);
+
     public void OnStateChanged(RoundState newState)
     {
-        active = newState == RoundState.ChoosingReward;
+        _active = newState == RoundState.ChoosingReward;
     }
 
     private void OnBallSelected(HitInfo info)
     {
-        if (!active)
+        if (!_active)
             return;
 
         var reward = 0;
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts) 
-        {
+        foreach ((var betInfo, var amount) in _betTable.NotNullBetAmounts)
             reward += GetRewardForBet(betInfo, amount, info);
-        }
-        betTable.ClearBets();
 
+        _betTable.ClearBets();
         GetReward?.Invoke(reward);
     }
 
@@ -47,18 +80,28 @@ public class BetCalculator
     {
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
         {
-            if (betInfo.FieldNumber == 0)
-                return amount * ZeroMultiplier;
+            int multiplier = betInfo.FieldNumber == 0
+                ? GetFieldMultiplier(0, ZeroMultiplier)
+                : GetFieldMultiplier(hitInfo.FieldNumber, NumMultiplier);
 
-            return amount * NumMultiplier;
+            return amount * Math.Max(multiplier, 0);
         }
 
         if (betInfo.Dozen == hitInfo.Dozen)
-            return amount * DozenMultiplier;
+            return amount * Math.Max(GetEffectiveDozenMultiplier(hitInfo.Dozen), 0);
 
         if (betInfo.FieldColor == hitInfo.FieldColor)
-            return amount * ColorMultiplier;
+            return amount * Math.Max(GetEffectiveColorMultiplier(hitInfo.FieldColor), 0);
 
         return amount;
     }
+
+    private int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
+        fieldNumberMultipliers.TryGetValue(fieldNumber, out var m) ? m : defaultMultiplier;
+
+    private int GetEffectiveDozenMultiplier(DozenType dozen) =>
+        dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
+
+    private int GetEffectiveColorMultiplier(string color) =>
+        colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 }

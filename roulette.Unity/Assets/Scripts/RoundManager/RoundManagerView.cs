@@ -34,6 +34,7 @@ public class RoundManagerView : MonoBehaviour
         roundManager.QuoteChanged += OnQuoteOrGoalChanged;
         roundManager.RerollCountChanged += OnRerollCountChanged;
         roundManager.GoalChanged += OnQuoteOrGoalChanged;
+        roundManager.AbleToWinChanged += OnAbleToWinChanged;
 
         OnBetCountChanged(roundManager.BetCount);
         OnQuoteOrGoalChanged(roundManager.Quote);
@@ -73,7 +74,11 @@ public class RoundManagerView : MonoBehaviour
     private void OnQuoteOrGoalChanged(int _)
     {
         quoteText.text = $"{roundManager.Quote}/{roundManager.Goal}";
-        confirmWinButton.gameObject.SetActive(roundManager.AbleToWin);
+    }
+
+    private void OnAbleToWinChanged(bool ableToWin)
+    {
+        confirmWinButton.gameObject.SetActive(ableToWin);
     }
 
     private void OnBetCountChanged(int newBet)

@@ -8,10 +8,9 @@ public class RoundManager
     public event Action<int> RerollCountChanged;
     public event Action<int> QuoteChanged;
     public event Action<int> GoalChanged;
+    public event Action<bool> AbleToWinChanged;
 
     public event Action Win;
-
-    public bool AbleToWin => ableToWin;
 
     public int Goal
     {
@@ -53,6 +52,15 @@ public class RoundManager
         }
     }
 
+    public bool AbleToWin {
+        get => ableToWin; 
+        set
+            {
+                ableToWin = value;
+                AbleToWinChanged?.Invoke(value);
+            }
+        }
+
     private int betCount = 3;
     private int rerollCount = 5;
     private int quote = 0;
@@ -84,6 +92,7 @@ public class RoundManager
         BetCount = tableConfig.BetCount;
         RerollCount = tableConfig.RerollCount;
         Goal = progressionManager.Current.Goal;
+        AbleToWin = false;
     }
 
     public void Spin()
@@ -142,7 +151,7 @@ public class RoundManager
     {
         quote += reward;
         if (quote >= goal)
-            ableToWin = true;
+            AbleToWin = true;
         else if (betCount <= 0)
             roundStateManager.ChangeState(RoundState.Lose);
 
