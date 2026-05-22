@@ -84,6 +84,11 @@ public class RouletteBallsManager : MonoBehaviour
         {
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
             isSimulating = false;
+
+            foreach (var hit in hitsInfo.Values)
+            {
+                Debug.Log($"Ball {hit.BallHash} stopped at field with number {hit.FieldNumber}, color {hit.FieldColor}, dozen {hit.Dozen}");
+            }
         }
     }
 
@@ -117,12 +122,14 @@ public class RouletteBallsManager : MonoBehaviour
                 var field = rouletteWheel.Fields[sectorIndex];
                 if (hitsInfo.ContainsKey(ball.Hash) == false)
                 {
+                    int number = rouletteWheel.FieldsOrder[sectorIndex];
+                    var bet = tableConfig.PocketMapping[number];
                     hitsInfo.Add(ball.Hash, new HitInfo()
                     {
                         BallHash = ball.Hash,
-                        FieldColor = tableConfig.PocketMapping[sectorIndex].FieldColor,
-                        FieldNumber = tableConfig.PocketMapping[sectorIndex].FieldNumber,
-                        Dozen = tableConfig.PocketMapping[sectorIndex].Dozen
+                        FieldColor = bet.FieldColor,
+                        FieldNumber = bet.FieldNumber,
+                        Dozen = bet.Dozen
                     });
                 }
             }

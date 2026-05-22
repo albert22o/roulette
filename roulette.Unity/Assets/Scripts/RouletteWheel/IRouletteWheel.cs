@@ -39,12 +39,4 @@ public interface IRouletteWheel
     /// </summary>
     /// <param name="fieldPosition">Фактическая позиция поля</param>
     /// <param name="color">Цвет поля</param>
-    public void SetFieldColor(int fieldPosition, string color);
-
-    /// <summary>
-    /// Устанавливает номер поля
-    /// </summary>
-    /// <param name="fieldIndex">Фактическая позиция поля</param>
-    /// <param name="number">Номер поля</param>
-    public void SetFieldNumber(int fieldIndex, int number);
 }
