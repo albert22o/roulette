@@ -2,6 +2,7 @@ using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 using Zenject;
+using Zenject.Asteroids;
 
 public class Shop : MonoBehaviour
 {
@@ -19,14 +20,14 @@ public class Shop : MonoBehaviour
 
     private ShopItemsPool itemsPool = new();
     private Inventory inventory;
-    private ItemFactory itemFactory;
+
+    public bool CanReroll => CheckRerollAvailable();
 
 
     [Inject]
-    public void Construct(Inventory inventory, ItemFactory factory)
+    public void Construct(Inventory inventory)
     {
         this.inventory = inventory;
-        itemFactory = factory;
     }
 
     private void Start()
@@ -74,30 +75,6 @@ public class Shop : MonoBehaviour
         tooltip.gameObject.SetActive(false);
     }
 
-    public bool TryBuy(ShopPlace place)
-    {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
-        {
-
-            if (inventory.CanAddItem(place.Item))
-            {
-                inventory.TryAddItem(itemFactory.Create(place.Item));
-                inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
-                Debug.Log(place.Item.NameKey + " bought!");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            Debug.Log(place.Item.NameKey + " not enough money!");
-            return false;
-        }
-    }
-
     public void Sell(Item item)
     {
         if (item.Data.Type == ItemType.Ball)
@@ -113,5 +90,17 @@ public class Shop : MonoBehaviour
             inventory.AddCurrency(CurrencyType.GoldenChips, (int)(item.Data.Cost * chipSellMultiplier));
             inventory.RemoveItem(item);
         }
+    }
+
+    public bool CheckRerollAvailable()
+    {
+        bool hasItem = false;
+        foreach(ShopPlace place in shopPlaces)
+        {
+            if (place.IsAnimationPlaying) return false;
+            if (place.Item != null) hasItem = true;
+        }
+        if (hasItem == false) return false;
+        return true;
     }
 }

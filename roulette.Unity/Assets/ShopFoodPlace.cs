@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 using Zenject.Asteroids;
@@ -14,6 +15,9 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private Inventory inventory;
 
     public bool IsInteractable => item != null;
+
+    public event Action<bool> IsHoverChanged;
+    public event Action<bool> HasItemChanged;
 
 
     [Inject] public void Construct(Shop shop, Inventory inventory)
@@ -41,23 +45,27 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             item = null;
             itemPlace.SetItem(null);
             HideDescription();
+            HasItemChanged?.Invoke(false);
         }
     }
 
     public void HoverEnter()
     {
         ShowDescription();
+        IsHoverChanged?.Invoke(true);
     }
 
     public void HoverExit()
     {
         HideDescription();
+        IsHoverChanged?.Invoke(false);
     }
 
     public void UpdateItem()
     {
         item = foodTable.GetRandomItem();
         itemPlace.SetItem(item);
+        HasItemChanged?.Invoke(true);
     }
 
 }

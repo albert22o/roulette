@@ -12,7 +12,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     [SerializeField] private string mainTextKey;
 
     private Inventory inventory;
-    private ItemFactory itemFactory;
+    private ItemFactory itemFactory = new();
     private int cost;
     private Shop shop;
 
@@ -29,10 +29,9 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory, ItemFactory factory, Shop shop)
+    public void Construct(Inventory inventory, Shop shop)
     {
         this.inventory = inventory;
-        itemFactory = factory;
         this.shop = shop;
     }
 

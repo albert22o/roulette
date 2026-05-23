@@ -1,14 +1,16 @@
 using System;
-using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
     [SerializeField] private Shop shop;
     [SerializeField] private CostView costView;
-    [SerializeField] private ItemPlace itemPlace;
 
     private ItemData item;
+    private Inventory inventory;
+    private readonly ItemFactory itemFactory = new();
+    private Item createdItem;
     public ItemData Item
     {
         get => item;
@@ -20,15 +22,22 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     }
 
     public bool IsInteractable => Item != null;
+    public bool IsAnimationPlaying { get; private set; } = false;
 
     public event Action<ItemData> ItemChanged;
 
+    [Inject]
+    public void Construct(Inventory inventory)
+    {
+        this.inventory = inventory;
+    }
 
     public void SetItem(ItemData item)
     {
         Item = item;
         costView.SetCost(Item.Cost);
-        itemPlace.SetItem(item);
+        ItemChanged?.Invoke(item);
+        IsAnimationPlaying = true;
     }
 
     public void ShowDescription()
@@ -45,13 +54,48 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public void Buy()
     {
         if (Item == null) return;
-        if (shop.TryBuy(this))
+        if (TryBuy(this))
         {
             Item = null;
-            itemPlace.SetItem(null);
+            ItemChanged?.Invoke(Item);
             HideDescription();
             costView.SetCost(0);
+            IsAnimationPlaying = true;
         }
+    }
+
+    private bool TryBuy(ShopPlace place)
+    {
+        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
+        {
+            if (inventory.CanAddItem(place.Item))
+            {
+                createdItem = itemFactory.Create(place.Item);
+                inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log(place.Item.NameKey + " not enough money!");
+            return false;
+        }
+    }
+
+    public void UpdateInventory()
+    {
+        if (createdItem == null) return;
+        inventory.TryAddItem(createdItem);
+        createdItem = null;
+    }
+
+    public void OnRaised()
+    {
+        IsAnimationPlaying = false;
     }
 
     public void Clicked()

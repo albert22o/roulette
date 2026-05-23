@@ -15,7 +15,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     private int cost;
     private Inventory inventory;
 
-    public bool IsInteractable => true;
+    public bool IsInteractable => shop.CanReroll;
     public int Cost
     {
         get => cost;
