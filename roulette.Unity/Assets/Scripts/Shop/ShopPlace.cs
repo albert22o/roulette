@@ -34,12 +34,12 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public void ShowDescription()
     {
         if (Item == null) return;
-        shop.ShowDescription(Item, transform.position);
+        shop.ShowTooltip(Item.NameKey, Item.DescriptionKey, transform.position);
     }
 
     public void HideDescription()
     {
-        shop.HideDescription();
+        shop.HIdeTooltip();
     }
 
     public void Buy()

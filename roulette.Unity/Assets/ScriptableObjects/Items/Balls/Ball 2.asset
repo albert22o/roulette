@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72c02c1ee8d53e47a7aa0b19b674341, type: 3}
   m_Name: Ball 2
   m_EditorClassIdentifier: 
-  <NameKey>k__BackingField: 
-  <DescriptionKey>k__BackingField: 
-  <Cost>k__BackingField: 0
-  <Type>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 0}
-  <VisualComponent>k__BackingField:
-    <Material>k__BackingField: {fileID: 0}
+  nameKey: 
+  descriptionKey: 
+  cost: 0
+  type: 0
+  prefab: {fileID: 7977642736402533640, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  visualComponent:
+    <Material>k__BackingField: {fileID: 2100000, guid: 57bdc12b9163eb44fa42d1b8012ca465, type: 2}

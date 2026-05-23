@@ -5,8 +5,7 @@ using Zenject;
 
 public class ShopInventory : MonoBehaviour
 {
-    [SerializeField] private ShopInventoryItem ballPrefab;
-    [SerializeField] private ShopInventoryItem chipPrefab;
+    [SerializeField] private ShopInventoryItem itemPrefab;
     [SerializeField] private Transform[] ballSpawnPoints, chipSpawnPoints;
 
     private readonly List<ShopInventoryItem> balls = new List<ShopInventoryItem>();
@@ -59,10 +58,11 @@ public class ShopInventory : MonoBehaviour
 
             if (!exists)
             {
-                var newBall = container.InstantiatePrefabForComponent<ShopInventoryItem>(ballPrefab);
-                newBall.transform.position = GetFreeBallSpawnPoint().position;
+                var newBall = container.InstantiatePrefabForComponent<ShopInventoryItem>(itemPrefab);
+                var point = GetFreeBallSpawnPoint();
+                newBall.transform.parent = point;
+                newBall.transform.position = point.position;
                 newBall.SetItem(inventoryBall);
-                newBall.SetVisualComponent(inventoryBall.Data.VisualComponent);
 
                 balls.Add(newBall);
             }
@@ -102,10 +102,12 @@ public class ShopInventory : MonoBehaviour
 
             if (!exists)
             {
-                var newChip = container.InstantiatePrefabForComponent<ShopInventoryItem>(chipPrefab);
-                newChip.transform.position = GetFreeChipSpawnPoint().position;
+                var newChip = container.InstantiatePrefabForComponent<ShopInventoryItem>(itemPrefab);
+                var point = GetFreeChipSpawnPoint();
+                newChip.transform.parent = point;
+                newChip.transform.position = point.position;
                 newChip.SetItem(inventoryChip);
-                newChip.SetVisualComponent(inventoryChip.Data.VisualComponent);
+                
 
                 chips.Add(newChip);
             }

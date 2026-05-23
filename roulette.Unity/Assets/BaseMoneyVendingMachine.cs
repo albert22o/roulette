@@ -2,14 +2,20 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
+public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private int initCost = 2;
     [SerializeField] private int nextCostDelta = 1;
     [SerializeField] private int purchasedMoney = 100;
 
+    [Header("Tooltip")]
+    [SerializeField] private string titleKey;
+    [SerializeField] private string mainTextKey;
+    [SerializeField] private Transform tooltipPosition;
+
     private Inventory inventory;
     private int cost;
+    private Shop shop;
 
 
     public int Cost
@@ -27,9 +33,10 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(Inventory inventory, Shop shop)
     {
         this.inventory = inventory;
+        this.shop= shop;
     }
 
     public void ResetCost()
@@ -50,5 +57,15 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public void Clicked()
     {
         TryBuy();
+    }
+
+    public void HoverEnter()
+    {
+        shop.ShowTooltip(titleKey, mainTextKey, tooltipPosition.position);
+    }
+
+    public void HoverExit()
+    {
+        shop.HIdeTooltip();
     }
 }

@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c72c02c1ee8d53e47a7aa0b19b674341, type: 3}
-  m_Name: Item
+  m_Name: Food
   m_EditorClassIdentifier: 
-  <NameKey>k__BackingField: "\u041B\u0438\u043C\u043E\u043D"
-  <DescriptionKey>k__BackingField: "+1 \u043A \u0441\u0442\u0430\u0432\u043A\u0430\u043C
-    \u0432 \u0440\u0430\u043C\u043A\u0430\u0445 \u043A\u0432\u043E\u0442\u044B \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430"
-  <Cost>k__BackingField: 0
-  <Type>k__BackingField: 0
+  nameKey: "\u0415\u0434\u0430 1"
+  descriptionKey: "\u043F\u0446\u043F\u0443\u0435\u0440\u043A\u0435\u043E"
+  cost: 0
+  type: 2
+  prefab: {fileID: 7977642736402533640, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  visualComponent:
+    <Material>k__BackingField: {fileID: 2100000, guid: 7b5e884f1329d1c498d18ac6a0056a4b, type: 2}

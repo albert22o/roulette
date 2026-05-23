@@ -4,13 +4,15 @@ public class ItemPlace : MonoBehaviour
 {
     private ItemData item;
     private ItemVisual spawnedItem;
+
+    public ItemData Item => item;
     
     public void SetItem(ItemData item)
     {
+        if (spawnedItem != null)
+            Destroy(spawnedItem.gameObject);
         if (item == null)
         {
-            if (spawnedItem != null)
-                Destroy(spawnedItem.gameObject);
             this.item = null;
             spawnedItem = null;
         }

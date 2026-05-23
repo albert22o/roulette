@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 using Zenject;
@@ -61,21 +62,14 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public void ShowDescription(Item item, Vector3 position)
+    public void ShowTooltip(string title, string mainText, Vector3 position)
     {
         tooltip.gameObject.SetActive(true);
-        tooltip.SetItem(item);
+        tooltip.SetData(title, mainText);
         tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
-    public void ShowDescription(ItemData itemdata, Vector3 position)
-    {
-        tooltip.gameObject.SetActive(true);
-        tooltip.SetItemData(itemdata);
-        tooltip.transform.position = position + Vector3.up * tooltipHeight;
-    }
-
-    public void HideDescription()
+    public void HIdeTooltip()
     {
         tooltip.gameObject.SetActive(false);
     }

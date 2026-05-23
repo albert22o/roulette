@@ -6,6 +6,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 {
     [SerializeField] private ShopItemsRarityGroup foodTable;
     [SerializeField] private int cost = 10;
+    [SerializeField] private ItemPlace itemPlace;
 
 
     private ItemData item;
@@ -23,12 +24,12 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void ShowDescription()
     {
-        shop.ShowDescription(item, transform.position);
+        shop.ShowTooltip(item.NameKey, item.DescriptionKey, transform.position);
     }
 
     public void HideDescription()
     {
-        shop.HideDescription();
+        shop.HIdeTooltip();
     }
 
     public void Clicked()
@@ -38,6 +39,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             inventory.RemoveCurrency(CurrencyType.GoldenChips, cost);
             Debug.Log($"Food {item.NameKey} bought");
             item = null;
+            itemPlace.SetItem(null);
             HideDescription();
         }
     }
@@ -55,6 +57,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void UpdateItem()
     {
         item = foodTable.GetRandomItem();
+        itemPlace.SetItem(item);
     }
 
 }

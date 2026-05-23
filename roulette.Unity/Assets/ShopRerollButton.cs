@@ -2,11 +2,15 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable
+public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private Shop shop;
     [SerializeField] private int initCost = 2;
     [SerializeField] private int costDelta;
+
+    [Header("Tooltip")]
+    [SerializeField] private string titleKey;
+    [SerializeField] private string mainTextKey;
 
     private int cost;
     private Inventory inventory;
@@ -42,5 +46,15 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable
             Cost += costDelta;
             shop.Reroll();
         }
+    }
+
+    public void HoverEnter()
+    {
+        shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+    }
+
+    public void HoverExit()
+    {
+        shop.HIdeTooltip();
     }
 }
