@@ -3,12 +3,12 @@ using UnityEngine;
 public class BaseMoneyVendingMachineCostViewConnector : MonoBehaviour
 {
     [SerializeField] private BaseMoneyVendingMachine vendingMachine;
-    [SerializeField] private CostView costView;
+    [SerializeField] private DrumNumberDisplay costView;
 
     private void OnEnable()
     {
         vendingMachine.CostChanged += OnCostChanged;
-        costView.SetCost(vendingMachine.Cost);
+        costView.SetNumber(vendingMachine.Cost);
     }
 
     private void OnDisable()
@@ -18,6 +18,6 @@ public class BaseMoneyVendingMachineCostViewConnector : MonoBehaviour
 
     private void OnCostChanged(int newCost)
     {
-        costView.SetCost(newCost);
+        costView.SetNumber(newCost);
     }
 }

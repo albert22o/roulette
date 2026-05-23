@@ -101,21 +101,21 @@ public class Inventory
         ItemsChanged?.Invoke();
     }
 
-    public void SetCurrency(CurrencyType type, int count)
+    public void SetCurrency(CurrencyType type, int amount)
     {
-        currencies[type] = count;
+        currencies[type] = amount;
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void AddCurrency(CurrencyType type, int count)
+    public void AddCurrency(CurrencyType type, int amount)
     {
-        currencies[type] += count;
+        currencies[type] += amount;
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void RemoveCurrency(CurrencyType type, int count)
+    public void RemoveCurrency(CurrencyType type, int amount)
     {
-        currencies[type] = Mathf.Max(0, currencies[type] - count);
+        currencies[type] = Mathf.Max(0, currencies[type] - amount);
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 

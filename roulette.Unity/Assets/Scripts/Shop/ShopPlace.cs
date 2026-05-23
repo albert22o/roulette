@@ -5,7 +5,7 @@ using Zenject;
 public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
     [SerializeField] private Shop shop;
-    [SerializeField] private CostView costView;
+    [SerializeField] private DrumNumberDisplay costView;
 
     private ItemData item;
     private Inventory inventory;
@@ -35,7 +35,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public void SetItem(ItemData item)
     {
         Item = item;
-        costView.SetCost(Item.Cost);
+        costView.SetNumber(Item.Cost);
         ItemChanged?.Invoke(item);
         IsAnimationPlaying = true;
     }
@@ -59,7 +59,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
             Item = null;
             ItemChanged?.Invoke(Item);
             HideDescription();
-            costView.SetCost(0);
+            costView.SetNumber(0);
             IsAnimationPlaying = true;
         }
     }

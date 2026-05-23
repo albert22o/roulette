@@ -3,7 +3,7 @@ using UnityEngine;
 public class RerollCostViewConnector : MonoBehaviour
 {
     [SerializeField] private ShopRerollButton rerollButton;
-    [SerializeField] private CostView costView;
+    [SerializeField] private DrumNumberDisplay costView;
 
     private void OnEnable()
     {
@@ -17,6 +17,6 @@ public class RerollCostViewConnector : MonoBehaviour
 
     private void OnCostChanged(int cost)
     {
-        costView.SetCost(cost);
+        costView.SetNumber(cost);
     }
 }

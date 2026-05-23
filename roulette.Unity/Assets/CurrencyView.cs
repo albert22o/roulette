@@ -4,7 +4,7 @@ using Zenject;
 
 public class CurrencyView : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro text;
+    [SerializeField] private DrumNumberDisplay display;
     [SerializeField] private CurrencyType currencyType;
     private Inventory inventory;
 
@@ -25,9 +25,9 @@ public class CurrencyView : MonoBehaviour
         inventory.CurrencyChanged -= UpdateText;
     }
 
-    private void UpdateText(CurrencyType type, int count)
+    private void UpdateText(CurrencyType type, int amount)
     {
         if (currencyType == type)
-            text.text = count.ToString();
+            display.SetNumber(amount);
     }
 }
