@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class RouletteBallsManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class RouletteBallsManager : MonoBehaviour
     private List<float> prevAngles = new List<float>();
     private List<float> stableTimes = new List<float>();
     private HashSet<string> invalidBalls = new HashSet<string>();
+    private TableConfig tableConfig;
 
     private Dictionary<string, HitInfo> hitsInfo = new Dictionary<string, HitInfo>();
 
@@ -27,6 +29,12 @@ public class RouletteBallsManager : MonoBehaviour
     private bool isSimulating;
 
     public event Action<string> BallInvalid;
+
+    [Inject]
+    public void Construct(TableConfig config)
+    {
+        tableConfig = config;
+    }
 
     private void MarkInvalid(Ball ball)
     {
@@ -76,6 +84,11 @@ public class RouletteBallsManager : MonoBehaviour
         {
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
             isSimulating = false;
+
+            foreach (var hit in hitsInfo.Values)
+            {
+                Debug.Log($"Ball {hit.BallHash} stopped at field with number {hit.FieldNumber}, color {hit.FieldColor}, dozen {hit.Dozen}");
+            }
         }
     }
 
@@ -109,12 +122,14 @@ public class RouletteBallsManager : MonoBehaviour
                 var field = rouletteWheel.Fields[sectorIndex];
                 if (hitsInfo.ContainsKey(ball.Hash) == false)
                 {
+                    int number = rouletteWheel.FieldsOrder[sectorIndex];
+                    var bet = tableConfig.PocketMapping[number];
                     hitsInfo.Add(ball.Hash, new HitInfo()
                     {
                         BallHash = ball.Hash,
-                        FieldColor = field.Color,
-                        FieldNumber = field.Number,
-                        Dozen = GetDozenByIndex(sectorIndex)
+                        FieldColor = bet.FieldColor,
+                        FieldNumber = bet.FieldNumber,
+                        Dozen = bet.Dozen
                     });
                 }
             }
@@ -130,14 +145,6 @@ public class RouletteBallsManager : MonoBehaviour
                 hitsInfo.Remove(ball.Hash);
             }
         }
-    }
-
-    private DozenType GetDozenByIndex(int index)
-    {
-        if (index == 0) return DozenType.Zero;
-        else if (index <= 13) return DozenType.First;
-        else if (index <= 25) return DozenType.Second;
-        else return DozenType.Third;
     }
 
     private float GetAngle(Vector3 local)
