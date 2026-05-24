@@ -11,4 +11,13 @@ public class TableButton : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
             Clicked?.Invoke();
     }
+
+    // Временно повесь на кнопку
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        var col = GetComponent<Collider>();
+        if (col != null)
+            Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+    }
 }

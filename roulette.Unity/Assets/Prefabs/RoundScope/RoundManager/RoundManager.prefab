@@ -568,7 +568,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2667595488464002059}
   m_maskType: 0
---- !u!1 &5636544088011255731
+--- !u!1 &4543604705277917058
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,11 +576,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2474024035487233294}
-  - component: {fileID: 2231100633419682542}
-  - component: {fileID: 37110123448521902}
-  - component: {fileID: 4671034337190548589}
-  - component: {fileID: 6864430707476887865}
+  - component: {fileID: 1158476969243337918}
+  - component: {fileID: 4168385365907562426}
+  - component: {fileID: 986765561859098086}
+  - component: {fileID: 6409584759469585807}
+  - component: {fileID: 6612430203428734479}
   m_Layer: 3
   m_Name: SpinButton
   m_TagString: Untagged
@@ -588,15 +588,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2474024035487233294
+--- !u!224 &1158476969243337918
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636544088011255731}
+  m_GameObject: {fileID: 4543604705277917058}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.378}
+  m_LocalPosition: {x: 0, y: 0, z: 0.391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -604,16 +604,16 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.78, y: 0}
-  m_SizeDelta: {x: 0.6102, y: 0.1401}
+  m_AnchoredPosition: {x: -6.976, y: 0}
+  m_SizeDelta: {x: 0.2439, y: 0.127}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!23 &2231100633419682542
+--- !u!23 &4168385365907562426
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636544088011255731}
+  m_GameObject: {fileID: 4543604705277917058}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -652,13 +652,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &37110123448521902
+--- !u!114 &986765561859098086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636544088011255731}
+  m_GameObject: {fileID: 4543604705277917058}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
@@ -672,7 +672,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spin
+  m_text: 'Spin
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -745,15 +747,15 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 2231100633419682542}
+  m_renderer: {fileID: 4168385365907562426}
   m_maskType: 0
---- !u!65 &4671034337190548589
-BoxCollider:
+--- !u!136 &6409584759469585807
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636544088011255731}
+  m_GameObject: {fileID: 4543604705277917058}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -762,19 +764,21 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.38383722, y: 0.12717614, z: 0.11893151}
-  m_Center: {x: -0.19191861, y: 0.012474418, z: -0.05946577}
---- !u!114 &6864430707476887865
+  serializedVersion: 2
+  m_Radius: 0.096802324
+  m_Height: 0.095930256
+  m_Direction: 1
+  m_Center: {x: -0.023112793, y: -0.0014458824, z: 0}
+--- !u!114 &6612430203428734479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636544088011255731}
+  m_GameObject: {fileID: 4543604705277917058}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f209b7095504bd644a80794e6094558c, type: 3}
@@ -813,9 +817,9 @@ Transform:
   - {fileID: 5069216492136996478}
   - {fileID: 2365360498220686691}
   - {fileID: 8856351841506035455}
-  - {fileID: 2474024035487233294}
   - {fileID: 4572710429034308995}
   - {fileID: 738976406813431776}
+  - {fileID: 1158476969243337918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8061388274333662976
@@ -833,7 +837,7 @@ MonoBehaviour:
   quoteText: {fileID: 9218511518278506895}
   betCountText: {fileID: 9050597306203807961}
   rerollCountText: {fileID: 3219514491283642315}
-  spinButton: {fileID: 6864430707476887865}
+  spinButton: {fileID: 6612430203428734479}
   rerollButton: {fileID: 2213757971742136909}
   confirmWinButton: {fileID: 6825410054318657939}
 --- !u!1 &7499829557494344019
