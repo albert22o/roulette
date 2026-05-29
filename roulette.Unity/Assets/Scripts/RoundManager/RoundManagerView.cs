@@ -22,7 +22,7 @@ public class RoundManagerView : MonoBehaviour
         this.roundManager = roundManager;
     }
 
-    public void Init()
+    public void Start()
     {
         if (quoteText == null || betCountText == null || rerollCountText == null)
         {

@@ -17,7 +17,7 @@ public class RoundEntryZone : MonoBehaviour
         this.playerInput = playerInput;
     }
 
-    public void Init()
+    public void Start()
     {
         playerInput.actions["Interact"].performed += OnInteract;
         active = true;

@@ -5,7 +5,7 @@ using Zenject;
 
 [RequireComponent(typeof(CharacterController),typeof(MeshRenderer),typeof(Collider))]
 public class FirstPersonController : MonoBehaviour
-{
+{ 
     [Header("Движение")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 1.2f;
@@ -34,7 +34,7 @@ public class FirstPersonController : MonoBehaviour
         this.gameStateManager = gameStateManager;
     }
 
-    public void Init()
+    public void Start()
     {
         if (cameraTransform  == null)
         {

@@ -13,7 +13,7 @@ public class BallResultView : MonoBehaviour
         this.ballResults = ballResults;
     }
 
-    public void Init()
+    public void Start()
     {
         confirmButton.Clicked += OnConfirmButtonClicked;
     }

@@ -26,14 +26,14 @@ public class ChipHolderView : MonoBehaviour
 
 
     [Inject]
-    public void Construct(ChipHolder holder)
+    public void Construct(ChipHolder holder, Camera mainCamera)
     {
         chipHolder = holder;
+        this.mainCamera = mainCamera;
     }
 
-    public void Init(Camera mainCamera)
+    public void Start()
     {
-        this.mainCamera = mainCamera;
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;

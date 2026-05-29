@@ -53,13 +53,13 @@ public class BallResults
         tempBall = balls[0];
         //SelectBall(balls[0]);
         return;
-        foreach (var ball in balls) 
-        {
-            // TODO: var visualComponent = inventory.FindBall(ball.BallHash);
-            VisualComponent visualComponent = null;
-            BallAdded?.Invoke(visualComponent, ball);
-            currentBalls.Add(ball);
-        }
+        //foreach (var ball in balls) 
+        //{
+        //    // TODO: var visualComponent = inventory.FindBall(ball.BallHash);
+        //    VisualComponent visualComponent = null;
+        //    BallAdded?.Invoke(visualComponent, ball);
+        //    currentBalls.Add(ball);
+        //}
     }
 
     public void OnStateChanged(RoundState newState)

@@ -15,7 +15,7 @@ public class RoundStateManagerView : MonoBehaviour
         this.roundStateManager = roundStateManager;
     }
 
-    public void Init()
+    public void Start()
     {
         roundStateManager.StateChanged += OnStateChanged;
     }

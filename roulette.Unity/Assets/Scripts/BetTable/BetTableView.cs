@@ -18,7 +18,7 @@ class BetTableView : MonoBehaviour
         this.tableConfig = tableConfig;
     }
 
-    public void Init()
+    public void Start()
     {
         if (alailableSumText == null)
         {
