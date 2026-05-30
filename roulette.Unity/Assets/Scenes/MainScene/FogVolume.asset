@@ -14,76 +14,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   enabled:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   colorMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   color:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   mipFogMaxMip:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0
   mipFogNear:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   mipFogFar:
-    m_OverrideState: 0
-    m_Value: 1000
+    m_OverrideState: 1
+    m_Value: 0
   baseHeight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   maximumHeight:
-    m_OverrideState: 0
-    m_Value: 1000
+    m_OverrideState: 1
+    m_Value: 1.21
   fogAttenuationDistance:
     m_OverrideState: 0
-    m_Value: 50
+    m_Value: 200
   enableDirectionalLight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   enablePointAndSpotLight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   albedo:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   directionalScatteringIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   localScatteringIntensity:
-    m_OverrideState: 0
-    m_Value: 100
+    m_OverrideState: 1
+    m_Value: 187.4
   anisotropy:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   depthExtent:
-    m_OverrideState: 0
-    m_Value: 64
+    m_OverrideState: 1
+    m_Value: 97.9
   screenResolutionPercentage:
-    m_OverrideState: 0
-    m_Value: 12.5
+    m_OverrideState: 1
+    m_Value: 16.67
   volumeSliceCount:
-    m_OverrideState: 0
-    m_Value: 128
+    m_OverrideState: 1
+    m_Value: 170
   denoiseMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 3
   sampleOffsetWeight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   autoSliceDistribution:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   sliceDistributionUniformity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.75
   blendWeight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 7
 --- !u!114 &11400000
 MonoBehaviour:
