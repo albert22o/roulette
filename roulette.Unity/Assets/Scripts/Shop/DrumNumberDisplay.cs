@@ -7,10 +7,15 @@ public class DrumNumberDisplay : MonoBehaviour
 
     private void OnValidate()
     {
-        SetNumber(number);
+        SetNumber(number, true);
     }
 
-    public void SetNumber(int number)
+    private void Start()
+    {
+        SetNumber(number, true);
+    }
+
+    public void SetNumber(int number, bool setImmediately = false)
     {
         if (wheels == null || wheels.Length == 0) return;
 
@@ -19,13 +24,13 @@ public class DrumNumberDisplay : MonoBehaviour
 
         if (number > maxNumber)
         {
-            Debug.LogWarning($"[DigitController] Число {number} превышает лимит! Максимум для {wheels.Length} колес: {maxNumber}. Отображаю максимум.");
+            Debug.LogWarning($"Число {number} превышает лимит! Максимум для {wheels.Length} колес: {maxNumber}. Отображаю максимум.");
             number = maxNumber;
         }
         for (int i = 0; i < wheels.Length; i++)
         {
             int digit = number % 10;
-            wheels[i].CurrentDigit = digit;
+            wheels[i].SetDigit(digit, setImmediately);
             number /= 10;
         }
     }

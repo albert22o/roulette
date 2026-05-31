@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class DrumNumberWheel : MonoBehaviour
 {
@@ -9,24 +10,24 @@ public class DrumNumberWheel : MonoBehaviour
     private Tween rotationTween;
     private const float DegreesPerDigit = 36f;
 
-    public int CurrentDigit
-    {
-        get => currentDigit;
-        set
-        {
-            currentDigit = Mathf.Clamp(value, 0, 9);
-            UpdateRotation();
-        }
-    }
-
-    private void OnValidate()
-    {
-        UpdateRotation();
-    }
+    public int CurrentDigit => currentDigit;
 
     private void Start()
     {
-        UpdateRotation();
+        UpdateRotationImmediately();
+    }
+
+    public void SetDigit(int digit, bool setImmediately)
+    {
+        currentDigit = Mathf.Clamp(digit, 0, 9);
+        if (setImmediately)
+        {
+            UpdateRotationImmediately();
+        }
+        else
+        {
+            UpdateRotation();
+        }
     }
 
     private void UpdateRotation()
@@ -36,6 +37,12 @@ public class DrumNumberWheel : MonoBehaviour
         rotationTween?.Kill();
         rotationTween = transform.DOLocalRotate(new Vector3(0f, 0f, targetAngle), duration, RotateMode.Fast)
             .SetEase(Ease.InOutElastic, 0.2f);
+    }
+
+    private void UpdateRotationImmediately()
+    {
+        float targetAngle = currentDigit * DegreesPerDigit;
+        transform.localRotation = Quaternion.Euler(0f, 0f, targetAngle);
     }
 
     private void OnDestroy()
