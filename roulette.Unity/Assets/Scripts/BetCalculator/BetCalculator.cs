@@ -18,12 +18,12 @@ public class BetCalculator
 
     private readonly Dictionary<string, int> colorMultipliers = new();
 
-    private bool _active = true;
-    private readonly BetTable _betTable;
+    private bool active = true;
+    private readonly BetTable betTable;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
-        _betTable = betTable;
+        this.betTable = betTable;
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }
@@ -60,19 +60,19 @@ public class BetCalculator
 
     public void OnStateChanged(RoundState newState)
     {
-        _active = newState == RoundState.ChoosingReward;
+        active = newState == RoundState.ChoosingReward;
     }
 
     private void OnBallSelected(HitInfo info)
     {
-        if (!_active)
+        if (!active)
             return;
 
         var reward = 0;
-        foreach ((var betInfo, var amount) in _betTable.NotNullBetAmounts)
+        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             reward += GetRewardForBet(betInfo, amount, info);
 
-        _betTable.ClearBets();
+        betTable.ClearBets();
         GetReward?.Invoke(reward);
     }
 
