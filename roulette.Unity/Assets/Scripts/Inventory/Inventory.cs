@@ -27,11 +27,16 @@ public class Inventory
     public event Action<CurrencyType, int> CurrencyChanged;
     public event Action ItemsChanged;
 
+    public int BallsCapacity {  get; private set; }
+    public int ChipsCapacity { get; private set; }
+
 
     public Inventory(InventoryConfig config)
     {
         balls = new List<Item>(config.BallsSlots);
         chips = new List<Item>(config.ChipsSlots);
+        BallsCapacity = config.BallsSlots;
+        ChipsCapacity = config.ChipsSlots;
     }
 
     public bool TryAddItem(Item item)
@@ -66,6 +71,22 @@ public class Inventory
         return false;
     }
 
+    public bool CanAddItem(ItemData data)
+    {
+        switch (data.Type)
+        {
+            case ItemType.Ball:
+                if (balls.Count < balls.Capacity)
+                    return true;
+                break;
+            case ItemType.Chip:
+                if (chips.Count < chips.Capacity)
+                    return true;
+                break;
+        }
+        return false;
+    }
+
     public void RemoveItem(Item item)
     {
         switch (item.Data.Type)
@@ -80,21 +101,21 @@ public class Inventory
         ItemsChanged?.Invoke();
     }
 
-    public void SetCurrency(CurrencyType type, int count)
+    public void SetCurrency(CurrencyType type, int amount)
     {
-        currencies[type] = count;
+        currencies[type] = amount;
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void AddCurrency(CurrencyType type, int count)
+    public void AddCurrency(CurrencyType type, int amount)
     {
-        currencies[type] += count;
+        currencies[type] += amount;
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 
-    public void RemoveCurrency(CurrencyType type, int count)
+    public void RemoveCurrency(CurrencyType type, int amount)
     {
-        currencies[type] = Mathf.Max(0, currencies[type] - count);
+        currencies[type] = Mathf.Max(0, currencies[type] - amount);
         CurrencyChanged?.Invoke(type, currencies[type]);
     }
 

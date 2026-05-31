@@ -6,40 +6,75 @@ public class MouseInteraction : MonoBehaviour
     [SerializeField] private float maxDistance;
     [SerializeField] private LayerMask mask;
 
-    private IMouseInteractable hitObject;
+    private GameObject hitObject;
+    private GameObject clickedObject;
 
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, mask))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IMouseInteractable interactable))
+            if (hit.collider.gameObject.TryGetComponent(out IMouseInteractable interactable)
+                && interactable.IsInteractable == true)
             {
-                if (hitObject != interactable)
+                if (hitObject != hit.collider.gameObject)
                 {
-                    hitObject = interactable;
-                    interactable.OnMouseEnter();
+                    HandleNoIntersection();
+                    hitObject = hit.collider.gameObject;
+
+                    if (hitObject.TryGetComponent(out IHoverable hoverable))
+                    {
+                        hoverable.HoverEnter();
+                    }
                 }
                 
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    interactable.OnMouseDown();
+                    if (hitObject.TryGetComponent(out IPressable pressable))
+                    {
+                        pressable.Pressed();
+                    }
+                    clickedObject = hitObject;
                 }
-                else if (Mouse.current.leftButton.wasReleasedThisFrame)
+
+                if (Mouse.current.leftButton.wasReleasedThisFrame)
                 {
-                    interactable.OnMouseUp();
+                    if (hitObject.TryGetComponent(out IPressable pressable))
+                    {
+                        pressable.Released();
+                    }
+                    if (hitObject.TryGetComponent(out IClickable clickable)
+                        && clickedObject == hitObject)
+                    {
+                        clickable.Clicked();
+                    }
                 }
             }
             else
             {
-                hitObject?.OnMouseExit();
-                hitObject = null;
+                HandleNoIntersection();
             }
         }
         else
         {
-            hitObject?.OnMouseExit();
-            hitObject = null;
+            HandleNoIntersection();
         }
+    }
+
+    private void HandleNoIntersection()
+    {
+        if (hitObject != null)
+        {
+            if(hitObject.TryGetComponent(out IPressable pressable))
+            {
+                pressable.Released();
+            }
+            if (hitObject.TryGetComponent(out IHoverable hoverable))
+            {
+                hoverable.HoverExit();
+            }
+        }
+        hitObject = null;
+        clickedObject = null;
     }
 }

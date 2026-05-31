@@ -3,17 +3,12 @@ using UnityEngine;
 
 public class ShopTooltip : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI itemName, decription;
+    [SerializeField] private TextMeshProUGUI title, mainText;
 
-    public void SetItem(Item item)
+    public void SetData(string title, string mainText)
     {
-        itemName.text = item.Data.NameKey;
-        decription.text = item.Data.DescriptionKey;
+        this.title.text = title;
+        this.mainText.text = mainText;
     }
 
-    public void SetItemData(ItemData data)
-    {
-        itemName.text = data.NameKey;
-        decription.text = data.DescriptionKey;
-    }
 }   
