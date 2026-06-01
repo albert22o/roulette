@@ -624,10 +624,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 1.89
       objectReference: {fileID: 0}
-    - target: {fileID: 2400881397860589377, guid: 0f1f9c22255d54041a03494b79e15060, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 101.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3352139611652427609, guid: 0f1f9c22255d54041a03494b79e15060, type: 3}
       propertyPath: m_Name
       value: RoundStateManager

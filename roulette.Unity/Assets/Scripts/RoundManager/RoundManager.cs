@@ -73,7 +73,7 @@ public class RoundManager
     private readonly RoundStateManager roundStateManager;
     private readonly TableConfig tableConfig;
 
-    public RoundManager(IRouletteWheel rouletteWheel, BetCalculator betCalculator, RoundStateManager roundStateManager,
+    public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         TableConfig tableConfig, ProgressionManager progressionManager, BetResultsDisplay betResultsDisplay)
     {
         this.rouletteWheel = rouletteWheel;
