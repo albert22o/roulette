@@ -81,7 +81,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     {
         "Red" => UnityEngine.Color.red,
         "Black" => UnityEngine.Color.black,
-        _ => customGreen,
+        "Green" => customGreen,
+        _ => UnityEngine.Color.white,
     };
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
