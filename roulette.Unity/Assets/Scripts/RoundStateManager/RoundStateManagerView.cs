@@ -6,6 +6,7 @@ public class RoundStateManagerView : MonoBehaviour
 {
     [SerializeField] CinemachineCamera roundCamera;
     [SerializeField] CinemachineCamera rouletteCamera;
+    [SerializeField] CinemachineCamera betsCamera;
 
     private RoundStateManager roundStateManager;
 
@@ -27,15 +28,23 @@ public class RoundStateManagerView : MonoBehaviour
             case RoundStateManager.RoundState.NotActive:
                 rouletteCamera.gameObject.SetActive(false);
                 roundCamera.gameObject.SetActive(false);
+                betsCamera.gameObject.SetActive(false);
                 break;
             case RoundStateManager.RoundState.WheelSpining:
             case RoundStateManager.RoundState.ChoosingReward:
                 rouletteCamera.gameObject.SetActive(true);
                 roundCamera.gameObject.SetActive(false);
+                betsCamera.gameObject.SetActive(false);
+                break;
+            case RoundStateManager.RoundState.BetResults:
+                rouletteCamera.gameObject.SetActive(false);
+                roundCamera.gameObject.SetActive(false);
+                betsCamera.gameObject.SetActive(true);
                 break;
             default:
                 rouletteCamera.gameObject.SetActive(false);
                 roundCamera.gameObject.SetActive(true);
+                betsCamera.gameObject.SetActive(false);
                 break;
         }
     }
