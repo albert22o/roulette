@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 8757807404056085043}
   - component: {fileID: 1115419984905218245}
   - component: {fileID: 3549243137628725461}
+  - component: {fileID: 4790454503774925705}
   m_Layer: 0
   m_Name: roulette_table.001
   m_TagString: Untagged
@@ -1026,6 +1027,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4790454503774925705
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8868380561098912257}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.025555296, y: 0.019257624, z: 0.0013041329}
+  m_Center: {x: 0.0073511647, y: -5.9604643e-10, z: 0.008280562}
 --- !u!1001 &130903301454930995
 PrefabInstance:
   m_ObjectHideFlags: 0
