@@ -5,7 +5,7 @@ using static RoundStateManager;
 
 public class BetCalculator
 {
-    public event Action<int> GetReward;
+    public event Action<int> DisplayBetResults;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -73,7 +73,7 @@ public class BetCalculator
             reward += GetRewardForBet(betInfo, amount, info);
 
         betTable.ClearBets();
-        GetReward?.Invoke(reward);
+        DisplayBetResults?.Invoke(reward);
     }
 
     private int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
