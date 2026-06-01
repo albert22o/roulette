@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -5,6 +6,7 @@ using Zenject;
 public class BetResultsDisplay : MonoBehaviour
 {
     private RoundStateManager roundStateManager;
+    public event Action<int> GetReward;
 
     [Inject]
     public void Construct(RoundStateManager roundStateManager, BetCalculator betCalculator)
@@ -24,6 +26,6 @@ public class BetResultsDisplay : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        roundStateManager.ChangeState(RoundStateManager.RoundState.PlacingBets);
+        GetReward?.Invoke(reward);
     }
 }

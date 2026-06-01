@@ -5,7 +5,6 @@ using static RoundStateManager;
 
 public class BetCalculator
 {
-    public event Action<int> GetReward;
     public event Action<int> DisplayBetResults;
 
     public int ZeroMultiplier { get; set; } = 10;
