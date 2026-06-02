@@ -9,9 +9,6 @@ public class CurrencyDisplayUI : MonoBehaviour
     [Header("Currency")]
     [SerializeField] private CurrencyCounterUI[] counters;
 
-    [Header("Тестовые значения")]
-    [SerializeField] private int[] testAmount;
-
     [Header("Settings")]
     [SerializeField] private float displayDuration = 4f;
     private Coroutine hideCoroutine;
@@ -23,32 +20,22 @@ public class CurrencyDisplayUI : MonoBehaviour
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
 
-        RefreshAll();
+        foreach (var counter in counters)
+            counter.RequestShow();
+
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
     private IEnumerator HideAfterDelay()
     {
         yield return new WaitForSeconds(displayDuration);
-        HideAll();
+        
+        foreach (var counter in counters)
+            counter.ForceHide();
+
         hideCoroutine = null;
     }
 
-    private void RefreshAll()
-    {
-        for (int i =0; i < counters.Length; i++)
-        {
-            int amount = (i < testAmount.Length) ? testAmount[i] : 0;
-            counters[i].UpdateAmount(amount);
-        }
-
-    }
-   
-    private void HideAll()
-    {
-        foreach (var counter in counters)
-            counter.ForceHide();
-    }
 
 
 

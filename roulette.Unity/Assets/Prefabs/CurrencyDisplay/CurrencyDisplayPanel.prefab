@@ -359,9 +359,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource:
+    rid: -2
   panel: {fileID: 2336258482881327968}
   text: {fileID: 53185917101903408}
   alwayesShow: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &2980124965248793460
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +698,6 @@ MonoBehaviour:
   - {fileID: 1481597855086258946}
   - {fileID: 3107505459077322548}
   - {fileID: 5911397199962348191}
-  testAmount: 00000000000000000000000000000000
   displayDuration: 4
 --- !u!1 &4130791688435821491
 GameObject:
@@ -919,9 +925,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource:
+    rid: -2
   panel: {fileID: 4761248411057015589}
   text: {fileID: 7007027926415456344}
   alwayesShow: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &6592189602895376164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1059,6 @@ MonoBehaviour:
   - {fileID: 1481597855086258946}
   - {fileID: 3107505459077322548}
   - {fileID: 5911397199962348191}
-  testAmount: 05000000060000000700000005000000
   displayDuration: 4
 --- !u!1 &6673437037560720983
 GameObject:
@@ -1137,9 +1149,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource:
+    rid: -2
   panel: {fileID: 6673437037560720983}
   text: {fileID: 8889357963596963846}
   alwayesShow: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &6714285575627576336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,6 +1385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource:
+    rid: -2
   panel: {fileID: 8472035358168453425}
   text: {fileID: 8074359901427081813}
   alwayesShow: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

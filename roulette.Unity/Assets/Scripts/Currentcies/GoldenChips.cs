@@ -1,6 +1,7 @@
 ﻿using System;
 
-public class GoldenChips
+[Serializable]
+public class GoldenChips : ICurrencyResource
 {
     public int Amount { get; private set; }
 
