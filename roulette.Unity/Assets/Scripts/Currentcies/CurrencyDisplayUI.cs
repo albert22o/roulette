@@ -5,26 +5,12 @@ using UnityEngine.InputSystem;
 
 public class CurrencyDisplayUI : MonoBehaviour
 {
-    
+
     [Header("Currency")]
-
-    [SerializeField] private GameObject goldchipPanel;
-    [SerializeField] private TextMeshProUGUI goldchipText;
-
-    [SerializeField] private GameObject bosschipPanel;
-    [SerializeField] private TextMeshProUGUI bosschipText;
-
-    [SerializeField] private GameObject ticketPanel;
-    [SerializeField] private TextMeshProUGUI ticketText;
-
-    [SerializeField] private GameObject moneyPanel;
-    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private CurrencyCounterUI[] counters;
 
     [Header("Тестовые значения")]
-    [SerializeField] private int testdataGoldChipAmount = 0;
-    [SerializeField] private int testdataBossChipAmount = 0;
-    [SerializeField] private int testdataTicketAmount = 0;
-    [SerializeField] private int testdataMoneyAmount = 0;
+    [SerializeField] private int[] testAmount;
 
     [Header("Settings")]
     [SerializeField] private float displayDuration = 4f;
@@ -37,37 +23,31 @@ public class CurrencyDisplayUI : MonoBehaviour
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
 
-        RefreshAllCurrencies();
+        RefreshAll();
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
     private IEnumerator HideAfterDelay()
     {
         yield return new WaitForSeconds(displayDuration);
-        HideAllCurrencies();
+        HideAll();
         hideCoroutine = null;
     }
 
-    private void RefreshAllCurrencies()
+    private void RefreshAll()
     {
-        UpdateSingleCurrency(goldchipPanel, goldchipText, testdataGoldChipAmount, true);
-        UpdateSingleCurrency(bosschipPanel, bosschipText, testdataBossChipAmount, false);
-        UpdateSingleCurrency(ticketPanel, ticketText, testdataTicketAmount, false);
-        UpdateSingleCurrency(moneyPanel, moneyText, testdataMoneyAmount, true);
+        for (int i =0; i < counters.Length; i++)
+        {
+            int amount = (i < testAmount.Length) ? testAmount[i] : 0;
+            counters[i].UpdateAmount(amount);
+        }
 
     }
-    private void UpdateSingleCurrency(GameObject panel, TextMeshProUGUI text, int amount, bool alwayesShow)
+   
+    private void HideAll()
     {
-        bool shouldShow = alwayesShow || amount > 0;
-        panel.SetActive(shouldShow);
-        text.text = amount.ToString();
-    }
-    private void HideAllCurrencies()
-    {
-        goldchipPanel.SetActive(false);
-        bosschipPanel.SetActive(false);
-        ticketPanel.SetActive(false);
-        moneyPanel.SetActive(false);
+        foreach (var counter in counters)
+            counter.ForceHide();
     }
 
 

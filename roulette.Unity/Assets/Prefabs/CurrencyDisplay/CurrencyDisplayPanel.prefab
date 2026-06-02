@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 6832259682256418999}
   - component: {fileID: 3333880318605204903}
   - component: {fileID: 2655270895379084963}
+  - component: {fileID: 1481597855086258946}
   m_Layer: 5
   m_Name: BossChipPanel
   m_TagString: Untagged
@@ -346,6 +347,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1481597855086258946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336258482881327968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 2336258482881327968}
+  text: {fileID: 53185917101903408}
+  alwayesShow: 0
 --- !u!1 &2980124965248793460
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,18 +686,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8396578c9fbc9b349ab854209c5f7799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldchipPanel: {fileID: 6673437037560720983}
-  goldchipText: {fileID: 8889357963596963846}
-  bosschipPanel: {fileID: 2336258482881327968}
-  bosschipText: {fileID: 53185917101903408}
-  ticketPanel: {fileID: 8472035358168453425}
-  ticketText: {fileID: 8074359901427081813}
-  moneyPanel: {fileID: 4761248411057015589}
-  moneyText: {fileID: 7007027926415456344}
-  testdataGoldChipAmount: 23
-  testdataBossChipAmount: 22
-  testdataTicketAmount: 21
-  testdataMoneyAmount: 2
+  counters:
+  - {fileID: 3994426348555328000}
+  - {fileID: 1481597855086258946}
+  - {fileID: 3107505459077322548}
+  - {fileID: 5911397199962348191}
+  testAmount: 00000000000000000000000000000000
   displayDuration: 4
 --- !u!1 &4130791688435821491
 GameObject:
@@ -831,6 +841,7 @@ GameObject:
   - component: {fileID: 4322573441160342020}
   - component: {fileID: 6051786452090552719}
   - component: {fileID: 4048157146366548529}
+  - component: {fileID: 5911397199962348191}
   m_Layer: 5
   m_Name: MoneyPanel
   m_TagString: Untagged
@@ -896,6 +907,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5911397199962348191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761248411057015589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 4761248411057015589}
+  text: {fileID: 7007027926415456344}
+  alwayesShow: 1
 --- !u!1 &6592189602895376164
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +934,7 @@ GameObject:
   - component: {fileID: 3819530295638968346}
   - component: {fileID: 4086367618925729835}
   - component: {fileID: 7756037488658242170}
+  - component: {fileID: 1937202605284497261}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1002,6 +1029,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1937202605284497261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592189602895376164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8396578c9fbc9b349ab854209c5f7799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counters:
+  - {fileID: 3994426348555328000}
+  - {fileID: 1481597855086258946}
+  - {fileID: 3107505459077322548}
+  - {fileID: 5911397199962348191}
+  testAmount: 05000000060000000700000005000000
+  displayDuration: 4
 --- !u!1 &6673437037560720983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,6 +1059,7 @@ GameObject:
   - component: {fileID: 3079183944206004188}
   - component: {fileID: 1308037015195979769}
   - component: {fileID: 6534783897861615888}
+  - component: {fileID: 3994426348555328000}
   m_Layer: 5
   m_Name: GoldChipPanel
   m_TagString: Untagged
@@ -1078,6 +1125,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3994426348555328000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673437037560720983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 6673437037560720983}
+  text: {fileID: 8889357963596963846}
+  alwayesShow: 1
 --- !u!1 &6714285575627576336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1288,7 @@ GameObject:
   - component: {fileID: 7482611996648278323}
   - component: {fileID: 289552405544275016}
   - component: {fileID: 3441015227196465220}
+  - component: {fileID: 3107505459077322548}
   m_Layer: 5
   m_Name: TicketPanel
   m_TagString: Untagged
@@ -1291,3 +1354,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3107505459077322548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8472035358168453425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 8472035358168453425}
+  text: {fileID: 8074359901427081813}
+  alwayesShow: 0
