@@ -359,16 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource:
-    rid: -2
   panel: {fileID: 2336258482881327968}
   text: {fileID: 53185917101903408}
-  alwayesShow: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  alwaysShow: 0
 --- !u!1 &2980124965248793460
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +691,10 @@ MonoBehaviour:
   - {fileID: 1481597855086258946}
   - {fileID: 3107505459077322548}
   - {fileID: 5911397199962348191}
+  testGoldAmount: 0
+  testBossAmount: 5
+  testTicketAmount: 5
+  testMoneyAmount: 0
   displayDuration: 4
 --- !u!1 &4130791688435821491
 GameObject:
@@ -925,16 +922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource:
-    rid: -2
   panel: {fileID: 4761248411057015589}
   text: {fileID: 7007027926415456344}
-  alwayesShow: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  alwaysShow: 1
 --- !u!1 &6592189602895376164
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,7 +937,6 @@ GameObject:
   - component: {fileID: 3819530295638968346}
   - component: {fileID: 4086367618925729835}
   - component: {fileID: 7756037488658242170}
-  - component: {fileID: 1937202605284497261}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1042,24 +1031,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1937202605284497261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6592189602895376164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8396578c9fbc9b349ab854209c5f7799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counters:
-  - {fileID: 3994426348555328000}
-  - {fileID: 1481597855086258946}
-  - {fileID: 3107505459077322548}
-  - {fileID: 5911397199962348191}
-  displayDuration: 4
 --- !u!1 &6673437037560720983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,16 +1120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource:
-    rid: -2
   panel: {fileID: 6673437037560720983}
   text: {fileID: 8889357963596963846}
-  alwayesShow: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  alwaysShow: 1
 --- !u!1 &6714285575627576336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,13 +1349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583027f693284942be607d2dc9baf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource:
-    rid: -2
   panel: {fileID: 8472035358168453425}
   text: {fileID: 8074359901427081813}
-  alwayesShow: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  alwaysShow: 0
