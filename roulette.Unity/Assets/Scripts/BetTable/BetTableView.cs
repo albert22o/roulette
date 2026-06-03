@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 class BetTableView : MonoBehaviour
 {
@@ -14,6 +16,7 @@ class BetTableView : MonoBehaviour
     private BetTable betTable;
     private TableConfig tableConfig;
     private RoundStateManager roundStateManager;
+    public event Action<int> GetReward;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator, RoundStateManager roundStateManager)
@@ -72,64 +75,73 @@ class BetTableView : MonoBehaviour
         betButtons[index].Amount = amount;
     }
 
-    private void OnHighlightButton(HitInfo hitInfo)
+    private void OnHighlightButton(HitInfo hitInfo, int reward)
     {
-        StartCoroutine(ResultDisplaySequence(hitInfo));
-        Debug.Log("On highlight");
+        StartCoroutine(ResultDisplaySequence(hitInfo, reward));
     }
 
-    public IEnumerator ResultDisplaySequence(HitInfo hitInfo)
+    public IEnumerator ResultDisplaySequence(HitInfo hitInfo, int reward)
     {
-        yield return new WaitForSeconds(2f);
-        Debug.Log("corroutine");
+        roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
+
+        yield return new WaitForSeconds(3f);
+
         //Для каждой ненулевой ставки
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
         {
-            Debug.Log("ЕЕЕ БОЙ");
-            //Если цвет ставки совпадает с выпавшим
-            if (hitInfo.FieldColor == betInfo.FieldColor)
+            foreach (BetButton button in betButtons)
             {
-                Debug.Log("color");
-                //Каждая кнопка этого цвета подсвечивается
-                foreach (BetButton button in betButtons)
+                //Если цвет ставки совпадает с выпавшим
+                if (hitInfo.FieldColor == betInfo.FieldColor)
+                {
+                    //Каждая кнопка этого цвета подсвечивается
+                    if (button.Color == betInfo.FieldColor)
+                        button.Highlight(false, true, 1);
+                }
+                //Если цвет ставки не совпадает
+                else
                 {
                     if (button.Color == betInfo.FieldColor)
-                        button.Highlight(true);
+                        button.Highlight(true, true, 0);
                 }
-            }
-            //Если цвет ставки не совпадает
-            else
-            {
-                //Затемняется
             }
 
             yield return new WaitForSeconds(1f);
 
-            //Если дюжина ставки совпадает с выпавшей
-            if (hitInfo.Dozen == betInfo.Dozen)
+            foreach (BetButton button in betButtons)
             {
-                //Каждая кнопка этой дюжины подсвечивается
-                foreach (BetButton button in betButtons)
+                //Если дюжина ставки совпадает с выпавшей
+                if (hitInfo.Dozen == betInfo.Dozen)
                 {
+                    //Каждая кнопка этой дюжины подсвечивается
                     if (button.GetDozen() == betInfo.Dozen)
-                        button.Highlight(true);
+                        button.Highlight(false, true, 2);
                 }
-            }
-            //Если дюжина ставки не совпадает
-            else
-            {
-                //Затемняется
+                //Если дюжина ставки не совпадает
+                else
+                {
+                    //Затемняется
+                    if (button.GetDozen() == hitInfo.Dozen)
+                        button.Highlight(true, true, 0);
+                }
             }
 
             yield return new WaitForSeconds(1f);
 
-            if (hitInfo.FieldNumber == betInfo.FieldNumber)
+            foreach (BetButton button in betButtons)
             {
-                //Каждая кнопка этой дюжины подсвечивается
-                foreach (BetButton button in betButtons)
+                if (hitInfo.FieldNumber == betInfo.FieldNumber)
                 {
+                    //Кнопка этой цифры подсвечивается
                     if (button.FieldNum == betInfo.FieldNumber)
-                        button.Highlight(true);
+                        button.Highlight(false, true, 3);
+                }
+                //Если цифра ставки не совпадает
+                else
+                {
+                    //Затемняется
+                    if (button.FieldNum == hitInfo.FieldNumber)
+                        button.Highlight(true, true, 0);
                 }
             }
         }
@@ -137,8 +149,9 @@ class BetTableView : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         foreach (BetButton button in betButtons)
-                button.Highlight(false);
+                button.Highlight(false, false, 0);
 
+        GetReward?.Invoke(reward);
         betTable.ClearBets();
     }
 }

@@ -22,8 +22,6 @@ public class BetResultsDisplay : MonoBehaviour
 
     private IEnumerator PeekOnBets(int reward)
     {
-        roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
-
         yield return new WaitForSeconds(4f);
 
         GetReward?.Invoke(reward);

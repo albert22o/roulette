@@ -60,10 +60,15 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public bool IsHighlighted { get; private set; }
+
     [SerializeField] TextMeshPro fieldNumText;
     [SerializeField] Transform spawnChipPoint;
     [SerializeField] GameObject chipPrefab;
-    [SerializeField] Color highlightColor;
+    [SerializeField] Color colorHighlight;
+    [SerializeField] Color dozenHighlight;
+    [SerializeField] Color numberHighlight;
+    [SerializeField] Color lowlight;
 
     private SpriteRenderer BG;
     private event Action OnRightClick;
@@ -106,12 +111,39 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             OnRightClick?.Invoke();
     }
 
-    public void Highlight(bool isOn)
+    public void Highlight(bool isLowlight, bool isOn, int phase)
     {
         if (isOn)
-            BG.color = highlightColor;
+        {
+            if (isLowlight && !IsHighlighted)
+            {
+                BG.color = lowlight;
+                return;
+            }
+
+            switch (phase)
+            {
+                case 1:
+                    BG.color = colorHighlight;
+                    break;
+                case 2:
+                    BG.color = dozenHighlight;
+                    break;
+                case 3:
+                    BG.color = numberHighlight;
+                    break;
+                default:
+                    BG.color = lowlight;
+                    break;
+            }
+            IsHighlighted = true;
+        }   
         else
+        {
+            IsHighlighted = false;
             BG.color = GetColor(color);
+        }
+
     }
 
     public DozenType GetDozen()
