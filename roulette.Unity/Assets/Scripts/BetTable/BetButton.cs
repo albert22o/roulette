@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,17 +9,27 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BetButton : MonoBehaviour, IPointerClickHandler
 {
-
     public string Color
     {
+        get
+        {
+            return color;
+        }
         set
         {
             if (value != null)
+            {
+                color = value;
                 BG.color = GetColor(value);
+            }
         }
     }
     public int FieldNum
     {
+        get
+        {
+            return Convert.ToInt32(fieldNumText.text);
+        }
         set
         {
             fieldNumText.text = value.ToString();
@@ -52,11 +63,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] TextMeshPro fieldNumText;
     [SerializeField] Transform spawnChipPoint;
     [SerializeField] GameObject chipPrefab;
+    [SerializeField] Color highlightColor;
 
     private SpriteRenderer BG;
     private event Action OnRightClick;
     private event Action OnLeftClick;
     private readonly Stack<GameObject> stackChips = new();
+    private string color;
 
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
@@ -91,5 +104,36 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             OnLeftClick?.Invoke();
         else if (eventData.button == PointerEventData.InputButton.Right)
             OnRightClick?.Invoke();
+    }
+
+    public void Highlight(bool isOn)
+    {
+        if (isOn)
+            BG.color = highlightColor;
+        else
+            BG.color = GetColor(color);
+    }
+
+    public DozenType GetDozen()
+    {
+        DozenType dozenType;
+
+        switch ((FieldNum + 11) / 12)
+        {
+            case 1:
+                dozenType = DozenType.First;
+                break;
+            case 2:
+                dozenType = DozenType.Second;
+                break;
+            case 3:
+                dozenType = DozenType.Third;
+                break;
+            default:
+                dozenType = DozenType.Zero;
+                break;
+        }
+
+        return dozenType;
     }
 }

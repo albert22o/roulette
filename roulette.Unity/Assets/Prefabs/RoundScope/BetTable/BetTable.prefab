@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cf90354ec978b41ba9c45ecd6a7663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alailableSumText: {fileID: 1060608308285132481}
+  availableSumText: {fileID: 1060608308285132481}
   betButtons:
   - {fileID: 5149553570520496478}
   - {fileID: 2560928184546142833}

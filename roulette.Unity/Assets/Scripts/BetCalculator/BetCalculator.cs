@@ -6,6 +6,7 @@ using static RoundStateManager;
 public class BetCalculator
 {
     public event Action<int> DisplayBetResults;
+    public event Action<HitInfo> HighlightButtons;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -72,7 +73,9 @@ public class BetCalculator
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             reward += GetRewardForBet(betInfo, amount, info);
 
-        betTable.ClearBets();
+        HighlightButtons?.Invoke(info);
+        //betTable.ClearBets();
+
         DisplayBetResults?.Invoke(reward);
     }
 
@@ -104,4 +107,6 @@ public class BetCalculator
 
     private int GetEffectiveColorMultiplier(string color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
+
+
 }
