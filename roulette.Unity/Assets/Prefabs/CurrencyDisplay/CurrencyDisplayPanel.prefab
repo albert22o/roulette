@@ -646,6 +646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5305431496890184478}
   - component: {fileID: 1445388564004383205}
+  - component: {fileID: 6745977721994188706}
   m_Layer: 5
   m_Name: CurrencyDisplayPanel
   m_TagString: Untagged
@@ -696,6 +697,30 @@ MonoBehaviour:
   testTicketAmount: 5
   testMoneyAmount: 0
   displayDuration: 4
+  animator: {fileID: 0}
+  hideAnimationDuration: 0.3
+--- !u!95 &6745977721994188706
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4125987397239082209}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62135d0e9a27501408411a20fdff830e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4130791688435821491
 GameObject:
   m_ObjectHideFlags: 0

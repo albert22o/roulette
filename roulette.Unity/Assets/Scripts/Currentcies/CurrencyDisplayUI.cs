@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using TMPro;
 using System.Collections;
+using Zenject;
 
 public class CurrencyDisplayUI : MonoBehaviour
 {
     [Header("Currency")]
     [SerializeField] private CurrencyCounterUI[] counters;
 
-    [Header("Ые Values")]
+    [Header("Test Values")]
     [SerializeField] private int testGoldAmount = 0;
     [SerializeField] private int testBossAmount = 0;
     [SerializeField] private int testTicketAmount = 0;
@@ -17,25 +17,19 @@ public class CurrencyDisplayUI : MonoBehaviour
     [SerializeField] private float displayDuration = 4f;
     private Coroutine hideCoroutine;
 
+    [Header("Animator")]
+    [SerializeField] private Animator animator;
+    private bool isShowing = false;
+    [SerializeField] private float hideAnimationDuration = 0.3f;
+
+
     private GoldenChips goldenChips;
     private BossChips bossChips;
     private Tickets tickets;
     private Money money;
 
-    private void Awake()
-    {
-        // Создаём ресурсы
-        goldenChips = new GoldenChips();
-        bossChips = new BossChips();
-        tickets = new Tickets();
-        money = new Money();
-        goldenChips.Add(testGoldAmount);
-        bossChips.Add(testBossAmount);
-        tickets.Add(testTicketAmount);
-        money.Add(testMoneyAmount);
-        
-    }
 
+    [Inject]
     public void Construct(GoldenChips goldenChips, BossChips bossChips, Tickets tickets, Money money)
     {
         this.goldenChips = goldenChips;
@@ -46,40 +40,25 @@ public class CurrencyDisplayUI : MonoBehaviour
 
     private void Start()
     {
-        {
-            goldenChips.AmountChanged += counters[0].UpdateCounter;
-            bossChips.AmountChanged += counters[1].UpdateCounter;
-            tickets.AmountChanged += counters[2].UpdateCounter;
-            money.AmountChanged += counters[3].UpdateCounter;
-        }
+        goldenChips.AmountChanged += counters[0].UpdateCounter;
+        bossChips.AmountChanged += counters[1].UpdateCounter;
+        tickets.AmountChanged += counters[2].UpdateCounter;
+        money.AmountChanged += counters[3].UpdateCounter;
     }
 
     public void ShowTemporarily()
     {
-
-        counters[0].UpdateCounter(goldenChips.Amount);
-        counters[1].UpdateCounter(bossChips.Amount);
-        counters[2].UpdateCounter(tickets.Amount);
-        counters[3].UpdateCounter(money.Amount);
-
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
-
+        animator.SetBool("isShowing", true);
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
     private IEnumerator HideAfterDelay()
     {
         yield return new WaitForSeconds(displayDuration);
-        HideAll();
+        animator.SetBool("isShowing",false);
+        //yield return new WaitForSeconds(hideAnimationDuration);
         hideCoroutine = null;
-    }
-
-    private void HideAll()
-    {
-        foreach (var counter in counters)
-        {
-            counter.ForceHide();
-        }
     }
 }
