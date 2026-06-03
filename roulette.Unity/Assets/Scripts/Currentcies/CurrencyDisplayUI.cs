@@ -20,7 +20,6 @@ public class CurrencyDisplayUI : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator animator;
     private bool isShowing = false;
-    [SerializeField] private float hideAnimationDuration = 0.3f;
 
 
     private GoldenChips goldenChips;
@@ -44,6 +43,11 @@ public class CurrencyDisplayUI : MonoBehaviour
         bossChips.AmountChanged += counters[1].UpdateCounter;
         tickets.AmountChanged += counters[2].UpdateCounter;
         money.AmountChanged += counters[3].UpdateCounter;
+
+        counters[0].UpdateCounter(goldenChips.Amount);
+        counters[1].UpdateCounter(bossChips.Amount);
+        counters[2].UpdateCounter(tickets.Amount);
+        counters[3].UpdateCounter(money.Amount);
     }
 
     public void ShowTemporarily()
@@ -58,7 +62,6 @@ public class CurrencyDisplayUI : MonoBehaviour
     {
         yield return new WaitForSeconds(displayDuration);
         animator.SetBool("isShowing",false);
-        //yield return new WaitForSeconds(hideAnimationDuration);
         hideCoroutine = null;
     }
 }
