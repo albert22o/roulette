@@ -54,15 +54,6 @@ public class CurrencyDisplayUI : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-
-        goldenChips.AmountChanged -= counters[0].UpdateCounter;
-        bossChips.AmountChanged -= counters[1].UpdateCounter;
-        tickets.AmountChanged -= counters[2].UpdateCounter;
-        money.AmountChanged -= counters[3].UpdateCounter;
-    }
-
     public void ShowTemporarily()
     {
 
