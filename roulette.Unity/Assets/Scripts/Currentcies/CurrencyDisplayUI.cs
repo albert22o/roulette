@@ -7,12 +7,6 @@ public class CurrencyDisplayUI : MonoBehaviour
     [Header("Currency")]
     [SerializeField] private CurrencyCounterUI[] counters;
 
-    [Header("Test Values")]
-    [SerializeField] private int testGoldAmount = 0;
-    [SerializeField] private int testBossAmount = 0;
-    [SerializeField] private int testTicketAmount = 0;
-    [SerializeField] private int testMoneyAmount = 0;
-
     [Header("Settings")]
     [SerializeField] private float displayDuration = 4f;
     private Coroutine hideCoroutine;
