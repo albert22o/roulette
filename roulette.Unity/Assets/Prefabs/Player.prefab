@@ -249,7 +249,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 80
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -301,7 +301,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 438987362841527413, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
       propertyPath: m_Range
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 438987362841527413, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
       propertyPath: m_Color.b
@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 438987362841527413, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
       propertyPath: m_Intensity
-      value: 5.55
+      value: 18.59
       objectReference: {fileID: 0}
     - target: {fileID: 438987362841527413, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
       propertyPath: m_BounceIntensity
