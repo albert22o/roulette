@@ -692,10 +692,6 @@ MonoBehaviour:
   - {fileID: 1481597855086258946}
   - {fileID: 3107505459077322548}
   - {fileID: 5911397199962348191}
-  testGoldAmount: 0
-  testBossAmount: 5
-  testTicketAmount: 5
-  testMoneyAmount: 0
   displayDuration: 4
   animator: {fileID: 6745977721994188706}
 --- !u!95 &6745977721994188706
@@ -1212,7 +1208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Show stats
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
