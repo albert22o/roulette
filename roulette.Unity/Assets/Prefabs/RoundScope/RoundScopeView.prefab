@@ -2578,13 +2578,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
+    - target: {fileID: 307930194845226413, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: SpinButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197616180752239903, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: RerollCount
+      objectReference: {fileID: 0}
     - target: {fileID: 2365360498220686691, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -7.204
       objectReference: {fileID: 0}
+    - target: {fileID: 3301684324613505352, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: Quota
+      objectReference: {fileID: 0}
     - target: {fileID: 3848279858172705220, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086560256910703926, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: ConfirmWinButton
       objectReference: {fileID: 0}
     - target: {fileID: 4193114875055083040, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2638,45 +2654,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8061388274333662976, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 18890234529733428}
+    - target: {fileID: 8130801568131831855, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: BetCount
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309648308929661999, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_Name
+      value: RerollButton
+      objectReference: {fileID: 0}
     - target: {fileID: 8856351841506035455, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -6.975
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6409584759469585807, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4543604705277917058, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+    - {fileID: 2752388546250497051, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+    - {fileID: 7905963334038449839, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+    - {fileID: 3848279858172705220, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+    - {fileID: 7499829557494344019, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+    - {fileID: 1538985537815735860, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4543604705277917058, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6544575953415472210}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
---- !u!1 &7061170850378066681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4543604705277917058, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+--- !u!223 &18890234529733428 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6823918271752619599, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
   m_PrefabInstance: {fileID: 6841092156145442171}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &6544575953415472210
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061170850378066681}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.19360465, y: 0.095930256, z: 0}
-  m_Center: {x: -0.023112793, y: -0.0014458824, z: 0}
 --- !u!4 &7259977220961211227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4193114875055083040, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
