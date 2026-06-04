@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -60,6 +59,32 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public DozenType Dozen 
+    {
+        get
+        {
+            DozenType dozenType;
+
+            switch ((FieldNum + 11) / 12)
+            {
+                case 1:
+                    dozenType = DozenType.First;
+                    break;
+                case 2:
+                    dozenType = DozenType.Second;
+                    break;
+                case 3:
+                    dozenType = DozenType.Third;
+                    break;
+                default:
+                    dozenType = DozenType.Zero;
+                    break;
+            }
+
+            return dozenType;
+        }
+    }
+
     public bool IsHighlighted { get; private set; }
 
     [SerializeField] TextMeshPro fieldNumText;
@@ -111,29 +136,20 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             OnRightClick?.Invoke();
     }
 
-    public void Highlight(bool isLowlight, bool isOn, int phase)
+    public void Highlight(bool isEnabled, HighlightPhase phase)
     {
-        if (isOn)
+        if (isEnabled)
         {
-            if (isLowlight && !IsHighlighted)
-            {
-                BG.color = lowlight;
-                return;
-            }
-
             switch (phase)
             {
-                case 1:
+                case HighlightPhase.Color:
                     BG.color = colorHighlight;
                     break;
-                case 2:
+                case HighlightPhase.Dozen:
                     BG.color = dozenHighlight;
                     break;
-                case 3:
+                case HighlightPhase.Number:
                     BG.color = numberHighlight;
-                    break;
-                default:
-                    BG.color = lowlight;
                     break;
             }
             IsHighlighted = true;
@@ -143,29 +159,19 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             IsHighlighted = false;
             BG.color = GetColor(color);
         }
-
     }
 
-    public DozenType GetDozen()
+    public void Lowlight(bool isEnabled)
     {
-        DozenType dozenType;
+        if (isEnabled && !IsHighlighted)
+            BG.color = lowlight;
+    }
 
-        switch ((FieldNum + 11) / 12)
-        {
-            case 1:
-                dozenType = DozenType.First;
-                break;
-            case 2:
-                dozenType = DozenType.Second;
-                break;
-            case 3:
-                dozenType = DozenType.Third;
-                break;
-            default:
-                dozenType = DozenType.Zero;
-                break;
-        }
-
-        return dozenType;
+    public enum HighlightPhase 
+    { 
+        Color,
+        Dozen,
+        Number,
+        None
     }
 }
