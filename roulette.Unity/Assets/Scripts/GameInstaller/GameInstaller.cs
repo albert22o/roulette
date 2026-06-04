@@ -41,5 +41,12 @@ public class GameInstaller : MonoInstaller
         Container.Bind<RoundManager>().AsSingle();
 
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
+
+        Container.Bind<GoldenChips>().AsSingle();
+        Container.Bind<BossChips>().AsSingle();
+        Container.Bind<Tickets>().AsSingle();
+        Container.Bind<Money>().AsSingle();
+
+
     }
 }
