@@ -42,6 +42,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: M_KomodH1
+    second: {fileID: 2100000, guid: 1ed28193d8fb5ae41887d550d95f8e9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Tumba_H1
+    second: {fileID: 2100000, guid: 6c68743a0f965114895ad9c54c30db19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Newspaper Crumpled
     second: {fileID: 2100000, guid: ad14f1db534648b4b9197ef3922c5065, type: 2}
   - first:
@@ -94,6 +104,46 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: gray_dark2_neutral
     second: {fileID: 2100000, guid: 5775af2629ed2484bb60e78bd6992b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_dark1
+    second: {fileID: 2100000, guid: 860a39c49c20f1c41b8f1b9bf2ce47a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow_light2
+    second: {fileID: 2100000, guid: 9abb3cd4cc54f51428160c2f7722c054, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u043F\u043E\u0434\u0441\u0432\u0435\u0447\u043D\u0438\u043A"
+    second: {fileID: 2100000, guid: bf7b90f287b203d47a41a6804d1edcb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u043F\u043E\u0434\u0441\u0432\u0435\u0447\u043D\u0438\u043A.001"
+    second: {fileID: 2100000, guid: 2f99fff1fc724134a8e3d3b5830dcb19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0441\u0432\u0435\u0447\u0438"
+    second: {fileID: 2100000, guid: cbff3ebecc982d347817a5e94cb7adf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0441\u0432\u0435\u0447\u0438.001"
+    second: {fileID: 2100000, guid: cbff3ebecc982d347817a5e94cb7adf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0444\u0438\u0442\u0438\u043B\u044C"
+    second: {fileID: 2100000, guid: cbff3ebecc982d347817a5e94cb7adf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0444\u0438\u0442\u0438\u043B\u044C.001"
+    second: {fileID: 2100000, guid: cbff3ebecc982d347817a5e94cb7adf9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

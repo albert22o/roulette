@@ -1,5 +1,26 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4810085940322784680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f8f22c3df675e4ebb7549527109555, type: 3}
+  m_Name: FPVolumetricFog
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 550
+  resources:
+    volumeVoxelizationCS: {fileID: 7200000, guid: dcae1ab958dd06047b691a4f76998d0f, type: 3}
+    volumetricLightingCS: {fileID: 7200000, guid: 633f6c93e531b7649877f1ee6af81206, type: 3}
+    volumetricLightingFilteringCS: {fileID: 7200000, guid: e7c6734610ba8774789df5bebb773484, type: 3}
+    generateMaxZCS: {fileID: 7200000, guid: ef07e1cecfcf17849b9dabc5c283c5d1, type: 3}
+    defaultLocalVolumeShader: {fileID: 7200000, guid: 0661a81e303cf794890df5e603c4f35b, type: 3}
+    resolveMat: {fileID: 2100000, guid: 2acfffc3c62e9b24b813c8247c7ab5b7, type: 2}
 --- !u!114 &-4374188254431761458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,11 +33,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: FullScreenPassRendererFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
-  passMaterial: {fileID: 2100000, guid: 7aabc9176dfe6fc47a19d72dc97af6a3, type: 2}
+  passMaterial: {fileID: 2100000, guid: f9a32c2f1fb69eb4497b552b9923a336, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1
@@ -47,7 +68,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
   - {fileID: -4374188254431761458}
-  m_RendererFeatureMap: ad6b866f10d7b46cceabe841f5c24bc3
+  - {fileID: -4810085940322784680}
+  m_RendererFeatureMap: ad6b866f10d7b46cceabe841f5c24bc358aaf57b52243fbd
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
