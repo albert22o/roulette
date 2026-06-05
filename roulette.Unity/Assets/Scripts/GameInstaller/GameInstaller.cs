@@ -7,6 +7,8 @@ public class GameInstaller : MonoInstaller
 {
     [SerializeField] InventoryConfig inventoryConfig;
     [SerializeField] RoundsConfig roundsConfig;
+
+   
    
     public override void InstallBindings()
     {
@@ -47,7 +49,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Money>().AsSingle();
 
         Container.Bind<ChipSpawner>().AsSingle();
-        Container.Bind<ChipSpawnerManager>().AsSingle();
+        Container.Bind<ChipSpawnerManager>().FromComponentInHierarchy().AsSingle();
 
     }
 }

@@ -24,7 +24,7 @@ public class ChipSpawnerManager : MonoBehaviour
 
     private void Start()
     {
-        chipSpawner.Configure(chipPrefab, spawnPoint);
+        chipSpawner.Configure(chipPrefab, spawnPoint, this);
 
         StartSpawner = () => chipSpawner.OnStartSpawing(chipsToSpawn, spawnInterval);
         ClearChips = () => chipSpawner?.OnClearChips();

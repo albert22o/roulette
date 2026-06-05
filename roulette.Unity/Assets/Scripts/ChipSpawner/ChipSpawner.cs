@@ -8,22 +8,24 @@ public class ChipSpawner
 {
     private GameObject chipPrefab;
     private Transform spawnPoint;
+    private MonoBehaviour coroutineRunner;
+
 
     private List<GameObject> spawnerChips = new();
     private Coroutine spawnCoroutine;
 
-    private MonoBehaviour coroutineRunner;
 
     [Inject]
-    public void Construct(MonoBehaviour coroutineRunner)
+    public void Construct()
     {
-        this.coroutineRunner = coroutineRunner;
        
     }
-    public void Configure(GameObject chipPrefab, Transform spawnPoint)
+    public void Configure(GameObject chipPrefab, Transform spawnPoint, MonoBehaviour coroutineRunner)
     {
         this.chipPrefab = chipPrefab;
         this.spawnPoint = spawnPoint;
+        this.coroutineRunner = coroutineRunner;
+
     }
 
     public void OnStartSpawing(int chipCount, float interval)
