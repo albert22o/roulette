@@ -96,13 +96,13 @@ public class BetCalculator
         return amount;
     }
 
-    private int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
+    public int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
         fieldNumberMultipliers.TryGetValue(fieldNumber, out var m) ? m : defaultMultiplier;
 
-    private int GetEffectiveDozenMultiplier(DozenType dozen) =>
+    public int GetEffectiveDozenMultiplier(DozenType dozen) =>
         dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
 
-    private int GetEffectiveColorMultiplier(string color) =>
+    public int GetEffectiveColorMultiplier(string color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 
     public void GetRewardAction()

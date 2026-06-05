@@ -10,7 +10,9 @@ using Zenject;
 class BetTableView : MonoBehaviour
 {
     [SerializeField] TextMeshPro availableSumText;
+    [SerializeField] TextMeshPro betText;
     [SerializeField] List<BetButton> betButtons = new();
+    [SerializeField] TextMeshPro generalMultiplierText;
 
     [SerializeField] SpriteRenderer firstDozenSprite;
     [SerializeField] SpriteRenderer secondDozenSprite;
@@ -27,7 +29,8 @@ class BetTableView : MonoBehaviour
     private TableConfig tableConfig;
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
-
+    private float generalMultiplier;
+    private int betSum;
     private Color baseBottomSectionColor;
 
     [Inject]
@@ -97,6 +100,9 @@ class BetTableView : MonoBehaviour
     {
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         baseBottomSectionColor = firstDozenSprite.color;
+        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+            betSum += amount;
+        betText.text = betSum.ToString();
 
         yield return new WaitForSeconds(3f);
 
@@ -108,6 +114,7 @@ class BetTableView : MonoBehaviour
                 ProcessButtonHighlightByColor(button, hitInfo, betInfo);
             }
             ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
+            DisplayColorMultiplier(hitInfo, betInfo);
 
             yield return new WaitForSeconds(1f);
 
@@ -116,6 +123,7 @@ class BetTableView : MonoBehaviour
                 ProcessButtonHighlightByDozen(button, hitInfo, betInfo);
             }
             ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
+            DisplayDozenMultiplier(hitInfo, betInfo);
 
             yield return new WaitForSeconds(1f);
 
@@ -123,6 +131,7 @@ class BetTableView : MonoBehaviour
             {
                 ProcessButtonHighlightByNumber(button, hitInfo, betInfo);
             }
+            DisplayNumberMultiplier(hitInfo, betInfo);
         }
 
         yield return new WaitForSeconds(2f);
@@ -130,6 +139,11 @@ class BetTableView : MonoBehaviour
         foreach (BetButton button in betButtons)
             button.Highlight(false, BetButton.HighlightPhase.None);
         ResetBottomSectionColors();
+
+        generalMultiplier = 0;
+        generalMultiplierText.text = "";
+        betSum = 0;
+        betText.text = "";
 
         betCalculator.GetRewardAction();
         betTable.ClearBets();
@@ -205,6 +219,7 @@ class BetTableView : MonoBehaviour
                 spriteToColor.color = lowlight;
         }
     }
+
     private void ProcessBottomSectionHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
     {
         if (hitInfo.FieldColor != "Green")
@@ -231,5 +246,34 @@ class BetTableView : MonoBehaviour
         thirdDozenSprite.color = baseBottomSectionColor;
         redNumberSprite.color = baseBottomSectionColor;
         blackNumberSprite.color = baseBottomSectionColor;
+    }
+
+    private void DisplayColorMultiplier(HitInfo hitInfo, BetInfo betInfo)
+    {
+        if (hitInfo.FieldColor == betInfo.FieldColor)
+        {
+            generalMultiplier = betCalculator.GetEffectiveColorMultiplier(betInfo.FieldColor);
+            generalMultiplierText.text = "x" + generalMultiplier.ToString();
+        }
+    }
+
+    private void DisplayDozenMultiplier(HitInfo hitInfo, BetInfo betInfo)
+    {
+        if (hitInfo.Dozen == betInfo.Dozen)
+        {
+            generalMultiplier = betCalculator.GetEffectiveDozenMultiplier(betInfo.Dozen);
+            generalMultiplierText.text = "x" + generalMultiplier.ToString();
+        }
+    }
+
+    private void DisplayNumberMultiplier(HitInfo hitInfo, BetInfo betInfo)
+    {
+        if (hitInfo.FieldNumber == betInfo.FieldNumber)
+        {
+            generalMultiplier = betInfo.FieldNumber == 0
+                ? betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier)
+                : betCalculator.GetFieldMultiplier(hitInfo.FieldNumber, betCalculator.NumMultiplier);
+            generalMultiplierText.text = "x" + generalMultiplier.ToString();
+        }
     }
 }
