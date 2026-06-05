@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3352139611652427609}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.15537131, y: -1.1273694, z: -0.76366913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -153,16 +153,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6764593116405068785}
-  m_LocalRotation: {x: 0.45982733, y: 0.014645063, z: -0.0075847963, w: 0.8878552}
-  m_LocalPosition: {x: 0, y: 0, z: -2.105464}
+  m_LocalRotation: {x: 0.46276897, y: 0.014619831, z: -0.0076333177, w: 0.8863255}
+  m_LocalPosition: {x: 0, y: 0, z: -1.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 159393122675463309}
-  m_LocalEulerAnglesHint: {x: 54.76, y: 1.89, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.14, y: 1.89, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.92, y: 2.62}
+  m_AnchoredPosition: {x: 1.03, y: 2.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7306162223987439921
@@ -189,7 +189,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 80
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -234,7 +234,7 @@ Transform:
   m_GameObject: {fileID: 7374096900712310605}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70462155, y: -0.004253952, z: 0.0042244424, w: 0.70955795}
-  m_LocalPosition: {x: 0.00046145916, y: 2.11, z: -0.038508415}
+  m_LocalPosition: {x: 0.00046145916, y: 0.85, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -264,7 +264,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 136.4
+    FieldOfView: 100
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000

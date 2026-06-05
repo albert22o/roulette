@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 48a916aa70e2ea04bb339054e5f6ed0b, type: 2}
+    - target: {fileID: -5552338036393153490, guid: da6f748572ee37640b3bc91415031174, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c00c2e3cbeb0494a9aa8e44094cb162, type: 2}
     - target: {fileID: 919132149155446097, guid: da6f748572ee37640b3bc91415031174, type: 3}
       propertyPath: m_Name
       value: Roulette_room

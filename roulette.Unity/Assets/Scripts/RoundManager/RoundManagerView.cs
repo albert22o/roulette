@@ -6,20 +6,22 @@ using Zenject;
 
 public class RoundManagerView : MonoBehaviour
 {
-    [SerializeField] TextMeshPro quoteText;
-    [SerializeField] TextMeshPro betCountText;
-    [SerializeField] TextMeshPro rerollCountText;
+    [SerializeField] TextMeshProUGUI quoteText;
+    [SerializeField] TextMeshProUGUI betCountText;
+    [SerializeField] TextMeshProUGUI rerollCountText;
 
-    [SerializeField] TableButton spinButton;
-    [SerializeField] TableButton rerollButton;
-    [SerializeField] TableButton confirmWinButton;
+    [SerializeField] Button spinButton;
+    [SerializeField] Button rerollButton;
+    [SerializeField] Button confirmWinButton;
 
+    [SerializeField] Canvas canvas;
     private RoundManager roundManager;
 
     [Inject]
-    public void Construct(RoundManager roundManager)
+    public void Construct(RoundManager roundManager, Camera camera)
     {
         this.roundManager = roundManager;
+        canvas.worldCamera = camera;
     }
 
     public void Start()
@@ -46,9 +48,9 @@ public class RoundManagerView : MonoBehaviour
             return;
         }
 
-        spinButton.Clicked += OnSpinButtonClick;
-        rerollButton.Clicked += OnRerollButtonClick;
-        confirmWinButton.Clicked += OnConfirmWinClick;
+        spinButton.onClick.AddListener(OnSpinButtonClick);
+        rerollButton.onClick.AddListener(OnRerollButtonClick);
+        confirmWinButton.onClick.AddListener(OnConfirmWinClick);
     }
 
     private void OnConfirmWinClick()
