@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -6,7 +7,7 @@ public class GameInstaller : MonoInstaller
 {
     [SerializeField] InventoryConfig inventoryConfig;
     [SerializeField] RoundsConfig roundsConfig;
-
+   
     public override void InstallBindings()
     {
         // Менеджеры состояний
@@ -45,6 +46,8 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Tickets>().AsSingle();
         Container.Bind<Money>().AsSingle();
 
+        Container.Bind<ChipSpawner>().AsSingle();
+        Container.Bind<ChipSpawnerManager>().AsSingle();
 
     }
 }
