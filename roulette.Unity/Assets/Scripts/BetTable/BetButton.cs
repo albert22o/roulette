@@ -8,17 +8,27 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BetButton : MonoBehaviour, IPointerClickHandler
 {
-
     public string Color
     {
+        get
+        {
+            return color;
+        }
         set
         {
             if (value != null)
+            {
+                color = value;
                 BG.color = GetColor(value);
+            }
         }
     }
     public int FieldNum
     {
+        get
+        {
+            return Convert.ToInt32(fieldNumText.text);
+        }
         set
         {
             fieldNumText.text = value.ToString();
@@ -49,14 +59,47 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public DozenType Dozen 
+    {
+        get
+        {
+            DozenType dozenType;
+
+            switch ((FieldNum + 11) / 12)
+            {
+                case 1:
+                    dozenType = DozenType.First;
+                    break;
+                case 2:
+                    dozenType = DozenType.Second;
+                    break;
+                case 3:
+                    dozenType = DozenType.Third;
+                    break;
+                default:
+                    dozenType = DozenType.Zero;
+                    break;
+            }
+
+            return dozenType;
+        }
+    }
+
+    public bool IsHighlighted { get; private set; }
+
     [SerializeField] TextMeshPro fieldNumText;
     [SerializeField] Transform spawnChipPoint;
     [SerializeField] GameObject chipPrefab;
+    [SerializeField] Color colorHighlight;
+    [SerializeField] Color dozenHighlight;
+    [SerializeField] Color numberHighlight;
+    [SerializeField] Color lowlight;
 
     private SpriteRenderer BG;
     private event Action OnRightClick;
     private event Action OnLeftClick;
     private readonly Stack<GameObject> stackChips = new();
+    private string color;
 
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
@@ -91,5 +134,44 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             OnLeftClick?.Invoke();
         else if (eventData.button == PointerEventData.InputButton.Right)
             OnRightClick?.Invoke();
+    }
+
+    public void Highlight(bool isEnabled, HighlightPhase phase)
+    {
+        if (isEnabled)
+        {
+            switch (phase)
+            {
+                case HighlightPhase.Color:
+                    BG.color = colorHighlight;
+                    break;
+                case HighlightPhase.Dozen:
+                    BG.color = dozenHighlight;
+                    break;
+                case HighlightPhase.Number:
+                    BG.color = numberHighlight;
+                    break;
+            }
+            IsHighlighted = true;
+        }   
+        else
+        {
+            IsHighlighted = false;
+            BG.color = GetColor(color);
+        }
+    }
+
+    public void Lowlight(bool isEnabled)
+    {
+        if (isEnabled && !IsHighlighted)
+            BG.color = lowlight;
+    }
+
+    public enum HighlightPhase 
+    { 
+        Color,
+        Dozen,
+        Number,
+        None
     }
 }
