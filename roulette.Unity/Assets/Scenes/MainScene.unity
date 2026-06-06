@@ -7616,6 +7616,30 @@ PrefabInstance:
       propertyPath: Lens.FieldOfView
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: dozenHighlight.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: dozenHighlight.g
+      value: 0.7178234
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: dozenHighlight.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: numberHighlight.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: numberHighlight.g
+      value: 0.015709443
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: numberHighlight.r
+      value: 0.99371064
+      objectReference: {fileID: 0}
     - target: {fileID: 2574800672807690766, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_IsActive
       value: 0
