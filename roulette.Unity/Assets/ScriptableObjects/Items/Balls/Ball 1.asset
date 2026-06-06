@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72c02c1ee8d53e47a7aa0b19b674341, type: 3}
   m_Name: Ball 1
   m_EditorClassIdentifier: 
-  nameKey: 
-  descriptionKey: 
-  cost: 0
+  nameKey: Ball 1
+  descriptionKey: ergrtejryjergweg
+  cost: 3
   type: 0
   prefab: {fileID: 7977642736402533640, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
   visualComponent:

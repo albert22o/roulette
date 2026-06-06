@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 using Zenject;
@@ -13,10 +14,14 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     private Inventory inventory;
     private ItemFactory itemFactory = new();
+
     private int cost;
     private Shop shop;
+    private Item boughtBall;
+    private GoldenChips goldenChips;
 
-    public bool IsInteractable => true;
+    public bool IsInteractable => boughtBall == null;
+    public event Action<ItemData> BallBought;
     public int Cost
     {
         get => cost;
@@ -29,10 +34,11 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory, Shop shop)
+    public void Construct(Inventory inventory, Shop shop, GoldenChips goldenChips)
     {
         this.inventory = inventory;
         this.shop = shop;
+        this.goldenChips = goldenChips;
     }
 
     private void Start()
@@ -44,19 +50,36 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     {
         if (inventory.Balls.Count < inventory.BallsCapacity)
         {
-            if (inventory.GetCurrency(CurrencyType.GoldenChips) >= Cost)
+            if (goldenChips.Amount >= Cost)
             {
-                inventory.RemoveCurrency(CurrencyType.GoldenChips, Cost);
-                inventory.TryAddItem(itemFactory.Create(ballsTable.GetRandomItem()));
+                goldenChips.Remove(Cost);
+                var itemData = ballsTable.GetRandomItem();
+                boughtBall = itemFactory.Create(itemData);
+                BallBought?.Invoke(itemData);
+                shop.SetInteractionAvailable(false);
             }
         }
+    }
+
+    public void AddBallToInventory()
+    {
+        inventory.TryAddItem(boughtBall);
+        boughtBall = null;
+        shop.SetInteractionAvailable(true);
+    }
+
+    public void SellBall()
+    {
+        shop.Sell(boughtBall);
+        boughtBall = null;
+        shop.SetInteractionAvailable(true);
     }
 
     public void Clicked()
     {
         TryBuy();
     }
-
+       
     public void HoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);

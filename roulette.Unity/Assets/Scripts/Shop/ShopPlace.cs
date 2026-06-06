@@ -11,6 +11,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     private Inventory inventory;
     private readonly ItemFactory itemFactory = new();
     private Item createdItem;
+    private GoldenChips goldenChips;
     public ItemData Item
     {
         get => item;
@@ -27,9 +28,10 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public event Action<ItemData> ItemChanged;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(Inventory inventory, GoldenChips goldenChips)
     {
         this.inventory = inventory;
+        this.goldenChips = goldenChips;
     }
 
     public void SetItem(ItemData item)
@@ -66,12 +68,12 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
 
     private bool TryBuy(ShopPlace place)
     {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
+        if (goldenChips.Amount >= place.Item.Cost)
         {
             if (inventory.CanAddItem(place.Item))
             {
                 createdItem = itemFactory.Create(place.Item);
-                inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
+                goldenChips.Remove(place.Item.Cost);
                 return true;
             }
             else

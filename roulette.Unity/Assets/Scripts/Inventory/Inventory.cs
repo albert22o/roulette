@@ -2,29 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CurrencyType
-{
-    GoldenChips,
-    BossChips,
-    BaseMoney
-}
-
 public class Inventory
 {
     private readonly List<Item> balls;
     private readonly List<Item> chips;
 
-    private Dictionary<CurrencyType, int> currencies = new Dictionary<CurrencyType, int>
-    {
-        { CurrencyType.GoldenChips, 0 },
-        { CurrencyType.BossChips, 0 },
-        { CurrencyType.BaseMoney, 0 }
-    };
-
     public IReadOnlyList<Item> Balls => balls;
     public IReadOnlyList<Item> Chips => chips;
 
-    public event Action<CurrencyType, int> CurrencyChanged;
     public event Action ItemsChanged;
 
     public int BallsCapacity {  get; private set; }
@@ -100,24 +85,4 @@ public class Inventory
         }
         ItemsChanged?.Invoke();
     }
-
-    public void SetCurrency(CurrencyType type, int amount)
-    {
-        currencies[type] = amount;
-        CurrencyChanged?.Invoke(type, currencies[type]);
-    }
-
-    public void AddCurrency(CurrencyType type, int amount)
-    {
-        currencies[type] += amount;
-        CurrencyChanged?.Invoke(type, currencies[type]);
-    }
-
-    public void RemoveCurrency(CurrencyType type, int amount)
-    {
-        currencies[type] = Mathf.Max(0, currencies[type] - amount);
-        CurrencyChanged?.Invoke(type, currencies[type]);
-    }
-
-    public int GetCurrency(CurrencyType type) => currencies[type];
 }

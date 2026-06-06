@@ -1,14 +1,14 @@
-using NUnit.Framework.Interfaces;
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
+using static GameStateManager;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private ShopPlace[] shopPlaces;
+
     [SerializeField] private ShopTooltip tooltip;
-    [SerializeField] private ShopItemsTable itemsTable;
+
     [SerializeField] private float tooltipHeight;
     [SerializeField] private float chipSellMultiplier = 0.5f;
     [SerializeField] private int ballSellCost = 3;
@@ -17,50 +17,37 @@ public class Shop : MonoBehaviour
     [SerializeField] private BaseMoneyVendingMachine baseMoneyVendingMachine;
     [SerializeField] private BallsVendingMachine ballsVendingMachine;
     [SerializeField] private ShopFoodPlace foodPlace;
+    [SerializeField] private MouseInteraction shopInteraction;
+    [SerializeField] private ShopChipPlacesController chipPlacesController;
 
-    private ShopItemsPool itemsPool = new();
+
+    private GoldenChips goldenChips;
     private Inventory inventory;
 
-    public bool CanReroll => CheckRerollAvailable();
+
+    public event Action InteractionStarted, InteractionFinished;
 
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(GoldenChips goldenChips, Inventory inventory)
     {
+        this.goldenChips = goldenChips;
         this.inventory = inventory;
     }
 
+   
+
     private void Start()
     {
-        itemsPool.SetTable(itemsTable);
         OnQuotaUpdated();
     }
 
     public void OnQuotaUpdated()
     {
-        FillShopPlaces();
+        chipPlacesController.Fill();
         rerollButton.ResetCost();
         baseMoneyVendingMachine.ResetCost();
         foodPlace.UpdateItem();
-    }
-
-    private void FillShopPlaces()
-    {
-        foreach (ShopPlace place in shopPlaces)
-        {
-            place.SetItem(itemsPool.GetRandomItem());
-        }
-    }
-
-    public void Reroll()
-    {
-        foreach (ShopPlace place in shopPlaces)
-        {
-            if (place.Item != null)
-            {
-                place.SetItem(itemsPool.GetRandomItem());
-            }
-        }
     }
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
@@ -81,26 +68,30 @@ public class Shop : MonoBehaviour
         {
             if (inventory.Balls.Count > 1)
             {
-                inventory.AddCurrency(CurrencyType.GoldenChips, ballSellCost);
+                goldenChips.Add(ballSellCost);
                 inventory.RemoveItem(item);
             }
         }
         else
         {
-            inventory.AddCurrency(CurrencyType.GoldenChips, (int)(item.Data.Cost * chipSellMultiplier));
+            goldenChips.Add((int)(item.Data.Cost * chipSellMultiplier));
             inventory.RemoveItem(item);
         }
     }
 
-    public bool CheckRerollAvailable()
+    public void SetInteractionAvailable(bool value)
     {
-        bool hasItem = false;
-        foreach(ShopPlace place in shopPlaces)
-        {
-            if (place.IsAnimationPlaying) return false;
-            if (place.Item != null) hasItem = true;
-        }
-        if (hasItem == false) return false;
-        return true;
+        shopInteraction.enabled = value;
+    }
+    public void StartInteraction()
+    {
+        SetInteractionAvailable(true);
+        InteractionStarted?.Invoke();
+    }
+
+    public void FinishInteraction()
+    {
+        SetInteractionAvailable(false);
+        InteractionFinished?.Invoke();
     }
 }
