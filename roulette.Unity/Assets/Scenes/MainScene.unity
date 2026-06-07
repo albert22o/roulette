@@ -7617,6 +7617,18 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: colorHighlight.b
+      value: 0.2235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: colorHighlight.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: colorHighlight.r
+      value: 0.2646317
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: dozenHighlight.b
       value: 0
       objectReference: {fileID: 0}
