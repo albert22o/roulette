@@ -77,7 +77,7 @@ class BetTableView : MonoBehaviour
         availableSumText.text = newSum.ToString();
     }
 
-    private void OnPocketColorChanged(int index, string color)
+    private void OnPocketColorChanged(int index, ColorType color)
     {
         betButtons[index].Color = color;
     }
@@ -228,9 +228,9 @@ class BetTableView : MonoBehaviour
 
     private void ProcessBottomSectionHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
     {
-        if (hitInfo.FieldColor != "Green")
+        if (hitInfo.FieldColor != ColorType.Green)
         {
-            SpriteRenderer spriteToColor = hitInfo.FieldColor == "Red"
+            SpriteRenderer spriteToColor = hitInfo.FieldColor == ColorType.Red
                 ? spriteToColor = redNumberSprite
                 : spriteToColor = blackNumberSprite;
 
