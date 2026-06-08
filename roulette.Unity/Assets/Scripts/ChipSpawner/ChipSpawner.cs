@@ -10,16 +10,9 @@ public class ChipSpawner
     private Transform spawnPoint;
     private MonoBehaviour coroutineRunner;
 
-
     private List<GameObject> spawnerChips = new();
     private Coroutine spawnCoroutine;
 
-
-    [Inject]
-    public void Construct()
-    {
-       
-    }
     public void Configure(GameObject chipPrefab, Transform spawnPoint, MonoBehaviour coroutineRunner)
     {
         this.chipPrefab = chipPrefab;
@@ -28,7 +21,7 @@ public class ChipSpawner
 
     }
 
-    public void OnStartSpawing(int chipCount, float interval)
+    public void StartSpawing(int chipCount, float interval)
     {
         if (spawnCoroutine != null) 
             coroutineRunner.StopCoroutine(spawnCoroutine);
@@ -36,7 +29,7 @@ public class ChipSpawner
         spawnCoroutine = coroutineRunner.StartCoroutine(SpawnRoutine(chipCount, interval));
     }
 
-    public void OnClearChips()
+    public void ClearChips()
     {
         if(spawnCoroutine != null)
         {

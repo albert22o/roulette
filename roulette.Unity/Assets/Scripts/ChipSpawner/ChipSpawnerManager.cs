@@ -26,24 +26,7 @@ public class ChipSpawnerManager : MonoBehaviour
     {
         chipSpawner.Configure(chipPrefab, spawnPoint, this);
 
-        StartSpawner = () => chipSpawner.OnStartSpawing(chipsToSpawn, spawnInterval);
-        ClearChips = () => chipSpawner?.OnClearChips();
+        StartSpawner = () => chipSpawner.StartSpawing(chipsToSpawn, spawnInterval);
+        ClearChips = () => chipSpawner?.ClearChips();
     }
-    public void OnSpawnButtonClick()
-    {
-        Debug.Log("Кнопка Spawn нажата");
-        StartSpawner?.Invoke();
-    }
-
-    public void OnClearButtonClick()
-    {
-        Debug.Log("Кнопка Clear нажата");
-        ClearChips?.Invoke();
-    }
-
-    [ContextMenu("Text: Spawn Chip")]
-    private void TestSpawn() => StartSpawner?.Invoke();
-
-    [ContextMenu("Text: Clear Chips")]
-    private void TestClesr() => ClearChips?.Invoke();
 }
