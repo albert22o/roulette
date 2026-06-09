@@ -13,6 +13,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] TextMeshPro betText;
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] TextMeshPro generalMultiplierText;
+    [SerializeField] float timeBetweenHighlights = 1f;
 
     [SerializeField] SpriteRenderer firstDozenSprite;
     [SerializeField] SpriteRenderer secondDozenSprite;
@@ -109,32 +110,32 @@ class BetTableView : MonoBehaviour
         //Для каждой ненулевой ставки
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
         {
-            foreach (BetButton button in betButtons)
+            if (hitInfo.FieldColor == betInfo.FieldColor || hitInfo.Dozen == betInfo.Dozen)
             {
-                ProcessButtonHighlightByColor(button, hitInfo, betInfo);
+                ProcessButtonHighlightByColor(hitInfo, betInfo);
+                ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
+                DisplayColorMultiplier(hitInfo, betInfo);
+
+                if (hitInfo.Dozen == betInfo.Dozen)
+                {
+                    yield return new WaitForSeconds(timeBetweenHighlights);
+
+                    ProcessButtonHighlightByDozen(hitInfo, betInfo);
+                    ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
+                    DisplayDozenMultiplier(hitInfo, betInfo);
+
+                    if (hitInfo.FieldNumber == betInfo.FieldNumber)
+                    {
+                        yield return new WaitForSeconds(timeBetweenHighlights);
+
+                        ProcessButtonHighlightByNumber(hitInfo, betInfo);
+                        DisplayNumberMultiplier(hitInfo, betInfo);
+                    }
+                }
             }
-            ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
-            DisplayColorMultiplier(hitInfo, betInfo);
-
-            yield return new WaitForSeconds(1f);
-
-            foreach (BetButton button in betButtons)
-            {
-                ProcessButtonHighlightByDozen(button, hitInfo, betInfo);
-            }
-            ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
-            DisplayDozenMultiplier(hitInfo, betInfo);
-
-            yield return new WaitForSeconds(1f);
-
-            foreach (BetButton button in betButtons)
-            {
-                ProcessButtonHighlightByNumber(button, hitInfo, betInfo);
-            }
-            DisplayNumberMultiplier(hitInfo, betInfo);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         foreach (BetButton button in betButtons)
             button.Highlight(false, BetButton.HighlightPhase.None);
@@ -149,55 +150,30 @@ class BetTableView : MonoBehaviour
         betTable.ClearBets();
     }
 
-    private void ProcessButtonHighlightByColor(BetButton button, HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
     {
-        //Если цвет ставки совпадает с выпавшим
-        if (hitInfo.FieldColor == betInfo.FieldColor)
+        foreach (BetButton button in betButtons)
         {
-            //Кнопка этого цвета подсвечивается
             if (button.Color == betInfo.FieldColor)
                 button.Highlight(true, BetButton.HighlightPhase.Color);
         }
-        //Если цвет ставки не совпадает
-        else
-        {
-            if (button.Color == betInfo.FieldColor)
-                button.Lowlight(true);
-        }
     }
 
-    private void ProcessButtonHighlightByDozen(BetButton button, HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByDozen(HitInfo hitInfo, BetInfo betInfo)
     {
-        //Если дюжина ставки совпадает с выпавшей
-        if (hitInfo.Dozen == betInfo.Dozen)
+        foreach (BetButton button in betButtons)
         {
-            //Каждая кнопка этой дюжины подсвечивается
             if (button.Dozen == betInfo.Dozen)
                 button.Highlight(true, BetButton.HighlightPhase.Dozen);
         }
-        //Если дюжина ставки не совпадает
-        else
-        {
-            //Затемняется
-            if (button.Dozen == hitInfo.Dozen)
-                button.Lowlight(true);
-        }
     }
 
-    private void ProcessButtonHighlightByNumber(BetButton button, HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByNumber(HitInfo hitInfo, BetInfo betInfo)
     {
-        if (hitInfo.FieldNumber == betInfo.FieldNumber)
+        foreach (BetButton button in betButtons)
         {
-            //Кнопка этой цифры подсвечивается
             if (button.FieldNum == betInfo.FieldNumber)
                 button.Highlight(true, BetButton.HighlightPhase.Number);
-        }
-        //Если цифра ставки не совпадает
-        else
-        {
-            //Затемняется
-            if (button.FieldNum == hitInfo.FieldNumber)
-                button.Lowlight(true);
         }
     }
 
@@ -215,8 +191,6 @@ class BetTableView : MonoBehaviour
 
             if (hitInfo.Dozen == betInfo.Dozen)
                 spriteToColor.color = dozenHighlight;
-            else
-                spriteToColor.color = lowlight;
         }
     }
 
@@ -231,10 +205,6 @@ class BetTableView : MonoBehaviour
             if (hitInfo.FieldColor == betInfo.FieldColor)
             {
                 spriteToColor.color = colorHighlight;
-            }
-            else
-            {
-                spriteToColor.color = lowlight;
             }
         }
     }

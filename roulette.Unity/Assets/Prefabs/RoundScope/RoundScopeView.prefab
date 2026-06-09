@@ -121,6 +121,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
+    - target: {fileID: 1157159042263557060, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: timeBetweenHighlights
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3582085522559153225, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.9069611
