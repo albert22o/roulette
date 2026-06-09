@@ -151,6 +151,11 @@ public class ChipHolderView : MonoBehaviour
         slotViews[indexB].PlaceChip(chipA);
     }
 
+    public ChipSlotView[] GetChips()
+    {
+        return slotViews;
+    }
+
     private ChipSlotView RaycastSlot()
     {
         var screenPos = pointAction.ReadValue<Vector2>();

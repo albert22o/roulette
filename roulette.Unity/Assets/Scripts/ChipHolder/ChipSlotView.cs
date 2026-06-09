@@ -42,4 +42,9 @@ public class ChipSlotView : MonoBehaviour
         ChipObject = chipObject;
         chipObject.transform.SetParent(transform);
     }
+
+    public void PlayAnimation()
+    {
+        ChipObject.GetComponent<Animator>().SetTrigger("start");
+    }
 }

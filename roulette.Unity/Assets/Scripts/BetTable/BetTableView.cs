@@ -14,6 +14,8 @@ class BetTableView : MonoBehaviour
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] TextMeshPro generalMultiplierText;
     [SerializeField] float timeBetweenHighlights = 1f;
+    [SerializeField] float timeBetweenChipAnimations = 0.5f;
+    [SerializeField] ChipHolderView chipHolderView;
 
     [SerializeField] SpriteRenderer firstDozenSprite;
     [SerializeField] SpriteRenderer secondDozenSprite;
@@ -40,7 +42,6 @@ class BetTableView : MonoBehaviour
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
-        betCalculator.HighlightButtons += OnHighlightButton;
         this.roundStateManager = roundStateManager;
     }
 
@@ -63,12 +64,25 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
+        betCalculator.HighlightButtons += OnHighlightButton;
 
         foreach (var pocket in tableConfig.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (betTable != null && betCalculator != null && tableConfig != null)
+        {
+            betCalculator.HighlightButtons -= OnHighlightButton;
+            betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
+            tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
+            tableConfig.PocketColorChanged -= OnPocketColorChanged;
+            betTable.ChangeAvailableSum -= OnChangeAvailableSum;
         }
     }
 
@@ -107,12 +121,11 @@ class BetTableView : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        //Для каждой ненулевой ставки
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+        foreach ((var betInfo, var _) in betTable.NotNullBetAmounts)
         {
             if (hitInfo.FieldColor == betInfo.FieldColor || hitInfo.Dozen == betInfo.Dozen)
             {
-                ProcessButtonHighlightByColor(hitInfo, betInfo);
+                ProcessButtonHighlightByColor(hitInfo);
                 ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
                 DisplayColorMultiplier(hitInfo, betInfo);
 
@@ -120,7 +133,7 @@ class BetTableView : MonoBehaviour
                 {
                     yield return new WaitForSeconds(timeBetweenHighlights);
 
-                    ProcessButtonHighlightByDozen(hitInfo, betInfo);
+                    ProcessButtonHighlightByDozen(hitInfo);
                     ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
                     DisplayDozenMultiplier(hitInfo, betInfo);
 
@@ -128,9 +141,21 @@ class BetTableView : MonoBehaviour
                     {
                         yield return new WaitForSeconds(timeBetweenHighlights);
 
-                        ProcessButtonHighlightByNumber(hitInfo, betInfo);
+                        ProcessButtonHighlightByNumber(hitInfo);
                         DisplayNumberMultiplier(hitInfo, betInfo);
                     }
+                }
+
+                yield return new WaitForSeconds(timeBetweenHighlights);
+
+                foreach (var chip in chipHolderView.GetChips())
+                {
+                    if (chip.ChipObject == null)
+                        continue;
+
+                    chip.PlayAnimation();
+
+                    yield return new WaitForSeconds(timeBetweenChipAnimations);
                 }
             }
         }
@@ -150,29 +175,29 @@ class BetTableView : MonoBehaviour
         betTable.ClearBets();
     }
 
-    private void ProcessButtonHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByColor(HitInfo hitInfo)
     {
         foreach (BetButton button in betButtons)
         {
-            if (button.Color == betInfo.FieldColor)
+            if (button.Color == hitInfo.FieldColor)
                 button.Highlight(true, BetButton.HighlightPhase.Color);
         }
     }
 
-    private void ProcessButtonHighlightByDozen(HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByDozen(HitInfo hitInfo)
     {
         foreach (BetButton button in betButtons)
         {
-            if (button.Dozen == betInfo.Dozen)
+            if (button.Dozen == hitInfo.Dozen)
                 button.Highlight(true, BetButton.HighlightPhase.Dozen);
         }
     }
 
-    private void ProcessButtonHighlightByNumber(HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessButtonHighlightByNumber(HitInfo hitInfo)
     {
         foreach (BetButton button in betButtons)
         {
-            if (button.FieldNum == betInfo.FieldNumber)
+            if (button.FieldNum == hitInfo.FieldNumber)
                 button.Highlight(true, BetButton.HighlightPhase.Number);
         }
     }
@@ -189,8 +214,7 @@ class BetTableView : MonoBehaviour
                 _ => null
             };
 
-            if (hitInfo.Dozen == betInfo.Dozen)
-                spriteToColor.color = dozenHighlight;
+            spriteToColor.color = dozenHighlight;
         }
     }
 
@@ -202,10 +226,7 @@ class BetTableView : MonoBehaviour
                 ? spriteToColor = redNumberSprite
                 : spriteToColor = blackNumberSprite;
 
-            if (hitInfo.FieldColor == betInfo.FieldColor)
-            {
-                spriteToColor.color = colorHighlight;
-            }
+            spriteToColor.color = colorHighlight;
         }
     }
 

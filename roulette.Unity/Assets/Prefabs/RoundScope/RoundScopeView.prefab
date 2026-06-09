@@ -122,6 +122,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
     - target: {fileID: 1157159042263557060, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: chipHolderView
+      value: 
+      objectReference: {fileID: 8343762536128858548}
+    - target: {fileID: 1157159042263557060, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: timeBetweenHighlights
       value: 1
       objectReference: {fileID: 0}
@@ -241,6 +245,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3101070714954178997, guid: f6035e373bc3f9845850d898f3a29f5b, type: 3}
   m_PrefabInstance: {fileID: 1361718590977735225}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8343762536128858548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7002873162256462733, guid: f6035e373bc3f9845850d898f3a29f5b, type: 3}
+  m_PrefabInstance: {fileID: 1361718590977735225}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58464cb613962b84aa7d4b2c5fff5243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4680193950152923065
 PrefabInstance:
   m_ObjectHideFlags: 0

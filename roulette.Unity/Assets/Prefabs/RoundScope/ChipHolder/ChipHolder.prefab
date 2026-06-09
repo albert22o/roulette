@@ -59,7 +59,10 @@ MonoBehaviour:
   slotLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  chips: []
+  chips:
+  - {fileID: 11400000, guid: 29aa849feecebaf41ab702efe07912da, type: 2}
+  - {fileID: 11400000, guid: 656227a3df2c2cc4f8415f36b3cb2873, type: 2}
+  - {fileID: 11400000, guid: cdd58383b919abc4ca38c5bc3b1039f7, type: 2}
 --- !u!1001 &536912043071185592
 PrefabInstance:
   m_ObjectHideFlags: 0
