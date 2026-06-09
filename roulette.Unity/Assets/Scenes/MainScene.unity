@@ -7708,6 +7708,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4154407854167585681, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282485798192379210, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.084
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866815937647442905, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.216
+      objectReference: {fileID: 0}
     - target: {fileID: 5072127714472755426, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: Lens.FieldOfView
       value: 100
