@@ -202,4 +202,12 @@ public class RouletteBallsManager : MonoBehaviour
             }
         }
     }
+
+    public void RerollBall(string ballHash)
+    {
+        var ball = balls.FirstOrDefault(b =>  b.Hash == ballHash);
+        if (ball != null) return;
+
+        Clear(ballHash);
+    }
 }
