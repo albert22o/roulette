@@ -26,7 +26,6 @@ public class ChipHolder
             return;
 
         chips[freeIndex] = chipFactory.Create(chipData);
-        chips[freeIndex].Apply();
 
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
@@ -50,9 +49,7 @@ public class ChipHolder
         if (indexA == indexB)
             return;
 
-        RevertAll();
         (chips[indexA], chips[indexB]) = (chips[indexB], chips[indexA]);
-        ApplyAll();
 
         ChipsSwapped?.Invoke(indexA, indexB);
     }
@@ -62,7 +59,7 @@ public class ChipHolder
         isActive = newState == RoundStateManager.RoundState.PlacingBets;
     }
 
-    private void RevertAll()
+    public void RevertAll()
     {
         for (int i = chips.Length - 1; i >= 0; i--)
             chips[i]?.Revert();
@@ -72,6 +69,11 @@ public class ChipHolder
     {
         for (int i = 0; i < chips.Length; i++)
             chips[i]?.Apply();
+    }
+
+    public void ApplyByIndex(int index)
+    {
+        chips[index]?.Apply();
     }
 
     private int FindFreeSlot()
