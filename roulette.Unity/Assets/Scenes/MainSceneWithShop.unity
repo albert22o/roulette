@@ -8684,10 +8684,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4173988833000430476, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0074
+      objectReference: {fileID: 0}
     - target: {fileID: 5072127714472755426, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: Lens.FieldOfView
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: chips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: 'chips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cdd58383b919abc4ca38c5bc3b1039f7, type: 2}
+    - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: 'chips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 656227a3df2c2cc4f8415f36b3cb2873, type: 2}
     - target: {fileID: 8859047967024364572, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_LocalScale.x
       value: 550

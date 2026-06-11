@@ -30,7 +30,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void ShowDescription()
     {
-        shop.ShowTooltip(item.NameKey, item.DescriptionKey, transform.position);
+        shop.ShowTooltip(item.Name, item.Description, transform.position);
     }
 
     public void HideDescription()
@@ -43,7 +43,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
         if (goldenChips.Amount >= cost)
         {
             goldenChips.Remove(cost);
-            Debug.Log($"Food {item.NameKey} bought");
+            Debug.Log($"Food {item.Name} bought");
             item = null;
             itemPlace.SetItem(null);
             HideDescription();

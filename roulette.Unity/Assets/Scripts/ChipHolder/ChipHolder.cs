@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 public class ChipHolder
 {
@@ -29,7 +28,6 @@ public class ChipHolder
         chips[freeIndex] = chipFactory.Create(chipData);
         chips[freeIndex].Apply();
 
-        UnityEngine.Debug.Log("chipAdded");
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
 

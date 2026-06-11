@@ -4,6 +4,9 @@ using UnityEngine;
 public class ChipShopItemData : ItemData
 {
     [SerializeField] private ChipData chipData;
+    [SerializeField] private int cost;
 
-    public ChipData ChipData => chipData;   
+
+    public ChipData ChipData => chipData;
+    public int Cost => cost;
 }

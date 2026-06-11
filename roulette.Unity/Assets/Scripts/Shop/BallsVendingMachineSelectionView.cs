@@ -29,8 +29,8 @@ public class BallsVendingMachineSelectionView : MonoBehaviour
     
     private void UpdateText(ItemData data)
     {
-        itemName.text = data.NameKey;
-        itemDescription.text = data.DescriptionKey;
+        itemName.text = data.Name;
+        itemDescription.text = data.Description;
     }
 
     private void OnBallSpawned()

@@ -16,7 +16,7 @@ public class ShopChipPlacesController : MonoBehaviour
     {
         foreach (ShopPlace place in shopPlaces)
         {
-            place.SetItem(itemsPool.GetRandomItem());
+            place.SetItem(itemsPool.GetRandomItem() as ChipShopItemData);
         }
     }
 
@@ -26,7 +26,7 @@ public class ShopChipPlacesController : MonoBehaviour
         {
             if (place.Item != null)
             {
-                place.SetItem(itemsPool.GetRandomItem());
+                place.SetItem(itemsPool.GetRandomItem() as ChipShopItemData);
             }
         }
     }

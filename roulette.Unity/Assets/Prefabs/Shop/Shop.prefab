@@ -1202,6 +1202,7 @@ MonoBehaviour:
   foodPlace: {fileID: 6050194589058150984}
   shopInteraction: {fileID: 1714608402749030524}
   chipPlacesController: {fileID: 6139096450551489458}
+  inputHandler: {fileID: 3873016230863998728}
 --- !u!114 &1714608402749030524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,7 +1247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723424273269335378}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 213bd2834798bf14da58b58fa5dc5577, type: 3}
   m_Name: 
@@ -1264,7 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8cc5e256260aa489acfb00382c5fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 5601833680969988884}
+  shopCamera: {fileID: 5601833680969988884}
   shop: {fileID: 4580049872970351105}
 --- !u!1 &2052145530499165929
 GameObject:

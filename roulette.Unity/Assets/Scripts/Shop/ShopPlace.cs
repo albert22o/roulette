@@ -7,12 +7,12 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     [SerializeField] private Shop shop;
     [SerializeField] private DrumNumberDisplay costView;
 
-    private ItemData item;
+    private ChipShopItemData item;
     private Inventory inventory;
     private readonly ItemFactory itemFactory = new();
     private Item createdItem;
     private GoldenChips goldenChips;
-    public ItemData Item
+    public ChipShopItemData Item
     {
         get => item;
         private set
@@ -34,7 +34,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         this.goldenChips = goldenChips;
     }
 
-    public void SetItem(ItemData item)
+    public void SetItem(ChipShopItemData item)
     {
         Item = item;
         costView.SetNumber(Item.Cost);
@@ -45,7 +45,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public void ShowDescription()
     {
         if (Item == null) return;
-        shop.ShowTooltip(Item.NameKey, Item.DescriptionKey, transform.position);
+        shop.ShowTooltip(Item.Name, Item.Description, transform.position);
     }
 
     public void HideDescription()
@@ -83,7 +83,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         }
         else
         {
-            Debug.Log(place.Item.NameKey + " not enough money!");
+            Debug.Log(place.Item.Name + " not enough money!");
             return false;
         }
     }

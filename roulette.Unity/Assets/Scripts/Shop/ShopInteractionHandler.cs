@@ -5,8 +5,9 @@ using static GameStateManager;
 
 public class ShopInteractionHandler : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera camera;
+    [SerializeField] private CinemachineCamera shopCamera;
     [SerializeField] private Shop shop;
+
     private GameStateManager stateManager;
     private bool isInteraction;
 
@@ -28,14 +29,15 @@ public class ShopInteractionHandler : MonoBehaviour
 
     public void StartInteraction()
     {
-        camera.gameObject.SetActive(true);
+        shopCamera.gameObject.SetActive(true);
         isInteraction = true;
         shop.StartInteraction();
+
     }
 
     public void FinishInteraction()
     {
-        camera.gameObject.SetActive(false);
+        shopCamera.gameObject.SetActive(false);
         isInteraction = false;
         shop.FinishInteraction();
     }

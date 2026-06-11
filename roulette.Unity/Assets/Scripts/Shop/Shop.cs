@@ -19,6 +19,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopFoodPlace foodPlace;
     [SerializeField] private MouseInteraction shopInteraction;
     [SerializeField] private ShopChipPlacesController chipPlacesController;
+    [SerializeField] private ShopInputHandler inputHandler;
 
 
     private GoldenChips goldenChips;
@@ -64,7 +65,7 @@ public class Shop : MonoBehaviour
 
     public void Sell(Item item)
     {
-        if (item.Data.Type == ItemType.Ball)
+        if (item.Data is BallShopItemData)
         {
             if (inventory.Balls.Count > 1)
             {
@@ -72,9 +73,9 @@ public class Shop : MonoBehaviour
                 inventory.RemoveItem(item);
             }
         }
-        else
+        else if (item.Data is ChipShopItemData chipData)
         {
-            goldenChips.Add((int)(item.Data.Cost * chipSellMultiplier));
+            goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
             inventory.RemoveItem(item);
         }
     }
@@ -82,6 +83,7 @@ public class Shop : MonoBehaviour
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;
+        inputHandler.enabled = value;
     }
     public void StartInteraction()
     {

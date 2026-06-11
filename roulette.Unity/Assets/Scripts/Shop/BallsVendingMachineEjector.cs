@@ -22,7 +22,7 @@ public class BallsVendingMachineEjector : MonoBehaviour
     public void EjectBall()
     {
         currentBall.gameObject.SetActive(true);
-        currentBall.SetVisual(ballData.VisualComponent);
+        //currentBall.SetVisual(ballData.VisualComponent);
         currentBall.transform.position = transform.position;
         BallUpdated?.Invoke();
     }
