@@ -1,7 +1,7 @@
 ﻿public class ColorChip : Chip
 {
     private readonly BetCalculator betCalculator;
-    private readonly ColorType color;
+    private readonly string color;
     private readonly int modifyAmount;
 
     public ColorChip(BetCalculator betCalculator, ColorChipData colorChipData) : base(colorChipData)

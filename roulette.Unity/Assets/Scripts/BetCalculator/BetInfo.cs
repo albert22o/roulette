@@ -1,6 +1,6 @@
 ﻿public class BetInfo
 {
-    public BetInfo(int fieldNumber, DozenType dozen, ColorType fieldColor)
+    public BetInfo(int fieldNumber, DozenType dozen, string fieldColor)
     {
         FieldNumber = fieldNumber;
         Dozen = dozen;
@@ -13,5 +13,5 @@
     /// </summary>
     public int FieldNumber { get; set; }
     public DozenType Dozen { get; set; }
-    public ColorType FieldColor { get; set; }
+    public string FieldColor { get; set; }
 }

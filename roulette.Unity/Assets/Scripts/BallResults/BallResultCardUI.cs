@@ -19,7 +19,7 @@ public class BallResultCardUI : MonoBehaviour
     {
         hitInfo = hit;
         numberText.text = hit.FieldNumber.ToString();
-        colorText.text = hit.FieldColor.ToString();
+        colorText.text = hit.FieldColor;
         dozenText.text = hit.Dozen.ToString();
         background.color = ConvertToColor(hit.FieldColor);
         GetComponent<Button>().onClick.AddListener(() => onClick());
@@ -30,12 +30,12 @@ public class BallResultCardUI : MonoBehaviour
         selectedHighlight.SetActive(v);
     }
 
-    private Color ConvertToColor(ColorType fieldColor)
+    private Color ConvertToColor(string fieldColor)
     {
         return fieldColor switch
         {
-            ColorType.Red => Color.red,
-            ColorType.Black => Color.black,
+            "Red" => Color.red,
+            "Black" => Color.black,
             _ => Color.white,
         };
     }

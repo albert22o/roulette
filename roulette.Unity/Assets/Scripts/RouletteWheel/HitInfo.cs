@@ -5,7 +5,7 @@
     /// Уникальный хеш шара, который остановился на поле
     /// </summary>
     public string BallHash { get; set; }
-    public ColorType FieldColor { get; set; }
+    public string FieldColor { get; set; }
     /// <summary>
     /// Номер поля, на котором остановился шар
     /// Может отличаться от фактической позиции поля
@@ -20,11 +20,4 @@ public enum DozenType
     First = 1,
     Second = 2,
     Third = 3
-}
-public enum ColorType
-{
-    Red,
-    Black,
-    Green,
-    White
 }

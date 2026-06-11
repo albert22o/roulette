@@ -80,7 +80,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         AllBallsStopped?.Invoke(hitsInfo);
     }
 
-    public void OnPocketColorChanged(int index, ColorType color)
+    public void OnPocketColorChanged(int index, string color)
     {
         int pos = Array.IndexOf(FieldsOrder, index);
         Fields[pos].Color = color;
@@ -119,7 +119,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         spinController.Spin();
     }
 
-    public void SetFieldColor(int fieldPosition, ColorType color)
+    public void SetFieldColor(int fieldPosition, string color)
     {
         Fields[fieldPosition].Color = color;
         FieldsUpdated?.Invoke();

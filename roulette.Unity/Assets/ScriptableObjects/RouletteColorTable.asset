@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RouletteColorTable
   m_EditorClassIdentifier: 
   colorsList:
-  - ColorName: 0
+  - ColorName: Red
     Color: {r: 1, g: 0, b: 0, a: 1}
-  - ColorName: 2
+  - ColorName: Green
     Color: {r: 0.29118645, g: 1, b: 0, a: 1}
-  - ColorName: 1
+  - ColorName: Black
     Color: {r: 0, g: 0, b: 0, a: 1}

@@ -2,13 +2,13 @@ using System;
 [System.Serializable]
 public class RouletteWheelField
 {
-    private ColorType color;
+    private string color;
     private int number;
 
     public event Action<int> NumberChanged;
-    public event Action<ColorType> ColorChanged;
+    public event Action<string> ColorChanged;
 
-    public ColorType Color { 
+    public string Color { 
         get => color;
         set
         {

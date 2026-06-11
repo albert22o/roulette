@@ -4,7 +4,7 @@
 
 public class ColorChipData : ChipData
 {
-    public ColorType Color;
+    public string Color;
     public int ModifyAmount;
 
     public override Chip CreateChip(ChipDependencies deps)

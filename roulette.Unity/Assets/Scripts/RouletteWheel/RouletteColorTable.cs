@@ -6,15 +6,15 @@ public class RouletteColorTable : ScriptableObject
 {
     [SerializeField] private List<ColorsTable> colorsList;
 
-    private Dictionary<ColorType, Color> colors;
+    private Dictionary<string, Color> colors;
 
-    private Dictionary<ColorType, Color> Colors
+    private Dictionary<string, Color> Colors
     {
         get
         {
             if (colors == null)
             {
-                colors = new Dictionary<ColorType, Color>();
+                colors = new Dictionary<string, Color>();
                 foreach (var c in colorsList)
                     colors[c.ColorName] = c.Color;
             }
@@ -22,12 +22,12 @@ public class RouletteColorTable : ScriptableObject
         }
     }
 
-    public Color GetColorByName(ColorType name) => Colors[name];
+    public Color GetColorByName(string name) => Colors[name];
 }
 
 [System.Serializable]
 internal struct ColorsTable
 {
-    public ColorType ColorName;
+    public string ColorName;
     public Color Color;
 }
