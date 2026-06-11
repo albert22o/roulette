@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Inventory
 {
     private readonly List<Item> balls;
     private readonly List<Item> chips;
+
+    private ChipHolder chipHolder;
 
     public IReadOnlyList<Item> Balls => balls;
     public IReadOnlyList<Item> Chips => chips;
@@ -15,6 +18,11 @@ public class Inventory
     public int BallsCapacity {  get; private set; }
     public int ChipsCapacity { get; private set; }
 
+    [Inject]
+    public void Construct(ChipHolder chipHolder)
+    {
+        this.chipHolder = chipHolder;
+    }
 
     public Inventory(InventoryConfig config)
     {
@@ -33,6 +41,7 @@ public class Inventory
                 {
                     balls.Add(item);
                     ItemsChanged?.Invoke();
+                    
                     return true;
                 }
                 else
@@ -44,6 +53,7 @@ public class Inventory
                 if (chips.Count < chips.Capacity)
                 {
                     chips.Add(item);
+                    chipHolder.AddChip(((ChipShopItemData)item.Data).ChipData);
                     ItemsChanged?.Invoke();
                     return true;    
                 }
@@ -81,6 +91,7 @@ public class Inventory
                 break;
             case ItemType.Chip:
                 chips.Remove(item);
+                chipHolder.RemoveChip(((ChipShopItemData)item.Data).ChipData);
                 break;
         }
         ItemsChanged?.Invoke();

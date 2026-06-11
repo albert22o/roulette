@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 public class ChipHolder
 {
@@ -28,6 +29,7 @@ public class ChipHolder
         chips[freeIndex] = chipFactory.Create(chipData);
         chips[freeIndex].Apply();
 
+        UnityEngine.Debug.Log("chipAdded");
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
 
@@ -40,6 +42,23 @@ public class ChipHolder
         chips[index] = null;
 
         ChipRemoved?.Invoke(index);
+    }
+
+    public void RemoveChip(ChipData data)
+    {
+        if (data == null)
+            return;
+
+        for (int i = 0; i < chips.Length; i++)
+        {
+            if (chips[i] != null && chips[i].ChipData == data)
+            {
+                chips[i].Revert();
+                chips[i] = null;
+                ChipRemoved?.Invoke(i);
+                return;
+            }
+        }
     }
 
     public void SwapChips(int indexA, int indexB)
