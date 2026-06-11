@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using static RoundStateManager;
 
 public class BetCalculator
 {
-    public event Action<int> DisplayBetResults;
+    public event Action<int> GetReward;
+    public event Action<HitInfo, int> HighlightButtons;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -16,10 +16,11 @@ public class BetCalculator
 
     private readonly Dictionary<DozenType, int> dozenMultipliers = new();
 
-    private readonly Dictionary<string, int> colorMultipliers = new();
+    private readonly Dictionary<ColorType, int> colorMultipliers = new();
 
     private bool active = true;
     private readonly BetTable betTable;
+    private int reward;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
@@ -43,7 +44,7 @@ public class BetCalculator
         dozenMultipliers[dozen] = current + delta;
     }
 
-    public void ModifyColorMultiplier(string color, int delta)
+    public void ModifyColorMultiplier(ColorType color, int delta)
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
@@ -55,7 +56,7 @@ public class BetCalculator
     public void ResetDozenMultiplier(DozenType dozen) =>
         dozenMultipliers.Remove(dozen);
 
-    public void ResetColorMultiplier(string color) =>
+    public void ResetColorMultiplier(ColorType color) =>
         colorMultipliers.Remove(color);
 
     public void OnStateChanged(RoundState newState)
@@ -68,12 +69,11 @@ public class BetCalculator
         if (!active)
             return;
 
-        var reward = 0;
+        reward = 0;
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             reward += GetRewardForBet(betInfo, amount, info);
 
-        betTable.ClearBets();
-        DisplayBetResults?.Invoke(reward);
+        HighlightButtons?.Invoke(info, reward);
     }
 
     private int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
@@ -96,12 +96,17 @@ public class BetCalculator
         return amount;
     }
 
-    private int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
+    public int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
         fieldNumberMultipliers.TryGetValue(fieldNumber, out var m) ? m : defaultMultiplier;
 
-    private int GetEffectiveDozenMultiplier(DozenType dozen) =>
+    public int GetEffectiveDozenMultiplier(DozenType dozen) =>
         dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
 
-    private int GetEffectiveColorMultiplier(string color) =>
+    public int GetEffectiveColorMultiplier(ColorType color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
+
+    public void GetRewardAction()
+    {
+        GetReward?.Invoke(reward);
+    }
 }

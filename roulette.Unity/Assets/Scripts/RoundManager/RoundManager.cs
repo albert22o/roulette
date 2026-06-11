@@ -72,13 +72,14 @@ public class RoundManager
     private readonly IRouletteWheel rouletteWheel;
     private readonly RoundStateManager roundStateManager;
     private readonly TableConfig tableConfig;
+    private readonly BetCalculator betCalculator;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
-        TableConfig tableConfig, ProgressionManager progressionManager, BetResultsDisplay betResultsDisplay)
+        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator)
     {
         this.rouletteWheel = rouletteWheel;
 
-        betResultsDisplay.GetReward += OnGetReward;
+        betCalculator.GetReward += OnGetReward;
         
         this.roundStateManager = roundStateManager;
         this.tableConfig = tableConfig;
