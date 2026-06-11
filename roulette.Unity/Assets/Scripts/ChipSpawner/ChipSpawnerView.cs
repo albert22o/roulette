@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 public class ChipSpawnerView : MonoBehaviour
@@ -11,10 +12,8 @@ public class ChipSpawnerView : MonoBehaviour
     [SerializeField] private GameObject chipPrefab;
     [SerializeField] private Transform spawnPoint;
 
-    public Action StartSpawner;
-    public Action ClearChips;
-
     private ChipSpawner chipSpawner;
+    private List<GameObject> spawnedChips = new();
     private Coroutine spawnCoroutine;
 
     [Inject]
@@ -23,40 +22,55 @@ public class ChipSpawnerView : MonoBehaviour
         this.chipSpawner = chipSpawner;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        StartSpawner = () => StartSpawningWithInternal();
-        ClearChips = () => ClearAllChips();
+        chipSpawner.ChipSpawnerRequested += OnChipSpawnRequested;
+        chipSpawner.ChipClearRecvested += OnClearRequested;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (spawnCoroutine != null) 
+        chipSpawner.ChipSpawnerRequested -= OnChipSpawnRequested;
+        chipSpawner.ChipClearRecvested -= OnClearRequested;
+
+        if ( spawnCoroutine != null) 
             StopCoroutine(spawnCoroutine);
     }
 
-    public void StartSpawningWithInternal()
+    private void OnChipSpawnRequested(GameObject prefab, Transform spawnPoint)
     {
-        if( spawnCoroutine != null )
-            StopCoroutine(spawnCoroutine);
-        spawnCoroutine = StartCoroutine(SpawnRoutine());
+        GameObject chip = Instantiate(prefab,spawnPoint.position, Quaternion.identity);
+        spawnedChips.Add(chip);
     }
 
-    public void ClearAllChips()
+    private void OnClearRequested()
     {
         if (spawnCoroutine != null)
         {
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
         }
-        chipSpawner.ClearChips();
+        foreach (var chip in spawnedChips)
+        {
+            if (chip != null)
+                Destroy(chip);
+        }
+        spawnedChips.Clear();
+    }
+
+    public void StartSpawningWithInterval()
+    {
+        if (spawnCoroutine != null)
+            StopCoroutine (spawnCoroutine);
+
+        spawnCoroutine = StartCoroutine(SpawnRoutine());
     }
 
     private IEnumerator SpawnRoutine()
     {
         for (int i = 0; i < chipsToSpawn; i++)
         {
-            chipSpawner.SpawnChip(chipPrefab, spawnPoint);
+            chipSpawner.RequestSpawn(chipPrefab, spawnPoint);
             yield return new WaitForSeconds(spawnInterval);
         }
         spawnCoroutine = null;

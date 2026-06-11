@@ -1,25 +1,18 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ChipSpawner
 {
-    private List<GameObject> spawnerChips = new();
+    public event Action<GameObject, Transform> ChipSpawnerRequested;
+    public event Action ChipClearRecvested;
 
-    public GameObject SpawnChip(GameObject chipPrefab, Transform spawnPoint)
+    public void RequestSpawn(GameObject prefab,Transform spawnPoint)
     {
-        GameObject chip = UnityEngine.Object.Instantiate(chipPrefab, spawnPoint.position, Quaternion.identity);
-        spawnerChips.Add(chip);
-        return chip;
+        ChipSpawnerRequested?.Invoke(prefab, spawnPoint);
     }
 
-    public void ClearChips()
+    public void RecquestClear()
     {
-        foreach (var chip in spawnerChips)
-        {
-            if (chip != null)
-                UnityEngine.Object.Destroy(chip);
-        }
-
-        spawnerChips.Clear();
+        ChipClearRecvested?.Invoke();
     }
 }
