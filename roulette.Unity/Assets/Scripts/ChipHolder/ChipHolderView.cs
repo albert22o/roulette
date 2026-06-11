@@ -5,7 +5,7 @@ using Zenject;
 public class ChipHolderView : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private ChipSlotView[] slotViews;
+    [SerializeField] public ChipSlotView[] SlotViews { get; private set; }
 
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
@@ -37,6 +37,7 @@ public class ChipHolderView : MonoBehaviour
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;
+        chipHolder.ChipAnimated += OnChipAnimated;
 
         InitSlots();
         SetupInput();
@@ -60,8 +61,8 @@ public class ChipHolderView : MonoBehaviour
 
     private void InitSlots()
     {
-        for (int i = 0; i < slotViews.Length; i++)
-            slotViews[i].Init(i, slotViews[i].transform.position);
+        for (int i = 0; i < SlotViews.Length; i++)
+            SlotViews[i].Init(i, SlotViews[i].transform.position);
     }
 
     private void SetupInput()
@@ -131,29 +132,29 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipAdded(int slotIndex, Chip chip)
     {
         var chipObject = Instantiate(chip.ChipData.Prefab);
-        slotViews[slotIndex].PlaceChip(chipObject);
+        SlotViews[slotIndex].PlaceChip(chipObject);
     }
 
     private void OnChipRemoved(int slotIndex)
     {
-        slotViews[slotIndex].ClearChip();
+        SlotViews[slotIndex].ClearChip();
     }
 
     private void OnChipsSwapped(int indexA, int indexB)
     {
-        var chipA = slotViews[indexA].ChipObject;
-        var chipB = slotViews[indexB].ChipObject;
+        var chipA = SlotViews[indexA].ChipObject;
+        var chipB = SlotViews[indexB].ChipObject;
 
         chipA.transform.SetParent(null);
         chipB.transform.SetParent(null);
 
-        slotViews[indexA].PlaceChip(chipB);
-        slotViews[indexB].PlaceChip(chipA);
+        SlotViews[indexA].PlaceChip(chipB);
+        SlotViews[indexB].PlaceChip(chipA);
     }
 
-    public ChipSlotView[] GetChips()
+    private void OnChipAnimated(int index)
     {
-        return slotViews;
+        SlotViews[index].PlayAnimation();
     }
 
     private ChipSlotView RaycastSlot()

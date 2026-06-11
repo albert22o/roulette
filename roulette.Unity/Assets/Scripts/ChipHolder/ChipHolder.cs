@@ -5,6 +5,7 @@ public class ChipHolder
     public event Action<int, Chip> ChipAdded;       
     public event Action<int> ChipRemoved;           
     public event Action<int, int> ChipsSwapped;
+    public event Action<int> ChipAnimated;
     public int Capacity { get; }
 
     private readonly Chip[] chips;
@@ -54,15 +55,15 @@ public class ChipHolder
         ChipsSwapped?.Invoke(indexA, indexB);
     }
 
-    private void OnStateChanged(RoundStateManager.RoundState newState)
-    {
-        isActive = newState == RoundStateManager.RoundState.PlacingBets;
-    }
-
     public void RevertAll()
     {
         for (int i = chips.Length - 1; i >= 0; i--)
             chips[i]?.Revert();
+    }
+
+    private void OnStateChanged(RoundStateManager.RoundState newState)
+    {
+        isActive = newState == RoundStateManager.RoundState.PlacingBets;
     }
 
     private void ApplyAll()
@@ -74,6 +75,8 @@ public class ChipHolder
     public void ApplyByIndex(int index)
     {
         chips[index]?.Apply();
+        ChipAnimated?.Invoke(index);
+        
     }
 
     private int FindFreeSlot()

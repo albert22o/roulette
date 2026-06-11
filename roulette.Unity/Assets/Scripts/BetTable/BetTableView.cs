@@ -15,7 +15,6 @@ class BetTableView : MonoBehaviour
     [SerializeField] TextMeshPro generalMultiplierText;
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
-    [SerializeField] ChipHolderView chipHolderView;
 
     [SerializeField] SpriteRenderer firstDozenSprite;
     [SerializeField] SpriteRenderer secondDozenSprite;
@@ -151,12 +150,11 @@ class BetTableView : MonoBehaviour
 
                 yield return new WaitForSeconds(timeBetweenHighlights);
 
-                foreach (var chip in chipHolderView.GetChips())
+                foreach (var chip in chipHolderView.SlotViews)
                 {
                     if (chip.ChipObject == null)
                         continue;
 
-                    chip.PlayAnimation();
                     chipHolder.ApplyByIndex(chip.SlotIndex);
                     DisplayMaxWinningMultiplier(hitInfo, betInfo);
 
