@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ce2a958c33492419f8f9fbfc6a91e8, type: 3}
-  m_Name: DozenChipData
+  m_Script: {fileID: 11500000, guid: f6066436ff2ae1540a002d5f4c12fbbc, type: 3}
+  m_Name: Greater_Chip
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 573473156636019110, guid: 55c244452c2ebea47aa0377220453297, type: 3}
-  DozenType: 1
-  ModifyAmount: 4
+  Prefab: {fileID: 0}
+  MinNumber: 1
+  MaxNumber: 36
+  BonusAmount: 1

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c6dbc4db4c39034abaed34c2ee168c8, type: 3}
-  m_Name: BlackChip
+  m_Name: Black_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 573473156636019110, guid: 55c244452c2ebea47aa0377220453297, type: 3}
   Color: Black
