@@ -150,12 +150,9 @@ class BetTableView : MonoBehaviour
 
                 yield return new WaitForSeconds(timeBetweenHighlights);
 
-                foreach (var chip in chipHolderView.SlotViews)
+                for (int i = 0; i < chipHolder.Сhips.Length; i++)
                 {
-                    if (chip.ChipObject == null)
-                        continue;
-
-                    chipHolder.ApplyByIndex(chip.SlotIndex);
+                    chipHolder.ApplyByIndex(i);
                     DisplayMaxWinningMultiplier(hitInfo, betInfo);
 
                     yield return new WaitForSeconds(timeBetweenChipAnimations);

@@ -5,7 +5,7 @@ using Zenject;
 public class ChipHolderView : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] public ChipSlotView[] SlotViews { get; private set; }
+    [SerializeField] private ChipSlotView[] slotViews;
 
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
@@ -61,8 +61,8 @@ public class ChipHolderView : MonoBehaviour
 
     private void InitSlots()
     {
-        for (int i = 0; i < SlotViews.Length; i++)
-            SlotViews[i].Init(i, SlotViews[i].transform.position);
+        for (int i = 0; i < slotViews.Length; i++)
+            slotViews[i].Init(i, slotViews[i].transform.position);
     }
 
     private void SetupInput()
@@ -132,29 +132,29 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipAdded(int slotIndex, Chip chip)
     {
         var chipObject = Instantiate(chip.ChipData.Prefab);
-        SlotViews[slotIndex].PlaceChip(chipObject);
+        slotViews[slotIndex].PlaceChip(chipObject);
     }
 
     private void OnChipRemoved(int slotIndex)
     {
-        SlotViews[slotIndex].ClearChip();
+        slotViews[slotIndex].ClearChip();
     }
 
     private void OnChipsSwapped(int indexA, int indexB)
     {
-        var chipA = SlotViews[indexA].ChipObject;
-        var chipB = SlotViews[indexB].ChipObject;
+        var chipA = slotViews[indexA].ChipObject;
+        var chipB = slotViews[indexB].ChipObject;
 
         chipA.transform.SetParent(null);
         chipB.transform.SetParent(null);
 
-        SlotViews[indexA].PlaceChip(chipB);
-        SlotViews[indexB].PlaceChip(chipA);
+        slotViews[indexA].PlaceChip(chipB);
+        slotViews[indexB].PlaceChip(chipA);
     }
 
     private void OnChipAnimated(int index)
     {
-        SlotViews[index].PlayAnimation();
+        slotViews[index].PlayAnimation();
     }
 
     private ChipSlotView RaycastSlot()

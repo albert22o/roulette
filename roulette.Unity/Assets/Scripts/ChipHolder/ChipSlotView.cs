@@ -45,6 +45,6 @@ public class ChipSlotView : MonoBehaviour
 
     public void PlayAnimation()
     {
-        ChipObject.GetComponent<Animator>().SetTrigger("start");
+        ChipObject?.GetComponent<Animator>().SetTrigger("start");
     }
 }

@@ -8,13 +8,13 @@ public class ChipHolder
     public event Action<int> ChipAnimated;
     public int Capacity { get; }
 
-    private readonly Chip[] chips;
+    public Chip[] Сhips { get; private set; }
     private bool isActive = false;
     private readonly ChipFactory chipFactory;
 
     public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, int capacity = 5)
     {
-        chips = new Chip[capacity];
+        Сhips = new Chip[capacity];
         roundStateManager.StateChanged += OnStateChanged;
         Capacity = capacity; 
         this.chipFactory = chipFactory;
@@ -26,18 +26,18 @@ public class ChipHolder
         if (freeIndex == -1)
             return;
 
-        chips[freeIndex] = chipFactory.Create(chipData);
+        Сhips[freeIndex] = chipFactory.Create(chipData);
 
-        ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
+        ChipAdded?.Invoke(freeIndex, Сhips[freeIndex]);
     }
 
     public void RemoveChip(int index)
     {
-        if (!IsValidIndex(index) || chips[index] == null)
+        if (!IsValidIndex(index) || Сhips[index] == null)
             return;
 
-        chips[index].Revert();
-        chips[index] = null;
+        Сhips[index].Revert();
+        Сhips[index] = null;
 
         ChipRemoved?.Invoke(index);
     }
@@ -50,15 +50,15 @@ public class ChipHolder
         if (indexA == indexB)
             return;
 
-        (chips[indexA], chips[indexB]) = (chips[indexB], chips[indexA]);
+        (Сhips[indexA], Сhips[indexB]) = (Сhips[indexB], Сhips[indexA]);
 
         ChipsSwapped?.Invoke(indexA, indexB);
     }
 
     public void RevertAll()
     {
-        for (int i = chips.Length - 1; i >= 0; i--)
-            chips[i]?.Revert();
+        for (int i = Сhips.Length - 1; i >= 0; i--)
+            Сhips[i]?.Revert();
     }
 
     private void OnStateChanged(RoundStateManager.RoundState newState)
@@ -68,24 +68,24 @@ public class ChipHolder
 
     private void ApplyAll()
     {
-        for (int i = 0; i < chips.Length; i++)
-            chips[i]?.Apply();
+        for (int i = 0; i < Сhips.Length; i++)
+            Сhips[i]?.Apply();
     }
 
     public void ApplyByIndex(int index)
     {
-        chips[index]?.Apply();
+        Сhips[index]?.Apply();
         ChipAnimated?.Invoke(index);
         
     }
 
     private int FindFreeSlot()
     {
-        for (int i = 0; i < chips.Length; i++)
-            if (chips[i] == null) return i;
+        for (int i = 0; i < Сhips.Length; i++)
+            if (Сhips[i] == null) return i;
         return -1;
     }
 
     private bool IsValidIndex(int index) =>
-        index >= 0 && index < chips.Length;
+        index >= 0 && index < Сhips.Length;
 }
