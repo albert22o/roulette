@@ -11,11 +11,13 @@ public class XChip : Chip
 
     public override void Apply()
     {
-        betCalculator.ModifyFieldNumberMultiplier(0, 1);
+        for (int i = 0; i <= 36; i++)
+            betCalculator.ModifyFieldNumberMultiplier(i, 1);
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyFieldNumberMultiplier(0, -1);
+        for (int i = 0; i <= 36; i++)
+            betCalculator.ModifyFieldNumberMultiplier(i, -1);
     }
 }

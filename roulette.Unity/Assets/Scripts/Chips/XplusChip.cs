@@ -10,12 +10,14 @@ public class XplusChip : Chip
 
     public override void Apply()
     {
-        betCalculator.ModifyFieldNumberMultiplier(0, 2);
+        for (int i = 0; i <= 36; i++)
+            betCalculator.ModifyFieldNumberMultiplier(i, 2);
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyFieldNumberMultiplier(0, -2);
+        for (int i = 0; i <= 36; i++)
+            betCalculator.ModifyFieldNumberMultiplier(i, -2);
     }
 }
     
