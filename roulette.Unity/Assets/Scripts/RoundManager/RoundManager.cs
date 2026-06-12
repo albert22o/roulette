@@ -73,9 +73,10 @@ public class RoundManager
     private readonly RoundStateManager roundStateManager;
     private readonly TableConfig tableConfig;
     private readonly BetCalculator betCalculator;
+    private readonly ChipHolder chipHolder;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
-        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator)
+        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator, ChipHolder chipHolder)
     {
         this.rouletteWheel = rouletteWheel;
 
@@ -84,6 +85,7 @@ public class RoundManager
         this.roundStateManager = roundStateManager;
         this.tableConfig = tableConfig;
         this.progressionManager = progressionManager;
+        this.chipHolder = chipHolder;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -156,6 +158,7 @@ public class RoundManager
         else if (betCount <= 0)
             roundStateManager.ChangeState(RoundState.Lose);
 
+        chipHolder.RevertAll();
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }

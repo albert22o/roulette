@@ -13,7 +13,8 @@ class BetTableView : MonoBehaviour
     [SerializeField] TextMeshPro betText;
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] TextMeshPro generalMultiplierText;
-    [SerializeField] float timeBetweenButtonHighlights;
+    [SerializeField] float timeBetweenHighlights = 1f;
+    [SerializeField] float timeBetweenChipAnimations = 0.5f;
 
     [SerializeField] SpriteRenderer firstDozenSprite;
     [SerializeField] SpriteRenderer secondDozenSprite;
@@ -30,18 +31,20 @@ class BetTableView : MonoBehaviour
     private TableConfig tableConfig;
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
+    private ChipHolder chipHolder;
     private float generalMultiplier;
     private int betSum;
     private Color baseBottomSectionColor;
 
     [Inject]
-    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator, RoundStateManager roundStateManager)
+    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
+        RoundStateManager roundStateManager, ChipHolder chipHolder)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
-        betCalculator.HighlightButtons += OnHighlightButton;
         this.roundStateManager = roundStateManager;
+        this.chipHolder = chipHolder;
     }
 
     public void Start()
@@ -63,12 +66,25 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
+        betCalculator.HighlightButtons += OnHighlightButton;
 
         foreach (var pocket in tableConfig.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (betTable != null && betCalculator != null && tableConfig != null)
+        {
+            betCalculator.HighlightButtons -= OnHighlightButton;
+            betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
+            tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
+            tableConfig.PocketColorChanged -= OnPocketColorChanged;
+            betTable.ChangeAvailableSum -= OnChangeAvailableSum;
         }
     }
 
@@ -92,12 +108,12 @@ class BetTableView : MonoBehaviour
         betButtons[index].Amount = amount;
     }
 
-    private void OnHighlightButton(HitInfo hitInfo, int reward)
+    private void OnHighlightButton(HitInfo hitInfo)
     {
-        StartCoroutine(ResultDisplaySequence(hitInfo, reward));
+        StartCoroutine(ResultDisplaySequence(hitInfo));
     }
 
-    public IEnumerator ResultDisplaySequence(HitInfo hitInfo, int reward)
+    public IEnumerator ResultDisplaySequence(HitInfo hitInfo)
     {
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         baseBottomSectionColor = firstDozenSprite.color;
@@ -107,17 +123,44 @@ class BetTableView : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        ProcessButtonHighlightByColor(hitInfo);
+        foreach ((var betInfo, var _) in betTable.NotNullBetAmounts)
+        {
+            if (hitInfo.FieldColor == betInfo.FieldColor || hitInfo.Dozen == betInfo.Dozen)
+            {
+                ProcessButtonHighlightByColor(hitInfo);
+                ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
+                DisplayColorMultiplier();
 
-        yield return new WaitForSeconds(timeBetweenButtonHighlights);
+                if (hitInfo.Dozen == betInfo.Dozen)
+                {
+                    yield return new WaitForSeconds(timeBetweenHighlights);
 
-        ProcessButtonHighlightByDozen(hitInfo);
+                    ProcessButtonHighlightByDozen(hitInfo);
+                    ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
+                    DisplayDozenMultiplier();
 
-        yield return new WaitForSeconds(timeBetweenButtonHighlights);
-        
-        ProcessButtonHighlightByNumber(hitInfo);
+                    if (hitInfo.FieldNumber == betInfo.FieldNumber)
+                    {
+                        yield return new WaitForSeconds(timeBetweenHighlights);
 
-        yield return new WaitForSeconds(2f);
+                        ProcessButtonHighlightByNumber(hitInfo);
+                        DisplayNumberMultiplier(betInfo);
+                    }
+                }
+
+                yield return new WaitForSeconds(timeBetweenHighlights);
+
+                for (int i = 0; i < chipHolder.Сhips.Length; i++)
+                {
+                    chipHolder.ApplyByIndex(i);
+                    DisplayMaxWinningMultiplier(hitInfo, betInfo);
+
+                    yield return new WaitForSeconds(timeBetweenChipAnimations);
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(3f);
 
         foreach (BetButton button in betButtons)
             button.Highlight(false, BetButton.HighlightPhase.None);
@@ -128,82 +171,34 @@ class BetTableView : MonoBehaviour
         betSum = 0;
         betText.text = "";
 
-        betCalculator.GetRewardAction();
+        betCalculator.GetRewardAction(hitInfo);
         betTable.ClearBets();
     }
 
     private void ProcessButtonHighlightByColor(HitInfo hitInfo)
     {
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+        foreach (BetButton button in betButtons)
         {
-            foreach (BetButton button in betButtons)
-            {
-                //Если цвет ставки совпадает с выпавшим
-                if (hitInfo.FieldColor == betInfo.FieldColor)
-                {
-                    //Кнопка этого цвета подсвечивается
-                    if (button.Color == betInfo.FieldColor)
-                        button.Highlight(true, BetButton.HighlightPhase.Color);
-                }
-                //Если цвет ставки не совпадает
-                else
-                {
-                    if (button.Color == betInfo.FieldColor)
-                        button.Lowlight(true);
-                }
-            }
-            ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
-            DisplayColorMultiplier(hitInfo, betInfo);
+            if (button.Color == hitInfo.FieldColor)
+                button.Highlight(true, BetButton.HighlightPhase.Color);
         }
     }
 
     private void ProcessButtonHighlightByDozen(HitInfo hitInfo)
     {
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+        foreach (BetButton button in betButtons)
         {
-            foreach (BetButton button in betButtons)
-            {
-                //Если дюжина ставки совпадает с выпавшей
-                if (hitInfo.Dozen == betInfo.Dozen)
-                {
-                    //Каждая кнопка этой дюжины подсвечивается
-                    if (button.Dozen == betInfo.Dozen)
-                        button.Highlight(true, BetButton.HighlightPhase.Dozen);
-                }
-                //Если дюжина ставки не совпадает
-                else
-                {
-                    //Затемняется
-                    if (button.Dozen == hitInfo.Dozen)
-                        button.Lowlight(true);
-                }
-            }
-            ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
-            DisplayDozenMultiplier(hitInfo, betInfo);
+            if (button.Dozen == hitInfo.Dozen)
+                button.Highlight(true, BetButton.HighlightPhase.Dozen);
         }
     }
 
     private void ProcessButtonHighlightByNumber(HitInfo hitInfo)
     {
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+        foreach (BetButton button in betButtons)
         {
-            foreach (BetButton button in betButtons)
-            {
-                if (hitInfo.FieldNumber == betInfo.FieldNumber)
-                {
-                    //Кнопка этой цифры подсвечивается
-                    if (button.FieldNum == betInfo.FieldNumber)
-                        button.Highlight(true, BetButton.HighlightPhase.Number);
-                }
-                //Если цифра ставки не совпадает
-                else
-                {
-                    //Затемняется
-                    if (button.FieldNum == hitInfo.FieldNumber)
-                        button.Lowlight(true);
-                }
-            }
-            DisplayNumberMultiplier(hitInfo, betInfo);
+            if (button.FieldNum == hitInfo.FieldNumber)
+                button.Highlight(true, BetButton.HighlightPhase.Number);
         }
     }
 
@@ -219,10 +214,7 @@ class BetTableView : MonoBehaviour
                 _ => null
             };
 
-            if (hitInfo.Dozen == betInfo.Dozen)
-                spriteToColor.color = dozenHighlight;
-            else
-                spriteToColor.color = lowlight;
+            spriteToColor.color = dozenHighlight;
         }
     }
 
@@ -234,14 +226,7 @@ class BetTableView : MonoBehaviour
                 ? spriteToColor = redNumberSprite
                 : spriteToColor = blackNumberSprite;
 
-            if (hitInfo.FieldColor == betInfo.FieldColor)
-            {
-                spriteToColor.color = colorHighlight;
-            }
-            else
-            {
-                spriteToColor.color = lowlight;
-            }
+            spriteToColor.color = colorHighlight;
         }
     }
 
@@ -254,33 +239,43 @@ class BetTableView : MonoBehaviour
         blackNumberSprite.color = baseBottomSectionColor;
     }
 
-    private void DisplayColorMultiplier(HitInfo hitInfo, BetInfo betInfo)
+    private void DisplayColorMultiplier()
+    {
+        generalMultiplier = betCalculator.ColorMultiplier;
+        generalMultiplierText.text = "x" + generalMultiplier.ToString();
+    }
+
+    private void DisplayDozenMultiplier()
+    {
+        generalMultiplier = betCalculator.DozenMultiplier;
+        generalMultiplierText.text = "x" + generalMultiplier.ToString();
+    }
+
+    private void DisplayNumberMultiplier(BetInfo betInfo)
+    {
+        generalMultiplier = betInfo.FieldNumber == 0
+            ? betCalculator.ZeroMultiplier
+            : betCalculator.NumMultiplier;
+        generalMultiplierText.text = "x" + generalMultiplier.ToString();
+    }
+
+    private void DisplayMaxWinningMultiplier(HitInfo hitInfo, BetInfo betInfo)
     {
         if (hitInfo.FieldColor == betInfo.FieldColor)
         {
-            generalMultiplier = Mathf.Max(betCalculator.GetEffectiveColorMultiplier(betInfo.FieldColor), generalMultiplier);
-            generalMultiplierText.text = "x" + generalMultiplier.ToString();
+            generalMultiplier = Mathf.Max(betCalculator.GetEffectiveColorMultiplier(hitInfo.FieldColor), generalMultiplier);
+            if (hitInfo.Dozen == betInfo.Dozen)
+            {
+                generalMultiplier = Mathf.Max(betCalculator.GetEffectiveDozenMultiplier(hitInfo.Dozen), generalMultiplier);
+                if (hitInfo.FieldNumber == betInfo.FieldNumber)
+                {
+                    generalMultiplier = betInfo.FieldNumber == 0
+                        ? Mathf.Max(betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier), generalMultiplier)
+                        : Mathf.Max(betCalculator.GetFieldMultiplier(hitInfo.FieldNumber, betCalculator.NumMultiplier), generalMultiplier);
+                }
+            }
         }
-    }
 
-    private void DisplayDozenMultiplier(HitInfo hitInfo, BetInfo betInfo)
-    {
-        if (hitInfo.Dozen == betInfo.Dozen)
-        {
-            generalMultiplier = Mathf.Max(betCalculator.GetEffectiveDozenMultiplier(betInfo.Dozen), generalMultiplier);
-            generalMultiplierText.text = "x" + generalMultiplier.ToString();
-        }
-    }
-
-    private void DisplayNumberMultiplier(HitInfo hitInfo, BetInfo betInfo)
-    {
-        if (hitInfo.FieldNumber == betInfo.FieldNumber)
-        {
-            generalMultiplier = Mathf.Max(betInfo.FieldNumber == 0
-                ? betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier)
-                : betCalculator.GetFieldMultiplier(hitInfo.FieldNumber, betCalculator.NumMultiplier),
-                generalMultiplier);
-            generalMultiplierText.text = "x" + generalMultiplier.ToString();
-        }
+        generalMultiplierText.text = "x" + generalMultiplier.ToString();
     }
 }
