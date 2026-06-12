@@ -931,7 +931,8 @@ MonoBehaviour:
   - {fileID: 2377068897417237724}
   - {fileID: 5295750392696956918}
   generalMultiplierText: {fileID: 2561205482209066509}
-  timeBetweenButtonHighlights: 0
+  timeBetweenHighlights: 1
+  timeBetweenChipAnimations: 0.5
   firstDozenSprite: {fileID: 922154701419371194}
   secondDozenSprite: {fileID: 743462944292902941}
   thirdDozenSprite: {fileID: 6759021856524701890}
