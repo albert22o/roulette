@@ -12,13 +12,18 @@ public class GameInstaller : MonoInstaller
         // Менеджеры состояний
         Container.Bind<GameStateManager>().AsSingle();
         Container.Bind<RoundStateManager>().AsSingle();
-
+        // Приколюхи Юнити
         Container.Bind<PlayerInput>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
         // Конфиги
         Container.BindInstance(roundsConfig).AsSingle();
         Container.BindInstance(inventoryConfig).AsSingle();
         Container.Bind<TableConfig>().AsSingle();
+        // Валюты
+        Container.Bind<GoldenChips>().AsSingle();
+        Container.Bind<BossChips>().AsSingle();
+        Container.Bind<Tickets>().AsSingle();
+        Container.Bind<Money>().AsSingle();
         
         Container.Bind<IRouletteWheel>()
             .To<RouletteWheel>()
@@ -38,13 +43,8 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<RoundManager>().AsSingle();
 
+        Container.Bind<RewardCalculator>().AsSingle().NonLazy();
+
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
-
-        Container.Bind<GoldenChips>().AsSingle();
-        Container.Bind<BossChips>().AsSingle();
-        Container.Bind<Tickets>().AsSingle();
-        Container.Bind<Money>().AsSingle();
-
-
     }
 }
