@@ -3,7 +3,7 @@ using UnityEngine;
 public class ItemPlace : MonoBehaviour
 {
     private ItemData item;
-    private ItemVisual spawnedItem;
+    private GameObject spawnedItem;
 
     public ItemData Item => item;
     
@@ -20,7 +20,6 @@ public class ItemPlace : MonoBehaviour
         {
             spawnedItem = Instantiate(item.Prefab, transform);
             spawnedItem.transform.position = transform.position;
-            spawnedItem.SetMaterial(item.VisualComponent.Material);
             this.item = item;
         }
     }

@@ -5,17 +5,20 @@ using Zenject;
 public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private Shop shop;
+    [SerializeField] private ShopChipPlacesController chipPlacesController;
     [SerializeField] private int initCost = 2;
     [SerializeField] private int costDelta;
+    [SerializeField] private ButtonAnimation3D buttonAnimation;
 
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
 
     private int cost;
-    private Inventory inventory;
+    private Money money;
+    private GoldenChips goldenChips;
 
-    public bool IsInteractable => shop.CanReroll;
+    public bool IsInteractable => chipPlacesController.CheckRerollAvailable();
     public int Cost
     {
         get => cost;
@@ -28,9 +31,10 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(Money money, GoldenChips goldenChips)
     {
-        this.inventory = inventory;
+        this.goldenChips = goldenChips;
+        this.money = money;
     }
 
     public void ResetCost()
@@ -40,11 +44,12 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
 
     public void Clicked()
     {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= Cost)
+        buttonAnimation.Press();
+        if (goldenChips.Amount >= Cost)
         {
-            inventory.RemoveCurrency(CurrencyType.GoldenChips, Cost);
+            goldenChips.Remove(Cost);
             Cost += costDelta;
-            shop.Reroll();
+            chipPlacesController.Reroll();
         }
     }
 

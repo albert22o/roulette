@@ -9,6 +9,7 @@ public class RoundEntryZone : MonoBehaviour
     private bool playerInside;
     private GameStateManager gameStateManager;
     private PlayerInput playerInput;
+    [SerializeField] private GameStateManager.GameState state;
 
     [Inject]
     public void Construct(GameStateManager gameStateManager, PlayerInput playerInput)
@@ -33,7 +34,7 @@ public class RoundEntryZone : MonoBehaviour
     {
         if (!active) return;
         if (!playerInside) return;
-        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
+        gameStateManager.ChangeGameState(state);
     }
 
     private void OnTriggerEnter(Collider other)

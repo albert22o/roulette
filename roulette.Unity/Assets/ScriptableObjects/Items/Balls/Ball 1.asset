@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72c02c1ee8d53e47a7aa0b19b674341, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c55950d5c3d3154b82f22fdea69f96f, type: 3}
   m_Name: Ball 1
   m_EditorClassIdentifier: 
-  nameKey: 
-  descriptionKey: 
-  cost: 0
-  type: 0
-  prefab: {fileID: 7977642736402533640, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  itemName: TestBall1
+  description: wrgerhehehrhr
+  prefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
   visualComponent:
-    <Material>k__BackingField: {fileID: 2100000, guid: 7b5e884f1329d1c498d18ac6a0056a4b, type: 2}
+    <Material>k__BackingField: {fileID: 0}

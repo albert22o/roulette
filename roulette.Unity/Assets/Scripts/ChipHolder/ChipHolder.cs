@@ -42,6 +42,23 @@ public class ChipHolder
         ChipRemoved?.Invoke(index);
     }
 
+    public void RemoveChip(ChipData data)
+    {
+        if (data == null)
+            return;
+
+        for (int i = 0; i < Сhips.Length; i++)
+        {
+            if (Сhips[i] != null && Сhips[i].ChipData == data)
+            {
+                Сhips[i].Revert();
+                Сhips[i] = null;
+                ChipRemoved?.Invoke(i);
+                return;
+            }
+        }
+    }
+
     public void SwapChips(int indexA, int indexB)
     {
         if (!isActive || !IsValidIndex(indexA) || !IsValidIndex(indexB))

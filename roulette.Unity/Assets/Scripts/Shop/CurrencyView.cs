@@ -1,33 +1,31 @@
-using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class CurrencyView : MonoBehaviour
+public class CurrencyView<T> : MonoBehaviour where T : CurrencyResource
 {
     [SerializeField] private DrumNumberDisplay display;
-    [SerializeField] private CurrencyType currencyType;
-    private Inventory inventory;
+
+    private T currency;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(T currency)
     {
-        this.inventory = inventory;
+        this.currency = currency;
     }
 
     private void OnEnable()
     {
-        inventory.CurrencyChanged += UpdateText;
-        UpdateText(currencyType, inventory.GetCurrency(currencyType));
+        currency.AmountChanged += UpdateDisplay;
+        UpdateDisplay(currency.Amount);
     }
 
     private void OnDisable()
     {
-        inventory.CurrencyChanged -= UpdateText;
+        currency.AmountChanged -= UpdateDisplay;
     }
 
-    private void UpdateText(CurrencyType type, int amount)
+    private void UpdateDisplay(int amount)
     {
-        if (currencyType == type)
-            display.SetNumber(amount);
+        display.SetNumber(amount);
     }
 }

@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:roulette.Unity/Assets/Art/Roulette/M_Roulette_wood.mat.meta
 guid: 8f664052912bd144a877ab21f6687cf1
 NativeFormatImporter:
+========
+guid: 3c76dac67b1e8df4bbb18bcdd9af74ab
+DefaultImporter:
+>>>>>>>> chip-logic-to-shop:roulette.Unity/Assets/Scenes/MainSceneWithShop.unity.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 

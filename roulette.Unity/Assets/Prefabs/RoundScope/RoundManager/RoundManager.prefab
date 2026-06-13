@@ -673,7 +673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.039, y: 0.866}
+  m_AnchoredPosition: {x: 0.731, y: 0.866}
   m_SizeDelta: {x: 0.6, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1149097321495753563
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fda6912114ee34b9e04ce68383b4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quoteText: {fileID: 8754011166459521976}
+  quoteText: {fileID: 2541181235058432482}
   betCountText: {fileID: 8754011166459521976}
   rerollCountText: {fileID: 2862224832437879025}
   spinButton: {fileID: 3126827958378859951}

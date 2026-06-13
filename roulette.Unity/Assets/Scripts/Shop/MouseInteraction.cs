@@ -9,6 +9,11 @@ public class MouseInteraction : MonoBehaviour
     private GameObject hitObject;
     private GameObject clickedObject;
 
+    private void OnDisable()
+    {
+        HandleNoIntersection();
+    }
+
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());

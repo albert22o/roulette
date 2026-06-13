@@ -9,16 +9,14 @@ public class BallResults
 
     public event Action<HitInfo> BallSelected;
 
-    private readonly Inventory inventory;
     private readonly RoundStateManager roundStateManager;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
     private HitInfo tempBall;
 
-    public BallResults(IRouletteWheel rouletteWheel, Inventory inventory, RoundStateManager roundStateManager)
+    public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager)
     {
         rouletteWheel.AllBallsStopped += AddBalls;
-        this.inventory = inventory;
         this.roundStateManager = roundStateManager;
         this.roundStateManager.StateChanged += OnStateChanged;
     }
