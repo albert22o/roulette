@@ -1,12 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
 public class Billboard : MonoBehaviour
 {
     private Camera cam;
 
-    void Start()
+    [Inject]
+    public void Constuct(Camera camera)
     {
-        cam = Camera.main;
+        cam = camera;
     }
 
     void LateUpdate()

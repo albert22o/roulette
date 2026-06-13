@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class MouseInteraction : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class MouseInteraction : MonoBehaviour
 
     private GameObject hitObject;
     private GameObject clickedObject;
+    private Camera cam;
+
+    [Inject]
+    public void Construct(Camera camera)
+    {
+        cam = camera;
+    }
 
     private void OnDisable()
     {
@@ -16,7 +24,7 @@ public class MouseInteraction : MonoBehaviour
 
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, mask))
         {
             if (hit.collider.gameObject.TryGetComponent(out IMouseInteractable interactable)
