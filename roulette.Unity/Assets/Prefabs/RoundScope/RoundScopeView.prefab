@@ -122,13 +122,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
+    - target: {fileID: 1932851546120740674, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932851546120740674, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932851546120740674, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3582085522559153225, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.9069611
       objectReference: {fileID: 0}
     - target: {fileID: 3582085522559153225, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.007
       objectReference: {fileID: 0}
     - target: {fileID: 3582085522559153225, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -165,6 +177,18 @@ PrefabInstance:
     - target: {fileID: 5769935715830859327, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
       propertyPath: m_Name
       value: BetTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931191030884732115, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931191030884732115, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931191030884732115, guid: d1cfb53eca3edf14e9520f5a986d67dd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
