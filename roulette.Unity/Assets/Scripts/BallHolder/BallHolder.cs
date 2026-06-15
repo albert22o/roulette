@@ -27,10 +27,8 @@ public class BallHolder
             Material = dummyMaterial
         };
 
-        var ballData = new SimpleBallInfoData()
-        {
-            VisualComponent = visualComponent
-        };
+        var ballData = ScriptableObject.CreateInstance<SimpleBallInfoData>();
+        ballData.VisualComponent = visualComponent;
         balls.Add(ballFactory.Create(ballData));
         balls.Add(ballFactory.Create(ballData));
 

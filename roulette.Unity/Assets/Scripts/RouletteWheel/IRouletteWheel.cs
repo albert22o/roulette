@@ -35,8 +35,17 @@ public interface IRouletteWheel
     public HitInfo[] GetHitInfo();
 
     /// <summary>
-    /// Устанавливает цвет поля
+    /// Вызывается при наведении на шар
     /// </summary>
-    /// <param name="fieldPosition">Фактическая позиция поля</param>
-    /// <param name="color">Цвет поля</param>
+    public event Action<string> BallHover;
+
+    /// <summary>
+    /// Вызывается при снятии наведения на шар
+    /// </summary>
+    public event Action<string> BallUnHover;
+
+    /// <summary>
+    /// Вызывается при клике на шар
+    /// </summary>
+    public event Action<string> BallClicked;
 }
