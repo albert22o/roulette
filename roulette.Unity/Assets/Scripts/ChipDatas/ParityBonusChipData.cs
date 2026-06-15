@@ -9,7 +9,6 @@ public enum ParityType
 [CreateAssetMenu(fileName = "ParityBonusChipData", menuName = "Chips/ParityBonusChipData")]
 public class ParityBonusChipData : ChipData
 {
-    [Header ("Настройки")]
     public ParityType Parity;
 
     public int BonusAmount = 1;
