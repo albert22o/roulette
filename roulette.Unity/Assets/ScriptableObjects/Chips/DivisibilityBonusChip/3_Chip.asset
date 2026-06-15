@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 3_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Divisior: 0
-  BonusAmount: 1
+  Divisior: 3
+  BonusAmount: 2

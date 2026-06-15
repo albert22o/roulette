@@ -9,11 +9,9 @@ public enum ParityType
 [CreateAssetMenu(fileName = "ParityBonusChipData", menuName = "Chips/ParityBonusChipData")]
 public class ParityBonusChipData : ChipData
 {
-    [Header("Settings")]
-    [Tooltip("Тип четности")]
+    [Header ("Настройки")]
     public ParityType Parity;
 
-    [Tooltip("Сколько добавить к множителю")]
     public int BonusAmount = 1;
 
     public override Chip CreateChip(ChipDependencies deps)
