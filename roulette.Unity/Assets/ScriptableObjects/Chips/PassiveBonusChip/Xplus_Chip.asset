@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Xplus_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  BonusAmount: 1
+  BonusAmount: 2
+  SecondaryEffect: 0
+  SecondaryAmount: 0

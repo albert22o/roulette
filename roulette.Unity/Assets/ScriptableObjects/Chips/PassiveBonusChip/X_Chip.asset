@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
   BonusAmount: 1
+  SecondaryEffect: 0
+  SecondaryAmount: 0
