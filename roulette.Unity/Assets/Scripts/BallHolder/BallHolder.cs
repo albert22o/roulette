@@ -1,72 +1,69 @@
-using System;
-using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class BallHolder 
 {
     public event Action<int, BallInfo> BallAdded;
     public event Action<int> BallRemoved;
-    public event Action<int, int> BallsSwapped;
+
+    public IReadOnlyCollection<BallInfo> Balls => balls;
 
     public int Capacity { get; }
 
-    private readonly BallInfo[] balls;
-    private bool isActive = false;
-    private readonly RoundStateManager roundStateManager;
+    private readonly List<BallInfo> balls = new();
+    private readonly BallFactory ballFactory;
+    private bool isActive;
 
     [Inject]
-    public BallHolder(RoundStateManager roundStateManager, int capacity = 5)
+    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, int capacity = 5)
     {
-        this.roundStateManager = roundStateManager;
+        this.ballFactory = ballFactory;
+        // Убрать потом
+        var dummyMaterial = new Material(Shader.Find("Standard"));
+        var visualComponent = new VisualComponent()
+        {
+            Material = dummyMaterial
+        };
+
+        var ballData = new SimpleBallInfoData()
+        {
+            VisualComponent = visualComponent
+        };
+        balls.Add(ballFactory.Create(ballData));
+        balls.Add(ballFactory.Create(ballData));
+
         Capacity = capacity;
 
-        balls = new BallInfo[capacity];
-
-        roundStateManager.StateChanged += OnStateChanged;
+        gameStateManager.GameStateChanged += OnStateChanged;
     }
 
-    public void AddBall(BallInfo ballinfo)
+    public void AddBall(BallInfoData ballInfoData)
     {
-        if (!isActive) return;
+        if (!isActive || Capacity == balls.Count) return;
 
-        int freeIndex = FindFreeSlot();
-        if(freeIndex == -1) return;
+        var ballInfo = ballFactory.Create(ballInfoData);
+        balls.Add(ballInfo);
 
-        balls[freeIndex] = ballinfo;
-        BallAdded?.Invoke(freeIndex, ballinfo);
+        BallAdded?.Invoke(balls.Count -1, ballInfo);
     }
 
     public void RemoveBall(int index)
     {
-        if (!IsValidIndex(index) || balls[index] == null)
+        if (!isActive || IsIndexValid(index))
             return;
-        balls[index] = null;
+        balls.RemoveAt(index);
         BallRemoved?.Invoke(index);
     }
-    
-    public void SwapBalls(int indexA, int indexB)
+
+    private bool IsIndexValid(int index)
     {
-        if (!isActive || !IsValidIndex(indexA) || !IsValidIndex(indexB) || indexA == indexB)
-            return;
-        (balls[indexA], balls[indexB]) = (balls[indexB], balls[indexA]);
-        BallsSwapped?.Invoke(indexA, indexB);
+        return index >= 0 && index < balls.Count;
     }
 
-    private void OnStateChanged(RoundStateManager.RoundState newState)
+    private void OnStateChanged(GameStateManager.GameState newState)
     {
-        isActive = newState == RoundStateManager.RoundState.PlacingBets;
+        isActive = newState == GameStateManager.GameState.Shopping;
     }
-
-    private int FindFreeSlot()
-    {
-        for (int i = 0; i < balls.Length; i++)
-        {
-            if (balls[i] == null) return i;
-        }
-        return -1;
-    }
-
-    private bool IsValidIndex(int index) => index >= 0 && index < balls.Length;
-
 }

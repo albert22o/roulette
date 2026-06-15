@@ -41,6 +41,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<ChipFactory>().AsSingle();
         Container.Bind<ChipHolder>().AsSingle();
 
+        Container.Bind<BallFactory>().AsSingle();
+        Container.Bind<BallHolder>().AsSingle();
+
         Container.Bind<RoundManager>().AsSingle();
 
         Container.Bind<RewardCalculator>().AsSingle().NonLazy();

@@ -1,15 +1,35 @@
-using System;
-using UnityEngine;
-[Serializable]
-public class BallInfo
-{
-    public string Name;
-    public object Effect;
+﻿using System;
 
-    public BallInfo(string name, object effect = null)
+public abstract class BallInfo
+{
+    public string BallHash { get; }
+    public BallInfoData BallInfoData { get; }
+
+    public BallInfo(BallInfoData ballInfoData)
     {
-        Name = name;
-        Effect = effect;
+        BallHash = Guid.NewGuid().ToString();
+        BallInfoData = ballInfoData;
     }
-    
+
+    public abstract void OnLanding();
+}
+
+public class SimpleBallInfo : BallInfo
+{
+    public SimpleBallInfo(BallInfoData ballInfoData) : base(ballInfoData)
+    {
+    }
+
+    public override void OnLanding()
+    {
+        
+    }
+}
+
+public class SimpleBallInfoData : BallInfoData
+{
+    public override BallInfo CreateBall(BallDependencies deps)
+    {
+        return new SimpleBallInfo(this);
+    }
 }
