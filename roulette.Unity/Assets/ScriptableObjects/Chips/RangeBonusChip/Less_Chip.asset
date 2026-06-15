@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
   MinNumber: 1
-  MaxNumber: 36
+  MaxNumber: 17
   BonusAmount: 1

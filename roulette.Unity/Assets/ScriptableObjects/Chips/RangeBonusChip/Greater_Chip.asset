@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Greater_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  MinNumber: 1
+  MinNumber: 19
   MaxNumber: 36
   BonusAmount: 1

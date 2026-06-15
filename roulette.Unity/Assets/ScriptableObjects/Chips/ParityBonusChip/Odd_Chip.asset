@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Odd_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Parity: 0
+  Parity: 1
   BonusAmount: 1

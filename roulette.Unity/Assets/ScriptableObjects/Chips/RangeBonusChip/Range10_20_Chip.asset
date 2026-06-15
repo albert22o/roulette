@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Range10_20_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  MinNumber: 1
-  MaxNumber: 36
-  BonusAmount: 1
+  MinNumber: 10
+  MaxNumber: 20
+  BonusAmount: 3
