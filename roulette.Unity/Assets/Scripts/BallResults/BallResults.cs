@@ -31,6 +31,8 @@ public class BallResults
 
     private void OnBallHover(string ballHash)
     {
+        if (!active) return;
+
         BallInfo hoveredBall = ballHolder.Balls.FirstOrDefault(ball => ball.BallHash == ballHash);
         if (hoveredBall == null) return;
         BallInfoData ballData = hoveredBall.BallInfoData;
