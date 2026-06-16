@@ -34,10 +34,8 @@ public class BallResultsView : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (ballResults != null)
-        {
-            ballResults.BallHovered -= ShowInfo;
-            ballResults.BallUnHovered -= HideInfo;
-        }
+        ballResults.BallHovered -= ShowInfo;
+        ballResults.BallUnHovered -= HideInfo;
+        
     }
 }
