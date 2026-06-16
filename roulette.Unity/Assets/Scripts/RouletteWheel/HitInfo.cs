@@ -1,17 +1,19 @@
-п»їpublic class HitInfo
+public class HitInfo
 {
     public DozenType Dozen { get; set; }
     /// <summary>
-    /// РЈРЅРёРєР°Р»СЊРЅС‹Р№ С…РµС€ С€Р°СЂР°, РєРѕС‚РѕСЂС‹Р№ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ РЅР° РїРѕР»Рµ
+    /// Уникальный хеш шара, который остановился на поле
     /// </summary>
     public string BallHash { get; set; }
     public ColorType FieldColor { get; set; }
     /// <summary>
-    /// РќРѕРјРµСЂ РїРѕР»СЏ, РЅР° РєРѕС‚РѕСЂРѕРј РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ С€Р°СЂ
-    /// РњРѕР¶РµС‚ РѕС‚Р»РёС‡Р°С‚СЊСЃСЏ РѕС‚ С„Р°РєС‚РёС‡РµСЃРєРѕР№ РїРѕР·РёС†РёРё РїРѕР»СЏ
+    /// Номер поля, на котором остановился шар
+    /// Может отличаться от фактической позиции поля
     /// </summary>
     public int FieldNumber { get; set; }
     public int FieldIndex { get; set; }
+
+    public BallInfoData BallData { get; set; }
 }
 
 public enum DozenType

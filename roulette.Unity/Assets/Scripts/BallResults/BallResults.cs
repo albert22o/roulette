@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using static RoundStateManager;
 
@@ -6,6 +6,10 @@ public class BallResults
 {
     public event Action<HitInfo> BallSelected;
 
+    public event Action<BallInfoData> BallHovered;
+    public event Action BallUnHovered;
+
+    private readonly IRouletteWheel rouletteWheel1;
     private readonly RoundStateManager roundStateManager;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
@@ -14,8 +18,25 @@ public class BallResults
     {
         rouletteWheel.AllBallsStopped += AddBalls;
         rouletteWheel.BallClicked += SelectBall;
+
+        rouletteWheel.BallHover += OnBallHover;
+        rouletteWheel.BallUnHover += OnBallUnHovered;
+
         this.roundStateManager = roundStateManager;
         this.roundStateManager.StateChanged += OnStateChanged;
+
+    }
+
+    private void OnBallHover (string ballHash)
+    {
+        HitInfo hoveredBall = currentBalls.Find(ball => ball.BallHash == ballHash);
+        if (hoveredBall == null) return;
+        BallHovered?.Invoke(hoveredBall.BallData);
+    }
+
+    private void OnBallUnHovered(string ballHash)
+    {
+        BallUnHovered?.Invoke();
     }
 
     public void SelectBall(string ballhash)
