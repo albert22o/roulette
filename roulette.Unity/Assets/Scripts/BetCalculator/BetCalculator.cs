@@ -6,6 +6,7 @@ public class BetCalculator
 {
     public event Action<int> GetReward;
     public event Action<HitInfo> HighlightButtons;
+    public event Action<int, int, int> CountMoney;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -72,7 +73,7 @@ public class BetCalculator
         HighlightButtons?.Invoke(info);
     }
 
-    private int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
+    public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
         {
@@ -101,12 +102,16 @@ public class BetCalculator
     public int GetEffectiveColorMultiplier(string color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 
-    public void GetRewardAction(HitInfo info)
+    public void GetRewardAction()
+    {
+        GetReward?.Invoke(reward);
+    }
+
+    public void StartMoneyCounting(int bet, int multiplier, HitInfo info)
     {
         reward = 0;
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             reward += GetRewardForBet(betInfo, amount, info);
-
-        GetReward?.Invoke(reward);
+        CountMoney?.Invoke(bet, multiplier, reward);
     }
 }

@@ -16,11 +16,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
 
-    [SerializeField] SpriteRenderer firstDozenSprite;
-    [SerializeField] SpriteRenderer secondDozenSprite;
-    [SerializeField] SpriteRenderer thirdDozenSprite;
-    [SerializeField] SpriteRenderer redNumberSprite;
-    [SerializeField] SpriteRenderer blackNumberSprite;
+    [SerializeField] BottomSectionZone[] bottomSectionZones;
 
     [SerializeField] Color colorHighlight;
     [SerializeField] Color dozenHighlight;
@@ -32,7 +28,7 @@ class BetTableView : MonoBehaviour
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
-    private float generalMultiplier;
+    private int generalMultiplier;
     private int betSum;
     private Color baseBottomSectionColor;
 
@@ -116,7 +112,6 @@ class BetTableView : MonoBehaviour
     public IEnumerator ResultDisplaySequence(HitInfo hitInfo)
     {
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
-        baseBottomSectionColor = firstDozenSprite.color;
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             betSum += amount;
         betText.text = betSum.ToString();
@@ -128,7 +123,7 @@ class BetTableView : MonoBehaviour
             if (hitInfo.FieldColor == betInfo.FieldColor || hitInfo.Dozen == betInfo.Dozen)
             {
                 ProcessButtonHighlightByColor(hitInfo);
-                ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
+                ProcessBottomSectionHighlightByColor(hitInfo);
                 DisplayColorMultiplier();
 
                 if (hitInfo.Dozen == betInfo.Dozen)
@@ -136,7 +131,7 @@ class BetTableView : MonoBehaviour
                     yield return new WaitForSeconds(timeBetweenHighlights);
 
                     ProcessButtonHighlightByDozen(hitInfo);
-                    ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
+                    ProcessBottomSectionHighlightByDozen(hitInfo);
                     DisplayDozenMultiplier();
 
                     if (hitInfo.FieldNumber == betInfo.FieldNumber)
@@ -159,6 +154,7 @@ class BetTableView : MonoBehaviour
                 }
             }
         }
+        betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
 
         yield return new WaitForSeconds(3f);
 
@@ -171,7 +167,7 @@ class BetTableView : MonoBehaviour
         betSum = 0;
         betText.text = "";
 
-        betCalculator.GetRewardAction(hitInfo);
+        betCalculator.GetRewardAction();
         betTable.ClearBets();
     }
 
@@ -202,41 +198,30 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void ProcessBottomSectionHighlightByDozen(HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessBottomSectionHighlightByDozen(HitInfo hitInfo)
     {
-        if (hitInfo.Dozen != DozenType.Zero)
+        foreach (BottomSectionZone bottomSectionZone in bottomSectionZones)
         {
-            SpriteRenderer spriteToColor = hitInfo.Dozen switch
-            {
-                DozenType.First => firstDozenSprite,
-                DozenType.Second => secondDozenSprite,
-                DozenType.Third => thirdDozenSprite,
-                _ => null
-            };
-
-            spriteToColor.color = dozenHighlight;
+            if (bottomSectionZone.Dozen == hitInfo.Dozen)
+                bottomSectionZone.Highlight(true);
         }
     }
 
-    private void ProcessBottomSectionHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
+    private void ProcessBottomSectionHighlightByColor(HitInfo hitInfo)
     {
-        if (hitInfo.FieldColor != "Green")
+        foreach (BottomSectionZone bottomSectionZone in bottomSectionZones)
         {
-            SpriteRenderer spriteToColor = hitInfo.FieldColor == "Red"
-                ? spriteToColor = redNumberSprite
-                : spriteToColor = blackNumberSprite;
-
-            spriteToColor.color = colorHighlight;
+            if (bottomSectionZone.Color == hitInfo.FieldColor)
+                bottomSectionZone.Highlight(true);
         }
     }
 
     private void ResetBottomSectionColors()
     {
-        firstDozenSprite.color = baseBottomSectionColor;
-        secondDozenSprite.color = baseBottomSectionColor;
-        thirdDozenSprite.color = baseBottomSectionColor;
-        redNumberSprite.color = baseBottomSectionColor;
-        blackNumberSprite.color = baseBottomSectionColor;
+        foreach (BottomSectionZone bottomSectionZone in bottomSectionZones)
+        {
+             bottomSectionZone.Highlight(false);
+        }
     }
 
     private void DisplayColorMultiplier()
