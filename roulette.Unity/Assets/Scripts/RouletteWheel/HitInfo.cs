@@ -12,8 +12,6 @@ public class HitInfo
     /// </summary>
     public int FieldNumber { get; set; }
     public int FieldIndex { get; set; }
-
-    public BallInfoData BallData { get; set; }
 }
 
 public enum DozenType

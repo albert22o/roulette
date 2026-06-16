@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static RoundStateManager;
 
 public class BallResults
@@ -9,13 +10,14 @@ public class BallResults
     public event Action<BallInfoData> BallHovered;
     public event Action BallUnHovered;
 
-    private readonly IRouletteWheel rouletteWheel1;
     private readonly RoundStateManager roundStateManager;
+    private readonly BallHolder ballHolder;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
 
-    public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager)
+    public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager, BallHolder ballHolder)
     {
+        this.ballHolder = ballHolder;
         rouletteWheel.AllBallsStopped += AddBalls;
         rouletteWheel.BallClicked += SelectBall;
 
@@ -27,11 +29,12 @@ public class BallResults
 
     }
 
-    private void OnBallHover (string ballHash)
+    private void OnBallHover(string ballHash)
     {
-        HitInfo hoveredBall = currentBalls.Find(ball => ball.BallHash == ballHash);
+        BallInfo hoveredBall = ballHolder.Balls.FirstOrDefault(ball => ball.BallHash == ballHash);
         if (hoveredBall == null) return;
-        BallHovered?.Invoke(hoveredBall.BallData);
+        BallInfoData ballData = hoveredBall.BallInfoData;
+        BallHovered?.Invoke(ballData);
     }
 
     private void OnBallUnHovered(string ballHash)
@@ -43,7 +46,7 @@ public class BallResults
     {
         if (!active)
             return;
-        var hitInfo = currentBalls.Find(ball => ball.BallHash == ballhash );
+        var hitInfo = currentBalls.Find(ball => ball.BallHash == ballhash);
 
         BallSelected?.Invoke(hitInfo);
         RemoveBalls();

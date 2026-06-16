@@ -1,14 +1,16 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using Zenject;
 
-public class BallResultsView: MonoBehaviour
+public class BallResultsView : MonoBehaviour
 {
     [SerializeField] private GameObject infoPanel;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     private BallResults ballResults;
 
-    public void Initialize(BallResults ballResults)
+    [Inject]
+    public void Construct(BallResults ballResults)
     {
         this.ballResults = ballResults;
 
