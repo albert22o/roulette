@@ -18,11 +18,6 @@ class BetTableView : MonoBehaviour
 
     [SerializeField] BottomSectionZone[] bottomSectionZones;
 
-    [SerializeField] Color colorHighlight;
-    [SerializeField] Color dozenHighlight;
-    [SerializeField] Color numberHighlight;
-    [SerializeField] Color lowlight;
-
     private BetTable betTable;
     private TableConfig tableConfig;
     private RoundStateManager roundStateManager;
@@ -30,7 +25,6 @@ class BetTableView : MonoBehaviour
     private ChipHolder chipHolder;
     private int generalMultiplier;
     private int betSum;
-    private Color baseBottomSectionColor;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
