@@ -1,19 +1,15 @@
-using System;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class BottomSectionZone : MonoBehaviour
 {
-    public string Color { get{ return color; } }
+    public string Color => color;
+    public DozenType Dozen => dozenType;
 
-    public DozenType Dozen { get { return dozenType; } }
-
-    [SerializeField] private BottomSectionType sectionType;
     [SerializeField] private DozenType dozenType;
     [SerializeField] private string color;
     [SerializeField] private Material baseMaterial;
-    [SerializeField] private Material colorHighlight;
-    [SerializeField] private Material dozenHighlight;
+    [SerializeField] private Material highlightMaterial;
     private SpriteRenderer BG;
 
     private void Start()
@@ -26,14 +22,9 @@ public class BottomSectionZone : MonoBehaviour
     {
         if (isEnabled)
         {
-            if (sectionType == BottomSectionType.Color)
-                BG.material = colorHighlight;
-            else
-                BG.material = dozenHighlight;
+            BG.material = highlightMaterial;
         }
         else
             BG.material = baseMaterial;
     }
-
-    public enum BottomSectionType { Color, Dozen}
 }

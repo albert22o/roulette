@@ -52,6 +52,7 @@ public class MoneyCounterView : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        betCalculator.GetRewardAction();
         animator.SetTrigger("fade");
     }
 }

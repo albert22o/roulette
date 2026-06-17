@@ -100,12 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectionType: 0
   dozenType: 0
   color: Black
   baseMaterial: {fileID: 2100000, guid: 87245b78b553b5846882ae611b4a75e8, type: 2}
-  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
-  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &251013903016701161
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,12 +518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectionType: 0
   dozenType: 0
   color: Red
   baseMaterial: {fileID: 2100000, guid: 991ae47d0f265e94780c1b078841eed6, type: 2}
-  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
-  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &3905590195395130995
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,16 +967,15 @@ MonoBehaviour:
   generalMultiplierText: {fileID: 2561205482209066509}
   timeBetweenHighlights: 1
   timeBetweenChipAnimations: 0.5
-  bottomSectionZones:
-  - {fileID: 8989331756827094103}
-  - {fileID: 1889428634186802230}
-  - {fileID: 4837969885485422089}
+  timeForCountingMoney: 3
+  timeBeforeBetsResults: 3
+  bottomSectionColorZones:
   - {fileID: 3258340430882644816}
   - {fileID: 7588085295408872345}
-  colorHighlight: {r: 0.78431374, g: 0.8117647, b: 0.101960786, a: 1}
-  dozenHighlight: {r: 0.8901961, g: 0.9254902, b: 0, a: 1}
-  numberHighlight: {r: 0.972549, g: 1, b: 0.23137255, a: 1}
-  lowlight: {r: 0.6117647, g: 0.6117647, b: 0.6117647, a: 1}
+  bottomSectionDozenZones:
+  - {fileID: 4837969885485422089}
+  - {fileID: 1889428634186802230}
+  - {fileID: 8989331756827094103}
 --- !u!1 &6472862418836013477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,12 +1076,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectionType: 1
   dozenType: 2
-  color: Custom
+  color: 
   baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
-  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
-  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &6833406641152632364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,12 +1180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectionType: 1
   dozenType: 3
-  color: Custom
+  color: 
   baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
-  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
-  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &8474577656311464227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,12 +1284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectionType: 1
   dozenType: 1
-  color: Custom
+  color: 
   baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
-  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
-  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1001 &241506564193049317
 PrefabInstance:
   m_ObjectHideFlags: 0
