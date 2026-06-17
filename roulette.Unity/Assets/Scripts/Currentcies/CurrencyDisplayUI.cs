@@ -13,7 +13,6 @@ public class CurrencyDisplayUI : MonoBehaviour
 
     [Header("Animator")]
     [SerializeField] private Animator animator;
-    private bool isShowing = false;
 
 
     private GoldenChips goldenChips;

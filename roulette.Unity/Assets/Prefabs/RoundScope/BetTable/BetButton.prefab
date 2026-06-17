@@ -27,14 +27,14 @@ RectTransform:
   m_GameObject: {fileID: 5428965525501952293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.9999999, y: 1.9999999, z: 1.9999999}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 156922674808583640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.028}
   m_SizeDelta: {x: 0.6883, y: 0.1721}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1872545594907299775
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2404813431375338964, guid: 3e98ce50e2685aa40809884f1c38ff39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e98ce50e2685aa40809884f1c38ff39, type: 2}
+  m_sharedMaterial: {fileID: -2404813431375338964, guid: 3e98ce50e2685aa40809884f1c38ff39, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.63
-  m_fontSizeBase: 0.63
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -284,8 +284,8 @@ MonoBehaviour:
   spawnChipPoint: {fileID: 7474288467868680278}
   chipPrefab: {fileID: 8665725115522850742, guid: 815b3ec4b96cfa7498c230a23fbe0d93, type: 3}
   colorHighlight: {r: 1, g: 0.80791026, b: 0.2216981, a: 1}
-  dozenHighlight: {r: 0.9622642, g: 0.5803922, b: 0.18609825, a: 1}
-  numberHighlight: {r: 0.73794556, g: 0, b: 1, a: 1}
+  dozenHighlight: {r: 0.9559748, g: 0.8121216, b: 0.093192354, a: 1}
+  numberHighlight: {r: 0.9433962, g: 0.80355555, b: 0.08603289, a: 1}
   lowlight: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
 --- !u!65 &658725084393326555

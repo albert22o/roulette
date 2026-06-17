@@ -16,7 +16,7 @@ public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable, 
 
     public void HoverEnter()
     {
-        shop.ShowTooltip(inventoryItem.Item.Data.NameKey, inventoryItem.Item.Data.DescriptionKey, inventoryItem.transform.position);
+        shop.ShowTooltip(inventoryItem.Item.Data.Name, inventoryItem.Item.Data.Description, inventoryItem.transform.position);
     }
 
     public void HoverExit()

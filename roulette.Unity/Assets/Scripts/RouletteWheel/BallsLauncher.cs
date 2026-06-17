@@ -1,9 +1,15 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallsLauncher : MonoBehaviour
 {
+    public event Action<string> Hover;
+    public event Action<string> UnHover;
+    public event Action<string> Clicked;
+
     [SerializeField] private float launchVelocityMin;
     [SerializeField] private float launchVelocityMax;
 
@@ -51,7 +57,7 @@ public class BallsLauncher : MonoBehaviour
     private void SpawnBall(BallData ballData)
     {
         var ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-        float velocity = Random.Range(launchVelocityMin, launchVelocityMax);
+        float velocity = UnityEngine.Random.Range(launchVelocityMin, launchVelocityMax);
         ball.SetHash(ballData.BallHash);
         ball.Launch(transform.right * velocity, physicalRoulette);
         ballsManager.AddBall(ball);
@@ -60,9 +66,12 @@ public class BallsLauncher : MonoBehaviour
         {
             ballVisual.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
             ballVisual.SetVisualComponent(ballData.VisualComponent);
+            ballVisual.Clicked += OnBallClicked;
+            ballVisual.Hover += OnBallHover;
+            ballVisual.UnHover += OnBallUnHover;
+            ballVisual.Destroyed += () => OnBallDestroyed(ballVisual);
         }
     }
-
     public void Clear()
     {
         ballsToSpawn.Clear();
@@ -93,6 +102,27 @@ public class BallsLauncher : MonoBehaviour
         SpawnBall(data);
     }
 
+    private void OnBallUnHover(string hash)
+    {
+        UnHover?.Invoke(hash);
+    }
+
+    private void OnBallHover(string hash)
+    {
+        Hover?.Invoke(hash);
+    }
+
+    private void OnBallClicked(string hash)
+    {
+        Clicked?.Invoke(hash);
+    }
+
+    private void OnBallDestroyed(BallVisual ball)
+    {
+        ball.Clicked -= OnBallClicked;
+        ball.Hover -= OnBallHover;
+        ball.UnHover -= OnBallUnHover;
+    }
 }
 
 internal class BallData
