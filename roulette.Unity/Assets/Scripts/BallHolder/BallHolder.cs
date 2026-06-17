@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -20,7 +20,7 @@ public class BallHolder
     public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, int capacity = 5)
     {
         this.ballFactory = ballFactory;
-        // Убрать потом
+        // РЈР±СЂР°С‚СЊ РїРѕС‚РѕРј
         var dummyMaterial = new Material(Shader.Find("Standard"));
         var visualComponent = new VisualComponent()
         {
@@ -30,8 +30,8 @@ public class BallHolder
         var ballData = ScriptableObject.CreateInstance<SimpleBallInfoData>();
         ballData.VisualComponent = visualComponent;
 
-        ballData.Name = "Тестовый шар";
-        ballData.Description = "Это описание тестового шара для проверки UI";
+        ballData.Name = "РўРµСЃС‚РѕРІС‹Р№ С€Р°СЂ";
+        ballData.Description = "Р­С‚Рѕ РѕРїРёСЃР°РЅРёРµ С‚РµСЃС‚РѕРІРѕРіРѕ С€Р°СЂР° РґР»СЏ РїСЂРѕРІРµСЂРєРё UI";
 
         balls.Add(ballFactory.Create(ballData));
         balls.Add(ballFactory.Create(ballData));
