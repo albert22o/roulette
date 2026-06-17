@@ -37,6 +37,7 @@ public class ChipHolderView : MonoBehaviour
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;
+        chipHolder.ChipAnimated += OnChipAnimated;
 
         InitSlots();
         SetupInput();
@@ -149,6 +150,11 @@ public class ChipHolderView : MonoBehaviour
 
         slotViews[indexA].PlaceChip(chipB);
         slotViews[indexB].PlaceChip(chipA);
+    }
+
+    private void OnChipAnimated(int index)
+    {
+        slotViews[index].PlayAnimation();
     }
 
     private ChipSlotView RaycastSlot()

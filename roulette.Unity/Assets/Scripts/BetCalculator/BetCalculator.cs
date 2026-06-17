@@ -6,7 +6,7 @@ using static RoundStateManager;
 public class BetCalculator
 {
     public event Action<int> GetReward;
-    public event Action<HitInfo, int> HighlightButtons;
+    public event Action<HitInfo> HighlightButtons;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -91,11 +91,7 @@ public class BetCalculator
         if (!active)
             return;
 
-        reward = 0;
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
-            reward += GetRewardForBet(betInfo, amount, info);
-
-        HighlightButtons?.Invoke(info, reward);
+        HighlightButtons?.Invoke(info);
     }
 
     private int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
@@ -127,8 +123,12 @@ public class BetCalculator
     public int GetEffectiveColorMultiplier(ColorType color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 
-    public void GetRewardAction()
+    public void GetRewardAction(HitInfo info)
     {
+        reward = 0;
+        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+            reward += GetRewardForBet(betInfo, amount, info);
+
         GetReward?.Invoke(reward);
     }
 }

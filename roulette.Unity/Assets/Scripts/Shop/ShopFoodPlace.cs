@@ -13,6 +13,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private ItemData item;
     private Shop shop;
     private Inventory inventory;
+    private GoldenChips goldenChips;
 
     public bool IsInteractable => item != null;
 
@@ -20,15 +21,16 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public event Action<bool> HasItemChanged;
 
 
-    [Inject] public void Construct(Shop shop, Inventory inventory)
+    [Inject] public void Construct(Shop shop, Inventory inventory, GoldenChips goldenChips)
     {
         this.shop = shop;
         this.inventory = inventory;
+        this.goldenChips = goldenChips;
     }
 
     public void ShowDescription()
     {
-        shop.ShowTooltip(item.NameKey, item.DescriptionKey, transform.position);
+        shop.ShowTooltip(item.Name, item.Description, transform.position);
     }
 
     public void HideDescription()
@@ -38,10 +40,10 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void Clicked()
     {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= cost)
+        if (goldenChips.Amount >= cost)
         {
-            inventory.RemoveCurrency(CurrencyType.GoldenChips, cost);
-            Debug.Log($"Food {item.NameKey} bought");
+            goldenChips.Remove(cost);
+            Debug.Log($"Food {item.Name} bought");
             item = null;
             itemPlace.SetItem(null);
             HideDescription();

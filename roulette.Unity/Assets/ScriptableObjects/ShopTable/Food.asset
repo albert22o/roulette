@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Food
   m_EditorClassIdentifier: 
   <Items>k__BackingField:
-  - {fileID: 11400000, guid: eaba43162c7029e419ca1aa21f6af22f, type: 2}
+  - {fileID: 11400000, guid: e05b53f76c4d20849819dc6833e21b06, type: 2}

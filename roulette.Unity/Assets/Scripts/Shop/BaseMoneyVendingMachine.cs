@@ -8,14 +8,17 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     [SerializeField] private int nextCostDelta = 1;
     [SerializeField] private int purchasedMoney = 100;
 
+    [SerializeField] private ButtonAnimation3D buttonAnimation;
+
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
     [SerializeField] private Transform tooltipPosition;
 
-    private Inventory inventory;
     private int cost;
     private Shop shop;
+    private GoldenChips goldenChips;
+    private Money money;
 
 
     public int Cost
@@ -33,10 +36,11 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory, Shop shop)
+    public void Construct(Shop shop, Money money, GoldenChips goldenChips)
     {
-        this.inventory = inventory;
         this.shop= shop;
+        this.goldenChips = goldenChips;
+        this.money = money;
     }
 
     public void ResetCost()
@@ -46,11 +50,12 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     public void TryBuy()
     {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= Cost)
+        buttonAnimation.Press();
+        if (goldenChips.Amount >= Cost)
         {
-            inventory.RemoveCurrency(CurrencyType.GoldenChips, Cost);
+            goldenChips.Remove(Cost);
             Cost += nextCostDelta;
-            inventory.AddCurrency(CurrencyType.BaseMoney, purchasedMoney);
+            money.Add(purchasedMoney);
         }
     }
 

@@ -7,11 +7,12 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     [SerializeField] private Shop shop;
     [SerializeField] private DrumNumberDisplay costView;
 
-    private ItemData item;
+    private ChipShopItemData item;
     private Inventory inventory;
     private readonly ItemFactory itemFactory = new();
     private Item createdItem;
-    public ItemData Item
+    private GoldenChips goldenChips;
+    public ChipShopItemData Item
     {
         get => item;
         private set
@@ -27,12 +28,13 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public event Action<ItemData> ItemChanged;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(Inventory inventory, GoldenChips goldenChips)
     {
         this.inventory = inventory;
+        this.goldenChips = goldenChips;
     }
 
-    public void SetItem(ItemData item)
+    public void SetItem(ChipShopItemData item)
     {
         Item = item;
         costView.SetNumber(Item.Cost);
@@ -43,7 +45,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
     public void ShowDescription()
     {
         if (Item == null) return;
-        shop.ShowTooltip(Item.NameKey, Item.DescriptionKey, transform.position);
+        shop.ShowTooltip(Item.Name, Item.Description, transform.position);
     }
 
     public void HideDescription()
@@ -66,12 +68,12 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
 
     private bool TryBuy(ShopPlace place)
     {
-        if (inventory.GetCurrency(CurrencyType.GoldenChips) >= place.Item.Cost)
+        if (goldenChips.Amount >= place.Item.Cost)
         {
             if (inventory.CanAddItem(place.Item))
             {
                 createdItem = itemFactory.Create(place.Item);
-                inventory.RemoveCurrency(CurrencyType.GoldenChips, place.Item.Cost);
+                goldenChips.Remove(place.Item.Cost);
                 return true;
             }
             else
@@ -81,7 +83,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         }
         else
         {
-            Debug.Log(place.Item.NameKey + " not enough money!");
+            Debug.Log(place.Item.Name + " not enough money!");
             return false;
         }
     }

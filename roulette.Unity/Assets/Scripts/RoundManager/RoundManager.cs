@@ -73,9 +73,12 @@ public class RoundManager
     private readonly RoundStateManager roundStateManager;
     private readonly TableConfig tableConfig;
     private readonly BetCalculator betCalculator;
+    private readonly ChipHolder chipHolder;
+    private readonly BallHolder ballHolder;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
-        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator)
+        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator,
+        ChipHolder chipHolder, BallHolder ballHolder)
     {
         this.rouletteWheel = rouletteWheel;
 
@@ -84,6 +87,8 @@ public class RoundManager
         this.roundStateManager = roundStateManager;
         this.tableConfig = tableConfig;
         this.progressionManager = progressionManager;
+        this.chipHolder = chipHolder;
+        this.ballHolder = ballHolder;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -106,13 +111,11 @@ public class RoundManager
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
         rouletteWheel.ClearBalls();
-        // Убрать потом
-        var dummyMaterial = new Material(Shader.Find("Standard"));
-        var visualComponent = new VisualComponent()
+
+        foreach (var ballInfo in ballHolder.Balls)
         {
-            Material = dummyMaterial
-        };
-        rouletteWheel.AddBall("1", visualComponent);
+            rouletteWheel.AddBall(ballInfo.BallHash, ballInfo.BallInfoData.VisualComponent);
+        }
 
         rouletteWheel.Spin();
         betCount--;
@@ -127,14 +130,12 @@ public class RoundManager
             return;
 
         rouletteWheel.ClearBalls();
-        // Убрать потом
-        var dummyMaterial = new Material(Shader.Find("Standard"));
-        var visualComponent = new VisualComponent()
-        {
-            Material = dummyMaterial
-        };
-        rouletteWheel.AddBall("1", visualComponent);
 
+        foreach(var ballInfo in ballHolder.Balls)
+        {
+            rouletteWheel.AddBall(ballInfo.BallHash, ballInfo.BallInfoData.VisualComponent);
+        }
+        
         rouletteWheel.Spin();
         rerollCount--;
         RerollCountChanged?.Invoke(rerollCount);
@@ -156,6 +157,7 @@ public class RoundManager
         else if (betCount <= 0)
             roundStateManager.ChangeState(RoundState.Lose);
 
+        chipHolder.RevertAll();
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }

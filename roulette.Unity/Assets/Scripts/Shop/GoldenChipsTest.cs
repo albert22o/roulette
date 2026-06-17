@@ -4,16 +4,16 @@ using Zenject;
 public class GoldenChipsTest : MonoBehaviour
 {
     [SerializeField] private int initMoney;
-    private Inventory inventory;
+    private GoldenChips goldenChips;
 
     [Inject]
-    public void Construct(Inventory inventory)
+    public void Construct(GoldenChips goldenChips)
     {
-        this.inventory = inventory;
+        this.goldenChips = goldenChips;
     }
 
     void Start()
     {
-        inventory.AddCurrency(CurrencyType.GoldenChips, initMoney);
+        goldenChips.Add(initMoney);
     }
 }
