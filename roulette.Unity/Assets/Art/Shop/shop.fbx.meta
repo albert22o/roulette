@@ -3,7 +3,57 @@ guid: 69ebebbf81f16cb4f93c7a37dd5a9f71
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown_light
+    second: {fileID: 2100000, guid: 0b1ab3d002965174a98128b6e1f6b8aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown_mid
+    second: {fileID: 2100000, guid: ae9c551dd3164b5459f038a8042dfc2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass1
+    second: {fileID: 2100000, guid: a1dda171a9405274aa5c747e7e5cc2dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gold4
+    second: {fileID: 2100000, guid: 9f6e7fcc3484a9f4ca803dec291ac96d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gold5
+    second: {fileID: 2100000, guid: 8d1d840e3ab28064cb5c77210ec9680c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gray_dark2_neutral
+    second: {fileID: 2100000, guid: 5b0f93e568a8e0f4db67de92340ddd90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gray_light2_neutral
+    second: {fileID: 2100000, guid: 1c69b2646dea9ab4c852d6055bc5d584, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: green_mid
+    second: {fileID: 2100000, guid: 2c6f0b023e3b1a048a2c27260d757baa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orange5
+    second: {fileID: 2100000, guid: 83412ece09561c147afc468c3df4c7d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_dark1
+    second: {fileID: 2100000, guid: 37e70b19226366045a4e7007ae0cc873, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
