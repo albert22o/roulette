@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,21 +25,20 @@ public class ChipSpawnerView : MonoBehaviour
     private void OnEnable()
     {
         chipSpawner.ChipSpawnerRequested += OnChipSpawnRequested;
-        chipSpawner.ChipClearRecvested += OnClearRequested;
+        chipSpawner.ChipClearRequested += OnClearRequested;
     }
 
     private void OnDisable()
     {
         chipSpawner.ChipSpawnerRequested -= OnChipSpawnRequested;
-        chipSpawner.ChipClearRecvested -= OnClearRequested;
+        chipSpawner.ChipClearRequested -= OnClearRequested;
 
-        if ( spawnCoroutine != null) 
-            StopCoroutine(spawnCoroutine);
+        OnClearRequested();
     }
 
-    private void OnChipSpawnRequested(GameObject prefab, Transform spawnPoint)
+    private void OnChipSpawnRequested()
     {
-        GameObject chip = Instantiate(prefab,spawnPoint.position, Quaternion.identity);
+        GameObject chip = Instantiate(chipPrefab,spawnPoint.position, Quaternion.identity);
         spawnedChips.Add(chip);
     }
 
@@ -58,7 +57,7 @@ public class ChipSpawnerView : MonoBehaviour
         spawnedChips.Clear();
     }
 
-    public void StartSpawningWithInterval()
+    private void StartSpawningWithInterval()
     {
         if (spawnCoroutine != null)
             StopCoroutine (spawnCoroutine);
@@ -70,7 +69,7 @@ public class ChipSpawnerView : MonoBehaviour
     {
         for (int i = 0; i < chipsToSpawn; i++)
         {
-            chipSpawner.RequestSpawn(chipPrefab, spawnPoint);
+            chipSpawner.RequestSpawn();
             yield return new WaitForSeconds(spawnInterval);
         }
         spawnCoroutine = null;

@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class ChipSpawner
 {
-    public event Action<GameObject, Transform> ChipSpawnerRequested;
-    public event Action ChipClearRecvested;
+    public event Action ChipSpawnerRequested;
+    public event Action ChipClearRequested;
 
-    public void RequestSpawn(GameObject prefab,Transform spawnPoint)
+    public void RequestSpawn()
     {
-        ChipSpawnerRequested?.Invoke(prefab, spawnPoint);
+        ChipSpawnerRequested?.Invoke();
     }
 
     public void RecquestClear()
     {
-        ChipClearRecvested?.Invoke();
+        ChipClearRequested?.Invoke();
     }
 }
