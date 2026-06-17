@@ -24,7 +24,6 @@ class BetTableView : MonoBehaviour
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
     private int generalMultiplier;
-    private int betSum;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
@@ -102,6 +101,7 @@ class BetTableView : MonoBehaviour
 
     private IEnumerator ResultDisplaySequence(HitInfo hitInfo)
     {
+        int betSum = 0;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             betSum += amount;
