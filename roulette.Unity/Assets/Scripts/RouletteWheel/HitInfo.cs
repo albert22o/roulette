@@ -1,14 +1,14 @@
-public class HitInfo
+п»їpublic class HitInfo
 {
     public DozenType Dozen { get; set; }
     /// <summary>
-    /// Уникальный хеш шара, который остановился на поле
+    /// РЈРЅРёРєР°Р»СЊРЅС‹Р№ С…РµС€ С€Р°СЂР°, РєРѕС‚РѕСЂС‹Р№ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ РЅР° РїРѕР»Рµ
     /// </summary>
     public string BallHash { get; set; }
     public ColorType FieldColor { get; set; }
     /// <summary>
-    /// Номер поля, на котором остановился шар
-    /// Может отличаться от фактической позиции поля
+    /// РќРѕРјРµСЂ РїРѕР»СЏ, РЅР° РєРѕС‚РѕСЂРѕРј РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ С€Р°СЂ
+    /// РњРѕР¶РµС‚ РѕС‚Р»РёС‡Р°С‚СЊСЃСЏ РѕС‚ С„Р°РєС‚РёС‡РµСЃРєРѕР№ РїРѕР·РёС†РёРё РїРѕР»СЏ
     /// </summary>
     public int FieldNumber { get; set; }
     public int FieldIndex { get; set; }
