@@ -30,6 +30,7 @@ public class BallResultsView : MonoBehaviour
     private void HideInfo()
     {
         infoPanel.SetActive(false);
+
     }
 
     private void OnDestroy()
