@@ -1,0 +1,116 @@
+using System;
+using UnityEngine;
+using Zenject;
+
+public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
+{
+    [SerializeField] private Shop shop;
+    [SerializeField] private DrumNumberDisplay costView;
+
+    private ChipData item;
+    private ChipHolder chipHolder;
+    private GoldenChips goldenChips;
+    private ChipData boughtItem;
+    public ChipData Item
+    {
+        get => item;
+        private set
+        {
+            item = value;
+            ItemChanged?.Invoke(item);
+        }
+    }
+
+    public bool IsInteractable => Item != null && IsAnimationPlaying == false;
+    public bool IsAnimationPlaying { get; private set; } = false;
+
+    public event Action<ItemData> ItemChanged;
+
+    [Inject]
+    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips)
+    {
+        this.chipHolder = chipHolder;
+        this.goldenChips = goldenChips;
+    }
+
+    public void SetItem(ChipData item)
+    {
+        Item = item;
+        costView.SetNumber(Item.Cost);
+        IsAnimationPlaying = true;
+    }
+
+    public void ShowDescription()
+    {
+        if (Item == null) return;
+        shop.ShowTooltip(Item.Name, Item.Description, transform.position);
+    }
+
+    public void HideDescription()
+    {
+        shop.HideTooltip();
+    }
+
+    public void Buy()
+    {
+        if (Item == null) return;
+        if (TryBuy(this))
+        {
+            HideDescription();
+            costView.SetNumber(0);
+            IsAnimationPlaying = true;
+        }
+    }
+
+    private bool TryBuy(ChipShopPlace place)
+    {
+        if (goldenChips.Amount >= place.Item.Cost)
+        {
+            if (chipHolder.HasFreeSlot)
+            {
+                goldenChips.Remove(place.Item.Cost);
+                boughtItem = Item;
+                Item = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log(place.Item.Name + " not enough money!");
+            return false;
+        }
+    }
+
+    public void UpdateInventory()
+    {
+        if (boughtItem != null)
+        {
+            chipHolder.AddChip(boughtItem);
+            boughtItem = null;
+        }
+    }
+
+    public void OnRaised()
+    {
+        IsAnimationPlaying = false;
+    }
+
+    public void Clicked()
+    {
+        Buy();
+    }
+
+    public void HoverEnter()
+    {
+        ShowDescription();
+    }
+
+    public void HoverExit()
+    {
+        HideDescription();
+    }
+}

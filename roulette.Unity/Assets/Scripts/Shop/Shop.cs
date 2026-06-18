@@ -21,22 +21,23 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopChipPlacesController chipPlacesController;
     [SerializeField] private ShopInputHandler inputHandler;
 
+    public int BallSellCost => ballSellCost;
 
     private GoldenChips goldenChips;
-    private Inventory inventory;
+    private BallHolder ballHolder;
+    private ChipHolder chipHolder;
 
 
     public event Action InteractionStarted, InteractionFinished;
 
 
     [Inject]
-    public void Construct(GoldenChips goldenChips, Inventory inventory)
+    public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder)
     {
         this.goldenChips = goldenChips;
-        this.inventory = inventory;
+        this.ballHolder = ballHolder;
+        this.chipHolder = chipHolder;
     }
-
-   
 
     private void Start()
     {
@@ -58,26 +59,30 @@ public class Shop : MonoBehaviour
         tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
-    public void HIdeTooltip()
+    public void HideTooltip()
     {
         tooltip.gameObject.SetActive(false);
     }
 
-    public void Sell(Item item)
+    public bool TrySell(ItemData item, int index)
     {
-        if (item.Data is BallShopItemData)
+        if (item is BallInfoData)
         {
-            if (inventory.Balls.Count > 1)
+            if (ballHolder.Balls.Count > 1)
             {
                 goldenChips.Add(ballSellCost);
-                inventory.RemoveItem(item);
+                ballHolder.RemoveBall(index);
+                return true;
             }
+            return false;
         }
-        else if (item.Data is ChipShopItemData chipData)
+        else if (item is ChipData chipData)
         {
             goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
-            inventory.RemoveItem(item);
+            chipHolder.RemoveChip(index);
+            return true;
         }
+        return false;
     }
 
     public void SetInteractionAvailable(bool value)
@@ -85,6 +90,7 @@ public class Shop : MonoBehaviour
         shopInteraction.enabled = value;
         inputHandler.enabled = value;
     }
+
     public void StartInteraction()
     {
         SetInteractionAvailable(true);

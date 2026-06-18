@@ -11,10 +11,17 @@ public class ShopInteractionHandler : MonoBehaviour
     private GameStateManager stateManager;
     private bool isInteraction;
 
+    private bool isInitialized;
+
     [Inject]
-    public void Construct(Money money, GoldenChips goldenChips, Inventory inventory, GameStateManager stateManager)
+    public void Construct(Money money, GoldenChips goldenChips, GameStateManager stateManager)
     {
         this.stateManager = stateManager;
+    }
+
+    private void Init()
+    {
+        isInitialized = true;
     }
 
     private void OnEnable()
@@ -32,6 +39,7 @@ public class ShopInteractionHandler : MonoBehaviour
         shopCamera.gameObject.SetActive(true);
         isInteraction = true;
         shop.StartInteraction();
+        if (isInitialized == false) Init();
 
     }
 

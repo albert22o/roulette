@@ -167,7 +167,7 @@ class BetTableView : MonoBehaviour
 
     private IEnumerator ApplyChips(BetInfo betInfo, HitInfo hitInfo)
     {
-        for (int i = 0; i < chipHolder.Сhips.Length; i++)
+        for (int i = 0; i < chipHolder.Capacity; i++)
         {
             chipHolder.ApplyByIndex(i);
             DisplayMaxWinningMultiplier(hitInfo, betInfo);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class ChipHolder
 {
@@ -8,15 +9,18 @@ public class ChipHolder
     public event Action<int> ChipAnimated;
     public int Capacity { get; }
 
-    public Chip[] Сhips { get; private set; }
+    private Chip[] chips;
     private bool isActive = false;
     private readonly ChipFactory chipFactory;
+    public bool HasFreeSlot => FindFreeSlot() != -1;
+    public IReadOnlyList<Chip> Chips => chips;
 
-    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, int capacity = 5)
+    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, ChipHolderConfig config)
     {
-        Сhips = new Chip[capacity];
+        Capacity = config.Capacity;
+        chips = new Chip[Capacity];
         roundStateManager.StateChanged += OnStateChanged;
-        Capacity = capacity; 
+         
         this.chipFactory = chipFactory;
     }
 
@@ -26,18 +30,18 @@ public class ChipHolder
         if (freeIndex == -1)
             return;
 
-        Сhips[freeIndex] = chipFactory.Create(chipData);
+        chips[freeIndex] = chipFactory.Create(chipData);
 
-        ChipAdded?.Invoke(freeIndex, Сhips[freeIndex]);
+        ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
 
     public void RemoveChip(int index)
     {
-        if (!IsValidIndex(index) || Сhips[index] == null)
+        if (!IsValidIndex(index) || chips[index] == null)
             return;
 
-        Сhips[index].Revert();
-        Сhips[index] = null;
+        chips[index].Revert();
+        chips[index] = null;
 
         ChipRemoved?.Invoke(index);
     }
@@ -47,12 +51,12 @@ public class ChipHolder
         if (data == null)
             return;
 
-        for (int i = 0; i < Сhips.Length; i++)
+        for (int i = 0; i < chips.Length; i++)
         {
-            if (Сhips[i] != null && Сhips[i].ChipData == data)
+            if (chips[i] != null && chips[i].ChipData == data)
             {
-                Сhips[i].Revert();
-                Сhips[i] = null;
+                chips[i].Revert();
+                chips[i] = null;
                 ChipRemoved?.Invoke(i);
                 return;
             }
@@ -67,15 +71,15 @@ public class ChipHolder
         if (indexA == indexB)
             return;
 
-        (Сhips[indexA], Сhips[indexB]) = (Сhips[indexB], Сhips[indexA]);
+        (chips[indexA], chips[indexB]) = (chips[indexB], chips[indexA]);
 
         ChipsSwapped?.Invoke(indexA, indexB);
     }
 
     public void RevertAll()
     {
-        for (int i = Сhips.Length - 1; i >= 0; i--)
-            Сhips[i]?.Revert();
+        for (int i = chips.Length - 1; i >= 0; i--)
+            chips[i]?.Revert();
     }
 
     private void OnStateChanged(RoundStateManager.RoundState newState)
@@ -85,24 +89,24 @@ public class ChipHolder
 
     private void ApplyAll()
     {
-        for (int i = 0; i < Сhips.Length; i++)
-            Сhips[i]?.Apply();
+        for (int i = 0; i < chips.Length; i++)
+            chips[i]?.Apply();
     }
 
     public void ApplyByIndex(int index)
     {
-        Сhips[index]?.Apply();
+        chips[index]?.Apply();
         ChipAnimated?.Invoke(index);
         
     }
 
     private int FindFreeSlot()
     {
-        for (int i = 0; i < Сhips.Length; i++)
-            if (Сhips[i] == null) return i;
+        for (int i = 0; i < chips.Length; i++)
+            if (chips[i] == null) return i;
         return -1;
     }
 
     private bool IsValidIndex(int index) =>
-        index >= 0 && index < Сhips.Length;
+        index >= 0 && index < chips.Length;
 }

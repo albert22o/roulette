@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+using System.Diagnostics;
+using System.Dynamic;
+using Zenject; 
 
 public class BallHolder 
 {
     public event Action<int, BallInfo> BallAdded;
     public event Action<int> BallRemoved;
 
-    public IReadOnlyCollection<BallInfo> Balls => balls;
+    public IReadOnlyList<BallInfo> Balls => balls;
 
     public int Capacity { get; }
 
@@ -16,29 +17,20 @@ public class BallHolder
     private readonly BallFactory ballFactory;
     private bool isActive;
 
+    public bool HasFreeSlot => balls.Count < Capacity;
+
     [Inject]
-    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, int capacity = 5)
+    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, BallHolderConfig config)
     {
         this.ballFactory = ballFactory;
-        // Убрать потом
-        var dummyMaterial = new Material(Shader.Find("Standard"));
-        var visualComponent = new VisualComponent()
-        {
-            Material = dummyMaterial
-        };
-
-        var ballData = ScriptableObject.CreateInstance<SimpleBallInfoData>();
-        ballData.VisualComponent = visualComponent;
-
-        ballData.Name = "Тестовый шар";
-        ballData.Description = "Это описание тестового шара для проверки UI";
-
-        balls.Add(ballFactory.Create(ballData));
-        balls.Add(ballFactory.Create(ballData));
-
-        Capacity = capacity;
-
+        Capacity = config.Capacity;
         gameStateManager.GameStateChanged += OnStateChanged;
+
+        foreach (BallInfoData ball in config.StartBalls)
+        {
+            var ballInfo = ballFactory.Create(ball);
+            balls.Add(ballInfo);
+        }
     }
 
     public void AddBall(BallInfoData ballInfoData)
@@ -53,8 +45,9 @@ public class BallHolder
 
     public void RemoveBall(int index)
     {
-        if (!isActive || IsIndexValid(index))
+        if (!isActive || !IsIndexValid(index))
             return;
+        
         balls.RemoveAt(index);
         BallRemoved?.Invoke(index);
     }

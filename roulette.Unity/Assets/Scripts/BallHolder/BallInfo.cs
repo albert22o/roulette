@@ -25,11 +25,3 @@ public class SimpleBallInfo : BallInfo
         
     }
 }
-
-public class SimpleBallInfoData : BallInfoData
-{
-    public override BallInfo CreateBall(BallDependencies deps)
-    {
-        return new SimpleBallInfo(this);
-    }
-}

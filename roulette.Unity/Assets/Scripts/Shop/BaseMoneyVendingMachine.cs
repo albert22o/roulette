@@ -71,6 +71,6 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     public void HoverExit()
     {
-        shop.HIdeTooltip();
+        shop.HideTooltip();
     }
 }
