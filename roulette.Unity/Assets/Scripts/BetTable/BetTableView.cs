@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -113,8 +114,9 @@ class BetTableView : MonoBehaviour
         {
             if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
                 continue;
-                
-            ProcessButtonHighlightByColor(hitInfo);
+
+            HighlightButtonsWhere(button => button.Color == hitInfo.FieldColor, BetButton.HighlightPhase.Color);
+            HighlightBottomSectionColor(hitInfo);
             DisplayMultiplier(betCalculator.ColorMultiplier);
 
             yield return new WaitForSeconds(timeBetweenHighlights);
@@ -126,7 +128,8 @@ class BetTableView : MonoBehaviour
                 continue;
             }
 
-            ProcessButtonHighlightByDozen(hitInfo);
+            HighlightButtonsWhere(button => button.Dozen == hitInfo.Dozen, BetButton.HighlightPhase.Dozen);
+            HighlightBottomSectionDozen(hitInfo);
             DisplayMultiplier(betCalculator.DozenMultiplier);
 
             yield return new WaitForSeconds(timeBetweenHighlights);
@@ -138,7 +141,7 @@ class BetTableView : MonoBehaviour
                 continue;
             }
 
-            ProcessButtonHighlightByNumber(hitInfo);
+            HighlightButtonsWhere(button => button.FieldNum == hitInfo.FieldNumber, BetButton.HighlightPhase.Number);
             if (hitInfo.FieldNumber == 0)
                 DisplayMultiplier(betCalculator.ZeroMultiplier);
             else
@@ -158,7 +161,6 @@ class BetTableView : MonoBehaviour
 
         generalMultiplier = 0;
         generalMultiplierText.text = "";
-        betSum = 0;
         betText.text = "";
 
         betTable.ClearBets();
@@ -175,42 +177,30 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void ProcessButtonHighlightByColor(HitInfo hitInfo)
+    private void HighlightButtonsWhere(Func<BetButton, bool> predicate, BetButton.HighlightPhase phase)
     {
         foreach (BetButton button in betButtons)
         {
-            if (button.Color == hitInfo.FieldColor)
-                button.Highlight(true, BetButton.HighlightPhase.Color);
-        }
-
-        foreach (BottomSectionZone bottomSectionZone in bottomSectionColorZones)
-        {
-            if (bottomSectionZone.Color == hitInfo.FieldColor)
-                bottomSectionZone.Highlight(true);
+            if (predicate(button))
+                button.Highlight(true, phase);
         }
     }
 
-    private void ProcessButtonHighlightByDozen(HitInfo hitInfo)
+    private void HighlightBottomSectionColor(HitInfo hitInfo)
     {
-        foreach (BetButton button in betButtons)
+        foreach (BottomSectionZone zone in bottomSectionColorZones)
         {
-            if (button.Dozen == hitInfo.Dozen)
-                button.Highlight(true, BetButton.HighlightPhase.Dozen);
-        }
-
-        foreach (BottomSectionZone bottomSectionZone in bottomSectionDozenZones)
-        {
-            if (bottomSectionZone.Dozen == hitInfo.Dozen)
-                bottomSectionZone.Highlight(true);
+            if (zone.Color == hitInfo.FieldColor)
+                zone.Highlight(true);
         }
     }
 
-    private void ProcessButtonHighlightByNumber(HitInfo hitInfo)
+    private void HighlightBottomSectionDozen(HitInfo hitInfo)
     {
-        foreach (BetButton button in betButtons)
+        foreach (BottomSectionZone zone in bottomSectionDozenZones)
         {
-            if (button.FieldNum == hitInfo.FieldNumber)
-                button.Highlight(true, BetButton.HighlightPhase.Number);
+            if (zone.Dozen == hitInfo.Dozen)
+                zone.Highlight(true);
         }
     }
 
