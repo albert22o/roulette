@@ -7,10 +7,6 @@ public class PrimeBonusChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new PrimeBonusChip(
-            deps.BetCalculator,
-            deps.RouletteBallsManager,
-            deps.OnBallSelected,
-            this);
+        return new PrimeBonusChip(deps.BetCalculator, deps.RouletteBallsManager, deps.OnBallSelected, this);
     }
 }
