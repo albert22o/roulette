@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8a0ed2044a9ad45bb7d95cac3a27e0, type: 3}
   m_Name: ZeroChip
   m_EditorClassIdentifier: 
+  itemName: ZeroChip
+  description: 
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 2
   Prefab: {fileID: 573473156636019110, guid: 85d3f900bf2deba49b6592418ff0976c, type: 3}
   FieldNum: 0
   ModifyAmount: 10

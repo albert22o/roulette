@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: Food
   m_EditorClassIdentifier: 
-  <Items>k__BackingField:
-  - {fileID: 11400000, guid: e05b53f76c4d20849819dc6833e21b06, type: 2}
+  folder: {fileID: 102900000, guid: 6acfbed7f09378147903019bf697ee0a, type: 3}
+  items: []

@@ -2,17 +2,16 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
+public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
     [SerializeField] private Shop shop;
     [SerializeField] private DrumNumberDisplay costView;
 
-    private ChipShopItemData item;
-    private Inventory inventory;
-    private readonly ItemFactory itemFactory = new();
-    private Item createdItem;
+    private ChipData item;
+    private ChipHolder chipHolder;
     private GoldenChips goldenChips;
-    public ChipShopItemData Item
+    private ChipData boughtItem;
+    public ChipData Item
     {
         get => item;
         private set
@@ -22,23 +21,22 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         }
     }
 
-    public bool IsInteractable => Item != null;
+    public bool IsInteractable => Item != null && IsAnimationPlaying == false;
     public bool IsAnimationPlaying { get; private set; } = false;
 
     public event Action<ItemData> ItemChanged;
 
     [Inject]
-    public void Construct(Inventory inventory, GoldenChips goldenChips)
+    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips)
     {
-        this.inventory = inventory;
+        this.chipHolder = chipHolder;
         this.goldenChips = goldenChips;
     }
 
-    public void SetItem(ChipShopItemData item)
+    public void SetItem(ChipData item)
     {
         Item = item;
         costView.SetNumber(Item.Cost);
-        ItemChanged?.Invoke(item);
         IsAnimationPlaying = true;
     }
 
@@ -50,7 +48,7 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
 
     public void HideDescription()
     {
-        shop.HIdeTooltip();
+        shop.HideTooltip();
     }
 
     public void Buy()
@@ -58,22 +56,21 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
         if (Item == null) return;
         if (TryBuy(this))
         {
-            Item = null;
-            ItemChanged?.Invoke(Item);
             HideDescription();
             costView.SetNumber(0);
             IsAnimationPlaying = true;
         }
     }
 
-    private bool TryBuy(ShopPlace place)
+    private bool TryBuy(ChipShopPlace place)
     {
         if (goldenChips.Amount >= place.Item.Cost)
         {
-            if (inventory.CanAddItem(place.Item))
+            if (chipHolder.HasFreeSlot)
             {
-                createdItem = itemFactory.Create(place.Item);
                 goldenChips.Remove(place.Item.Cost);
+                boughtItem = Item;
+                Item = null;
                 return true;
             }
             else
@@ -90,9 +87,11 @@ public class ShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickab
 
     public void UpdateInventory()
     {
-        if (createdItem == null) return;
-        inventory.TryAddItem(createdItem);
-        createdItem = null;
+        if (boughtItem != null)
+        {
+            chipHolder.AddChip(boughtItem);
+            boughtItem = null;
+        }
     }
 
     public void OnRaised()

@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6dbc4db4c39034abaed34c2ee168c8, type: 3}
-  m_Name: BlackChip
+  m_Script: {fileID: 11500000, guid: a935ec9091d449b42af4ae5f238d1f0e, type: 3}
+  m_Name: EvenChip
   m_EditorClassIdentifier: 
+  itemName: EvenChip
+  description: 
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 2
   Prefab: {fileID: 573473156636019110, guid: 55c244452c2ebea47aa0377220453297, type: 3}
-  Color: Black
   ModifyAmount: 2

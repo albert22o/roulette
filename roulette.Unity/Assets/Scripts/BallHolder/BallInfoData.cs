@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class BallInfoData : ScriptableObject
+﻿public abstract class BallInfoData : ItemData
 {
     public VisualComponent VisualComponent;
 

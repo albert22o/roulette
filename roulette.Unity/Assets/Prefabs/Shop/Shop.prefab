@@ -1144,6 +1144,7 @@ GameObject:
   - component: {fileID: 5032197059614776993}
   - component: {fileID: 3873016230863998728}
   - component: {fileID: 4711916822517841281}
+  - component: {fileID: 7554467970892361072}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -1267,6 +1268,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopCamera: {fileID: 5601833680969988884}
   shop: {fileID: 4580049872970351105}
+  firstBallLoader: {fileID: 7554467970892361072}
+--- !u!114 &7554467970892361072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723424273269335378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b136ce75809ec4448a471cec6a32756f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
 --- !u!1 &2052145530499165929
 GameObject:
   m_ObjectHideFlags: 0
