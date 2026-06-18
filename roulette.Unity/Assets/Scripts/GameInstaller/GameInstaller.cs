@@ -6,7 +6,7 @@ public class GameInstaller : MonoInstaller
 {
     [SerializeField] InventoryConfig inventoryConfig;
     [SerializeField] RoundsConfig roundsConfig;
-
+   
     public override void InstallBindings()
     {
         // Менеджеры состояний
@@ -49,5 +49,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<RewardCalculator>().AsSingle().NonLazy();
 
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
+
+        Container.Bind<ChipSpawner>().AsSingle();
     }
 }
