@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -30,13 +30,11 @@ public class BallResultsView : MonoBehaviour
     private void HideInfo()
     {
         infoPanel.SetActive(false);
-
     }
 
     private void OnDestroy()
     {
         ballResults.BallHovered -= ShowInfo;
         ballResults.BallUnHovered -= HideInfo;
-        
     }
 }
