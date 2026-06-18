@@ -7,7 +7,6 @@ public class ShopInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera shopCamera;
     [SerializeField] private Shop shop;
-    [SerializeField] private FirstBallLoader firstBallLoader;
 
     private GameStateManager stateManager;
     private bool isInteraction;
@@ -23,7 +22,6 @@ public class ShopInteractionHandler : MonoBehaviour
     private void Init()
     {
         isInitialized = true;
-        firstBallLoader.LoadBall();
     }
 
     private void OnEnable()

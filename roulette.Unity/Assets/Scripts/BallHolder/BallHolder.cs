@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zenject;
+using Zenject; 
 
 public class BallHolder 
 {
@@ -18,12 +18,14 @@ public class BallHolder
     public bool HasFreeSlot => balls.Count < Capacity;
 
     [Inject]
-    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, int capacity = 5)
+    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, BallHolderConfig config)
     {
         this.ballFactory = ballFactory;
-        Capacity = capacity;
+        Capacity = config.Capacity;
         gameStateManager.GameStateChanged += OnStateChanged;
-    }
+        foreach (BallInfoData ball in config.StartBalls)
+            AddBall(ball);
+}
 
     public void AddBall(BallInfoData ballInfoData)
     {

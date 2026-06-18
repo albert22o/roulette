@@ -5,6 +5,8 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField] RoundsConfig roundsConfig;
+    [SerializeField] BallHolderConfig ballHolderConfig;
+    [SerializeField] ChipHolderConfig chipHolderConfig;
 
     public override void InstallBindings()
     {
@@ -17,6 +19,8 @@ public class GameInstaller : MonoInstaller
         // Конфиги
         Container.BindInstance(roundsConfig).AsSingle();
         Container.Bind<TableConfig>().AsSingle();
+        Container.BindInstance(ballHolderConfig).AsSingle();
+        Container.BindInstance(chipHolderConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();

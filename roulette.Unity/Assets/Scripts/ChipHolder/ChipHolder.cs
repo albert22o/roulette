@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class ChipHolder
 {
@@ -16,11 +15,12 @@ public class ChipHolder
     public bool HasFreeSlot => FindFreeSlot() != -1;
     public IReadOnlyList<Chip> Chips => chips;
 
-    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, int capacity = 5)
+    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, ChipHolderConfig config)
     {
-        chips = new Chip[capacity];
+        Capacity = config.Capacity;
+        chips = new Chip[Capacity];
         roundStateManager.StateChanged += OnStateChanged;
-        Capacity = capacity; 
+         
         this.chipFactory = chipFactory;
     }
 
