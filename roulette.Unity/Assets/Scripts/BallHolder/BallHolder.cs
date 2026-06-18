@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Dynamic;
 using Zenject; 
 
 public class BallHolder 
@@ -23,9 +25,13 @@ public class BallHolder
         this.ballFactory = ballFactory;
         Capacity = config.Capacity;
         gameStateManager.GameStateChanged += OnStateChanged;
+
         foreach (BallInfoData ball in config.StartBalls)
-            AddBall(ball);
-}
+        {
+            var ballInfo = ballFactory.Create(ball);
+            balls.Add(ballInfo);
+        }
+    }
 
     public void AddBall(BallInfoData ballInfoData)
     {

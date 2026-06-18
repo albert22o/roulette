@@ -86,5 +86,6 @@ public class ShopInventory : MonoBehaviour
             chips[i].Index = i;
             chips[i].SetShop(shop);
         }
+        UpdateBalls();
     }
 }
