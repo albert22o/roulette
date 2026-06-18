@@ -17,7 +17,7 @@ public class BetCalculator
 
     private readonly Dictionary<DozenType, int> dozenMultipliers = new();
 
-    private readonly Dictionary<string, int> colorMultipliers = new();
+    private readonly Dictionary<ColorType, int> colorMultipliers = new();
 
     private bool active = true;
     private readonly BetTable betTable;
@@ -45,7 +45,7 @@ public class BetCalculator
         dozenMultipliers[dozen] = current + delta;
     }
 
-    public void ModifyColorMultiplier(string color, int delta)
+    public void ModifyColorMultiplier(ColorType color, int delta)
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
@@ -57,7 +57,7 @@ public class BetCalculator
     public void ResetDozenMultiplier(DozenType dozen) =>
         dozenMultipliers.Remove(dozen);
 
-    public void ResetColorMultiplier(string color) =>
+    public void ResetColorMultiplier(ColorType color) =>
         colorMultipliers.Remove(color);
 
     public void OnStateChanged(RoundState newState)
@@ -99,7 +99,7 @@ public class BetCalculator
     public int GetEffectiveDozenMultiplier(DozenType dozen) =>
         dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
 
-    public int GetEffectiveColorMultiplier(string color) =>
+    public int GetEffectiveColorMultiplier(ColorType color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 
     public void GetRewardAction()

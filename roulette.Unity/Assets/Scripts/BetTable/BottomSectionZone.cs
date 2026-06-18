@@ -1,13 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class BottomSectionZone : MonoBehaviour
 {
-    public string Color => color;
+    public ColorType Color => color;
     public DozenType Dozen => dozenType;
 
     [SerializeField] private DozenType dozenType;
-    [SerializeField] private string color;
+    [SerializeField] private ColorType color;
     [SerializeField] private Material baseMaterial;
     [SerializeField] private Material highlightMaterial;
     private SpriteRenderer BG;

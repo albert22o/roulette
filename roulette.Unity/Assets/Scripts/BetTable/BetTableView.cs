@@ -80,7 +80,7 @@ class BetTableView : MonoBehaviour
         availableSumText.text = newSum.ToString();
     }
 
-    private void OnPocketColorChanged(int index, string color)
+    private void OnPocketColorChanged(int index, ColorType color)
     {
         betButtons[index].Color = color;
     }

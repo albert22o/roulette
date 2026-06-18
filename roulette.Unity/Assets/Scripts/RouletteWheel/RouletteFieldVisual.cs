@@ -36,7 +36,7 @@ public class RouletteFieldVisual : MonoBehaviour
         textMeshPro.text = number.ToString();
     }
 
-    public void OnColorChanged(string color)
+    public void OnColorChanged(ColorType color)
     {
         meshRenderer.material.color = colorTable.GetColorByName(color);
     }

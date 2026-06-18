@@ -1,15 +1,16 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 public class RouletteWheel : MonoBehaviour, IRouletteWheel
 {
+    public event Action<string> BallHover;
+    public event Action<string> BallUnHover;
+    public event Action<string> BallClicked;
+
+    public event Action FieldsUpdated;
+
     [SerializeField] private SpinController spinController;
     [SerializeField] private BallsLauncher ballsLauncher;
     [SerializeField] private Transform physicsModel;
@@ -20,8 +21,6 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
     private TableConfig tableConfig;
 
     public RouletteWheelField[] Fields { get; set; } = new RouletteWheelField[37];
-
-    public event Action FieldsUpdated;
 
     public Transform InnerWheel => spinController.transform;
     public Vector2 PhysicsModelPosition => physicsModel.position;
@@ -66,6 +65,25 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         ballsManager.AllBallsStopped += OnAllBallsStopped;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
+
+        ballsLauncher.Clicked += OnBallClicked;
+        ballsLauncher.Hover += OnBallHover;
+        ballsLauncher.UnHover += OnBallUnHover;
+    }
+
+    private void OnBallUnHover(string hash)
+    {
+        BallUnHover?.Invoke(hash);
+    }
+
+    private void OnBallHover(string hash)
+    {
+        BallHover?.Invoke(hash);
+    }
+
+    private void OnBallClicked(string hash)
+    {
+        BallClicked?.Invoke(hash);
     }
 
     private void OnDisable()
@@ -80,7 +98,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         AllBallsStopped?.Invoke(hitsInfo);
     }
 
-    public void OnPocketColorChanged(int index, string color)
+    public void OnPocketColorChanged(int index, ColorType color)
     {
         int pos = Array.IndexOf(FieldsOrder, index);
         Fields[pos].Color = color;
@@ -119,7 +137,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         spinController.Spin();
     }
 
-    public void SetFieldColor(int fieldPosition, string color)
+    public void SetFieldColor(int fieldPosition, ColorType color)
     {
         Fields[fieldPosition].Color = color;
         FieldsUpdated?.Invoke();

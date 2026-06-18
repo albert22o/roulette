@@ -8,19 +8,13 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BetButton : MonoBehaviour, IPointerClickHandler
 {
-    public string Color
+    public ColorType Color
     {
-        get
-        {
-            return color;
-        }
+        get => color;
         set
         {
-            if (value != null)
-            {
-                color = value;
-                BG.material = GetColorMaterial(value);
-            }
+            color = value;
+            BG.material = GetColorMaterial(value);
         }
     }
     public int FieldNum
@@ -90,7 +84,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     private event Action OnRightClick;
     private event Action OnLeftClick;
     private readonly Stack<GameObject> stackChips = new();
-    private string color;
+    private ColorType color;
 
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
@@ -111,11 +105,11 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         OnRightClick += rightClickCallback;
     }
 
-    private Material GetColorMaterial(string fieldColor) => fieldColor switch
+    private Material GetColorMaterial(ColorType fieldColor) => fieldColor switch
     {
-        "Red" => redMaterial,
-        "Black" => blackMaterial,
-        "Green" => greenMaterial,
+        ColorType.Red => redMaterial,
+        ColorType.Black => blackMaterial,
+        ColorType.Green => greenMaterial,
         _ => greenMaterial,
     };
 
