@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4440986143267567449}
   - component: {fileID: 1932851546120740674}
+  - component: {fileID: 7588085295408872345}
   m_Layer: 0
   m_Name: BlackColor
   m_TagString: Untagged
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,6 +89,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7588085295408872345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199613225337524090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dozenType: 0
+  color: 1
+  baseMaterial: {fileID: 2100000, guid: 87245b78b553b5846882ae611b4a75e8, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &251013903016701161
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7805989103717219551}
   - component: {fileID: 8931191030884732115}
+  - component: {fileID: 3258340430882644816}
   m_Layer: 3
   m_Name: RedColor
   m_TagString: Untagged
@@ -812,7 +830,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -844,6 +862,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3258340430882644816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675780282498555125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dozenType: 0
+  color: 0
+  baseMaterial: {fileID: 2100000, guid: 991ae47d0f265e94780c1b078841eed6, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &3905590195395130995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,15 +1323,14 @@ MonoBehaviour:
   generalMultiplierText: {fileID: 2561205482209066509}
   timeBetweenHighlights: 1
   timeBetweenChipAnimations: 0.5
-  firstDozenSprite: {fileID: 922154701419371194}
-  secondDozenSprite: {fileID: 743462944292902941}
-  thirdDozenSprite: {fileID: 6759021856524701890}
-  redNumberSprite: {fileID: 8931191030884732115}
-  blackNumberSprite: {fileID: 1932851546120740674}
-  colorHighlight: {r: 0.78431374, g: 0.8117647, b: 0.101960786, a: 1}
-  dozenHighlight: {r: 0.8901961, g: 0.9254902, b: 0, a: 1}
-  numberHighlight: {r: 0.972549, g: 1, b: 0.23137255, a: 1}
-  lowlight: {r: 0.6117647, g: 0.6117647, b: 0.6117647, a: 1}
+  timeBeforeBetsResults: 3
+  bottomSectionColorZones:
+  - {fileID: 3258340430882644816}
+  - {fileID: 7588085295408872345}
+  bottomSectionDozenZones:
+  - {fileID: 4837969885485422089}
+  - {fileID: 1889428634186802230}
+  - {fileID: 8989331756827094103}
 --- !u!1 &6472862418836013477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,6 +1341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5686245406408570751}
   - component: {fileID: 743462944292902941}
+  - component: {fileID: 1889428634186802230}
   m_Layer: 0
   m_Name: SecondDozen
   m_TagString: Untagged
@@ -1354,7 +1388,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1386,6 +1420,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1889428634186802230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6472862418836013477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dozenType: 2
+  color: 0
+  baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &6700294587710463164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,6 +1626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3430155385187017934}
   - component: {fileID: 6759021856524701890}
+  - component: {fileID: 4837969885485422089}
   m_Layer: 0
   m_Name: ThirdDozen
   m_TagString: Untagged
@@ -1622,7 +1673,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1654,6 +1705,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4837969885485422089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833406641152632364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dozenType: 3
+  color: 0
+  baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &8474577656311464227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5782402974554005565}
   - component: {fileID: 922154701419371194}
+  - component: {fileID: 8989331756827094103}
   m_Layer: 3
   m_Name: FirstDozen
   m_TagString: Untagged
@@ -1710,7 +1778,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1742,6 +1810,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8989331756827094103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474577656311464227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f25fc8e25a63f46867c19d0043be21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dozenType: 1
+  color: 0
+  baseMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
 --- !u!1 &8690941566422443102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,6 +2230,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(22)
@@ -2219,6 +2307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(29)
@@ -2292,6 +2384,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(17)
@@ -2365,6 +2461,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(28)
@@ -2438,6 +2538,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(33)
@@ -2511,6 +2615,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(8)
@@ -2584,6 +2692,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(4)
@@ -2657,6 +2769,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(21)
@@ -2730,6 +2846,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(6)
@@ -2803,6 +2923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(35)
@@ -2876,6 +3000,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(24)
@@ -2949,6 +3077,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(5)
@@ -3022,6 +3154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(15)
@@ -3095,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(7)
@@ -3168,6 +3308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(25)
@@ -3241,6 +3385,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(30)
@@ -3314,6 +3462,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(26)
@@ -3387,6 +3539,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(10)
@@ -3460,6 +3616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(34)
@@ -3533,6 +3693,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(19)
@@ -3606,6 +3770,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(14)
@@ -3679,6 +3847,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(3)
@@ -3752,6 +3924,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(31)
@@ -3825,6 +4001,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(32)
@@ -3898,6 +4078,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(13)
@@ -3971,6 +4155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(2)
@@ -4044,6 +4232,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(20)
@@ -4117,6 +4309,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(18)
@@ -4190,6 +4386,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(11)
@@ -4263,6 +4463,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(36)
@@ -4336,6 +4540,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(1)
@@ -4409,6 +4617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(16)
@@ -4482,6 +4694,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(9)
@@ -4555,6 +4771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(23)
@@ -4648,6 +4868,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.12941177
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 1872545594907299775, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -4779,6 +5003,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(27)
@@ -4852,6 +5080,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
     - target: {fileID: 5955095820531756855, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       propertyPath: m_Name
       value: BetButton(12)

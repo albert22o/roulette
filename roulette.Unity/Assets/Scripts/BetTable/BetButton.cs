@@ -13,10 +13,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         get => color;
         set
         {
-           
             color = value;
-            BG.color = GetColor(value);
-            
+            BG.material = GetColorMaterial(value);
         }
     }
     public int FieldNum
@@ -59,24 +57,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     {
         get
         {
-            DozenType dozenType;
-
-            switch ((FieldNum + 11) / 12)
+            var dozenType = ((FieldNum + 11) / 12) switch
             {
-                case 1:
-                    dozenType = DozenType.First;
-                    break;
-                case 2:
-                    dozenType = DozenType.Second;
-                    break;
-                case 3:
-                    dozenType = DozenType.Third;
-                    break;
-                default:
-                    dozenType = DozenType.Zero;
-                    break;
-            }
-
+                1 => DozenType.First,
+                2 => DozenType.Second,
+                3 => DozenType.Third,
+                _ => DozenType.Zero,
+            };
             return dozenType;
         }
     }
@@ -86,10 +73,12 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] TextMeshPro fieldNumText;
     [SerializeField] Transform spawnChipPoint;
     [SerializeField] GameObject chipPrefab;
-    [SerializeField] Color colorHighlight;
-    [SerializeField] Color dozenHighlight;
-    [SerializeField] Color numberHighlight;
-    [SerializeField] Color lowlight;
+    [SerializeField] Material blackMaterial;
+    [SerializeField] Material redMaterial;
+    [SerializeField] Material greenMaterial;
+    [SerializeField] Material colorHighlight;
+    [SerializeField] Material dozenHighlight;
+    [SerializeField] Material numberHighlight;
 
     private SpriteRenderer BG;
     private event Action OnRightClick;
@@ -116,12 +105,12 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         OnRightClick += rightClickCallback;
     }
 
-    private Color GetColor(ColorType fieldColor) => fieldColor switch
+    private Material GetColorMaterial(ColorType fieldColor) => fieldColor switch
     {
-        ColorType.Red => UnityEngine.Color.red,
-        ColorType.Black => UnityEngine.Color.black,
-        ColorType.Green => customGreen,
-        _ => UnityEngine.Color.white,
+        ColorType.Red => redMaterial,
+        ColorType.Black => blackMaterial,
+        ColorType.Green => greenMaterial,
+        _ => greenMaterial,
     };
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -139,13 +128,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             switch (phase)
             {
                 case HighlightPhase.Color:
-                    BG.color = colorHighlight;
+                    BG.material = colorHighlight;
                     break;
                 case HighlightPhase.Dozen:
-                    BG.color = dozenHighlight;
+                    BG.material = dozenHighlight;
                     break;
                 case HighlightPhase.Number:
-                    BG.color = numberHighlight;
+                    BG.material = numberHighlight;
                     break;
             }
             IsHighlighted = true;
@@ -153,14 +142,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         else
         {
             IsHighlighted = false;
-            BG.color = GetColor(color);
+            BG.material = GetColorMaterial(color);
         }
-    }
-
-    public void Lowlight(bool isEnabled)
-    {
-        if (isEnabled && !IsHighlighted)
-            BG.color = lowlight;
     }
 
     public enum HighlightPhase 

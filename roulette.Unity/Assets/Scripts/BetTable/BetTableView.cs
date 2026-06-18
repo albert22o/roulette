@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Zenject;
 
@@ -15,26 +13,17 @@ class BetTableView : MonoBehaviour
     [SerializeField] TextMeshPro generalMultiplierText;
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
+    [SerializeField] float timeBeforeBetsResults = 3f;
 
-    [SerializeField] SpriteRenderer firstDozenSprite;
-    [SerializeField] SpriteRenderer secondDozenSprite;
-    [SerializeField] SpriteRenderer thirdDozenSprite;
-    [SerializeField] SpriteRenderer redNumberSprite;
-    [SerializeField] SpriteRenderer blackNumberSprite;
-
-    [SerializeField] Color colorHighlight;
-    [SerializeField] Color dozenHighlight;
-    [SerializeField] Color numberHighlight;
-    [SerializeField] Color lowlight;
+    [SerializeField] BottomSectionZone[] bottomSectionColorZones;
+    [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
 
     private BetTable betTable;
     private TableConfig tableConfig;
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
-    private float generalMultiplier;
-    private int betSum;
-    private Color baseBottomSectionColor;
+    private int generalMultiplier;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
@@ -78,14 +67,11 @@ class BetTableView : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (betTable != null && betCalculator != null && tableConfig != null)
-        {
-            betCalculator.HighlightButtons -= OnHighlightButton;
-            betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
-            tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
-            tableConfig.PocketColorChanged -= OnPocketColorChanged;
-            betTable.ChangeAvailableSum -= OnChangeAvailableSum;
-        }
+        betCalculator.HighlightButtons -= OnHighlightButton;
+        betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
+        tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
+        tableConfig.PocketColorChanged -= OnPocketColorChanged;
+        betTable.ChangeAvailableSum -= OnChangeAvailableSum;
     }
 
     private void OnChangeAvailableSum(int newSum)
@@ -113,149 +99,125 @@ class BetTableView : MonoBehaviour
         StartCoroutine(ResultDisplaySequence(hitInfo));
     }
 
-    public IEnumerator ResultDisplaySequence(HitInfo hitInfo)
+    private IEnumerator ResultDisplaySequence(HitInfo hitInfo)
     {
+        int betSum = 0;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
-        baseBottomSectionColor = firstDozenSprite.color;
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
             betSum += amount;
         betText.text = betSum.ToString();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(timeBeforeBetsResults);
 
         foreach ((var betInfo, var _) in betTable.NotNullBetAmounts)
         {
-            if (hitInfo.FieldColor == betInfo.FieldColor || hitInfo.Dozen == betInfo.Dozen)
+            if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
+                continue;
+
+            HighlightButtonsWhere(button => button.Color == hitInfo.FieldColor, BetButton.HighlightPhase.Color);
+            HighlightBottomSectionColor(hitInfo);
+            DisplayMultiplier(betCalculator.ColorMultiplier);
+
+            yield return new WaitForSeconds(timeBetweenHighlights);
+
+            if (hitInfo.Dozen != betInfo.Dozen)
             {
-                ProcessButtonHighlightByColor(hitInfo);
-                ProcessBottomSectionHighlightByColor(hitInfo, betInfo);
-                DisplayColorMultiplier();
-
-                if (hitInfo.Dozen == betInfo.Dozen)
-                {
-                    yield return new WaitForSeconds(timeBetweenHighlights);
-
-                    ProcessButtonHighlightByDozen(hitInfo);
-                    ProcessBottomSectionHighlightByDozen(hitInfo, betInfo);
-                    DisplayDozenMultiplier();
-
-                    if (hitInfo.FieldNumber == betInfo.FieldNumber)
-                    {
-                        yield return new WaitForSeconds(timeBetweenHighlights);
-
-                        ProcessButtonHighlightByNumber(hitInfo);
-                        DisplayNumberMultiplier(betInfo);
-                    }
-                }
-
-                yield return new WaitForSeconds(timeBetweenHighlights);
-
-                for (int i = 0; i < chipHolder.Сhips.Length; i++)
-                {
-                    chipHolder.ApplyByIndex(i);
-                    DisplayMaxWinningMultiplier(hitInfo, betInfo);
-
-                    yield return new WaitForSeconds(timeBetweenChipAnimations);
-                }
+                yield return ApplyChips(betInfo, hitInfo);
+                betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+                continue;
             }
+
+            HighlightButtonsWhere(button => button.Dozen == hitInfo.Dozen, BetButton.HighlightPhase.Dozen);
+            HighlightBottomSectionDozen(hitInfo);
+            DisplayMultiplier(betCalculator.DozenMultiplier);
+
+            yield return new WaitForSeconds(timeBetweenHighlights);
+
+            if (hitInfo.FieldNumber != betInfo.FieldNumber)
+            {
+                yield return ApplyChips(betInfo, hitInfo);
+                betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+                continue;
+            }
+
+            HighlightButtonsWhere(button => button.FieldNum == hitInfo.FieldNumber, BetButton.HighlightPhase.Number);
+            if (hitInfo.FieldNumber == 0)
+                DisplayMultiplier(betCalculator.ZeroMultiplier);
+            else
+                DisplayMultiplier(betCalculator.NumMultiplier);
+            
+            yield return new WaitForSeconds(timeBetweenHighlights);
+
+            yield return ApplyChips(betInfo, hitInfo);
+            betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
         }
+        ResetTable();
+    }
 
-        yield return new WaitForSeconds(3f);
-
-        foreach (BetButton button in betButtons)
-            button.Highlight(false, BetButton.HighlightPhase.None);
-        ResetBottomSectionColors();
+    private void ResetTable()
+    {
+        ResetButtonColors();
 
         generalMultiplier = 0;
         generalMultiplierText.text = "";
-        betSum = 0;
         betText.text = "";
 
-        betCalculator.GetRewardAction(hitInfo);
         betTable.ClearBets();
     }
 
-    private void ProcessButtonHighlightByColor(HitInfo hitInfo)
+    private IEnumerator ApplyChips(BetInfo betInfo, HitInfo hitInfo)
+    {
+        for (int i = 0; i < chipHolder.Сhips.Length; i++)
+        {
+            chipHolder.ApplyByIndex(i);
+            DisplayMaxWinningMultiplier(hitInfo, betInfo);
+
+            yield return new WaitForSeconds(timeBetweenChipAnimations);
+        }
+    }
+
+    private void HighlightButtonsWhere(Func<BetButton, bool> predicate, BetButton.HighlightPhase phase)
     {
         foreach (BetButton button in betButtons)
         {
-            if (button.Color == hitInfo.FieldColor)
-                button.Highlight(true, BetButton.HighlightPhase.Color);
+            if (predicate(button))
+                button.Highlight(true, phase);
         }
     }
 
-    private void ProcessButtonHighlightByDozen(HitInfo hitInfo)
+    private void HighlightBottomSectionColor(HitInfo hitInfo)
+    {
+        foreach (BottomSectionZone zone in bottomSectionColorZones)
+        {
+            if (zone.Color == hitInfo.FieldColor)
+                zone.Highlight(true);
+        }
+    }
+
+    private void HighlightBottomSectionDozen(HitInfo hitInfo)
+    {
+        foreach (BottomSectionZone zone in bottomSectionDozenZones)
+        {
+            if (zone.Dozen == hitInfo.Dozen)
+                zone.Highlight(true);
+        }
+    }
+
+    private void ResetButtonColors()
     {
         foreach (BetButton button in betButtons)
-        {
-            if (button.Dozen == hitInfo.Dozen)
-                button.Highlight(true, BetButton.HighlightPhase.Dozen);
-        }
+            button.Highlight(false, BetButton.HighlightPhase.None);
+
+        foreach (BottomSectionZone bottomSectionZone in bottomSectionColorZones)
+             bottomSectionZone.Highlight(false);
+
+        foreach (BottomSectionZone bottomSectionZone in bottomSectionDozenZones)
+            bottomSectionZone.Highlight(false);
     }
 
-    private void ProcessButtonHighlightByNumber(HitInfo hitInfo)
+    private void DisplayMultiplier(int multiplier)
     {
-        foreach (BetButton button in betButtons)
-        {
-            if (button.FieldNum == hitInfo.FieldNumber)
-                button.Highlight(true, BetButton.HighlightPhase.Number);
-        }
-    }
-
-    private void ProcessBottomSectionHighlightByDozen(HitInfo hitInfo, BetInfo betInfo)
-    {
-        if (hitInfo.Dozen != DozenType.Zero)
-        {
-            SpriteRenderer spriteToColor = hitInfo.Dozen switch
-            {
-                DozenType.First => firstDozenSprite,
-                DozenType.Second => secondDozenSprite,
-                DozenType.Third => thirdDozenSprite,
-                _ => null
-            };
-
-            spriteToColor.color = dozenHighlight;
-        }
-    }
-
-    private void ProcessBottomSectionHighlightByColor(HitInfo hitInfo, BetInfo betInfo)
-    {
-        if (hitInfo.FieldColor != ColorType.Green)
-        {
-            SpriteRenderer spriteToColor = hitInfo.FieldColor == ColorType.Red
-                ? spriteToColor = redNumberSprite
-                : spriteToColor = blackNumberSprite;
-
-            spriteToColor.color = colorHighlight;
-        }
-    }
-
-    private void ResetBottomSectionColors()
-    {
-        firstDozenSprite.color = baseBottomSectionColor;
-        secondDozenSprite.color = baseBottomSectionColor;
-        thirdDozenSprite.color = baseBottomSectionColor;
-        redNumberSprite.color = baseBottomSectionColor;
-        blackNumberSprite.color = baseBottomSectionColor;
-    }
-
-    private void DisplayColorMultiplier()
-    {
-        generalMultiplier = betCalculator.ColorMultiplier;
-        generalMultiplierText.text = "x" + generalMultiplier.ToString();
-    }
-
-    private void DisplayDozenMultiplier()
-    {
-        generalMultiplier = betCalculator.DozenMultiplier;
-        generalMultiplierText.text = "x" + generalMultiplier.ToString();
-    }
-
-    private void DisplayNumberMultiplier(BetInfo betInfo)
-    {
-        generalMultiplier = betInfo.FieldNumber == 0
-            ? betCalculator.ZeroMultiplier
-            : betCalculator.NumMultiplier;
+        generalMultiplier = multiplier;
         generalMultiplierText.text = "x" + generalMultiplier.ToString();
     }
 

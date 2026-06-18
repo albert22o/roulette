@@ -283,10 +283,12 @@ MonoBehaviour:
   fieldNumText: {fileID: 8548362096563339515}
   spawnChipPoint: {fileID: 7474288467868680278}
   chipPrefab: {fileID: 8665725115522850742, guid: 815b3ec4b96cfa7498c230a23fbe0d93, type: 3}
-  colorHighlight: {r: 1, g: 0.80791026, b: 0.2216981, a: 1}
-  dozenHighlight: {r: 0.9559748, g: 0.8121216, b: 0.093192354, a: 1}
-  numberHighlight: {r: 0.9433962, g: 0.80355555, b: 0.08603289, a: 1}
-  lowlight: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+  blackMaterial: {fileID: 2100000, guid: 87245b78b553b5846882ae611b4a75e8, type: 2}
+  redMaterial: {fileID: 2100000, guid: 991ae47d0f265e94780c1b078841eed6, type: 2}
+  greenMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
+  colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  numberHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
 --- !u!65 &658725084393326555
 BoxCollider:
