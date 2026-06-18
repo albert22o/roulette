@@ -29,6 +29,10 @@ public class BallHolder
 
         var ballData = ScriptableObject.CreateInstance<SimpleBallInfoData>();
         ballData.VisualComponent = visualComponent;
+
+        ballData.Name = "Тестовый шар";
+        ballData.Description = "Это описание тестового шара для проверки UI";
+
         balls.Add(ballFactory.Create(ballData));
         balls.Add(ballFactory.Create(ballData));
 
