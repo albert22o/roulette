@@ -1,12 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "PrimeBonusChipData", menuName = "Chips/PrimeBonusChipData")]
+[CreateAssetMenu(fileName = "PrimeBonusChip", menuName = "Chips/PrimeBonusChip")]
 public class PrimeBonusChipData : ChipData
 {
-    public int BonusAmount = 2;
+    public int BonusAmount = 0;
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new PrimeBonusChip(deps.BetCalculator, deps.RouletteBallsManager, this);
+        return new PrimeBonusChip(
+            deps.BetCalculator,
+            deps.RouletteBallsManager,
+            deps.OnBallSelected,
+            this);
     }
 }

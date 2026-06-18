@@ -18,6 +18,7 @@ public class BallResults
         this.roundStateManager.StateChanged += OnStateChanged;
     }
 
+    public Action<HitInfo> GetBallSelectedEvent() => BallSelected;
     public void SelectBall(string ballhash)
     {
         if (!active)
