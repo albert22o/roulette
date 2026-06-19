@@ -115,8 +115,12 @@ class BetTableView : MonoBehaviour
         foreach ((var betInfo, var _) in betTable.NotNullBetAmounts)
         {
             if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
+            {
+                ResetTable();
+                roundStateManager.ChangeState(RoundStateManager.RoundState.PlacingBets);
                 continue;
-
+            }
+                
             HighlightButtonsWhere(button => button.Color == hitInfo.FieldColor, BetButton.HighlightPhase.Color);
             HighlightBottomSectionColor(hitInfo);
             DisplayMultiplier(betCalculator.ColorMultiplier);
@@ -159,7 +163,7 @@ class BetTableView : MonoBehaviour
         betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
     }
 
-    private void ResetTable(int _)
+    private void ResetTable(int _ = 0)
     {
         ResetButtonColors();
 
