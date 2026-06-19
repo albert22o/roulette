@@ -4,7 +4,7 @@ public abstract class Chip
 {
     public ChipData ChipData { get; }
     protected HashSet<string> EligibleBallHashes { get; private set; } = new HashSet<string>();
-    public Chip(ChipData chipData)
+    protected Chip(ChipData chipData)
     {
         ChipData = chipData;
     }
