@@ -8,9 +8,10 @@ public class ChipFactory
         BetCalculator betCalculator,
         BetTable betTable,
         RouletteBallsManager rouletteBallsManager,
-        Action<HitInfo> onBallSelected)  
+        Action<HitInfo> onBallSelected,
+        GoldenChips goldenChips)  
     {
-        deps = new ChipDependencies(betCalculator, betTable, rouletteBallsManager, onBallSelected);
+        deps = new ChipDependencies(betCalculator, betTable, rouletteBallsManager, onBallSelected, goldenChips);
     }
 
     public Chip Create(ChipData data) => data.CreateChip(deps);
