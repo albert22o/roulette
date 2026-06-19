@@ -6,7 +6,6 @@ using Zenject;
 public class ChipSpawnerView : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private int chipsToSpawn = 5;
     [SerializeField] private float spawnInterval = 0.5f;
 
     [SerializeField] private GameObject chipPrefab;
@@ -24,19 +23,19 @@ public class ChipSpawnerView : MonoBehaviour
 
     private void OnEnable()
     {
-        chipSpawner.ChipSpawnerRequested += OnChipSpawnRequested;
+        chipSpawner.ChipSpawnerRequested += StartSpawningWithInterval;
         chipSpawner.ChipClearRequested += OnClearRequested;
     }
 
     private void OnDisable()
     {
-        chipSpawner.ChipSpawnerRequested -= OnChipSpawnRequested;
+        chipSpawner.ChipSpawnerRequested -= StartSpawningWithInterval;
         chipSpawner.ChipClearRequested -= OnClearRequested;
 
         OnClearRequested();
     }
 
-    private void OnChipSpawnRequested()
+    private void SpawnChip()
     {
         GameObject chip = Instantiate(chipPrefab,spawnPoint.position, Quaternion.identity);
         spawnedChips.Add(chip);
@@ -57,19 +56,19 @@ public class ChipSpawnerView : MonoBehaviour
         spawnedChips.Clear();
     }
 
-    private void StartSpawningWithInterval()
+    private void StartSpawningWithInterval(int chipsToSpawn)
     {
         if (spawnCoroutine != null)
             StopCoroutine (spawnCoroutine);
 
-        spawnCoroutine = StartCoroutine(SpawnRoutine());
+        spawnCoroutine = StartCoroutine(SpawnRoutine(chipsToSpawn));
     }
 
-    private IEnumerator SpawnRoutine()
+    private IEnumerator SpawnRoutine(int chipsToSpawn)
     {
         for (int i = 0; i < chipsToSpawn; i++)
         {
-            chipSpawner.RequestSpawn();
+            SpawnChip();
             yield return new WaitForSeconds(spawnInterval);
         }
         spawnCoroutine = null;

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class ChipSpawner
 {
-    public event Action ChipSpawnerRequested;
+    public event Action<int> ChipSpawnerRequested;
     public event Action ChipClearRequested;
 
-    public void RequestSpawn()
+    public void RequestSpawn(int amount)
     {
-        ChipSpawnerRequested?.Invoke();
+        ChipSpawnerRequested?.Invoke(amount);
     }
 
     public void RecquestClear()

@@ -20,7 +20,7 @@ public class BetTable
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
     private bool active;
-    public const int betStep = 25;
+    public const int BetStep = 25;
 
     public BetTable(TableConfig tableConfig, RoundStateManager roundStateManager)
     {
@@ -39,17 +39,17 @@ public class BetTable
             return;
         if (!betAmounts.ContainsKey(index))
             return;
-        if (availableBetSum < betStep)
+        if (availableBetSum < BetStep)
             return;
         if (!betIndexSet.Contains(index) 
             && betIndexSet.Count >= tableConfig.MaxBetsAtBoard)
             return;
         betIndexSet.Add(index);
 
-        betAmounts[index] += betStep;
+        betAmounts[index] += BetStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
 
-        availableBetSum -= betStep;
+        availableBetSum -= BetStep;
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
@@ -59,14 +59,14 @@ public class BetTable
             return;
         if (!betAmounts.ContainsKey(index))
             return;
-        if (betAmounts[index] < betStep)
+        if (betAmounts[index] < BetStep)
             return;
         betIndexSet.Remove(index);
 
-        betAmounts[index] -= betStep;
+        betAmounts[index] -= BetStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
 
-        availableBetSum += betStep;
+        availableBetSum += BetStep;
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 

@@ -25,19 +25,17 @@ class BetTableView : MonoBehaviour
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
-    ChipSpawner chipSpawner;
     private int generalMultiplier;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
-        RoundStateManager roundStateManager, ChipHolder chipHolder, ChipSpawner chipSpawner)
+        RoundStateManager roundStateManager, ChipHolder chipHolder)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
         this.roundStateManager = roundStateManager;
         this.chipHolder = chipHolder;
-        this.chipSpawner = chipSpawner;
     }
 
     public void Start()

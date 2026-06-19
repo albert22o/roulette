@@ -21,11 +21,13 @@ public class BetCalculator
 
     private bool active = true;
     private readonly BetTable betTable;
+    private readonly ChipSpawner chipSpawner;
     private int reward;
 
-    public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
+    public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager, ChipSpawner chipSpawner)
     {
         this.betTable = betTable;
+        this.chipSpawner = chipSpawner;
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }
@@ -104,6 +106,7 @@ public class BetCalculator
 
     public void GetRewardAction()
     {
+        chipSpawner.RequestSpawn(reward/BetTable.BetStep);
         GetReward?.Invoke(reward);
     }
 
