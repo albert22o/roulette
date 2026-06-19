@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Odd_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Divisior: 0
-  Remainder: 0
-  BonusAmount: 0
+  Divisior: 2
+  Remainder: 1
+  BonusAmount: 1

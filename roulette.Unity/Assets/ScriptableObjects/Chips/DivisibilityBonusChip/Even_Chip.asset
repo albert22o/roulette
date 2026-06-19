@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Even_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Divisior: 0
+  Divisior: 2
   Remainder: 0
-  BonusAmount: 0
+  BonusAmount: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Luck4_Chip
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Divisor: 0
+  Divisor: 4
   Remainder: 0
   Multiplier: 2
