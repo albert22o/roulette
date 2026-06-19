@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using static RoundStateManager;
 
@@ -75,15 +76,16 @@ public class RoundManager
     private readonly BetCalculator betCalculator;
     private readonly ChipHolder chipHolder;
     private readonly BallHolder ballHolder;
+    private readonly BetTable betTable;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator,
-        ChipHolder chipHolder, BallHolder ballHolder)
+        ChipHolder chipHolder, BallHolder ballHolder, BetTable betTable)
     {
         this.rouletteWheel = rouletteWheel;
 
         betCalculator.GetReward += OnGetReward;
-        
+        this.betTable = betTable;
         this.roundStateManager = roundStateManager;
         this.tableConfig = tableConfig;
         this.progressionManager = progressionManager;
@@ -106,6 +108,8 @@ public class RoundManager
         if (betState != RoundState.PlacingBets)
             return;
         if (betCount <= 0)
+            return;
+        if (!betTable.NotNullBetAmounts.Any())
             return;
 
         roundStateManager.ChangeState(RoundState.WheelSpining);

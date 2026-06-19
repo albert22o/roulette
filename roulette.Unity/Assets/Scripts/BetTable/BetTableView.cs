@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using Zenject;
 
@@ -24,17 +25,19 @@ class BetTableView : MonoBehaviour
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
+    ChipSpawner chipSpawner;
     private int generalMultiplier;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
-        RoundStateManager roundStateManager, ChipHolder chipHolder)
+        RoundStateManager roundStateManager, ChipHolder chipHolder, ChipSpawner chipSpawner)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
         this.roundStateManager = roundStateManager;
         this.chipHolder = chipHolder;
+        this.chipSpawner = chipSpawner;
     }
 
     public void Start()
@@ -57,6 +60,7 @@ class BetTableView : MonoBehaviour
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
         betCalculator.HighlightButtons += OnHighlightButton;
+        betCalculator.GetReward += ResetTable;
 
         foreach (var pocket in tableConfig.PocketMapping)
         {
@@ -123,8 +127,7 @@ class BetTableView : MonoBehaviour
 
             if (hitInfo.Dozen != betInfo.Dozen)
             {
-                yield return ApplyChips(betInfo, hitInfo);
-                betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+                yield return FinishDisplaySequence(betInfo, hitInfo, betSum);
                 continue;
             }
 
@@ -136,8 +139,7 @@ class BetTableView : MonoBehaviour
 
             if (hitInfo.FieldNumber != betInfo.FieldNumber)
             {
-                yield return ApplyChips(betInfo, hitInfo);
-                betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+                yield return FinishDisplaySequence(betInfo, hitInfo, betSum);
                 continue;
             }
 
@@ -149,13 +151,17 @@ class BetTableView : MonoBehaviour
             
             yield return new WaitForSeconds(timeBetweenHighlights);
 
-            yield return ApplyChips(betInfo, hitInfo);
-            betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+            yield return FinishDisplaySequence(betInfo, hitInfo, betSum);
         }
-        ResetTable();
     }
 
-    private void ResetTable()
+    private IEnumerator FinishDisplaySequence(BetInfo betInfo, HitInfo hitInfo, int betSum)
+    {
+        yield return ApplyChips(betInfo, hitInfo);
+        betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
+    }
+
+    private void ResetTable(int _)
     {
         ResetButtonColors();
 

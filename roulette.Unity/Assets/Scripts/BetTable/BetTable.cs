@@ -20,7 +20,7 @@ public class BetTable
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
     private bool active;
-    private const int betStep = 25;
+    public const int betStep = 25;
 
     public BetTable(TableConfig tableConfig, RoundStateManager roundStateManager)
     {
