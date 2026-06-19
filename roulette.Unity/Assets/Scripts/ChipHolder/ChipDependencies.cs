@@ -7,13 +7,15 @@ public class ChipDependencies
     public Action<HitInfo> OnBallSelected { get; }
     public GoldenChips GoldenChips { get; }
     public Money Money { get; }
+    public ChipHolder ChipHolder { get; }
     public ChipDependencies(
         BetCalculator betCalculator,
         BetTable betTable,
         RouletteBallsManager rouletteBallsManager,
         Action<HitInfo> onBallSelected,
         GoldenChips goldenChips,
-        Money money)
+        Money money,
+        ChipHolder chipHolder)
     {
         BetCalculator = betCalculator;
         BetTable = betTable;
@@ -21,5 +23,6 @@ public class ChipDependencies
         OnBallSelected = onBallSelected;
         GoldenChips = goldenChips;
         Money = money;
+        ChipHolder = chipHolder;
     }
 }
