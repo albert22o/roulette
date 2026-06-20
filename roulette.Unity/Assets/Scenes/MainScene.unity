@@ -1910,8 +1910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb07ef782aeff98498b72eb48a04adb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryConfig: {fileID: 11400000, guid: 17dbda15b29519849b58142e39003a4b, type: 2}
   roundsConfig: {fileID: 11400000, guid: 8cce83c490e29c342ad61e362b7cd029, type: 2}
+  ballHolderConfig: {fileID: 11400000, guid: e6b9f1e1fdc9f564e804aba8e11227f4, type: 2}
+  chipHolderConfig: {fileID: 11400000, guid: d717b0894ca611e47b121125725b184b, type: 2}
 --- !u!114 &1216754607
 MonoBehaviour:
   m_ObjectHideFlags: 0
