@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "PassiveBonusChipData", menuName = "Chips/PassiveBonusChipData")]
+[CreateAssetMenu(fileName = "PassiveChipData", menuName = "Chips/PassiveChipData")]
 public class PassiveChipData : ChipData
 {
     public int BonusAmount = 0;

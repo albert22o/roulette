@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "MultiplyDivisibilityChip", menuName = "Chips/MultiplyDivisibilityBonusChip")]
+[CreateAssetMenu(fileName = "MultiplyDivisibilityChip", menuName = "Chips/MultiplyDivisibilityChip")]
 public class MultiplyDivisibilityChipData : ChipData
 {
     public int Divisor;
