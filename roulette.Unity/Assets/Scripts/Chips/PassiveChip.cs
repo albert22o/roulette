@@ -5,9 +5,7 @@ public class PassiveChip : Chip
     private readonly BetCalculator betCalculator;
     private readonly int bonusAmount;
 
-    public PassiveChip(
-        BetCalculator betCalculator,
-        PassiveChipData data) : base(data)
+    public PassiveChip(BetCalculator betCalculator, PassiveChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         bonusAmount = data.BonusAmount;

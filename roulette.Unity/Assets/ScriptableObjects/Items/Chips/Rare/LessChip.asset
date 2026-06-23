@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6066436ff2ae1540a002d5f4c12fbbc, type: 3}
-  m_Name: RangeBonusChip
+  m_Name: LessChip
   m_EditorClassIdentifier: 
+  itemName: 
+  description: 
+  shopPrefab: {fileID: 0}
+  cost: 0
   Prefab: {fileID: 0}
   MinNumber: 19
   MaxNumber: 36

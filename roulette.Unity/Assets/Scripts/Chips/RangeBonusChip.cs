@@ -10,21 +10,20 @@ public class RangeBonusChip : Chip
 
     private bool modifierApplied = false;
 
-    public RangeBonusChip(
-        BetCalculator betCalculator,
-        BallResults ballResults,
-        RangeBonusChipData data) : base(data)
+    public RangeBonusChip(BetCalculator betCalculator, BallResults ballResults, RangeBonusChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
         minNumber = data.MinNumber;
         maxNumber = data.MaxNumber;
         bonusAmount = data.BonusAmount;
+
+        this.ballResults.BallSelected += OnBallSelected;
     }
 
     public override void Apply()
     {
-        ballResults.BallSelected += OnBallSelected;
+        
     }
 
     public override void Revert()
