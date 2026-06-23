@@ -23,12 +23,11 @@ public class DivisibilityChip : Chip
 
     public override void Apply()
     {
+        modifierApplied = false;
     }
 
     public override void Revert()
     {
-        ballResults.BallSelected -= OnBallSelected;
-
         if (modifierApplied)
         {
             for (int i = 0; i <= 36; i++)
@@ -41,6 +40,8 @@ public class DivisibilityChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
+        if (modifierApplied) return;
+
         if (hit.FieldNumber != 0 && hit.FieldNumber % divisor == remainder)
         {
             for (int i = 0; i <= 36; i++)
