@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Animator))]
 public class BallVisual : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public event Action<string> Hover;
@@ -14,6 +15,8 @@ public class BallVisual : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Ball ball;
     private VisualComponent visualComponent;
     private float scaleMultiplier;
+    private Animator animator;
+    private bool updateFrozen = false;
 
     public void SetVisualComponent(VisualComponent visualComponent)
     {
@@ -26,7 +29,13 @@ public class BallVisual : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         this.ball = ball;
         this.scaleMultiplier = scaleMultiplier;
         ball.Destroyed += OnBallDestroy;
+        ball.Animated += OnBallAnimated;
         this.rouletteOrigin = rouletteOrigin;
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
     }
 
     private void OnDestroy()
@@ -46,6 +55,8 @@ public class BallVisual : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void LateUpdate()
     {
         if (ball == null) return;
+
+        if (updateFrozen) return;
 
         transform.position = rouletteOrigin.position + ball.RelativeToRoulettePosition * scaleMultiplier;
 
@@ -67,5 +78,17 @@ public class BallVisual : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         Clicked?.Invoke(ball.Hash);
+    }
+
+    public void OnBallAnimated()
+    {
+        FreezeUpdate();
+        transform.rotation = Quaternion.Euler(Vector3.up);
+        animator.SetTrigger("jump");
+    }
+
+    public void FreezeUpdate()
+    {
+        updateFrozen = !updateFrozen;
     }
 }

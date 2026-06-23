@@ -94,6 +94,8 @@ MonoBehaviour:
   formulaText: {fileID: 2983679640432352678}
   resultText: {fileID: 4761852773684458003}
   timeToCountMoney: 1
+  timeBeforeChipSpawn: 1
+  timeBeforeChipClear: 5
 --- !u!95 &1231199186179719228
 Animator:
   serializedVersion: 7

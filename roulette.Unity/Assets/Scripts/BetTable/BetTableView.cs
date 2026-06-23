@@ -16,6 +16,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
     [SerializeField] float timeForCountingMoney = 3f;
     [SerializeField] float timeBeforeBetsResults = 3f;
+    [SerializeField] float timeForBallApply = 1f;
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
@@ -25,17 +26,19 @@ class BetTableView : MonoBehaviour
     private RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
     private ChipHolder chipHolder;
+    private IRouletteBallsManager rouletteBallsManager;
     private int generalMultiplier;
 
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
-        RoundStateManager roundStateManager, ChipHolder chipHolder)
+        RoundStateManager roundStateManager, ChipHolder chipHolder, IRouletteBallsManager rouletteBallsManager)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
         this.roundStateManager = roundStateManager;
         this.chipHolder = chipHolder;
+        this.rouletteBallsManager = rouletteBallsManager;
     }
 
     public void Start()
@@ -159,6 +162,10 @@ class BetTableView : MonoBehaviour
 
     private IEnumerator FinishDisplaySequence(BetInfo betInfo, HitInfo hitInfo, int betSum)
     {
+        ApplyBall(hitInfo);
+
+        yield return new WaitForSeconds(timeForBallApply);
+
         yield return ApplyChips(betInfo, hitInfo);
         betCalculator.StartMoneyCounting(betSum, generalMultiplier, hitInfo);
     }
@@ -172,6 +179,11 @@ class BetTableView : MonoBehaviour
         betText.text = "";
 
         betTable.ClearBets();
+    }
+
+    private void ApplyBall(HitInfo hitInfo)
+    {
+        rouletteBallsManager.AnimateBall(hitInfo.BallHash);
     }
 
     private IEnumerator ApplyChips(BetInfo betInfo, HitInfo hitInfo)

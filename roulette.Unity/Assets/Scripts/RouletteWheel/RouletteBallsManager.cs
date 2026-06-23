@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class RouletteBallsManager : MonoBehaviour
+public class RouletteBallsManager : MonoBehaviour, IRouletteBallsManager
 {
     [SerializeField] private BallsLauncher ballLauncher;
     [SerializeField] private float sectorsRadius;
@@ -199,6 +199,17 @@ public class RouletteBallsManager : MonoBehaviour
             {
                 ball.Freeze();
                 ball.transform.parent = wheel.transform;
+            }
+        }
+    }
+
+    public void AnimateBall(string ballHash)
+    {
+        foreach (var ball in balls)
+        {
+            if (ball.Hash == ballHash)
+            {
+                ball.PlayAnimation();
             }
         }
     }

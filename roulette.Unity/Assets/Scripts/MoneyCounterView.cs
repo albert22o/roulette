@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 [RequireComponent(typeof(Animator))]
 public class MoneyCounterView : MonoBehaviour
@@ -9,15 +10,20 @@ public class MoneyCounterView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI formulaText;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private float timeToCountMoney;
+    [SerializeField] private float timeBeforeChipSpawn;
+    [SerializeField] private float timeBeforeChipClear;
+
     private BetCalculator betCalculator;
+    private ChipSpawner chipSpawner;
     private Animator animator;
     private int currentDisplayedMoney;
     private int result;
 
     [Inject]
-    public void Construct(BetCalculator betCalculator)
+    public void Construct(BetCalculator betCalculator, ChipSpawner chipSpawner)
     {
         this.betCalculator = betCalculator;
+        this.chipSpawner = chipSpawner;
     }
 
     private void Start()
@@ -50,9 +56,14 @@ public class MoneyCounterView : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeBeforeChipSpawn);
 
+        chipSpawner.RequestSpawn(result / BetTable.BetStep);
         betCalculator.GetRewardAction();
         animator.SetTrigger("fade");
+
+        yield return new WaitForSeconds(timeBeforeChipClear);
+
+        chipSpawner.RecquestClear();
     }
 }

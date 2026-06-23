@@ -29,7 +29,11 @@ public class GameInstaller : MonoInstaller
             .To<RouletteWheel>()
             .FromComponentInHierarchy()
             .AsSingle();
-        
+        Container.Bind<IRouletteBallsManager>()
+            .To<RouletteBallsManager>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
         Container.Bind<ProgressionManager>().AsSingle();
         Container.Bind<Inventory>().AsSingle();
         Container.Bind<BetTable>().AsSingle();
