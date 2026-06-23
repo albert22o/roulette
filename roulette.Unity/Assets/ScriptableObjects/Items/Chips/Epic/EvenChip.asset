@@ -16,5 +16,5 @@ MonoBehaviour:
   description: 
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
   cost: 2
-  Prefab: {fileID: 573473156636019110, guid: 55c244452c2ebea47aa0377220453297, type: 3}
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   ModifyAmount: 2
