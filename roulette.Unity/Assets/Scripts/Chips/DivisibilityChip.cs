@@ -8,7 +8,7 @@ public class DivisibilityChip : Chip
     private readonly int remainder;
     private readonly int bonusAmount;
 
-    private bool modifierApplied = false;
+    private bool modifyRequest = false;
 
     public DivisibilityChip(BetCalculator betCalculator, BallResults ballResults, DivisibilityChipData data) : base(data)
     {
@@ -23,32 +23,25 @@ public class DivisibilityChip : Chip
 
     public override void Apply()
     {
-        modifierApplied = false;
+        if (modifyRequest)
+        {
+            betCalculator.ModifyGeneralModifier(bonusAmount);
+        }
     }
 
     public override void Revert()
     {
-        if (modifierApplied)
+        if (modifyRequest)
         {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, -bonusAmount);
-            }
-            modifierApplied = false;
+            betCalculator.ModifyGeneralModifier(-bonusAmount);
         }
     }
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (modifierApplied) return;
-
         if (hit.FieldNumber != 0 && hit.FieldNumber % divisor == remainder)
-        {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, bonusAmount);
-            }
-            modifierApplied = true;
-        }
+            modifyRequest = true;
+        else
+            modifyRequest = false;
     }
 }

@@ -6,7 +6,7 @@ public class PrimeChip : Chip
     private readonly BallResults ballResults;
     private readonly int bonusAmount;
 
-    private bool modifierApplied = false;
+    private bool modifyRequest = false;
 
     public PrimeChip(BetCalculator betCalculator, BallResults ballResults, PrimeChipData data) : base(data)
     {
@@ -19,33 +19,26 @@ public class PrimeChip : Chip
 
     public override void Apply()
     {
-        modifierApplied = false;
+        if (modifyRequest)
+        {
+            betCalculator.ModifyGeneralModifier(bonusAmount);
+        }
     }
 
     public override void Revert()
     {
-        if (modifierApplied)
+        if (modifyRequest)
         {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, -bonusAmount);
-            }
-            modifierApplied = false;
+            betCalculator.ModifyGeneralModifier(-bonusAmount);
         }
     }
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (modifierApplied) return;
-
         if (IsPrime(hit.FieldNumber))
-        {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, bonusAmount);
-            }
-            modifierApplied = true;
-        }
+            modifyRequest = true;
+        else
+            modifyRequest = false;
     }
 
     private bool IsPrime(int number)

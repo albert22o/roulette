@@ -13,18 +13,12 @@ public class PassiveChip : Chip
 
     public override void Apply()
     {
-        for (int i = 0; i <= 36; i++)
-        {
-            betCalculator.ModifyFieldNumberMultiplier(i, bonusAmount);
-        }
+        betCalculator.ModifyGeneralModifier(bonusAmount);
 
     }
 
     public override void Revert()
     {
-        for (int i = 0; i <= 36; i++)
-        {
-            betCalculator.ModifyFieldNumberMultiplier(i, -bonusAmount);
-        }
+        betCalculator.ModifyGeneralModifier(-bonusAmount);
     }
 }
