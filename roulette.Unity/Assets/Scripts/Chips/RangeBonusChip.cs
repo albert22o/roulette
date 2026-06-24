@@ -8,7 +8,7 @@ public class RangeBonusChip : Chip
     private readonly int maxNumber;
     private readonly int bonusAmount;
 
-    private bool modifierApplied = false;
+    private bool modifyRequest = false;
 
     public RangeBonusChip(BetCalculator betCalculator, BallResults ballResults, RangeBonusChipData data) : base(data)
     {
@@ -23,32 +23,25 @@ public class RangeBonusChip : Chip
 
     public override void Apply()
     {
-        modifierApplied = false;
+        if (modifyRequest)
+        {
+            betCalculator.ModifyGeneralModifier(bonusAmount);
+        }
     }
 
     public override void Revert()
     {
-        if (modifierApplied)
+        if (modifyRequest)
         {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, -bonusAmount);
-            }
-            modifierApplied = false;
+            betCalculator.ModifyGeneralModifier(-bonusAmount);
         }
     }
 
-    private void OnBallSelected(HitInfo hit)
+    private void OnBallSelected(HitInfo hit) 
     {
-        if (modifierApplied) return;
-
         if (hit.FieldNumber >= minNumber && hit.FieldNumber <= maxNumber)
-        {
-            for (int i = 0; i <= 36; i++)
-            {
-                betCalculator.ModifyFieldNumberMultiplier(i, bonusAmount);
-            }
-            modifierApplied = true;
-        }
+            modifyRequest = true;
+        else
+            modifyRequest = false;
     }
 }

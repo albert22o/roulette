@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c687063d9090447bdacb48778ca254, type: 3}
   m_Name: OddChip
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
-  shopPrefab: {fileID: 0}
-  cost: 0
-  Prefab: {fileID: 0}
-  Divisor: 0
-  Remainder: 0
-  BonusAmount: 0
+  itemName: "\u041D\u0435\u0447\u0435\u0442\u043D\u0430\u044F \u0444\u0438\u0448\u043A\u0430"
+  description: "\u0412\u044B\u043F\u0430\u0434\u0435\u043D\u0438\u0435 \u043D\u0435\u0447\u0435\u0442\u043D\u043E\u0433\u043E
+    \u0447\u0438\u0441\u043B\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442
+    +1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 7
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  Divisor: 2
+  Remainder: 1
+  BonusAmount: 1
