@@ -132,6 +132,13 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipAdded(int slotIndex, Chip chip)
     {
         var chipObject = Instantiate(chip.ChipData.Prefab);
+        var nameDisplay = chipObject.GetComponentInChildren<ChipNameDisplay>();
+
+        if (nameDisplay != null)
+        {
+            nameDisplay.SetName(chip.ChipData.Name);
+        }
+
         slotViews[slotIndex].PlaceChip(chipObject);
     }
 
