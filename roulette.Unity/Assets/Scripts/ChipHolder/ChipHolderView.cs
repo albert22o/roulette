@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.SmartFormat.Utilities;
 using Zenject;
 
 public class ChipHolderView : MonoBehaviour
@@ -132,14 +134,8 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipAdded(int slotIndex, Chip chip)
     {
         var chipObject = Instantiate(chip.ChipData.Prefab);
-        var nameDisplay = chipObject.GetComponentInChildren<ChipNameDisplay>();
-
-        if (nameDisplay != null)
-        {
-            nameDisplay.SetName(chip.ChipData.Name);
-        }
-
         slotViews[slotIndex].PlaceChip(chipObject);
+        slotViews[slotIndex].SetChipName(chip.ChipData.Name);
     }
 
     private void OnChipRemoved(int slotIndex)
