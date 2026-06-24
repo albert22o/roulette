@@ -61,6 +61,7 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
+        currentBalls.Clear();
         roundStateManager.ChangeState(RoundState.ChoosingReward);
         currentBalls.AddRange(balls);
     }
