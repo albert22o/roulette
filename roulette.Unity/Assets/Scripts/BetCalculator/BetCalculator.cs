@@ -22,7 +22,7 @@ public class BetCalculator
     private bool active = true;
     private readonly BetTable betTable;
     private int reward;
-    private int generalModifier = 1;
+    private int generalModifier = 0;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
@@ -80,24 +80,24 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
-        amount *= generalModifier;
+        int multiplier = 0;
 
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
         {
-            int multiplier = betInfo.FieldNumber == 0
+            multiplier = betInfo.FieldNumber == 0
                 ? GetFieldMultiplier(0, ZeroMultiplier)
                 : GetFieldMultiplier(hitInfo.FieldNumber, NumMultiplier);
-
-            return amount * Math.Max(multiplier, 0);
         }
 
         if (betInfo.Dozen == hitInfo.Dozen)
-            return amount * Math.Max(GetEffectiveDozenMultiplier(hitInfo.Dozen), 0);
+            multiplier = Math.Max(multiplier, GetEffectiveDozenMultiplier(hitInfo.Dozen));
 
         if (betInfo.FieldColor == hitInfo.FieldColor)
-            return amount * Math.Max(GetEffectiveColorMultiplier(hitInfo.FieldColor), 0);
+            multiplier = Math.Max(multiplier, GetEffectiveColorMultiplier(hitInfo.FieldColor));
 
-        return amount;
+        multiplier += generalModifier;
+
+        return amount * Math.Max(multiplier, 0);
     }
 
     public int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
