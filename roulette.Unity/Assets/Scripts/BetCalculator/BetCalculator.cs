@@ -23,6 +23,7 @@ public class BetCalculator
     private bool active = true;
     private readonly BetTable betTable;
     private int reward;
+    private int generalModifier = 1;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
@@ -31,6 +32,10 @@ public class BetCalculator
         roundStateManager.StateChanged += OnStateChanged;
     }
 
+    public void ModifyGeneralModifier(int delta)
+    {
+        generalModifier += delta;
+    }
 
     public void ModifyFieldNumberMultiplier(int fieldNumber, int delta)
     {
@@ -94,6 +99,8 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
+        amount *= generalModifier;
+
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
         {
             int multiplier = betInfo.FieldNumber == 0
