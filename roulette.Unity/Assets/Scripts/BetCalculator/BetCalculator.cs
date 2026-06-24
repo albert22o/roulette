@@ -80,6 +80,11 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
+        return amount * Math.Max(GetMaxWinningMultiplier(betInfo, hitInfo), 0);
+    }
+
+    public int GetMaxWinningMultiplier(BetInfo betInfo, HitInfo hitInfo)
+    {
         int multiplier = 0;
 
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
@@ -97,7 +102,7 @@ public class BetCalculator
 
         multiplier += generalModifier;
 
-        return amount * Math.Max(multiplier, 0);
+        return multiplier;
     }
 
     public int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
