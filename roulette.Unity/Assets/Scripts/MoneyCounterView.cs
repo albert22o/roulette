@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using Zenject;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
@@ -15,55 +16,73 @@ public class MoneyCounterView : MonoBehaviour
 
     private BetCalculator betCalculator;
     private ChipSpawner chipSpawner;
+    private WinningSequence winningSequence;
     private Animator animator;
     private int currentDisplayedMoney;
-    private int result;
+    private int bet;
+    private int reward;
 
     [Inject]
-    public void Construct(BetCalculator betCalculator, ChipSpawner chipSpawner)
+    public void Construct(BetCalculator betCalculator, ChipSpawner chipSpawner, WinningSequence winningSequence)
     {
         this.betCalculator = betCalculator;
         this.chipSpawner = chipSpawner;
+        this.winningSequence = winningSequence;
     }
 
     private void Start()
     {
-        betCalculator.CountMoney += OnCountMoney;
+        winningSequence.CountMoney += OnCountMoney;
+        winningSequence.DisplayMultiplier += OnDisplayMultiplier;
+        winningSequence.SequenceStart += OnSequenceStart;
         animator = GetComponent<Animator>();
     }
 
     private void OnDestroy()
     {
-        betCalculator.CountMoney -= OnCountMoney;
+        winningSequence.CountMoney -= OnCountMoney;
     }
 
     private void OnCountMoney(int bet, int multiplier, int reward)
     {
-        result = reward;
+        this.reward = reward;
         currentDisplayedMoney = 0;
-        resultText.text = "0";
-        formulaText.text = $"{bet} x {multiplier}";
-        animator.SetTrigger("fade");
+        animator.SetTrigger("collapse");
     }
 
     public IEnumerator ProcessCounting()
     {
-        while (currentDisplayedMoney < result)
+        while (currentDisplayedMoney < reward)
         {
-            currentDisplayedMoney += (int)Mathf.Lerp(0, result, 1 / timeToCountMoney * Time.fixedDeltaTime);
-            resultText.text = Mathf.Clamp(currentDisplayedMoney, 0, result).ToString();
+            currentDisplayedMoney += (int)Mathf.Lerp(0, reward, 1 / timeToCountMoney * Time.fixedDeltaTime);
+            resultText.text = Mathf.Clamp(currentDisplayedMoney, 0, reward).ToString();
 
             yield return new WaitForFixedUpdate();
         }
 
         yield return new WaitForSeconds(timeBeforeChipSpawn);
 
-        chipSpawner.RequestSpawn(result / BetTable.BetStep);
-        betCalculator.GetRewardAction();
-        animator.SetTrigger("fade");
+        chipSpawner.RequestSpawn(reward / BetTable.BetStep);
 
+        animator.SetTrigger("fade");
+        winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
+
+        //Сейчас нет анимации того как монстр сгребает фишки, поэтому они просто исчезают после времени
         yield return new WaitForSeconds(timeBeforeChipClear);
 
-        chipSpawner.RecquestClear();
+        chipSpawner.RequestClear();
+    }
+
+    private void OnSequenceStart(int bet, int multiplier)
+    {
+        this.bet = bet;
+        resultText.text = "0";
+        formulaText.text = $"{bet} x {multiplier}";
+        animator.SetTrigger("fade");
+    }
+
+    private void OnDisplayMultiplier(int multiplier)
+    {
+        formulaText.text = $"{bet} x {multiplier}";
     }
 }

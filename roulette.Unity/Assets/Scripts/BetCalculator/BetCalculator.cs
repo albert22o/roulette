@@ -5,7 +5,7 @@ using static RoundStateManager;
 public class BetCalculator
 {
     public event Action<int> GetReward;
-    public event Action<HitInfo> HighlightButtons;
+    public event Action<HitInfo> EndRound;
     public event Action<int, int, int> CountMoney;
 
     public int ZeroMultiplier { get; set; } = 10;
@@ -21,7 +21,6 @@ public class BetCalculator
 
     private bool active = true;
     private readonly BetTable betTable;
-    private int reward;
     private int generalModifier = 0;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
@@ -75,7 +74,7 @@ public class BetCalculator
         if (!active)
             return;
 
-        HighlightButtons?.Invoke(info);
+        EndRound?.Invoke(info);
     }
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
@@ -114,16 +113,8 @@ public class BetCalculator
     public int GetEffectiveColorMultiplier(ColorType color) =>
         colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
 
-    public void GetRewardAction()
+    public void GetRewardAction(int reward)
     {
         GetReward?.Invoke(reward);
-    }
-
-    public void StartMoneyCounting(int bet, int multiplier, HitInfo info)
-    {
-        reward = 0;
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
-            reward += GetRewardForBet(betInfo, amount, info);
-        CountMoney?.Invoke(bet, multiplier, reward);
     }
 }

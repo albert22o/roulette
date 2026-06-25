@@ -55,5 +55,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<ChipSpawner>().AsSingle();
+
+        Container.Bind<WinningSequence>().AsSingle();
     }
 }
