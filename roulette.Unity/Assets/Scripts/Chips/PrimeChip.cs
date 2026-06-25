@@ -7,6 +7,7 @@ public class PrimeChip : Chip
     private readonly int bonusAmount;
 
     private bool modifyRequest = false;
+    private static readonly int[] primeNumbers = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
 
     public PrimeChip(BetCalculator betCalculator, BallResults ballResults, PrimeChipData data) : base(data)
     {
@@ -43,15 +44,11 @@ public class PrimeChip : Chip
 
     private bool IsPrime(int number)
     {
-        if (number <= 1) return false;
-        if (number == 2) return true;
-        if (number % 2 == 0) return false;
-
-        for (int i = 3; i <= Mathf.Sqrt(number); i += 2)
+        foreach (int prime in primeNumbers)
         {
-            if (number % i == 0) return false;
+            if (number == prime)
+                return true;
         }
-
-        return true;
+        return false;
     }
 }

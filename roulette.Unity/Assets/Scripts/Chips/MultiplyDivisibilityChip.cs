@@ -23,25 +23,19 @@ public class MultiplyDivisibilityChip : Chip
 
     public override void Apply()
     {
-        if(modifyRequest)
-        {
-            for(int i = 0; i<=36; i++) 
-                betCalculator.MultiplyFieldNumberMultiplier(i, multiplier);
-        }
+        if (modifyRequest)
+            betCalculator.MultiplyGeneralModifier(multiplier);
     }
 
     public override void Revert()
     {
         if (modifyRequest)
-        {
-            for (int i = 0; i <= 36; i++)
-                betCalculator.DivideFieldNumberMultiplier(i, multiplier);
-        }
+            betCalculator.DivideGeneralModifier(multiplier);
     }
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (hit.FieldNumber != 0 && hit.FieldNumber % divisor == remainder)
+        if (hit.FieldNumber % divisor == remainder)
             modifyRequest = true;
         else
             modifyRequest = false;

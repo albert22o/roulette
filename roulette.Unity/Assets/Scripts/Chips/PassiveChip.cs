@@ -14,7 +14,6 @@ public class PassiveChip : Chip
     public override void Apply()
     {
         betCalculator.ModifyGeneralModifier(bonusAmount);
-
     }
 
     public override void Revert()
