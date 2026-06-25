@@ -11,7 +11,7 @@ public class ChipSpawner
         ChipSpawnerRequested?.Invoke(amount);
     }
 
-    public void RecquestClear()
+    public void RequestClear()
     {
         ChipClearRequested?.Invoke();
     }
