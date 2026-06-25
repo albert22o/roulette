@@ -24,7 +24,6 @@ public class BetCalculator
     private readonly BetTable betTable;
     private int reward;
     private int generalModifier = 0;
-    private float generalMultiplier = 1f;
 
     public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
     {
@@ -35,17 +34,7 @@ public class BetCalculator
 
     public void ModifyGeneralModifier(int delta)
     {
-        generalModifier *= delta;
-    }
-
-    public void MultiplyGeneralModifier(float delta)
-    {
-        generalMultiplier += delta;
-    }
-
-    public void DivideGeneralModifier(float delta)
-    {
-        generalMultiplier /= delta;
+        generalModifier += delta;
     }
 
     public void ModifyFieldNumberMultiplier(int fieldNumber, int delta)
@@ -68,6 +57,24 @@ public class BetCalculator
         colorMultipliers[color] = current + delta;
     }
 
+    public void MultiplyFieldNumberMultiplier(int fieldNumber, float multiplier)
+    {
+        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
+            ? m
+            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
+
+        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current * multiplier);
+    }
+
+    public void DivideFieldNumberMultiplier(int fieldNumber, float divisor)
+    {
+        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
+            ? m
+            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
+
+        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current / divisor);
+    }
+
     public void ResetFieldNumberMultiplier(int fieldNumber) =>
         fieldNumberMultipliers.Remove(fieldNumber);
 
@@ -76,11 +83,6 @@ public class BetCalculator
 
     public void ResetColorMultiplier(ColorType color) =>
         colorMultipliers.Remove(color);
-
-    public void ResetGeneralMultiplier()
-    {
-        generalMultiplier = 1f;
-    }
 
     public void OnStateChanged(RoundState newState)
     {
@@ -97,7 +99,7 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
-        float multiplier = 0;
+        int multiplier = 0;
 
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
         {
@@ -113,10 +115,8 @@ public class BetCalculator
             multiplier = Math.Max(multiplier, GetEffectiveColorMultiplier(hitInfo.FieldColor));
 
         multiplier += generalModifier;
-        multiplier *= generalMultiplier;
 
-
-        return Mathf.RoundToInt(amount * Math.Max(multiplier, 0f));
+        return amount * Math.Max(multiplier, 0);
     }
 
     public int GetFieldMultiplier(int fieldNumber, int defaultMultiplier) =>
