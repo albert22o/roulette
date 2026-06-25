@@ -141,6 +141,7 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipRemoved(int slotIndex)
     {
         slotViews[slotIndex].ClearChip();
+        slotViews[slotIndex].SetChipName("");
     }
 
     private void OnChipsSwapped(int indexA, int indexB)
@@ -153,6 +154,13 @@ public class ChipHolderView : MonoBehaviour
 
         slotViews[indexA].PlaceChip(chipB);
         slotViews[indexB].PlaceChip(chipA);
+
+        var chipDataA = chipHolder.Chips[indexA];
+        var chipDataB = chipHolder.Chips[indexB];
+
+        slotViews[indexA].SetChipName(chipDataA?.ChipData?.Name ?? "");
+        slotViews[indexB].SetChipName(chipDataB?.ChipData?.Name ?? "");
+
     }
 
     private void OnChipAnimated(int index)
@@ -182,4 +190,6 @@ public class ChipHolderView : MonoBehaviour
 
         return Vector3.zero;
     }
+
+   
 }
