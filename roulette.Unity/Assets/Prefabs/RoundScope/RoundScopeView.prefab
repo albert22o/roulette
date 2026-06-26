@@ -39,6 +39,7 @@ Transform:
   - {fileID: 3330431598060816631}
   - {fileID: 5890849848637114392}
   - {fileID: 9100819864842882323}
+  - {fileID: 3126104036841279737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3113324024820818794
@@ -417,6 +418,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4817683116597590315, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
   m_PrefabInstance: {fileID: 1376793054658162995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3134039317828497579
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3593906385390282129}
+    m_Modifications:
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.889
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.611
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108762098253572365, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108762098253572365, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108762098253572365, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991086733339087172, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+      propertyPath: m_Name
+      value: Dealer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+--- !u!4 &3126104036841279737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8021111766818898, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+  m_PrefabInstance: {fileID: 3134039317828497579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8943043293656482780 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6296676978654442359, guid: e926885ee694c734784ae5e7be936b98, type: 3}
+  m_PrefabInstance: {fileID: 3134039317828497579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4121270402014758022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,6 +505,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
+    - target: {fileID: 1370742425248368840, guid: a43b5968060271b469a1fbb316c0fe1f, type: 3}
+      propertyPath: dealerAnimator
+      value: 
+      objectReference: {fileID: 8943043293656482780}
     - target: {fileID: 1427882247078421622, guid: a43b5968060271b469a1fbb316c0fe1f, type: 3}
       propertyPath: m_Name
       value: WinningSequence

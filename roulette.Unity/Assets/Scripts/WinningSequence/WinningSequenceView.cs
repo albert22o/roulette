@@ -8,6 +8,7 @@ public class WinningSequenceView : MonoBehaviour
 {
     [SerializeField] TextMeshPro betText;
     [SerializeField] TextMeshPro generalMultiplierText;
+    [SerializeField] Animator dealerAnimator;
     [SerializeField] float timeBeforeChipApply = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
 
@@ -80,9 +81,11 @@ public class WinningSequenceView : MonoBehaviour
         generalMultiplierText.text = multiplier.ToString();
     }
 
-    private void OnEndSequence()
+    private void OnEndSequence(bool isWin)
     {
         generalMultiplierText.text = "";
         betText.text = "";
+        if (isWin)
+            dealerAnimator.SetTrigger("collect");
     }
 }

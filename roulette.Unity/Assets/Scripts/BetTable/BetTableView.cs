@@ -100,7 +100,7 @@ class BetTableView : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeBetsHighlight);
 
         if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
-        { 
+        {
             winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
             yield break;
         }
@@ -111,7 +111,7 @@ class BetTableView : MonoBehaviour
 
         if (hitInfo.Dozen != betInfo.Dozen)
         {
-            winningSequence.NextPhase();
+            winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyBall);
             yield break;
         }
 
@@ -123,7 +123,7 @@ class BetTableView : MonoBehaviour
 
         if (hitInfo.FieldNumber != betInfo.FieldNumber)
         {
-            winningSequence.NextPhase();
+            winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyBall);
             yield break;
         }
 
@@ -165,8 +165,11 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void OnEndSequence()
+    private void OnEndSequence(bool isRoundWon)
     {
+        if (!isRoundWon)
+            return;
+
         foreach (BetButton button in betButtons)
             button.Highlight(false, BetButton.HighlightPhase.None);
 

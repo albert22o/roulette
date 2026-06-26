@@ -9,7 +9,7 @@ public class WinningSequence
     public event Action<HitInfo> ApplyBall;
     public event Action<BetInfo, HitInfo> ApplyChips;
     public event Action<int, int, int> CountMoney;
-    public event Action EndSequence;
+    public event Action<bool> EndSequence;
     public event Action<int> DisplayMultiplier;
 
     private readonly BetTable betTable;
@@ -19,6 +19,7 @@ public class WinningSequence
     private SequencePhase phase;
     private BetInfo betInfo;
     private HitInfo hitInfo;
+    private bool isRoundWon;
     private int betSum;
     private int generalMultiplier;
 
@@ -35,6 +36,7 @@ public class WinningSequence
         if (!betTable.NotNullBetAmounts.Any()) return;
 
         phase = SequencePhase.Init;
+        isRoundWon = false;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         CompareAndDisplayMaxMultiplier(1);
 
@@ -61,6 +63,7 @@ public class WinningSequence
                 Highlight?.Invoke(betInfo, hitInfo);
                 break;
             case SequencePhase.ApplyBall:
+                isRoundWon = true;
                 ApplyBall?.Invoke(hitInfo);
                 break;
             case SequencePhase.ApplyChips:
@@ -73,7 +76,7 @@ public class WinningSequence
                 betCalculator.GetRewardAction(betCalculator.GetRewardForBet(betInfo, betSum, hitInfo));
                 generalMultiplier = 0;
                 betTable.ClearBets();
-                EndSequence?.Invoke();
+                EndSequence?.Invoke(isRoundWon);
                 break;
         }
     }
