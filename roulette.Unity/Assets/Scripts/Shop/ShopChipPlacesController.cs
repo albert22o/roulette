@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ShopChipPlacesController : MonoBehaviour
 {
-    [SerializeField] private ShopPlace[] shopPlaces;
+    [SerializeField] private ChipShopPlace[] shopPlaces;
     [SerializeField] private ShopItemsTable itemsTable;
 
     private ShopItemsPool itemsPool = new();
@@ -14,19 +14,19 @@ public class ShopChipPlacesController : MonoBehaviour
 
     public void Fill()
     {
-        foreach (ShopPlace place in shopPlaces)
+        foreach (ChipShopPlace place in shopPlaces)
         {
-            place.SetItem(itemsPool.GetRandomItem() as ChipShopItemData);
+            place.SetItem(itemsPool.GetRandomItem() as ChipData);
         }
     }
 
     public void Reroll()
     {
-        foreach (ShopPlace place in shopPlaces)
+        foreach (ChipShopPlace place in shopPlaces)
         {
             if (place.Item != null)
             {
-                place.SetItem(itemsPool.GetRandomItem() as ChipShopItemData);
+                place.SetItem(itemsPool.GetRandomItem() as ChipData);
             }
         }
     }
@@ -34,7 +34,7 @@ public class ShopChipPlacesController : MonoBehaviour
     public bool CheckRerollAvailable()
     {
         bool hasItem = false;
-        foreach (ShopPlace place in shopPlaces)
+        foreach (ChipShopPlace place in shopPlaces)
         {
             if (place.IsAnimationPlaying) return false;
             if (place.Item != null) hasItem = true;

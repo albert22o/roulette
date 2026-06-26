@@ -5,10 +5,10 @@ public class ItemPlace : MonoBehaviour
     private ItemData item;
     private GameObject spawnedItem;
 
-    public ItemData Item => item;
     
     public void SetItem(ItemData item)
     {
+        if (item == this.item) return;
         if (spawnedItem != null)
             Destroy(spawnedItem.gameObject);
         if (item == null)
@@ -18,7 +18,7 @@ public class ItemPlace : MonoBehaviour
         }
         else
         {
-            spawnedItem = Instantiate(item.Prefab, transform);
+            spawnedItem = Instantiate(item.ShopPrefab, transform);
             spawnedItem.transform.position = transform.position;
             this.item = item;
         }

@@ -12,16 +12,14 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
 
-    private Inventory inventory;
-    private ItemFactory itemFactory = new();
-
     private int cost;
     private Shop shop;
-    private Item boughtBall;
+    private BallInfoData boughtBall;
     private GoldenChips goldenChips;
+    private BallHolder ballHolder;
 
     public bool IsInteractable => boughtBall == null;
-    public event Action<ItemData> BallBought;
+    public event Action<BallInfoData> BallBought;
     public int Cost
     {
         get => cost;
@@ -34,11 +32,11 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Inventory inventory, Shop shop, GoldenChips goldenChips)
+    public void Construct(Shop shop, GoldenChips goldenChips, BallHolder ballHolder)
     {
-        this.inventory = inventory;
         this.shop = shop;
         this.goldenChips = goldenChips;
+        this.ballHolder = ballHolder;
     }
 
     private void Start()
@@ -48,14 +46,13 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     public void TryBuy()
     {
-        if (inventory.Balls.Count < inventory.BallsCapacity)
+        if (ballHolder.HasFreeSlot)
         {
             if (goldenChips.Amount >= Cost)
             {
                 goldenChips.Remove(Cost);
-                var itemData = ballsTable.GetRandomItem();
-                boughtBall = itemFactory.Create(itemData);
-                BallBought?.Invoke(itemData);
+                boughtBall = ballsTable.GetRandomItem() as BallInfoData;
+                BallBought?.Invoke(boughtBall);
                 shop.SetInteractionAvailable(false);
             }
         }
@@ -63,14 +60,14 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     public void AddBallToInventory()
     {
-        inventory.TryAddItem(boughtBall);
+        ballHolder.AddBall(boughtBall);
         boughtBall = null;
         shop.SetInteractionAvailable(true);
     }
 
     public void SellBall()
     {
-        shop.Sell(boughtBall);
+        goldenChips.Add(shop.BallSellCost);
         boughtBall = null;
         shop.SetInteractionAvailable(true);
     }
@@ -87,6 +84,6 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     public void HoverExit()
     {
-        shop.HIdeTooltip();
+        shop.HideTooltip();
     }
 }

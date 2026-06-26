@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0938dd408761c5e469b1734ccc3b2407, type: 3}
+  m_Name: SimpleBall
+  m_EditorClassIdentifier: 
+  itemName: SimpleBall
+  description: SimpleBall
+  shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  VisualComponent:
+    <Material>k__BackingField: {fileID: 2100000, guid: 7b5e884f1329d1c498d18ac6a0056a4b, type: 2}

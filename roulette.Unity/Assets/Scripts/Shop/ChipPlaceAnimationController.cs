@@ -3,7 +3,7 @@ using UnityEngine;
 public class ChipPlaceAnimationController : MonoBehaviour
 {
     [SerializeField] private ItemPlace itemPlace;
-    [SerializeField] private ShopPlace shopPlace;
+    [SerializeField] private ChipShopPlace shopPlace;
     [SerializeField] private Animator animator;
 
     private ItemData item;

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6dbc4db4c39034abaed34c2ee168c8, type: 3}
+  m_Name: RedChip
+  m_EditorClassIdentifier: 
+  itemName: RedChip
+  description: 
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 2
+  Prefab: {fileID: 573473156636019110, guid: 55c244452c2ebea47aa0377220453297, type: 3}
+  Color: 0
+  ModifyAmount: 2
