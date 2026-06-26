@@ -37,6 +37,7 @@ public class GameStateManager
         FreeRoam,
         BettingСycle,
         Shopping,
-        Lose
+        Lose,
+        PlaqueShopping,
     }
 }

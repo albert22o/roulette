@@ -42,7 +42,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
         Cost = initCost;
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         buttonAnimation.Press();
         if (goldenChips.Amount >= Cost)
@@ -53,12 +53,12 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
         }
     }
 
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         shop.HideTooltip();
     }

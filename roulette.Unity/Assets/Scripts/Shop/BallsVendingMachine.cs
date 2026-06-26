@@ -72,17 +72,17 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
         shop.SetInteractionAvailable(true);
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         TryBuy();
     }
        
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         shop.HideTooltip();
     }
