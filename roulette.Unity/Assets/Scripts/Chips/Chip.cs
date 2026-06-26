@@ -3,7 +3,6 @@
 public abstract class Chip
 {
     public ChipData ChipData { get; }
-    protected HashSet<string> EligibleBallHashes { get; private set; } = new HashSet<string>();
     protected Chip(ChipData chipData)
     {
         ChipData = chipData;
@@ -13,19 +12,4 @@ public abstract class Chip
 
     public virtual void OnAddedToHolder() { }
     public virtual void OnRemovedFromHolder() { }
-
-    protected void AddToMemory(string ballHash)
-    {
-        EligibleBallHashes.Add(ballHash);
-    }
-
-    protected bool IsInMemory(string ballHash)
-    {
-        return EligibleBallHashes.Contains(ballHash);
-    }
-
-    protected void ClearMemory()
-    {
-        EligibleBallHashes.Clear();
-    }
 }
