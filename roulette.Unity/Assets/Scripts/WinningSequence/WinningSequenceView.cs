@@ -15,16 +15,16 @@ public class WinningSequenceView : MonoBehaviour
     private WinningSequence winningSequence;
     private ChipHolder chipHolder;
     private BetCalculator betCalculator;
-    private IRouletteBallsManager rouletteBallsManager;
+    private IAnimateBalls animateBalls;
 
     [Inject]
     public void Construct(WinningSequence winningSequence, BetCalculator betCalculator, ChipHolder chipHolder,
-        IRouletteBallsManager rouletteBallsManager)
+        IAnimateBalls animateBalls)
     {
         this.winningSequence = winningSequence;
         this.betCalculator = betCalculator;
         this.chipHolder = chipHolder;
-        this.rouletteBallsManager = rouletteBallsManager;
+        this.animateBalls = animateBalls;
     }
 
     private void Start()
@@ -72,7 +72,7 @@ public class WinningSequenceView : MonoBehaviour
 
     private void OnApplyBall(HitInfo hitInfo)
     {
-        rouletteBallsManager.AnimateBall(hitInfo.BallHash);
+        animateBalls.AnimateBall(hitInfo.BallHash);
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyChips);
     }
 

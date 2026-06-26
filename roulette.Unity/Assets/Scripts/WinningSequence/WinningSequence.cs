@@ -47,12 +47,6 @@ public class WinningSequence
         SequenceStart?.Invoke(betSum, 0);
     }
 
-    public void NextPhase()
-    {
-        phase += 1;
-        CallPhaseExecution(phase);
-    }
-
     public void CallPhaseExecution(SequencePhase sequencePhase)
     {
         switch (sequencePhase)

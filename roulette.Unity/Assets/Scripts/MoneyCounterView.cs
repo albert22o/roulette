@@ -1,9 +1,7 @@
 using System.Collections;
 using TMPro;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 [RequireComponent(typeof(Animator))]
 public class MoneyCounterView : MonoBehaviour
@@ -14,7 +12,6 @@ public class MoneyCounterView : MonoBehaviour
     [SerializeField] private float timeBeforeChipSpawn;
     [SerializeField] private float timeBeforeChipClear;
 
-    private BetCalculator betCalculator;
     private ChipSpawner chipSpawner;
     private WinningSequence winningSequence;
     private Animator animator;
@@ -23,9 +20,8 @@ public class MoneyCounterView : MonoBehaviour
     private int reward;
 
     [Inject]
-    public void Construct(BetCalculator betCalculator, ChipSpawner chipSpawner, WinningSequence winningSequence)
+    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence)
     {
-        this.betCalculator = betCalculator;
         this.chipSpawner = chipSpawner;
         this.winningSequence = winningSequence;
     }
