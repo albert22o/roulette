@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: ZeroChip
   description: 
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
-  cost: 2
+  cost: 1
   Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   FieldNum: 0
   ModifyAmount: 10

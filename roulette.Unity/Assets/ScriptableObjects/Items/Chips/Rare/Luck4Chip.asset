@@ -18,7 +18,7 @@ MonoBehaviour:
     \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0434\u0435\u043B\u0438\u0442\u0441\u044F
     \u043D\u0430 4."
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
-  cost: 24
+  cost: 1
   Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   Divisor: 4
   Remainder: 0

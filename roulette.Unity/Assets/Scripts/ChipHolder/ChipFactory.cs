@@ -9,10 +9,9 @@ public class ChipFactory
         BetTable betTable,
         IRouletteWheel rouletteWheel,
         BallResults ballResults,
-        GoldenChips goldenChips,
-        Money money)
+        GoldenChips goldenChips)
     {
-        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips, money);
+        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips);
     }
 
     public Chip Create(ChipData data) => data.CreateChip(deps);

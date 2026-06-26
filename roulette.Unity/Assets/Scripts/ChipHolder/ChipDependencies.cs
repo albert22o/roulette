@@ -14,14 +14,12 @@ public class ChipDependencies
         BetTable betTable,
         IRouletteWheel rouletteWheel,
         BallResults ballResult,
-        GoldenChips goldenChips,
-        Money money)
+        GoldenChips goldenChips)
     {
         BetCalculator = betCalculator;
         BetTable = betTable;
         RouletteWheel = rouletteWheel;  
         BallResults = ballResult;
         GoldenChips = goldenChips;
-        Money = money;
     }
 }

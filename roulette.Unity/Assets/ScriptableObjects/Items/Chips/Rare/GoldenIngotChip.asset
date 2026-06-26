@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1784c6eb2c6ce524f8553a3da169711c, type: 3}
   m_Name: GoldenIngotChip
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
-  shopPrefab: {fileID: 0}
-  cost: 0
-  Prefab: {fileID: 0}
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0417\u043E\u043B\u043E\u0442\u043E\u0439
+    \u0441\u043B\u0438\u0442\u043E\u043A\""
+  description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
+    \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0437\u043E\u043B\u043E\u0442\u044B\u0445
+    \u0444\u0438\u0448\u0435\u043A."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 1
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}

@@ -11,6 +11,9 @@ public abstract class Chip
     public abstract void Apply();
     public abstract void Revert();
 
+    public virtual void OnAddedToHolder() { }
+    public virtual void OnRemovedFromHolder() { }
+
     protected void AddToMemory(string ballHash)
     {
         EligibleBallHashes.Add(ballHash);

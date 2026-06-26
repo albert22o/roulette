@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using static RoundStateManager;
 
 public class BetTable
@@ -83,8 +84,21 @@ public class BetTable
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
+
     private void OnStateChanged(RoundState newState)
     {
         active = newState == RoundState.PlacingBets;
+    }
+
+    public void AddAvailableSum(int amount)
+    {
+        availableBetSum += amount;
+        ChangeAvailableSum?.Invoke(availableBetSum);
+    }
+
+    public void RemoveAvailableSum(int amount)
+    {
+        availableBetSum = Mathf.Max(0, availableBetSum - amount);
+        ChangeAvailableSum?.Invoke(availableBetSum);
     }
 }

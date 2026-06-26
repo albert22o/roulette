@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class ChipHolder
@@ -29,8 +30,9 @@ public class ChipHolder
         int freeIndex = FindFreeSlot();
         if (freeIndex == -1)
             return;
-
+        
         chips[freeIndex] = chipFactory.Create(chipData);
+        chips[freeIndex].OnAddedToHolder();
 
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
@@ -39,6 +41,8 @@ public class ChipHolder
     {
         if (!IsValidIndex(index) || chips[index] == null)
             return;
+
+        chips[index].OnRemovedFromHolder();
 
         chips[index].Revert();
         chips[index] = null;
@@ -55,6 +59,8 @@ public class ChipHolder
         {
             if (chips[i] != null && chips[i].ChipData == data)
             {
+                chips[i].OnRemovedFromHolder();
+
                 chips[i].Revert();
                 chips[i] = null;
                 ChipRemoved?.Invoke(i);
