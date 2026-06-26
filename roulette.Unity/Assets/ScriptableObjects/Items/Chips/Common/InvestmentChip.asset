@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2832e93ca66f32f44916d7061d0aefc8, type: 3}
   m_Name: InvestmentChip
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
-  shopPrefab: {fileID: 0}
-  cost: 0
-  Prefab: {fileID: 0}
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0418\u043D\u0432\u0435\u0441\u0442\u0438\u0446\u0438\u044F\""
+  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+    \u0431\u0430\u0437\u043E\u0432\u044B\u0435 \u0434\u0435\u043D\u044C\u0433\u0438
+    \u043D\u0430 200."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 1
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   BonusAmount: 200

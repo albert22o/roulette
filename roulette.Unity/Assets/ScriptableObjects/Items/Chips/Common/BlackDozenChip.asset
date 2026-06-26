@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ab36c47edd8374c87da8a5af04d7a9, type: 3}
   m_Name: BlackDozenChip
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0427\u0435\u0440\u043D\u0430\u044F
+    \u0434\u044E\u0436\u0438\u043D\u0430\""
+  description: "\u0421\u043B\u0443\u0447\u0430\u0439\u043D\u0430\u044F \u0434\u044E\u0436\u0438\u043D\u0430
+    \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442 +2 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
   cost: 1
   Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}

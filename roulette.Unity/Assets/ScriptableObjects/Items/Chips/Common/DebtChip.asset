@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728236813da5bde4a9f9249dcc323dec, type: 3}
   m_Name: DebtChip
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
-  shopPrefab: {fileID: 0}
-  cost: 0
-  Prefab: {fileID: 0}
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0414\u043E\u043B\u0433\""
+  description: "\u0414\u0430\u0435\u0442 \u0438\u043C\u0435\u0442\u044C \u043C\u0438\u043D\u0443\u0441
+    2 \u0437\u043E\u043B\u043E\u0442\u044B\u0445 \u0444\u0438\u0448\u043A\u0438 \u0432
+    \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 1
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   DebtAmount: 2

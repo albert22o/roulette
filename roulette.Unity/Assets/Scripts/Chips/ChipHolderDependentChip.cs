@@ -1,0 +1,38 @@
+﻿using UnityEngine;
+
+// Базовый класс для фишек, которые считают что-то в ChipHolder
+public abstract class ChipHolderDependentChip : Chip
+{
+    protected readonly BetCalculator betCalculator;
+
+    private bool bonusApplied = false;
+
+    protected ChipHolderDependentChip(BetCalculator betCalculator, ChipData data) : base(data)
+    {
+        this.betCalculator = betCalculator;
+    }
+
+    protected abstract int CalculateBonus();
+
+    public override void Apply()
+    {
+        if (bonusApplied) return;
+        int bonus = CalculateBonus();
+        if (bonus > 0)
+        {
+            betCalculator.ModifyGeneralModifier(bonus);
+            bonusApplied = true;
+        }
+    }
+
+    public override void Revert()
+    {
+        if (!bonusApplied) return;
+        int bonus = CalculateBonus();
+        if (bonus > 0)
+        {
+            betCalculator.ModifyGeneralModifier(-bonus);
+        }
+        bonusApplied = false;
+    }
+}
