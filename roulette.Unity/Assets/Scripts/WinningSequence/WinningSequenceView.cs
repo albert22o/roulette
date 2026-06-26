@@ -8,6 +8,7 @@ public class WinningSequenceView : MonoBehaviour
 {
     [SerializeField] TextMeshPro betText;
     [SerializeField] TextMeshPro generalMultiplierText;
+    [SerializeField] Animator dealerAnimator;
     [SerializeField] float timeBeforeChipApply = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
 
@@ -59,7 +60,7 @@ public class WinningSequenceView : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeChipApply);
 
-        for (int i = 0; i < chipHolder.Сhips.Length; i++)
+        for (int i = 0; i < chipHolder.Chips.Count; i++)
         {
             chipHolder.ApplyByIndex(i);
             winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.GetMaxWinningMultiplier(betInfo, hitInfo));
@@ -80,9 +81,11 @@ public class WinningSequenceView : MonoBehaviour
         generalMultiplierText.text = multiplier.ToString();
     }
 
-    private void OnEndSequence()
+    private void OnEndSequence(bool isWin)
     {
         generalMultiplierText.text = "";
         betText.text = "";
+        if (isWin)
+            dealerAnimator.SetTrigger("collect");
     }
 }

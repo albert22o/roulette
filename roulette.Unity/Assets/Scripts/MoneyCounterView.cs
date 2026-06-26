@@ -35,6 +35,7 @@ public class MoneyCounterView : MonoBehaviour
         winningSequence.CountMoney += OnCountMoney;
         winningSequence.DisplayMultiplier += OnDisplayMultiplier;
         winningSequence.SequenceStart += OnSequenceStart;
+        winningSequence.EndSequence += OnEndSequence;
         animator = GetComponent<Animator>();
     }
 
@@ -63,14 +64,6 @@ public class MoneyCounterView : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeChipSpawn);
 
         chipSpawner.RequestSpawn(reward / BetTable.BetStep);
-
-        animator.SetTrigger("fade");
-        winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
-
-        //Сейчас нет анимации того как монстр сгребает фишки, поэтому они просто исчезают после времени
-        yield return new WaitForSeconds(timeBeforeChipClear);
-
-        chipSpawner.RequestClear();
     }
 
     private void OnSequenceStart(int bet, int multiplier)
@@ -78,6 +71,11 @@ public class MoneyCounterView : MonoBehaviour
         this.bet = bet;
         resultText.text = "0";
         formulaText.text = $"{bet} x {multiplier}";
+        animator.SetTrigger("fade");
+    }
+
+    private void OnEndSequence(bool _)
+    {
         animator.SetTrigger("fade");
     }
 

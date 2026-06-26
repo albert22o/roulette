@@ -32,6 +32,11 @@ public class GameInstaller : MonoInstaller
             .FromComponentInHierarchy()
             .AsSingle();
 
+        Container.Bind<IRouletteBallsManager>()
+            .To<RouletteBallsManager>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
         Container.Bind<ProgressionManager>().AsSingle();
         Container.Bind<BetTable>().AsSingle();
 
@@ -52,5 +57,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<ChipSpawner>().AsSingle();
+
+        Container.Bind<WinningSequence>().AsSingle();
     }
 }

@@ -13,13 +13,15 @@ public class ChipSpawnerView : MonoBehaviour
     [SerializeField] private float randomSpawnPositionMultiplier;
 
     private ChipSpawner chipSpawner;
+    private WinningSequence winningSequence;
     private List<GameObject> spawnedChips = new();
     private Coroutine spawnCoroutine;
 
     [Inject]
-    public void Construct(ChipSpawner chipSpawner)
+    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence)
     {
         this.chipSpawner = chipSpawner;
+        this.winningSequence = winningSequence;
     }
 
     private void OnEnable()
@@ -81,5 +83,6 @@ public class ChipSpawnerView : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
         spawnCoroutine = null;
+        winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
     }
 }

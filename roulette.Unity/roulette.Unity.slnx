@@ -11,4 +11,5 @@
   <Project Path="UniversalFPVolumetricFog.Editor.csproj" />
   <Project Path="Zenject-TestFramework.csproj" />
   <Project Path="Zenject-PoolMonitor-Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
