@@ -32,7 +32,7 @@ public class GameInstaller : MonoInstaller
             .FromComponentInHierarchy()
             .AsSingle();
 
-        Container.Bind<IRouletteBallsManager>()
+        Container.Bind<IAnimateBalls>()
             .To<RouletteBallsManager>()
             .FromComponentInHierarchy()
             .AsSingle();
