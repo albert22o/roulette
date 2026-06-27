@@ -36,11 +36,6 @@ public class GameInstaller : MonoInstaller
             .FromComponentInHierarchy()
             .AsSingle();
 
-        Container.Bind<IAnimateBalls>()
-            .To<RouletteBallsManager>()
-            .FromComponentInHierarchy()
-            .AsSingle();
-
         Container.Bind<ProgressionManager>().AsSingle();
         Container.Bind<BetTable>().AsSingle();
 

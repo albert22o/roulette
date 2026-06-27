@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -73,6 +73,7 @@ public class MoneyCounterView : MonoBehaviour
     private void OnEndSequence(bool _)
     {
         animator.SetTrigger("fade");
+        chipSpawner.RequestClear();
     }
 
     private void OnDisplayMultiplier(int multiplier)
