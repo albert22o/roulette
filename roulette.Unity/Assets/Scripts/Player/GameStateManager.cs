@@ -39,5 +39,6 @@ public class GameStateManager
         Shopping,
         Lose,
         PlaqueShopping,
+        FieldsSelecting
     }
 }

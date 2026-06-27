@@ -19,7 +19,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopFoodPlace foodPlace;
     [SerializeField] private MouseInteraction shopInteraction;
     [SerializeField] private ShopChipPlacesController chipPlacesController;
-    [SerializeField] private ShopInputHandler inputHandler;
+    [SerializeField] private CancelInputHandler inputHandler;
 
     public int BallSellCost => ballSellCost;
 
