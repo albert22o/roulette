@@ -6,7 +6,6 @@ public class BetCalculator
 {
     public event Action<int> GetReward;
     public event Action<HitInfo> EndRound;
-    public event Action<int, int, int> CountMoney;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class RouletteBallsManager : MonoBehaviour, IAnimateBalls
+public class RouletteBallsManager : MonoBehaviour
 {
     [SerializeField] private BallsLauncher ballLauncher;
     [SerializeField] private float sectorsRadius;

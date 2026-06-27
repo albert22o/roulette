@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class RouletteWheel : MonoBehaviour, IRouletteWheel
+public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
 {
     public event Action<string> BallHover;
     public event Action<string> BallUnHover;
@@ -159,4 +159,8 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel
         ballsLauncher.StartLaunch();
     }
 
+    public void AnimateBall(string ballHash)
+    {
+        ballsManager.AnimateBall(ballHash);
+    }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +16,6 @@ public class WinningSequence
     private readonly RoundStateManager roundStateManager;
     private BetCalculator betCalculator;
 
-    private SequencePhase phase;
     private BetInfo betInfo;
     private HitInfo hitInfo;
     private bool isRoundWon;
@@ -35,7 +34,6 @@ public class WinningSequence
     {
         if (!betTable.NotNullBetAmounts.Any()) return;
 
-        phase = SequencePhase.Init;
         isRoundWon = false;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         CompareAndDisplayMaxMultiplier(1);
