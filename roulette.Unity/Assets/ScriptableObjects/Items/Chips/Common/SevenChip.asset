@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602f7fd78bcae3545abf74d1258e689a, type: 3}
+  m_Name: SevenChip
+  m_EditorClassIdentifier: 
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \u0441 \u0446\u0438\u0444\u0440\u043E\u0439
+    7"
+  description: "\u0427\u0435\u0442\u044B\u0440\u0435 \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u044B\u0445
+    \u0447\u0438\u0441\u043B\u0430 \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0442
+    +4 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  cost: 1
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  BonusAmount: 4
+  NumbersCount: 4

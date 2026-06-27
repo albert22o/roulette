@@ -167,6 +167,12 @@ public class RoundManager
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }
 
+    public void AddRerollCount(int amount)
+    {
+        rerollCount += amount;
+        RerollCountChanged?.Invoke(rerollCount);
+    }
+
     private void OnStateChanged(RoundState newState)
     {
         betState = newState;

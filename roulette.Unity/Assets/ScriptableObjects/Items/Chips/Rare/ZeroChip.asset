@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8a0ed2044a9ad45bb7d95cac3a27e0, type: 3}
   m_Name: ZeroChip
   m_EditorClassIdentifier: 
-  itemName: ZeroChip
-  description: 
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \u0441 \u0446\u0438\u0444\u0440\u043E\u0439
+    0"
+  description: "0 \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442 +10 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
-  cost: 2
-  Prefab: {fileID: 573473156636019110, guid: 85d3f900bf2deba49b6592418ff0976c, type: 3}
+  cost: 1
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   FieldNum: 0
   ModifyAmount: 10

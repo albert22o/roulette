@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using static RoundStateManager;
 
 public class BetCalculator
@@ -52,6 +53,24 @@ public class BetCalculator
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
+    }
+
+    public void MultiplyFieldNumberMultiplier(int fieldNumber, float multiplier)
+    {
+        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
+            ? m
+            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
+
+        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current * multiplier);
+    }
+
+    public void DivideFieldNumberMultiplier(int fieldNumber, float divisor)
+    {
+        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
+            ? m
+            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
+
+        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current / divisor);
     }
 
     public void ResetFieldNumberMultiplier(int fieldNumber) =>

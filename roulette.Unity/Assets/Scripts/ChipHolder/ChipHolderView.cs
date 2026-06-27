@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.SmartFormat.Utilities;
 using Zenject;
 
 public class ChipHolderView : MonoBehaviour
@@ -133,11 +135,13 @@ public class ChipHolderView : MonoBehaviour
     {
         var chipObject = Instantiate(chip.ChipData.Prefab);
         slotViews[slotIndex].PlaceChip(chipObject);
+        slotViews[slotIndex].SetChipName(chip.ChipData.Name);
     }
 
     private void OnChipRemoved(int slotIndex)
     {
         slotViews[slotIndex].ClearChip();
+        slotViews[slotIndex].SetChipName("");
     }
 
     private void OnChipsSwapped(int indexA, int indexB)
@@ -150,6 +154,13 @@ public class ChipHolderView : MonoBehaviour
 
         slotViews[indexA].PlaceChip(chipB);
         slotViews[indexB].PlaceChip(chipA);
+
+        var chipDataA = chipHolder.Chips[indexA];
+        var chipDataB = chipHolder.Chips[indexB];
+
+        slotViews[indexA].SetChipName(chipDataA?.ChipData?.Name ?? "");
+        slotViews[indexB].SetChipName(chipDataB?.ChipData?.Name ?? "");
+
     }
 
     private void OnChipAnimated(int index)
@@ -179,4 +190,6 @@ public class ChipHolderView : MonoBehaviour
 
         return Vector3.zero;
     }
+
+   
 }
