@@ -60,6 +60,6 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
 
     public void HoverExit()
     {
-        shop.HIdeTooltip();
+        shop.HideTooltip();
     }
 }

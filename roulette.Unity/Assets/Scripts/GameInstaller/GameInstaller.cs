@@ -4,9 +4,10 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-    [SerializeField] InventoryConfig inventoryConfig;
     [SerializeField] RoundsConfig roundsConfig;
-   
+    [SerializeField] BallHolderConfig ballHolderConfig;
+    [SerializeField] ChipHolderConfig chipHolderConfig;
+
     public override void InstallBindings()
     {
         // Менеджеры состояний
@@ -17,14 +18,15 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
         // Конфиги
         Container.BindInstance(roundsConfig).AsSingle();
-        Container.BindInstance(inventoryConfig).AsSingle();
         Container.Bind<TableConfig>().AsSingle();
+        Container.BindInstance(ballHolderConfig).AsSingle();
+        Container.BindInstance(chipHolderConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
         Container.Bind<Tickets>().AsSingle();
         Container.Bind<Money>().AsSingle();
-        
+
         Container.Bind<IRouletteWheel>()
             .To<RouletteWheel>()
             .FromComponentInHierarchy()
@@ -35,7 +37,6 @@ public class GameInstaller : MonoInstaller
             .AsSingle();
 
         Container.Bind<ProgressionManager>().AsSingle();
-        Container.Bind<Inventory>().AsSingle();
         Container.Bind<BetTable>().AsSingle();
 
         Container.Bind<BallResults>().AsSingle();

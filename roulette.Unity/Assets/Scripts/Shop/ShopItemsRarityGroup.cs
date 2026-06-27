@@ -1,18 +1,38 @@
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ShopItemsRarityGroup", menuName = "Scriptable Objects/ShopItemsRarityGroup")]
 public class ShopItemsRarityGroup : ScriptableObject
 {
-    [field : SerializeField] public ItemData[] Items { get; private set; }
+    [SerializeField] private DefaultAsset folder;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (folder == null)
+            return;
+
+        string folderPath = AssetDatabase.GetAssetPath(folder);
+
+        string[] guids = AssetDatabase.FindAssets("t:ItemData", new[] { folderPath });
+
+        items = guids
+            .Select(guid => AssetDatabase.LoadAssetAtPath<ItemData>(AssetDatabase.GUIDToAssetPath(guid)))
+            .ToArray();
+    }
+#endif
+
+    private ItemData[] items;
 
     public ItemData GetRandomItem()
     {
-        if (Items == null || Items.Length == 0)
+        if (items == null || items.Length == 0)
         {
             Debug.LogWarning("ShopItemsRarityGroup has no items.");
             return null;
         }
-        int randomIndex = Random.Range(0, Items.Length);
-        return Items[randomIndex];
+        int randomIndex = Random.Range(0, items.Length);
+        return items[randomIndex];
     }
 }

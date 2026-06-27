@@ -134,6 +134,7 @@ public class RoundManager
             return;
 
         rouletteWheel.ClearBalls();
+        roundStateManager.ChangeState(RoundState.WheelSpining);
 
         foreach(var ballInfo in ballHolder.Balls)
         {

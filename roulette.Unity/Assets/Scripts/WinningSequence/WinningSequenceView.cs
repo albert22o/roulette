@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEditor.Recorder;
 using UnityEngine;
@@ -59,7 +59,7 @@ public class WinningSequenceView : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeChipApply);
 
-        for (int i = 0; i < chipHolder.Сhips.Length; i++)
+        for (int i = 0; i < chipHolder.Capacity; i++)
         {
             chipHolder.ApplyByIndex(i);
             winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.GetMaxWinningMultiplier(betInfo, hitInfo));
