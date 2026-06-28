@@ -7,7 +7,7 @@ using static GameStateManager;
 public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera tableCamera;
-    [SerializeField] private TableSelection tableSelection;
+    [SerializeField] private TableSelectionView tableSelection;
     [SerializeField] private Canvas canvas;
 
     private GameStateManager stateManager;
@@ -20,12 +20,13 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    private void Start()
     {
         stateManager.GameStateChanged += OnGameStateChanged;
+        if (stateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(false);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         stateManager.GameStateChanged -= OnGameStateChanged;
     }
@@ -51,10 +52,12 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
         if (state == GameState.FieldsSelecting)
         {
             StartInteraction();
+            gameObject.SetActive(true);
         }
         else if (isInteraction == true)
         {
             FinishInteraction();
+            gameObject.SetActive(false);
         }
     }
 }

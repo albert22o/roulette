@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
+using static GameStateManager;
 
 class BetTableView : MonoBehaviour
 {
@@ -25,15 +26,18 @@ class BetTableView : MonoBehaviour
     private ChipHolder chipHolder;
     private int generalMultiplier;
 
+    private GameStateManager gameStateManager;
+
     [Inject]
     public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
-        RoundStateManager roundStateManager, ChipHolder chipHolder)
+        RoundStateManager roundStateManager, ChipHolder chipHolder, GameStateManager gameStateManager)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
         this.roundStateManager = roundStateManager;
         this.chipHolder = chipHolder;
+        this.gameStateManager = gameStateManager;
     }
 
     public void Start()
@@ -56,6 +60,8 @@ class BetTableView : MonoBehaviour
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
         betCalculator.HighlightButtons += OnHighlightButton;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+
 
         foreach (var pocket in tableConfig.PocketMapping)
         {
@@ -63,6 +69,8 @@ class BetTableView : MonoBehaviour
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
         }
+
+        if (gameStateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(true);
     }
 
     private void OnDestroy()
@@ -72,6 +80,7 @@ class BetTableView : MonoBehaviour
         tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
         tableConfig.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
+        gameStateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     private void OnChangeAvailableSum(int newSum)
@@ -92,6 +101,14 @@ class BetTableView : MonoBehaviour
     private void OnChangeAmountByIndex(int index, int amount)
     {
         betButtons[index].Amount = amount;
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state is GameState.FieldsSelecting)
+            gameObject.SetActive(false);
+        else
+            gameObject.SetActive(true);
     }
 
     private void OnHighlightButton(HitInfo hitInfo)

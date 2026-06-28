@@ -9,6 +9,8 @@ public class GameStateManager
     private readonly Queue<GameState> stateQueue = new Queue<GameState>();
     private bool isProcessing;
 
+    public GameState? CurrentState => currentState;
+
     public void ChangeGameState(GameState state)
     {
         stateQueue.Enqueue(state);

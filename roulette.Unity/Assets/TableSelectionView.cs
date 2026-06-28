@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class TableSelection : MonoBehaviour
+public class TableSelectionView : MonoBehaviour
 {
     [SerializeField] List<BetButton> betButtons = new();
 
