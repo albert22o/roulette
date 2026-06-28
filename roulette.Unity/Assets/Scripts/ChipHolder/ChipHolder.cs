@@ -43,8 +43,6 @@ public class ChipHolder
             return;
 
         chips[index].OnRemovedFromHolder();
-
-        chips[index].Revert();
         chips[index] = null;
 
         ChipRemoved?.Invoke(index);
@@ -60,8 +58,6 @@ public class ChipHolder
             if (chips[i] != null && chips[i].ChipData == data)
             {
                 chips[i].OnRemovedFromHolder();
-
-                chips[i].Revert();
                 chips[i] = null;
                 ChipRemoved?.Invoke(i);
                 return;
@@ -91,12 +87,6 @@ public class ChipHolder
     private void OnStateChanged(RoundStateManager.RoundState newState)
     {
         isActive = newState == RoundStateManager.RoundState.PlacingBets;
-    }
-
-    private void ApplyAll()
-    {
-        for (int i = 0; i < chips.Length; i++)
-            chips[i]?.Apply();
     }
 
     public void ApplyByIndex(int index)
