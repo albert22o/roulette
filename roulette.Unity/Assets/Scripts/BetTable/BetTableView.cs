@@ -73,6 +73,11 @@ class BetTableView : MonoBehaviour
         if (gameStateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(true);
     }
 
+    private void OnEnable()
+    {
+        UpdateAllButtons();
+    }
+
     private void OnDestroy()
     {
         betCalculator.HighlightButtons -= OnHighlightButton;
@@ -101,6 +106,15 @@ class BetTableView : MonoBehaviour
     private void OnChangeAmountByIndex(int index, int amount)
     {
         betButtons[index].Amount = amount;
+    }
+
+    private void UpdateAllButtons()
+    {
+        for (int i = 0; i < betButtons.Count; i++)
+        {
+            betButtons[i].Color = tableConfig.PocketMapping[i].FieldColor;
+            betButtons[i].FieldNum = tableConfig.PocketMapping[i].FieldNumber;
+        }
     }
 
     private void OnGameStateChanged(GameState state)

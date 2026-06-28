@@ -1,8 +1,6 @@
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
-using static GameStateManager;
 
 public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     private void Start()
     {
         stateManager.GameStateChanged += OnGameStateChanged;
-        if (stateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(false);
+        if (stateManager.CurrentState is not GameStateManager.GameState.FieldsSelecting) gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -44,12 +42,12 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
         tableCamera.gameObject.SetActive(false);
         canvas.gameObject.SetActive(false);
         isInteraction = false;
-        tableSelection.FinishInteraction();
+        tableSelection.ClearHighlight();
     }
 
-    private void OnGameStateChanged(GameState state)
+    private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        if (state == GameState.FieldsSelecting)
+        if (state == GameStateManager.GameState.FieldsSelecting)
         {
             StartInteraction();
             gameObject.SetActive(true);

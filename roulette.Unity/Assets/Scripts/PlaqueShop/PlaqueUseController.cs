@@ -6,38 +6,41 @@ public class PlaqueUseController
     private GameStateManager stateManager;
     private PlaqueFieldsSelector fieldsSelector;
     private PlaqueHolder plaqueHolder;
-    private PlaqueData selectedPlaque;
-
+    private Plaque plaque;
+    private PlaqueFactory plaqueFactory;
     public event Action PlaqueUsed;
 
     public PlaqueUseController(GameStateManager stateManager,
-        PlaqueFieldsSelector fieldsSelector, PlaqueHolder plaqueHolder)
+        PlaqueFieldsSelector fieldsSelector, PlaqueHolder plaqueHolder, PlaqueFactory plaqueFactory)
     {
         this.stateManager = stateManager;
         this.fieldsSelector = fieldsSelector;
         this.plaqueHolder = plaqueHolder;
+        this.plaqueFactory = plaqueFactory;
 
         fieldsSelector.SelectionCompleted += OnSelectionCompleted;
     }
 
     public void UsePlaque(PlaqueData data)
     {
-        selectedPlaque = data;
-        if (data.SelectionRequests.Length > 0)
+        plaque = plaqueFactory.CreatePlaque(data);
+        if (plaque.SelectionRequests.Length > 0)
         {
-            fieldsSelector.SetPlaque(selectedPlaque);
+            fieldsSelector.SetPlaque(plaque);
             stateManager.ChangeGameState(GameStateManager.GameState.FieldsSelecting);
         }
         else
         {
-            plaqueHolder.AddPlaque(selectedPlaque, null);
+            plaqueHolder.AddPlaque(plaque, null);
+            plaque = null;
         }
     }
 
     public void OnSelectionCompleted(int[][] selectedFields)
     {
-        plaqueHolder.AddPlaque(selectedPlaque, selectedFields);
+        plaqueHolder.AddPlaque(plaque, selectedFields);
         stateManager.ChangeGameState(GameStateManager.GameState.PlaqueShopping);
         PlaqueUsed?.Invoke();
+        plaque = null;
     }
 }

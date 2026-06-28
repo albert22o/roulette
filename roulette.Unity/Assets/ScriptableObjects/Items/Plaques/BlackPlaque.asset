@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6b6c12ed67ad74a9f63752ca91566e, type: 3}
-  m_Name: TestPlaque
+  m_Name: BlackPlaque
   m_EditorClassIdentifier: 
   itemName: "\u0427\u0435\u0440\u043D\u044B\u0439 \u043F\u043B\u0430\u043A"
   description: "\u041F\u0435\u0440\u0435\u043A\u0440\u0430\u0448\u0438\u0432\u0430\u0435\u0442

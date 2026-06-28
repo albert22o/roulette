@@ -22,6 +22,8 @@ public class PlaqueFieldSelectionGUI : MonoBehaviour
         plaqueFieldsSelector.SelectionRequestChanged += OnSelectionRequestChanged;
         plaqueFieldsSelector.IsSelectionValidChanged += OnSelectionValidChanged;
         applyButton.onClick.AddListener(Apply);
+        OnSelectionRequestChanged(plaqueFieldsSelector.CurrentRequest);
+        OnSelectionValidChanged(false);
     }
 
     private void OnDisable()
@@ -38,7 +40,8 @@ public class PlaqueFieldSelectionGUI : MonoBehaviour
 
     private void OnSelectionRequestChanged(SelectionRequest request)
     {
-        selectionDescription.text = request.Hint;
+        if (request != null)
+            selectionDescription.text = request.Hint;
     }
 
     public void OnSelectionValidChanged(bool isValid)

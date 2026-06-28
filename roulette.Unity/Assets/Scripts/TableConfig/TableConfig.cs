@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.VisualScripting;
 
 public class TableConfig
 {
@@ -67,7 +69,7 @@ public class TableConfig
 
     public void SetPocketNum(int index, int num)
     {
-        if (!pocketMapping.TryGetValue(index,out var pocket))
+        if (pocketMapping.TryGetValue(index, out var pocket))
         {
             pocket.FieldNumber = num;
             PocketNumberChanged?.Invoke(index, num);

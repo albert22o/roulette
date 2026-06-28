@@ -80,7 +80,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] Material dozenHighlight;
     [SerializeField] Material numberHighlight;
 
-    private SpriteRenderer BG;
+    [SerializeField] private SpriteRenderer BG;
     private event Action OnRightClick;
     private event Action OnLeftClick;
     private readonly Stack<GameObject> stackChips = new();
@@ -89,7 +89,6 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
     {
-        BG = GetComponent<SpriteRenderer>();
         Color = betInfo.FieldColor;
 
         if (fieldNumText == null)

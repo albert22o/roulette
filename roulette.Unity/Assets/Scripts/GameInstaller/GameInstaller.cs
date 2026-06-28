@@ -59,5 +59,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlaqueFieldsSelector>().AsSingle();
         Container.Bind<PlaqueHolder>().AsSingle();
         Container.Bind<PlaqueUseController>().AsSingle();
+        Container.Bind<PlaqueFactory>().AsSingle();
     }
 }

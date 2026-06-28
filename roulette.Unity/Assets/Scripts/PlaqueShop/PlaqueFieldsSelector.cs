@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlaqueFieldsSelector
 {
     private List<int> currentSelectedFields = new();
-    private PlaqueData plaqueData;
+    private Plaque plaque;
     private int selectionIndex;
     private List<int[]> selectedAll = new();
     private SelectionRequest currentSelectionRequest;
@@ -13,6 +13,9 @@ public class PlaqueFieldsSelector
     public event Action<int[][]> SelectionCompleted;
     public event Action<SelectionRequest> SelectionRequestChanged;
     public event Action<bool> IsSelectionValidChanged;
+    public event Action SelectionPhaseCompleted;
+
+    public SelectionRequest CurrentRequest => currentSelectionRequest;
 
 
 
@@ -21,13 +24,13 @@ public class PlaqueFieldsSelector
         this.tableConfig = tableConfig;
     }
 
-    public void SetPlaque(PlaqueData plaqueData)
+    public void SetPlaque(Plaque plaque)
     {
-        this.plaqueData = plaqueData;
+        this.plaque = plaque;
         currentSelectedFields.Clear();
         selectedAll.Clear();
         selectionIndex = 0;
-        currentSelectionRequest = plaqueData.SelectionRequests[0];
+        currentSelectionRequest = plaque.SelectionRequests[0];
         SelectionRequestChanged?.Invoke(currentSelectionRequest);
         IsSelectionValidChanged?.Invoke(false);
     }
@@ -60,17 +63,22 @@ public class PlaqueFieldsSelector
     }
     public void ApplySelection()
     {
-        selectedAll.Add(currentSelectedFields.ToArray());
+        var currentSelectedFielsArray = currentSelectedFields.ToArray();
+        selectedAll.Add(currentSelectedFielsArray);
+        plaque.OnSelectionPhaseCompleted(selectionIndex, currentSelectedFielsArray);
         selectionIndex++;
-        if (selectionIndex >= plaqueData.SelectionRequests.Length)
+        if (selectionIndex >= plaque.SelectionRequests.Length)
         {
             SelectionCompleted?.Invoke(selectedAll.ToArray());
+            plaque = null;
         }
         else
         {
-            currentSelectionRequest = plaqueData.SelectionRequests[selectionIndex];
+            currentSelectionRequest = plaque.SelectionRequests[selectionIndex];
+            SelectionPhaseCompleted?.Invoke();
             SelectionRequestChanged?.Invoke(currentSelectionRequest);
             IsSelectionValidChanged?.Invoke(false);
+            currentSelectedFields.Clear();
         }
     }
 }

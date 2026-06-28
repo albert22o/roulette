@@ -1,12 +1,17 @@
-using UnityEngine;
 
 public abstract class Plaque
 {
     public PlaqueData PlaqueData { get; }
-    public Plaque(PlaqueData data)
+    protected PlaqueDependencies PlaqueDependencies { get; }
+
+    public Plaque(PlaqueData data, PlaqueDependencies plaqueDependencies)
     {
         PlaqueData = data;
+        PlaqueDependencies = plaqueDependencies;
     }
-    public abstract void Apply(PlaqueDependencies dependencies);
+
+    public abstract void OnSelectionPhaseCompleted(int phaseIndex, int[] selectedFields);
+    public abstract SelectionRequest[] SelectionRequests { get; }
+    public abstract void Apply(int[][] selectedFields);
 
 }

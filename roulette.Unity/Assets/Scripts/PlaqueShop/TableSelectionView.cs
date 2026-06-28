@@ -29,6 +29,8 @@ public class TableSelectionView : MonoBehaviour
 
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
+        plaqueFieldsSelector.SelectionPhaseCompleted += ClearHighlight;
+        
 
         foreach (var pocket in tableConfig.PocketMapping)
         {
@@ -54,6 +56,7 @@ public class TableSelectionView : MonoBehaviour
     {
         tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
         tableConfig.PocketColorChanged -= OnPocketColorChanged;
+        plaqueFieldsSelector.SelectionPhaseCompleted -= ClearHighlight;
     }
 
     private void OnPocketColorChanged(int index, ColorType color)
@@ -71,7 +74,7 @@ public class TableSelectionView : MonoBehaviour
 
     }
 
-    public void FinishInteraction()
+    public void ClearHighlight()
     {
         foreach (var betButton in betButtons) 
         {
