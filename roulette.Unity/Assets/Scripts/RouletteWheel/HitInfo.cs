@@ -28,3 +28,13 @@ public enum ColorType
     Green,
     White
 }
+
+[System.Flags]
+public enum ColorMask
+{
+    None = 0,
+    Red = 1 << 0,
+    Black = 1 << 1,
+    Green = 1 << 2,
+}
+

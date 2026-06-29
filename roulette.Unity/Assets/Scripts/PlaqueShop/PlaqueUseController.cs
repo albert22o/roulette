@@ -24,15 +24,16 @@ public class PlaqueUseController
     public void UsePlaque(PlaqueData data)
     {
         plaque = plaqueFactory.CreatePlaque(data);
-        if (plaque.SelectionRequests.Length > 0)
+        if (plaque.SelectionRequests == null || plaque.SelectionRequests.Length == 0)
+        {
+            plaqueHolder.AddPlaque(plaque, null);
+            PlaqueUsed?.Invoke();
+            plaque = null;
+        }
+        else if (plaque.SelectionRequests.Length > 0)
         {
             fieldsSelector.SetPlaque(plaque);
             stateManager.ChangeGameState(GameStateManager.GameState.FieldsSelecting);
-        }
-        else
-        {
-            plaqueHolder.AddPlaque(plaque, null);
-            plaque = null;
         }
     }
 
