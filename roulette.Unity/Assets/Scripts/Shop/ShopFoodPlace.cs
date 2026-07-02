@@ -36,7 +36,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
         shop.HideTooltip();
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         if (goldenChips.Amount >= cost)
         {
@@ -49,13 +49,13 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
         }
     }
 
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         ShowDescription();
         IsHoverChanged?.Invoke(true);
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         HideDescription();
         IsHoverChanged?.Invoke(false);

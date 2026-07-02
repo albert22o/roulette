@@ -59,17 +59,17 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
         }
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         TryBuy();
     }
 
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, tooltipPosition.position);
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         shop.HideTooltip();
     }

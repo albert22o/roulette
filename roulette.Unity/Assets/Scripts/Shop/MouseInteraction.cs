@@ -37,7 +37,7 @@ public class MouseInteraction : MonoBehaviour
 
                     if (hitObject.TryGetComponent(out IHoverable hoverable))
                     {
-                        hoverable.HoverEnter();
+                        hoverable.OnHoverEnter();
                     }
                 }
                 
@@ -59,7 +59,7 @@ public class MouseInteraction : MonoBehaviour
                     if (hitObject.TryGetComponent(out IClickable clickable)
                         && clickedObject == hitObject)
                     {
-                        clickable.Clicked();
+                        clickable.OnClick();
                     }
                 }
             }
@@ -84,7 +84,7 @@ public class MouseInteraction : MonoBehaviour
             }
             if (hitObject.TryGetComponent(out IHoverable hoverable))
             {
-                hoverable.HoverExit();
+                hoverable.OnHoverExit();
             }
         }
         hitObject = null;

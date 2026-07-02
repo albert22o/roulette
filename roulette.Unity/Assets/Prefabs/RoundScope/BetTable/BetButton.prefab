@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5428965525501952293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0004}
   m_LocalScale: {x: 1.9999999, y: 1.9999999, z: 1.9999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -289,6 +289,7 @@ MonoBehaviour:
   colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   numberHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
+  BG: {fileID: 1584103670993536186}
   customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
 --- !u!65 &658725084393326555
 BoxCollider:
@@ -309,8 +310,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.16007596, y: 0.16000004, z: 0.1692358}
-  m_Center: {x: 0.00003798554, y: 4.601074e-16, z: -0.07038374}
+  m_Size: {x: 0.49648228, y: 0.22515093, z: 0.032050118}
+  m_Center: {x: -0.0033361465, y: -0.000026101867, z: -0.0017908781}
 --- !u!1 &6656800096395598255
 GameObject:
   m_ObjectHideFlags: 0

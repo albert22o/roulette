@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class ShopInputHandler : MonoBehaviour
+public class CancelInputHandler : MonoBehaviour
 {
     [SerializeField] private InputActionReference cancelActionReference;
 

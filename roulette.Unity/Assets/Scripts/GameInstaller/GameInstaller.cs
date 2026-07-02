@@ -7,6 +7,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] RoundsConfig roundsConfig;
     [SerializeField] BallHolderConfig ballHolderConfig;
     [SerializeField] ChipHolderConfig chipHolderConfig;
+    [SerializeField] PlaqueShopConfig plaqueShopConfig;
 
     public override void InstallBindings()
     {
@@ -21,6 +22,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TableConfig>().AsSingle();
         Container.BindInstance(ballHolderConfig).AsSingle();
         Container.BindInstance(chipHolderConfig).AsSingle();
+        Container.BindInstance(plaqueShopConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
@@ -60,6 +62,11 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<ChipSpawner>().AsSingle();
 
+        Container.Bind<PlaqueShop>().AsSingle();
+        Container.Bind<PlaqueFieldsSelector>().AsSingle();
+        Container.Bind<PlaqueHolder>().AsSingle();
+        Container.Bind<PlaqueUseController>().AsSingle();
+        Container.Bind<PlaqueFactory>().AsSingle();
         Container.Bind<WinningSequence>().AsSingle();
     }
 }

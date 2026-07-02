@@ -6,6 +6,7 @@ using TMPro;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using Zenject;
+using static GameStateManager;
 
 class BetTableView : MonoBehaviour
 {
@@ -21,14 +22,17 @@ class BetTableView : MonoBehaviour
     private TableConfig tableConfig;
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
-    private int generalMultiplier;
+
+    private GameStateManager gameStateManager;
 
     [Inject]
-    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator, WinningSequence winningSequence)
+    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
+        GameStateManager gameStateManager, WinningSequence winningSequence)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
+        this.gameStateManager = gameStateManager;
         this.winningSequence = winningSequence;
     }
 
@@ -51,6 +55,8 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+
         winningSequence.Highlight += OnHighlight;
         winningSequence.EndSequence += OnEndSequence;
 
@@ -60,6 +66,13 @@ class BetTableView : MonoBehaviour
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
         }
+
+        if (gameStateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        UpdateAllButtons();
     }
 
     private void OnDestroy()
@@ -68,6 +81,7 @@ class BetTableView : MonoBehaviour
         tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
         tableConfig.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
+        gameStateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     private void OnChangeAvailableSum(int newSum)
@@ -90,6 +104,23 @@ class BetTableView : MonoBehaviour
         betButtons[index].Amount = amount;
     }
 
+    private void UpdateAllButtons()
+    {
+        for (int i = 0; i < betButtons.Count; i++)
+        {
+            betButtons[i].Color = tableConfig.PocketMapping[i].FieldColor;
+            betButtons[i].FieldNum = tableConfig.PocketMapping[i].FieldNumber;
+        }
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state is GameState.FieldsSelecting)
+            gameObject.SetActive(false);
+        else
+            gameObject.SetActive(true);
+    }
+
     private void OnHighlight(BetInfo betInfo, HitInfo hitInfo)
     {
         StartCoroutine(HighlightSequence(betInfo, hitInfo));
@@ -101,7 +132,7 @@ class BetTableView : MonoBehaviour
 
         if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
         {
-            winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
+            winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyBall);
             yield break;
         }
     

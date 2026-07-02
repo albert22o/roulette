@@ -99,17 +99,17 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
         IsAnimationPlaying = false;
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         Buy();
     }
 
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         ShowDescription();
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         HideDescription();
     }

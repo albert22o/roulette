@@ -5,17 +5,17 @@ public class ShopInventoryItemInputHandler : MonoBehaviour, IMouseInteractable, 
     [SerializeField] private ShopInventoryItem inventoryItem;
     public bool IsInteractable => inventoryItem != null;
 
-    public void HoverEnter()
+    public void OnHoverEnter()
     {
         inventoryItem.ShowTooltip();
     }
 
-    public void HoverExit()
+    public void OnHoverExit()
     {
         inventoryItem.HideTooltip();
     }
 
-    public void Clicked()
+    public void OnClick()
     {
         inventoryItem.Sell();
     }

@@ -5,13 +5,13 @@ public interface IMouseInteractable
 
 public interface IHoverable
 {
-    public void HoverEnter();
-    public void HoverExit();
+    public void OnHoverEnter();
+    public void OnHoverExit();
 }
 
 public interface IClickable
 {
-    public void Clicked();
+    public void OnClick();
 }
 
 public interface IPressable
