@@ -103,10 +103,10 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Posterize_Steps: 47.5
+    - _Posterize_Steps: 70
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Shadow_Threshold: 0.008
+    - _Shadow_Threshold: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
