@@ -23,24 +23,24 @@ public class PlaqueUseController
 
     public void UsePlaque(PlaqueData data)
     {
+        stateManager.ChangeGameState(GameStateManager.GameState.FieldsSelecting);
         plaque = plaqueFactory.CreatePlaque(data);
         if (plaque.SelectionRequests == null || plaque.SelectionRequests.Length == 0)
         {
             plaqueHolder.AddPlaque(plaque, null);
             PlaqueUsed?.Invoke();
             plaque = null;
+            
         }
         else if (plaque.SelectionRequests.Length > 0)
         {
             fieldsSelector.SetPlaque(plaque);
-            stateManager.ChangeGameState(GameStateManager.GameState.FieldsSelecting);
         }
     }
 
     public void OnSelectionCompleted(int[][] selectedFields)
     {
         plaqueHolder.AddPlaque(plaque, selectedFields);
-        stateManager.ChangeGameState(GameStateManager.GameState.PlaqueShopping);
         PlaqueUsed?.Invoke();
         plaque = null;
     }

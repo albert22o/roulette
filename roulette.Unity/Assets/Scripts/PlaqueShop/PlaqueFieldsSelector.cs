@@ -69,6 +69,7 @@ public class PlaqueFieldsSelector
         selectionIndex++;
         if (selectionIndex >= plaque.SelectionRequests.Length)
         {
+            SelectionPhaseCompleted?.Invoke();
             SelectionCompleted?.Invoke(selectedAll.ToArray());
             plaque = null;
         }
