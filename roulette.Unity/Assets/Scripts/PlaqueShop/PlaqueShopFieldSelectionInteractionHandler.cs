@@ -6,7 +6,6 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera tableCamera;
     [SerializeField] private TableSelectionView tableSelection;
-    [SerializeField] private Canvas canvas;
 
     private GameStateManager stateManager;
     private bool isInteraction;
@@ -32,7 +31,6 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     public void StartInteraction()
     {
         tableCamera.gameObject.SetActive(true);
-        canvas.gameObject.SetActive(true);
         isInteraction = true;
         tableSelection.StartInteraction();
     }
@@ -40,7 +38,6 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     public void FinishInteraction()
     {
         tableCamera.gameObject.SetActive(false);
-        canvas.gameObject.SetActive(false);
         isInteraction = false;
         tableSelection.ClearHighlight();
     }

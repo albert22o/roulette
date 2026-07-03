@@ -37,6 +37,10 @@ public class PlaqueFieldsSelector
 
     public bool ToggleField(int index)
     {
+        if (currentSelectionRequest == null)
+        {
+            return false;
+        }
         if (currentSelectedFields.Contains(index) == true)
         {
             currentSelectedFields.Remove(index);

@@ -10,13 +10,10 @@ public class CameraEventHandler : MonoBehaviour
     public void OnTransitionStart()
     {
         TransitionStarted?.Invoke();
-        Debug.Log("transitionStarted");
     }
 
     public void OnTransitionFinish()
     {
         TransitionCompleted?.Invoke();
-        Debug.Log("transitionCompleted");
     }
-
 }

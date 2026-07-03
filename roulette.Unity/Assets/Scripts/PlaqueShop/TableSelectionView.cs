@@ -73,6 +73,7 @@ public class TableSelectionView : MonoBehaviour
 
     public void StartInteraction()
     {
+        CameraArrived = null;
         isCameraArrived = false;
         for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
         {
@@ -82,7 +83,7 @@ public class TableSelectionView : MonoBehaviour
 
     public void ClearHighlight()
     {
-        foreach (var betButton in betButtons) 
+        foreach (var betButton in betButtons)
         {
             betButton.Highlight(false);
         }
@@ -107,12 +108,12 @@ public class TableSelectionView : MonoBehaviour
         yield return new WaitForSeconds(delayToChangeState);
         interactionHandler.FinishInteraction();
         gameStateManager.ChangeGameState(GameStateManager.GameState.PlaqueShopping);
-
     }
 
     private void OnCameraTransitionFinished()
     {
         isCameraArrived = true;
         CameraArrived?.Invoke();
+        CameraArrived = null;
     }
 }
