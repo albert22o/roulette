@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Zenject;
 using static GameStateManager;
@@ -23,16 +21,12 @@ class BetTableView : MonoBehaviour
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
 
-    private GameStateManager gameStateManager;
-
     [Inject]
-    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator,
-        GameStateManager gameStateManager, WinningSequence winningSequence)
+    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator, WinningSequence winningSequence)
     {
         this.betTable = betTable;
         this.tableConfig = tableConfig;
         this.betCalculator = betCalculator;
-        this.gameStateManager = gameStateManager;
         this.winningSequence = winningSequence;
     }
 
@@ -55,7 +49,6 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableConfig.PocketNumberChanged += OnPocketNumberChanged;
         tableConfig.PocketColorChanged += OnPocketColorChanged;
-        gameStateManager.GameStateChanged += OnGameStateChanged;
 
         winningSequence.Highlight += OnHighlight;
         winningSequence.EndSequence += OnEndSequence;
@@ -66,8 +59,6 @@ class BetTableView : MonoBehaviour
                 () => betTable.AddBet(pocket.Key),
                 () => betTable.RemoveBet(pocket.Key));
         }
-
-        if (gameStateManager.CurrentState is not GameState.FieldsSelecting) gameObject.SetActive(true);
     }
 
     private void OnEnable()
@@ -81,7 +72,6 @@ class BetTableView : MonoBehaviour
         tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
         tableConfig.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
-        gameStateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     private void OnChangeAvailableSum(int newSum)
@@ -113,13 +103,7 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void OnGameStateChanged(GameState state)
-    {
-        if (state is GameState.FieldsSelecting)
-            gameObject.SetActive(false);
-        else
-            gameObject.SetActive(true);
-    }
+
 
     private void OnHighlight(BetInfo betInfo, HitInfo hitInfo)
     {

@@ -68,5 +68,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlaqueUseController>().AsSingle();
         Container.Bind<PlaqueFactory>().AsSingle();
         Container.Bind<WinningSequence>().AsSingle();
+
+        Container.Bind<CameraEventHandler>().FromComponentInHierarchy().AsSingle();
     }
 }

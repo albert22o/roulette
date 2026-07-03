@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,17 +14,22 @@ public class TableSelectionView : MonoBehaviour
     private PlaqueFieldsSelector plaqueFieldsSelector;
     private PlaqueUseController plaqueUseController;
     private GameStateManager gameStateManager;
+    private CameraEventHandler cameraEventHandler;
+
+    private bool isCameraArrived;
+    private Action CameraArrived;
 
 
     [Inject]
     public void Construct(TableConfig tableConfig,
         RoundStateManager roundStateManager, PlaqueFieldsSelector fieldsSelector, PlaqueUseController plaqueUseController,
-        GameStateManager gameStateManager)
+        GameStateManager gameStateManager, CameraEventHandler cameraEventHandler)
     {
         this.tableConfig = tableConfig;
         this.plaqueFieldsSelector = fieldsSelector;
         this.plaqueUseController = plaqueUseController;
         this.gameStateManager = gameStateManager;
+        this.cameraEventHandler = cameraEventHandler;
     }
 
     public void Start()
@@ -42,6 +48,7 @@ public class TableSelectionView : MonoBehaviour
             betButtons[pocket.Key].Init(pocket.Value,
                 () => OnSelectField(pocket.Key));
         }
+        cameraEventHandler.TransitionCompleted += OnCameraTransitionFinished;
     }
 
     public void OnSelectField(int buttonIndex)
@@ -66,6 +73,7 @@ public class TableSelectionView : MonoBehaviour
 
     public void StartInteraction()
     {
+        isCameraArrived = false;
         for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(true);
@@ -82,6 +90,11 @@ public class TableSelectionView : MonoBehaviour
 
     private void OnPlaqueUsed()
     {
+        if (isCameraArrived == false)
+        {
+            CameraArrived = OnPlaqueUsed;
+            return;
+        }
         for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(false);
@@ -95,5 +108,11 @@ public class TableSelectionView : MonoBehaviour
         interactionHandler.FinishInteraction();
         gameStateManager.ChangeGameState(GameStateManager.GameState.PlaqueShopping);
 
+    }
+
+    private void OnCameraTransitionFinished()
+    {
+        isCameraArrived = true;
+        CameraArrived?.Invoke();
     }
 }

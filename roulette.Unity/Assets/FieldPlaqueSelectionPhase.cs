@@ -36,14 +36,12 @@ public class FieldPlaqueSelectionPhase : MonoBehaviour, IPointerClickHandler
         {
             staticField.SetColor(betInfo.FieldColor);
             staticField.SetNumber(betInfo.FieldNumber);
-            animatedField.gameObject.SetActive(false);
         }
         else
         {
             animator.SetTrigger(animationHash);
             animatedField.SetColor(betInfo.FieldColor);
             animatedField.SetNumber(betInfo.FieldNumber);
-            animatedField.gameObject.SetActive(true);
         }
     }
 
@@ -53,7 +51,6 @@ public class FieldPlaqueSelectionPhase : MonoBehaviour, IPointerClickHandler
     {
         UpdateField(true);
         staticField.Highlight(false);
-        animatedField.gameObject.SetActive(false);
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
