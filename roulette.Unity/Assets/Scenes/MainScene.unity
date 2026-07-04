@@ -2326,6 +2326,7 @@ MonoBehaviour:
   ballHolderConfig: {fileID: 11400000, guid: e6b9f1e1fdc9f564e804aba8e11227f4, type: 2}
   chipHolderConfig: {fileID: 11400000, guid: d717b0894ca611e47b121125725b184b, type: 2}
   plaqueShopConfig: {fileID: 11400000, guid: 1fdec112bac83c949bd7c4779da674e6, type: 2}
+  bossRewardConfig: {fileID: 0}
 --- !u!114 &1216754607
 MonoBehaviour:
   m_ObjectHideFlags: 0

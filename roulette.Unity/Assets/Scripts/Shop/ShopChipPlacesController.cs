@@ -5,11 +5,11 @@ public class ShopChipPlacesController : MonoBehaviour
     [SerializeField] private ChipShopPlace[] shopPlaces;
     [SerializeField] private ShopItemsTable itemsTable;
 
-    private ShopItemsPool itemsPool = new();
+    private ShopItemsPool itemsPool;
 
     private void Start()
     {
-        itemsPool.SetTable(itemsTable);
+        itemsPool = new ShopItemsPool(itemsTable);
     }
 
     public void Fill()

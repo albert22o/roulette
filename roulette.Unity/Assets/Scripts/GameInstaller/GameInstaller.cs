@@ -9,6 +9,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] BallHolderConfig ballHolderConfig;
     [SerializeField] ChipHolderConfig chipHolderConfig;
     [SerializeField] PlaqueShopConfig plaqueShopConfig;
+    [SerializeField] BossRewardConfig bossRewardConfig;
 
     public override void InstallBindings()
     {
@@ -25,6 +26,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(ballHolderConfig).AsSingle();
         Container.BindInstance(chipHolderConfig).AsSingle();
         Container.BindInstance(plaqueShopConfig).AsSingle();
+        Container.BindInstance(bossRewardConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
@@ -72,5 +74,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<WinningSequence>().AsSingle();
 
         Container.Bind<CameraEventHandler>().AsSingle();
+
+        Container.Bind<BossReward>().AsSingle();
     }
 }
