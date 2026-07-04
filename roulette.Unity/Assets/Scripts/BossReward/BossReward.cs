@@ -1,8 +1,12 @@
+using System;
+
 public class BossReward
 {
     private BossRewardConfig config;
     private ItemData[] items = new ItemData[5];
     private ShopItemsPool cardsPool, otherItemsPool;
+
+    public event Action<ItemData[]> RewardCreated;
 
     public BossReward(BossRewardConfig config)
     {
@@ -11,7 +15,9 @@ public class BossReward
         otherItemsPool = new ShopItemsPool(config.OtherItemsTable);
     }
 
-    public ItemData[] GetItems()
+
+
+    public void GiveReward()
     {
         items[0] = cardsPool.GetRandomItem();
         items[1] = cardsPool.GetRandomItem();
@@ -19,6 +25,6 @@ public class BossReward
 
         items[3] = otherItemsPool.GetRandomItem();
         items[4] = otherItemsPool.GetRandomItem();
-        return items;
+        RewardCreated?.Invoke(items);
     }
 }

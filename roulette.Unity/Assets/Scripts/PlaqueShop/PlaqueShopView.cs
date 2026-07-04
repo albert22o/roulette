@@ -71,7 +71,7 @@ public class PlaqueShopView : MonoBehaviour
     private void OnPlaqueClicked(PlaqueItem item)
     {
         cancelInputHandler.enabled = false;
-        plaqueController.UsePlaque(item.Data);
+        plaqueController.UsePlaque(item.Data as PlaqueData);
     }
 
     public void StartInteraction()
