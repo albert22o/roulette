@@ -1818,8 +1818,6 @@ GameObject:
   - component: {fileID: 937209323}
   - component: {fileID: 937209322}
   - component: {fileID: 937209321}
-  - component: {fileID: 937209327}
-  - component: {fileID: 937209326}
   m_Layer: 0
   m_Name: Camera (1)
   m_TagString: Untagged
@@ -1997,73 +1995,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &937209326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937209319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a510488cc26384ea9c0600441770b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  CameraDeactivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  BlendCreatedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 937209327}
-        m_TargetAssemblyTypeName: CameraEventHandler, Assembly-CSharp
-        m_MethodName: OnTransitionStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BlendFinishedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 937209327}
-        m_TargetAssemblyTypeName: CameraEventHandler, Assembly-CSharp
-        m_MethodName: OnTransitionFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  Brain: {fileID: 937209322}
-  BrainUpdatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &937209327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937209319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 108f211edf1c98a41adeb44b9a4963e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1017860262
 PrefabInstance:
   m_ObjectHideFlags: 0

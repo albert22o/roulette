@@ -1,19 +1,18 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
-public class CameraEventHandler : MonoBehaviour
+public class CameraEventHandler
 {
-
     public event Action TransitionStarted;
-    public event Action TransitionCompleted;
+    public event Action TransitionFinished;
 
-    public void OnTransitionStart()
+    public CameraEventHandler()
     {
-        TransitionStarted?.Invoke();
+        CinemachineCore.BlendCreatedEvent.AddListener(OnBlendCreated);
+        CinemachineCore.BlendFinishedEvent.AddListener(OnBlendFinished);
     }
 
-    public void OnTransitionFinish()
-    {
-        TransitionCompleted?.Invoke();
-    }
+    private void OnBlendFinished(ICinemachineMixer arg0, ICinemachineCamera arg1) => TransitionFinished?.Invoke();
+    private void OnBlendCreated(CinemachineCore.BlendEventParams arg0) => TransitionStarted?.Invoke();
 }

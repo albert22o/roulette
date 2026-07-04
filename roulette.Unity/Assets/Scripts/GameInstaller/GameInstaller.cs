@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Cinemachine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -17,6 +18,7 @@ public class GameInstaller : MonoInstaller
         // Приколюхи Юнити
         Container.Bind<PlayerInput>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<CinemachineBrainEvents>().FromComponentInHierarchy().AsSingle();
         // Конфиги
         Container.BindInstance(roundsConfig).AsSingle();
         Container.Bind<TableConfig>().AsSingle();
@@ -69,6 +71,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlaqueFactory>().AsSingle();
         Container.Bind<WinningSequence>().AsSingle();
 
-        Container.Bind<CameraEventHandler>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<CameraEventHandler>().AsSingle();
     }
 }

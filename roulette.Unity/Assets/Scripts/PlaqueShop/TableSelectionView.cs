@@ -48,7 +48,7 @@ public class TableSelectionView : MonoBehaviour
             betButtons[pocket.Key].Init(pocket.Value,
                 () => OnSelectField(pocket.Key));
         }
-        cameraEventHandler.TransitionCompleted += OnCameraTransitionFinished;
+        cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
     }
 
     public void OnSelectField(int buttonIndex)
