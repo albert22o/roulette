@@ -88,7 +88,14 @@ public class BetTable
     private void OnStateChanged(RoundState newState)
     {
         active = newState == RoundState.PlacingBets;
+
+        if (newState == RoundState.Start)
+        {
+            availableBetSum = tableConfig.StartSum;
+            ChangeAvailableSum?.Invoke(availableBetSum);
+        }
     }
+
 
     public void AddAvailableSum(int amount)
     {
