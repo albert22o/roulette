@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b82beb397b8f9a479fdf23545ffb770, type: 3}
-  m_Name: TestFoodData
+  m_Script: {fileID: 11500000, guid: f58447d237e681443a3e6c0cfec7c806, type: 3}
+  m_Name: LemonFoodData
   m_EditorClassIdentifier: 
-  itemName: TestFood
+  itemName: "\u041B\u0438\u043C\u043E\u043D"
   description: 
-  shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  shopPrefab: {fileID: 0}

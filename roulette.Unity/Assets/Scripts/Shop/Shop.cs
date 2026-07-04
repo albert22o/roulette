@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
@@ -27,9 +27,7 @@ public class Shop : MonoBehaviour
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
 
-
     public event Action InteractionStarted, InteractionFinished;
-
 
     [Inject]
     public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder)

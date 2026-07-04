@@ -56,6 +56,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<BallFactory>().AsSingle();
         Container.Bind<BallHolder>().AsSingle();
 
+        Container.Bind<FoodFactory>().AsSingle();
+        Container.Bind<FoodHolder>().AsSingle();
+
         Container.Bind<RoundManager>().AsSingle();
 
         Container.Bind<RewardCalculator>().AsSingle().NonLazy();
@@ -69,6 +72,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlaqueHolder>().AsSingle();
         Container.Bind<PlaqueUseController>().AsSingle();
         Container.Bind<PlaqueFactory>().AsSingle();
+
         Container.Bind<WinningSequence>().AsSingle();
 
         Container.Bind<CameraEventHandler>().AsSingle();

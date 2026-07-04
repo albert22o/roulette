@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
 
 public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
@@ -10,9 +9,10 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     [SerializeField] private ItemPlace itemPlace;
 
 
-    private ItemData item;
+    private FoodData item;
     private Shop shop;
     private GoldenChips goldenChips;
+    private FoodHolder foodHolder;
 
     public bool IsInteractable => item != null;
 
@@ -20,10 +20,11 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public event Action<bool> HasItemChanged;
 
 
-    [Inject] public void Construct(Shop shop, GoldenChips goldenChips)
+    [Inject] public void Construct(Shop shop, GoldenChips goldenChips, FoodHolder foodHolder)
     {
         this.shop = shop;
         this.goldenChips = goldenChips;
+        this.foodHolder = foodHolder;
     }
 
     public void ShowDescription()
@@ -41,7 +42,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
         if (goldenChips.Amount >= cost)
         {
             goldenChips.Remove(cost);
-            Debug.Log($"Food {item.Name} bought");
+            foodHolder.AddFood(item);
             item = null;
             itemPlace.SetItem(null);
             HideDescription();
@@ -63,7 +64,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void UpdateItem()
     {
-        item = foodTable.GetRandomItem();
+        item = foodTable.GetRandomItem() as FoodData;
         itemPlace.SetItem(item);
         HasItemChanged?.Invoke(true);
     }
