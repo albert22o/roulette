@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using UnityEngine;
 using static RoundStateManager;
 
 public class RoundManager
@@ -72,22 +71,22 @@ public class RoundManager
     private readonly ProgressionManager progressionManager;
     private readonly IRouletteWheel rouletteWheel;
     private readonly RoundStateManager roundStateManager;
-    private readonly TableConfig tableConfig;
-    private readonly BetCalculator betCalculator;
+    private readonly TableInfo tableInfo;
     private readonly ChipHolder chipHolder;
     private readonly BallHolder ballHolder;
     private readonly BetTable betTable;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
-        TableConfig tableConfig, ProgressionManager progressionManager, BetCalculator betCalculator,
+        TableInfo tableInfo, ProgressionManager progressionManager, BetCalculator betCalculator,
         ChipHolder chipHolder, BallHolder ballHolder, BetTable betTable)
     {
         this.rouletteWheel = rouletteWheel;
 
         betCalculator.GetReward += OnGetReward;
+
         this.betTable = betTable;
         this.roundStateManager = roundStateManager;
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
         this.progressionManager = progressionManager;
         this.chipHolder = chipHolder;
         this.ballHolder = ballHolder;
@@ -97,8 +96,8 @@ public class RoundManager
     public void Reset()
     {
         Quote = 0;
-        BetCount = tableConfig.BetCount;
-        RerollCount = tableConfig.RerollCount;
+        BetCount = tableInfo.BetCount;
+        RerollCount = tableInfo.RerollCount;
         Goal = progressionManager.Current.Goal;
         AbleToWin = false;
     }
@@ -151,7 +150,6 @@ public class RoundManager
         if (!AbleToWin)
             return;
         Win?.Invoke();
-        roundStateManager.ChangeState(RoundState.Win);
     }
 
     private void OnGetReward(int reward)
@@ -162,6 +160,7 @@ public class RoundManager
         else if (betCount <= 0)
             roundStateManager.ChangeState(RoundState.Lose);
 
+        betTable.ClearBets();
         chipHolder.RevertAll();
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);

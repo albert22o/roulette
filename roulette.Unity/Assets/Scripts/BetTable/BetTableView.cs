@@ -17,15 +17,15 @@ class BetTableView : MonoBehaviour
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
 
     private BetTable betTable;
-    private TableConfig tableConfig;
+    private TableInfo tableInfo;
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
 
     [Inject]
-    public void Construct(BetTable betTable, TableConfig tableConfig, BetCalculator betCalculator, WinningSequence winningSequence)
+    public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence)
     {
         this.betTable = betTable;
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
         this.betCalculator = betCalculator;
         this.winningSequence = winningSequence;
     }
@@ -40,20 +40,20 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAvailableSum += OnChangeAvailableSum;
         OnChangeAvailableSum(betTable.AvailableSum);
 
-        if (betButtons.Count < tableConfig.PocketMapping.Count)
+        if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
             Debug.LogError("Не все кнопки для ставок проставлены");
             return;
         }
 
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
-        tableConfig.PocketNumberChanged += OnPocketNumberChanged;
-        tableConfig.PocketColorChanged += OnPocketColorChanged;
+        tableInfo.PocketNumberChanged += OnPocketNumberChanged;
+        tableInfo.PocketColorChanged += OnPocketColorChanged;
 
         winningSequence.Highlight += OnHighlight;
         winningSequence.EndSequence += OnEndSequence;
 
-        foreach (var pocket in tableConfig.PocketMapping)
+        foreach (var pocket in tableInfo.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
                 () => betTable.AddBet(pocket.Key),
@@ -69,8 +69,8 @@ class BetTableView : MonoBehaviour
     private void OnDestroy()
     {
         betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
-        tableConfig.PocketNumberChanged -= OnPocketNumberChanged;
-        tableConfig.PocketColorChanged -= OnPocketColorChanged;
+        tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
+        tableInfo.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
     }
 
@@ -98,8 +98,8 @@ class BetTableView : MonoBehaviour
     {
         for (int i = 0; i < betButtons.Count; i++)
         {
-            betButtons[i].Color = tableConfig.PocketMapping[i].FieldColor;
-            betButtons[i].FieldNum = tableConfig.PocketMapping[i].FieldNumber;
+            betButtons[i].Color = tableInfo.PocketMapping[i].FieldColor;
+            betButtons[i].FieldNum = tableInfo.PocketMapping[i].FieldNumber;
         }
     }
 

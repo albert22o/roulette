@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using static RoundStateManager;
 
 public class BallResults
@@ -10,14 +11,19 @@ public class BallResults
     public event Action<BallInfoData> BallHovered;
     public event Action BallUnHovered;
 
+    public event Action Win;
+
     private readonly RoundStateManager roundStateManager;
     private readonly BallHolder ballHolder;
+    private readonly TableInfo tableInfo;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
 
-    public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager, BallHolder ballHolder)
+    public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
+        BallHolder ballHolder, TableInfo tableInfo)
     {
         this.ballHolder = ballHolder;
+        this.tableInfo = tableInfo;
         rouletteWheel.AllBallsStopped += AddBalls;
         rouletteWheel.BallClicked += SelectBall;
 
@@ -50,6 +56,11 @@ public class BallResults
             return;
         var hitInfo = currentBalls.Find(ball => ball.BallHash == ballhash);
 
+        if (hitInfo.FieldColor == ColorType.White)
+        {
+            tableInfo.ResetPocketColor(hitInfo.FieldIndex);
+            Win?.Invoke();
+        }
         BallSelected?.Invoke(hitInfo);
         RemoveBalls();
     }
@@ -61,6 +72,12 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
+        if (balls.Any(ball => ball.FieldColor == ColorType.Grey))
+        {
+            // Отправляем выбор нулевого шара для проигрыша
+            BallSelected?.Invoke(null);
+            return;
+        }
         currentBalls.Clear();
         roundStateManager.ChangeState(RoundState.ChoosingReward);
         currentBalls.AddRange(balls);

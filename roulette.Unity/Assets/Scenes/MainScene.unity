@@ -119,65 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &51114890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 51114891}
-  - component: {fileID: 51114893}
-  - component: {fileID: 51114892}
-  m_Layer: 0
-  m_Name: MoneyLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &51114891
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51114890}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.4601073, y: 0.30498257, z: -0.3717167}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &51114892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51114890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5555f0ab3faf3146900156fae1f40bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initMoney: 5
---- !u!114 &51114893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51114890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a6a414dd2f59b4e982429fc13fa76d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initMoney: 100
 --- !u!223 &219949359 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 8406485248537788567, guid: fc54237d291672944a57db5a13b89733, type: 3}
@@ -2322,10 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb07ef782aeff98498b72eb48a04adb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundsConfig: {fileID: 11400000, guid: 8cce83c490e29c342ad61e362b7cd029, type: 2}
-  ballHolderConfig: {fileID: 11400000, guid: e6b9f1e1fdc9f564e804aba8e11227f4, type: 2}
-  chipHolderConfig: {fileID: 11400000, guid: d717b0894ca611e47b121125725b184b, type: 2}
-  plaqueShopConfig: {fileID: 11400000, guid: 1fdec112bac83c949bd7c4779da674e6, type: 2}
+  settings: {fileID: 11400000, guid: eed0fb07ede812b47b630724c917c438, type: 2}
 --- !u!114 &1216754607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2373,17 +2311,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1262399630 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8360052150238459966, guid: fc54237d291672944a57db5a13b89733, type: 3}
-  m_PrefabInstance: {fileID: 3730739055183839058}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0729599e09338cc469a1c423a26f93b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1341746327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3005,10 +2932,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.6084383
       objectReference: {fileID: 0}
-    - target: {fileID: 7685931223442741530, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: interactionHandler
-      value: 
-      objectReference: {fileID: 1262399630}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: chips.Array.size
       value: 1
@@ -3394,6 +3317,5 @@ SceneRoots:
   - {fileID: 783434622}
   - {fileID: 3956157596183037852}
   - {fileID: 1017860262}
-  - {fileID: 51114891}
   - {fileID: 827982698}
   - {fileID: 1341746327}

@@ -26,7 +26,8 @@ public enum ColorType
     Red,
     Black,
     Green,
-    White
+    White,
+    Grey
 }
 
 [System.Flags]

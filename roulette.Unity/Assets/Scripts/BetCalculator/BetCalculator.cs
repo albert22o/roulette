@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static RoundStateManager;
-using static Unity.Cinemachine.CinemachineFreeLookModifier;
 
 public class BetCalculator
 {
@@ -22,12 +21,10 @@ public class BetCalculator
     private readonly Dictionary<ColorType, int> colorMultipliers = new();
 
     private bool active = true;
-    private readonly BetTable betTable;
     private int generalModifier = 0;
 
-    public BetCalculator(BallResults ballResults, BetTable betTable, RoundStateManager roundStateManager)
+    public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
-        this.betTable = betTable;
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }
@@ -91,9 +88,14 @@ public class BetCalculator
 
     private void OnBallSelected(HitInfo info)
     {
+        if (info == null)
+        {
+            // Если информации о ставке не пришло - автопроигрыш
+            GetReward?.Invoke(0);
+            return;
+        }
         if (!active)
             return;
-
         EndRound?.Invoke(info);
     }
 

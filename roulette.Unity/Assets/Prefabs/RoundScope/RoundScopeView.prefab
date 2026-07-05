@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tableCamera: {fileID: 4984183168773704176}
   tableSelection: {fileID: 7685931223442741530}
-  canvas: {fileID: 8406485248537788567}
 --- !u!114 &4840245680436335709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c5b030713083a44b3af0356e17b9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   selectionDescription: {fileID: 4688277395688713370}
   applyButton: {fileID: 4868914611745040764}
 --- !u!1 &309601138234569349
@@ -465,7 +465,7 @@ MonoBehaviour:
   - {fileID: 2133315621142474425}
   - {fileID: 8365520131727842707}
   delayToChangeState: 2
-  interactionHandler: {fileID: 0}
+  interactionHandler: {fileID: 8360052150238459966}
 --- !u!1 &1799723760093118178
 GameObject:
   m_ObjectHideFlags: 0

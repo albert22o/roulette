@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class PlaqueFieldsSelector
@@ -8,7 +8,7 @@ public class PlaqueFieldsSelector
     private int selectionIndex;
     private List<int[]> selectedAll = new();
     private SelectionRequest currentSelectionRequest;
-    private TableConfig tableConfig;
+    private readonly TableInfo tableInfo;
 
     public event Action<int[][]> SelectionCompleted;
     public event Action<SelectionRequest> SelectionRequestChanged;
@@ -19,9 +19,9 @@ public class PlaqueFieldsSelector
 
 
 
-    public PlaqueFieldsSelector(TableConfig tableConfig)
+    public PlaqueFieldsSelector(TableInfo tableInfo)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
     }
 
     public void SetPlaque(Plaque plaque)
@@ -49,7 +49,7 @@ public class PlaqueFieldsSelector
         }
         else
         {
-            if (currentSelectionRequest.Filter != null && currentSelectionRequest.Filter(tableConfig.PocketMapping[index]) == false)
+            if (currentSelectionRequest.Filter != null && currentSelectionRequest.Filter(tableInfo.PocketMapping[index]) == false)
             {
                 return false;
             }

@@ -1,11 +1,11 @@
-public class PlaqueDependencies
+﻿public class PlaqueDependencies
 {
-    public TableConfig TableConfig { get; private set; }
+    public TableInfo TableInfo { get; private set; }
     public BetCalculator BetCalculator { get; private set; }
 
-    public PlaqueDependencies(TableConfig tableConfig, BetCalculator betCalculator)
+    public PlaqueDependencies(TableInfo tableInfo, BetCalculator betCalculator)
     {
-        TableConfig = tableConfig;
+        TableInfo = tableInfo;
         BetCalculator = betCalculator; 
     }
 }  

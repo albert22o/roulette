@@ -5,11 +5,7 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-    [SerializeField] RoundsConfig roundsConfig;
-    [SerializeField] BallHolderConfig ballHolderConfig;
-    [SerializeField] ChipHolderConfig chipHolderConfig;
-    [SerializeField] PlaqueShopConfig plaqueShopConfig;
-
+    [SerializeField] Settings settings;
     public override void InstallBindings()
     {
         // Менеджеры состояний
@@ -20,16 +16,19 @@ public class GameInstaller : MonoInstaller
         Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
         Container.Bind<CinemachineBrainEvents>().FromComponentInHierarchy().AsSingle();
         // Конфиги
-        Container.BindInstance(roundsConfig).AsSingle();
-        Container.Bind<TableConfig>().AsSingle();
-        Container.BindInstance(ballHolderConfig).AsSingle();
-        Container.BindInstance(chipHolderConfig).AsSingle();
-        Container.BindInstance(plaqueShopConfig).AsSingle();
+        Container.BindInstance(settings.RoundsConfig).AsSingle();
+        Container.BindInstance(settings.TableConfig).AsSingle();
+        Container.BindInstance(settings.CurrenciesConfig).AsSingle();
+        Container.BindInstance(settings.BallHolderConfig).AsSingle();
+        Container.BindInstance(settings.ChipHolderConfig).AsSingle();
+        Container.BindInstance(settings.PlaqueShopConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
         Container.Bind<Tickets>().AsSingle();
         Container.Bind<Money>().AsSingle();
+
+        Container.Bind<TableInfo>().AsSingle();
 
         Container.Bind<RouletteWheel>()
             .FromComponentInHierarchy()

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,7 @@ public class TableSelectionView : MonoBehaviour
     [SerializeField] private float delayToChangeState = 2f;
     [SerializeField] private PlaqueShopFieldSelectionInteractionHandler interactionHandler;
 
-    private TableConfig tableConfig;
+    private TableInfo tableInfo;
     private PlaqueFieldsSelector plaqueFieldsSelector;
     private PlaqueUseController plaqueUseController;
     private GameStateManager gameStateManager;
@@ -21,11 +21,11 @@ public class TableSelectionView : MonoBehaviour
 
 
     [Inject]
-    public void Construct(TableConfig tableConfig,
+    public void Construct(TableInfo tableInfo,
         RoundStateManager roundStateManager, PlaqueFieldsSelector fieldsSelector, PlaqueUseController plaqueUseController,
         GameStateManager gameStateManager, CameraEventHandler cameraEventHandler)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
         this.plaqueFieldsSelector = fieldsSelector;
         this.plaqueUseController = plaqueUseController;
         this.gameStateManager = gameStateManager;
@@ -34,7 +34,7 @@ public class TableSelectionView : MonoBehaviour
 
     public void Start()
     {
-        if (betButtons.Count < tableConfig.PocketMapping.Count)
+        if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
             Debug.LogError("Не все кнопки для ставок проставлены");
             return;
@@ -43,7 +43,7 @@ public class TableSelectionView : MonoBehaviour
         plaqueFieldsSelector.SelectionPhaseCompleted += ClearHighlight;
         plaqueUseController.PlaqueUsed += OnPlaqueUsed;
 
-        foreach (var pocket in tableConfig.PocketMapping)
+        foreach (var pocket in tableInfo.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
                 () => OnSelectField(pocket.Key));
@@ -65,7 +65,7 @@ public class TableSelectionView : MonoBehaviour
 
     public void PlayFieldsChangeAnimation()
     {
-        for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
+        for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(false);
         }
@@ -75,7 +75,7 @@ public class TableSelectionView : MonoBehaviour
     {
         CameraArrived = null;
         isCameraArrived = false;
-        for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
+        for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(true);
         }
@@ -96,7 +96,7 @@ public class TableSelectionView : MonoBehaviour
             CameraArrived = OnPlaqueUsed;
             return;
         }
-        for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
+        for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(false);
         }

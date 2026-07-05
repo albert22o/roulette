@@ -1,17 +1,17 @@
-public class PlaqueFactory
+﻿public class PlaqueFactory
 {
-    private readonly TableConfig tableConfig;
+    private readonly TableInfo tableInfo;
     private readonly BetCalculator betCalculator;
     
 
-    public PlaqueFactory(TableConfig tableConfig, BetCalculator betCalculator)
+    public PlaqueFactory(TableInfo tableInfo, BetCalculator betCalculator)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
         this.betCalculator = betCalculator;
     }
 
     public Plaque CreatePlaque(PlaqueData plaqueData)
     {
-        return plaqueData.CreatePlaque(new(tableConfig, betCalculator));
+        return plaqueData.CreatePlaque(new(tableInfo, betCalculator));
     }
 }

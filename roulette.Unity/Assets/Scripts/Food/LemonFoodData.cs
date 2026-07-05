@@ -3,5 +3,5 @@
 [CreateAssetMenu(fileName = "LemonFoodData", menuName = "Food/LemonFoodData")]
 public class LemonFoodData : FoodData
 {
-    public override Food CreateFood(FoodDependencies deps) => new LemonFood(deps.TableConfig);
+    public override Food CreateFood(FoodDependencies deps) => new LemonFood(deps.TableInfo);
 }

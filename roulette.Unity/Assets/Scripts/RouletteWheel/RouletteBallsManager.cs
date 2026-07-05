@@ -20,7 +20,7 @@ public class RouletteBallsManager : MonoBehaviour
     private List<float> prevAngles = new List<float>();
     private List<float> stableTimes = new List<float>();
     private HashSet<string> invalidBalls = new HashSet<string>();
-    private TableConfig tableConfig;
+    private TableInfo tableInfo;
 
     private Dictionary<string, HitInfo> hitsInfo = new Dictionary<string, HitInfo>();
 
@@ -31,9 +31,9 @@ public class RouletteBallsManager : MonoBehaviour
     public event Action<string> BallInvalid;
 
     [Inject]
-    public void Construct(TableConfig config)
+    public void Construct(TableInfo tableInfo)
     {
-        tableConfig = config;
+        this.tableInfo = tableInfo;
     }
 
     private void MarkInvalid(Ball ball)
@@ -123,7 +123,7 @@ public class RouletteBallsManager : MonoBehaviour
                 if (hitsInfo.ContainsKey(ball.Hash) == false)
                 {
                     int number = rouletteWheel.FieldsOrder[sectorIndex];
-                    var bet = tableConfig.PocketMapping[number];
+                    var bet = tableInfo.PocketMapping[number];
                     hitsInfo.Add(ball.Hash, new HitInfo()
                     {
                         BallHash = ball.Hash,

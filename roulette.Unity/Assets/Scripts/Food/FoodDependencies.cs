@@ -1,5 +1,5 @@
 ﻿public class FoodDependencies
 {
     public BetTable BetTable;
-    public TableConfig TableConfig;
+    public TableInfo TableInfo;
 }

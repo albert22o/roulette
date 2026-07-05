@@ -14,7 +14,7 @@ public class WinningSequence
 
     private readonly BetTable betTable;
     private readonly RoundStateManager roundStateManager;
-    private BetCalculator betCalculator;
+    private readonly BetCalculator betCalculator;
 
     private BetInfo betInfo;
     private HitInfo hitInfo;
@@ -67,7 +67,6 @@ public class WinningSequence
             case SequencePhase.Finish:
                 betCalculator.GetRewardAction(betCalculator.GetRewardForBet(betInfo, betSum, hitInfo));
                 generalMultiplier = 0;
-                betTable.ClearBets();
                 EndSequence?.Invoke(isRoundWon);
                 break;
         }

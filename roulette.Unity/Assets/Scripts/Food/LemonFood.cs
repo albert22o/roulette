@@ -1,14 +1,14 @@
 ﻿public class LemonFood : Food
 {
-    private readonly TableConfig tableConfig;
+    private readonly TableInfo tableInfo;
 
-    public LemonFood(TableConfig tableConfig)
+    public LemonFood(TableInfo tableInfo)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
     }
 
     public override void Apply()
     {
-        tableConfig.BetCount++;
+        tableInfo.AddToBetCount(1);
     }
 }

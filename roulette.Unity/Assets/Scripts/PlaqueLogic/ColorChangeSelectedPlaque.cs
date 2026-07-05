@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 public class ColorChangeSelectedPlaque : Plaque
 {
     private ColorType targetColor;
@@ -25,7 +25,7 @@ public class ColorChangeSelectedPlaque : Plaque
     {
         for (int i = 0; i < selectedFields[0].Length; i++)
         {
-            PlaqueDependencies.TableConfig.SetPocketColor(selectedFields[0][i], targetColor);
+            PlaqueDependencies.TableInfo.SetPocketColor(selectedFields[0][i], targetColor);
         }
     }
 

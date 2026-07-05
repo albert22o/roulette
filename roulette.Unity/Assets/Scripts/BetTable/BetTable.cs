@@ -11,26 +11,24 @@ public class BetTable
 
     public IEnumerable<(BetInfo, int)> NotNullBetAmounts => betAmounts
         .Where(bet => bet.Value != 0)
-        .Select(bet => (tableConfig.PocketMapping[bet.Key], bet.Value));
+        .Select(bet => (tableInfo.PocketMapping[bet.Key], bet.Value));
 
     public int AvailableSum => availableBetSum;
 
     private readonly HashSet<int> betIndexSet = new();
-    private readonly TableConfig tableConfig;
-    private readonly RoundStateManager roundStateManager;
+    private readonly TableInfo tableInfo;
     private readonly Dictionary<int, int> betAmounts;
     private int availableBetSum;
     private bool active;
     public const int BetStep = 25;
 
-    public BetTable(TableConfig tableConfig, RoundStateManager roundStateManager)
+    public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager)
     {
-        this.tableConfig = tableConfig;
-        betAmounts = tableConfig.PocketMapping
+        this.tableInfo = tableInfo;
+        betAmounts = tableInfo.PocketMapping
             .ToDictionary(pocket => pocket.Key, _ => 0);
-        availableBetSum = tableConfig.StartSum;
+        availableBetSum = tableInfo.StartSum;
 
-        this.roundStateManager = roundStateManager;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -43,7 +41,7 @@ public class BetTable
         if (availableBetSum < BetStep)
             return;
         if (!betIndexSet.Contains(index) 
-            && betIndexSet.Count >= tableConfig.MaxBetsAtBoard)
+            && betIndexSet.Count >= tableInfo.MaxBetsAtBoard)
             return;
         betIndexSet.Add(index);
 
@@ -91,7 +89,7 @@ public class BetTable
 
         if (newState == RoundState.Start)
         {
-            availableBetSum = tableConfig.StartSum;
+            availableBetSum = tableInfo.StartSum;
             ChangeAvailableSum?.Invoke(availableBetSum);
         }
     }

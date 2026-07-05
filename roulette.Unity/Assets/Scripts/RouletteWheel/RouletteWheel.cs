@@ -18,7 +18,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     [SerializeField] private RouletteBallsManager ballsManager;
 
     private HitInfo[] hitsInfo;
-    private TableConfig tableConfig;
+    private TableInfo tableInfo;
 
     public RouletteWheelField[] Fields { get; set; } = new RouletteWheelField[37];
 
@@ -37,9 +37,9 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
 };
 
     [Inject]
-    public void Construct(TableConfig tableConfig)
+    public void Construct(TableInfo tableInfo)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
     }
 
     private void Awake()
@@ -49,12 +49,12 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
             Fields[i] = new RouletteWheelField();
         }
         fieldsGenerator.GenerateFields(Fields);
-        for (int i = 0; i < tableConfig.PocketMapping.Count; i++)
+        for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             int tableIndex = FieldsOrder[i];
 
-            Fields[i].Color = tableConfig.PocketMapping[tableIndex].FieldColor;
-            Fields[i].Number = tableConfig.PocketMapping[tableIndex].FieldNumber;
+            Fields[i].Color = tableInfo.PocketMapping[tableIndex].FieldColor;
+            Fields[i].Number = tableInfo.PocketMapping[tableIndex].FieldNumber;
         }
         FieldsUpdated?.Invoke();
     }
@@ -63,8 +63,8 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     {
         spinController.TargetSpeedReached += LaunchBalls;
         ballsManager.AllBallsStopped += OnAllBallsStopped;
-        tableConfig.PocketColorChanged += OnPocketColorChanged;
-        tableConfig.PocketNumberChanged += OnPocketNumberChanged;
+        tableInfo.PocketColorChanged += OnPocketColorChanged;
+        tableInfo.PocketNumberChanged += OnPocketNumberChanged;
 
         ballsLauncher.Clicked += OnBallClicked;
         ballsLauncher.Hover += OnBallHover;

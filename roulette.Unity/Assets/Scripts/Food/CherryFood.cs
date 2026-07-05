@@ -1,14 +1,14 @@
 ﻿internal class CherryFood : Food
 {
-    private readonly TableConfig tableConfig;
+    private readonly TableInfo tableInfo;
 
-    public CherryFood(TableConfig tableConfig)
+    public CherryFood(TableInfo tableInfo)
     {
-        this.tableConfig = tableConfig;
+        this.tableInfo = tableInfo;
     }
 
     public override void Apply()
     {
-        tableConfig.AddToStartSum(400);
+        tableInfo.AddToStartSum(400);
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 
 public class GreenPlaque : Plaque
@@ -28,8 +28,8 @@ public class GreenPlaque : Plaque
     {
         for (int i = 0; i < selectedFields[1].Length; i++)
         {
-            PlaqueDependencies.TableConfig.SetPocketNum(selectedFields[1][i],
-                PlaqueDependencies.TableConfig.PocketMapping[selectedFields[0][0]].FieldNumber);
+            PlaqueDependencies.TableInfo.SetPocketNum(selectedFields[1][i],
+                PlaqueDependencies.TableInfo.PocketMapping[selectedFields[0][0]].FieldNumber);
         }
     }
 
@@ -38,7 +38,7 @@ public class GreenPlaque : Plaque
         if (phaseIndex == 0)
         {
             selectionRequests[1].Hint = $"Выберите 3 числа, которые нужно заменить на " +
-                $"{PlaqueDependencies.TableConfig.PocketMapping[selectedFields[0]].FieldNumber}";
+                $"{PlaqueDependencies.TableInfo.PocketMapping[selectedFields[0]].FieldNumber}";
         }
     }
 }

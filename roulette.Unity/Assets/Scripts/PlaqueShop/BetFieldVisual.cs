@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class BetFieldVisual : MonoBehaviour
@@ -11,6 +11,7 @@ public class BetFieldVisual : MonoBehaviour
     [SerializeField] Material redMaterial;
     [SerializeField] Material greenMaterial;
     [SerializeField] Material colorHighlight;
+    [SerializeField] Material whiteMaterial;
 
     public ColorType Color { get; private set; }
     public int Number { get; private set; }
@@ -25,6 +26,7 @@ public class BetFieldVisual : MonoBehaviour
             ColorType.Red => redMaterial,
             ColorType.Black => blackMaterial,
             ColorType.Green => greenMaterial,
+            ColorType.White => whiteMaterial,
             _ => greenMaterial,
         };
     }

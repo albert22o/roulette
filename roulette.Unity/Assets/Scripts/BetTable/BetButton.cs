@@ -76,6 +76,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] Material blackMaterial;
     [SerializeField] Material redMaterial;
     [SerializeField] Material greenMaterial;
+    [SerializeField] Material whiteMaterial;
+
     [SerializeField] Material colorHighlight;
     [SerializeField] Material dozenHighlight;
     [SerializeField] Material numberHighlight;
@@ -109,6 +111,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         ColorType.Red => redMaterial,
         ColorType.Black => blackMaterial,
         ColorType.Green => greenMaterial,
+        ColorType.White => whiteMaterial,
         _ => greenMaterial,
     };
 

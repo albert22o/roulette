@@ -1,4 +1,4 @@
-public class GrayPlaque : Plaque
+﻿public class GrayPlaque : Plaque
 {
     private readonly System.Random random = new System.Random();
 
@@ -12,9 +12,9 @@ public class GrayPlaque : Plaque
 
     public override void Apply(int[][] selectedFields)
     {
-        int randomIndex = random.Next(0, PlaqueDependencies.TableConfig.PocketMapping.Count);
+        int randomIndex = random.Next(0, PlaqueDependencies.TableInfo.PocketMapping.Count);
 
-        PlaqueDependencies.TableConfig.SetPocketColor(randomIndex, ColorType.Green); //TODO change to Gray
+        PlaqueDependencies.TableInfo.SetPocketColor(randomIndex, ColorType.Green); //TODO change to Gray
         PlaqueDependencies.BetCalculator.GeneralModifier += 3;
     }
 

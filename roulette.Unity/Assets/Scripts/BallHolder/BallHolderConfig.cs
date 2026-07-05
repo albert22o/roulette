@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "BallHolderConfig", menuName = "Scriptable Objects/BallHolderConfig")]
+[CreateAssetMenu(fileName = "BallHolderConfig", menuName = "Configs/BallHolderConfig")]
 public class BallHolderConfig : ScriptableObject
 {
-    [field: SerializeField] public int Capacity { get; private set; }
-    [field: SerializeField] public BallInfoData[] StartBalls { get; private set; }
+    [SerializeField] public int Capacity { get; private set; }
+    [SerializeField] public BallInfoData[] StartBalls { get; private set; }
 }

@@ -3,11 +3,11 @@ public class FoodFactory
 {
     private readonly FoodDependencies deps;
 
-    public FoodFactory(BetTable betTable, TableConfig tableConfig)
+    public FoodFactory(BetTable betTable, TableInfo tableInfo)
     {
         deps = new FoodDependencies();
         deps.BetTable = betTable;
-        deps.TableConfig = tableConfig;
+        deps.TableInfo = tableInfo;
     }
 
     public Food Create(FoodData data) => data.CreateFood(deps);
