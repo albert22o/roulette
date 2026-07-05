@@ -129,7 +129,8 @@ public class RouletteBallsManager : MonoBehaviour
                         BallHash = ball.Hash,
                         FieldColor = bet.FieldColor,
                         FieldNumber = bet.FieldNumber,
-                        Dozen = bet.Dozen
+                        Dozen = bet.Dozen,
+                        FieldIndex = number
                     });
                 }
             }
