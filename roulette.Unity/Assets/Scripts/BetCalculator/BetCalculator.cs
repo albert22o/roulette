@@ -12,7 +12,6 @@ public class BetCalculator
     public int NumMultiplier { get; set; } = 5;
     public int DozenMultiplier { get; set; } = 3;
     public int ColorMultiplier { get; set; } = 2;
-    public int GeneralModifier { get; set; } = 1;
 
     private readonly Dictionary<int, int> fieldNumberMultipliers = new();
 

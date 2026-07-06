@@ -36,6 +36,8 @@ public class BlackDozenChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
+        if (hit == null)
+            return;
         selectedDozen = GetRandomDozen();
 
         if (IsNumberInDozen(hit.FieldNumber, selectedDozen))

@@ -43,7 +43,7 @@ public class ColorBankChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (hit.FieldColor == targetColor)
+        if (hit?.FieldColor == targetColor)
         {
             currentBonus++;
         }

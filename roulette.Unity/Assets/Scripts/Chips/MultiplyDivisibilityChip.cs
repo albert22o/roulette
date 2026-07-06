@@ -41,7 +41,7 @@ public class MultiplyDivisibilityChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (hit.FieldNumber != 0 && hit.FieldNumber % divisor == remainder)
+        if (hit?.FieldNumber != 0 && hit?.FieldNumber % divisor == remainder)
             modifyRequest = true;
         else
             modifyRequest = false;

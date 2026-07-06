@@ -30,7 +30,7 @@ public class AllInChip : Chip
         if (modifyRequest)betCalculator.DivideFieldNumberMultiplier(0, multiplier);
     }
 
-    private void OnBallSelected(HitInfo hit)
+    private void OnBallSelected(HitInfo _)
     {
         if (IsBetOnlyOnZero())
         {

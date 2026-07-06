@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -77,6 +78,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] Material redMaterial;
     [SerializeField] Material greenMaterial;
     [SerializeField] Material whiteMaterial;
+    [SerializeField] Material greyMaterial;
 
     [SerializeField] Material colorHighlight;
     [SerializeField] Material dozenHighlight;
@@ -112,6 +114,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
         ColorType.Black => blackMaterial,
         ColorType.Green => greenMaterial,
         ColorType.White => whiteMaterial,
+        ColorType.Grey => greyMaterial,
         _ => greenMaterial,
     };
 

@@ -41,6 +41,11 @@ public class RandomNumbersChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
+        if (hit == null)
+        {
+            modifyRequest = false;
+            return;
+        }
         if (selectedNumbers == null || selectedNumbers.Count == 0)
             selectedNumbers = GetRandomNumbers(numbersCount);
 

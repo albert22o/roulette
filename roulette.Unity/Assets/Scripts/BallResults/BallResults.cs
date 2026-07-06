@@ -18,9 +18,10 @@ public class BallResults
     private readonly TableInfo tableInfo;
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
+    private BetTable betTable;
 
     public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
-        BallHolder ballHolder, TableInfo tableInfo)
+        BallHolder ballHolder, TableInfo tableInfo, BetTable betTable)
     {
         this.ballHolder = ballHolder;
         this.tableInfo = tableInfo;
@@ -32,7 +33,7 @@ public class BallResults
 
         this.roundStateManager = roundStateManager;
         this.roundStateManager.StateChanged += OnStateChanged;
-
+        this.betTable = betTable;
     }
 
     private void OnBallHover(string ballHash)
@@ -55,14 +56,16 @@ public class BallResults
         if (!active)
             return;
         var hitInfo = currentBalls.Find(ball => ball.BallHash == ballhash);
+        RemoveBalls();
 
         if (hitInfo.FieldColor == ColorType.White)
         {
             tableInfo.ResetPocketColor(hitInfo.FieldIndex);
+            betTable.ClearBets();
             Win?.Invoke();
+            return;
         }
         BallSelected?.Invoke(hitInfo);
-        RemoveBalls();
     }
 
     private void RemoveBalls()
@@ -72,6 +75,7 @@ public class BallResults
 
     private void AddBalls(HitInfo[] balls)
     {
+        roundStateManager.ChangeState(RoundState.ChoosingReward);
         if (balls.Any(ball => ball.FieldColor == ColorType.Grey))
         {
             // Отправляем выбор нулевого шара для проигрыша
@@ -79,7 +83,6 @@ public class BallResults
             return;
         }
         currentBalls.Clear();
-        roundStateManager.ChangeState(RoundState.ChoosingReward);
         currentBalls.AddRange(balls);
     }
 

@@ -39,7 +39,7 @@ public class RangeBonusChip : Chip
 
     private void OnBallSelected(HitInfo hit) 
     {
-        if (hit.FieldNumber >= minNumber && hit.FieldNumber <= maxNumber)
+        if (hit?.FieldNumber >= minNumber && hit?.FieldNumber <= maxNumber)
             modifyRequest = true;
         else
             modifyRequest = false;

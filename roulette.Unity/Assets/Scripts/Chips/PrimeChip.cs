@@ -36,7 +36,7 @@ public class PrimeChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (IsPrime(hit.FieldNumber))
+        if (hit != null && IsPrime(hit.FieldNumber))
             modifyRequest = true;
         else
             modifyRequest = false;

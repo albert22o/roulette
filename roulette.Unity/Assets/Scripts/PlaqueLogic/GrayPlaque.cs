@@ -14,8 +14,8 @@
     {
         int randomIndex = random.Next(0, PlaqueDependencies.TableInfo.PocketMapping.Count);
 
-        PlaqueDependencies.TableInfo.SetPocketColor(randomIndex, ColorType.Green); //TODO change to Gray
-        PlaqueDependencies.BetCalculator.GeneralModifier += 3;
+        PlaqueDependencies.TableInfo.SetPocketColor(randomIndex, ColorType.Grey);
+        PlaqueDependencies.BetCalculator.ModifyGeneralModifier(3);
     }
 
     public override void OnSelectionPhaseCompleted(int phaseIndex, int[] selectedFields)

@@ -29,7 +29,7 @@ public class AntiColorChip : Chip
         if (rerollAdded)
             return;
 
-        if (hit.FieldColor == targetColor)
+        if (hit?.FieldColor == targetColor)
         {
             rerollAdded = true;
         }

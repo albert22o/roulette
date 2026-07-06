@@ -50,7 +50,7 @@ public class OneToThirtySixChip : Chip
     {
         foreach (int number in pseudoZeroNumbers)
         {
-            if (hit.FieldNumber == number)
+            if (hit?.FieldNumber == number)
             {
                 modifyRequest = true;
                 return;
