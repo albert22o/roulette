@@ -22,12 +22,13 @@ public class AllInChip : Chip
     public override void Apply()
     {
         if (modifyRequest)
-            betCalculator.MultiplyFieldNumberMultiplier(0, multiplier);
+            betCalculator.MuliplyGeneralModifier(multiplier);
     }
 
     public override void Revert()
     {
-        if (modifyRequest)betCalculator.DivideFieldNumberMultiplier(0, multiplier);
+        if (modifyRequest)
+            betCalculator.DivideGeneralModifier(multiplier);
     }
 
     private void OnBallSelected(HitInfo _)

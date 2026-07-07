@@ -159,6 +159,9 @@ public class BetCalculator
         if (betInfo.FieldColor == hitInfo.FieldColor)
             multiplier = Math.Max(multiplier, GetEffectiveColorMultiplier(hitInfo.FieldColor));
 
+        if (multiplier == 0)
+            return 0;
+
         multiplier = ApplyModifiers(multiplier);
 
         return multiplier;
