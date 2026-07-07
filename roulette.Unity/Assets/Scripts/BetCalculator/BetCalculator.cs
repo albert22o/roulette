@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static RoundStateManager;
 
@@ -20,7 +21,8 @@ public class BetCalculator
     private readonly Dictionary<ColorType, int> colorMultipliers = new();
 
     private bool active = true;
-    private int generalModifier = 0;
+
+    private List<(Func<int, int> Function, string OperationType, float Value)> modifySequence = new();
 
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
@@ -30,7 +32,44 @@ public class BetCalculator
 
     public void ModifyGeneralModifier(int delta)
     {
-        generalModifier += delta;
+        var inverseIndex = modifySequence.FindLastIndex(item =>
+            item.OperationType == "Add" && Math.Abs(item.Value - (-delta)) < 0.0001f);
+
+        if (inverseIndex >= 0)
+        {
+            modifySequence.RemoveAt(inverseIndex);
+            return;
+        }
+
+        modifySequence.Add((x => x + delta, "Add", delta));
+    }
+
+    public void MuliplyGeneralModifier(float multiplier)
+    {
+        var inverseIndex = modifySequence.FindLastIndex(item =>
+            item.OperationType == "Divide" && Math.Abs(item.Value - multiplier) < 0.0001f);
+
+        if (inverseIndex >= 0)
+        {
+            modifySequence.RemoveAt(inverseIndex);
+            return;
+        }
+
+        modifySequence.Add((x => (int)(x * multiplier), "Multiply", multiplier));
+    }
+
+    public void DivideGeneralModifier(float divisor)
+    {
+        var inverseIndex = modifySequence.FindLastIndex(item =>
+            item.OperationType == "Multiply" && Math.Abs(item.Value - divisor) < 0.0001f);
+
+        if (inverseIndex >= 0)
+        {
+            modifySequence.RemoveAt(inverseIndex);
+            return;
+        }
+
+        modifySequence.Add((x => (int)(x / divisor), "Divide", divisor));
     }
 
     public void ModifyFieldNumberMultiplier(int fieldNumber, int delta)
@@ -120,7 +159,7 @@ public class BetCalculator
         if (betInfo.FieldColor == hitInfo.FieldColor)
             multiplier = Math.Max(multiplier, GetEffectiveColorMultiplier(hitInfo.FieldColor));
 
-        multiplier += generalModifier;
+        multiplier = ApplyModifiers(multiplier);
 
         return multiplier;
     }
@@ -137,5 +176,9 @@ public class BetCalculator
     public void GetRewardAction(int reward)
     {
         GetReward?.Invoke(reward);
+    }
+    private int ApplyModifiers(int value)
+    {
+        return modifySequence.Aggregate(value, (current, item) => item.Function(current));
     }
 }
