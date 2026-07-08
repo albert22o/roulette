@@ -4,12 +4,13 @@
 public abstract class ChipHolderDependentChip : Chip
 {
     protected readonly BetCalculator betCalculator;
-
+    protected readonly ChipHolder chipHolder;
     private bool bonusApplied = false;
 
-    protected ChipHolderDependentChip(BetCalculator betCalculator, ChipData data) : base(data)
+    protected ChipHolderDependentChip(BetCalculator betCalculator, ChipHolder chipHolder, ChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
+        this.chipHolder = chipHolder;
     }
 
     protected abstract int CalculateBonus();

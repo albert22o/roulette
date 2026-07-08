@@ -8,6 +8,7 @@ public class ChipDependencies
     public BallResults BallResults { get; }
     public GoldenChips GoldenChips { get; }
     public Money Money { get; }
+    public ChipHolder ChipHolder { get; set; }
 
     public ChipDependencies(
         BetCalculator betCalculator,

@@ -4,10 +4,10 @@ public class LeakyChip : ChipHolderDependentChip
 {
     private readonly int bonusPerFreeSlot;
 
-    public LeakyChip(BetCalculator betCalculator, LeakyChipData data) : base(betCalculator, data) { }
-
-    protected override int CalculateBonus()
+    public LeakyChip(BetCalculator betCalculator, ChipHolder chipHolder, LeakyChipData data) : base(betCalculator, chipHolder, data) 
     {
-        return 0;
+        bonusPerFreeSlot = data.BonusPerFreeSlot;
     }
+
+    protected override int CalculateBonus() => chipHolder.FreeSlotCount * bonusPerFreeSlot;
 }

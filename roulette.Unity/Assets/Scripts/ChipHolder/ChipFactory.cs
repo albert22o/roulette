@@ -14,5 +14,8 @@ public class ChipFactory
         deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips);
     }
 
-    public Chip Create(ChipData data) => data.CreateChip(deps);
+    public Chip Create(ChipData data, ChipHolder chipHolder) {
+        deps.ChipHolder = chipHolder;
+         return data.CreateChip(deps); 
+    }
 }

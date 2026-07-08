@@ -14,15 +14,28 @@ public class ChipHolder
     private bool isActive = false;
     private readonly ChipFactory chipFactory;
     public bool HasFreeSlot => FindFreeSlot() != -1;
+    public int FreeSlotCount
+    {
+        get
+        {
+            var freeSlotIndex = FindFreeSlot();
+            if (freeSlotIndex == -1)
+                return 0;
+            return Capacity - freeSlotIndex;
+        }
+    }
     public IReadOnlyList<Chip> Chips => chips;
 
     public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, ChipHolderConfig config)
     {
+        this.chipFactory = chipFactory;
         Capacity = config.Capacity;
         chips = new Chip[Capacity];
-        roundStateManager.StateChanged += OnStateChanged;
-         
-        this.chipFactory = chipFactory;
+
+        foreach (var chip in config.StartChips) 
+            AddChip(chip);
+
+        roundStateManager.StateChanged += OnStateChanged; 
     }
 
     public void AddChip(ChipData chipData)
@@ -31,7 +44,7 @@ public class ChipHolder
         if (freeIndex == -1)
             return;
         
-        chips[freeIndex] = chipFactory.Create(chipData);
+        chips[freeIndex] = chipFactory.Create(chipData, this);
         chips[freeIndex].OnAddedToHolder();
 
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);

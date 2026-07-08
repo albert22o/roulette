@@ -36,7 +36,7 @@ public class WinningSequence
 
         isRoundWon = false;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
-        CompareAndDisplayMaxMultiplier(1);
+        CompareAndDisplayMaxMultiplier(0);
 
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
         {

@@ -12,8 +12,6 @@ public class ChipHolderView : MonoBehaviour
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
     [SerializeField] private LayerMask slotLayerMask;
-    [Header("For Test")]
-    [SerializeField] private ChipData[] chips;
 
     private Camera mainCamera;
     private ChipHolder chipHolder;
@@ -44,8 +42,13 @@ public class ChipHolderView : MonoBehaviour
         InitSlots();
         SetupInput();
 
-        foreach (var data in chips)
-            chipHolder.AddChip(data);
+        for (int index = 0; index < chipHolder.Chips.Count; index++)
+        {
+            if (chipHolder.Chips[index] == null)
+                continue;
+
+            OnChipAdded(index, chipHolder.Chips[index]);
+        }
     }
 
     private void OnDestroy()

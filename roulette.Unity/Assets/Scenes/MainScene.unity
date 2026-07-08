@@ -2939,15 +2939,15 @@ PrefabInstance:
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: 'chips.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 795e0a7b88f143f42a92b8e6ce669e00, type: 2}
+      objectReference: {fileID: 11400000, guid: a86a2fe5722e461468951800bbf1a5d9, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: 'chips.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 159857b1d3df72140be62dde104949d4, type: 2}
+      objectReference: {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: 'chips.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 159857b1d3df72140be62dde104949d4, type: 2}
+      objectReference: {fileID: 11400000, guid: cb191765755619d43959ea7375ca7a61, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: 'chips.Array.data[3]'
       value: 
