@@ -1,18 +1,23 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
+using UnityEngine;
 
 public class ChipHolder
 {
-    public event Action<int, Chip> ChipAdded;       
-    public event Action<int> ChipRemoved;           
+    public event Action<int, Chip> ChipAdded;
+    public event Action<int> ChipRemoved;
     public event Action<int, int> ChipsSwapped;
     public event Action<int> ChipAnimated;
-    public int Capacity { get; }
 
+    public event Action<int> SlotAdded;
+    public event Action<int> SlotRemoved; 
+
+    public int Capacity { get; private set; }
     private Chip[] chips;
     private bool isActive = false;
     private readonly ChipFactory chipFactory;
+
     public bool HasFreeSlot => FindFreeSlot() != -1;
     public int FreeSlotCount
     {
@@ -31,11 +36,9 @@ public class ChipHolder
         this.chipFactory = chipFactory;
         Capacity = config.Capacity;
         chips = new Chip[Capacity];
-
-        foreach (var chip in config.StartChips) 
+        foreach (var chip in config.StartChips)
             AddChip(chip);
-
-        roundStateManager.StateChanged += OnStateChanged; 
+        roundStateManager.StateChanged += OnStateChanged;
     }
 
     public void AddChip(ChipData chipData)
@@ -43,10 +46,9 @@ public class ChipHolder
         int freeIndex = FindFreeSlot();
         if (freeIndex == -1)
             return;
-        
+
         chips[freeIndex] = chipFactory.Create(chipData, this);
         chips[freeIndex].OnAddedToHolder();
-
         ChipAdded?.Invoke(freeIndex, chips[freeIndex]);
     }
 
@@ -54,10 +56,8 @@ public class ChipHolder
     {
         if (!IsValidIndex(index) || chips[index] == null)
             return;
-
         chips[index].OnRemovedFromHolder();
         chips[index] = null;
-
         ChipRemoved?.Invoke(index);
     }
 
@@ -65,7 +65,6 @@ public class ChipHolder
     {
         if (data == null)
             return;
-
         for (int i = 0; i < chips.Length; i++)
         {
             if (chips[i] != null && chips[i].ChipData == data)
@@ -82,12 +81,9 @@ public class ChipHolder
     {
         if (!isActive || !IsValidIndex(indexA) || !IsValidIndex(indexB))
             return;
-
         if (indexA == indexB)
             return;
-
         (chips[indexA], chips[indexB]) = (chips[indexB], chips[indexA]);
-
         ChipsSwapped?.Invoke(indexA, indexB);
     }
 
@@ -95,6 +91,71 @@ public class ChipHolder
     {
         for (int i = chips.Length - 1; i >= 0; i--)
             chips[i]?.Revert();
+    }
+
+    /// <summary>
+    /// Добавляет один новый пустой слот в конец holder'а.
+    /// </summary>
+    public void AddSlot()
+    {
+        var newChips = new Chip[Capacity + 1];
+        Array.Copy(chips, newChips, chips.Length);
+        chips = newChips;
+        Capacity++;
+
+        SlotAdded?.Invoke(Capacity - 1);
+    }
+
+    /// <summary>
+    /// Добавляет несколько слотов сразу.
+    /// </summary>
+    public void AddSlots(int count)
+    {
+        for (int i = 0; i < count; i++)
+            AddSlot();
+    }
+
+    /// <summary>
+    /// Удаляет слот по индексу. Если в нём была фишка — сначала убирает её.
+    /// Индексы всех слотов после удалённого сдвигаются на 1 назад.
+    /// </summary>
+    public void RemoveSlot(int index)
+    {
+        if (!IsValidIndex(index))
+            return;
+
+        // Сначала снимаем фишку, если есть
+        if (chips[index] != null)
+            RemoveChip(index);
+
+        var newChips = new Chip[Capacity - 1];
+        for (int i = 0, j = 0; i < chips.Length; i++)
+        {
+            if (i == index)
+                continue;
+            newChips[j++] = chips[i];
+        }
+
+        chips = newChips;
+        Capacity--;
+
+        SlotRemoved?.Invoke(index);
+    }
+
+    /// <summary>
+    /// Удаляет последний слот holder'а.
+    /// </summary>
+    public void RemoveLastSlot()
+    {
+        if (Capacity <= 0)
+            return;
+        RemoveSlot(Capacity - 1);
+    }
+
+    public void RemoveLastSlots(int count)
+    {
+        for (int i = 0; i < count; i++)
+            RemoveLastSlot();
     }
 
     private void OnStateChanged(RoundStateManager.RoundState newState)
@@ -106,7 +167,6 @@ public class ChipHolder
     {
         chips[index]?.Apply();
         ChipAnimated?.Invoke(index);
-        
     }
 
     private int FindFreeSlot()

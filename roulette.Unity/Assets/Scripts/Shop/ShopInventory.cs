@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,6 +30,37 @@ public class ShopInventory : MonoBehaviour
         ballHolder.BallRemoved += OnBallRemoved;
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
+
+        chipHolder.SlotAdded += OnChipSlotAdded;
+        chipHolder.SlotRemoved += OnChipSlotRemoved;
+
+        for (int index = 0; index < chipHolder.Chips.Count; index++)
+        {
+            if (chipHolder.Chips[index] == null)
+                continue;
+
+            OnChipAdded(index, chipHolder.Chips[index]);
+        }
+    }
+    private void OnChipSlotAdded(int index)
+    {
+        UpdateChips();
+    }
+
+    private void OnChipSlotRemoved(int index)
+    {
+        UpdateChips();
+    }
+
+    private void UpdateChips()
+    {
+        for (int i = 0; i < chips.Length; i++)
+        {
+            if (i < chipHolder.Chips.Count && chipHolder.Chips[i] != null)
+                chips[i].SetItem(chipHolder.Chips[i].ChipData);
+            else
+                chips[i].SetItem(null);
+        }
     }
 
     private void UpdateBalls()

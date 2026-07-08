@@ -1,7 +1,5 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Localization.SmartFormat.Utilities;
 using Zenject;
 
 public class ChipHolderView : MonoBehaviour
@@ -38,6 +36,8 @@ public class ChipHolderView : MonoBehaviour
         chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;
         chipHolder.ChipAnimated += OnChipAnimated;
+        chipHolder.SlotAdded += OnSlotAdded;
+        chipHolder.SlotRemoved += OnSlotRemoved;
 
         InitSlots();
         SetupInput();
@@ -55,6 +55,8 @@ public class ChipHolderView : MonoBehaviour
     {
         if (chipHolder != null)
         {
+            chipHolder.SlotAdded -= OnSlotAdded;
+            chipHolder.SlotRemoved -= OnSlotRemoved;
             chipHolder.ChipAdded -= OnChipAdded;
             chipHolder.ChipRemoved -= OnChipRemoved;
             chipHolder.ChipsSwapped -= OnChipsSwapped;
@@ -194,5 +196,27 @@ public class ChipHolderView : MonoBehaviour
         return Vector3.zero;
     }
 
-   
+    private void OnSlotAdded(int index)
+    {
+        if (index < slotViews.Length)
+        {
+            slotViews[index].gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning($"Нет ChipSlotView для индекса {index}. " +
+                              "Нужно либо заранее подготовить достаточно слотов в сцене, " +
+                              "либо реализовать динамический спавн ChipSlotView.");
+        }
+    }
+
+    private void OnSlotRemoved(int index)
+    {
+        if (index < slotViews.Length)
+        {
+            slotViews[index].ClearChip();
+            slotViews[index].SetChipName("");
+            slotViews[index].gameObject.SetActive(false);
+        }
+    }
 }

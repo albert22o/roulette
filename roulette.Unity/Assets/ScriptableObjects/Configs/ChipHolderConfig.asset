@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Capacity>k__BackingField: 5
   StartChips:
-  - {fileID: 11400000, guid: eba6e7981c06a87478dcaab8cae7ee9a, type: 2}
   - {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
+  - {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
+  - {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
+  - {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
+  - {fileID: 11400000, guid: 03f0feef9c5c1f34e92f0120bb402bb4, type: 2}
