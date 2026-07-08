@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -32,6 +32,8 @@ public class Ball : MonoBehaviour
 
     public void Freeze()
     {
+        if (ballRigidbody.isKinematic)
+            return;
         ballRigidbody.angularVelocity = Vector3.zero;
         ballRigidbody.linearVelocity = Vector3.zero;
         ballRigidbody.isKinematic = true;

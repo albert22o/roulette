@@ -2,17 +2,15 @@
 
 public class AntiColorChip : Chip
 {
-    private readonly BallResults ballResults;
     private readonly ColorType targetColor;
+    private readonly IRouletteWheel rouletteWheel;
+    private bool rerollAbility = true;
 
-    private bool rerollAdded = false;
-
-    public AntiColorChip(BallResults ballResults, ColorType targetColor, AntiColorChipData data) : base(data)
+    public AntiColorChip(IRouletteWheel rouletteWheel, ColorType targetColor, AntiColorChipData data) : base(data)
     {
-        this.ballResults = ballResults;
         this.targetColor = targetColor;
-
-        this.ballResults.BallSelected += OnBallSelected;
+        this.rouletteWheel = rouletteWheel;
+        rouletteWheel.AllBallsStopped += OnAllBallsStopped;
     }
 
     public override void Apply()
@@ -21,17 +19,21 @@ public class AntiColorChip : Chip
 
     public override void Revert()
     {
-        rerollAdded = false;
+        rerollAbility = true;
     }
 
-    private void OnBallSelected(HitInfo hit)
+    private void OnAllBallsStopped(HitInfo[] hit)
     {
-        if (rerollAdded)
+        if (!rerollAbility)
             return;
-
-        if (hit?.FieldColor == targetColor)
+        rerollAbility = false;
+        foreach (var hitInfo in hit)
         {
-            rerollAdded = true;
+            if (hitInfo.FieldColor == targetColor)
+            {
+                rouletteWheel.Reroll(hitInfo.BallHash);
+                return;
+            }
         }
     }
 }

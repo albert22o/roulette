@@ -9,6 +9,6 @@ public class AntiColorChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new AntiColorChip(deps.BallResults,  targetColor, this);
+        return new AntiColorChip(deps.RouletteWheel,  targetColor, this);
     }
 }
