@@ -5,6 +5,6 @@ public class OneToThirtySixChipData : ChipData
 {
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new OneToThirtySixChip(deps.BetCalculator, deps.BallResults, this);
+        return new OneToThirtySixChip(deps.BetCalculator, this);
     }
 }

@@ -14,6 +14,8 @@ public class BetCalculator
     public int DozenMultiplier { get; set; } = 3;
     public int ColorMultiplier { get; set; } = 2;
 
+    private readonly HashSet<int> zeroFields = new HashSet<int>() { 0 };
+
     private readonly Dictionary<int, int> fieldNumberMultipliers = new();
 
     private readonly Dictionary<DozenType, int> dozenMultipliers = new();
@@ -28,6 +30,16 @@ public class BetCalculator
     {
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
+    }
+
+    public void AddToZeroFields(int fieldNum)
+    {
+        zeroFields.Add(fieldNum);
+    }
+
+    public void RemoveFromZeroFields(int fieldNum)
+    {
+        zeroFields.Remove(fieldNum);
     }
 
     public void ModifyGeneralModifier(int delta)
@@ -92,33 +104,6 @@ public class BetCalculator
         colorMultipliers[color] = current + delta;
     }
 
-    public void MultiplyFieldNumberMultiplier(int fieldNumber, float multiplier)
-    {
-        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
-            ? m
-            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
-
-        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current * multiplier);
-    }
-
-    public void DivideFieldNumberMultiplier(int fieldNumber, float divisor)
-    {
-        var current = fieldNumberMultipliers.TryGetValue(fieldNumber, out var m)
-            ? m
-            : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
-
-        fieldNumberMultipliers[fieldNumber] = Mathf.RoundToInt(current / divisor);
-    }
-
-    public void ResetFieldNumberMultiplier(int fieldNumber) =>
-        fieldNumberMultipliers.Remove(fieldNumber);
-
-    public void ResetDozenMultiplier(DozenType dozen) =>
-        dozenMultipliers.Remove(dozen);
-
-    public void ResetColorMultiplier(ColorType color) =>
-        colorMultipliers.Remove(color);
-
     public void OnStateChanged(RoundState newState)
     {
         active = newState == RoundState.ChoosingReward;
@@ -146,12 +131,11 @@ public class BetCalculator
     {
         int multiplier = 0;
 
+        if (betInfo.FieldNumber == 0 && zeroFields.Contains(hitInfo.FieldNumber))
+            multiplier = Math.Max(multiplier, ZeroMultiplier);
+
         if (betInfo.FieldNumber == hitInfo.FieldNumber)
-        {
-            multiplier = betInfo.FieldNumber == 0
-                ? GetFieldMultiplier(0, ZeroMultiplier)
-                : GetFieldMultiplier(hitInfo.FieldNumber, NumMultiplier);
-        }
+            multiplier = Math.Max(multiplier, GetFieldMultiplier(hitInfo.FieldNumber, NumMultiplier));
 
         if (betInfo.Dozen == hitInfo.Dozen)
             multiplier = Math.Max(multiplier, GetEffectiveDozenMultiplier(hitInfo.Dozen));

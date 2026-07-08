@@ -15,3 +15,7 @@ MonoBehaviour:
   capacity: 5
   startBalls:
   - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
+  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
+  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
+  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
+  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
