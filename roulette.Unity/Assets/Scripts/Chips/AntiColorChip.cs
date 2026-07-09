@@ -31,7 +31,7 @@ public class AntiColorChip : Chip
         {
             if (hitInfo.FieldColor == targetColor)
             {
-                rouletteWheel.Reroll(hitInfo.BallHash);
+                rouletteWheel.AddBallsToAutoReroll(hitInfo.BallHash);
                 return;
             }
         }

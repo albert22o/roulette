@@ -26,6 +26,9 @@ public interface IRouletteWheel
     /// <summary>
     /// Выводит все шары из рулетки
     /// </summary>
+    /// 
+
+    public void AddBallsToAutoReroll(params string[] ballNames);
     public void ClearBalls();
 
     /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -19,6 +20,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
 
     private HitInfo[] hitsInfo;
     private TableInfo tableInfo;
+    private List<string> ballsToAutoReroll = new();
 
     public RouletteWheelField[] Fields { get; set; } = new RouletteWheelField[37];
 
@@ -96,6 +98,11 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     {
         this.hitsInfo = hitsInfo.ToArray();
         AllBallsStopped?.Invoke(hitsInfo);
+        if (ballsToAutoReroll.Count > 0)
+        {
+            Reroll(ballsToAutoReroll.ToArray());
+            ballsToAutoReroll.Clear();
+        }
     }
 
     public void OnPocketColorChanged(int index, ColorType color)
@@ -162,5 +169,16 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public void AnimateBall(string ballHash)
     {
         ballsManager.AnimateBall(ballHash);
+    }
+
+    public void AddBallsToAutoReroll(params string[] ballNames)
+    {
+        foreach (string ballName in ballNames)
+        {
+            if (!ballsToAutoReroll.Contains(ballName))
+            {
+                ballsToAutoReroll.Add(ballName);
+            }
+        }
     }
 }
