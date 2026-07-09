@@ -76,5 +76,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CameraEventHandler>().AsSingle();
 
         Container.Bind<BossReward>().AsSingle();
+        Container.Bind<ItemReceiver>().AsSingle();
     }
 }

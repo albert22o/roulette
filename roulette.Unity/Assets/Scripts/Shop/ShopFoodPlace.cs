@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
 
 public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {

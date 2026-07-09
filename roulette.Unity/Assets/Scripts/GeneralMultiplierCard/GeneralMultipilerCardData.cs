@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GeneralMultipilerCardData", menuName = "Cards/GeneralMultipilerCardData")]
 public class GeneralMultipilerCardData : ItemData
 {
-    [SerializeField] private float multiplier;
+    [SerializeField] private int multiplier;
 
-    public float Multiplier => multiplier;
+    public int Multiplier => multiplier;
 }
