@@ -54,14 +54,14 @@ public class Shop : MonoBehaviour
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
     {
+        tooltip.Show(title, mainText);
         tooltip.gameObject.SetActive(true);
-        tooltip.SetData(title, mainText);
         tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
     public void HideTooltip()
     {
-        tooltip.gameObject.SetActive(false);
+        tooltip.Hide();
     }
 
     public bool TrySell(ItemData item, int index)

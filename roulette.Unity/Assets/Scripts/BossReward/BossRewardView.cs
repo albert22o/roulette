@@ -67,14 +67,13 @@ public class BossRewardView : MonoBehaviour
 
     private void OnItemHoverEnter(PlaqueItem item)
     {
-        tooltip.SetData(item.Data.Name, item.Data.Description);
+        tooltip.Show(item.Data.Name, item.Data.Description);
         tooltip.transform.position = item.transform.position + Vector3.up * tooltipHeight;
-        tooltip.gameObject.SetActive(true);
     }
 
     private void OnItemHoverExit(PlaqueItem item)
     {
-        tooltip.gameObject.SetActive(false);
+        tooltip.Hide();
     }
 
     private void OnItemClick(PlaqueItem item)
@@ -126,7 +125,6 @@ public class BossRewardView : MonoBehaviour
 
     private void OnCameraTransitionFinished()
     {
-        Debug.Log("cameraTransitinoFinished");
         RewardReceived?.Invoke();
         cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
     }
