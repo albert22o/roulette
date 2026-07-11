@@ -9,18 +9,21 @@ public class ChipDependencies
     public GoldenChips GoldenChips { get; }
     public Money Money { get; }
     public ChipHolder ChipHolder { get; set; }
+    public TableInfo TableInfo { get;  set; }
 
     public ChipDependencies(
         BetCalculator betCalculator,
         BetTable betTable,
         IRouletteWheel rouletteWheel,
         BallResults ballResult,
-        GoldenChips goldenChips)
+        GoldenChips goldenChips,
+        TableInfo tableInfo)
     {
         BetCalculator = betCalculator;
         BetTable = betTable;
         RouletteWheel = rouletteWheel;  
         BallResults = ballResult;
         GoldenChips = goldenChips;
+        TableInfo = tableInfo;
     }
 }

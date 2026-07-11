@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Capacity>k__BackingField: 5
   StartChips:
-  - {fileID: 11400000, guid: 886098432e68cd143bfba37d5089a9bb, type: 2}
+  - {fileID: 11400000, guid: 253dd8d3320600f44a60f9b190fa1835, type: 2}

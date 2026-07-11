@@ -9,9 +9,10 @@ public class ChipFactory
         BetTable betTable,
         IRouletteWheel rouletteWheel,
         BallResults ballResults,
-        GoldenChips goldenChips)
+        GoldenChips goldenChips,
+        TableInfo tableInfo)
     {
-        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips);
+        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips, tableInfo);
     }
 
     public Chip Create(ChipData data, ChipHolder chipHolder) {
