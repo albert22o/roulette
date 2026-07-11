@@ -1,6 +1,4 @@
-﻿using System;
-
-public class ChipFactory
+﻿public class ChipFactory
 {
     private readonly ChipDependencies deps;
 
