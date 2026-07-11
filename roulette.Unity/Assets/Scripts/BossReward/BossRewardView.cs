@@ -88,6 +88,7 @@ public class BossRewardView : MonoBehaviour
     {
         foreach (var item in itemPlaces)
         {
+            item.gameObject.SetActive(false);
             item.SetData(null);
         }
     }
@@ -118,6 +119,7 @@ public class BossRewardView : MonoBehaviour
         for (int i = 0; i < itemPlaces.Length; i++)
         {
             itemPlaces[i].SetData(itemsData[i]);
+            itemPlaces[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(delayBetweenItemsSpawn);
         }
         isInteractable = true;

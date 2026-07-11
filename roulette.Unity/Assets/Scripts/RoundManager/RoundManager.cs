@@ -151,7 +151,7 @@ public class RoundManager
         if (!AbleToWin)
             return;
         Win?.Invoke();
-        roundStateManager.ChangeState(RoundState.Win);
+        progressionManager.Advance();
     }
 
     private void OnGetReward(int reward)

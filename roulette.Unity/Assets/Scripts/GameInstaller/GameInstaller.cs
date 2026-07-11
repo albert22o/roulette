@@ -77,5 +77,6 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<BossReward>().AsSingle();
         Container.Bind<ItemReceiver>().AsSingle();
+        Container.Bind<RoundWinManager>().AsSingle().NonLazy();
     }
 }

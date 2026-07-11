@@ -7,19 +7,12 @@
     private readonly RoundsConfig roundsConfig;
     private int currentIndex = 0;
 
-    public ProgressionManager(RoundsConfig roundsConfig, RoundStateManager roundStateManager)
+    public ProgressionManager(RoundsConfig roundsConfig)
     {
         this.roundsConfig = roundsConfig;
-        roundStateManager.StateChanged += OnStateChanged;
     }
 
-    private void OnStateChanged(RoundStateManager.RoundState newState)
-    {
-        if (newState == RoundStateManager.RoundState.Win)
-            Advance();
-    }
-
-    private void Advance()
+    public void Advance()
     {
         if (!HasNext)
             return;

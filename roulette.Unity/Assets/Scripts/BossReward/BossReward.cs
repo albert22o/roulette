@@ -17,8 +17,6 @@ public class BossReward
         this.gameStateManager = gameStateManager;
     }
 
-
-
     public void GiveReward()
     {
         gameStateManager.ChangeGameState(GameStateManager.GameState.BossReward);
