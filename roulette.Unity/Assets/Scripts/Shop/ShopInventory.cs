@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class ShopInventory : MonoBehaviour
 {
     [SerializeField] private ShopInventoryItem itemPrefab;
     [SerializeField] private Transform[] ballSpawnPoints, chipSpawnPoints;
-
     private ShopInventoryItem[] balls;
     private ShopInventoryItem[] chips;
-
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
     private Shop shop;
@@ -28,6 +23,7 @@ public class ShopInventory : MonoBehaviour
     {
         ballHolder.BallAdded += OnBallAdded;
         ballHolder.BallRemoved += OnBallRemoved;
+        ballHolder.CapacityChanged += OnBallCapacityChanged;
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
 
@@ -42,6 +38,22 @@ public class ShopInventory : MonoBehaviour
             OnChipAdded(index, chipHolder.Chips[index]);
         }
     }
+    private void OnDisable()
+    {
+        ballHolder.BallAdded -= OnBallAdded;
+        ballHolder.BallRemoved -= OnBallRemoved;
+        ballHolder.CapacityChanged -= OnBallCapacityChanged;
+        chipHolder.ChipAdded -= OnChipAdded;
+        chipHolder.ChipRemoved -= OnChipRemoved;
+        chipHolder.SlotAdded -= OnChipSlotAdded;
+        chipHolder.SlotRemoved -= OnChipSlotRemoved;
+    }
+
+    private void OnBallCapacityChanged(int newCapacity)
+    {
+        UpdateBalls();
+    }
+
     private void OnChipSlotAdded(int index)
     {
         UpdateChips();
