@@ -3,6 +3,7 @@ using static RoundStateManager;
 
 public class RewardCalculator
 {
+    public int BaseReward { get; set; } = 3;
     public Action<int> GoalBeaten;
 
     private readonly RoundManager roundManager;
@@ -28,7 +29,7 @@ public class RewardCalculator
 
     public int CalculateReward(int betCount, int quote, int goal)
     {
-        var reward = 3;
+        var reward = BaseReward;
 
         reward += 2 * betCount;
 
