@@ -19,6 +19,7 @@ MonoBehaviour:
     \u043F\u043E\u0441\u043B\u0435 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u0432\u044B\u043F\u0430\u0434\u0435\u043D\u0438\u044F
     \u0432 \u0440\u0430\u043C\u043A\u0430\u0445 \u0441\u0442\u0430\u0432\u043A\u0438."
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  rarityType: 2
   cost: 2
   Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
   targetDozen: 1

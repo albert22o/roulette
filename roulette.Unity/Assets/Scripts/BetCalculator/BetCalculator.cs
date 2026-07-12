@@ -23,7 +23,7 @@ public class BetCalculator
 
     private bool active = true;
 
-    private List<(Func<int, int> Function, string OperationType, float Value)> modifySequence = new();
+    private List<(Func<float, float> Function, string OperationType, float Value)> modifySequence = new();
 
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
@@ -66,7 +66,7 @@ public class BetCalculator
             return;
         }
 
-        modifySequence.Add((x => (int)(x * multiplier), "Multiply", multiplier));
+        modifySequence.Add((x => (x * multiplier), "Multiply", multiplier));
     }
 
     public void DivideGeneralModifier(float divisor)
@@ -128,7 +128,7 @@ public class BetCalculator
 
     public float GetMaxWinningMultiplier(BetInfo betInfo, HitInfo hitInfo)
     {
-        int multiplier = 0;
+        float multiplier = 0;
 
         if (betInfo.FieldNumber == 0 && zeroFields.Contains(hitInfo.FieldNumber))
             multiplier = Math.Max(multiplier, ZeroMultiplier);
@@ -163,7 +163,7 @@ public class BetCalculator
     {
         GetReward?.Invoke(reward);
     }
-    private int ApplyModifiers(int value)
+    private float ApplyModifiers(float value)
     {
         return modifySequence.Aggregate(value, (current, item) => item.Function(current));
     }

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: Rare
   m_EditorClassIdentifier: 
+  rarityType: 2
   folder: {fileID: 102900000, guid: a21ce35269f5c8e4aa79fa4e9df8e3de, type: 3}
-  items:
-  - {fileID: 11400000, guid: 4cffa8ebb728612409b4708f038c384e, type: 2}

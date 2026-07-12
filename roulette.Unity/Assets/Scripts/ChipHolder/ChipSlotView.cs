@@ -34,7 +34,6 @@ public class ChipSlotView : MonoBehaviour
     public void ClearChip()
     {
         if (ChipObject == null) return;
-        Destroy(ChipObject);
         ChipObject = null;
 
         if (nameText != null)

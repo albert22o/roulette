@@ -35,6 +35,7 @@ public class ChipHolderView : MonoBehaviour
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
         chipHolder.ChipsSwapped += OnChipsSwapped;
+        chipHolder.ChipMoved += OnChipMoved;
         chipHolder.ChipAnimated += OnChipAnimated;
         chipHolder.SlotAdded += OnSlotAdded;
         chipHolder.SlotRemoved += OnSlotRemoved;
@@ -60,6 +61,7 @@ public class ChipHolderView : MonoBehaviour
             chipHolder.ChipAdded -= OnChipAdded;
             chipHolder.ChipRemoved -= OnChipRemoved;
             chipHolder.ChipsSwapped -= OnChipsSwapped;
+            chipHolder.ChipMoved -= OnChipMoved;
         }
 
         clickAction?.Dispose();
@@ -109,22 +111,26 @@ public class ChipHolderView : MonoBehaviour
             return;
 
         draggedObject.transform.position = worldPos;
-        hoveredSlot = RaycastSlot(); 
+        hoveredSlot = RaycastSlot();
     }
 
     private void EndDrag()
     {
-        if (!isDragging) 
+        if (!isDragging)
             return;
         isDragging = false;
 
-        var targetSlot = hoveredSlot; 
+        var targetSlot = hoveredSlot;
         hoveredSlot = null;
 
         if (targetSlot != null && targetSlot != draggedFromSlot)
         {
             draggedObject.transform.SetParent(draggedFromSlot.transform);
             draggedFromSlot.RestoreChip(draggedObject);
+
+            // chipHolder.SwapChips сам вызовет ChipsSwapped и там мы
+            // обновим визуал обоих слотов (OnChipsSwapped безопасен
+            // даже если целевой слот был пуст).
             chipHolder.SwapChips(draggedFromSlot.SlotIndex, targetSlot.SlotIndex);
         }
         else
@@ -154,18 +160,59 @@ public class ChipHolderView : MonoBehaviour
         var chipA = slotViews[indexA].ChipObject;
         var chipB = slotViews[indexB].ChipObject;
 
-        chipA.transform.SetParent(null);
-        chipB.transform.SetParent(null);
+        // ВАЖНО: здесь нельзя использовать оператор "?." для UnityEngine.Object.
+        // Unity переопределяет "==", чтобы корректно определять "fake null"
+        // (объект уже уничтожен через Destroy(), но C#-ссылка формально не null).
+        // Оператор "?." этот переопределённый "==" НЕ использует и делает
+        // сырую проверку ссылки, поэтому уничтоженный объект ошибочно считается
+        // "живым" — и обращение к chipA.transform кидает MissingReferenceException.
+        // Поэтому используем явные "!= null" / "== null" сравнения.
+        bool hasChipA = chipA != null;
+        bool hasChipB = chipB != null;
 
-        slotViews[indexA].PlaceChip(chipB);
-        slotViews[indexB].PlaceChip(chipA);
+        if (hasChipA)
+            chipA.transform.SetParent(null);
+        if (hasChipB)
+            chipB.transform.SetParent(null);
+
+        if (hasChipB)
+            slotViews[indexA].PlaceChip(chipB);
+        else
+            slotViews[indexA].ClearChip();
+
+        if (hasChipA)
+            slotViews[indexB].PlaceChip(chipA);
+        else
+            slotViews[indexB].ClearChip();
 
         var chipDataA = chipHolder.Chips[indexA];
         var chipDataB = chipHolder.Chips[indexB];
 
         slotViews[indexA].SetChipName(chipDataA?.ChipData?.Name ?? "");
         slotViews[indexB].SetChipName(chipDataB?.ChipData?.Name ?? "");
+    }
 
+    /// <summary>
+    /// Вызывается, когда ChipHolder сдвигает фишку в массиве данных
+    /// (например, из-за RemoveSlot в середине holder'а — все фишки после
+    /// удалённого слота сдвигаются на одну позицию назад). Переставляем
+    /// визуальный объект фишки между соответствующими ChipSlotView, чтобы
+    /// вид не рассинхронизировался с данными.
+    /// </summary>
+    private void OnChipMoved(int fromIndex, int toIndex)
+    {
+        var chipObject = slotViews[fromIndex].ChipObject;
+        if (chipObject == null)
+            return;
+
+        chipObject.transform.SetParent(null);
+        slotViews[fromIndex].ClearChip();
+        slotViews[fromIndex].SetChipName("");
+
+        slotViews[toIndex].PlaceChip(chipObject);
+
+        var chipData = chipHolder.Chips[toIndex];
+        slotViews[toIndex].SetChipName(chipData?.ChipData?.Name ?? "");
     }
 
     private void OnChipAnimated(int index)
