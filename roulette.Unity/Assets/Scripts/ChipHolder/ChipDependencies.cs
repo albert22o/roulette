@@ -2,14 +2,15 @@
 
 public class ChipDependencies
 {
+    public ChipHolder ChipHolder { get; set; }
     public BetCalculator BetCalculator { get; }
     public BetTable BetTable { get; }
     public IRouletteWheel RouletteWheel { get; }
     public BallResults BallResults { get; }
     public GoldenChips GoldenChips { get; }
     public Money Money { get; }
-    public ChipHolder ChipHolder { get; set; }
-    public TableInfo TableInfo { get;  set; }
+    public TableInfo TableInfo { get; }
+    public RoundManager RoundManager { get; }
 
     public ChipDependencies(
         BetCalculator betCalculator,
@@ -17,7 +18,8 @@ public class ChipDependencies
         IRouletteWheel rouletteWheel,
         BallResults ballResult,
         GoldenChips goldenChips,
-        TableInfo tableInfo)
+        TableInfo tableInfo,
+        RoundManager roundManager)
     {
         BetCalculator = betCalculator;
         BetTable = betTable;
@@ -25,5 +27,6 @@ public class ChipDependencies
         BallResults = ballResult;
         GoldenChips = goldenChips;
         TableInfo = tableInfo;
+        RoundManager = roundManager;
     }
 }

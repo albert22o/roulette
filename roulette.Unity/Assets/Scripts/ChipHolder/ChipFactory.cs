@@ -8,9 +8,10 @@
         IRouletteWheel rouletteWheel,
         BallResults ballResults,
         GoldenChips goldenChips,
-        TableInfo tableInfo)
+        TableInfo tableInfo,
+        RoundManager roundManager)
     {
-        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips, tableInfo);
+        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips, tableInfo, roundManager);
     }
 
     public Chip Create(ChipData data, ChipHolder chipHolder) {

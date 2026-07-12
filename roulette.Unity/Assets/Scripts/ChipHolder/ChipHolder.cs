@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using UnityEngine;
 
 public class ChipHolder
 {
@@ -31,7 +29,7 @@ public class ChipHolder
     }
     public IReadOnlyList<Chip> Chips => chips;
 
-    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, ChipHolderConfig config)
+    public ChipHolder(RoundStateManager roundStateManager, BetCalculator betCalculator, ChipFactory chipFactory, ChipHolderConfig config)
     {
         this.chipFactory = chipFactory;
         Capacity = config.Capacity;
@@ -39,6 +37,7 @@ public class ChipHolder
         foreach (var chip in config.StartChips)
             AddChip(chip);
         roundStateManager.StateChanged += OnStateChanged;
+        betCalculator.GetReward += (_) => RevertAll();
     }
 
     public void AddChip(ChipData chipData)

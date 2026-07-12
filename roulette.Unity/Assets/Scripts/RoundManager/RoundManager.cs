@@ -61,10 +61,13 @@ public class RoundManager
             }
         }
 
+    public float GoalModifier => goalModifier;
+
     private int betCount = 3;
     private int rerollCount = 5;
     private int quote = 0;
     private int goal = 1000;
+    private float goalModifier = 1f;
 
     private RoundState betState = RoundState.PlacingBets;
     private bool ableToWin;
@@ -72,13 +75,12 @@ public class RoundManager
     private readonly IRouletteWheel rouletteWheel;
     private readonly RoundStateManager roundStateManager;
     private readonly TableInfo tableInfo;
-    private readonly ChipHolder chipHolder;
     private readonly BallHolder ballHolder;
     private readonly BetTable betTable;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         TableInfo tableInfo, ProgressionManager progressionManager, BetCalculator betCalculator,
-        ChipHolder chipHolder, BallHolder ballHolder, BetTable betTable)
+        BallHolder ballHolder, BetTable betTable)
     {
         this.rouletteWheel = rouletteWheel;
 
@@ -88,7 +90,6 @@ public class RoundManager
         this.roundStateManager = roundStateManager;
         this.tableInfo = tableInfo;
         this.progressionManager = progressionManager;
-        this.chipHolder = chipHolder;
         this.ballHolder = ballHolder;
         roundStateManager.StateChanged += OnStateChanged;
     }
@@ -98,8 +99,13 @@ public class RoundManager
         Quote = 0;
         BetCount = tableInfo.BetCount;
         RerollCount = tableInfo.RerollCount;
-        Goal = progressionManager.Current.Goal;
+        Goal = (int)Math.Round(progressionManager.Current.Goal * GoalModifier);
         AbleToWin = false;
+    }
+
+    public void ModifiGoalModifier(float delta)
+    {
+        goalModifier += delta;
     }
 
     public void Spin()
@@ -161,7 +167,6 @@ public class RoundManager
             roundStateManager.ChangeState(RoundState.Lose);
 
         betTable.ClearBets();
-        chipHolder.RevertAll();
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }
