@@ -78,7 +78,8 @@ public class Shop : MonoBehaviour
         }
         else if (item is ChipData chipData)
         {
-            goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
+            float sellCost = (int)(chipData.Cost * chipSellMultiplier);
+            if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
             chipHolder.RemoveChip(index);
             return true;
         }
