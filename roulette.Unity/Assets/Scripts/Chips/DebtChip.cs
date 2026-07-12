@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 public class DebtChip : Chip
 {
     private readonly GoldenChips goldenChips;
@@ -21,11 +20,11 @@ public class DebtChip : Chip
 
     public override void OnAddedToHolder()
     {
-        goldenChips.Add(debtAmount);
+        goldenChips.OverdraftLimit += debtAmount;
     }
 
     public override void OnRemovedFromHolder()
     {
-        goldenChips.Remove(debtAmount);        
+        goldenChips.OverdraftLimit -= debtAmount;
     }
 }
