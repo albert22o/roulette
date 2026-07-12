@@ -12,6 +12,7 @@ public class ChipDependencies
     public TableInfo TableInfo { get; }
     public RoundManager RoundManager { get; }
     public RewardCalculator RewardCalculator { get; }
+    public LoseManager LoseManager { get; }
 
     public ChipDependencies(
         BetCalculator betCalculator,
@@ -21,7 +22,8 @@ public class ChipDependencies
         GoldenChips goldenChips,
         TableInfo tableInfo,
         RoundManager roundManager,
-        RewardCalculator rewardCalculator)
+        RewardCalculator rewardCalculator,
+        LoseManager loseManager)
     {
         BetCalculator = betCalculator;
         BetTable = betTable;
@@ -31,5 +33,6 @@ public class ChipDependencies
         TableInfo = tableInfo;
         RoundManager = roundManager;
         RewardCalculator = rewardCalculator;
+        LoseManager = loseManager;
     }
 }

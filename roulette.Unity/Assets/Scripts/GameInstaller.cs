@@ -60,6 +60,8 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<RoundManager>().AsSingle();
 
+        Container.Bind<LoseManager>().AsSingle();
+
         Container.Bind<RewardCalculator>().AsSingle().NonLazy();
 
         Container.Bind<Shop>().FromComponentInHierarchy().AsSingle();

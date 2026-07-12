@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoundsConfig
   m_EditorClassIdentifier: 
   Rounds:
-  - Goal: 400
+  - Goal: 4000
   - Goal: 600
   - Goal: 800

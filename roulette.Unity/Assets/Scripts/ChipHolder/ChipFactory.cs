@@ -10,10 +10,11 @@
         GoldenChips goldenChips,
         TableInfo tableInfo,
         RoundManager roundManager,
-        RewardCalculator rewardCalculator)
+        RewardCalculator rewardCalculator,
+        LoseManager loseManager)
     {
         deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults,
-            goldenChips, tableInfo, roundManager, rewardCalculator);
+            goldenChips, tableInfo, roundManager, rewardCalculator, loseManager);
     }
 
     public Chip Create(ChipData data, ChipHolder chipHolder) {

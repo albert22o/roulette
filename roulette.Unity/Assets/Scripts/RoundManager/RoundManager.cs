@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Bson;
+using System;
 using System.Linq;
 using static RoundStateManager;
 
@@ -11,6 +12,7 @@ public class RoundManager
     public event Action<bool> AbleToWinChanged;
 
     public event Action Win;
+    public event Action Lose;
 
     public int Goal
     {
@@ -158,16 +160,23 @@ public class RoundManager
         Win?.Invoke();
     }
 
+    public void ForceWin()
+    {
+        Win?.Invoke();
+    }
+
     private void OnGetReward(int reward)
     {
         quote += reward;
+        betTable.ClearBets();
+        QuoteChanged?.Invoke(quote);
         if (quote >= goal)
             AbleToWin = true;
         else if (betCount <= 0)
-            roundStateManager.ChangeState(RoundState.Lose);
-
-        betTable.ClearBets();
-        QuoteChanged?.Invoke(quote);
+        {
+            Lose?.Invoke();
+            return;
+        }
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }
 

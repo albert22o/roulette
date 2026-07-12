@@ -178,12 +178,12 @@ public class ChipHolderView : MonoBehaviour
         if (hasChipB)
             slotViews[indexA].PlaceChip(chipB);
         else
-            slotViews[indexA].ClearChip();
+            slotViews[indexA].ClearReference(); // chipA переехал в indexB, не уничтожаем его
 
         if (hasChipA)
             slotViews[indexB].PlaceChip(chipA);
         else
-            slotViews[indexB].ClearChip();
+            slotViews[indexB].ClearReference(); // chipB переехал в indexA, не уничтожаем его
 
         var chipDataA = chipHolder.Chips[indexA];
         var chipDataB = chipHolder.Chips[indexB];
@@ -206,8 +206,7 @@ public class ChipHolderView : MonoBehaviour
             return;
 
         chipObject.transform.SetParent(null);
-        slotViews[fromIndex].ClearChip();
-        slotViews[fromIndex].SetChipName("");
+        slotViews[fromIndex].ClearReference(); // фишка переезжает в toIndex, не уничтожаем её
 
         slotViews[toIndex].PlaceChip(chipObject);
 

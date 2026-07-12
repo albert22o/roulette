@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "AllInChip", menuName = "Chips/AllInChip")]
 public class AllInChipData : ChipData
