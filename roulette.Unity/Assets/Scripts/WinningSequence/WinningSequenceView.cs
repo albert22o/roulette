@@ -76,9 +76,9 @@ public class WinningSequenceView : MonoBehaviour
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyChips);
     }
 
-    private void OnDisplayMultiplier(int multiplier)
+    private void OnDisplayMultiplier(float multiplier)
     {
-        generalMultiplierText.text = multiplier.ToString();
+        generalMultiplierText.text = multiplier.ToString("0.##");
     }
 
     private void OnEndSequence(bool isWin)

@@ -3,6 +3,8 @@ using static RoundStateManager;
 
 public class RewardCalculator
 {
+    public Action<int> GoalBeaten;
+
     private readonly RoundManager roundManager;
     private readonly GoldenChips goldenChips;
     private readonly RoundStateManager roundStateManager;
@@ -31,6 +33,9 @@ public class RewardCalculator
         reward += 2 * betCount;
 
         var x = quote / goal;
+
+        GoalBeaten?.Invoke(x);
+
         reward += Math.Min(x - 1, 9);
 
         return reward;

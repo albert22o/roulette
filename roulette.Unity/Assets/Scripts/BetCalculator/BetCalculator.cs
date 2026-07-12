@@ -123,10 +123,10 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
-        return amount * Math.Max(GetMaxWinningMultiplier(betInfo, hitInfo), 0);
+        return (int)(amount * Math.Max(GetMaxWinningMultiplier(betInfo, hitInfo), 0));
     }
 
-    public int GetMaxWinningMultiplier(BetInfo betInfo, HitInfo hitInfo)
+    public float GetMaxWinningMultiplier(BetInfo betInfo, HitInfo hitInfo)
     {
         int multiplier = 0;
 

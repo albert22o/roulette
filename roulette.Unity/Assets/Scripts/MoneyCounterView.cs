@@ -40,7 +40,7 @@ public class MoneyCounterView : MonoBehaviour
         winningSequence.CountMoney -= OnCountMoney;
     }
 
-    private void OnCountMoney(int bet, int multiplier, int reward)
+    private void OnCountMoney(int bet, float _, int reward)
     {
         this.reward = reward;
         currentDisplayedMoney = 0;
@@ -76,8 +76,8 @@ public class MoneyCounterView : MonoBehaviour
         chipSpawner.RequestClear();
     }
 
-    private void OnDisplayMultiplier(int multiplier)
+    private void OnDisplayMultiplier(float multiplier)
     {
-        formulaText.text = $"{bet} x {multiplier}";
+        formulaText.text = $"{bet} x {multiplier:0.##}";
     }
 }
