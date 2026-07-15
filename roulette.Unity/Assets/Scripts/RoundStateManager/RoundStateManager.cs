@@ -7,7 +7,6 @@ public class RoundStateManager
 
     private readonly GameStateManager gameStateManager;
     private readonly Queue<RoundState> stateQueue = new();
-    private readonly BossReward bossReward;
     private bool isProcessing;
     private RoundState? currentState = null;
 

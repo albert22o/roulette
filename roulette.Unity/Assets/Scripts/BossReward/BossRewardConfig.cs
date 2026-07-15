@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BossRewardConfig", menuName = "Scriptable Objects/BossRewardConfig")]
+[CreateAssetMenu(fileName = "BossRewardConfig", menuName = "Configs/BossRewardConfig")]
 public class BossRewardConfig : ScriptableObject
 {
     [field : SerializeField] public ShopItemsTable GeneralMultiplierCardsTable{ get; private set; }
