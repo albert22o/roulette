@@ -74,6 +74,7 @@ public class RoundManager
     private RoundState betState = RoundState.PlacingBets;
     private bool ableToWin;
     private readonly ProgressionManager progressionManager;
+    private readonly BetCalculator betCalculator;
     private readonly IRouletteWheel rouletteWheel;
     private readonly RoundStateManager roundStateManager;
     private readonly TableInfo tableInfo;
@@ -85,14 +86,13 @@ public class RoundManager
         BallHolder ballHolder, BetTable betTable)
     {
         this.rouletteWheel = rouletteWheel;
-
-        betCalculator.GetReward += OnGetReward;
-
         this.betTable = betTable;
         this.roundStateManager = roundStateManager;
         this.tableInfo = tableInfo;
         this.progressionManager = progressionManager;
+        this.betCalculator = betCalculator;
         this.ballHolder = ballHolder;
+        betCalculator.GetReward += OnGetReward;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -119,6 +119,7 @@ public class RoundManager
         if (!betTable.NotNullBetAmounts.Any())
             return;
 
+        betCalculator.ResetRerollCoeff();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
         rouletteWheel.ClearBalls();
@@ -140,6 +141,7 @@ public class RoundManager
         if (rerollCount <= 0)
             return;
 
+        betCalculator.DecreaseRerollCoeff();
         rouletteWheel.ClearBalls();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 

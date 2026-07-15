@@ -12,6 +12,7 @@ public class BetCalculator
     public int NumMultiplier { get; set; } = 5;
     public int DozenMultiplier { get; set; } = 3;
     public int ColorMultiplier { get; set; } = 2;
+    public float RerollCoeff => rerollCoeff;
 
     private readonly HashSet<int> zeroFields = new HashSet<int>() { 0 };
 
@@ -25,10 +26,23 @@ public class BetCalculator
 
     private List<(Func<float, float> Function, string OperationType, float Value)> modifySequence = new();
 
+    private float rerollCoeff = 1.0f;
+
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
+    }
+
+    public void DecreaseRerollCoeff()
+    {
+        rerollCoeff -= 0.25f;
+        rerollCoeff = Math.Max(0, rerollCoeff);
+    }
+
+    public void ResetRerollCoeff()
+    {
+        rerollCoeff = 1.0f;
     }
 
     public void AddToZeroFields(int fieldNum)
@@ -123,7 +137,7 @@ public class BetCalculator
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
-        return (int)(amount * Math.Max(GetMaxWinningMultiplier(betInfo, hitInfo), 0));
+        return (int)(amount * Math.Max(GetMaxWinningMultiplier(betInfo, hitInfo), 0) * rerollCoeff);
     }
 
     public float GetMaxWinningMultiplier(BetInfo betInfo, HitInfo hitInfo)

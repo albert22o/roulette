@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WinningSequence
 {
-    public event Action<int, int> SequenceStart;
+    public event Action<int, int, float> SequenceStart;
     public event Action<BetInfo, HitInfo> Highlight;
     public event Action<HitInfo> ApplyBall;
     public event Action<BetInfo, HitInfo> ApplyChips;
@@ -21,6 +21,7 @@ public class WinningSequence
     private bool isRoundWon;
     private int betSum;
     private float generalMultiplier;
+    private float rerollCoeff;
 
     public WinningSequence(BetTable betTable, RoundStateManager roundStateManager, BetCalculator betCalculator)
     {
@@ -40,9 +41,9 @@ public class WinningSequence
 
         foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
         {
-            SetInfo(betInfo, hitInfo, amount);
+            SetInfo(betInfo, hitInfo, amount, betCalculator.RerollCoeff);
         }
-        SequenceStart?.Invoke(betSum, 0);
+        SequenceStart?.Invoke(betSum, 0, rerollCoeff);
     }
 
     public void CallPhaseExecution(SequencePhase sequencePhase)
@@ -88,10 +89,11 @@ public class WinningSequence
         Finish
     }
 
-    private void SetInfo(BetInfo betInfo, HitInfo hitInfo, int betSum)
+    private void SetInfo(BetInfo betInfo, HitInfo hitInfo, int betSum, float rerollCoef)
     {
         this.hitInfo = hitInfo;
         this.betInfo = betInfo;
         this.betSum = betSum;
+        this.rerollCoeff = rerollCoef;
     }
 }

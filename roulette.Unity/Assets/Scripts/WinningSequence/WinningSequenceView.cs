@@ -45,7 +45,7 @@ public class WinningSequenceView : MonoBehaviour
         winningSequence.EndSequence -= OnEndSequence;
     }
 
-    private void OnSequenceStart(int betSum, int _)
+    private void OnSequenceStart(int betSum, int _a1, float _a2)
     {
         betText.text = betSum.ToString();
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.BetHighlight);
