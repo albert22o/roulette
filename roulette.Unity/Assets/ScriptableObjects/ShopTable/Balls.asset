@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: Balls
   m_EditorClassIdentifier: 
+  rarityType: 2
   folder: {fileID: 102900000, guid: fbca235a9f55a5b4896f60d885d3306a, type: 3}
-  items:
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}

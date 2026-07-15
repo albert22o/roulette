@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 
@@ -64,7 +64,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     private bool TryBuy(ChipShopPlace place)
     {
-        if (goldenChips.Amount >= place.Item.Cost)
+        if (goldenChips.AvailableAmount >= place.Item.Cost)
         {
             if (chipHolder.HasFreeSlot)
             {

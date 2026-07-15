@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.PackageManager;
 using static RoundStateManager;
 
 public class BallResults
@@ -19,6 +18,8 @@ public class BallResults
     private readonly List<HitInfo> currentBalls = new();
     private bool active;
     private BetTable betTable;
+
+    public bool RandomBallSelection { get; set; }
 
     public BallResults(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         BallHolder ballHolder, TableInfo tableInfo, BetTable betTable)
@@ -76,14 +77,20 @@ public class BallResults
     private void AddBalls(HitInfo[] balls)
     {
         roundStateManager.ChangeState(RoundState.ChoosingReward);
+        currentBalls.Clear();
+        currentBalls.AddRange(balls);
         if (balls.Any(ball => ball.FieldColor == ColorType.Grey))
         {
             // Отправляем выбор нулевого шара для проигрыша
             BallSelected?.Invoke(null);
             return;
         }
-        currentBalls.Clear();
-        currentBalls.AddRange(balls);
+        if (RandomBallSelection)
+        {
+            var hash = balls[UnityEngine.Random.Range(0, balls.Length)].BallHash;
+            SelectBall(hash);
+            return;
+        }
     }
 
     public void OnStateChanged(RoundState newState)

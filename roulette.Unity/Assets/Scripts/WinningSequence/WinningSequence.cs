@@ -8,9 +8,9 @@ public class WinningSequence
     public event Action<BetInfo, HitInfo> Highlight;
     public event Action<HitInfo> ApplyBall;
     public event Action<BetInfo, HitInfo> ApplyChips;
-    public event Action<int, int, int> CountMoney;
+    public event Action<int, float, int> CountMoney;
     public event Action<bool> EndSequence;
-    public event Action<int> DisplayMultiplier;
+    public event Action<float> DisplayMultiplier;
 
     private readonly BetTable betTable;
     private readonly RoundStateManager roundStateManager;
@@ -20,7 +20,7 @@ public class WinningSequence
     private HitInfo hitInfo;
     private bool isRoundWon;
     private int betSum;
-    private int generalMultiplier;
+    private float generalMultiplier;
 
     public WinningSequence(BetTable betTable, RoundStateManager roundStateManager, BetCalculator betCalculator)
     {
@@ -72,7 +72,7 @@ public class WinningSequence
         }
     }
 
-    public void CompareAndDisplayMaxMultiplier(int multiplier)
+    public void CompareAndDisplayMaxMultiplier(float multiplier)
     {
         generalMultiplier = Mathf.Max(generalMultiplier, multiplier);
         DisplayMultiplier?.Invoke(generalMultiplier);

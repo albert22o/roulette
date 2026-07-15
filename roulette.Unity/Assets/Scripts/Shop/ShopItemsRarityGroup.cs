@@ -1,10 +1,11 @@
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ShopItemsRarityGroup", menuName = "Scriptable Objects/ShopItemsRarityGroup")]
 public class ShopItemsRarityGroup : ScriptableObject
 {
+    [SerializeField] private RarityType rarityType;
     [SerializeField] private DefaultAsset folder;
 
 #if UNITY_EDITOR
@@ -33,6 +34,7 @@ public class ShopItemsRarityGroup : ScriptableObject
             return null;
         }
         int randomIndex = Random.Range(0, items.Length);
-        return items[randomIndex];
+        var item = items[randomIndex];
+        return item;
     }
 }

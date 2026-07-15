@@ -1,4 +1,4 @@
-using NUnit.Framework.Interfaces;
+﻿using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 using Zenject;
@@ -48,7 +48,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     {
         if (ballHolder.HasFreeSlot)
         {
-            if (goldenChips.Amount >= Cost)
+            if (goldenChips.AvailableAmount >= Cost)
             {
                 goldenChips.Remove(Cost);
                 boughtBall = ballsTable.GetRandomItem() as BallInfoData;

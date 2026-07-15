@@ -1,6 +1,4 @@
-﻿using System;
-
-public class ChipFactory
+﻿public class ChipFactory
 {
     private readonly ChipDependencies deps;
 
@@ -9,9 +7,15 @@ public class ChipFactory
         BetTable betTable,
         IRouletteWheel rouletteWheel,
         BallResults ballResults,
-        GoldenChips goldenChips)
+        GoldenChips goldenChips,
+        TableInfo tableInfo,
+        RoundManager roundManager,
+        RewardCalculator rewardCalculator,
+        LoseManager loseManager,
+        BallHolder ballHolder)
     {
-        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults, goldenChips);
+        deps = new ChipDependencies(betCalculator, betTable, rouletteWheel, ballResults,
+            goldenChips, tableInfo, roundManager, rewardCalculator, loseManager, ballHolder);
     }
 
     public Chip Create(ChipData data, ChipHolder chipHolder) {

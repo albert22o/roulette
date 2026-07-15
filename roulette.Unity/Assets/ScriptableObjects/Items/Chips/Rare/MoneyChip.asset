@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2440a98a91d0174aa3a1a92edfd88bf, type: 3}
+  m_Name: MoneyChip
+  m_EditorClassIdentifier: 
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \u0441 \u043C\u043E\u043D\u0435\u0442\u043E\u0439"
+  description: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0441\u0442\u0430\u0432\u043A\u0438
+    \u043D\u0430 1, \u043D\u043E \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442
+    +2 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  rarityType: 2
+  cost: 2
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  BetCountDelta: -1
+  BonusAmount: 2

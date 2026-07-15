@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class CurrencyView<T> : MonoBehaviour where T : CurrencyResource

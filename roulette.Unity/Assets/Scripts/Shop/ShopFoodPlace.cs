@@ -39,7 +39,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void OnClick()
     {
-        if (goldenChips.Amount >= cost)
+        if (goldenChips.AvailableAmount >= cost)
         {
             goldenChips.Remove(cost);
             foodHolder.AddFood(item);

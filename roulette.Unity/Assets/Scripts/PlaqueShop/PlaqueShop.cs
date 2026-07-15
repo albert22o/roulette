@@ -1,4 +1,4 @@
-public class PlaqueShop
+﻿public class PlaqueShop
 {
     private ShopItemsRarityGroup items;
     private BossChips bossChips;
@@ -11,7 +11,7 @@ public class PlaqueShop
 
     public bool TrySpendBossChip()
     {
-        if (bossChips.Amount >= 1)
+        if (bossChips.AvailableAmount >= 1)
         {
             bossChips.Remove(1);
             return true;
