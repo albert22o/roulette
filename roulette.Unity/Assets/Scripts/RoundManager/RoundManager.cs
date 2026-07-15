@@ -13,6 +13,8 @@ public class RoundManager
 
     public event Action Win;
     public event Action Lose;
+    public event Action Rerolled;
+    public event Action Spun;
 
     public int Goal
     {
@@ -120,6 +122,7 @@ public class RoundManager
             return;
 
         betCalculator.ResetRerollCoeff();
+        Spun?.Invoke();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
         rouletteWheel.ClearBalls();
@@ -142,6 +145,7 @@ public class RoundManager
             return;
 
         betCalculator.DecreaseRerollCoeff();
+        Rerolled?.Invoke();
         rouletteWheel.ClearBalls();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
