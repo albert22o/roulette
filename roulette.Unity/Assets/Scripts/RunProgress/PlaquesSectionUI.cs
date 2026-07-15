@@ -1,12 +1,16 @@
-﻿using System.Text;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class PlaquesSectionUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI sectionText;
+    [SerializeField] private Transform contentParent;
+    [SerializeField] private ListItemUI listItemPrefab;
+    [SerializeField] private Sprite defaultIcon; 
+    [SerializeField] private bool spawnTestItems = false;
+
     private PlaqueHolder plaqueHolder;
+    private List<ListItemUI> spawnedItems = new();
 
     [Inject]
     public void Construct(PlaqueHolder plaqueHolder)
@@ -16,17 +20,37 @@ public class PlaquesSectionUI : MonoBehaviour
 
     public void UpdateData()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("<b>ПЛАКИ</b>");
+        ClearItems();
 
-        int count = plaqueHolder.plaques?.Count ?? 0;
-        sb.AppendLine($"Всего: {count}");
+        if (spawnTestItems)
+        {
+            SpawnItem(defaultIcon, "Тестовый плак 1");
+            SpawnItem(defaultIcon, "Тестовый плак 2");
+            return;
+        }
 
         if (plaqueHolder.plaques != null)
         {
             foreach (var plaque in plaqueHolder.plaques)
-                sb.AppendLine($"• {plaque.GetType().Name}");
+            {
+                SpawnItem(defaultIcon, plaque.GetType().Name);
+            }
         }
-        sectionText.text = sb.ToString();
+    }
+
+    private void SpawnItem(Sprite icon, string text)
+    {
+        var item = Instantiate(listItemPrefab, contentParent);
+        item.Setup(icon, text);
+        spawnedItems.Add(item);
+    }
+
+    private void ClearItems()
+    {
+        foreach (var item in spawnedItems)
+        {
+            if (item != null) Destroy(item.gameObject);
+        }
+        spawnedItems.Clear();
     }
 }

@@ -1,11 +1,12 @@
-﻿using System.Text;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class QuotasSectionUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI sectionText;
+    [SerializeField] private TextMeshProUGUI currentQuotaText;
+    [SerializeField] private TextMeshProUGUI completedQuotasText;     
+
     private ProgressionManager progressionManager;
     private RoundManager roundManager;
 
@@ -18,10 +19,10 @@ public class QuotasSectionUI : MonoBehaviour
 
     public void UpdateData()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("<b>КВОТЫ</b>");
-        sb.AppendLine($"Пройдено: {progressionManager.CurrentIndex}");
-        sb.AppendLine($"Текущая: {roundManager.Quote}/{roundManager.Goal}");
-        sectionText.text = sb.ToString();
+        if (completedQuotasText != null)
+            completedQuotasText.text = $"Пройдено квот: {progressionManager.CurrentIndex}";
+
+        if (currentQuotaText != null)
+            currentQuotaText.text = $"Текущая квота: {roundManager.Quote}/{roundManager.Goal}";
     }
 }
