@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class ItemData : ScriptableObject
 {
     [SerializeField] private string itemName;
     [SerializeField] private string description;
     [SerializeField] private GameObject shopPrefab;
-
+    [SerializeField] public Sprite Icon;
     public string Name => itemName;
     public string Description => description;
 

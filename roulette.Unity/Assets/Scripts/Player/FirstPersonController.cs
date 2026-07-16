@@ -22,6 +22,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation;
     private bool active = false;
+    private bool movementEnabled = true;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
@@ -52,6 +53,12 @@ public class FirstPersonController : MonoBehaviour
     {
         if (state == GameStateManager.GameState.FreeRoam)
             Enable();
+        else if (state == GameStateManager.GameState.ViewingProgress)
+        {
+            movementEnabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         else
             Disable();
     }
@@ -61,6 +68,7 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         active = true;
+        movementEnabled = true;
         render.enabled = true;
         playerCollider.enabled = true;
     }
@@ -70,8 +78,14 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         active = false;
+        movementEnabled = false;    
         render.enabled = false;
         playerCollider.enabled = false;
+    }
+
+    public void SetMovementEnabled(bool enabled)
+    {
+        movementEnabled = enabled;
     }
 
     private void Update()
@@ -89,6 +103,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
+        if (!movementEnabled)
+            return;
+
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;
 
@@ -101,6 +118,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (!movementEnabled)
+            return;
         var isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0f)

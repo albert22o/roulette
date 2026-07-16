@@ -2,22 +2,24 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using Zenject.Asteroids;
+using static GameStateManager;
 
 public class RunProgressUI : MonoBehaviour
 {
-    [Header("Sections (Non-Currency)")]
     [SerializeField] private ChipsSectionUI chipsSection;
     [SerializeField] private BallsSectionUI ballsSection;
     [SerializeField] private PlaquesSectionUI plaquesSection;
     [SerializeField] private FoodSectionUI foodSection;
     [SerializeField] private QuotasSectionUI quotasSection;
 
-    [Header("Settings")]
     [SerializeField] private float displayDuration = 4f;
+    [Inject] private GameStateManager gameStateManager;
 
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
     private bool isPanelOpen = false;
+    private GameState previousState;
 
     private void Start()
     {
@@ -60,6 +62,9 @@ public class RunProgressUI : MonoBehaviour
 
         UpdateAllSections();
 
+        previousState = gameStateManager.CurrentState ?? GameStateManager.GameState.FreeRoam;
+        gameStateManager.ChangeGameState(GameStateManager.GameState.ViewingProgress);
+
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
@@ -78,6 +83,8 @@ public class RunProgressUI : MonoBehaviour
         }
         gameObject.SetActive(false);
         isPanelOpen = false;
+
+        gameStateManager.ChangeGameState(previousState);
     }
 
     private void UpdateAllSections()
