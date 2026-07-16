@@ -20,19 +20,17 @@ public class BossRewardView : MonoBehaviour
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
     private bool isInteractable;
-    private BossChips bossChips;
 
     public event Action RewardReceived;
 
     [Inject]
-    public void Construct(BossReward bossReward, ItemReceiver itemReceiver, GameStateManager gameStateManager, CameraEventHandler cameraEventHandler,
-        BossChips bossChips)
+    public void Construct(BossReward bossReward, ItemReceiver itemReceiver,
+        GameStateManager gameStateManager, CameraEventHandler cameraEventHandler)
     {
         this.bossReward = bossReward;
         this.itemReceiver = itemReceiver;
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
-        this.bossChips = bossChips;
     }
 
     private void Start()
@@ -110,7 +108,7 @@ public class BossRewardView : MonoBehaviour
     public void OnBossChipPickedUp()
     {
         StartCoroutine(SpawnItems());
-        bossChips.Add(1);
+        bossReward.GiveBossChips();
     }
 
     private IEnumerator SpawnItems()

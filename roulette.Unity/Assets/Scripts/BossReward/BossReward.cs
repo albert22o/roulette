@@ -6,15 +6,17 @@ public class BossReward
     private ItemData[] items = new ItemData[5];
     private ShopItemsPool cardsPool, otherItemsPool;
     private GameStateManager gameStateManager;
+    private BossChips bossChips;
 
     public event Action<ItemData[]> RewardCreated;
 
-    public BossReward(BossRewardConfig config, GameStateManager gameStateManager)
+    public BossReward(BossRewardConfig config, GameStateManager gameStateManager, BossChips bossChips)
     {
         this.config = config;
         cardsPool = new ShopItemsPool(config.GeneralMultiplierCardsTable);
         otherItemsPool = new ShopItemsPool(config.OtherItemsTable);
         this.gameStateManager = gameStateManager;
+        this.bossChips = bossChips;
     }
 
     public void GiveReward()
@@ -27,5 +29,10 @@ public class BossReward
         items[3] = otherItemsPool.GetRandomItem();
         items[4] = otherItemsPool.GetRandomItem();
         RewardCreated?.Invoke(items);
+    }
+
+    public void GiveBossChips()
+    {
+        bossChips.Add(config.BossChipsCount);
     }
 }
