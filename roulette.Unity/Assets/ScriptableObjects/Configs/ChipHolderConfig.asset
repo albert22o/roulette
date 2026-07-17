@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: ChipHolderConfig
   m_EditorClassIdentifier: 
   <Capacity>k__BackingField: 5
-  StartChips:
-  - {fileID: 11400000, guid: a2ac968d5dad5244289f23c9f0249926, type: 2}
+  StartChips: []
