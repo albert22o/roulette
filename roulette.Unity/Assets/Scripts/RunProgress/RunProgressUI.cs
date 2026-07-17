@@ -14,13 +14,18 @@ public class RunProgressUI : MonoBehaviour
     [SerializeField] private QuotasSectionUI quotasSection;
 
     [SerializeField] private float displayDuration = 4f;
-    [Inject] private GameStateManager gameStateManager;
+    private GameStateManager gameStateManager;
 
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
     private bool isPanelOpen = false;
     private GameState previousState;
 
+    [Inject]
+    public void Constract(GameStateManager gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+    }
     private void Start()
     {
         gameObject.SetActive(false);
