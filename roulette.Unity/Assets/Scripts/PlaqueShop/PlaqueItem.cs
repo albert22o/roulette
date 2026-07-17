@@ -5,7 +5,7 @@ public class PlaqueItem : MonoBehaviour, IMouseInteractable, IHoverable, IClicka
 {
     [SerializeField] private ItemPlace itemPlace;
     public event Action<PlaqueItem> HoverEntered, HoverExited, Clicked;
-    public PlaqueData Data { get; private set; }
+    public ItemData Data { get; private set; }
 
     public bool IsInteractable => Data != null;
 
@@ -15,7 +15,7 @@ public class PlaqueItem : MonoBehaviour, IMouseInteractable, IHoverable, IClicka
 
     public void OnHoverExit() => HoverExited?.Invoke(this);
 
-    public void SetData(PlaqueData data)
+    public void SetData(ItemData data)
     {
         Data = data;
         itemPlace.SetItem(data);

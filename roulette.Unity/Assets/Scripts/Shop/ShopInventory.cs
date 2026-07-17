@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class ShopInventory : MonoBehaviour
 {
-    [SerializeField] private ShopInventoryItem itemPrefab;
-    [SerializeField] private Transform[] ballSpawnPoints, chipSpawnPoints;
-    private ShopInventoryItem[] balls;
-    private ShopInventoryItem[] chips;
+    [SerializeField] private PlaqueItem itemPrefab;
+    [SerializeField] private CustomWorldGridLayout ballsParent, chipsParent;
+
+    private List<PlaqueItem> balls = new();
+    private List<PlaqueItem> chips = new();
+
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
     private Shop shop;
@@ -23,66 +26,74 @@ public class ShopInventory : MonoBehaviour
     {
         ballHolder.BallAdded += OnBallAdded;
         ballHolder.BallRemoved += OnBallRemoved;
-        ballHolder.CapacityChanged += OnBallCapacityChanged;
         chipHolder.ChipAdded += OnChipAdded;
         chipHolder.ChipRemoved += OnChipRemoved;
-
-        chipHolder.SlotAdded += OnChipSlotAdded;
-        chipHolder.SlotRemoved += OnChipSlotRemoved;
-
-        for (int index = 0; index < chipHolder.Chips.Count; index++)
-        {
-            if (chipHolder.Chips[index] == null)
-                continue;
-
-            OnChipAdded(index, chipHolder.Chips[index]);
-        }
+        UpdateBalls();
+        UpdateChips();
     }
+
     private void OnDisable()
     {
         ballHolder.BallAdded -= OnBallAdded;
         ballHolder.BallRemoved -= OnBallRemoved;
-        ballHolder.CapacityChanged -= OnBallCapacityChanged;
         chipHolder.ChipAdded -= OnChipAdded;
         chipHolder.ChipRemoved -= OnChipRemoved;
-        chipHolder.SlotAdded -= OnChipSlotAdded;
-        chipHolder.SlotRemoved -= OnChipSlotRemoved;
-    }
-
-    private void OnBallCapacityChanged(int newCapacity)
-    {
-        UpdateBalls();
-    }
-
-    private void OnChipSlotAdded(int index)
-    {
-        UpdateChips();
-    }
-
-    private void OnChipSlotRemoved(int index)
-    {
-        UpdateChips();
-    }
-
-    private void UpdateChips()
-    {
-        for (int i = 0; i < chips.Length; i++)
-        {
-            if (i < chipHolder.Chips.Count && chipHolder.Chips[i] != null)
-                chips[i].SetItem(chipHolder.Chips[i].ChipData);
-            else
-                chips[i].SetItem(null);
-        }
     }
 
     private void UpdateBalls()
     {
-        for (int i = 0; i < balls.Length; i++)
+        for (int i = balls.Count - 1; i >= 0; i--)
+            Destroy(balls[i].gameObject);
+        balls.Clear();
+        for (int i = 0; i < ballHolder.Balls.Count; i++)
         {
-            if (i < ballHolder.Balls.Count)
-                balls[i].SetItem(ballHolder.Balls[i].BallInfoData);
-            else
-                balls[i].SetItem(null);
+            var newBall = Instantiate(itemPrefab, ballsParent.transform);
+            newBall.SetData(ballHolder.Balls[i].BallInfoData);
+            newBall.HoverEntered += OnHoverEnter;
+            newBall.HoverExited += OnHoverExit;
+            newBall.Clicked += OnClick;
+            balls.Add(newBall);
+        }
+    }
+
+    private void OnClick(PlaqueItem item)
+    {
+        if (item.Data is BallInfoData)
+        {
+            shop.TrySell(item.Data, balls.IndexOf(item));
+        }
+        else
+        {
+            shop.TrySell(item.Data, chips.IndexOf(item));
+        }
+    }
+
+    private void OnHoverExit(PlaqueItem item)
+    {
+        shop.HideTooltip();
+    }
+
+    private void OnHoverEnter(PlaqueItem item)
+    {
+        shop.ShowTooltip(item.Data.Name, item.Data.Description, item.transform.position);
+    }
+
+    private void UpdateChips()
+    {
+        for (int i = chips.Count - 1; i >= 0; i--)
+            Destroy(chips[i].gameObject);
+        chips.Clear();
+        for (int i = 0; i < chipHolder.Chips.Count; i++)
+        {
+            if (chipHolder.Chips[i] != null)
+            {
+                var newChip = Instantiate(itemPrefab, chipsParent.transform);
+                newChip.HoverEntered += OnHoverEnter;
+                newChip.HoverExited += OnHoverExit;
+                newChip.Clicked += OnClick;
+                newChip.SetData(chipHolder.Chips[i].ChipData);
+                chips.Add(newChip);
+            }
         }
     }
 
@@ -98,37 +109,11 @@ public class ShopInventory : MonoBehaviour
 
     private void OnChipAdded(int index, Chip chip)
     {
-        chips[index].SetItem(chip.ChipData);
+        UpdateChips();
     }
 
     private void OnChipRemoved(int index)
     {
-        chips[index].SetItem(null);
-    }
-
-    private void Awake()
-    {
-        Init();
-    }
-
-    public void Init()
-    {
-        balls = new ShopInventoryItem[ballSpawnPoints.Length];
-        chips = new ShopInventoryItem[chipSpawnPoints.Length];
-        for (int i = 0; i < ballSpawnPoints.Length; i++)
-        {
-            balls[i] = Instantiate(itemPrefab, ballSpawnPoints[i]);
-            balls[i].transform.position = ballSpawnPoints[i].position;
-            balls[i].Index = i;
-            balls[i].SetShop(shop);
-        }
-        for (int i = 0; i < chipSpawnPoints.Length; i++)
-        {
-            chips[i] = Instantiate(itemPrefab, chipSpawnPoints[i]);
-            chips[i].transform.position = chipSpawnPoints[i].position;
-            chips[i].Index = i;
-            chips[i].SetShop(shop);
-        }
-        UpdateBalls();
+        UpdateChips();
     }
 }

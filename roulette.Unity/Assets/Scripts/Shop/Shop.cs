@@ -52,14 +52,14 @@ public class Shop : MonoBehaviour
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
     {
+        tooltip.Show(title, mainText);
         tooltip.gameObject.SetActive(true);
-        tooltip.SetData(title, mainText);
         tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
     public void HideTooltip()
     {
-        tooltip.gameObject.SetActive(false);
+        tooltip.Hide();
     }
 
     public bool TrySell(ItemData item, int index)
@@ -76,7 +76,8 @@ public class Shop : MonoBehaviour
         }
         else if (item is ChipData chipData)
         {
-            goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
+            float sellCost = (int)(chipData.Cost * chipSellMultiplier);
+            if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
             chipHolder.RemoveChip(index);
             return true;
         }

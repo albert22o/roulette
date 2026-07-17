@@ -58,20 +58,19 @@ public class PlaqueShopView : MonoBehaviour
 
     private void OnPlaqueHoverEnter(PlaqueItem item)
     {
-        tooltip.SetData(item.Data.Name, item.Data.Description);
+        tooltip.Show(item.Data.Name, item.Data.Description);
         tooltip.transform.position = item.transform.position + Vector3.up * tooltipHeight;
-        tooltip.gameObject.SetActive(true);
     }
 
     private void OnPlaqueHoverExit(PlaqueItem item)
     {
-        tooltip.gameObject.SetActive(false);
+        tooltip.Hide();
     }
 
     private void OnPlaqueClicked(PlaqueItem item)
     {
         cancelInputHandler.enabled = false;
-        plaqueController.UsePlaque(item.Data);
+        plaqueController.UsePlaque(item.Data as PlaqueData);
     }
 
     public void StartInteraction()

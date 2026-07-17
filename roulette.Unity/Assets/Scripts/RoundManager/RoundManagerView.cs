@@ -56,6 +56,7 @@ public class RoundManagerView : MonoBehaviour
     private void OnConfirmWinClick()
     {
         roundManager.ConfirmWin();
+        confirmWinButton.gameObject.SetActive(false);   
     }
 
     private void OnSpinButtonClick()

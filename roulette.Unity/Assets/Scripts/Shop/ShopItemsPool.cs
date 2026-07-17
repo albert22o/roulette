@@ -4,7 +4,7 @@ public class ShopItemsPool
 {
     private ShopItemsTable shopItemsTable;
 
-    public void SetTable(ShopItemsTable table)
+    public ShopItemsPool(ShopItemsTable table)
     {
         shopItemsTable = table;
     }
@@ -26,9 +26,6 @@ public class ShopItemsPool
             }
             random -= g.Rarity;
         }
-
-
-
         return selectedGroup.GetRandomItem();
     }
 }

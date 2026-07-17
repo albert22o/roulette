@@ -24,7 +24,6 @@ public class RewardCalculator
     {
         int reward = CalculateReward(roundManager.BetCount, roundManager.Quote, roundManager.Goal);
         goldenChips.Add(reward);
-        roundStateManager.ChangeState(RoundState.Win);
     }
 
     public int CalculateReward(int betCount, int quote, int goal)

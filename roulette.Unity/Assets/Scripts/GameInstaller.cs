@@ -22,6 +22,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(settings.BallHolderConfig).AsSingle();
         Container.BindInstance(settings.ChipHolderConfig).AsSingle();
         Container.BindInstance(settings.PlaqueShopConfig).AsSingle();
+        Container.BindInstance(settings.BossRewardConfig).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
@@ -77,5 +78,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<WinningSequence>().AsSingle();
 
         Container.Bind<CameraEventHandler>().AsSingle();
+
+        Container.Bind<BossReward>().AsSingle();
+        Container.Bind<ItemReceiver>().AsSingle();
+        Container.Bind<RoundWinManager>().AsSingle().NonLazy();
     }
 }

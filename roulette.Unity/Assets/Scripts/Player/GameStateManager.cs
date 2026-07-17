@@ -42,6 +42,7 @@ public class GameStateManager
         Lose,
         PlaqueShopping,
         FieldsSelecting,
+        BossReward,
         Win
     }
 }

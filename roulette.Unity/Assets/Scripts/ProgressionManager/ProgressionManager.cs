@@ -12,16 +12,9 @@
     {
         this.roundsConfig = roundsConfig;
         this.gameStateManager = gameStateManager;
-        roundStateManager.StateChanged += OnStateChanged;
     }
 
-    private void OnStateChanged(RoundStateManager.RoundState newState)
-    {
-        if (newState == RoundStateManager.RoundState.Win)
-            Advance();
-    }
-
-    private void Advance()
+    public void Advance()
     {
         if (!HasNext)
         {

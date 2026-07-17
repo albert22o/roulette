@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a07e84d75f0314aa7405f7c0305fc2, type: 3}
+  m_Name: GoldenChips5
+  m_EditorClassIdentifier: Assembly-CSharp::GoldenChipItemData
+  itemName: "\u0417\u043E\u043B\u043E\u0442\u0430\u044F \u0444\u0438\u0448\u043A\u0430
+    x5"
+  description: 
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  amount: 1
