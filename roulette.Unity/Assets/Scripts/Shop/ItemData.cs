@@ -11,4 +11,5 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] private string description;
     [SerializeField] private GameObject shopPrefab;
     [SerializeField] private RarityType rarityType;
+    [SerializeField] public Sprite Icon;
 }

@@ -119,6 +119,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
+        if (!active)
+            return;
+
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;
 
