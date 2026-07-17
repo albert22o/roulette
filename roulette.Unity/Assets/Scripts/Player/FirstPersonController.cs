@@ -105,8 +105,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (!active)
-            return;
         var isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0f)
