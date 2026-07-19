@@ -55,7 +55,6 @@ public class BallHolder
 
     public void RemoveBall(string ballHash)
     {
-        UnityEngine.Debug.Log(ballHash);
         if (string.IsNullOrEmpty(ballHash)) return;
 
         int index = balls.FindIndex(b => b != null && b.Hash == ballHash);
