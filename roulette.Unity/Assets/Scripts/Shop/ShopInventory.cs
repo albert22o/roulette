@@ -68,7 +68,7 @@ public class ShopInventory : MonoBehaviour
         for (int i = 0; i < balls.Length; i++)
         {
             if (i < ballHolder.Balls.Count)
-                balls[i].SetItem(ballHolder.Balls[i].BallInfoData);
+                balls[i].SetItem(ballHolder.Balls[i].BallData);
             else
                 balls[i].SetItem(null);
         }

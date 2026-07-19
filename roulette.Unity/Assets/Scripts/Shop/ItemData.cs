@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class ItemData : ScriptableObject
 {
     [SerializeField] private string itemName;
+    [TextArea]
     [SerializeField] private string description;
     [SerializeField] private GameObject shopPrefab;
 

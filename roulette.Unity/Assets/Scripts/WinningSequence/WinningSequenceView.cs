@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using TMPro;
-using UnityEditor.Recorder;
 using UnityEngine;
 using Zenject;
 
@@ -16,15 +15,17 @@ public class WinningSequenceView : MonoBehaviour
     private ChipHolder chipHolder;
     private BetCalculator betCalculator;
     private IAnimateBalls animateBalls;
+    private BallHolder ballHolder;
 
     [Inject]
     public void Construct(WinningSequence winningSequence, BetCalculator betCalculator, ChipHolder chipHolder,
-        IAnimateBalls animateBalls)
+        IAnimateBalls animateBalls, BallHolder ballHolder)
     {
         this.winningSequence = winningSequence;
         this.betCalculator = betCalculator;
         this.chipHolder = chipHolder;
         this.animateBalls = animateBalls;
+        this.ballHolder = ballHolder;
     }
 
     private void Start()
@@ -72,6 +73,7 @@ public class WinningSequenceView : MonoBehaviour
 
     private void OnApplyBall(HitInfo hitInfo)
     {
+        ballHolder.ApplySelectedBall(hitInfo.BallHash, hitInfo);
         animateBalls.AnimateBall(hitInfo.BallHash);
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyChips);
     }

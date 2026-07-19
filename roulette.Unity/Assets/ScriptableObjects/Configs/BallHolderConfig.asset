@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capacity: 5
   startBalls:
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
+  - {fileID: 11400000, guid: 28e60975752c0d64ca8fc0988c3427a4, type: 2}
+  - {fileID: 11400000, guid: 28e60975752c0d64ca8fc0988c3427a4, type: 2}
+  - {fileID: 11400000, guid: 28e60975752c0d64ca8fc0988c3427a4, type: 2}

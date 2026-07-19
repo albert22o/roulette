@@ -1,5 +1,12 @@
-﻿public abstract class BallInfoData : ItemData
+﻿using UnityEngine;
+
+public abstract class BallInfoData : ItemData
 {
-    public VisualComponent VisualComponent;
-    public abstract BallInfo CreateBall(BallDependencies deps);
+    [SerializeField] private Ball ballPrefab;
+    [SerializeField] private VisualComponent visualComponent;
+
+    public VisualComponent VisualComponent => visualComponent;
+    public Ball BallPrefab => ballPrefab;
+
+    public abstract BallInfo CreateBall(string hash, BallDependencies deps);
 }
