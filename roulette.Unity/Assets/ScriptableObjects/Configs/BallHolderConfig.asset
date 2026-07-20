@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55a54417866d0b44a2c8e2e630d837a, type: 3}
   m_Name: BallHolderConfig
   m_EditorClassIdentifier: 
-  capacity: 5
+  capacity: 3
   startBalls:
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
-  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
   - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}
