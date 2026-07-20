@@ -20,6 +20,14 @@ public class ItemPlace : MonoBehaviour
         {
             spawnedItem = Instantiate(item.ShopPrefab, transform);
             spawnedItem.transform.position = transform.position;
+
+            if (item is BallInfoData ballData)
+            {
+                if (spawnedItem.TryGetComponent(out BallVisual ballVisual))
+                {
+                    ballVisual.SetVisualComponent(ballData.VisualComponent);
+                }
+            }
             this.item = item;
         }
     }

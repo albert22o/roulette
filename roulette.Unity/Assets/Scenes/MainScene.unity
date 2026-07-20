@@ -508,12 +508,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391093357535976200, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1723424273269335378, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 3873016230863998728, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6254753558420566979, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 676.9993
+      objectReference: {fileID: 0}
+    - target: {fileID: 6254753558420566979, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467240686230594706, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8327413986694656733, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}

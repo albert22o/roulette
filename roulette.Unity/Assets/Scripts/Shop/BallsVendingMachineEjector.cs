@@ -5,7 +5,7 @@ public class BallsVendingMachineEjector : MonoBehaviour
 {
     [SerializeField] private BallsVendingMachine ballsVendingMachine;
     [SerializeField] private BallsVendingMachineBall currentBall;
-    private ItemData ballData;
+    private BallInfoData ballData;
 
     public event Action BallUpdated;
 
@@ -14,7 +14,7 @@ public class BallsVendingMachineEjector : MonoBehaviour
         ballsVendingMachine.BallBought += OnBallBought;
     }
 
-    private void OnBallBought(ItemData itemData)
+    private void OnBallBought(BallInfoData itemData)
     {
         ballData = itemData;
     }
@@ -22,7 +22,7 @@ public class BallsVendingMachineEjector : MonoBehaviour
     public void EjectBall()
     {
         currentBall.gameObject.SetActive(true);
-        //currentBall.SetVisual(ballData.VisualComponent);
+        currentBall.SetVisual(ballData.VisualComponent);
         currentBall.transform.position = transform.position;
         BallUpdated?.Invoke();
     }
