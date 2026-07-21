@@ -7,7 +7,6 @@ public class BallsSectionUI : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private ListItemUI listItemPrefab;
     [SerializeField] private Sprite defaultIcon;
-    [SerializeField] private bool spawnTestItems = false;
 
     private BallHolder ballHolder;
     private List<ListItemUI> spawnedItems = new();
@@ -21,13 +20,6 @@ public class BallsSectionUI : MonoBehaviour
     public void UpdateData()
     {
         ClearItems();
-
-        if (spawnTestItems)
-        {
-            SpawnItem(defaultIcon, "Тестовый шарик 1");
-            SpawnItem(defaultIcon, "Тестовый шарик 2");
-            return;
-        }
 
         if (ballHolder.Balls != null)
         {
