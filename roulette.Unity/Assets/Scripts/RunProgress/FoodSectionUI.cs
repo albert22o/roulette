@@ -7,7 +7,6 @@ public class FoodSectionUI : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private ListItemUI listItemPrefab;
     [SerializeField] private Sprite defaultIcon; 
-    [SerializeField] private bool spawnTestItems = false;
 
     private FoodHolder foodHolder;
     private List<ListItemUI> spawnedItems = new();
@@ -21,14 +20,6 @@ public class FoodSectionUI : MonoBehaviour
     public void UpdateData()
     {
         ClearItems();
-
-        if (spawnTestItems)
-        {
-            SpawnItem(defaultIcon, "Тестовая еда 1");
-            SpawnItem(defaultIcon, "Тестовая еда 2");
-            SpawnItem(defaultIcon, "Тестовая еда 3");
-            return;
-        }
 
         if (foodHolder.AppliedHistory != null)
         {

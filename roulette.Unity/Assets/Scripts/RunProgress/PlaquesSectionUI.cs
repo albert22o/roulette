@@ -7,7 +7,6 @@ public class PlaquesSectionUI : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private ListItemUI listItemPrefab;
     [SerializeField] private Sprite defaultIcon; 
-    [SerializeField] private bool spawnTestItems = false;
 
     private PlaqueHolder plaqueHolder;
     private List<ListItemUI> spawnedItems = new();
@@ -21,13 +20,6 @@ public class PlaquesSectionUI : MonoBehaviour
     public void UpdateData()
     {
         ClearItems();
-
-        if (spawnTestItems)
-        {
-            SpawnItem(defaultIcon, "Тестовый плак 1");
-            SpawnItem(defaultIcon, "Тестовый плак 2");
-            return;
-        }
 
         if (plaqueHolder.plaques != null)
         {

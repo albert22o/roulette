@@ -85,8 +85,16 @@ public class FirstPersonController : MonoBehaviour
         render.enabled = true;
         playerCollider.enabled = true;
         SyncToMainCameraDirection();
-        isCameraTransitionFinished = false;
-        cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
+
+        if (cameraEventHandler != null && cameraEventHandler.IsTransitioning)
+        {
+            isCameraTransitionFinished = false;
+            cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
+        }
+        else
+        {
+            isCameraTransitionFinished = true;
+        }
     }
 
     private void Disable()
@@ -98,10 +106,10 @@ public class FirstPersonController : MonoBehaviour
         playerCollider.enabled = false;
     }
 
-    private void OnCameraTransitionFinished() 
-    { 
+    private void OnCameraTransitionFinished()
+    {
         isCameraTransitionFinished = true;
-        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished; 
+        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
     }
 
     private void Update()

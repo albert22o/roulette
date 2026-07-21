@@ -7,7 +7,6 @@ public class ChipsSectionUI : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private ListItemUI listItemPrefab;
     [SerializeField] private Sprite defaultIcon; 
-    [SerializeField] private bool spawnTestItems = false; 
 
     private ChipHolder chipHolder;
     private List<ListItemUI> spawnedItems = new();
@@ -21,16 +20,6 @@ public class ChipsSectionUI : MonoBehaviour
     public void UpdateData()
     {
         ClearItems();
-
-        if (spawnTestItems)
-        {
-            SpawnItem(defaultIcon, "Тестовая фишка 1");
-            SpawnItem(defaultIcon, "Тестовая фишка 2");
-            SpawnItem(defaultIcon, "Тестовая фишка 3");
-            SpawnItem(defaultIcon, "Тестовая фишка 4");
-
-            return;
-        }
 
         foreach (var chip in chipHolder.Chips)
         {
