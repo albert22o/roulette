@@ -3,10 +3,10 @@ public class GlassBall : BallInfo
 {
     private int destroyChance;
     private int multiplier;
-    public GlassBall(int multiplier, int destroyChance, string hash, BallInfoData data, BallDependencies deps) : base(hash, data, deps)
+    public GlassBall( string hash, GlassBallData data, BallDependencies deps) : base(hash, data, deps)
     {
-        this.multiplier = multiplier;
-        this.destroyChance = destroyChance;
+        multiplier = data.Multiplier;
+        destroyChance = data.DestroyChance;
     }
 
     public override void ApplySelectedEffect(HitInfo hitInfo)

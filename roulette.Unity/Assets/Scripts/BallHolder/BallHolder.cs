@@ -13,7 +13,7 @@ public class BallHolder
 
     private readonly List<BallInfo> balls = new();
     private readonly BallFactory ballFactory;
-    private BallInfo selectedBall;
+    private List<BallInfo> selectedBalls = new();
 
     public bool HasFreeSlot => balls.Count < Capacity;
 
@@ -75,12 +75,14 @@ public class BallHolder
         if (targetBall != null)
         {
             targetBall.ApplySelectedEffect(hitInfo);
-            selectedBall = targetBall;
+            selectedBalls.Add(targetBall);
         }
     }
 
-    public void RemoveSelectedBallEffect()
+    public void RemoveSelectedBallsEffect()
     {
-        selectedBall.RemoveSelectedEffect();
+        foreach(var ball in selectedBalls)
+            ball.RemoveSelectedEffect();
+        selectedBalls.Clear();
     }
 }

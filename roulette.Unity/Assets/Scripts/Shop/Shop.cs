@@ -1,9 +1,6 @@
 ﻿using System;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
-using static GameStateManager;
 
 public class Shop : MonoBehaviour
 {

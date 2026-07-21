@@ -1,15 +1,12 @@
-using System.Diagnostics;
-using UnityEditor.PackageManager;
-
 public class ColorModifyGeneralModifierBall : BallInfo
 {
     private ColorType color;
     private int multiplier;
     private bool isSelected;
-    public ColorModifyGeneralModifierBall(ColorType color, int multiplier, string hash, BallInfoData data, BallDependencies deps) : base(hash, data, deps)
+    public ColorModifyGeneralModifierBall(string hash, ColorModifyGeneralModifierBallData data, BallDependencies deps) : base(hash, data, deps)
     {
-        this.color = color;
-        this.multiplier = multiplier;
+        color = data.Color;
+        multiplier = data.Multiplier;
     }
 
     public override void ApplySelectedEffect(HitInfo hitInfo)
@@ -18,7 +15,6 @@ public class ColorModifyGeneralModifierBall : BallInfo
         {
             Dependencies.BetCalculator.ModifyGeneralModifier(multiplier);
             isSelected = true;
-            UnityEngine.Debug.Log("generalModIncreased");
         }
     }
 
@@ -28,8 +24,6 @@ public class ColorModifyGeneralModifierBall : BallInfo
         {
             Dependencies.BetCalculator.ModifyGeneralModifier(-multiplier);
             isSelected = false;
-
-            UnityEngine.Debug.Log("generalModDecreased");
         }
     }
 }

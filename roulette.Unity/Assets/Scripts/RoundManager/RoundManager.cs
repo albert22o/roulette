@@ -163,7 +163,7 @@ public class RoundManager
         betTable.ClearBets();
         chipHolder.RevertAll();
 
-        ballHolder.RemoveSelectedBallEffect();
+        ballHolder.RemoveSelectedBallsEffect();
         QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }
