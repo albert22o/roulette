@@ -4277,6 +4277,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightForGameplay
       objectReference: {fileID: 0}
+    - target: {fileID: 5385089529935367121, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
+      propertyPath: m_UsePipelineSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572596183517038296, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
+      propertyPath: m_Shadows.m_Bias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572596183517038296, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
+      propertyPath: m_Shadows.m_NormalBias
+      value: 0.26
+      objectReference: {fileID: 0}
     - target: {fileID: 7847313511382020328, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2887645
