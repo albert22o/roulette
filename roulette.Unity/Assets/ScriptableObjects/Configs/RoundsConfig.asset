@@ -14,8 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rounds:
   - Goal: 400
-    isBoss: 1
+    isBoss: 0
   - Goal: 600
     isBoss: 0
   - Goal: 800
+    isBoss: 1
+  - Goal: 1600
+    isBoss: 0
+  - Goal: 2400
+    isBoss: 0
+  - Goal: 3200
+    isBoss: 1
+  - Goal: 6400
+    isBoss: 0
+  - Goal: 9600
+    isBoss: 0
+  - Goal: 12800
+    isBoss: 1
+  - Goal: 25600
+    isBoss: 0
+  - Goal: 38400
+    isBoss: 0
+  - Goal: 51200
+    isBoss: 1
+  - Goal: 102400
+    isBoss: 0
+  - Goal: 153600
+    isBoss: 0
+  - Goal: 204800
+    isBoss: 1
+  - Goal: 409600
+    isBoss: 0
+  - Goal: 614400
+    isBoss: 0
+  - Goal: 102400
     isBoss: 0

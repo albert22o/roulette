@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1ad82347b31ec4280090db0f133b84, type: 3}
   m_Name: CurrenciesConfig
   m_EditorClassIdentifier: 
-  StartBossChips: 5
+  StartBossChips: 0
   StartGoldenChips: 0
