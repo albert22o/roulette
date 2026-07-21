@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CardCollection
+public class CardHolder
 {
     private readonly List<ItemData> collectedCards = new List<ItemData>();
 
@@ -13,13 +13,13 @@ public class CardCollection
         }
     }
 
-    public List<ItemData> GetCollectedCards()
+    public IReadOnlyList<ItemData> GetCollectedCards()
     {
         return collectedCards;
     }
 
     public void Clear()
     {
-        collectedCards.Clear(); 
+        collectedCards.Clear();
     }
 }

@@ -7,16 +7,16 @@ public class ItemReceiver
     private readonly GoldenChips goldenChips;
     private readonly BallHolder ballHolder;
     private readonly BetCalculator betCalculator;
-    private readonly CardCollection cardCollection;
+    private readonly CardHolder cardHolder;
 
-    public ItemReceiver(ChipHolder chipHolder, BossChips bossChips, GoldenChips goldenChips, BallHolder ballHolder, BetCalculator betCalculator, CardCollection cardCollection)
+    public ItemReceiver(ChipHolder chipHolder, BossChips bossChips, GoldenChips goldenChips, BallHolder ballHolder, BetCalculator betCalculator, CardHolder cardHolder)
     {
         this.chipHolder = chipHolder;
         this.bossChips = bossChips;
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.betCalculator = betCalculator;
-        this.cardCollection = cardCollection;
+        this.cardHolder = cardHolder;
     }
 
     public void ReceiveItem(ItemData item)
@@ -37,7 +37,7 @@ public class ItemReceiver
                 break;
             case GeneralMultipilerCardData generalMultiplierCardData:
                 betCalculator.ModifyGeneralModifier(generalMultiplierCardData.Multiplier);
-                cardCollection.AddCard(generalMultiplierCardData);
+                cardHolder.AddCard(generalMultiplierCardData);
                 break;
             case FoodData food:
                 Debug.Log($"Food: {food.Name}"); 
