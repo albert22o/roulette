@@ -26,7 +26,7 @@ public class CardsSectionUI : MonoBehaviour
 
         foreach (var item in cards)
         {
-            if (item is GeneralMultipilerCardData cardData)
+            if (item.Data is CardData cardData)
             {
                 Sprite icon = cardData.Icon != null ? cardData.Icon : defaultIcon;
                 string displayName = string.IsNullOrEmpty(cardData.Name)

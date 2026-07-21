@@ -83,5 +83,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<ItemReceiver>().AsSingle();
         Container.Bind<CardHolder>().AsSingle();
         Container.Bind<RoundWinManager>().AsSingle().NonLazy();
+        Container.Bind<CardFactory>().AsSingle();
     }
 }

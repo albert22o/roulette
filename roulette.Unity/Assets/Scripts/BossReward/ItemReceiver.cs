@@ -6,17 +6,18 @@ public class ItemReceiver
     private readonly BossChips bossChips;
     private readonly GoldenChips goldenChips;
     private readonly BallHolder ballHolder;
-    private readonly BetCalculator betCalculator;
     private readonly CardHolder cardHolder;
+    private readonly FoodHolder foodHolder;
 
-    public ItemReceiver(ChipHolder chipHolder, BossChips bossChips, GoldenChips goldenChips, BallHolder ballHolder, BetCalculator betCalculator, CardHolder cardHolder)
+    public ItemReceiver(ChipHolder chipHolder, BossChips bossChips, GoldenChips goldenChips,
+        BallHolder ballHolder, CardHolder cardHolder, FoodHolder foodHolder)
     {
         this.chipHolder = chipHolder;
         this.bossChips = bossChips;
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
-        this.betCalculator = betCalculator;
         this.cardHolder = cardHolder;
+        this.foodHolder = foodHolder;
     }
 
     public void ReceiveItem(ItemData item)
@@ -36,11 +37,10 @@ public class ItemReceiver
                 bossChips.Add(boss.Amount); 
                 break;
             case GeneralMultipilerCardData generalMultiplierCardData:
-                betCalculator.ModifyGeneralModifier(generalMultiplierCardData.Multiplier);
                 cardHolder.AddCard(generalMultiplierCardData);
                 break;
             case FoodData food:
-                Debug.Log($"Food: {food.Name}"); 
+                foodHolder.AddFood(food);
                 break;
             default: 
                 Debug.LogWarning($"Unknown type: {item?.GetType().Name}");
