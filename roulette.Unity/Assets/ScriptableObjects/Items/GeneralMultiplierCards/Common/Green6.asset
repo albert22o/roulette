@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: "\u0417\u0435\u043B\u0435\u043D\u0430\u044F 6"
   description: "+1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
     0"
-  shopPrefab: {fileID: 0}
+  shopPrefab: {fileID: 4657025761638334603, guid: cf73410da87e0dd4d917f9f138750601, type: 3}
   rarityType: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 8373675954752092734, guid: 215687feeab0b7445b4a1cd86c82c2e1, type: 3}
   multiplier: 1
   number: 0
