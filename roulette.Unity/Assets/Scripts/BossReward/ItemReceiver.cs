@@ -36,8 +36,8 @@ public class ItemReceiver
             case BossChipItemData boss: 
                 bossChips.Add(boss.Amount); 
                 break;
-            case GeneralMultipilerCardData generalMultiplierCardData:
-                cardHolder.AddCard(generalMultiplierCardData);
+            case CardData cardData:
+                cardHolder.AddCard(cardData);
                 break;
             case FoodData food:
                 foodHolder.AddFood(food);
