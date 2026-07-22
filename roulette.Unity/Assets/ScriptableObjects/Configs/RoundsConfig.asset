@@ -48,4 +48,4 @@ MonoBehaviour:
   - Goal: 614400
     isBoss: 0
   - Goal: 102400
-    isBoss: 0
+    isBoss: 1
