@@ -22,6 +22,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation;
     private bool active = false;
+    private bool isFrozen = false;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
@@ -112,9 +113,16 @@ public class FirstPersonController : MonoBehaviour
         cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
     }
 
+    // ИЗМЕНЕНИЕ: Этот метод теперь блокирует ТОЛЬКО движение и камеру.
+    // Он больше НЕ трогает курсор, чтобы не конфликтовать с GameState или UI.
+    public void SetFrozen(bool frozen)
+    {
+        isFrozen = frozen;
+    }
+
     private void Update()
     {
-        if (active && isCameraTransitionFinished)
+        if (active && isCameraTransitionFinished && !isFrozen)
         {
             HandleMouseLook();
             HandleMovement();
@@ -127,8 +135,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        if (!active)
-            return;
+        if (!active) return;
 
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;

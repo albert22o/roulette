@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
-using static GameStateManager;
 
 public class RunProgressUI : MonoBehaviour
 {
-    [Header("Sections")]
     [SerializeField] private ChipsSectionUI chipsSection;
     [SerializeField] private BallsSectionUI ballsSection;
     [SerializeField] private PlaquesSectionUI plaquesSection;
@@ -14,20 +11,15 @@ public class RunProgressUI : MonoBehaviour
     [SerializeField] private QuotasSectionUI quotasSection;
     [SerializeField] private CardsSectionUI cardsSection;
 
-    [Header("Settings")]
     [SerializeField] private float displayDuration = 4f;
+    [SerializeField] private FirstPersonController playerController;
 
-    private GameStateManager gameStateManager;
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
     private bool isPanelOpen = false;
-    private GameState previousState;
 
-    [Inject]
-    public void Construct(GameStateManager gameStateManager)
-    {
-        this.gameStateManager = gameStateManager;
-    }
+    private CursorLockMode savedCursorLockState;
+    private bool savedCursorVisible;
 
     private void Start()
     {
@@ -61,13 +53,18 @@ public class RunProgressUI : MonoBehaviour
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
 
+        savedCursorLockState = Cursor.lockState;
+        savedCursorVisible = Cursor.visible;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         gameObject.SetActive(true);
         isPanelOpen = true;
 
         UpdateAllSections();
 
-        previousState = gameStateManager.CurrentState ?? GameState.FreeRoam;
-        gameStateManager.ChangeGameState(GameState.ViewingProgress);
+        playerController.SetFrozen(true);
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
@@ -87,7 +84,10 @@ public class RunProgressUI : MonoBehaviour
 
         gameObject.SetActive(false);
         isPanelOpen = false;
-        gameStateManager.ChangeGameState(previousState);
+        playerController.SetFrozen(false);
+
+        Cursor.lockState = savedCursorLockState;
+        Cursor.visible = savedCursorVisible;
     }
 
     private void UpdateAllSections()
