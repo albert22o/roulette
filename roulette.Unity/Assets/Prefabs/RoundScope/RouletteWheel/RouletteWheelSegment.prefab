@@ -49,6 +49,7 @@ MonoBehaviour:
   textMeshPro: {fileID: 294981139347712587}
   meshRenderer: {fileID: 2252366613831157561}
   colorTable: {fileID: 11400000, guid: 9c815aca10fcc3c4499799be7cddbbb4, type: 2}
+  highlightedMaterial: {fileID: 2100000, guid: 92a06b804a8d40b4abdbc7d89b279ab1, type: 2}
 --- !u!1 &7279419000284010393
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public event Action<string> BallHover;
     public event Action<string> BallUnHover;
     public event Action<string> BallClicked;
-
     public event Action FieldsUpdated;
 
     [SerializeField] private SpinController spinController;
