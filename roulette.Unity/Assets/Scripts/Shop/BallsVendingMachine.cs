@@ -12,6 +12,9 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
 
+    [Space]
+    [SerializeField] private OutlineController outline;
+
     private int cost;
     private Shop shop;
     private BallInfoData boughtBall;
@@ -80,10 +83,12 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }

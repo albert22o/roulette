@@ -10,6 +10,8 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     [SerializeField] private int costDelta;
     [SerializeField] private ButtonAnimation3D buttonAnimation;
 
+    [SerializeField] private OutlineController outline;
+
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
@@ -56,10 +58,12 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }
