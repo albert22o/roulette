@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class BetButton : MonoBehaviour, IPointerClickHandler
+public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public ColorType Color
     {
@@ -84,15 +83,26 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] Material dozenHighlight;
     [SerializeField] Material numberHighlight;
 
-    [SerializeField] private SpriteRenderer BG;
+    [SerializeField] private MeshRenderer BG;
+
+    [SerializeField] private OutlineController outline;
     private event Action OnRightClick;
     private event Action OnLeftClick;
     private readonly Stack<GameObject> stackChips = new();
     private ColorType color;
+    private int index;
+    private BetTable betTable;
+
+    [Inject]
+    private void Construct(BetTable table)
+    {
+        this.betTable = table;
+    }
 
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
-    public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback)
+    public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback, int index)
     {
+        this.index = index; 
         Color = betInfo.FieldColor;
 
         if (fieldNumText == null)
@@ -149,6 +159,17 @@ public class BetButton : MonoBehaviour, IPointerClickHandler
             IsHighlighted = false;
             BG.material = GetColorMaterial(color);
         }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        outline.ToggleMaterial(false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (betTable.CanBet(index))
+            outline.ToggleMaterial(true);
     }
 
     public enum HighlightPhase 

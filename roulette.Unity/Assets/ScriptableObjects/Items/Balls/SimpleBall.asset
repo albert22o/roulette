@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: SimpleBall
   description: SimpleBall
   shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  rarityType: 0
+  Icon: {fileID: 0}
   VisualComponent:
-    <Material>k__BackingField: {fileID: 2100000, guid: 7b5e884f1329d1c498d18ac6a0056a4b, type: 2}
+    <Material>k__BackingField: {fileID: 2100000, guid: d2b89dae86aac9a4d9b52881cf3be975, type: 2}

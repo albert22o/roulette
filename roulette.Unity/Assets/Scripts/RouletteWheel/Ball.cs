@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
 
     public event Action Destroyed;
     public event Action Animated;
+    public event Action Stopped;
     public string Hash { get; private set; }
 
     public Vector3 RelativeToRoulettePosition => transform.position - rouletteOrigin.position;
@@ -38,6 +39,13 @@ public class Ball : MonoBehaviour
         ballRigidbody.linearVelocity = Vector3.zero;
         ballRigidbody.isKinematic = true;
         ballRigidbody.interpolation = RigidbodyInterpolation.None;
+    }
+
+    public void Stop()
+    {
+        ballRigidbody.angularVelocity = Vector3.zero;
+        ballRigidbody.linearVelocity = Vector3.zero;
+        Stopped?.Invoke();
     }
 
     public void PlayAnimation()
