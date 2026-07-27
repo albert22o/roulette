@@ -5,39 +5,33 @@ public class RouletteHighlightManager : MonoBehaviour
 {
     [SerializeField] private RouletteWheel rouletteWheel;
     [SerializeField] private RouletteBallsManager ballsManager;
+    [SerializeField] private RoundStateManager roundStateManager; 
 
     private BallResults ballResults;
 
     [Inject]
-    public void Construct(BallResults ballResults)
+    public void Construct(BallResults ballResults, RoundStateManager roundStateManager)
     {
         this.ballResults = ballResults;
-        Debug.Log($"[RouletteHighlightManager] BallResults injected: {ballResults != null}");
+        this.roundStateManager = roundStateManager; 
     }
 
     private void OnEnable()
     {
-        Debug.Log("[RouletteHighlightManager] OnEnable called");
-
         if (ballsManager != null)
         {
             ballsManager.AllBallsStopped += OnAllBallsStopped;
             ballsManager.SimulationStarted += OnSimulationStarted;
-            Debug.Log("[RouletteHighlightManager] Subscribed to ballsManager events");
-        }
-        else
-        {
-            Debug.LogWarning("[RouletteHighlightManager] ballsManager is NULL!");
         }
 
         if (ballResults != null)
         {
             ballResults.BallSelected += OnBallSelected;
-            Debug.Log("[RouletteHighlightManager] Subscribed to BallSelected event");
         }
-        else
+
+        if (roundStateManager != null)
         {
-            Debug.LogWarning("[RouletteHighlightManager] ballResults is NULL! Zenject injection failed.");
+            roundStateManager.StateChanged += OnRoundStateChanged;
         }
     }
 
@@ -53,29 +47,38 @@ public class RouletteHighlightManager : MonoBehaviour
         {
             ballResults.BallSelected -= OnBallSelected;
         }
+
+        if (roundStateManager != null)
+        {
+            roundStateManager.StateChanged -= OnRoundStateChanged;
+        }
+    }
+
+    private void OnRoundStateChanged(RoundStateManager.RoundState newState)
+    {
+        if (newState != RoundStateManager.RoundState.ChoosingReward)
+        {
+            ResetAllHighlights();
+        }
     }
 
     private void OnSimulationStarted()
     {
-        Debug.Log("[RouletteHighlightManager] SimulationStarted - resetting highlights");
         ResetAllHighlights();
     }
 
     private void OnBallSelected(HitInfo hitInfo)
     {
-        Debug.Log($"[RouletteHighlightManager] BallSelected called! hitInfo is {(hitInfo == null ? "null" : "valid")}");
         ResetAllHighlights();
 
         if (hitInfo != null)
         {
-            Debug.Log($"[RouletteHighlightManager] Highlighting field index: {hitInfo.FieldIndex}");
             HighlightField(hitInfo.FieldIndex);
         }
     }
 
     private void OnAllBallsStopped(HitInfo[] hitsInfo)
     {
-        Debug.Log($"[RouletteHighlightManager] AllBallsStopped - {hitsInfo.Length} balls stopped");
         ResetAllHighlights();
 
         foreach (var hit in hitsInfo)
@@ -90,14 +93,12 @@ public class RouletteHighlightManager : MonoBehaviour
 
         if (positionOnWheel >= 0 && positionOnWheel < rouletteWheel.Fields.Length)
         {
-            Debug.Log($"[RouletteHighlightManager] Highlighting field {fieldNumber} at position {positionOnWheel}");
             rouletteWheel.Fields[positionOnWheel].IsHighlighted = true;
         }
     }
 
     private void ResetAllHighlights()
     {
-        Debug.Log("[RouletteHighlightManager] Resetting all highlights");
         for (int i = 0; i < rouletteWheel.Fields.Length; i++)
         {
             rouletteWheel.Fields[i].IsHighlighted = false;
