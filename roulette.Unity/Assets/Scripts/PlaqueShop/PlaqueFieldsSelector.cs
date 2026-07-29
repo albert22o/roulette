@@ -35,6 +35,19 @@ public class PlaqueFieldsSelector
         IsSelectionValidChanged?.Invoke(false);
     }
 
+    public bool CanToggle(int index)
+    {
+        if (currentSelectionRequest == null)
+            return false;
+        if (currentSelectedFields.Contains(index))
+            return true;
+        if (currentSelectionRequest.Filter != null && !currentSelectionRequest.Filter(tableInfo.PocketMapping[index]))
+            return false;
+        if (currentSelectedFields.Count >= currentSelectionRequest.Count)
+            return false;
+        return true;
+    }
+
     public bool ToggleField(int index)
     {
         if (currentSelectionRequest == null)
@@ -65,6 +78,7 @@ public class PlaqueFieldsSelector
             return true;
         }
     }
+
     public void ApplySelection()
     {
         var currentSelectedFielsArray = currentSelectedFields.ToArray();

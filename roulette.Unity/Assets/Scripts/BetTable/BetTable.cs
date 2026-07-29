@@ -52,6 +52,21 @@ public class BetTable
         ChangeAvailableSum?.Invoke(availableBetSum);
     }
 
+    public bool CanBet(int index)
+    {
+        if (!active)
+            return false;
+        if (!betAmounts.ContainsKey(index))
+            return false;
+        if (availableBetSum < BetStep)
+            return false;
+        if (!betIndexSet.Contains(index)
+            && betIndexSet.Count >= tableInfo.MaxBetsAtBoard)
+            return false;
+        return
+            true;
+    }
+
     public void RemoveBet(int index) 
     {
         if (!active)

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BetFieldVisual : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer bgRenderer;
+    [SerializeField] private MeshRenderer bgRenderer;
     [SerializeField] private TextMeshPro text;
 
     [Header("Materials")]

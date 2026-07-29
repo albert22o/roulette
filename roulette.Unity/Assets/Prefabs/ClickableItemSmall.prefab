@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3139751280868228747}
   - component: {fileID: 8107390137740422174}
   - component: {fileID: 2391692131154400217}
+  - component: {fileID: 4887632470399614793}
+  - component: {fileID: -2431889707125873588}
   m_Layer: 3
   m_Name: ClickableItemSmall
   m_TagString: Untagged
@@ -80,3 +82,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.08, z: 0.08}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4887632470399614793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673400485587310774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff2b993d8523d64e80ca987b21f19ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMaterial: {fileID: -876546973899608171, guid: b4622244f5b2dd547b46b15696478d5e, type: 3}
+  autoFindRenderers: 1
+  _renderers: []
+  findRenderersEveryToggle: 1
+--- !u!114 &-2431889707125873588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673400485587310774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b782ca63c37eb44791a240a50e5820a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 8107390137740422174}
+  outline: {fileID: 4887632470399614793}

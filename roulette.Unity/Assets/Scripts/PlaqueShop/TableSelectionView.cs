@@ -46,21 +46,25 @@ public class TableSelectionView : MonoBehaviour
         foreach (var pocket in tableInfo.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
-                () => OnSelectField(pocket.Key));
+                pocket.Key);
+            betButtons[pocket.Key].HoverEnter += OnFieldHoverEnter;
+            betButtons[pocket.Key].HoverExit += OnFieldHoverExit;
+            betButtons[pocket.Key].Clicked += OnFieldClick;
         }
         cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
     }
 
-    public void OnSelectField(int buttonIndex)
+    private void OnDestroy()
     {
-        if (plaqueFieldsSelector.ToggleField(buttonIndex))
+        foreach (var pocket in tableInfo.PocketMapping)
         {
-            betButtons[buttonIndex].Highlight(true);
+            betButtons[pocket.Key].HoverEnter -= OnFieldHoverEnter;
+            betButtons[pocket.Key].HoverExit -= OnFieldHoverExit;
+            betButtons[pocket.Key].Clicked -= OnFieldClick;
         }
-        else
-        {
-            betButtons[buttonIndex].Highlight(false);
-        }
+        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
+        plaqueFieldsSelector.SelectionPhaseCompleted -= ClearHighlight;
+        plaqueUseController.PlaqueUsed -= OnPlaqueUsed;
     }
 
     public void PlayFieldsChangeAnimation()
@@ -115,5 +119,30 @@ public class TableSelectionView : MonoBehaviour
         isCameraArrived = true;
         CameraArrived?.Invoke();
         CameraArrived = null;
+    }
+
+    private void OnFieldHoverEnter(FieldPlaqueSelectionPhase field)
+    {
+        if (plaqueFieldsSelector.CanToggle(field.Index))
+        {
+            field.ToggleOutline(true);
+        }
+    }
+
+    private void OnFieldHoverExit(FieldPlaqueSelectionPhase field)
+    {
+            field.ToggleOutline(false);
+    }
+
+    private void OnFieldClick(FieldPlaqueSelectionPhase field)
+    {
+        if (plaqueFieldsSelector.ToggleField(field.Index))
+        {
+            field.Highlight(true);
+        }
+        else
+        {
+            field.Highlight(false);
+        }
     }
 }

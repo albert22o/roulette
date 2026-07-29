@@ -10,6 +10,8 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     [SerializeField] private ButtonAnimation3D buttonAnimation;
 
+    [SerializeField] private OutlineController outline;
+
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
@@ -67,10 +69,12 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, tooltipPosition.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }

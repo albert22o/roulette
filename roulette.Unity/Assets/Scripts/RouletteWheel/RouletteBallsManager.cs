@@ -85,6 +85,10 @@ public class RouletteBallsManager : MonoBehaviour
 
         if (hitsInfo.Count == balls.Count)
         {
+            foreach (Ball ball in balls)
+            {
+                ball.Stop();
+            }
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
             isSimulating = false;
 

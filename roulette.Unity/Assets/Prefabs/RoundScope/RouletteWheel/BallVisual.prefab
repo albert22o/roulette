@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4745954316741687552}
   - component: {fileID: 3538755749482843862}
   - component: {fileID: 8430382528447555435}
+  - component: {fileID: 9059582665939850213}
+  - component: {fileID: 7022344572684702427}
   m_Layer: 3
   m_Name: BallVisual
   m_TagString: Untagged
@@ -147,3 +149,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9059582665939850213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090357027309566939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced17c29e10e73d4f9b0150f00b1881c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: 7022344572684702427}
+  visual: {fileID: 4745954316741687552}
+--- !u!114 &7022344572684702427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090357027309566939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff2b993d8523d64e80ca987b21f19ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMaterial: {fileID: -876546973899608171, guid: b4622244f5b2dd547b46b15696478d5e, type: 3}
+  autoFindRenderers: 0
+  _renderers:
+  - {fileID: 3844196706005564986}
+  findRenderersEveryToggle: 0
