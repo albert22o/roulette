@@ -12,7 +12,6 @@ public class WinningNumberUI : MonoBehaviour
     private RouletteWheel rouletteWheel;
     private BallResults ballResults;
     private RoundStateManager roundStateManager;
-    private RouletteBallsManager rouletteBallsManager;
 
     private Material originalMaterial;
     private bool isBallSelected = false;
@@ -32,6 +31,7 @@ public class WinningNumberUI : MonoBehaviour
         {
             numberText.gameObject.SetActive(false);
             numberText.text = "";
+            numberText.raycastTarget = false;
         }
 
         if (textMeshRenderer != null)
@@ -42,22 +42,34 @@ public class WinningNumberUI : MonoBehaviour
 
     private void OnEnable()
     {
-        
-        rouletteWheel.BallHover += OnBallHoveredWithHash;
-        rouletteWheel.BallUnHover += OnBallUnHovered;
-        rouletteWheel.BallClicked += OnBallClicked;
-        rouletteWheel.AllBallsStopped += OnBallsStopped;
-        roundStateManager.StateChanged += OnRoundStateChanged;        
+        if (rouletteWheel != null)
+        {
+            rouletteWheel.BallHover += OnBallHoveredWithHash;
+            rouletteWheel.BallUnHover += OnBallUnHovered;
+            rouletteWheel.BallClicked += OnBallClicked;
+            rouletteWheel.AllBallsStopped += OnBallsStopped;
+        }
+
+        if (roundStateManager != null)
+        {
+            roundStateManager.StateChanged += OnRoundStateChanged;
+        }
     }
 
     private void OnDisable()
     {
-        
-        rouletteWheel.BallHover -= OnBallHoveredWithHash;
-        rouletteWheel.BallUnHover -= OnBallUnHovered;
-        rouletteWheel.BallClicked -= OnBallClicked;
-        rouletteWheel.AllBallsStopped -= OnBallsStopped;
-        roundStateManager.StateChanged -= OnRoundStateChanged;
+        if (rouletteWheel != null)
+        {
+            rouletteWheel.BallHover -= OnBallHoveredWithHash;
+            rouletteWheel.BallUnHover -= OnBallUnHovered;
+            rouletteWheel.BallClicked -= OnBallClicked;
+            rouletteWheel.AllBallsStopped -= OnBallsStopped;
+        }
+
+        if (roundStateManager != null)
+        {
+            roundStateManager.StateChanged -= OnRoundStateChanged;
+        }
     }
 
     private void OnBallsStopped(HitInfo[] hitsInfo)
@@ -102,8 +114,16 @@ public class WinningNumberUI : MonoBehaviour
     private void OnRoundStateChanged(RoundStateManager.RoundState newState)
     {
 
+        if (newState == RoundStateManager.RoundState.WheelSpining ||
+            newState == RoundStateManager.RoundState.PlacingBets ||
+            newState == RoundStateManager.RoundState.Start)
+        {
+            hitsByBallHash.Clear();
+            isBallSelected = false;
+            Hide();
+        }
+
         if (newState == RoundStateManager.RoundState.BetResults ||
-            newState == RoundStateManager.RoundState.Start ||
             newState == RoundStateManager.RoundState.NotActive)
         {
             isBallSelected = false;
