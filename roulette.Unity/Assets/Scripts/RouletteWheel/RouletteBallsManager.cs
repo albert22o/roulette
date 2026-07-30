@@ -26,8 +26,6 @@ public class RouletteBallsManager : MonoBehaviour
 
     public event Action<HitInfo[]> AllBallsStopped;
 
-    public event Action SimulationStarted;
-
     private bool isSimulating;
 
     public event Action<string> BallInvalid;
@@ -70,7 +68,6 @@ public class RouletteBallsManager : MonoBehaviour
         prevAngles.Add(0);
         stableTimes.Add(0);
         isSimulating = true;
-        SimulationStarted?.Invoke();
         
     }
 
