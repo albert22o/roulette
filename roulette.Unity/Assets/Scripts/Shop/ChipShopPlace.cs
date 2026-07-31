@@ -6,6 +6,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 {
     [SerializeField] private Shop shop;
     [SerializeField] private DrumNumberDisplay costView;
+    [SerializeField] private OutlineController outline;
 
     private ChipData item;
     private ChipHolder chipHolder;
@@ -107,10 +108,12 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void OnHoverEnter()
     {
         ShowDescription();
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         HideDescription();
+        outline.ToggleMaterial(false);
     }
 }
