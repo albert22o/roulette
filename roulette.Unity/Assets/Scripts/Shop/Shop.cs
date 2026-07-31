@@ -26,28 +26,43 @@ public class Shop : MonoBehaviour
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
+    private RoundManager roundManager;
+    private ProgressionManager progressionManager;
 
     public event Action InteractionStarted, InteractionFinished;
 
     [Inject]
-    public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder)
+    public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder,
+        RoundManager roundManager, ProgressionManager progressionManager)
     {
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
+        this.roundManager = roundManager;
+        this.progressionManager = progressionManager;
+        roundManager.Win += OnQuotaUpdated;
     }
 
     private void Start()
     {
-        OnQuotaUpdated();
+        UpdateShop(true);
     }
+
 
     public void OnQuotaUpdated()
     {
+        UpdateShop(false);
+    }
+
+    private void UpdateShop(bool forceUpdateFood)
+    {
+        if (progressionManager.Current.IsBoss|| forceUpdateFood)
+        {
+            foodPlace.UpdateItem();
+        }
         chipPlacesController.Fill();
         rerollButton.ResetCost();
         baseMoneyVendingMachine.ResetCost();
-        foodPlace.UpdateItem();
     }
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
