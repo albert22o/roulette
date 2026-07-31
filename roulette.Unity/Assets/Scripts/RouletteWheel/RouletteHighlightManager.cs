@@ -5,7 +5,7 @@ public class RouletteHighlightManager : MonoBehaviour
 {
     [SerializeField] private RouletteWheel rouletteWheel;
     [SerializeField] private RouletteBallsManager ballsManager;
-    [SerializeField] private RoundStateManager roundStateManager; 
+    [SerializeField] private RoundStateManager roundStateManager;
 
     private BallResults ballResults;
 
@@ -13,58 +13,33 @@ public class RouletteHighlightManager : MonoBehaviour
     public void Construct(BallResults ballResults, RoundStateManager roundStateManager)
     {
         this.ballResults = ballResults;
-        this.roundStateManager = roundStateManager; 
+        this.roundStateManager = roundStateManager;
     }
 
     private void OnEnable()
     {
-        if (ballsManager != null)
-        {
-            ballsManager.AllBallsStopped += OnAllBallsStopped;
-            ballsManager.SimulationStarted += OnSimulationStarted;
-        }
-
-        if (ballResults != null)
-        {
-            ballResults.BallSelected += OnBallSelected;
-        }
-
-        if (roundStateManager != null)
-        {
-            roundStateManager.StateChanged += OnRoundStateChanged;
-        }
+        ballsManager.AllBallsStopped += OnAllBallsStopped;
+        ballResults.BallSelected += OnBallSelected;
+        roundStateManager.StateChanged += OnRoundStateChanged;
     }
 
     private void OnDisable()
     {
-        if (ballsManager != null)
-        {
-            ballsManager.AllBallsStopped -= OnAllBallsStopped;
-            ballsManager.SimulationStarted -= OnSimulationStarted;
-        }
-
-        if (ballResults != null)
-        {
-            ballResults.BallSelected -= OnBallSelected;
-        }
-
-        if (roundStateManager != null)
-        {
-            roundStateManager.StateChanged -= OnRoundStateChanged;
-        }
+        ballsManager.AllBallsStopped -= OnAllBallsStopped;
+        ballResults.BallSelected -= OnBallSelected;
+        roundStateManager.StateChanged -= OnRoundStateChanged;
     }
 
     private void OnRoundStateChanged(RoundStateManager.RoundState newState)
     {
-        if (newState != RoundStateManager.RoundState.ChoosingReward)
+        if (newState == RoundStateManager.RoundState.WheelSpining ||
+            newState == RoundStateManager.RoundState.PlacingBets ||
+            newState == RoundStateManager.RoundState.Start ||
+            newState == RoundStateManager.RoundState.NotActive ||
+            newState == RoundStateManager.RoundState.BetResults)
         {
             ResetAllHighlights();
         }
-    }
-
-    private void OnSimulationStarted()
-    {
-        ResetAllHighlights();
     }
 
     private void OnBallSelected(HitInfo hitInfo)
