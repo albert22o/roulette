@@ -18,6 +18,7 @@ public class TableSelectionView : MonoBehaviour
 
     private bool isCameraArrived;
     private Action CameraArrived;
+    private bool isSelectionAvailable;
 
 
     [Inject]
@@ -79,6 +80,7 @@ public class TableSelectionView : MonoBehaviour
     {
         CameraArrived = null;
         isCameraArrived = false;
+        isSelectionAvailable = true;
         for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             betButtons[i].UpdateField(true);
@@ -104,6 +106,7 @@ public class TableSelectionView : MonoBehaviour
         {
             betButtons[i].UpdateField(false);
         }
+        isSelectionAvailable = false;
         StartCoroutine(WaitBeforeExit());
     }
 
@@ -123,7 +126,7 @@ public class TableSelectionView : MonoBehaviour
 
     private void OnFieldHoverEnter(FieldPlaqueSelectionPhase field)
     {
-        if (plaqueFieldsSelector.CanToggle(field.Index))
+        if (isSelectionAvailable && plaqueFieldsSelector.CanToggle(field.Index))
         {
             field.ToggleOutline(true);
         }
@@ -131,7 +134,10 @@ public class TableSelectionView : MonoBehaviour
 
     private void OnFieldHoverExit(FieldPlaqueSelectionPhase field)
     {
+        if (isSelectionAvailable && plaqueFieldsSelector.CanToggle(field.Index))
+        {
             field.ToggleOutline(false);
+        }
     }
 
     private void OnFieldClick(FieldPlaqueSelectionPhase field)

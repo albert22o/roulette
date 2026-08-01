@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-public class GreenPlaque : Plaque
+﻿public class GreenPlaque : Plaque
 {
     public GreenPlaque(PlaqueData data, PlaqueDependencies dependencies) : base(data, dependencies)
     {
@@ -30,6 +27,8 @@ public class GreenPlaque : Plaque
         {
             PlaqueDependencies.TableInfo.SetPocketNum(selectedFields[1][i],
                 PlaqueDependencies.TableInfo.PocketMapping[selectedFields[0][0]].FieldNumber);
+            PlaqueDependencies.TableInfo.SetPocketColor(selectedFields[1][i],
+                PlaqueDependencies.TableInfo.PocketMapping[selectedFields[0][0]].FieldColor);
         }
     }
 

@@ -749,12 +749,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: BetButtonPlaqueSelection
       objectReference: {fileID: 0}
+    - target: {fileID: 7507879617637945546, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: autoFindRenderers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507879617637945546, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: _renderers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507879617637945546, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: '_renderers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6759057068750098082}
+    - target: {fileID: 7507879617637945546, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+      propertyPath: '_renderers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5088510610892540091}
     m_RemovedComponents:
     - {fileID: 4194919758732754528, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
     - {fileID: 1584103670993536186, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6656800096395598255, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
     - {fileID: 5428965525501952293, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
+    - {fileID: 1029528267457568821, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 156922674808583640, guid: 64ba279a515d1564a93e287d4a3a5883, type: 3}
       insertIndex: -1

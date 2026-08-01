@@ -13,7 +13,7 @@ public class FieldPlaqueSelectionPhase : MonoBehaviour, IPointerClickHandler, IP
     public int Index { get; private set; }
     private BetInfo betInfo;
 
-    private int animationHash = Animator.StringToHash("ChangeField");
+    private int changeFieldHash = Animator.StringToHash("ChangeField");
 
 
 
@@ -41,7 +41,7 @@ public class FieldPlaqueSelectionPhase : MonoBehaviour, IPointerClickHandler, IP
         }
         else
         {
-            animator.SetTrigger(animationHash);
+            animator.SetTrigger(changeFieldHash);
             animatedField.SetColor(betInfo.FieldColor);
             animatedField.SetNumber(betInfo.FieldNumber);
         }
