@@ -1,13 +1,13 @@
 ﻿public abstract class BallInfo
 {
     public string Hash { get; private set; }
-    public BallInfoData BallData { get; private set; }
+    public BallInfoData BallInfoData { get; private set; }
     public BallDependencies Dependencies { get; private set; }
 
     protected BallInfo(string ballHash, BallInfoData data, BallDependencies deps)
     {
         Hash = ballHash;
-        BallData = data;
+        BallInfoData = data;
         Dependencies = deps;
     }
 

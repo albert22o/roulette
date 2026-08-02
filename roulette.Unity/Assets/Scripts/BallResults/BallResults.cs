@@ -43,7 +43,7 @@ public class BallResults
 
         BallInfo hoveredBall = ballHolder.Balls.FirstOrDefault(ball => ball.Hash == ballHash);
         if (hoveredBall == null) return;
-        BallInfoData ballData = hoveredBall.BallData;
+        BallInfoData ballData = hoveredBall.BallInfoData;
         BallHovered?.Invoke(ballData);
     }
 

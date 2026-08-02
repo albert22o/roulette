@@ -82,7 +82,7 @@ public class Shop : MonoBehaviour
             int undestroyableBalls = 0;
             foreach (var ball in ballHolder.Balls)
             {
-                if (!ball.BallData.IsDestroyable) undestroyableBalls++;
+                if (!ball.BallInfoData.IsDestroyable) undestroyableBalls++;
             }
             if (undestroyableBalls > 1 || ballData.IsDestroyable)
             {

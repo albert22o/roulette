@@ -129,7 +129,7 @@ public class RoundManager
 
         foreach (var ballInfo in ballHolder.Balls)
         {
-            rouletteWheel.AddBall(ballInfo.Hash, ballInfo.BallData.VisualComponent);
+            rouletteWheel.AddBall(ballInfo.Hash, ballInfo.BallInfoData.VisualComponent);
         }
 
         rouletteWheel.Spin();
@@ -151,7 +151,7 @@ public class RoundManager
 
         foreach(var ballInfo in ballHolder.Balls)
         {
-            rouletteWheel.AddBall(ballInfo.Hash, ballInfo.BallData.VisualComponent);
+            rouletteWheel.AddBall(ballInfo.Hash, ballInfo.BallInfoData.VisualComponent);
         }
         
         rouletteWheel.Spin();
@@ -187,7 +187,6 @@ public class RoundManager
             roundStateManager.ChangeState(RoundState.Lose);
 
         betTable.ClearBets();
-        chipHolder.RevertAll();
 
         ballHolder.RemoveSelectedBallsEffect();
         QuoteChanged?.Invoke(quote);

@@ -96,7 +96,6 @@ public class BallHolder
             selectedBalls.Add(targetBall);
         }
     }
-}
 
     public void RemoveSelectedBallsEffect()
     {
