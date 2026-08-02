@@ -1,8 +1,6 @@
 ﻿using System;
-using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
-using static GameStateManager;
 
 public class Shop : MonoBehaviour
 {
@@ -79,9 +77,14 @@ public class Shop : MonoBehaviour
 
     public bool TrySell(ItemData item, int index)
     {
-        if (item is BallInfoData)
+        if (item is BallInfoData ballData)
         {
-            if (ballHolder.Balls.Count > 1)
+            int undestroyableBalls = 0;
+            foreach (var ball in ballHolder.Balls)
+            {
+                if (!ball.BallInfoData.IsDestroyable) undestroyableBalls++;
+            }
+            if (undestroyableBalls > 1 || ballData.IsDestroyable)
             {
                 goldenChips.Add(ballSellCost);
                 ballHolder.RemoveBall(index);

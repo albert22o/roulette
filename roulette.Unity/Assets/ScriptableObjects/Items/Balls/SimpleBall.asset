@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0938dd408761c5e469b1734ccc3b2407, type: 3}
   m_Name: SimpleBall
   m_EditorClassIdentifier: 
-  itemName: SimpleBall
-  description: SimpleBall
+  itemName: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439 \u0448\u0430\u0440\u0438\u043A"
+  description: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439 \u0448\u0430\u0440\u0438\u043A,
+    \u043D\u0438\u0447\u0435\u0433\u043E \u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E\u0433\u043E."
   shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
-  rarityType: 0
-  Icon: {fileID: 0}
-  VisualComponent:
-    <Material>k__BackingField: {fileID: 2100000, guid: d2b89dae86aac9a4d9b52881cf3be975, type: 2}
+  ballPrefab: {fileID: 4563755349166495531, guid: 3652028bf1924db47827b66cfc949158, type: 3}
+  visualComponent:
+    <Material>k__BackingField: {fileID: 2100000, guid: 993b964cdd804b8418dd8a226134945e, type: 2}

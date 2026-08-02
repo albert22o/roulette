@@ -11,34 +11,39 @@ public class BallHolder
     public int FreeSlotsCount => Capacity - balls.Count;
     private readonly List<BallInfo> balls = new();
     private readonly BallFactory ballFactory;
-    private bool isActive;
+    private List<BallInfo> selectedBalls = new();
     public bool HasFreeSlot => balls.Count < Capacity;
 
-    public BallHolder(GameStateManager gameStateManager, BallFactory ballFactory, BallHolderConfig config)
+    public BallHolder(BallFactory ballFactory, BallHolderConfig config)
     {
         this.ballFactory = ballFactory;
         Capacity = config.Capacity;
-        gameStateManager.GameStateChanged += OnStateChanged;
         foreach (BallInfoData ball in config.StartBalls)
         {
             var ballInfo = ballFactory.Create(ball);
             balls.Add(ballInfo);
+            ballInfo.OnAddedToHolder();
         }
     }
 
     public void AddBall(BallInfoData ballInfoData)
     {
-        if (!isActive || Capacity == balls.Count) return;
+        if (Capacity == balls.Count) return;
         var ballInfo = ballFactory.Create(ballInfoData);
         balls.Add(ballInfo);
         BallAdded?.Invoke(balls.Count - 1, ballInfo);
+        ballInfo.OnAddedToHolder();
+
+        BallAdded?.Invoke(balls.Count -1, ballInfo);
     }
 
     public void RemoveBall(int index)
     {
-        if (!isActive || !IsIndexValid(index))
+        if (!IsIndexValid(index))
             return;
 
+
+        balls[index].OnRemovedFromHolder();
         balls.RemoveAt(index);
         BallRemoved?.Invoke(index);
     }
@@ -66,13 +71,36 @@ public class BallHolder
         CapacityChanged?.Invoke(Capacity);
     }
 
+    public void RemoveBall(string ballHash)
+    {
+        if (string.IsNullOrEmpty(ballHash)) return;
+
+        int index = balls.FindIndex(b => b != null && b.Hash == ballHash);
+        if (index != -1)
+        {
+            RemoveBall(index);
+        }
+    }
+
     private bool IsIndexValid(int index)
     {
         return index >= 0 && index < balls.Count;
     }
 
-    private void OnStateChanged(GameStateManager.GameState newState)
+    public void ApplySelectedBall(string ballHash, HitInfo hitInfo)
     {
-        isActive = newState == GameStateManager.GameState.Shopping;
+        BallInfo targetBall = balls.Find(b => b != null && b.Hash == ballHash);
+        if (targetBall != null)
+        {
+            targetBall.ApplySelectedEffect(hitInfo);
+            selectedBalls.Add(targetBall);
+        }
+    }
+
+    public void RemoveSelectedBallsEffect()
+    {
+        foreach(var ball in selectedBalls)
+            ball.RemoveSelectedEffect();
+        selectedBalls.Clear();
     }
 }

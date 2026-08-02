@@ -1,28 +1,18 @@
-﻿using System;
-using UnityEngine;
-
-public abstract class BallInfo
+﻿public abstract class BallInfo
 {
-    public string BallHash { get; }
-    public BallInfoData BallInfoData { get; }
+    public string Hash { get; private set; }
+    public BallInfoData BallInfoData { get; private set; }
+    public BallDependencies Dependencies { get; private set; }
 
-    public BallInfo(BallInfoData ballInfoData)
+    protected BallInfo(string ballHash, BallInfoData data, BallDependencies deps)
     {
-        BallHash = Guid.NewGuid().ToString();
-        BallInfoData = ballInfoData;
+        Hash = ballHash;
+        BallInfoData = data;
+        Dependencies = deps;
     }
 
-    public abstract void OnLanding();
-}
-
-public class SimpleBallInfo : BallInfo
-{
-    public SimpleBallInfo(BallInfoData ballInfoData) : base(ballInfoData)
-    {
-    }
-
-    public override void OnLanding()
-    {
-        
-    }
+    public virtual void ApplySelectedEffect(HitInfo hitInfo) { }
+    public virtual void RemoveSelectedEffect() { }
+    public virtual void OnAddedToHolder() { }
+    public virtual void OnRemovedFromHolder() { }
 }
