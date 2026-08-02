@@ -184,7 +184,6 @@ public class RoundManager
             Lose?.Invoke();
             return;
         }
-            roundStateManager.ChangeState(RoundState.Lose);
 
         betTable.ClearBets();
 
