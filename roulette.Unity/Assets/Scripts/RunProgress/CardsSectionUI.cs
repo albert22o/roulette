@@ -9,24 +9,24 @@ public class CardsSectionUI : MonoBehaviour
     [SerializeField] private ListItemUI listItemPrefab;
     [SerializeField] private Sprite defaultIcon;
 
-    private CardCollection cardCollection;
+    private CardHolder cardHolder;
     private readonly List<ListItemUI> spawnedItems = new();
 
     [Inject]
-    public void Construct(CardCollection cardCollection)
+    public void Construct(CardHolder cardCollection)
     {
-        this.cardCollection = cardCollection;
+        this.cardHolder = cardCollection;
     }
 
     public void UpdateData()
     {
         ClearItems();
 
-        var cards = cardCollection.GetCollectedCards();
+        var cards = cardHolder.GetCollectedCards();
 
         foreach (var item in cards)
         {
-            if (item is GeneralMultipilerCardData cardData)
+            if (item.Data is CardData cardData)
             {
                 Sprite icon = cardData.Icon != null ? cardData.Icon : defaultIcon;
                 string displayName = string.IsNullOrEmpty(cardData.Name)

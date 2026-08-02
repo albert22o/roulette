@@ -105,16 +105,40 @@ public class BetCalculator
         fieldNumberMultipliers[fieldNumber] = current + delta;
     }
 
+    public void ModifyFieldNumberMultiplier(int delta)
+    {
+        for (int i = 1; i <= 36; i++)
+        {
+            ModifyFieldNumberMultiplier(i, delta);
+        }
+    }
+
     public void ModifyDozenMultiplier(DozenType dozen, int delta)
     {
         var current = dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
         dozenMultipliers[dozen] = current + delta;
     }
 
+    public void ModifyDozenMultiplier(int delta)
+    {
+        foreach (DozenType type in Enum.GetValues(typeof(DozenType)))
+        {
+            ModifyDozenMultiplier(type, delta);
+        }
+    }
+
     public void ModifyColorMultiplier(ColorType color, int delta)
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
+    }
+
+    public void ModifyColorMultiplier(int delta)
+    {
+        foreach (ColorType type in Enum.GetValues(typeof(ColorType)))
+        {
+            ModifyColorMultiplier(type, delta);
+        }
     }
 
     public void OnStateChanged(RoundState newState)
