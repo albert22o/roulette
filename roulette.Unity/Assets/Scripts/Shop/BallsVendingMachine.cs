@@ -1,4 +1,4 @@
-using NUnit.Framework.Interfaces;
+﻿using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 using Zenject;
@@ -11,6 +11,9 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
+
+    [Space]
+    [SerializeField] private OutlineController outline;
 
     private int cost;
     private Shop shop;
@@ -48,7 +51,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     {
         if (ballHolder.HasFreeSlot)
         {
-            if (goldenChips.Amount >= Cost)
+            if (goldenChips.AvailableAmount >= Cost)
             {
                 goldenChips.Remove(Cost);
                 boughtBall = ballsTable.GetRandomItem() as BallInfoData;
@@ -80,10 +83,12 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }

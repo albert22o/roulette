@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7901b78afa383e4bad8faa083314367, type: 3}
+  m_Name: 8BallChip
+  m_EditorClassIdentifier: 
+  itemName: "\u0424\u0438\u0448\u043A\u0430 \"8Ball\""
+  description: "+1 \u0441\u043B\u043E\u0442 \u0434\u043B\u044F \u0448\u0430\u0440\u0438\u043A\u0430."
+  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  rarityType: 2
+  Icon: {fileID: 0}
+  cost: 6
+  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  ModifyAmount: 0
+  BallSlotToRemove: -1

@@ -57,7 +57,8 @@ class BetTableView : MonoBehaviour
         {
             betButtons[pocket.Key].Init(pocket.Value,
                 () => betTable.AddBet(pocket.Key),
-                () => betTable.RemoveBet(pocket.Key));
+                () => betTable.RemoveBet(pocket.Key),
+                pocket.Key);
         }
     }
 

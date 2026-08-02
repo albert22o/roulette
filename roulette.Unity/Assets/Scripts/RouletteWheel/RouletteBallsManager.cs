@@ -68,8 +68,8 @@ public class RouletteBallsManager : MonoBehaviour
         prevAngles.Add(0);
         stableTimes.Add(0);
         isSimulating = true;
+        
     }
-
 
     void Update()
     {
@@ -82,6 +82,10 @@ public class RouletteBallsManager : MonoBehaviour
 
         if (hitsInfo.Count == balls.Count)
         {
+            foreach (Ball ball in balls)
+            {
+                ball.Stop();
+            }
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
             isSimulating = false;
 

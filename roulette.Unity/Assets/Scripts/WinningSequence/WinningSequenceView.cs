@@ -46,7 +46,7 @@ public class WinningSequenceView : MonoBehaviour
         winningSequence.EndSequence -= OnEndSequence;
     }
 
-    private void OnSequenceStart(int betSum, int _)
+    private void OnSequenceStart(int betSum, int _a1, float _a2)
     {
         betText.text = betSum.ToString();
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.BetHighlight);
@@ -78,9 +78,9 @@ public class WinningSequenceView : MonoBehaviour
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyChips);
     }
 
-    private void OnDisplayMultiplier(int multiplier)
+    private void OnDisplayMultiplier(float multiplier)
     {
-        generalMultiplierText.text = multiplier.ToString();
+        generalMultiplierText.text = multiplier.ToString("0.##");
     }
 
     private void OnEndSequence(bool isWin)

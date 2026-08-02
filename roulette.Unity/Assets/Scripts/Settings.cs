@@ -10,4 +10,5 @@ public class Settings : ScriptableObject
     public BallHolderConfig BallHolderConfig;
     public ChipHolderConfig ChipHolderConfig;
     public PlaqueShopConfig PlaqueShopConfig;
+    public BossRewardConfig BossRewardConfig;
 }

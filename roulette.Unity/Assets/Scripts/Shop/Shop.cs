@@ -24,40 +24,55 @@ public class Shop : MonoBehaviour
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
+    private RoundManager roundManager;
+    private ProgressionManager progressionManager;
 
     public event Action InteractionStarted, InteractionFinished;
 
     [Inject]
-    public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder)
+    public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder,
+        RoundManager roundManager, ProgressionManager progressionManager)
     {
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
+        this.roundManager = roundManager;
+        this.progressionManager = progressionManager;
+        roundManager.Win += OnQuotaUpdated;
     }
 
     private void Start()
     {
-        OnQuotaUpdated();
+        UpdateShop(true);
     }
+
 
     public void OnQuotaUpdated()
     {
+        UpdateShop(false);
+    }
+
+    private void UpdateShop(bool forceUpdateFood)
+    {
+        if (progressionManager.Current.IsBoss|| forceUpdateFood)
+        {
+            foodPlace.UpdateItem();
+        }
         chipPlacesController.Fill();
         rerollButton.ResetCost();
         baseMoneyVendingMachine.ResetCost();
-        foodPlace.UpdateItem();
     }
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
     {
+        tooltip.Show(title, mainText);
         tooltip.gameObject.SetActive(true);
-        tooltip.SetData(title, mainText);
         tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
     public void HideTooltip()
     {
-        tooltip.gameObject.SetActive(false);
+        tooltip.Hide();
     }
 
     public bool TrySell(ItemData item, int index)
@@ -79,7 +94,8 @@ public class Shop : MonoBehaviour
         }
         else if (item is ChipData chipData)
         {
-            goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
+            float sellCost = (int)(chipData.Cost * chipSellMultiplier);
+            if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
             chipHolder.RemoveChip(index);
             return true;
         }

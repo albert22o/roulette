@@ -5,24 +5,22 @@
     public bool HasNext => currentIndex < roundsConfig.Rounds.Count - 1;
 
     private readonly RoundsConfig roundsConfig;
+    private readonly GameStateManager gameStateManager;
     private int currentIndex = 0;
 
-    public ProgressionManager(RoundsConfig roundsConfig, RoundStateManager roundStateManager)
+    public ProgressionManager(RoundsConfig roundsConfig, RoundStateManager roundStateManager, GameStateManager gameStateManager)
     {
         this.roundsConfig = roundsConfig;
-        roundStateManager.StateChanged += OnStateChanged;
+        this.gameStateManager = gameStateManager;
     }
 
-    private void OnStateChanged(RoundStateManager.RoundState newState)
-    {
-        if (newState == RoundStateManager.RoundState.Win)
-            Advance();
-    }
-
-    private void Advance()
+    public void Advance()
     {
         if (!HasNext)
+        {
+            gameStateManager.ChangeGameState(GameStateManager.GameState.Win);
             return;
+        }
 
         currentIndex++;
     }

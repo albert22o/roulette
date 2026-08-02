@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +9,8 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     [SerializeField] private int purchasedMoney = 100;
 
     [SerializeField] private ButtonAnimation3D buttonAnimation;
+
+    [SerializeField] private OutlineController outline;
 
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
@@ -51,7 +53,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public void TryBuy()
     {
         buttonAnimation.Press();
-        if (goldenChips.Amount >= Cost)
+        if (goldenChips.AvailableAmount >= Cost)
         {
             goldenChips.Remove(Cost);
             Cost += nextCostDelta;
@@ -67,10 +69,12 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, tooltipPosition.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }

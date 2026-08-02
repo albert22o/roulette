@@ -13,7 +13,7 @@ public class BallsLauncher : MonoBehaviour
     [SerializeField] private float launchVelocityMax;
 
     [SerializeField] private Ball ballPrefab;
-    [SerializeField] private BallVisual ballVisualPrefab;
+    [SerializeField] private RouletteBall ballVisualPrefab;
     [SerializeField] private RouletteBallsManager ballsManager;
 
     [SerializeField] private Transform physicalRoulette, visualRoulette;
@@ -61,14 +61,14 @@ public class BallsLauncher : MonoBehaviour
         ball.Launch(transform.right * velocity, physicalRoulette);
         ballsManager.AddBall(ball);
 
-        var ballVisual = Instantiate(ballVisualPrefab, transform.position, Quaternion.identity);
+        var rouletteBall = Instantiate(ballVisualPrefab, transform.position, Quaternion.identity);
         {
-            ballVisual.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
-            ballVisual.SetVisualComponent(ballData.VisualComponent);
-            ballVisual.Clicked += OnBallClicked;
-            ballVisual.Hover += OnBallHover;
-            ballVisual.UnHover += OnBallUnHover;
-            ballVisual.Destroyed += () => OnBallDestroyed(ballVisual);
+            rouletteBall.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
+            rouletteBall.SetVisualComponent(ballData.VisualComponent);
+            rouletteBall.Clicked += OnBallClicked;
+            rouletteBall.Hover += OnBallHover;
+            rouletteBall.UnHover += OnBallUnHover;
+            rouletteBall.Destroyed += () => OnBallDestroyed(rouletteBall);
         }
     }
     public void Clear()
@@ -116,7 +116,7 @@ public class BallsLauncher : MonoBehaviour
         Clicked?.Invoke(hash);
     }
 
-    private void OnBallDestroyed(BallVisual ball)
+    private void OnBallDestroyed(RouletteBall ball)
     {
         ball.Clicked -= OnBallClicked;
         ball.Hover -= OnBallHover;

@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-[RequireComponent(typeof(CharacterController),typeof(MeshRenderer),typeof(Collider))]
+[RequireComponent(typeof(CharacterController), typeof(MeshRenderer), typeof(Collider))]
 public class FirstPersonController : MonoBehaviour
-{ 
+{
     [Header("Движение")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 1.2f;
@@ -25,18 +25,23 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
+    private Camera mainCamera;
+    private bool isCameraTransitionFinished = true;
 
     private GameStateManager gameStateManager;
+    private CameraEventHandler cameraEventHandler;
 
     [Inject]
-    public void Constuct(GameStateManager gameStateManager)
+    public void Construct(GameStateManager gameStateManager, Camera camera, CameraEventHandler cameraEventHandler)
     {
         this.gameStateManager = gameStateManager;
+        mainCamera = camera;
+        this.cameraEventHandler = cameraEventHandler;
     }
 
     public void Start()
     {
-        if (cameraTransform  == null)
+        if (cameraTransform == null)
         {
             Debug.LogError("Не назначена ссылка на камеру");
             return;
@@ -46,6 +51,7 @@ public class FirstPersonController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
         Enable();
         gameStateManager.GameStateChanged += OnGameStateChanged;
+        isCameraTransitionFinished = true;
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
@@ -56,6 +62,21 @@ public class FirstPersonController : MonoBehaviour
             Disable();
     }
 
+    public void SyncToMainCameraDirection()
+    {
+        Vector3 euler = mainCamera.transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+
+        float rawX = euler.x;
+        if (rawX > 180f) rawX -= 360f;
+
+        xRotation = rawX;
+
+        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        lookInput = Vector2.zero;
+    }
+
     private void Enable()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -63,6 +84,17 @@ public class FirstPersonController : MonoBehaviour
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
+        SyncToMainCameraDirection();
+
+        if (cameraEventHandler != null && cameraEventHandler.IsTransitioning)
+        {
+            isCameraTransitionFinished = false;
+            cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
+        }
+        else
+        {
+            isCameraTransitionFinished = true;
+        }
     }
 
     private void Disable()
@@ -74,12 +106,18 @@ public class FirstPersonController : MonoBehaviour
         playerCollider.enabled = false;
     }
 
+    private void OnCameraTransitionFinished()
+    {
+        isCameraTransitionFinished = true;
+        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
+    }
+
     private void Update()
     {
-        if (active)
+        if (active && isCameraTransitionFinished)
         {
             HandleMouseLook();
-            HandleMovement();    
+            HandleMovement();
         }
     }
 
@@ -89,6 +127,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
+        if (!active)
+            return;
+
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;
 

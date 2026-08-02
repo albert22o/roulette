@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +9,8 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     [SerializeField] private int initCost = 2;
     [SerializeField] private int costDelta;
     [SerializeField] private ButtonAnimation3D buttonAnimation;
+
+    [SerializeField] private OutlineController outline;
 
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
@@ -45,7 +47,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public void OnClick()
     {
         buttonAnimation.Press();
-        if (goldenChips.Amount >= Cost)
+        if (goldenChips.AvailableAmount >= Cost)
         {
             goldenChips.Remove(Cost);
             Cost += costDelta;
@@ -56,10 +58,12 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public void OnHoverEnter()
     {
         shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         shop.HideTooltip();
+        outline.ToggleMaterial(false);
     }
 }

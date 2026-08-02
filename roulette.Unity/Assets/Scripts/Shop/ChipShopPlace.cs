@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 
@@ -6,6 +6,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 {
     [SerializeField] private Shop shop;
     [SerializeField] private DrumNumberDisplay costView;
+    [SerializeField] private OutlineController outline;
 
     private ChipData item;
     private ChipHolder chipHolder;
@@ -64,7 +65,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     private bool TryBuy(ChipShopPlace place)
     {
-        if (goldenChips.Amount >= place.Item.Cost)
+        if (goldenChips.AvailableAmount >= place.Item.Cost)
         {
             if (chipHolder.HasFreeSlot)
             {
@@ -107,10 +108,12 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void OnHoverEnter()
     {
         ShowDescription();
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         HideDescription();
+        outline.ToggleMaterial(false);
     }
 }

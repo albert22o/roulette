@@ -18,6 +18,7 @@ public class MoneyCounterView : MonoBehaviour
     private int currentDisplayedMoney;
     private int bet;
     private int reward;
+    private float rerollCoeff;
 
     [Inject]
     public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence)
@@ -40,7 +41,7 @@ public class MoneyCounterView : MonoBehaviour
         winningSequence.CountMoney -= OnCountMoney;
     }
 
-    private void OnCountMoney(int bet, int multiplier, int reward)
+    private void OnCountMoney(int bet, float _, int reward)
     {
         this.reward = reward;
         currentDisplayedMoney = 0;
@@ -62,11 +63,12 @@ public class MoneyCounterView : MonoBehaviour
         chipSpawner.RequestSpawn(reward / BetTable.BetStep);
     }
 
-    private void OnSequenceStart(int bet, int multiplier)
+    private void OnSequenceStart(int bet, int multiplier, float rerollCoeff)
     {
         this.bet = bet;
+        this.rerollCoeff = rerollCoeff;
         resultText.text = "0";
-        formulaText.text = $"{bet} x {multiplier}";
+        formulaText.text = $"{bet} x {multiplier:0.##} x {rerollCoeff:0.##}";
         animator.SetTrigger("fade");
     }
 
@@ -76,8 +78,8 @@ public class MoneyCounterView : MonoBehaviour
         chipSpawner.RequestClear();
     }
 
-    private void OnDisplayMultiplier(int multiplier)
+    private void OnDisplayMultiplier(float multiplier)
     {
-        formulaText.text = $"{bet} x {multiplier}";
+        formulaText.text = $"{bet} x {multiplier:0.##} x {rerollCoeff:0.##}";
     }
 }

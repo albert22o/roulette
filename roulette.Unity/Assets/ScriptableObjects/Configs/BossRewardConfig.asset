@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73683e53034d55b42b306e407d7b5c7d, type: 3}
+  m_Name: BossRewardConfig
+  m_EditorClassIdentifier: 
+  <GeneralMultiplierCardsTable>k__BackingField: {fileID: 11400000, guid: a620ecd2f33ea454d8cb3c8f160c55c9, type: 2}
+  <OtherItemsTable>k__BackingField: {fileID: 11400000, guid: f634416ea04a99b40b350867c700218d, type: 2}

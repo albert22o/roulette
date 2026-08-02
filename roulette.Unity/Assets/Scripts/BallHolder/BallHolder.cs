@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zenject; 
 
-public class BallHolder 
+public class BallHolder
 {
     public event Action<int, BallInfo> BallAdded;
     public event Action<int> BallRemoved;
-
+    public event Action<int> CapacityChanged;
     public IReadOnlyList<BallInfo> Balls => balls;
-
-    public int Capacity { get; }
-
+    public int Capacity { get; private set; }
+    public int FreeSlotsCount => Capacity - balls.Count;
     private readonly List<BallInfo> balls = new();
     private readonly BallFactory ballFactory;
     private List<BallInfo> selectedBalls = new();
-
     public bool HasFreeSlot => balls.Count < Capacity;
 
-    [Inject]
     public BallHolder(BallFactory ballFactory, BallHolderConfig config)
     {
         this.ballFactory = ballFactory;
         Capacity = config.Capacity;
-
         foreach (BallInfoData ball in config.StartBalls)
         {
             var ballInfo = ballFactory.Create(ball);
@@ -34,9 +29,9 @@ public class BallHolder
     public void AddBall(BallInfoData ballInfoData)
     {
         if (Capacity == balls.Count) return;
-
         var ballInfo = ballFactory.Create(ballInfoData);
         balls.Add(ballInfo);
+        BallAdded?.Invoke(balls.Count - 1, ballInfo);
         ballInfo.OnAddedToHolder();
 
         BallAdded?.Invoke(balls.Count -1, ballInfo);
@@ -51,6 +46,29 @@ public class BallHolder
         balls[index].OnRemovedFromHolder();
         balls.RemoveAt(index);
         BallRemoved?.Invoke(index);
+    }
+
+    public void ChangeCapacity(int delta)
+    {
+        if (delta == 0)
+            return;
+
+        int newCapacity = Capacity + delta;
+        if (newCapacity < 0)
+            newCapacity = 0;
+
+        if (newCapacity == Capacity)
+            return;
+
+        while (balls.Count > newCapacity)
+        {
+            int lastIndex = balls.Count - 1;
+            balls.RemoveAt(lastIndex);
+            BallRemoved?.Invoke(lastIndex);
+        }
+
+        Capacity = newCapacity;
+        CapacityChanged?.Invoke(Capacity);
     }
 
     public void RemoveBall(string ballHash)
@@ -78,6 +96,7 @@ public class BallHolder
             selectedBalls.Add(targetBall);
         }
     }
+}
 
     public void RemoveSelectedBallsEffect()
     {

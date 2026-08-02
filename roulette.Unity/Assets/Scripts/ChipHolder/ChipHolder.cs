@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using UnityEngine;
 
 public class ChipHolder
 {
     public event Action<int, Chip> ChipAdded;
     public event Action<int> ChipRemoved;
     public event Action<int, int> ChipsSwapped;
+    public event Action<int, int> ChipMoved;
     public event Action<int> ChipAnimated;
 
     public event Action<int> SlotAdded;
-    public event Action<int> SlotRemoved; 
+    public event Action<int> SlotRemoved;
 
     public int Capacity { get; private set; }
     private Chip[] chips;
@@ -19,19 +18,21 @@ public class ChipHolder
     private readonly ChipFactory chipFactory;
 
     public bool HasFreeSlot => FindFreeSlot() != -1;
+
     public int FreeSlotCount
     {
         get
         {
-            var freeSlotIndex = FindFreeSlot();
-            if (freeSlotIndex == -1)
-                return 0;
-            return Capacity - freeSlotIndex;
+            int count = 0;
+            for (int i = 0; i < chips.Length; i++)
+                if (chips[i] == null)
+                    count++;
+            return count;
         }
     }
     public IReadOnlyList<Chip> Chips => chips;
 
-    public ChipHolder(RoundStateManager roundStateManager, ChipFactory chipFactory, ChipHolderConfig config)
+    public ChipHolder(RoundStateManager roundStateManager, BetCalculator betCalculator, ChipFactory chipFactory, ChipHolderConfig config)
     {
         this.chipFactory = chipFactory;
         Capacity = config.Capacity;
@@ -39,6 +40,7 @@ public class ChipHolder
         foreach (var chip in config.StartChips)
             AddChip(chip);
         roundStateManager.StateChanged += OnStateChanged;
+        betCalculator.GetReward += (_) => RevertAll();
     }
 
     public void AddChip(ChipData chipData)
@@ -115,10 +117,6 @@ public class ChipHolder
             AddSlot();
     }
 
-    /// <summary>
-    /// Удаляет слот по индексу. Если в нём была фишка — сначала убирает её.
-    /// Индексы всех слотов после удалённого сдвигаются на 1 назад.
-    /// </summary>
     public void RemoveSlot(int index)
     {
         if (!IsValidIndex(index))
@@ -128,18 +126,22 @@ public class ChipHolder
         if (chips[index] != null)
             RemoveChip(index);
 
-        var newChips = new Chip[Capacity - 1];
-        for (int i = 0, j = 0; i < chips.Length; i++)
-        {
-            if (i == index)
-                continue;
-            newChips[j++] = chips[i];
-        }
+        int lastIndex = Capacity - 1;
 
+        for (int i = index + 1; i <= lastIndex; i++)
+        {
+            chips[i - 1] = chips[i];
+            if (chips[i - 1] != null)
+                ChipMoved?.Invoke(i, i - 1);
+        }
+        chips[lastIndex] = null;
+
+        var newChips = new Chip[Capacity - 1];
+        Array.Copy(chips, newChips, newChips.Length);
         chips = newChips;
         Capacity--;
 
-        SlotRemoved?.Invoke(index);
+        SlotRemoved?.Invoke(lastIndex);
     }
 
     /// <summary>

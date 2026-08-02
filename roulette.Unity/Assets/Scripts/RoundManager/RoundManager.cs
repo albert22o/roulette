@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Bson;
+using System;
 using System.Linq;
 using static RoundStateManager;
 
@@ -11,6 +12,9 @@ public class RoundManager
     public event Action<bool> AbleToWinChanged;
 
     public event Action Win;
+    public event Action Lose;
+    public event Action Rerolled;
+    public event Action Spun;
 
     public int Goal
     {
@@ -61,35 +65,36 @@ public class RoundManager
             }
         }
 
+    public float GoalModifier => goalModifier;
+
     private int betCount = 3;
     private int rerollCount = 5;
     private int quote = 0;
     private int goal = 1000;
+    private float goalModifier = 1f;
 
     private RoundState betState = RoundState.PlacingBets;
     private bool ableToWin;
     private readonly ProgressionManager progressionManager;
+    private readonly BetCalculator betCalculator;
     private readonly IRouletteWheel rouletteWheel;
     private readonly RoundStateManager roundStateManager;
     private readonly TableInfo tableInfo;
-    private readonly ChipHolder chipHolder;
     private readonly BallHolder ballHolder;
     private readonly BetTable betTable;
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         TableInfo tableInfo, ProgressionManager progressionManager, BetCalculator betCalculator,
-        ChipHolder chipHolder, BallHolder ballHolder, BetTable betTable)
+        BallHolder ballHolder, BetTable betTable)
     {
         this.rouletteWheel = rouletteWheel;
-
-        betCalculator.GetReward += OnGetReward;
-
         this.betTable = betTable;
         this.roundStateManager = roundStateManager;
         this.tableInfo = tableInfo;
         this.progressionManager = progressionManager;
-        this.chipHolder = chipHolder;
+        this.betCalculator = betCalculator;
         this.ballHolder = ballHolder;
+        betCalculator.GetReward += OnGetReward;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -98,8 +103,13 @@ public class RoundManager
         Quote = 0;
         BetCount = tableInfo.BetCount;
         RerollCount = tableInfo.RerollCount;
-        Goal = progressionManager.Current.Goal;
+        Goal = (int)Math.Round(progressionManager.Current.Goal * GoalModifier);
         AbleToWin = false;
+    }
+
+    public void ModifiGoalModifier(float delta)
+    {
+        goalModifier += delta;
     }
 
     public void Spin()
@@ -111,6 +121,8 @@ public class RoundManager
         if (!betTable.NotNullBetAmounts.Any())
             return;
 
+        betCalculator.ResetRerollCoeff();
+        Spun?.Invoke();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
         rouletteWheel.ClearBalls();
@@ -132,6 +144,8 @@ public class RoundManager
         if (rerollCount <= 0)
             return;
 
+        betCalculator.DecreaseRerollCoeff();
+        Rerolled?.Invoke();
         rouletteWheel.ClearBalls();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
@@ -150,14 +164,26 @@ public class RoundManager
         if (!AbleToWin)
             return;
         Win?.Invoke();
+        progressionManager.Advance();
+    }
+
+    public void ForceWin()
+    {
+        Win?.Invoke();
     }
 
     private void OnGetReward(int reward)
     {
         quote += reward;
+        betTable.ClearBets();
+        QuoteChanged?.Invoke(quote);
         if (quote >= goal)
             AbleToWin = true;
         else if (betCount <= 0)
+        {
+            Lose?.Invoke();
+            return;
+        }
             roundStateManager.ChangeState(RoundState.Lose);
 
         betTable.ClearBets();

@@ -8,6 +8,8 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     [SerializeField] private int cost = 10;
     [SerializeField] private ItemPlace itemPlace;
 
+    [SerializeField] private OutlineController outline;
+
 
     private FoodData item;
     private Shop shop;
@@ -39,7 +41,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void OnClick()
     {
-        if (goldenChips.Amount >= cost)
+        if (goldenChips.AvailableAmount >= cost)
         {
             goldenChips.Remove(cost);
             foodHolder.AddFood(item);
@@ -54,12 +56,14 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     {
         ShowDescription();
         IsHoverChanged?.Invoke(true);
+        outline.ToggleMaterial(true);
     }
 
     public void OnHoverExit()
     {
         HideDescription();
         IsHoverChanged?.Invoke(false);
+        outline.ToggleMaterial(false);
     }
 
     public void UpdateItem()
