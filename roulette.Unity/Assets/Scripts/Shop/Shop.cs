@@ -102,6 +102,23 @@ public class Shop : MonoBehaviour
         return false;
     }
 
+    public int GetSellPrice(ItemData item)
+    {
+        if (item is BallInfoData)
+        {
+            return ballSellCost;
+        }
+        else if (item is ChipData chipData)
+        {
+            int sellCost = (int)(chipData.Cost * chipSellMultiplier);
+            return sellCost;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;

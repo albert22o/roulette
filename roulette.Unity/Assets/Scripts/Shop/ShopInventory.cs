@@ -75,7 +75,8 @@ public class ShopInventory : MonoBehaviour
 
     private void OnHoverEnter(PlaqueItem item)
     {
-        shop.ShowTooltip(item.Data.Name, item.Data.Description, item.transform.position);
+        string description = item.Data.Description + "\n" + "Цена продажи: " + shop.GetSellPrice(item.Data);
+        shop.ShowTooltip(item.Data.Name, description, item.transform.position);
     }
 
     private void UpdateChips()
