@@ -95,6 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4087574460633009231}
+  - component: {fileID: 2590620839389058056}
   m_Layer: 0
   m_Name: PlaqueModel
   m_TagString: Untagged
@@ -118,3 +119,18 @@ Transform:
   - {fileID: 4073727203331190628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2590620839389058056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4657025761638334603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87c956520a94b3479b95fbafb9c8505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnMaterial: {fileID: -876546973899608171, guid: 87bbdca55a06de34d915145264803578, type: 3}
+  burnDuration: 1.5
+  dissolveProperty: _Dissolve

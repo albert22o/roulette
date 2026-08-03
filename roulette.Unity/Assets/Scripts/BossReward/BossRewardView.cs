@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -77,8 +77,49 @@ public class BossRewardView : MonoBehaviour
     private void OnItemClick(PlaqueItem item)
     {
         if (isInteractable == false) return;
+
+        isInteractable = false;
         itemReceiver.ReceiveItem(item.Data);
-        ClearAllItems();
+
+        foreach (var place in itemPlaces)
+        {
+            if (!place.gameObject.activeSelf) continue;
+
+            // ИЩЕМ BurnEffect В ДЕТЯХ (там, где спавнится визуал)
+            var burnEffect = place.GetComponentInChildren<BurnEffect>();
+
+            if (place == item)
+            {
+                // Выбранная награда — скрываем через 1.5 секунды
+                StartCoroutine(DelayedHide(place.gameObject, 1.5f));
+            }
+            else
+            {
+                // Лишние награды — сжигаем
+                if (burnEffect != null)
+                {
+                    burnEffect.StartBurn();
+                }
+                else
+                {
+                    Debug.LogWarning($"[BossRewardView] BurnEffect не найден на {place.gameObject.name}");
+                    place.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        StartCoroutine(WaitForBurnAndChangeState(2.5f));
+    }
+
+    private System.Collections.IEnumerator DelayedHide(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator WaitForBurnAndChangeState(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
     }
 
