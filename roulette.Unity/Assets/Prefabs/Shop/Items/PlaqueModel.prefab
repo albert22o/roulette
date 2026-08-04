@@ -133,4 +133,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   burnMaterial: {fileID: -876546973899608171, guid: 87bbdca55a06de34d915145264803578, type: 3}
   burnDuration: 1.5
-  dissolveProperty: _Dissolve
+  dissolveProperty: _Disolve

@@ -62,7 +62,6 @@ public class BossRewardView : MonoBehaviour
         cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
     }
 
-
     private void OnItemHoverEnter(PlaqueItem item)
     {
         tooltip.Show(item.Data.Name, item.Data.Description);
@@ -85,24 +84,20 @@ public class BossRewardView : MonoBehaviour
         {
             if (!place.gameObject.activeSelf) continue;
 
-            // ИЩЕМ BurnEffect В ДЕТЯХ (там, где спавнится визуал)
             var burnEffect = place.GetComponentInChildren<BurnEffect>();
 
             if (place == item)
             {
-                // Выбранная награда — скрываем через 1.5 секунды
                 StartCoroutine(DelayedHide(place.gameObject, 1.5f));
             }
             else
             {
-                // Лишние награды — сжигаем
                 if (burnEffect != null)
                 {
                     burnEffect.StartBurn();
                 }
                 else
                 {
-                    Debug.LogWarning($"[BossRewardView] BurnEffect не найден на {place.gameObject.name}");
                     place.gameObject.SetActive(false);
                 }
             }
@@ -121,15 +116,6 @@ public class BossRewardView : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
-    }
-
-    private void ClearAllItems()
-    {
-        foreach (var item in itemPlaces)
-        {
-            item.gameObject.SetActive(false);
-            item.SetData(null);
-        }
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newState)

@@ -131,6 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87c956520a94b3479b95fbafb9c8505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnMaterial: {fileID: 0}
+  burnMaterial: {fileID: -876546973899608171, guid: 87bbdca55a06de34d915145264803578, type: 3}
   burnDuration: 1.5
   dissolveProperty: _Dissolve
