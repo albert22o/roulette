@@ -10,6 +10,6 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] [TextArea] private string itemName;
     [SerializeField] [TextArea] private string description;
     [SerializeField] private GameObject shopPrefab;
-    [SerializeField] private RarityType rarityType;
+    [SerializeField] private RarityType rarityType = RarityType.None;
     [SerializeField] public Sprite Icon;
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -13,13 +14,15 @@ public class ShopInventory : MonoBehaviour
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
     private Shop shop;
+    private RarityData rarityData;
 
     [Inject]
-    public void Construct(BallHolder ballHolder, ChipHolder chipHolder, Shop shop)
+    public void Construct(BallHolder ballHolder, ChipHolder chipHolder, Shop shop, RarityData rarityData)
     {
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
         this.shop = shop;
+        this.rarityData = rarityData;
     }
 
     private void OnEnable()
@@ -75,7 +78,13 @@ public class ShopInventory : MonoBehaviour
 
     private void OnHoverEnter(PlaqueItem item)
     {
-        string description = item.Data.Description + "\n" + "Цена продажи: " + shop.GetSellPrice(item.Data);
+        string description = item.Data.Description;
+        if (item.Data.RarityType != RarityType.None)
+        {
+            var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
+            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
+        }
+        description += "\nЦена продажи: " + shop.GetSellPrice(item.Data);
         shop.ShowTooltip(item.Data.Name, description, item.transform.position);
     }
 

@@ -2,5 +2,6 @@
 {
     Epic,
     Common,
-    Rare
+    Rare,
+    None
 }

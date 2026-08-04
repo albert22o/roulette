@@ -1433,6 +1433,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 27.84
       objectReference: {fileID: 0}
+    - target: {fileID: 998332665222785895, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: rarityData
+      value: 
+      objectReference: {fileID: 11400000, guid: f89d3d1d863ce99459e7e649d8e7a120, type: 2}
     - target: {fileID: 1391093357535976200, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
@@ -1629,10 +1633,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 27
       objectReference: {fileID: 0}
-    - target: {fileID: 6512982634167066497, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
-      propertyPath: currentDigit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6254753558420566979, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       propertyPath: m_SizeDelta.x
       value: 676.9993
@@ -1643,6 +1643,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467240686230594706, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512982634167066497, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      propertyPath: currentDigit
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8327413986694656733, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
@@ -5920,23 +5924,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: chips.Array.data[0]
+      propertyPath: 'chips.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: a86a2fe5722e461468951800bbf1a5d9, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: chips.Array.data[1]
+      propertyPath: 'chips.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: eaea22270234ec443a658dd20f6c64b3, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: chips.Array.data[2]
+      propertyPath: 'chips.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: cb191765755619d43959ea7375ca7a61, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: chips.Array.data[3]
+      propertyPath: 'chips.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 159857b1d3df72140be62dde104949d4, type: 2}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
-      propertyPath: chips.Array.data[4]
+      propertyPath: 'chips.Array.data[4]'
       value: 
       objectReference: {fileID: 11400000, guid: 4bca6f7ac12e1b04795eddd0f385508f, type: 2}
     - target: {fileID: 8360052150238459966, guid: fc54237d291672944a57db5a13b89733, type: 3}

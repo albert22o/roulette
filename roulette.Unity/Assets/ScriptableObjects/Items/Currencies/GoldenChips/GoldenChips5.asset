@@ -16,4 +16,6 @@ MonoBehaviour:
     x5"
   description: 
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  rarityType: 3
+  Icon: {fileID: 0}
   amount: 1

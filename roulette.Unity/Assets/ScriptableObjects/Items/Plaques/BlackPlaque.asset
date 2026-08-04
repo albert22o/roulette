@@ -17,6 +17,8 @@ MonoBehaviour:
     5 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0445 \u043A\u0440\u0430\u0441\u043D\u044B\u0445
     \u0447\u0438\u0441\u0435\u043B \u0432 \u0447\u0435\u0440\u043D\u044B\u0439"
   shopPrefab: {fileID: 4657025761638334603, guid: cf73410da87e0dd4d917f9f138750601, type: 3}
+  rarityType: 3
+  Icon: {fileID: 0}
   <SelectionCount>k__BackingField: 5
   <filter>k__BackingField: 1
   <TargetColor>k__BackingField: 1
