@@ -19,4 +19,5 @@ MonoBehaviour:
   ChipHolderConfig: {fileID: 11400000, guid: d717b0894ca611e47b121125725b184b, type: 2}
   PlaqueShopConfig: {fileID: 11400000, guid: 1fdec112bac83c949bd7c4779da674e6, type: 2}
   BossRewardConfig: {fileID: 11400000, guid: c24c0fd376524874bbc3a1bb9c3eb16e, type: 2}
-  RarityData: {fileID: 11400000, guid: f89d3d1d863ce99459e7e649d8e7a120, type: 2}
+  RarityData: {fileID: 11400000, guid: ffec318f5634ca946ad4216db139ee8f, type: 2}
+  ShopFontConfig: {fileID: 11400000, guid: d9a1e0f4539f5ec4ea6fc22d61628517, type: 2}

@@ -13,6 +13,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private GoldenChips goldenChips;
     private ChipData boughtItem;
     private RarityData rarityData;
+    private ShopFontConfig fontColorsConfig;
     public ChipData Item
     {
         get => item;
@@ -29,11 +30,12 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public event Action<ItemData> ItemChanged;
 
     [Inject]
-    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips, RarityData rarityData)
+    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips, RarityData rarityData, ShopFontConfig fontColorsConfig)
     {
         this.chipHolder = chipHolder;
         this.goldenChips = goldenChips;
         this.rarityData = rarityData;
+        this.fontColorsConfig = fontColorsConfig;
     }
 
     public void SetItem(ChipData item)
@@ -52,6 +54,8 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             var rarity = rarityData.GetRarityDisplayData(Item.RarityType);
             description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
         }
+        var color = goldenChips.Amount >= Item.Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
+        description += $"\nЦена: <color={color}>{Item.Cost}</color>";
         shop.ShowTooltip(Item.Name, description, transform.position);
     }
 

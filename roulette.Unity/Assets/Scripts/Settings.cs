@@ -12,4 +12,5 @@ public class Settings : ScriptableObject
     public PlaqueShopConfig PlaqueShopConfig;
     public BossRewardConfig BossRewardConfig;
     public RarityData RarityData;
+    public ShopFontConfig ShopFontConfig;
 }

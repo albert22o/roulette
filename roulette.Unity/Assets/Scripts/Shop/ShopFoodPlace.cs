@@ -15,6 +15,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private Shop shop;
     private GoldenChips goldenChips;
     private FoodHolder foodHolder;
+    private ShopFontConfig shopFontConfig;
 
     public bool IsInteractable => item != null;
 
@@ -22,16 +23,20 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public event Action<bool> HasItemChanged;
 
 
-    [Inject] public void Construct(Shop shop, GoldenChips goldenChips, FoodHolder foodHolder)
+    [Inject] public void Construct(Shop shop, GoldenChips goldenChips, FoodHolder foodHolder, ShopFontConfig shopFontConfig)
     {
         this.shop = shop;
         this.goldenChips = goldenChips;
         this.foodHolder = foodHolder;
+        this.shopFontConfig = shopFontConfig;
     }
 
     public void ShowDescription()
     {
-        shop.ShowTooltip(item.Name, item.Description, transform.position);
+        var description = $"{item.Description}";
+        var color = goldenChips.Amount >= cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
+        description += $"\nЦена: <color={color}>{cost}</color>";
+        shop.ShowTooltip(item.Name, description, transform.position);
     }
 
     public void HideDescription()

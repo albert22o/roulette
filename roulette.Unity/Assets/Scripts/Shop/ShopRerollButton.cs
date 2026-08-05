@@ -19,6 +19,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     private int cost;
     private Money money;
     private GoldenChips goldenChips;
+    private ShopFontConfig shopFontConfig;
 
     public bool IsInteractable => chipPlacesController.CheckRerollAvailable();
     public int Cost
@@ -33,11 +34,12 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Money money, GoldenChips goldenChips)
+    public void Construct(Money money, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
     {
         this.goldenChips = goldenChips;
         this.money = money;
-    }
+        this.shopFontConfig = shopFontConfig;
+}
 
     public void ResetCost()
     {
@@ -57,7 +59,11 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
 
     public void OnHoverEnter()
     {
-        shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        var description = $"{mainTextKey}";
+        var color = goldenChips.Amount >= cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
+        description += $"\nЦена: <color={color}>{cost}</color>";
+
+        shop.ShowTooltip(titleKey, description, transform.position);
         outline.ToggleMaterial(true);
     }
 
