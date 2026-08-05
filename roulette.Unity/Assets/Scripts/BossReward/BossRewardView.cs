@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
+using Zenject.Asteroids;
 
 public class BossRewardView : MonoBehaviour
 {
@@ -20,17 +21,19 @@ public class BossRewardView : MonoBehaviour
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
     private bool isInteractable;
+    private RarityData rarityData;
 
     public event Action RewardReceived;
 
     [Inject]
     public void Construct(BossReward bossReward, ItemReceiver itemReceiver,
-        GameStateManager gameStateManager, CameraEventHandler cameraEventHandler)
+        GameStateManager gameStateManager, CameraEventHandler cameraEventHandler, RarityData rarityData)
     {
         this.bossReward = bossReward;
         this.itemReceiver = itemReceiver;
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
+        this.rarityData = rarityData;
     }
 
     private void Start()
@@ -65,7 +68,13 @@ public class BossRewardView : MonoBehaviour
 
     private void OnItemHoverEnter(PlaqueItem item)
     {
-        tooltip.Show(item.Data.Name, item.Data.Description);
+        string description = item.Data.Description;
+        if (item.Data.RarityType != RarityType.None)
+        {
+            var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
+            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
+        }
+        tooltip.Show(item.Data.Name, description);
         tooltip.transform.position = item.transform.position + Vector3.up * tooltipHeight;
     }
 

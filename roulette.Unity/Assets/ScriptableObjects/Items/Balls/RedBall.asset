@@ -18,8 +18,11 @@ MonoBehaviour:
     \u0435\u0441\u043B\u0438 \u043E\u043D \u0432\u044B\u043F\u0430\u043B \u043D\u0430
     \u043A\u0440\u0430\u0441\u043D\u043E\u0435 \u0447\u0438\u0441\u043B\u043E"
   shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
+  rarityType: 3
+  Icon: {fileID: 0}
   ballPrefab: {fileID: 4563755349166495531, guid: 3652028bf1924db47827b66cfc949158, type: 3}
   visualComponent:
     <Material>k__BackingField: {fileID: 2100000, guid: 8eb859eed293b144783a172faa9c590f, type: 2}
+  isDestroyable: 0
   multiplier: 3
   color: 0

@@ -12,6 +12,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private ChipHolder chipHolder;
     private GoldenChips goldenChips;
     private ChipData boughtItem;
+    private RarityData rarityData;
     public ChipData Item
     {
         get => item;
@@ -28,10 +29,11 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public event Action<ItemData> ItemChanged;
 
     [Inject]
-    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips)
+    public void Construct(ChipHolder chipHolder, GoldenChips goldenChips, RarityData rarityData)
     {
         this.chipHolder = chipHolder;
         this.goldenChips = goldenChips;
+        this.rarityData = rarityData;
     }
 
     public void SetItem(ChipData item)
@@ -44,7 +46,13 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void ShowDescription()
     {
         if (Item == null) return;
-        shop.ShowTooltip(Item.Name, Item.Description, transform.position);
+        string description = Item.Description;
+        if (Item.RarityType != RarityType.None)
+        {
+            var rarity = rarityData.GetRarityDisplayData(Item.RarityType);
+            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
+        }
+        shop.ShowTooltip(Item.Name, description, transform.position);
     }
 
     public void HideDescription()

@@ -11,4 +11,5 @@ public class Settings : ScriptableObject
     public ChipHolderConfig ChipHolderConfig;
     public PlaqueShopConfig PlaqueShopConfig;
     public BossRewardConfig BossRewardConfig;
+    public RarityData RarityData;
 }
