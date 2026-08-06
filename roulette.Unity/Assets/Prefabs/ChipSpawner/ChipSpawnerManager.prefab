@@ -77,6 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 0.2
-  chipPrefab: {fileID: 8665725115522850742, guid: 815b3ec4b96cfa7498c230a23fbe0d93, type: 3}
+  chipPrefab: {fileID: 6911491143773113581, guid: 35a4b3999957ccf4db0c535f6dbc26f0, type: 3}
   spawnPoint: {fileID: 1597914941276563860}
   randomSpawnPositionMultiplier: 0.4
