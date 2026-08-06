@@ -74,8 +74,7 @@ public class BossRewardView : MonoBehaviour
             var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
             description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
         }
-        tooltip.Show(item.Data.Name, description);
-        tooltip.transform.position = item.transform.position + Vector3.up * tooltipHeight;
+        tooltip.Show(item.Data.Name, description, item.transform.position);
     }
 
     private void OnItemHoverExit(PlaqueItem item)

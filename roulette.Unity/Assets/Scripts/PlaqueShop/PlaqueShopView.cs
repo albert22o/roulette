@@ -7,7 +7,6 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private PlaqueVendingMachine vendingMachine;
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private ShopTooltip tooltip;
-    [SerializeField] private float tooltipHeight;
     [SerializeField] private CancelInputHandler cancelInputHandler;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
@@ -58,8 +57,7 @@ public class PlaqueShopView : MonoBehaviour
 
     private void OnPlaqueHoverEnter(PlaqueItem item)
     {
-        tooltip.Show(item.Data.Name, item.Data.Description);
-        tooltip.transform.position = item.transform.position + Vector3.up * tooltipHeight;
+        tooltip.Show(item.Data.Name, item.Data.Description, item.transform.position);
     }
 
     private void OnPlaqueHoverExit(PlaqueItem item)

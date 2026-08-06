@@ -21,11 +21,12 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     private Shop shop;
     private GoldenChips goldenChips;
     private Money money;
+    private ShopFontConfig shopFontConfig;
 
 
     public int Cost
     {
-        get => cost; 
+        get => cost;
         private set
         {
             cost = value;
@@ -38,11 +39,12 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Shop shop, Money money, GoldenChips goldenChips)
+    public void Construct(Shop shop, Money money, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
     {
-        this.shop= shop;
+        this.shop = shop;
         this.goldenChips = goldenChips;
         this.money = money;
+        this.shopFontConfig = shopFontConfig;
     }
 
     public void ResetCost()
@@ -58,6 +60,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
             goldenChips.Remove(Cost);
             Cost += nextCostDelta;
             money.Add(purchasedMoney);
+            ShowTooltip();
         }
     }
 
@@ -68,8 +71,16 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     public void OnHoverEnter()
     {
-        shop.ShowTooltip(titleKey, mainTextKey, tooltipPosition.position);
+        ShowTooltip();
         outline.ToggleMaterial(true);
+    }
+
+    private void ShowTooltip()
+    {
+        var text = mainTextKey;
+        var color = goldenChips.Amount >= Cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
+        text += $"\nЦена: <color={color}>{Cost}</color>";
+        shop.ShowTooltip(titleKey, text, tooltipPosition.position);
     }
 
     public void OnHoverExit()

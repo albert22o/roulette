@@ -20,6 +20,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     private BallInfoData boughtBall;
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
+    private ShopFontConfig fontColorsConfig;
 
     public bool IsInteractable => boughtBall == null;
     public event Action<BallInfoData> BallBought;
@@ -35,11 +36,12 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Shop shop, GoldenChips goldenChips, BallHolder ballHolder)
+    public void Construct(Shop shop, GoldenChips goldenChips, BallHolder ballHolder, ShopFontConfig fontColorsConfig)
     {
         this.shop = shop;
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
+        this.fontColorsConfig = fontColorsConfig;
     }
 
     private void Start()
@@ -82,7 +84,10 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
        
     public void OnHoverEnter()
     {
-        shop.ShowTooltip(titleKey, mainTextKey, transform.position);
+        var text = mainTextKey;
+        var color = goldenChips.Amount >= Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
+        text += $"\nЦена: <color={color}>{Cost}</color>";
+        shop.ShowTooltip(titleKey, text, transform.position);
         outline.ToggleMaterial(true);
     }
 

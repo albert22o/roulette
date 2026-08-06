@@ -7,7 +7,6 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private ShopTooltip tooltip;
 
-    [SerializeField] private float tooltipHeight;
     [SerializeField] private float chipSellMultiplier = 0.5f;
     [SerializeField] private int ballSellCost = 3;
 
@@ -65,9 +64,8 @@ public class Shop : MonoBehaviour
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
     {
-        tooltip.Show(title, mainText);
+        tooltip.Show(title, mainText,position);
         tooltip.gameObject.SetActive(true);
-        tooltip.transform.position = position + Vector3.up * tooltipHeight;
     }
 
     public void HideTooltip()

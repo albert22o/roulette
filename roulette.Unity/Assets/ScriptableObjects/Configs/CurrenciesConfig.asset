@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CurrenciesConfig
   m_EditorClassIdentifier: 
   StartBossChips: 62
-  StartGoldenChips: 53
+  StartGoldenChips: 20
