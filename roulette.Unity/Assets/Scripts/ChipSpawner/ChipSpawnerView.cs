@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -48,7 +48,7 @@ public class ChipSpawnerView : MonoBehaviour
             0,
             (float)randomZ.NextDouble()) * randomSpawnPositionMultiplier;
 
-        GameObject chip = Instantiate(chipPrefab,spawnPoint.position + offsetPos, Quaternion.identity);
+        GameObject chip = Instantiate(chipPrefab, spawnPoint.position + offsetPos, Quaternion.Euler(90, 0, 0)); 
         spawnedChips.Add(chip);
     }
 
