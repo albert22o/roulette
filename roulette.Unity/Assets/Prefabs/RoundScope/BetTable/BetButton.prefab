@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldNumText: {fileID: 8548362096563339515}
   spawnChipPoint: {fileID: 7474288467868680278}
-  chipPrefab: {fileID: 8665725115522850742, guid: 815b3ec4b96cfa7498c230a23fbe0d93, type: 3}
+  chipPrefab: {fileID: 6911491143773113581, guid: 35a4b3999957ccf4db0c535f6dbc26f0, type: 3}
   blackMaterial: {fileID: 2100000, guid: 87245b78b553b5846882ae611b4a75e8, type: 2}
   redMaterial: {fileID: 2100000, guid: 991ae47d0f265e94780c1b078841eed6, type: 2}
   greenMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
