@@ -1,11 +1,13 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera tableCamera;
     [SerializeField] private TableSelectionView tableSelection;
+    [SerializeField] private GameObject fields;
 
     private GameStateManager stateManager;
     private bool isInteraction;
@@ -31,6 +33,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     public void StartInteraction()
     {
         tableCamera.gameObject.SetActive(true);
+        fields.gameObject.SetActive(true);
         isInteraction = true;
         tableSelection.StartInteraction();
     }
@@ -38,13 +41,13 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     public void FinishInteraction()
     {
         tableCamera.gameObject.SetActive(false);
+        fields.gameObject.SetActive(false);
         isInteraction = false;
         tableSelection.ClearHighlight();
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        Debug.Log(state);
         if (state == GameStateManager.GameState.FieldsSelecting)
         {
             StartInteraction();
@@ -54,7 +57,6 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
         {
             FinishInteraction();
             gameObject.SetActive(false);
-            Debug.Log("ewmgoierhuerbrjeg");
         }
     }
 }
