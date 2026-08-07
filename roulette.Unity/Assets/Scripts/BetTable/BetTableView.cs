@@ -12,6 +12,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;
+    [SerializeField] private ShopTooltip tooltip;
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
@@ -20,14 +21,17 @@ class BetTableView : MonoBehaviour
     private TableInfo tableInfo;
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
+    private ColorsDescription colorsDescription;
 
     [Inject]
-    public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence)
+    public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence,
+        ColorsDescription colorsDescription)
     {
         this.betTable = betTable;
         this.tableInfo = tableInfo;
         this.betCalculator = betCalculator;
         this.winningSequence = winningSequence;
+        this.colorsDescription = colorsDescription;
     }
 
     public void Start()
@@ -60,6 +64,28 @@ class BetTableView : MonoBehaviour
                 () => betTable.RemoveBet(pocket.Key),
                 pocket.Key);
         }
+        foreach( var button in betButtons)
+        {
+            button.HoverEnter += OnHoverEnter;
+            button.HoverExit += OnHoverExit;
+        }
+    }
+
+    private void OnHoverExit(BetButton button)
+    {
+        if (colorsDescription.GetColorData(button.Color) != null)
+        {
+            tooltip.Hide();
+        }
+    }
+
+    private void OnHoverEnter(BetButton button)
+    {
+        var colorData = colorsDescription.GetColorData(button.Color);
+        if (colorData != null)
+        {
+            tooltip.Show(colorData.ColorName, colorData.ColorDescription, button.transform.position);
+        }
     }
 
     private void OnEnable()
@@ -73,6 +99,13 @@ class BetTableView : MonoBehaviour
         tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
         tableInfo.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
+
+        foreach (var button in betButtons)
+        {
+            if (button == null) continue;
+            button.HoverEnter += OnHoverEnter;
+            button.HoverExit += OnHoverExit;
+        }
     }
 
     private void OnChangeAvailableSum(int newSum)

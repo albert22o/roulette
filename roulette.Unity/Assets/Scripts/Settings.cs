@@ -13,4 +13,5 @@ public class Settings : ScriptableObject
     public BossRewardConfig BossRewardConfig;
     public RarityData RarityData;
     public ShopFontConfig ShopFontConfig;
+    public ColorsDescription ColorsDescription;
 }

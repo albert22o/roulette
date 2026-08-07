@@ -44,6 +44,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
+        Debug.Log(state);
         if (state == GameStateManager.GameState.FieldsSelecting)
         {
             StartInteraction();
@@ -53,6 +54,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
         {
             FinishInteraction();
             gameObject.SetActive(false);
+            Debug.Log("ewmgoierhuerbrjeg");
         }
     }
 }

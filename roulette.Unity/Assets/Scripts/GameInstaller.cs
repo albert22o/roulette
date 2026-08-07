@@ -25,6 +25,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(settings.BossRewardConfig).AsSingle();
         Container.BindInstance(settings.RarityData).AsSingle();
         Container.BindInstance(settings.ShopFontConfig).AsSingle();
+        Container.BindInstance(settings.ColorsDescription).AsSingle();
         // Валюты
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
