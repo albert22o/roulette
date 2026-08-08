@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3881114031844789404}
   - component: {fileID: 7929094685646248705}
+  - component: {fileID: 8857370275184290392}
   m_Layer: 0
   m_Name: DrumNumberDisplay
   m_TagString: Untagged
@@ -25,16 +26,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7986024520587570438}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.634, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalRotation: {x: 0.32376575, y: 0.6286301, z: 0.32376575, w: 0.6286301}
+  m_LocalPosition: {x: -1.0137, y: 0.3829, z: -0.2761}
+  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6122994845885135274}
   - {fileID: 7640606853938448460}
   - {fileID: 7159994406998061873}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 54.5}
 --- !u!114 &7929094685646248705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +53,31 @@ MonoBehaviour:
   - {fileID: 3098803774717985940}
   - {fileID: 2473780304519184361}
   number: 155
+--- !u!114 &8857370275184290392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986024520587570438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bae899aaafea2444b2eff0a42a61039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPlane: 1
+  startCorner: 0
+  startAxis: 0
+  constraint: 1
+  centerHorizontal: 0
+  centerVertical: 0
+  centerIncompleteRows: 0
+  constraintCount: 1
+  cellSize: {x: 0, y: 0.013}
+  spacing: {x: 0, y: 0.004}
+  padding: {x: 0, y: 0}
+  planeOffset: 0
+  autoUpdate: 1
 --- !u!1001 &4989175718408613690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,7 +96,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0286
+      value: -0.017
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -147,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.057
+      value: -0.034
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -224,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3401906097770293110, guid: 1bb923d8dcdc64e49b2061695602c6dd, type: 3}
       propertyPath: m_LocalRotation.w
