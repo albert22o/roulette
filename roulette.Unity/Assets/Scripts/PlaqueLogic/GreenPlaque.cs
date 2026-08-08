@@ -1,6 +1,5 @@
 ﻿public class GreenPlaque : Plaque
 {
-    private int firstPhaseSelectedField;
     public GreenPlaque(PlaqueData data, PlaqueDependencies dependencies) : base(data, dependencies)
     {
 
