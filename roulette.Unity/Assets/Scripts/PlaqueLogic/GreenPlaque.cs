@@ -1,5 +1,6 @@
 ﻿public class GreenPlaque : Plaque
 {
+    private int firstPhaseSelectedField;
     public GreenPlaque(PlaqueData data, PlaqueDependencies dependencies) : base(data, dependencies)
     {
 
@@ -36,8 +37,12 @@
     {
         if (phaseIndex == 0)
         {
-            selectionRequests[1].Hint = $"Выберите 3 числа, которые нужно заменить на " +
-                $"{PlaqueDependencies.TableInfo.PocketMapping[selectedFields[0]].FieldNumber}";
+            int firstPhaseSelectedIndex = selectedFields[0];
+
+            selectionRequests[1].Filter = betInfo => betInfo.Index != firstPhaseSelectedIndex;
+
+            int displayNum = PlaqueDependencies.TableInfo.PocketMapping[firstPhaseSelectedIndex].FieldNumber;
+            selectionRequests[1].Hint = $"Выберите 3 числа, которые нужно заменить на {displayNum}";
         }
     }
 }

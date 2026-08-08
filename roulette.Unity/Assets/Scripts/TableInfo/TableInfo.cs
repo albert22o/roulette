@@ -58,12 +58,12 @@ public class TableInfo
     private Dictionary<int, BetInfo> BuildPocketMapping()
     {
         var mapping = new Dictionary<int, BetInfo>(startPockets.Length);
-        foreach (var pocket in startPockets)
-        {
-            if (!mapping.TryAdd(pocket.Number, new BetInfo(pocket.Number, pocket.Dozen, pocket.Color)))
-                throw new InvalidOperationException($" pocket number {pocket.Number} in TableConfig.");
-        }
 
+        for (int i = 0; i < startPockets.Length; i++)
+        {
+            var pocket = startPockets[i];
+            mapping.Add(i, new BetInfo(pocket.Number, pocket.Dozen, pocket.Color, i));
+        }
         return mapping;
     }
 }
