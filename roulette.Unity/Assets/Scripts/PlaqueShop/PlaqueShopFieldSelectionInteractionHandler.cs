@@ -7,6 +7,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     [SerializeField] private CinemachineCamera tableCamera;
     [SerializeField] private TableSelectionView tableSelection;
 
+
     private GameStateManager stateManager;
     private bool isInteraction;
 

@@ -7,6 +7,7 @@ public class ShopInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera shopCamera;
     [SerializeField] private Shop shop;
+    [SerializeField] private FPCInteractionPositionSetter playerPositionSetter;
 
     private GameStateManager stateManager;
     private bool isInteraction;
@@ -45,6 +46,7 @@ public class ShopInteractionHandler : MonoBehaviour
 
     public void FinishInteraction()
     {
+        playerPositionSetter.ChangePlayerPositionAndRotation();
         shopCamera.gameObject.SetActive(false);
         isInteraction = false;
         shop.FinishInteraction();

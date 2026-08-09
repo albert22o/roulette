@@ -80,6 +80,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<WinningSequence>().AsSingle();
 
         Container.Bind<CameraEventHandler>().AsSingle();
+        Container.Bind<FirstPersonController>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<BossReward>().AsSingle();
         Container.Bind<ItemReceiver>().AsSingle();

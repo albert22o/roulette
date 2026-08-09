@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-[RequireComponent(typeof(CharacterController), typeof(MeshRenderer), typeof(Collider))]
+[RequireComponent(typeof(CharacterController), typeof(Collider))]
 public class FirstPersonController : MonoBehaviour
 {
     [Header("Движение")]
@@ -17,7 +16,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float verticalClamp = 85f;
 
     private CharacterController controller;
-    private MeshRenderer render;
+    [SerializeField] private MeshRenderer render;
     private Collider playerCollider;
     private Vector3 velocity;
     private float xRotation;
@@ -47,7 +46,6 @@ public class FirstPersonController : MonoBehaviour
             return;
         }
         controller = GetComponent<CharacterController>();
-        render = GetComponent<MeshRenderer>();
         playerCollider = GetComponent<Collider>();
         Enable();
         gameStateManager.GameStateChanged += OnGameStateChanged;
@@ -84,7 +82,6 @@ public class FirstPersonController : MonoBehaviour
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
-        SyncToMainCameraDirection();
 
         if (cameraEventHandler != null && cameraEventHandler.IsTransitioning)
         {
@@ -163,5 +160,26 @@ public class FirstPersonController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void SetPositionAndRotation(Vector3 position, Quaternion rotation, float cameraPitch)
+    {
+        transform.position = position;
+
+        Vector3 euler = rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0, euler.y, 0);
+
+        float rawX = euler.x;
+        if (rawX > 180f) rawX -= 360f;
+
+        xRotation = Mathf.Clamp(cameraPitch, -verticalClamp, verticalClamp);
+        if (cameraTransform != null)
+        {
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        }
+
+        velocity = Vector3.zero;
+        moveInput = Vector2.zero;
+        lookInput = Vector2.zero;
     }
 }
