@@ -34,15 +34,7 @@ public class BetTable
 
     public void AddBet(int index)
     {
-        if (!active)
-            return;
-        if (!betAmounts.ContainsKey(index))
-            return;
-        if (availableBetSum < BetStep)
-            return;
-        if (!betIndexSet.Contains(index) 
-            && betIndexSet.Count >= tableInfo.MaxBetsAtBoard)
-            return;
+        if (CanBet(index) == false) return;
         betIndexSet.Add(index);
 
         betAmounts[index] += BetStep;
@@ -58,16 +50,18 @@ public class BetTable
             return false;
         if (!betAmounts.ContainsKey(index))
             return false;
+        if (tableInfo.PocketMapping[index].FieldColor == ColorType.White || 
+            tableInfo.PocketMapping[index].FieldColor == ColorType.Grey)
+            return false;
         if (availableBetSum < BetStep)
             return false;
         if (!betIndexSet.Contains(index)
             && betIndexSet.Count >= tableInfo.MaxBetsAtBoard)
             return false;
-        return
-            true;
+        return true;
     }
 
-    public void RemoveBet(int index) 
+    public void RemoveBet(int index)
     {
         if (!active)
             return;
@@ -88,7 +82,7 @@ public class BetTable
     {
         var keys = betAmounts.Keys.ToList();
         betIndexSet.Clear();
-        foreach(var betIndex in keys)
+        foreach (var betIndex in keys)
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
