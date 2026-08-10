@@ -25,7 +25,6 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 lookInput;
     private bool jumpPressed;
     private Camera mainCamera;
-    private bool isCameraTransitionFinished = true;
 
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
@@ -49,7 +48,6 @@ public class FirstPersonController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
         Enable();
         gameStateManager.GameStateChanged += OnGameStateChanged;
-        isCameraTransitionFinished = true;
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
@@ -60,21 +58,6 @@ public class FirstPersonController : MonoBehaviour
             Disable();
     }
 
-    public void SyncToMainCameraDirection()
-    {
-        Vector3 euler = mainCamera.transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
-
-        float rawX = euler.x;
-        if (rawX > 180f) rawX -= 360f;
-
-        xRotation = rawX;
-
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        lookInput = Vector2.zero;
-    }
-
     private void Enable()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -82,16 +65,6 @@ public class FirstPersonController : MonoBehaviour
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
-
-        if (cameraEventHandler != null && cameraEventHandler.IsTransitioning)
-        {
-            isCameraTransitionFinished = false;
-            cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
-        }
-        else
-        {
-            isCameraTransitionFinished = true;
-        }
     }
 
     private void Disable()
@@ -103,15 +76,9 @@ public class FirstPersonController : MonoBehaviour
         playerCollider.enabled = false;
     }
 
-    private void OnCameraTransitionFinished()
-    {
-        isCameraTransitionFinished = true;
-        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
-    }
-
     private void Update()
     {
-        if (active && isCameraTransitionFinished)
+        if (active && cameraEventHandler.IsTransitioning == false)
         {
             HandleMouseLook();
             HandleMovement();
@@ -164,6 +131,7 @@ public class FirstPersonController : MonoBehaviour
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation, float cameraPitch)
     {
+        if (controller != null) controller.enabled = false;
         transform.position = position;
 
         Vector3 euler = rotation.eulerAngles;
@@ -181,5 +149,8 @@ public class FirstPersonController : MonoBehaviour
         velocity = Vector3.zero;
         moveInput = Vector2.zero;
         lookInput = Vector2.zero;
+
+        if (controller != null) controller.enabled = true;
+        Physics.SyncTransforms();
     }
 }

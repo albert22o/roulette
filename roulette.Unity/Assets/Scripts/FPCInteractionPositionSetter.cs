@@ -4,7 +4,7 @@ using Zenject;
 
 public class FPCInteractionPositionSetter : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera camera;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
     private FirstPersonController fpc;
 
     [Inject]
@@ -15,7 +15,7 @@ public class FPCInteractionPositionSetter : MonoBehaviour
 
     public void ChangePlayerPositionAndRotation()
     {
-        Vector3 camEuler = camera.transform.rotation.eulerAngles;
+        Vector3 camEuler = cinemachineCamera.transform.rotation.eulerAngles;
         float pitch = camEuler.x;
 
         if (pitch > 180f) pitch -= 360f;
