@@ -60,7 +60,7 @@ public class MoneyCounterView : MonoBehaviour
 
         yield return new WaitForSeconds(timeBeforeChipSpawn);
 
-        chipSpawner.RequestSpawn(reward / BetTable.BetStep);
+        chipSpawner.RequestSpawn(reward);
     }
 
     private void OnSequenceStart(int bet, int multiplier, float rerollCoeff)
