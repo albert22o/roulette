@@ -131,11 +131,16 @@ public class FirstPersonController : MonoBehaviour
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation, float cameraPitch)
     {
-        if (controller != null) controller.enabled = false;
-        transform.position = position;
+        if (controller != null)
+        {
+            controller.Move(Vector3.zero);
+            controller.enabled = false;
+        }
+
 
         Vector3 euler = rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, euler.y, 0);
+        transform.position = position;
 
         float rawX = euler.x;
         if (rawX > 180f) rawX -= 360f;
@@ -150,7 +155,8 @@ public class FirstPersonController : MonoBehaviour
         moveInput = Vector2.zero;
         lookInput = Vector2.zero;
 
-        if (controller != null) controller.enabled = true;
         Physics.SyncTransforms();
+        if (controller != null) controller.enabled = true;
+        
     }
 }
