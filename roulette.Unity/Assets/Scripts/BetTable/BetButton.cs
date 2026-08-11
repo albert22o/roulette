@@ -93,6 +93,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     private int index;
     private BetTable betTable;
 
+    public event Action<BetButton> HoverEnter, HoverExit;
+
     [Inject]
     private void Construct(BetTable table)
     {
@@ -163,11 +165,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        HoverExit?.Invoke(this);
         outline.ToggleMaterial(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        HoverEnter?.Invoke(this);
         if (betTable.CanBet(index))
             outline.ToggleMaterial(true);
     }

@@ -4736,6 +4736,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542706775}
   m_CullTransparentMesh: 1
+--- !u!1 &1634679619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1447679279682446433, guid: fc54237d291672944a57db5a13b89733, type: 3}
+  m_PrefabInstance: {fileID: 3730739055183839058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1708582881 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5305431496890184478, guid: a558df1b7a7039a4ba461628cfd78c35, type: 3}
@@ -5677,6 +5682,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1447679279682446433, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1567553158716436297, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 3.863037
@@ -5886,6 +5895,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4bca6f7ac12e1b04795eddd0f385508f, type: 2}
     - target: {fileID: 8360052150238459966, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: fields
+      value: 
+      objectReference: {fileID: 1634679619}
+    - target: {fileID: 8360052150238459966, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: tableCamera
       value: 
       objectReference: {fileID: 1763542126}
@@ -5904,6 +5917,22 @@ PrefabInstance:
     - target: {fileID: 9176514302932406693, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201780325581787629, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201780325581787629, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201780325581787629, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201780325581787629, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

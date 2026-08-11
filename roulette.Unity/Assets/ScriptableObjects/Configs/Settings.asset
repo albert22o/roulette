@@ -21,3 +21,4 @@ MonoBehaviour:
   BossRewardConfig: {fileID: 11400000, guid: c24c0fd376524874bbc3a1bb9c3eb16e, type: 2}
   RarityData: {fileID: 11400000, guid: ffec318f5634ca946ad4216db139ee8f, type: 2}
   ShopFontConfig: {fileID: 11400000, guid: d9a1e0f4539f5ec4ea6fc22d61628517, type: 2}
+  ColorsDescription: {fileID: 11400000, guid: 00f78de7b5ab393439454ff86b49a3d8, type: 2}
