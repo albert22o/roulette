@@ -50,7 +50,6 @@ public class ShopInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        Debug.Log(state);
         if (state == GameState.Shopping)
         {
             StartInteraction();
