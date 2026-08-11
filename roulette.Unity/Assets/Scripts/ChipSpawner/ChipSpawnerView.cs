@@ -31,6 +31,8 @@ public class ChipSpawnerView : MonoBehaviour
     [SerializeField] private int startBatchSize = 1;
     [SerializeField] private int maxBatchSize = 5;
     [SerializeField] private int iterationsPerBatchIncrease = 3;
+    [SerializeField] private float viewingTime = 3f;
+    [SerializeField] private float chipLifetime = 2f;
 
     private ChipSpawner chipSpawner;
     private WinningSequence winningSequence;
@@ -61,7 +63,7 @@ public class ChipSpawnerView : MonoBehaviour
     {
         chipSpawner.ChipSpawnerRequested -= StartSpawningWithInterval;
         chipSpawner.ChipClearRequested -= OnClearRequested;
-        OnClearRequested();
+        ImmediateClear();
     }
 
     private GameObject GetChipPrefab(int denomination)
@@ -100,12 +102,31 @@ public class ChipSpawnerView : MonoBehaviour
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
         }
+
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(DelayedClear());
+        }
+        else
+        {
+            ImmediateClear();
+        }
+    }
+
+    private void ImmediateClear()
+    {
         foreach (var chip in spawnedChips)
         {
             if (chip != null)
                 Destroy(chip);
         }
         spawnedChips.Clear();
+    }
+
+    private IEnumerator DelayedClear()
+    {
+        yield return new WaitForSeconds(chipLifetime);
+        ImmediateClear();
     }
 
     private void StartSpawningWithInterval(List<int> chipDistribution)
@@ -152,7 +173,7 @@ public class ChipSpawnerView : MonoBehaviour
         }
 
         Debug.Log($"[ChipSpawnerView] Все {totalChips} фишек заспаунены");
-
+        yield return new WaitForSeconds(viewingTime);
         spawnCoroutine = null;
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
     }
