@@ -113,8 +113,6 @@ public class FirstPersonController : MonoBehaviour
         cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
     }
 
-    // ИЗМЕНЕНИЕ: Этот метод теперь блокирует ТОЛЬКО движение и камеру.
-    // Он больше НЕ трогает курсор, чтобы не конфликтовать с GameState или UI.
     public void SetFrozen(bool frozen)
     {
         isFrozen = frozen;

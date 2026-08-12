@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class RunProgressUI : MonoBehaviour
 {
+    [Header("Sections")]
     [SerializeField] private ChipsSectionUI chipsSection;
     [SerializeField] private BallsSectionUI ballsSection;
     [SerializeField] private PlaquesSectionUI plaquesSection;
