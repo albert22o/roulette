@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarityType: 2
   folder: {fileID: 102900000, guid: fbca235a9f55a5b4896f60d885d3306a, type: 3}
+  items:
+  - {fileID: 11400000, guid: a16a3de865734df4db49a715b5d6744b, type: 2}
+  - {fileID: 11400000, guid: 28e60975752c0d64ca8fc0988c3427a4, type: 2}
+  - {fileID: 11400000, guid: ad7b5120ef97c684389bad9fabaae5d8, type: 2}
+  - {fileID: 11400000, guid: d58f407bde6136b4ab85be440776bc15, type: 2}

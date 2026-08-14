@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -81,3 +83,4 @@ public class ShopItemsTableEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

@@ -60,8 +60,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void Enable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
@@ -69,8 +67,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void Disable()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         active = false;
         render.enabled = false;
         playerCollider.enabled = false;

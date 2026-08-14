@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: Food
   m_EditorClassIdentifier: 
+  rarityType: 0
   folder: {fileID: 102900000, guid: 6acfbed7f09378147903019bf697ee0a, type: 3}
-  items: []
+  items:
+  - {fileID: 11400000, guid: ccd42e8f394d3c44cbd5432d7895f895, type: 2}
+  - {fileID: 11400000, guid: 5308ad411f8240d46a2c93603fb04d7c, type: 2}

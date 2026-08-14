@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: CommonCards
   m_EditorClassIdentifier: 
+  rarityType: 0
   folder: {fileID: 102900000, guid: 434f0f0d6ae38c44da3d1fe1b963f539, type: 3}
+  items:
+  - {fileID: 11400000, guid: 04afa105fe71af44f8b14e8af9bafe22, type: 2}
+  - {fileID: 11400000, guid: 7fc542fe4d01c5047bec8a2f176e53a4, type: 2}
+  - {fileID: 11400000, guid: d366d4ad254129c4a97b2c6728288eed, type: 2}
+  - {fileID: 11400000, guid: e5daa5b57ee16f64dbeaae1f75f7b707, type: 2}

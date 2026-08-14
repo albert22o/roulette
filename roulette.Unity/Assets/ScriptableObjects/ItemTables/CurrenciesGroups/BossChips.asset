@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: BossChips
   m_EditorClassIdentifier: 
+  rarityType: 0
   folder: {fileID: 102900000, guid: 4717c98e38955a143b4370c197081df8, type: 3}
+  items:
+  - {fileID: 11400000, guid: 4f27125335f9a134485c1605b3c86645, type: 2}
