@@ -9,6 +9,7 @@ public class RoundStateManager
     private readonly Queue<RoundState> stateQueue = new();
     private bool isProcessing;
     private RoundState? currentState = null;
+    private bool wasInRunProgress = false;
 
     public RoundStateManager(GameStateManager gameStateManager)
     {
@@ -46,6 +47,16 @@ public class RoundStateManager
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
+        if (state == GameStateManager.GameState.RunProgress)
+        {
+            wasInRunProgress = true;
+            return;
+        }
+        if (wasInRunProgress)
+        {
+            wasInRunProgress = false;
+            return;
+        }
         if (state == GameStateManager.GameState.BettingСycle)
             ChangeState(RoundState.Start);
         else

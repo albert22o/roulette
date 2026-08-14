@@ -52,6 +52,8 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
+        if (state == GameState.RunProgress)
+            return;
         if (state == GameState.PlaqueShopping)
         {
             StartInteraction();

@@ -5,7 +5,7 @@ public class GameStateManager
 {
     public event Action<GameState> GameStateChanged;
 
-    private GameState? currentState = null;
+    private GameState? currentState = GameState.FreeRoam;
     private readonly Queue<GameState> stateQueue = new Queue<GameState>();
     private bool isProcessing;
 
@@ -43,6 +43,7 @@ public class GameStateManager
         PlaqueShopping,
         FieldsSelecting,
         BossReward,
-        Win
+        Win,
+        RunProgress
     }
 }

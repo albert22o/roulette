@@ -1,30 +1,25 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
-public class RunProgressUI : MonoBehaviour
+public class RunProgress
 {
-    [Header("Sections")]
-    [SerializeField] private ChipsSectionUI chipsSection;
-    [SerializeField] private BallsSectionUI ballsSection;
-    [SerializeField] private PlaquesSectionUI plaquesSection;
-    [SerializeField] private FoodSectionUI foodSection;
-    [SerializeField] private QuotasSectionUI quotasSection;
-    [SerializeField] private CardsSectionUI cardsSection;
-
-    [SerializeField] private float displayDuration = 4f;
-    [SerializeField] private FirstPersonController playerController;
+    private readonly RunProgressUIView view;
+    private readonly GameStateManager gameStateManager;
 
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
     private bool isPanelOpen = false;
+    private GameStateManager.GameState? previousState = null;
 
-    private CursorLockMode savedCursorLockState;
-    private bool savedCursorVisible;
-
-    private void Start()
+    [Inject]
+    public RunProgress(RunProgressUIView view, GameStateManager gameStateManager)
     {
-        gameObject.SetActive(false);
+        this.view = view;
+        this.gameStateManager = gameStateManager;
+
+        view.gameObject.SetActive(false);
         SetupInput();
     }
 
@@ -33,12 +28,6 @@ public class RunProgressUI : MonoBehaviour
         toggleAction = new InputAction("ToggleProgress", binding: "<Keyboard>/tab");
         toggleAction.started += _ => TogglePanel();
         toggleAction.Enable();
-    }
-
-    private void OnDestroy()
-    {
-        toggleAction?.Disable();
-        toggleAction?.Dispose();
     }
 
     public void TogglePanel()
@@ -52,26 +41,21 @@ public class RunProgressUI : MonoBehaviour
     public void Show()
     {
         if (hideCoroutine != null)
-            StopCoroutine(hideCoroutine);
+            view.StopCustomCoroutine(hideCoroutine);
 
-        savedCursorLockState = Cursor.lockState;
-        savedCursorVisible = Cursor.visible;
+        previousState = gameStateManager.CurrentState;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        gameStateManager.ChangeGameState(GameStateManager.GameState.RunProgress);
 
-        gameObject.SetActive(true);
+        view.Show();
         isPanelOpen = true;
 
-        UpdateAllSections();
-
-        playerController.SetFrozen(true);
-        hideCoroutine = StartCoroutine(HideAfterDelay());
+        hideCoroutine = view.StartCustomCoroutine(HideAfterDelay());
     }
 
     private IEnumerator HideAfterDelay()
     {
-        yield return new WaitForSeconds(displayDuration);
+        yield return new WaitForSeconds(view.DisplayDuration);
         Hide();
     }
 
@@ -79,25 +63,17 @@ public class RunProgressUI : MonoBehaviour
     {
         if (hideCoroutine != null)
         {
-            StopCoroutine(hideCoroutine);
+            view.StopCustomCoroutine(hideCoroutine);
             hideCoroutine = null;
         }
 
-        gameObject.SetActive(false);
+        view.Hide();
         isPanelOpen = false;
-        playerController.SetFrozen(false);
 
-        Cursor.lockState = savedCursorLockState;
-        Cursor.visible = savedCursorVisible;
-    }
-
-    private void UpdateAllSections()
-    {
-        chipsSection?.UpdateData();
-        ballsSection?.UpdateData();
-        plaquesSection?.UpdateData();
-        foodSection?.UpdateData();
-        quotasSection?.UpdateData();
-        cardsSection?.UpdateData();
+        if (previousState.HasValue)
+        {
+            gameStateManager.ChangeGameState(previousState.Value);
+            previousState = null;
+        }
     }
 }

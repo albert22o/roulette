@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 using static GameStateManager;
@@ -52,6 +52,8 @@ public class ShopInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
+        if (state == GameState.RunProgress) 
+            return;
         if (state == GameState.Shopping)
         {
             StartInteraction();

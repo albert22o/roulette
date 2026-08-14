@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework.Constraints;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -59,6 +60,12 @@ public class FirstPersonController : MonoBehaviour
     {
         if (state == GameStateManager.GameState.FreeRoam)
             Enable();
+        else if (state == GameStateManager.GameState.RunProgress)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            active = false;
+        }
         else
             Disable();
     }
