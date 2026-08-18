@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class RouletteFieldVisual : MonoBehaviour
@@ -14,12 +15,14 @@ public class RouletteFieldVisual : MonoBehaviour
     [SerializeField] private Material numberBetMaterial;
     [SerializeField] private Material dozenBetMaterial;
     [SerializeField] private Material colorBetMaterial;
+    [SerializeField] private float rimBlinkInterval = 0.3f;
 
     private Material originalMaterial;
 
     private MaterialPropertyBlock propertyBlock;
     private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
     private Color currentRuntimeColor;
+    private Coroutine blinkRoutine;
 
     public void SetField(RouletteWheelField field, FieldHighlightState highlight)
     {
@@ -66,24 +69,24 @@ public class RouletteFieldVisual : MonoBehaviour
     }
 
     private void OnBetHighlightLevelChanged(BetHighlightLevel level) => UpdateVisualMaterial();
-    private void OnRimHighlightChanged(bool value) => UpdateVisualMaterial();
-
-    private void UpdateVisualMaterial()
+    private void OnRimHighlightChanged(bool value)
     {
-        Material target =
-            highlight.IsRimHighlighted ? rimLightMaterial :
-            highlight.BetHighlightLevel switch
+        if (value)
+        {
+            blinkRoutine ??= StartCoroutine(BlinkRimRoutine());
+        }
+        else
+        {
+            if (blinkRoutine != null)
             {
-                BetHighlightLevel.Number => numberBetMaterial,
-                BetHighlightLevel.Dozen => dozenBetMaterial,
-                BetHighlightLevel.Color => colorBetMaterial,
-                _ => null
-            };
-
-        meshRenderer.sharedMaterial = target != null ? target : originalMaterial;
-
-        ApplyColorToPropertyBlock();
+                StopCoroutine(blinkRoutine);
+                blinkRoutine = null;
+            }
+            UpdateVisualMaterial();
+        }
     }
+
+    
 
     private void ApplyColorToPropertyBlock()
     {
@@ -92,5 +95,42 @@ public class RouletteFieldVisual : MonoBehaviour
         meshRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor(ColorPropertyId, currentRuntimeColor.linear);
         meshRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    private IEnumerator BlinkRimRoutine()
+    {
+        var wait = new WaitForSeconds(rimBlinkInterval);
+        bool showRim = true;
+
+        while (true)
+        {
+            meshRenderer.sharedMaterial = showRim ? rimLightMaterial : GetUnderlyingBetMaterial();
+            ApplyColorToPropertyBlock();
+            showRim = !showRim;
+            yield return wait;
+        }
+    }
+    private void UpdateVisualMaterial()
+    {
+        if (highlight.IsRimHighlighted)
+        {
+            ApplyColorToPropertyBlock();
+            return;
+        }
+
+        meshRenderer.sharedMaterial = GetUnderlyingBetMaterial();
+        ApplyColorToPropertyBlock();
+    }
+
+    private Material GetUnderlyingBetMaterial()
+    {
+        Material target = highlight.BetHighlightLevel switch
+        {
+            BetHighlightLevel.Number => numberBetMaterial,
+            BetHighlightLevel.Dozen => dozenBetMaterial,
+            BetHighlightLevel.Color => colorBetMaterial,
+            _ => null
+        };
+        return target != null ? target : originalMaterial;
     }
 }
