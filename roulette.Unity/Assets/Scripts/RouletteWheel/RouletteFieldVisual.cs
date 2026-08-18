@@ -1,35 +1,47 @@
-﻿using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class RouletteFieldVisual : MonoBehaviour
 {
     private RouletteWheelField field;
+    private FieldHighlightState highlight;
+
     [SerializeField] private TextMeshPro textMeshPro;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private RouletteColorTable colorTable;
 
-    [SerializeField] private Material rimLightMaterial; 
+    [SerializeField] private Material rimLightMaterial;
+    [SerializeField] private Material numberBetMaterial;
+    [SerializeField] private Material dozenBetMaterial;
+    [SerializeField] private Material colorBetMaterial;
+
     private Material originalMaterial;
 
-    public void SetField(RouletteWheelField field)
+    private MaterialPropertyBlock propertyBlock;
+    private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
+    private Color currentRuntimeColor;
+
+    public void SetField(RouletteWheelField field, FieldHighlightState highlight)
     {
         this.field = field;
+        this.highlight = highlight;
+
+        propertyBlock = new MaterialPropertyBlock();
 
         field.ColorChanged += OnColorChanged;
         field.NumberChanged += OnNumberChanged;
-        field.HighlightChanged += OnHighlightChanged;
+        highlight.BetHighlightLevelChanged += OnBetHighlightLevelChanged;
+        highlight.RimHighlightChanged += OnRimHighlightChanged;
 
         if (meshRenderer != null)
-        {
-            originalMaterial = meshRenderer.material;
-        }
+            originalMaterial = meshRenderer.sharedMaterial;
+
+        OnColorChanged(field.Color);
+        OnNumberChanged(field.Number);
+        UpdateVisualMaterial();
     }
 
-    public void GenerateMesh(float angle)
-    {
-        transform.rotation = Quaternion.Euler(0, angle, 0);
-    }
+    public void GenerateMesh(float angle) => transform.rotation = Quaternion.Euler(0, angle, 0);
 
     private void OnDestroy()
     {
@@ -37,30 +49,48 @@ public class RouletteFieldVisual : MonoBehaviour
         {
             field.ColorChanged -= OnColorChanged;
             field.NumberChanged -= OnNumberChanged;
-            field.HighlightChanged -= OnHighlightChanged;
         }
-    }
-
-    public void OnNumberChanged(int number)
-    {
-        textMeshPro.text = number.ToString();
-    }
-
-    public void OnColorChanged(ColorType color)
-    {
-        meshRenderer.material.color = colorTable.GetColorByName(color);
-    }
-
-    public void OnHighlightChanged(bool isHighlighted)
-    {
-        if (isHighlighted && rimLightMaterial != null && originalMaterial != null)
+        if (highlight != null)
         {
-            meshRenderer.material = rimLightMaterial;
-            meshRenderer.material.color = originalMaterial.color;
+            highlight.BetHighlightLevelChanged -= OnBetHighlightLevelChanged;
+            highlight.RimHighlightChanged -= OnRimHighlightChanged;
         }
-        else if (originalMaterial != null)
-        {
-            meshRenderer.material = originalMaterial;
-        }
+    }
+
+    private void OnNumberChanged(int number) => textMeshPro.text = number.ToString();
+
+    private void OnColorChanged(ColorType color)
+    {
+        currentRuntimeColor = colorTable.GetColorByName(color);
+        ApplyColorToPropertyBlock();
+    }
+
+    private void OnBetHighlightLevelChanged(BetHighlightLevel level) => UpdateVisualMaterial();
+    private void OnRimHighlightChanged(bool value) => UpdateVisualMaterial();
+
+    private void UpdateVisualMaterial()
+    {
+        Material target =
+            highlight.IsRimHighlighted ? rimLightMaterial :
+            highlight.BetHighlightLevel switch
+            {
+                BetHighlightLevel.Number => numberBetMaterial,
+                BetHighlightLevel.Dozen => dozenBetMaterial,
+                BetHighlightLevel.Color => colorBetMaterial,
+                _ => null
+            };
+
+        meshRenderer.sharedMaterial = target != null ? target : originalMaterial;
+
+        ApplyColorToPropertyBlock();
+    }
+
+    private void ApplyColorToPropertyBlock()
+    {
+        if (meshRenderer == null || propertyBlock == null) return;
+
+        meshRenderer.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetColor(ColorPropertyId, currentRuntimeColor.linear);
+        meshRenderer.SetPropertyBlock(propertyBlock);
     }
 }

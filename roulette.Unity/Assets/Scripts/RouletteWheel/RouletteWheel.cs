@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     private List<string> ballsToAutoReroll = new();
 
     public RouletteWheelField[] Fields { get; set; } = new RouletteWheelField[37];
+    public FieldHighlightState[] HighlightStates { get; private set; } = new FieldHighlightState[37];
 
     public Transform InnerWheel => spinController.transform;
     public Vector2 PhysicsModelPosition => physicsModel.position;
@@ -48,14 +50,17 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         for (int i = 0; i < 37; i++)
         {
             Fields[i] = new RouletteWheelField();
+            HighlightStates[i] = new FieldHighlightState();
         }
-        fieldsGenerator.GenerateFields(Fields);
+        fieldsGenerator.GenerateFields(Fields, HighlightStates);
+
         for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
         {
             int tableIndex = FieldsOrder[i];
 
             Fields[i].Color = tableInfo.PocketMapping[tableIndex].FieldColor;
             Fields[i].Number = tableInfo.PocketMapping[tableIndex].FieldNumber;
+            Fields[i].Dozen = tableInfo.PocketMapping[tableIndex].Dozen;
         }
         FieldsUpdated?.Invoke();
     }

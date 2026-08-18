@@ -50,6 +50,9 @@ MonoBehaviour:
   meshRenderer: {fileID: 2252366613831157561}
   colorTable: {fileID: 11400000, guid: 9c815aca10fcc3c4499799be7cddbbb4, type: 2}
   rimLightMaterial: {fileID: 2100000, guid: 92a06b804a8d40b4abdbc7d89b279ab1, type: 2}
+  numberBetMaterial: {fileID: 2100000, guid: 20834dc1675a76144a5b5d84689995c7, type: 2}
+  dozenBetMaterial: {fileID: 2100000, guid: 052430cb022a1b148b0db55e5e8362a5, type: 2}
+  colorBetMaterial: {fileID: 2100000, guid: 3cdd4b3e49966334c95b889e99ea3ab5, type: 2}
 --- !u!1 &7279419000284010393
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +289,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1c6bfef95a8c034469964ed10c4ef663, type: 3}
       propertyPath: m_Name
       value: RouletteWheelInnerSegment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471955805818997952, guid: 1c6bfef95a8c034469964ed10c4ef663, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471955805818997952, guid: 1c6bfef95a8c034469964ed10c4ef663, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -5,8 +5,8 @@ public class RouletteHighlightManager : MonoBehaviour
 {
     [SerializeField] private RouletteWheel rouletteWheel;
     [SerializeField] private RouletteBallsManager ballsManager;
-    [SerializeField] private RoundStateManager roundStateManager;
 
+    private RoundStateManager roundStateManager;
     private BallResults ballResults;
 
     [Inject]
@@ -62,21 +62,21 @@ public class RouletteHighlightManager : MonoBehaviour
         }
     }
 
-    private void HighlightField(int fieldNumber)
+    private void HighlightField(int fieldIndex)
     {
-        int positionOnWheel = System.Array.IndexOf(rouletteWheel.FieldsOrder, fieldNumber);
+        int positionOnWheel = System.Array.IndexOf(rouletteWheel.FieldsOrder, fieldIndex);
 
-        if (positionOnWheel >= 0 && positionOnWheel < rouletteWheel.Fields.Length)
+        if (positionOnWheel >= 0 && positionOnWheel < rouletteWheel.HighlightStates.Length)
         {
-            rouletteWheel.Fields[positionOnWheel].IsHighlighted = true;
+            rouletteWheel.HighlightStates[positionOnWheel].IsRimHighlighted = true;
         }
     }
 
     private void ResetAllHighlights()
     {
-        for (int i = 0; i < rouletteWheel.Fields.Length; i++)
+        for (int i = 0; i < rouletteWheel.HighlightStates.Length; i++)
         {
-            rouletteWheel.Fields[i].IsHighlighted = false;
+            rouletteWheel.HighlightStates[i].IsRimHighlighted = false;
         }
     }
 }
