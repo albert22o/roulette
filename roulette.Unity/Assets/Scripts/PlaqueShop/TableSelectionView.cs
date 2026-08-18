@@ -31,10 +31,13 @@ public class TableSelectionView : MonoBehaviour
         this.plaqueUseController = plaqueUseController;
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
+        Initialize();
     }
 
-    public void Start()
+
+    public void Initialize()
     {
+        Debug.Log("SelectionInit");
         if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
             Debug.LogError("Не все кнопки для ставок проставлены");
