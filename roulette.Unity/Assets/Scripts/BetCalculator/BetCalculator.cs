@@ -7,6 +7,7 @@ public class BetCalculator
 {
     public event Action<int> GetReward;
     public event Action<HitInfo> EndRound;
+    public event Action MultipliersUpdated;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -103,6 +104,8 @@ public class BetCalculator
             ? m
             : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
         fieldNumberMultipliers[fieldNumber] = current + delta;
+
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyFieldNumberMultiplier(int delta)
@@ -117,6 +120,8 @@ public class BetCalculator
     {
         var current = dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
         dozenMultipliers[dozen] = current + delta;
+
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyDozenMultiplier(int delta)
@@ -131,6 +136,8 @@ public class BetCalculator
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
+
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyColorMultiplier(int delta)
