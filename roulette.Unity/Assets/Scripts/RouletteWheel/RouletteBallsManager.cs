@@ -9,7 +9,6 @@ public class RouletteBallsManager : MonoBehaviour
     [SerializeField] private BallsLauncher ballLauncher;
     [SerializeField] private float sectorsRadius;
     [SerializeField] private Transform wheel;
-    [SerializeField] private float stopThreshold = 5f;
     [SerializeField] private float stableTimeRequired = 1f;
     [SerializeField] private float maxDistance;
     [SerializeField] private RouletteWheel rouletteWheel;
@@ -17,7 +16,7 @@ public class RouletteBallsManager : MonoBehaviour
 
     private List<Ball> balls = new List<Ball>();
 
-    private List<float> prevAngles = new List<float>();
+    private List<int> prevSectors = new List<int>();
     private List<float> stableTimes = new List<float>();
     private HashSet<string> invalidBalls = new HashSet<string>();
     private TableInfo tableInfo;
@@ -55,30 +54,69 @@ public class RouletteBallsManager : MonoBehaviour
     {
         if (wheel != null)
         {
+            // Отрисовка окружностей радиусов
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(wheel.position, sectorsRadius);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(wheel.position, maxDistance);
+
+            // Отрисовка разделительных линий секторов
+            if (rouletteWheel != null && rouletteWheel.Fields != null && rouletteWheel.Fields.Length > 0)
+            {
+                Gizmos.color = Color.yellow;
+                int totalSectors = rouletteWheel.Fields.Length;
+                float angleStep = 360f / totalSectors;
+
+                // Вычисляем половину угла одного сектора
+                float halfSectorOffset = angleStep / 2f;
+
+                // Нормализуем ось вращения
+                Vector3 up = upAxis.normalized;
+
+                // Создаем два ортогональных вектора на плоскости колеса
+                Vector3 refAxis = Vector3.Normalize(Vector3.Cross(up, Vector3.right) + Vector3.Cross(up, Vector3.forward));
+                Vector3 ortho = Vector3.Cross(up, refAxis);
+
+                for (int i = 0; i < totalSectors; i++)
+                {
+                    // Вычитаем половину сектора, чтобы повернуть линии по часовой стрелке
+                    float currentAngleDeg = (i * angleStep) - halfSectorOffset;
+                    float currentAngleRad = currentAngleDeg * Mathf.Deg2Rad;
+
+                    // Направление линии на плоскости колеса
+                    Vector3 dir = refAxis * Mathf.Cos(currentAngleRad) + ortho * Mathf.Sin(currentAngleRad);
+
+                    // Поворачиваем линию вместе с колесом
+                    Vector3 worldDir = wheel.TransformDirection(dir);
+
+                    // Рисуем линию из центра колеса до максимального радиуса
+                    Gizmos.DrawLine(wheel.position, wheel.position + worldDir * maxDistance);
+                }
+            }
         }
     }
+
+
 
     public void AddBall(Ball ball)
     {
         balls.Add(ball);
-        prevAngles.Add(0);
+        prevSectors.Add(-1);
         stableTimes.Add(0);
         isSimulating = true;
-        
+
     }
 
     void Update()
     {
         if (isSimulating == false) return;
+
+        invalidBalls.Clear();
+
         for (int i = 0; i < balls.Count; i++)
         {
             CheckBallStopped(balls[i]);
         }
-        invalidBalls.Clear();
 
         if (hitsInfo.Count == balls.Count)
         {
@@ -98,35 +136,42 @@ public class RouletteBallsManager : MonoBehaviour
 
     private void CheckBallStopped(Ball ball)
     {
-        if (Vector2.SqrMagnitude(ball.transform.position - wheel.position) > maxDistance * maxDistance)
+        float sqrDistance = Vector3.SqrMagnitude(ball.transform.position - wheel.position);
+        if (sqrDistance > maxDistance * maxDistance)
         {
             MarkInvalid(ball);
             return;
         }
 
-        Vector3 local = wheel.InverseTransformPoint(ball.transform.position);
-
-        float deg = GetAngle(local);
-
         int ballIndex = balls.IndexOf(ball);
-        float delta = Mathf.Abs(Mathf.DeltaAngle(prevAngles[ballIndex], deg));
-        prevAngles[ballIndex] = deg;
 
-        if (delta < stopThreshold)
-            stableTimes[ballIndex] += Time.deltaTime;
-        else
-            stableTimes[ballIndex] = 0f;
-
-        if (stableTimes[ballIndex] >= stableTimeRequired)
+        if (sqrDistance <= sectorsRadius * sectorsRadius)
         {
-            if (Vector2.SqrMagnitude(ball.transform.position - wheel.position) <= sectorsRadius * sectorsRadius)
-            {
-                int sectorIndex = Mathf.FloorToInt(deg / (360f / rouletteWheel.Fields.Length));
+            Vector3 local = wheel.InverseTransformPoint(ball.transform.position);
+            float deg = GetAngle(local);
 
-                var field = rouletteWheel.Fields[sectorIndex];
+            int currentSectorIndex = Mathf.FloorToInt(deg / (360f / rouletteWheel.Fields.Length));
+
+            if (currentSectorIndex == prevSectors[ballIndex])
+            {
+                stableTimes[ballIndex] += Time.deltaTime;
+            }
+            else
+            {
+                stableTimes[ballIndex] = 0f;
+                prevSectors[ballIndex] = currentSectorIndex;
+
+                if (hitsInfo.ContainsKey(ball.Hash))
+                {
+                    hitsInfo.Remove(ball.Hash);
+                }
+            }
+
+            if (stableTimes[ballIndex] >= stableTimeRequired)
+            {
                 if (hitsInfo.ContainsKey(ball.Hash) == false)
                 {
-                    int number = rouletteWheel.FieldsOrder[sectorIndex];
+                    int number = rouletteWheel.FieldsOrder[currentSectorIndex];
                     var bet = tableInfo.PocketMapping[number];
                     hitsInfo.Add(ball.Hash, new HitInfo()
                     {
@@ -140,11 +185,17 @@ public class RouletteBallsManager : MonoBehaviour
             }
             else
             {
-                MarkInvalid(ball);
+                if (hitsInfo.ContainsKey(ball.Hash) == true)
+                {
+                    hitsInfo.Remove(ball.Hash);
+                }
             }
         }
         else
         {
+            stableTimes[ballIndex] = 0f;
+            prevSectors[ballIndex] = -1;
+
             if (hitsInfo.ContainsKey(ball.Hash) == true)
             {
                 hitsInfo.Remove(ball.Hash);
@@ -163,8 +214,12 @@ public class RouletteBallsManager : MonoBehaviour
         float y = Vector3.Dot(local, ortho);
 
         float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        return (angle + 360f) % 360f;
+
+        float halfSectorOffset = (360f / rouletteWheel.Fields.Length) / 2f;
+
+        return (angle + halfSectorOffset + 360f) % 360f;
     }
+
 
     public void ClearAll()
     {
