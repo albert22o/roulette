@@ -37,7 +37,6 @@ public class TableSelectionView : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log("SelectionInit");
         if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
             Debug.LogError("Не все кнопки для ставок проставлены");

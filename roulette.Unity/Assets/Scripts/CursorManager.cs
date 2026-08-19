@@ -43,15 +43,18 @@ public class CursorManager : MonoBehaviour
 
     private void UpdateCursorState(GameStateManager.GameState? state)
     {
+        Debug.Log(state);
         if (state == GameStateManager.GameState.FreeRoam)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Debug.Log("lockCursor");
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Debug.Log("unlockCursor");
         }
     }
 }

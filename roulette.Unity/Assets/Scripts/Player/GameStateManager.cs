@@ -6,7 +6,7 @@ public class GameStateManager
 {
     public event Action<GameState> GameStateChanged;
 
-    private GameState? currentState = GameState.FreeRoam;
+    private GameState? currentState = null;
     private readonly Queue<GameState> stateQueue = new Queue<GameState>();
     private bool isProcessing;
 

@@ -39,6 +39,8 @@ public class FirstPersonController : MonoBehaviour
 
     public void Start()
     {
+        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+
         if (cameraTransform == null)
         {
             Debug.LogError("Не назначена ссылка на камеру");
