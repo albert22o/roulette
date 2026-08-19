@@ -44,6 +44,5 @@ public class GameStateManager
         FieldsSelecting,
         BossReward,
         Win,
-        RunProgress
     }
 }

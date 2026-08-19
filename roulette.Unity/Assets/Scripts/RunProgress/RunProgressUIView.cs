@@ -20,11 +20,17 @@ public class RunProgressUIView : MonoBehaviour
     {
         gameObject.SetActive(true);
         UpdateAllSections();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void UpdateAllSections()

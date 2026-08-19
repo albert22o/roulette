@@ -25,8 +25,6 @@ public class BetButtonsController : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        if (state == GameState.RunProgress)
-            return;
         if (state is GameState.FieldsSelecting)
             gameObject.SetActive(false);
         else

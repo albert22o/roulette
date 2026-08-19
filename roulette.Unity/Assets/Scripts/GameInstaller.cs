@@ -84,7 +84,11 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CardHolder>().AsSingle();
         Container.Bind<RoundWinManager>().AsSingle().NonLazy();
 
+
+        Container.BindInterfacesAndSelfTo<FirstPersonController>().FromComponentInHierarchy().AsSingle();
+
         Container.Bind<RunProgressUIView>().FromComponentInHierarchy().AsSingle();
         Container.Bind<RunProgress>().AsSingle().NonLazy();
+
     }
 }

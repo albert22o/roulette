@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController), typeof(MeshRenderer), typeof(Collider))]
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonController : MonoBehaviour, IInputFreezer
 {
     [Header("Движение")]
     [SerializeField] private float moveSpeed = 5f;
@@ -60,12 +60,6 @@ public class FirstPersonController : MonoBehaviour
     {
         if (state == GameStateManager.GameState.FreeRoam)
             Enable();
-        else if (state == GameStateManager.GameState.RunProgress)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            active = false;
-        }
         else
             Disable();
     }
@@ -118,6 +112,16 @@ public class FirstPersonController : MonoBehaviour
     {
         isCameraTransitionFinished = true;
         cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
+    }
+
+    public void FreezeInput()
+    {
+        isFrozen = true;
+    }
+
+    public void UnfreezeInput()
+    {
+        isFrozen = false;
     }
 
     public void SetFrozen(bool frozen)

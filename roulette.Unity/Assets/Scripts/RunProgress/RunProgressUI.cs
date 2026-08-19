@@ -6,18 +6,17 @@ using Zenject;
 public class RunProgress
 {
     private readonly RunProgressUIView view;
-    private readonly GameStateManager gameStateManager;
+    private readonly IInputFreezer inputFreezer;
 
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
     private bool isPanelOpen = false;
-    private GameStateManager.GameState? previousState = null;
 
     [Inject]
-    public RunProgress(RunProgressUIView view, GameStateManager gameStateManager)
+    public RunProgress(RunProgressUIView view, IInputFreezer inputFreezer)
     {
         this.view = view;
-        this.gameStateManager = gameStateManager;
+        this.inputFreezer = inputFreezer;
 
         view.gameObject.SetActive(false);
         SetupInput();
@@ -43,9 +42,7 @@ public class RunProgress
         if (hideCoroutine != null)
             view.StopCustomCoroutine(hideCoroutine);
 
-        previousState = gameStateManager.CurrentState;
-
-        gameStateManager.ChangeGameState(GameStateManager.GameState.RunProgress);
+        inputFreezer.FreezeInput();
 
         view.Show();
         isPanelOpen = true;
@@ -70,10 +67,6 @@ public class RunProgress
         view.Hide();
         isPanelOpen = false;
 
-        if (previousState.HasValue)
-        {
-            gameStateManager.ChangeGameState(previousState.Value);
-            previousState = null;
-        }
+        inputFreezer.UnfreezeInput();
     }
 }

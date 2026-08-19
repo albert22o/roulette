@@ -93,8 +93,6 @@ public class BossRewardView : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newState)
     {
-        if(newState == GameStateManager.GameState.RunProgress)
-            return;
         if (newState == GameStateManager.GameState.BossReward)
         {
             bossRewardCamera.gameObject.SetActive(true);
