@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -21,6 +22,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation;
     private bool active = false;
+    private bool isFrozen = false;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
@@ -60,14 +62,14 @@ public class FirstPersonController : MonoBehaviour
             Disable();
     }
 
-    private void Enable()
+    public void Enable()
     {
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
     }
 
-    private void Disable()
+    public void Disable()
     {
         active = false;
         render.enabled = false;
@@ -76,6 +78,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        if (isFrozen)
+            return;
         if (active && cameraEventHandler.IsTransitioning == false)
         {
             HandleMouseLook();
@@ -89,8 +93,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        if (!active)
-            return;
+        if (!active) return;
 
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;
@@ -156,5 +159,10 @@ public class FirstPersonController : MonoBehaviour
         Physics.SyncTransforms();
         if (controller != null) controller.enabled = true;
         
+    }
+
+    public void SetFrozen(bool variable)
+    {
+        isFrozen = variable;
     }
 }

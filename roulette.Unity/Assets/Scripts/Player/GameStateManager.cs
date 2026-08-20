@@ -43,7 +43,6 @@ public class GameStateManager
         Lose,
         PlaqueShopping,
         FieldsSelecting,
-        ViewingProgress,
         BossReward,
         Win
     }
