@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class RunProgressUI : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class RunProgressUI : MonoBehaviour
     [SerializeField] private CardsSectionUI cardsSection;
 
     [SerializeField] private float displayDuration = 4f;
-    [SerializeField] private FirstPersonController playerController;
+    private FirstPersonController playerController;
 
     private InputAction toggleAction;
     private Coroutine hideCoroutine;
@@ -21,6 +22,12 @@ public class RunProgressUI : MonoBehaviour
 
     private CursorLockMode savedCursorLockState;
     private bool savedCursorVisible;
+
+    [Inject]
+    public void Construct(FirstPersonController firstPersonController)
+    {
+        playerController = firstPersonController;
+    }
 
     private void Start()
     {
