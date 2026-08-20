@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: RareCards
   m_EditorClassIdentifier: 
+  rarityType: 0
   folder: {fileID: 102900000, guid: 7711186f17640a845bc897d7c1c9aad5, type: 3}
+  items:
+  - {fileID: 11400000, guid: a27e6c9ceb3d48e43be30c9e28c8731f, type: 2}
+  - {fileID: 11400000, guid: ceb89aad8b9dd2e46a2d1ae75bf8c1c1, type: 2}
+  - {fileID: 11400000, guid: f76515a1e4b17a547bc76993dadd554e, type: 2}
+  - {fileID: 11400000, guid: 5f54674a3f5bd2f4aab2644280b90fbe, type: 2}
+  - {fileID: 11400000, guid: ce6bd32beae38d04bbd3f4c675b072b2, type: 2}
+  - {fileID: 11400000, guid: da263d12344351f47955c6b8d9d932db, type: 2}

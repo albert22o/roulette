@@ -9,6 +9,7 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     [SerializeField] private TableSelectionView tableSelection;
     [SerializeField] private GameObject fields;
 
+
     private GameStateManager stateManager;
     private bool isInteraction;
 

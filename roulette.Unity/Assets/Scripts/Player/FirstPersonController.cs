@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-[RequireComponent(typeof(CharacterController), typeof(MeshRenderer), typeof(Collider))]
+[RequireComponent(typeof(CharacterController), typeof(Collider))]
 public class FirstPersonController : MonoBehaviour
 {
     [Header("Движение")]
@@ -17,7 +16,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float verticalClamp = 85f;
 
     private CharacterController controller;
-    private MeshRenderer render;
+    [SerializeField] private MeshRenderer render;
     private Collider playerCollider;
     private Vector3 velocity;
     private float xRotation;
@@ -26,7 +25,6 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 lookInput;
     private bool jumpPressed;
     private Camera mainCamera;
-    private bool isCameraTransitionFinished = true;
 
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
@@ -41,17 +39,17 @@ public class FirstPersonController : MonoBehaviour
 
     public void Start()
     {
+        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+
         if (cameraTransform == null)
         {
             Debug.LogError("Не назначена ссылка на камеру");
             return;
         }
         controller = GetComponent<CharacterController>();
-        render = GetComponent<MeshRenderer>();
         playerCollider = GetComponent<Collider>();
         Enable();
         gameStateManager.GameStateChanged += OnGameStateChanged;
-        isCameraTransitionFinished = true;
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
@@ -62,59 +60,23 @@ public class FirstPersonController : MonoBehaviour
             Disable();
     }
 
-    public void SyncToMainCameraDirection()
-    {
-        Vector3 euler = mainCamera.transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
-
-        float rawX = euler.x;
-        if (rawX > 180f) rawX -= 360f;
-
-        xRotation = rawX;
-
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        lookInput = Vector2.zero;
-    }
-
     private void Enable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         active = true;
         render.enabled = true;
         playerCollider.enabled = true;
-        SyncToMainCameraDirection();
-
-        if (cameraEventHandler != null && cameraEventHandler.IsTransitioning)
-        {
-            isCameraTransitionFinished = false;
-            cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
-        }
-        else
-        {
-            isCameraTransitionFinished = true;
-        }
     }
 
     private void Disable()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         active = false;
         render.enabled = false;
         playerCollider.enabled = false;
     }
 
-    private void OnCameraTransitionFinished()
-    {
-        isCameraTransitionFinished = true;
-        cameraEventHandler.TransitionFinished -= OnCameraTransitionFinished;
-    }
-
     private void Update()
     {
-        if (active && isCameraTransitionFinished)
+        if (active && cameraEventHandler.IsTransitioning == false)
         {
             HandleMouseLook();
             HandleMovement();
@@ -163,5 +125,36 @@ public class FirstPersonController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void SetPositionAndRotation(Vector3 position, Quaternion rotation, float cameraPitch)
+    {
+        if (controller != null)
+        {
+            controller.Move(Vector3.zero);
+            controller.enabled = false;
+        }
+
+
+        Vector3 euler = rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0, euler.y, 0);
+        transform.position = position;
+
+        float rawX = euler.x;
+        if (rawX > 180f) rawX -= 360f;
+
+        xRotation = Mathf.Clamp(cameraPitch, -verticalClamp, verticalClamp);
+        if (cameraTransform != null)
+        {
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        }
+
+        velocity = Vector3.zero;
+        moveInput = Vector2.zero;
+        lookInput = Vector2.zero;
+
+        Physics.SyncTransforms();
+        if (controller != null) controller.enabled = true;
+        
     }
 }

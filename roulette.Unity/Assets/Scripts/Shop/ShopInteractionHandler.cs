@@ -7,47 +7,45 @@ public class ShopInteractionHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera shopCamera;
     [SerializeField] private Shop shop;
+    [SerializeField] private FPCInteractionPositionSetter playerPositionSetter;
 
     private GameStateManager stateManager;
     private bool isInteraction;
 
-    private bool isInitialized;
-
     [Inject]
-    public void Construct(Money money, GoldenChips goldenChips, GameStateManager stateManager)
+    public void Construct(GameStateManager stateManager)
     {
         this.stateManager = stateManager;
     }
 
-    private void Init()
-    {
-        isInitialized = true;
-    }
-
     private void OnEnable()
     {
-        stateManager.GameStateChanged += OnGameStateChanged;
+        if (stateManager != null)
+            stateManager.GameStateChanged += OnGameStateChanged;
     }
 
     private void OnDisable()
     {
-        stateManager.GameStateChanged -= OnGameStateChanged;
+        if (stateManager != null)
+            stateManager.GameStateChanged -= OnGameStateChanged;
     }
 
-    public void StartInteraction()
+    private void StartInteraction()
     {
-        shopCamera.gameObject.SetActive(true);
+        if (isInteraction) return;
+
         isInteraction = true;
-        shop.StartInteraction();
-        if (isInitialized == false) Init();
-
+        if (shopCamera != null) shopCamera.gameObject.SetActive(true);
+        if (shop != null) shop.StartInteraction();
     }
 
-    public void FinishInteraction()
+    private void FinishInteraction()
     {
-        shopCamera.gameObject.SetActive(false);
+        if (!isInteraction) return;
         isInteraction = false;
-        shop.FinishInteraction();
+        if (playerPositionSetter != null) playerPositionSetter.ChangePlayerPositionAndRotation();
+        if (shopCamera != null) shopCamera.gameObject.SetActive(false);
+        if (shop != null) shop.FinishInteraction();
     }
 
     private void OnGameStateChanged(GameState state)
@@ -56,7 +54,7 @@ public class ShopInteractionHandler : MonoBehaviour
         {
             StartInteraction();
         }
-        else if (isInteraction == true)
+        else if (isInteraction)
         {
             FinishInteraction();
         }

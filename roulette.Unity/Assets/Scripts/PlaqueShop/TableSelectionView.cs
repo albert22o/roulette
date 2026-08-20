@@ -31,9 +31,11 @@ public class TableSelectionView : MonoBehaviour
         this.plaqueUseController = plaqueUseController;
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
+        Initialize();
     }
 
-    public void Start()
+
+    public void Initialize()
     {
         if (betButtons.Count < tableInfo.PocketMapping.Count)
         {

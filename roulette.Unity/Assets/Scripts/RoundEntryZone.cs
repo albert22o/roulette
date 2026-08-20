@@ -16,6 +16,7 @@ public class RoundEntryZone : MonoBehaviour
     {
         this.gameStateManager = gameStateManager;
         this.playerInput = playerInput;
+        this.gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
     public void Start()
@@ -28,6 +29,17 @@ public class RoundEntryZone : MonoBehaviour
     {
         if (playerInput != null)
             playerInput.actions["Interact"].performed -= OnInteract;
+
+        if (gameStateManager != null)
+            gameStateManager.GameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newState)
+    {
+        if (newState != GameStateManager.GameState.FreeRoam)
+        {
+            playerInside = false;
+        }
     }
 
     private void OnInteract(InputAction.CallbackContext _)

@@ -7,6 +7,7 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
 {
     [SerializeField] private new CinemachineCamera camera;
     [SerializeField] private PlaqueShopView shop;
+    [SerializeField] private FPCInteractionPositionSetter positionSetter;
 
     private GameStateManager stateManager;
     private bool isInteraction;
@@ -40,11 +41,11 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
         isInteraction = true;
         shop.StartInteraction();
         if (isInitialized == false) Init();
-
     }
 
     public void FinishInteraction()
     {
+        positionSetter.ChangePlayerPositionAndRotation();
         camera.gameObject.SetActive(false);
         isInteraction = false;
         shop.FinishInteraction();

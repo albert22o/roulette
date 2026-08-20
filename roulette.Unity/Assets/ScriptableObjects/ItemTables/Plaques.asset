@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35addfad7c1ea3c438ce83daa1982b5b, type: 3}
   m_Name: Plaques
   m_EditorClassIdentifier: 
+  rarityType: 0
   folder: {fileID: 102900000, guid: ecfd12abc0f6c0e4793d33bd738fd494, type: 3}
+  items:
+  - {fileID: 11400000, guid: f2c0837c9c22dbb44886a72647292aab, type: 2}
+  - {fileID: 11400000, guid: e63ce65640c09b84183d5ab54ef348f0, type: 2}
+  - {fileID: 11400000, guid: 428d2af66afa01c458105763f1171d8e, type: 2}
+  - {fileID: 11400000, guid: 90f0418bc484c044686de5cb83dba1a1, type: 2}
+  - {fileID: 11400000, guid: bf98308b8c1238645939df7b18935d20, type: 2}

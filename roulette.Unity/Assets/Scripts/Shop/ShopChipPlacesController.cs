@@ -7,7 +7,7 @@ public class ShopChipPlacesController : MonoBehaviour
 
     private ShopItemsPool itemsPool;
 
-    private void Start()
+    private void Awake()
     {
         itemsPool = new ShopItemsPool(itemsTable);
     }
