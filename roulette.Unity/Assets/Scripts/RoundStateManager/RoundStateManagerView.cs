@@ -22,7 +22,6 @@ public class RoundStateManagerView : MonoBehaviour
     public void Start()
     {
         roundStateManager.StateChanged += OnStateChanged;
-        winningSequence.CountMoney += OnCountMoney;
     }
 
     private void OnStateChanged(RoundStateManager.RoundState state)
@@ -45,16 +44,16 @@ public class RoundStateManagerView : MonoBehaviour
                 roundCamera.gameObject.SetActive(false);
                 betsCamera.gameObject.SetActive(true);
                 break;
+            case RoundStateManager.RoundState.CountMoney:
+                rouletteCamera.gameObject.SetActive(false);
+                roundCamera.gameObject.SetActive(true);
+                betsCamera.gameObject.SetActive(false);
+                break;
             default:
                 rouletteCamera.gameObject.SetActive(false);
                 roundCamera.gameObject.SetActive(true);
                 betsCamera.gameObject.SetActive(false);
                 break;
         }
-    }
-    private void OnCountMoney(int bet, float multiplier, int reward)
-    {
-        betsCamera.gameObject.SetActive(false);
-        roundCamera.gameObject.SetActive(true);
     }
 }

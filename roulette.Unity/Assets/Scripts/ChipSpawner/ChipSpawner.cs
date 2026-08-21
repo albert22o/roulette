@@ -9,9 +9,20 @@ public class ChipSpawner
 
     private List<ChipThresholdData> thresholds;
 
+    private float mainChipRatio = 0.6f;
+    private float midChipRatio = 0.3f;
+    private int minimumMainChipsThreshold = 2;
+
     public void SetThresholds(List<ChipThresholdData> newThresholds)
     {
         thresholds = newThresholds;
+    }
+
+    public void SetDistributionSettings(float mainRatio, float midRatio, int minThreshold)
+    {
+        mainChipRatio = mainRatio;
+        midChipRatio = midRatio;
+        minimumMainChipsThreshold = minThreshold;
     }
 
     public void RequestSpawn(int totalAmount)
@@ -22,7 +33,14 @@ public class ChipSpawner
             return;
         }
 
-        List<int> distribution = ChipDistributionCalculator.CalculateDistribution(totalAmount, thresholds);
+        List<int> distribution = ChipDistributionCalculator.CalculateDistribution(
+            totalAmount,
+            thresholds,
+            mainChipRatio,
+            midChipRatio,
+            minimumMainChipsThreshold
+        );
+
         ChipSpawnerRequested?.Invoke(distribution);
     }
 

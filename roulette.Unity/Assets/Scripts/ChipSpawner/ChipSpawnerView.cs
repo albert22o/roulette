@@ -34,6 +34,26 @@ public class ChipSpawnerView : MonoBehaviour
     [SerializeField] private float viewingTime = 3f;
     [SerializeField] private float chipLifetime = 2f;
 
+    [Header("Chip Distribution Settings")]
+    [Tooltip("Доля основных фишек (0.6 = 60%)")]
+    [Range(0.1f, 0.9f)]
+    [SerializeField] private float mainChipRatio = 0.6f;
+
+    [Tooltip("Доля средних фишек (0.3 = 30%)")]
+    [Range(0.1f, 0.9f)]
+    [SerializeField] private float midChipRatio = 0.3f;
+
+    [Tooltip("Минимальное количество основных фишек для понижения номинала")]
+    [Range(1, 5)]
+    [SerializeField] private int minimumMainChipsThreshold = 2;
+
+    [Header("Debug")]
+    [Tooltip("Основные логи")]
+    [SerializeField] private bool enableGeneralLogs = false;
+
+    [Tooltip("Подробная математика и размены")]
+    [SerializeField] private bool enableDetailedLogs = false;
+
     private ChipSpawner chipSpawner;
     private WinningSequence winningSequence;
     private List<GameObject> spawnedChips = new List<GameObject>();
@@ -50,7 +70,10 @@ public class ChipSpawnerView : MonoBehaviour
 
     private void Start()
     {
+        ChipDistributionCalculator.SetDebugMode(enableGeneralLogs, enableDetailedLogs);
+
         chipSpawner.SetThresholds(thresholds);
+        chipSpawner.SetDistributionSettings(mainChipRatio, midChipRatio, minimumMainChipsThreshold);
     }
 
     private void OnEnable()
@@ -64,6 +87,12 @@ public class ChipSpawnerView : MonoBehaviour
         chipSpawner.ChipSpawnerRequested -= StartSpawningWithInterval;
         chipSpawner.ChipClearRequested -= OnClearRequested;
         ImmediateClear();
+    }
+
+    private void LogGeneral(string message)
+    {
+        if (enableGeneralLogs)
+            Debug.Log($"<color=white>[ChipSpawnerView]</color> {message}");
     }
 
     private GameObject GetChipPrefab(int denomination)
@@ -145,7 +174,7 @@ public class ChipSpawnerView : MonoBehaviour
         int iteration = 0;
         int totalChips = chipDistribution.Count;
 
-        Debug.Log($"[ChipSpawnerView] Начинаем спаун {totalChips} фишек...");
+        LogGeneral($"Начинаем спаун {totalChips} фишек");
 
         while (chipsSpawned < totalChips)
         {
@@ -172,8 +201,10 @@ public class ChipSpawnerView : MonoBehaviour
             currentInterval = Mathf.Max(minInterval, currentInterval - intervalDecrement);
         }
 
-        Debug.Log($"[ChipSpawnerView] Все {totalChips} фишек заспаунены");
+        LogGeneral($"Все {totalChips} фишек заспаунены");
+
         yield return new WaitForSeconds(viewingTime);
+
         spawnCoroutine = null;
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
     }

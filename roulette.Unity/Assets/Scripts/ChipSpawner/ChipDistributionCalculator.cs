@@ -4,61 +4,68 @@ using UnityEngine;
 
 public static class ChipDistributionCalculator
 {
+    [System.Serializable]
+    public class DebugSettings
+    {
+        public bool enableGeneralLogs = false;
+        public bool enableDetailedLogs = false;
+    }
+
+    private static DebugSettings debugSettings = new DebugSettings();
+
+    public static void SetDebugMode(bool enableGeneral, bool enableDetailed)
+    {
+        debugSettings.enableGeneralLogs = enableGeneral;
+        debugSettings.enableDetailedLogs = enableDetailed;
+    }
+
+    private static void LogGeneral(string message)
+    {
+        if (debugSettings.enableGeneralLogs)
+            Debug.Log($"<color=white>[ChipDistribution]</color> {message}");
+    }
+
+    private static void LogDetail(string message)
+    {
+        if (debugSettings.enableDetailedLogs)
+            Debug.Log($"<color=cyan>[ChipDistribution]</color> {message}");
+    }
+
+    private static void LogError(string message) => Debug.LogError($"<color=red>[ChipDistribution]</color> {message}");
+    private static void LogWarning(string message) => Debug.LogWarning($"<color=orange>[ChipDistribution]</color> {message}");
+
     private static readonly int[] Denominations = { 1000, 500, 100, 50, 25 };
 
-    public static List<int> CalculateDistribution(int totalAmount, List<ChipThresholdData> thresholds)
+    public static List<int> CalculateDistribution(int totalAmount, List<ChipThresholdData> thresholds, float mainChipRatio, float midChipRatio, int minimumMainChipsThreshold)
     {
-        Debug.Log($"[ChipDistribution] Начало расчета для суммы: {totalAmount}");
+        LogDetail($"Начало расчета для суммы: {totalAmount}");
 
         List<int> chips = new List<int>();
         int remaining = totalAmount;
 
         (int mainDenom, int minChips) = GetThresholdParams(totalAmount, thresholds);
-        Debug.Log($"[ChipDistribution] Выбран порог: основной номинал {mainDenom}, мин. фишек {minChips}");
+        LogDetail($"Выбран порог: основной номинал {mainDenom}, мин. фишек {minChips}");
 
         int maxMainByAmount = remaining / mainDenom;
-        int mainCount = Mathf.Min(Mathf.FloorToInt(minChips * 0.6f), maxMainByAmount);
+        int mainCount = Mathf.Min(Mathf.FloorToInt(minChips * mainChipRatio), maxMainByAmount);
 
-        if (mainCount < 2)
+        if (mainCount < minimumMainChipsThreshold)
         {
             mainDenom = GetLowerDenomination(mainDenom);
             maxMainByAmount = remaining / mainDenom;
-            mainCount = Mathf.Min(Mathf.FloorToInt(minChips * 0.6f), maxMainByAmount);
-            Debug.Log($"[ChipDistribution] Основной номинал понижен до {mainDenom}, количество: {mainCount}");
+            mainCount = Mathf.Min(Mathf.FloorToInt(minChips * mainChipRatio), maxMainByAmount);
+            LogDetail($"Основной номинал понижен до {mainDenom}, количество: {mainCount}");
         }
 
-        int midCount = Mathf.FloorToInt(minChips * 0.3f);
+        int midCount = Mathf.FloorToInt(minChips * midChipRatio);
         int smallCount = minChips - mainCount - midCount;
 
         int midDenom = GetNextDenomination(mainDenom);
         int smallDenom = GetNextDenomination(midDenom);
 
-        for (int i = 0; i < mainCount; i++)
-        {
-            if (remaining >= mainDenom)
-            {
-                chips.Add(mainDenom);
-                remaining -= mainDenom;
-            }
-        }
-
-        for (int i = 0; i < midCount; i++)
-        {
-            if (remaining >= midDenom)
-            {
-                chips.Add(midDenom);
-                remaining -= midDenom;
-            }
-        }
-
-        for (int i = 0; i < smallCount; i++)
-        {
-            if (remaining >= smallDenom)
-            {
-                chips.Add(smallDenom);
-                remaining -= smallDenom;
-            }
-        }
+        AddChipsByDenomination(chips, ref remaining, mainDenom, mainCount);
+        AddChipsByDenomination(chips, ref remaining, midDenom, midCount);
+        AddChipsByDenomination(chips, ref remaining, smallDenom, smallCount);
 
         foreach (int denom in Denominations)
         {
@@ -69,13 +76,25 @@ public static class ChipDistributionCalculator
             }
         }
 
-        Debug.Log($"[ChipDistribution] Распределение до размена ({chips.Count} фишек): {FormatChipList(chips)}, остаток: {remaining}");
+        LogDetail($"Распределение до размена ({chips.Count} фишек): {FormatChipList(chips)}, остаток: {remaining}");
 
         chips = ExchangeChips(chips, minChips);
 
-        Debug.Log($"[ChipDistribution] Итоговое распределение ({chips.Count} фишек): {FormatChipList(chips)}");
+        LogGeneral($"Итоговое распределение ({chips.Count} фишек): {FormatChipList(chips)}");
 
         return chips;
+    }
+
+    private static void AddChipsByDenomination(List<int> chips, ref int remaining, int denomination, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            if (remaining >= denomination)
+            {
+                chips.Add(denomination);
+                remaining -= denomination;
+            }
+        }
     }
 
     private static string FormatChipList(List<int> chips)
@@ -102,11 +121,11 @@ public static class ChipDistributionCalculator
     {
         if (chips.Count >= targetMinChips)
         {
-            Debug.Log("[ChipDistribution] Размен не требуется: количество фишек достигает минимума.");
+            LogDetail("Размен не требуется: количество фишек достигает минимума.");
             return chips;
         }
 
-        Debug.Log($"[ChipDistribution] Запуск размена. Текущее кол-во: {chips.Count}, цель: {targetMinChips}");
+        LogDetail($"Запуск размена. Текущее кол-во: {chips.Count}, цель: {targetMinChips}");
 
         chips.Sort((a, b) => b.CompareTo(a));
 
@@ -126,7 +145,7 @@ public static class ChipDistributionCalculator
 
             if (exchangeRate > 1)
             {
-                Debug.Log($"[ChipDistribution] Выполнен размен: 1x{chipValue} заменено на {exchangeRate}x{lowerDenom}");
+                LogDetail($"Выполнен размен: 1x{chipValue} заменено на {exchangeRate}x{lowerDenom}");
 
                 chips.RemoveAt(i);
                 for (int j = 0; j < exchangeRate; j++)
@@ -136,7 +155,7 @@ public static class ChipDistributionCalculator
 
                 neededChips = targetMinChips - chips.Count;
                 exchangesMade++;
-                i = -1; 
+                i = -1;
                 chips.Sort((a, b) => b.CompareTo(a));
             }
         }
@@ -147,9 +166,30 @@ public static class ChipDistributionCalculator
     private static int GetNextDenomination(int current)
     {
         int index = System.Array.IndexOf(Denominations, current);
-        if (index >= 0 && index < Denominations.Length - 1)
-            return Denominations[index + 1];
-        return 25;
+
+        if (index == -1)
+        {
+            LogError($"Номинал {current} не найден в массиве Denominations!");
+            return GetSmallestDenomination();
+        }
+
+        if (index >= Denominations.Length - 1)
+        {
+            return Denominations[index];
+        }
+
+        return Denominations[index + 1];
+    }
+
+    private static int GetSmallestDenomination()
+    {
+        if (Denominations == null || Denominations.Length == 0)
+        {
+            LogError("Массив Denominations пуст или null!");
+            return 1;
+        }
+
+        return Denominations[Denominations.Length - 1];
     }
 
     private static int GetLowerDenomination(int current)
@@ -157,6 +197,7 @@ public static class ChipDistributionCalculator
         int index = System.Array.IndexOf(Denominations, current);
         if (index > 0)
             return Denominations[index - 1];
-        return 25;
+
+        return GetSmallestDenomination();
     }
 }

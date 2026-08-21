@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using static RoundStateManager;
 
 public class WinningSequence
 {
@@ -63,6 +64,7 @@ public class WinningSequence
                 ApplyChips?.Invoke(betInfo, hitInfo);
                 break;
             case SequencePhase.CountMoney:
+                roundStateManager.ChangeState(RoundState.CountMoney);
                 CountMoney?.Invoke(betSum, generalMultiplier, betCalculator.GetRewardForBet(betInfo, betSum, hitInfo));
                 break;
             case SequencePhase.Finish:
