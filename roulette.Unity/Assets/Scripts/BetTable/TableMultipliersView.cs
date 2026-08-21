@@ -45,9 +45,6 @@ public class TableMultipliersView : MonoBehaviour
         int currentNumber = betCalculator.GetFieldMultiplier(1, betCalculator.NumMultiplier);
         int currentZero = betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier);
 
-        Debug.Log($"<color=cyan>[TableMultipliersView]</color> " +
-                  $"Zero: x{currentZero}, Number(1): x{currentNumber}, Dozen(1st): x{currentDozen}, Color(Red): x{currentColor}");
-
         if (colorMultiplierText != null)
             colorMultiplierText.text = $"Color (Red): x{currentColor}";
 
