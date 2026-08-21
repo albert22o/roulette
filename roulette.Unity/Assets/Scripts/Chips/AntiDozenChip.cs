@@ -4,19 +4,23 @@
     private readonly DozenType targetDozen;
     private bool rerollAbility = true;
 
+    private bool effectTriggered;
+
     public AntiDozenChip(IRouletteWheel rouletteWheel, DozenType targetDozen, AntiDozenChipData antiDozenChipData) : base(antiDozenChipData)
     {
         this.targetDozen = targetDozen;
         this.rouletteWheel = rouletteWheel;
         rouletteWheel.AllBallsStopped += OnAllBallsStopped;
     }
-    public override void Apply()
+    public override bool Apply()
     {
+        return effectTriggered;
     }
 
     public override void Revert()
     {
         rerollAbility = true;
+        effectTriggered = false;
     }
 
     private void OnAllBallsStopped(HitInfo[] hit)
@@ -29,6 +33,7 @@
             if (hitInfo.Dozen == targetDozen)
             {
                 rouletteWheel.AddBallsToAutoReroll(hitInfo.BallHash);
+                effectTriggered = true;
                 return;
             }
         }

@@ -21,7 +21,10 @@
         roundManager.ModifiGoalModifier(-percentChipData.GoalModifierDelta);
     }
 
-    public override void Apply() { }
+    public override bool Apply()
+    {
+        return true;
+    }
 
     public override void Revert() { }
 }

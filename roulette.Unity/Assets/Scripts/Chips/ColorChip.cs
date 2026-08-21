@@ -11,9 +11,10 @@
         modifyAmount = colorChipData.ModifyAmount;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyColorMultiplier(color, modifyAmount);
+        return true;
     }
 
     public override void Revert()

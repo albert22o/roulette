@@ -11,9 +11,10 @@
         modifyAmount = dozenChipData.ModifyAmount;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyDozenMultiplier(dozenType, modifyAmount);
+        return true;
     }
 
     public override void Revert()

@@ -21,12 +21,13 @@ public class MultiplyDivisibilityChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
-        if (modifyRequest)
-        {
-            betCalculator.MuliplyGeneralModifier(multiplier);
-        }
+        if (!modifyRequest)
+            return false;
+
+        betCalculator.MuliplyGeneralModifier(multiplier);
+        return true;
     }
 
     public override void Revert()

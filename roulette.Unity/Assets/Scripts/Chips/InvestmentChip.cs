@@ -11,8 +11,9 @@ public class InvestmentChip : Chip
         bonusAmount = data.BonusAmount;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
+        return true;
     }
 
     public override void Revert()

@@ -21,12 +21,14 @@ public class RangeBonusChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         if (modifyRequest)
         {
             betCalculator.ModifyGeneralModifier(bonusAmount);
+            return true;
         }
+        return false;
     }
 
     public override void Revert()

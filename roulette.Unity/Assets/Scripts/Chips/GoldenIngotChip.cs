@@ -11,9 +11,13 @@ public class GoldenIngotChip : Chip
         this.goldenChips = goldenChips;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
+        if (goldenChips.Amount == 0)
+            return false;
+
         betCalculator.ModifyGeneralModifier(goldenChips.Amount);
+        return true;
     }
 
     public override void Revert()

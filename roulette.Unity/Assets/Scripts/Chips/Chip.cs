@@ -7,7 +7,7 @@ public abstract class Chip
     {
         ChipData = chipData;
     }
-    public abstract void Apply();
+    public abstract bool Apply();
     public abstract void Revert();
 
     public virtual void OnAddedToHolder() { }

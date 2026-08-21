@@ -15,15 +15,17 @@ public abstract class ChipHolderDependentChip : Chip
 
     protected abstract int CalculateBonus();
 
-    public override void Apply()
+    public override bool Apply()
     {
-        if (bonusApplied) return;
+        if (bonusApplied) return false;
         int bonus = CalculateBonus();
         if (bonus > 0)
         {
             betCalculator.ModifyGeneralModifier(bonus);
             bonusApplied = true;
+            return true;
         }
+        return false;
     }
 
     public override void Revert()

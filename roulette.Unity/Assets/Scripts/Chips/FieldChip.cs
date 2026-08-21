@@ -11,9 +11,10 @@
         modifyAmount = fieldChipData.ModifyAmount;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyFieldNumberMultiplier(fieldNum, modifyAmount);
+        return true;
     }
 
     public override void Revert()

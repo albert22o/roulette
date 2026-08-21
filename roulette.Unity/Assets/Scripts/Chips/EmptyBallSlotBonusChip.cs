@@ -12,9 +12,14 @@
         this.emptyBallSlotBonusChipData = emptyBallSlotBonusChipData;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
-        betCalculator.ModifyGeneralModifier(ballHolder.FreeSlotsCount * emptyBallSlotBonusChipData.BonusPerBall);
+        int bonus = ballHolder.FreeSlotsCount * emptyBallSlotBonusChipData.BonusPerBall;
+        if (bonus == 0)
+            return false;
+
+        betCalculator.ModifyGeneralModifier(bonus);
+        return true;
     }
 
     public override void Revert()

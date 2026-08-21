@@ -8,10 +8,11 @@
         this.betCalculator = betCalculator;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
-        foreach (int number in pseudoZeroNumbers) 
+        foreach (int number in pseudoZeroNumbers)
             betCalculator.AddToZeroFields(number);
+        return true;
     }
 
     public override void Revert()

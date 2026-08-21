@@ -23,9 +23,10 @@
         ballResults.RandomBallSelection = false;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyGeneralModifier(d6ChipData.ModifyAmount);
+        return true;
     }
 
     public override void Revert()

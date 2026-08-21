@@ -21,12 +21,13 @@ public class DivisibilityChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
-        if (modifyRequest)
-        {
-            betCalculator.ModifyGeneralModifier(bonusAmount);
-        }
+        if (!modifyRequest)
+            return false;
+
+        betCalculator.ModifyGeneralModifier(bonusAmount);
+        return true;
     }
 
     public override void Revert()

@@ -167,8 +167,10 @@ public class ChipHolder
 
     public void ApplyByIndex(int index)
     {
-        chips[index]?.Apply();
-        ChipAnimated?.Invoke(index);
+        if (chips[index]?.Apply() == true)
+        {
+            ChipAnimated?.Invoke(index);
+        }
     }
 
     private int FindFreeSlot()

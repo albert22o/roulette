@@ -3,6 +3,7 @@
     private readonly BetCalculator betCalculator;
     private readonly RoundManager roundManager;
     private bool firstReroll = true;
+    private bool effectTriggered;
 
     public RerollChip(BetCalculator betCalculator, RoundManager roundManager, 
         RerollChipData rerollChipData) : base(rerollChipData)
@@ -29,13 +30,16 @@
             return;
         firstReroll = false;
         betCalculator.ResetRerollCoeff();
+        effectTriggered = true;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
+        return effectTriggered;
     }
 
     public override void Revert()
     {
+        effectTriggered = false;
     }
 }

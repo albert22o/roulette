@@ -11,9 +11,10 @@ public class PassiveChip : Chip
         bonusAmount = data.BonusAmount;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyGeneralModifier(bonusAmount);
+        return true;
     }
 
     public override void Revert()

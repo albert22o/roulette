@@ -19,10 +19,14 @@ public class AllInChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         if (modifyRequest)
+        {
             betCalculator.MuliplyGeneralModifier(multiplier);
+            return true;
+        }
+        return false;
     }
 
     public override void Revert()

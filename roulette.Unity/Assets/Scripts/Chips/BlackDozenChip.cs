@@ -18,12 +18,14 @@ public class BlackDozenChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         if (modifyRequest)
         {
             betCalculator.ModifyDozenMultiplier(selectedDozen, bonusAmount);
+            return true;
         }
+        return false;
     }
 
     public override void Revert()
