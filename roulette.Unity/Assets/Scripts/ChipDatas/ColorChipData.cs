@@ -9,6 +9,6 @@ public class ColorChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new ColorChip(deps.BetCalculator, this);
+        return new ColorChip(deps.BetCalculator, this, deps.BallResults);
     }
 }
