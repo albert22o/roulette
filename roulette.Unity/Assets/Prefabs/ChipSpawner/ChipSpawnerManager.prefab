@@ -76,7 +76,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79da42096ce41d14a97e8b7a0b5f4383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 0.2
-  chipPrefab: {fileID: 6911491143773113581, guid: 35a4b3999957ccf4db0c535f6dbc26f0, type: 3}
+  chipPrefabs:
+  - denomination: 25
+    prefab: {fileID: 6925182978877584918, guid: 7cfdd63a6833422478d8dd12a93cb317, type: 3}
+  - denomination: 50
+    prefab: {fileID: 7639186905714719954, guid: fb708d3ac9ca98b46b86dd09d3a75a25, type: 3}
+  - denomination: 100
+    prefab: {fileID: 1495576812300856905, guid: 051085fd712cd1d40bbbe998f4a3dd6b, type: 3}
+  - denomination: 500
+    prefab: {fileID: 3239344363843224179, guid: d640c8d45de79014584553996c8a4dee, type: 3}
+  - denomination: 1000
+    prefab: {fileID: 5369454331506477411, guid: f1f8d001a29dfe847a95cd6aaccf4da2, type: 3}
+  thresholds:
+  - maxAmount: 100
+    mainDenomination: 25
+    minChips: 4
+  - maxAmount: 500
+    mainDenomination: 50
+    minChips: 6
+  - maxAmount: 1000
+    mainDenomination: 100
+    minChips: 8
+  - maxAmount: 5000
+    mainDenomination: 500
+    minChips: 10
+  - maxAmount: 10000
+    mainDenomination: 1000
+    minChips: 12
   spawnPoint: {fileID: 1597914941276563860}
   randomSpawnPositionMultiplier: 0.4
+  startInterval: 0.4
+  minInterval: 0.08
+  intervalDecrement: 0.015
+  startBatchSize: 1
+  maxBatchSize: 5
+  iterationsPerBatchIncrease: 3

@@ -9,11 +9,14 @@ public class RoundStateManagerView : MonoBehaviour
     [SerializeField] CinemachineCamera betsCamera;
 
     private RoundStateManager roundStateManager;
+    private WinningSequence winningSequence;
 
     [Inject]
-    public void Construct(RoundStateManager roundStateManager)
+    public void Construct(RoundStateManager roundStateManager, WinningSequence winningSequence)
     {
         this.roundStateManager = roundStateManager;
+        this.winningSequence = winningSequence;
+
     }
 
     public void Start()
@@ -40,6 +43,11 @@ public class RoundStateManagerView : MonoBehaviour
                 rouletteCamera.gameObject.SetActive(false);
                 roundCamera.gameObject.SetActive(false);
                 betsCamera.gameObject.SetActive(true);
+                break;
+            case RoundStateManager.RoundState.CountMoney:
+                rouletteCamera.gameObject.SetActive(false);
+                roundCamera.gameObject.SetActive(true);
+                betsCamera.gameObject.SetActive(false);
                 break;
             default:
                 rouletteCamera.gameObject.SetActive(false);

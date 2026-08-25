@@ -59,6 +59,7 @@ public class RoundStateManager
         WheelSpining,
         ChoosingReward,
         BetResults,
+        CountMoney,
         Lose,
         Win,
         NotActive

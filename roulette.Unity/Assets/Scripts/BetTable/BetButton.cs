@@ -38,7 +38,10 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             {
                 while (targetChipCount != currentCount)
                 {
-                    stackChips.Push(Instantiate(chipPrefab, spawnChipPoint));
+                    GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
+                    chip.transform.localRotation = Quaternion.Euler(0,0,0);
+                    stackChips.Push(chip);
+
                     currentCount++;
                 }
             }
