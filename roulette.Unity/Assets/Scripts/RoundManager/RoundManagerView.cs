@@ -41,6 +41,8 @@ public class RoundManagerView : MonoBehaviour
         OnBetCountChanged(roundManager.BetCount);
         OnQuoteOrGoalChanged(roundManager.Quote);
         OnRerollCountChanged(roundManager.RerollCount);
+        OnAbleToWinChanged(roundManager.AbleToWin);
+        
 
         if (rerollButton == null || spinButton == null)
         {

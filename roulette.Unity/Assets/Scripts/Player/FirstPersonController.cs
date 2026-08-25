@@ -20,7 +20,6 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation;
     private bool active = false;
-    private bool isFrozen = false;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
