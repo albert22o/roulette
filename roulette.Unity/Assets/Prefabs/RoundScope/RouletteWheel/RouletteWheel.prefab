@@ -444,7 +444,6 @@ MonoBehaviour:
   ballLauncher: {fileID: 1870874417177158910}
   sectorsRadius: 1.89
   wheel: {fileID: 2513839341939426248}
-  stopThreshold: 0.1
   stableTimeRequired: 2
   maxDistance: 4.56
   rouletteWheel: {fileID: 1260821769150077766}
