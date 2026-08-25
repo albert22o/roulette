@@ -37,7 +37,7 @@ public class FirstPersonController : MonoBehaviour
 
     public void Start()
     {
-        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
 
         if (cameraTransform == null)
         {
@@ -46,7 +46,11 @@ public class FirstPersonController : MonoBehaviour
         }
         controller = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
-        Enable();
+        if (gameStateManager.CurrentState == GameStateManager.GameState.FreeRoam)
+            Enable();
+        else
+            Disable();
+
         gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
