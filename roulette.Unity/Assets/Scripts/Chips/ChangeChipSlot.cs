@@ -11,9 +11,10 @@
         this.changeChipSlotData = lostChipData;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.MuliplyGeneralModifier(changeChipSlotData.Multiplier);
+        return true;
     }
 
     public override void Revert()

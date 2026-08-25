@@ -10,8 +10,9 @@ public class DebtChip : Chip
         debtAmount = data.DebtAmount; 
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
+        return true;
     }
 
     public override void Revert()

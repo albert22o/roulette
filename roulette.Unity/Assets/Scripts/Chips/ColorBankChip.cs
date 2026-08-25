@@ -22,13 +22,15 @@ public class ColorBankChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         if (!bonusApplied && currentBonus > 0)
         {
             betCalculator.ModifyGeneralModifier(currentBonus);
             bonusApplied = true;
+            return true;
         }
+        return false;
     }
 
     public override void Revert()

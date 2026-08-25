@@ -33,9 +33,10 @@
         multiplier += multiplierPerWinChipData.MultiplierPerWin;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.MuliplyGeneralModifier(multiplier);
+        return true;
     }
 
     public override void Revert()

@@ -22,9 +22,10 @@
         base.OnRemovedFromHolder();
         tableInfo.AddToBetCount(-stackChipData.BetCountDelta);
     }
-    public override void Apply()
+    public override bool Apply()
     {
         betCalculator.ModifyGeneralModifier(stackChipData.BonusAmount);
+        return true;
     }
     public override void Revert()
     {

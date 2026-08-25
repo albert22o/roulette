@@ -1,19 +1,29 @@
-﻿public class DozenChip : Chip
+﻿using System;
+
+public class DozenChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly DozenType dozenType;
     private readonly int modifyAmount;
+    private HitInfo ballHit;
 
-    public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData) : base(dozenChipData)
+    public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData, BallResults ballResults) : base(dozenChipData)
     {
         this.betCalculator = betCalculator;
         dozenType = dozenChipData.DozenType;
         modifyAmount = dozenChipData.ModifyAmount;
+        ballResults.BallSelected += OnBallSelected;
     }
 
-    public override void Apply()
+    private void OnBallSelected(HitInfo info)
+    {
+        ballHit = info;
+    }
+
+    public override bool Apply()
     {
         betCalculator.ModifyDozenMultiplier(dozenType, modifyAmount);
+        return ballHit != null && ballHit.Dozen == dozenType;
     }
 
     public override void Revert()

@@ -12,9 +12,10 @@
         this.changeBallCountChipData = changeBallCountChipData;
     }
 
-    public override void Apply() 
+    public override bool Apply() 
     {
         betCalculator.ModifyGeneralModifier(changeBallCountChipData.ModifyAmount);
+        return true;
     }
 
     public override void Revert() 

@@ -11,7 +11,7 @@
         this.multiplyPerRareChipData = multiplyPerRareChipData;
     }
 
-    public override void Apply()
+    public override bool Apply()
     {
         multiplier = 1f;
         foreach (var chip in chipHolder.Chips) 
@@ -21,6 +21,7 @@
                 multiplier += multiplyPerRareChipData.MultiplierPerChip;
         }
         betCalculator.MuliplyGeneralModifier(multiplier);
+        return multiplier != 1f;
     }
 
     public override void Revert()
