@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -17,7 +16,6 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float verticalClamp = 85f;
 
     private CharacterController controller;
-    [SerializeField] private MeshRenderer render;
     private Collider playerCollider;
     private Vector3 velocity;
     private float xRotation;
@@ -26,7 +24,6 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool jumpPressed;
-    private Camera mainCamera;
 
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
@@ -35,7 +32,6 @@ public class FirstPersonController : MonoBehaviour
     public void Construct(GameStateManager gameStateManager, Camera camera, CameraEventHandler cameraEventHandler)
     {
         this.gameStateManager = gameStateManager;
-        mainCamera = camera;
         this.cameraEventHandler = cameraEventHandler;
     }
 
@@ -65,21 +61,17 @@ public class FirstPersonController : MonoBehaviour
     public void Enable()
     {
         active = true;
-        render.enabled = true;
         playerCollider.enabled = true;
     }
 
     public void Disable()
     {
         active = false;
-        render.enabled = false;
         playerCollider.enabled = false;
     }
 
     private void Update()
     {
-        if (isFrozen)
-            return;
         if (active && cameraEventHandler.IsTransitioning == false)
         {
             HandleMouseLook();
@@ -140,11 +132,7 @@ public class FirstPersonController : MonoBehaviour
 
 
         Vector3 euler = rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0, euler.y, 0);
-        transform.position = position;
-
-        float rawX = euler.x;
-        if (rawX > 180f) rawX -= 360f;
+        transform.SetPositionAndRotation(position, Quaternion.Euler(0, euler.y, 0));
 
         xRotation = Mathf.Clamp(cameraPitch, -verticalClamp, verticalClamp);
         if (cameraTransform != null)
@@ -159,10 +147,5 @@ public class FirstPersonController : MonoBehaviour
         Physics.SyncTransforms();
         if (controller != null) controller.enabled = true;
         
-    }
-
-    public void SetFrozen(bool variable)
-    {
-        isFrozen = variable;
     }
 }

@@ -104,8 +104,6 @@ MonoBehaviour:
   cameraTransform: {fileID: 7751595502225317023}
   mouseSensitivity: 0.3
   verticalClamp: 85
-  lightSource: {fileID: 4369394102548900908}
-  render: {fileID: 1486839130080608383}
 --- !u!114 &8586029147788430714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5979999163544922955
 Transform:
   m_ObjectHideFlags: 0
@@ -381,10 +379,5 @@ PrefabInstance:
 --- !u!4 &846324102307632781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3533657945981517524, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
-  m_PrefabInstance: {fileID: 4230195510420645977}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &4369394102548900908 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 438987362841527413, guid: 0bb5437c70f9ba94089453d766173ddf, type: 3}
   m_PrefabInstance: {fileID: 4230195510420645977}
   m_PrefabAsset: {fileID: 0}

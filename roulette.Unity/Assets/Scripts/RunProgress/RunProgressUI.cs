@@ -72,7 +72,7 @@ public class RunProgressUI : MonoBehaviour
 
         UpdateAllSections();
 
-        playerController.SetFrozen(true);
+        playerController.Disable();
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
 
@@ -92,7 +92,7 @@ public class RunProgressUI : MonoBehaviour
 
         gameObject.SetActive(false);
         isPanelOpen = false;
-        playerController.SetFrozen(false);
+        playerController.Enable();
 
         Cursor.lockState = savedCursorLockState;
         Cursor.visible = savedCursorVisible;
