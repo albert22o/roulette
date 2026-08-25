@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -21,15 +22,27 @@ public class PlaquesSectionUI : MonoBehaviour
     {
         ClearItems();
 
-        if (plaqueHolder.plaques != null)
+        if (plaqueHolder.plaques != null && plaqueHolder.plaques.Count > 0)
         {
-            foreach (var plaque in plaqueHolder.plaques)
+            var groupedPlaque = plaqueHolder.plaques.GroupBy(p => p.PlaqueData.GetType()).Select(g => new { PlaqueType = g.Key, Count = g.Count(), FirstPlaqueData = g.First().PlaqueData});
+
+            foreach (var group in groupedPlaque)
             {
-                SpawnItem(defaultIcon, plaque.GetType().Name);
+                Sprite icon = GetPlaqueIcon(group.FirstPlaqueData);
+                string text = $"{group.PlaqueType.Name} x{group.Count}";
+                SpawnItem(icon, text);
             }
         }
     }
 
+    private Sprite GetPlaqueIcon(PlaqueData plaqueData)
+    {
+        if (plaqueData != null && plaqueData.Icon != null)
+        {
+            return plaqueData.Icon;
+        }
+        return defaultIcon;
+    }
     private void SpawnItem(Sprite icon, string text)
     {
         var item = Instantiate(listItemPrefab, contentParent);
