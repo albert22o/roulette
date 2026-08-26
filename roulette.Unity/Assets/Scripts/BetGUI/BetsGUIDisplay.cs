@@ -27,6 +27,7 @@ public class BetsGUIDisplay : MonoBehaviour
         while (dots.Count < maxBets)
         {
             BetDisplayItem dot = Instantiate(betItemPrefab, container);
+            dot.transform.SetAsFirstSibling();
             dots.Add(dot);
         }
         while (dots.Count > maxBets)

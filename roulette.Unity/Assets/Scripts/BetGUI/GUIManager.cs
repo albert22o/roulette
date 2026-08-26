@@ -3,12 +3,13 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class BetGUIManager : MonoBehaviour
+public class GUIManager : MonoBehaviour
 {
     [SerializeField] private UICounter goldenChipsCounter, silverChipsCounter;
     [SerializeField] private BetsGUIDisplay betsDisplay;
     [SerializeField] private ProgressBarGUI quoteProgress;
     [SerializeField] private TextMeshProUGUI rerollPenalty;
+    [SerializeField] private GameObject betPanel;
 
     private GoldenChips goldenChips;
     private BossChips bossChips;
@@ -51,7 +52,7 @@ public class BetGUIManager : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        gameObject.SetActive(state is GameStateManager.GameState.BettingСycle);
+        betPanel.SetActive(state is GameStateManager.GameState.BettingСycle);
     }
 
     private void OnRerollCoeffChanged(float rerollCoef)
