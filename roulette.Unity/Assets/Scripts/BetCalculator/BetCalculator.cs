@@ -27,6 +27,7 @@ public class BetCalculator
     private List<(Func<float, float> Function, string OperationType, float Value)> modifySequence = new();
 
     private float rerollCoeff = 1.0f;
+    private bool freeReroll = true;
 
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
@@ -36,6 +37,11 @@ public class BetCalculator
 
     public void DecreaseRerollCoeff()
     {
+        if (freeReroll)
+        {
+            freeReroll = false;
+            return;
+        }
         rerollCoeff -= 0.25f;
         rerollCoeff = Math.Max(0, rerollCoeff);
     }
@@ -43,6 +49,7 @@ public class BetCalculator
     public void ResetRerollCoeff()
     {
         rerollCoeff = 1.0f;
+        freeReroll = true;
     }
 
     public void AddToZeroFields(int fieldNum)
