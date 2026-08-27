@@ -57,7 +57,7 @@ public class GUIManager : MonoBehaviour
 
     private void OnRerollCoeffChanged(float rerollCoef)
     {
-        rerollPenalty.text = $"{rerollCoef * 100}%";
+        rerollPenalty.text = $"{(1 - rerollCoef) * 100}%";
     }
 
     private void OnDestroy()
