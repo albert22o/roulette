@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Bson;
-using System;
+﻿using System;
 using System.Linq;
 using static RoundStateManager;
 
@@ -188,7 +187,6 @@ public class RoundManager
         betTable.ClearBets();
 
         ballHolder.RemoveSelectedBallsEffect();
-        QuoteChanged?.Invoke(quote);
         roundStateManager.ChangeState(RoundState.PlacingBets);
     }
 

@@ -29,6 +29,8 @@ public class BetCalculator
     private float rerollCoeff = 1.0f;
     private bool freeReroll = true;
 
+    public event Action<float> RerollCoeffChanged;
+
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
         ballResults.BallSelected += OnBallSelected;
@@ -44,12 +46,14 @@ public class BetCalculator
         }
         rerollCoeff -= 0.25f;
         rerollCoeff = Math.Max(0, rerollCoeff);
+        RerollCoeffChanged?.Invoke(rerollCoeff);
     }
 
     public void ResetRerollCoeff()
     {
         rerollCoeff = 1.0f;
         freeReroll = true;
+        RerollCoeffChanged?.Invoke(rerollCoeff);
     }
 
     public void AddToZeroFields(int fieldNum)
