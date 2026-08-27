@@ -7,6 +7,7 @@ public class BetCalculator
 {
     public event Action<int> GetReward;
     public event Action<HitInfo> EndRound;
+    public event Action MultipliersUpdated;
 
     public int ZeroMultiplier { get; set; } = 10;
     public int NumMultiplier { get; set; } = 5;
@@ -15,17 +16,12 @@ public class BetCalculator
     public float RerollCoeff => rerollCoeff;
 
     private readonly HashSet<int> zeroFields = new HashSet<int>() { 0 };
-
     private readonly Dictionary<int, int> fieldNumberMultipliers = new();
-
     private readonly Dictionary<DozenType, int> dozenMultipliers = new();
-
     private readonly Dictionary<ColorType, int> colorMultipliers = new();
 
     private bool active = true;
-
     private List<(Func<float, float> Function, string OperationType, float Value)> modifySequence = new();
-
     private float rerollCoeff = 1.0f;
     private bool freeReroll = true;
 
@@ -56,15 +52,8 @@ public class BetCalculator
         RerollCoeffChanged?.Invoke(rerollCoeff);
     }
 
-    public void AddToZeroFields(int fieldNum)
-    {
-        zeroFields.Add(fieldNum);
-    }
-
-    public void RemoveFromZeroFields(int fieldNum)
-    {
-        zeroFields.Remove(fieldNum);
-    }
+    public void AddToZeroFields(int fieldNum) => zeroFields.Add(fieldNum);
+    public void RemoveFromZeroFields(int fieldNum) => zeroFields.Remove(fieldNum);
 
     public void ModifyGeneralModifier(int delta)
     {
@@ -76,7 +65,6 @@ public class BetCalculator
             modifySequence.RemoveAt(inverseIndex);
             return;
         }
-
         modifySequence.Add((x => x + delta, "Add", delta));
     }
 
@@ -90,7 +78,6 @@ public class BetCalculator
             modifySequence.RemoveAt(inverseIndex);
             return;
         }
-
         modifySequence.Add((x => (x * multiplier), "Multiply", multiplier));
     }
 
@@ -104,7 +91,6 @@ public class BetCalculator
             modifySequence.RemoveAt(inverseIndex);
             return;
         }
-
         modifySequence.Add((x => (int)(x / divisor), "Divide", divisor));
     }
 
@@ -114,42 +100,39 @@ public class BetCalculator
             ? m
             : (fieldNumber == 0 ? ZeroMultiplier : NumMultiplier);
         fieldNumberMultipliers[fieldNumber] = current + delta;
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyFieldNumberMultiplier(int delta)
     {
         for (int i = 1; i <= 36; i++)
-        {
             ModifyFieldNumberMultiplier(i, delta);
-        }
     }
 
     public void ModifyDozenMultiplier(DozenType dozen, int delta)
     {
         var current = dozenMultipliers.TryGetValue(dozen, out var m) ? m : DozenMultiplier;
         dozenMultipliers[dozen] = current + delta;
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyDozenMultiplier(int delta)
     {
         foreach (DozenType type in Enum.GetValues(typeof(DozenType)))
-        {
             ModifyDozenMultiplier(type, delta);
-        }
     }
 
     public void ModifyColorMultiplier(ColorType color, int delta)
     {
         var current = colorMultipliers.TryGetValue(color, out var m) ? m : ColorMultiplier;
         colorMultipliers[color] = current + delta;
+        MultipliersUpdated?.Invoke();
     }
 
     public void ModifyColorMultiplier(int delta)
     {
         foreach (ColorType type in Enum.GetValues(typeof(ColorType)))
-        {
             ModifyColorMultiplier(type, delta);
-        }
     }
 
     public void OnStateChanged(RoundState newState)
@@ -161,7 +144,6 @@ public class BetCalculator
     {
         if (info == null)
         {
-            // Если информации о ставке не пришло - автопроигрыш
             GetReward?.Invoke(0);
             return;
         }
@@ -195,7 +177,6 @@ public class BetCalculator
             return 0;
 
         multiplier = ApplyModifiers(multiplier);
-
         return multiplier;
     }
 
@@ -212,6 +193,7 @@ public class BetCalculator
     {
         GetReward?.Invoke(reward);
     }
+
     private float ApplyModifiers(float value)
     {
         return modifySequence.Aggregate(value, (current, item) => item.Function(current));
