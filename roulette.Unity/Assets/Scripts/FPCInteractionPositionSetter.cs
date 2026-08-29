@@ -7,29 +7,14 @@ public class FPCInteractionPositionSetter : MonoBehaviour
     [SerializeField] private CinemachineCamera cinemachineCamera;
     private FirstPersonController fpc;
 
-    private GameStateManager gameStateManager;
-    [SerializeField] private GameStateManager.GameState requiredState = GameStateManager.GameState.BettingСycle;
-
     [Inject]
-    private void Construct(FirstPersonController fpc, GameStateManager gameStateManager)
+    public void Construct(FirstPersonController fpc)
     {
         this.fpc = fpc;
-        this.gameStateManager = gameStateManager;
     }
 
-    private void Start()
-    {
-        if (gameStateManager.CurrentState == requiredState)
-        {
-            ChangePlayerPositionAndRotation();
-        }
-    }
     public void ChangePlayerPositionAndRotation()
     {
-        if (cinemachineCamera != null)
-        {
-            cinemachineCamera.gameObject.SetActive(true);
-        }
         Vector3 camEuler = cinemachineCamera.transform.rotation.eulerAngles;
         float pitch = camEuler.x;
 
