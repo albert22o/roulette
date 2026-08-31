@@ -13,6 +13,10 @@ class BetTableView : MonoBehaviour
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;
     [SerializeField] private ShopTooltip tooltip;
+    [Header("Сгорание фишек")]
+    [SerializeField] private float burnStartDelay = 1f;
+    [SerializeField] private Material burnMaterial;
+    [SerializeField] private float burnTime = 2f;
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
@@ -22,16 +26,18 @@ class BetTableView : MonoBehaviour
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
     private ColorsDescription colorsDescription;
+    private BallResults ballResults;
 
     [Inject]
     public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence,
-        ColorsDescription colorsDescription)
+        ColorsDescription colorsDescription, BallResults ballResults)
     {
         this.betTable = betTable;
         this.tableInfo = tableInfo;
         this.betCalculator = betCalculator;
         this.winningSequence = winningSequence;
         this.colorsDescription = colorsDescription;
+        this.ballResults = ballResults;
     }
 
     public void Start()
@@ -43,6 +49,7 @@ class BetTableView : MonoBehaviour
         }
         betTable.ChangeAvailableSum += OnChangeAvailableSum;
         OnChangeAvailableSum(betTable.AvailableSum);
+        ballResults.GrayBallHit += OnGrayBallHit; 
 
         if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
@@ -99,6 +106,7 @@ class BetTableView : MonoBehaviour
         tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
         tableInfo.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
+        ballResults.GrayBallHit -= OnGrayBallHit; 
 
         foreach (var button in betButtons)
         {
@@ -227,5 +235,13 @@ class BetTableView : MonoBehaviour
 
         foreach (BottomSectionZone bottomSectionZone in bottomSectionDozenZones)
             bottomSectionZone.Highlight(false);
+    }
+    private void OnGrayBallHit(HitInfo hitInfo)
+    {
+        foreach (var button in betButtons)
+        {
+            if (button != null)
+                button.BurnChips(burnMaterial, burnStartDelay, burnTime);
+        }
     }
 }

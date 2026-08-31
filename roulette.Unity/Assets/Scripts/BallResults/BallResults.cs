@@ -9,8 +9,8 @@ public class BallResults
 
     public event Action<BallInfoData> BallHovered;
     public event Action BallUnHovered;
-
     public event Action Win;
+    public event Action<HitInfo> GrayBallHit;
 
     private readonly RoundStateManager roundStateManager;
     private readonly BallHolder ballHolder;
@@ -79,17 +79,24 @@ public class BallResults
         roundStateManager.ChangeState(RoundState.ChoosingReward);
         currentBalls.Clear();
         currentBalls.AddRange(balls);
-        if (balls.Any(ball => ball.FieldColor == ColorType.Grey))
+
+        var grayBalls = balls.Where(ball => ball.FieldColor == ColorType.Grey).ToList();
+
+        if (grayBalls.Count > 0)
         {
-            // Отправляем выбор нулевого шара для проигрыша
+            foreach (var grayBall in grayBalls)
+            {
+                GrayBallHit?.Invoke(grayBall);
+            }
+
             BallSelected?.Invoke(null);
             return;
         }
+
         if (RandomBallSelection)
         {
             var hash = balls[UnityEngine.Random.Range(0, balls.Length)].BallHash;
             SelectBall(hash);
-            return;
         }
     }
 

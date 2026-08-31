@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -177,6 +178,40 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         HoverEnter?.Invoke(this);
         if (betTable.CanBet(index))
             outline.ToggleMaterial(true);
+    }
+    public void BurnChips(Material burnMaterial, float startDelay, float burnTime)
+    {
+        if (stackChips.Count == 0) return;
+
+        var chipsToBurn = new List<GameObject>();
+        while (stackChips.Count > 0)
+        {
+            chipsToBurn.Add(stackChips.Pop());
+        }
+
+        StartCoroutine(BurnRoutine(chipsToBurn, burnMaterial, startDelay, burnTime));
+    }
+
+    private IEnumerator BurnRoutine(List<GameObject> chips, Material burnMaterial, float startDelay, float burnTime)
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        foreach (var chip in chips)
+        {
+            if (chip == null) continue;
+            var renderer = chip.GetComponentInChildren<Renderer>();
+            if (renderer != null && burnMaterial != null)
+            {
+                renderer.material = burnMaterial;
+            }
+        }
+
+        yield return new WaitForSeconds(burnTime);
+
+        foreach (var chip in chips)
+        {
+            if (chip != null) Destroy(chip);
+        }
     }
 
     public enum HighlightPhase 
