@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.VFX;
@@ -30,8 +30,6 @@ public class RouletteBall : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         animator = GetComponent<Animator>();
         
     }
-
-  
 
     public void Initialize(Ball ball, float scaleMultiplier, Transform rouletteOrigin)
     {
@@ -117,5 +115,10 @@ public class RouletteBall : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void FreezeUpdate()
     {
         updateFrozen = !updateFrozen;
+    }
+
+    public string GetBallHash()
+    {
+        return ball != null ? ball.Hash : null;
     }
 }

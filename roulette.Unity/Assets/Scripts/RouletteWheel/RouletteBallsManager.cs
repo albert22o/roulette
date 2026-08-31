@@ -275,4 +275,8 @@ public class RouletteBallsManager : MonoBehaviour
             }
         }
     }
+    public Ball GetBallByHash(string ballHash)
+    {
+        return balls.FirstOrDefault(b => b.Hash == ballHash);
+    }
 }

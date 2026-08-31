@@ -52,4 +52,13 @@ public class Ball : MonoBehaviour
     {
         Animated?.Invoke();
     }
+    public void Bounce(float force)
+    {
+        if (ballRigidbody.isKinematic)
+        {
+            ballRigidbody.isKinematic = false;
+        }
+
+        ballRigidbody.AddForce(Vector3.up * force, ForceMode.Impulse);
+    }
 }

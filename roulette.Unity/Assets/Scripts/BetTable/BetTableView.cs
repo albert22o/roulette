@@ -25,17 +25,19 @@ class BetTableView : MonoBehaviour
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
     private ColorsDescription colorsDescription;
+    private BallResults ballResults;
     private bool isBetAvailable = true;
 
     [Inject]
     public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence,
-        ColorsDescription colorsDescription)
+        ColorsDescription colorsDescription, BallResults ballResults)
     {
         this.betTable = betTable;
         this.tableInfo = tableInfo;
         this.betCalculator = betCalculator;
         this.winningSequence = winningSequence;
         this.colorsDescription = colorsDescription;
+        this.ballResults = ballResults;
     }
 
     public void Start()
