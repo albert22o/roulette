@@ -1,3 +1,273 @@
 ﻿roulette.Unity/Assets/Plugins/Zenject/Source/Zenject.csproj.meta
 roulette.Unity/Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
 roulette.Unity/Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Materials.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Materials/Shaders.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Models.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/Info.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/Presentation.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/UnityBall.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/Editor.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/RequiredSettings.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/Resources.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro/Resources.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro/Resources/Fonts & Materials.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Blending Masks.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Condition.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Interpolator.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/Cel Shader.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/PBR.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/PBR/PBRSpecular.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/Simple.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Detail Mapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/HD Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/ShowCasePrefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/ShowCasePrefabs/Info Panels.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Procedural Noise and Shapes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Procedural Noise and Shapes/SDF Shapes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Scenes/HDRPFeatureExampleScene.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Shader Graph Feature Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/Flipbook.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/FlowMapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/InteriorCubemapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/LatLongProjection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/MatCap.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/ParallaxMapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/Triplanar Projection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/AnimatedFlag.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/BendDeformer.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/Billboard.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/FoliageWind.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/GerstnerWave.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Artistic.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Channel.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Input.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Math.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Procedural.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Utility.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/UV.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Procedural Patterns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Decals.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/clover.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Ferns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Ferns/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Grass.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Nettle.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Pebbles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Ice.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Ice/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/LevelBlockout.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Rock.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Rock/Materials.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Water.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Lit.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/PostProcess.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes/HDRPProductionReadyShaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes/URPProductionReadyShaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain/Components.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow/Components.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Default Materials.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Backgrounds.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Buttons.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Indicators.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/ProgressBars.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scenes/UISampleScene.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Editor.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Runtime.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Runtime/Attributes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor/Nodes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor/PropertyDrawers.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Gradients.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Helpers.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Inputs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Patterns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/SDFs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/SDFs/Operators.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Time.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Utilities.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/UV.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes/Billboard.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Scripts.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Subgraphs.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/dry_soil.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/ground_grass_fells_mossy.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/ground_rockgrass_fellsdirty.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/stone_ground.meta
+roulette.Unity/Assets/Samples.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Materials.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Materials/Shaders.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Models.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/Info.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/Presentation.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Prefabs/UnityBall.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/Editor.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/RequiredSettings.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Scripts/Resources.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro/Resources.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/TextMesh Pro/Resources/Fonts & Materials.meta
+roulette.Unity/Assets/Samples/Scriptable Render Pipeline Core/Common/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Blending Masks.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Condition.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Interpolator.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/Cel Shader.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/PBR.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/PBR/PBRSpecular.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Custom Lighting/Simple.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Detail Mapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/HD Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/ShowCasePrefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Prefabs/ShowCasePrefabs/Info Panels.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Procedural Noise and Shapes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Procedural Noise and Shapes/SDF Shapes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Scenes/HDRPFeatureExampleScene.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/Shader Graph Feature Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/Flipbook.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/FlowMapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/InteriorCubemapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/LatLongProjection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/MatCap.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/ParallaxMapping.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/UV Projection/Triplanar Projection.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/AnimatedFlag.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/BendDeformer.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/Billboard.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/FoliageWind.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/GerstnerWave.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Feature Examples/VertexAnimation/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Artistic.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Channel.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Input.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Math.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Procedural.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/Utility.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Node Reference/UV.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Procedural Patterns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Decals.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/clover.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Ferns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Ferns/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Grass.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Nettle.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Details/Pebbles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Ice.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Ice/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/LevelBlockout.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Rock.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Rock/Materials.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Environment/Water.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Lit.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/PostProcess.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes/HDRPProductionReadyShaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Scenes/URPProductionReadyShaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain/Components.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Rain/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow/Components.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/Production Ready Shaders/Weather/Snow/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Default Materials.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Backgrounds.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Buttons.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/Indicators.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Examples/ProgressBars.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Prefabs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scenes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scenes/UISampleScene.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Editor.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Runtime.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Scripts/Runtime/Attributes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor/Nodes.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/ShaderGraphExtensions/ShaderGraph.Editor/PropertyDrawers.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Gradients.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Helpers.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Inputs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Patterns.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/SDFs.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/SDFs/Operators.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Time.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/Utilities.meta
+roulette.Unity/Assets/Samples/Shader Graph/17.0.4/UGUI Shaders/Subgraphs/UV.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes/Billboard.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Meshes/Particles.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Scripts.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Shaders.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Subgraphs.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/dry_soil.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/ground_grass_fells_mossy.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/ground_rockgrass_fellsdirty.meta
+roulette.Unity/Assets/Samples/Shader Graph/Common/Textures/terrain/stone_ground.meta
+roulette.Unity/Assets/Samples.meta
