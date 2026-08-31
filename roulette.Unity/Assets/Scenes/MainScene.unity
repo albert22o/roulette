@@ -1976,6 +1976,17 @@ Transform:
   - {fileID: 1272903928}
   m_Father: {fileID: 1778932579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &676871260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4984183168773704176, guid: fc54237d291672944a57db5a13b89733, type: 3}
+  m_PrefabInstance: {fileID: 3730739055183839058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &690784270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7847313511382020328, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
@@ -4565,6 +4576,10 @@ PrefabInstance:
     - target: {fileID: 3465994470683742597, guid: 9c536ec7b8760cb43a66077b60b8c3c8, type: 3}
       propertyPath: findRenderersEveryToggle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089825705711928287, guid: 9c536ec7b8760cb43a66077b60b8c3c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4447869406042865320, guid: 9c536ec7b8760cb43a66077b60b8c3c8, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8475,7 +8490,7 @@ PrefabInstance:
     - target: {fileID: 8360052150238459966, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: tableCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 676871260}
     - target: {fileID: 8530389521769467583, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_IsActive
       value: 0
