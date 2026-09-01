@@ -20,7 +20,7 @@ MonoBehaviour:
   rarityType: 3
   Icon: {fileID: 0}
   <SelectionCount>k__BackingField: 5
-  <filter>k__BackingField: 1
+  <Filter>k__BackingField: 1
   <TargetColor>k__BackingField: 1
   hint: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 5 \u043A\u0440\u0430\u0441\u043D\u044B\u0445
     \u043F\u043E\u043B\u0435\u0439 \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u043A\u0440\u0430\u0441\u043A\u0438

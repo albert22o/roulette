@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DebugTimeChanger : MonoBehaviour
 {
-    [SerializeField][Range(0, 5)] private float timeScale = 1;
+    [SerializeField][Range(0, 10)] private float timeScale = 1;
 
     private void OnValidate()
     {

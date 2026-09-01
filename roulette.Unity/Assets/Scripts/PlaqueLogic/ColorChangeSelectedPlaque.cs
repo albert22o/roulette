@@ -36,7 +36,7 @@ public class ColorChangeSelectedPlaque : Plaque
 
     private Func<BetInfo, bool> CreateFilter(ColorChangeSelectedPlaqueData data)
     {
-        return cell => (data.filter & ConvertColor(cell.FieldColor)) != 0;
+        return cell => (data.Filter & ConvertColor(cell.FieldColor)) != 0;
     }
 
     private ColorMask ConvertColor(ColorType color)
