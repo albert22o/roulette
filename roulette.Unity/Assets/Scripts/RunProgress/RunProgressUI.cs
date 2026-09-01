@@ -1,110 +1,47 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using System;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class RunProgressUI : MonoBehaviour
+public class RunProgress
 {
-    [Header("Sections")]
-    [SerializeField] private ChipsSectionUI chipsSection;
-    [SerializeField] private BallsSectionUI ballsSection;
-    [SerializeField] private PlaquesSectionUI plaquesSection;
-    [SerializeField] private FoodSectionUI foodSection;
-    [SerializeField] private QuotasSectionUI quotasSection;
-    [SerializeField] private CardsSectionUI cardsSection;
+    public event Action Shown;
+    public event Action Hidden;
 
-    [SerializeField] private float displayDuration = 4f;
-    private FirstPersonController playerController;
+    public bool IsPanelOpen { get; private set; }
 
-    private InputAction toggleAction;
-    private Coroutine hideCoroutine;
-    private bool isPanelOpen = false;
-
-    private CursorLockMode savedCursorLockState;
-    private bool savedCursorVisible;
+    private readonly FirstPersonController playerController;
+    private InputAction holdAction;
 
     [Inject]
-    public void Construct(FirstPersonController firstPersonController)
+    public RunProgress(FirstPersonController playerController)
     {
-        playerController = firstPersonController;
-    }
-
-    private void Start()
-    {
-        gameObject.SetActive(false);
+        this.playerController = playerController;
         SetupInput();
     }
 
     private void SetupInput()
     {
-        toggleAction = new InputAction("ToggleProgress", binding: "<Keyboard>/tab");
-        toggleAction.started += _ => TogglePanel();
-        toggleAction.Enable();
+        holdAction = new InputAction("HoldProgress", binding: "<Keyboard>/tab");
+        holdAction.started += _ => Show();    
+        holdAction.canceled += _ => Hide();  
+        holdAction.Enable();
     }
 
-    private void OnDestroy()
+    private void Show()
     {
-        toggleAction?.Disable();
-        toggleAction?.Dispose();
-    }
-
-    public void TogglePanel()
-    {
-        if (isPanelOpen)
-            Hide();
-        else
-            Show();
-    }
-
-    public void Show()
-    {
-        if (hideCoroutine != null)
-            StopCoroutine(hideCoroutine);
-
-        savedCursorLockState = Cursor.lockState;
-        savedCursorVisible = Cursor.visible;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        gameObject.SetActive(true);
-        isPanelOpen = true;
-
-        UpdateAllSections();
+        if (IsPanelOpen) return;
+        IsPanelOpen = true;
 
         playerController.Disable();
-        hideCoroutine = StartCoroutine(HideAfterDelay());
+        Shown?.Invoke();
     }
 
-    private IEnumerator HideAfterDelay()
+    private void Hide()
     {
-        yield return new WaitForSeconds(displayDuration);
-        Hide();
-    }
+        if (!IsPanelOpen) return;
+        IsPanelOpen = false;
 
-    public void Hide()
-    {
-        if (hideCoroutine != null)
-        {
-            StopCoroutine(hideCoroutine);
-            hideCoroutine = null;
-        }
-
-        gameObject.SetActive(false);
-        isPanelOpen = false;
         playerController.Enable();
-
-        Cursor.lockState = savedCursorLockState;
-        Cursor.visible = savedCursorVisible;
-    }
-
-    private void UpdateAllSections()
-    {
-        chipsSection?.UpdateData();
-        ballsSection?.UpdateData();
-        plaquesSection?.UpdateData();
-        foodSection?.UpdateData();
-        quotasSection?.UpdateData();
-        cardsSection?.UpdateData();
+        Hidden?.Invoke();
     }
 }
