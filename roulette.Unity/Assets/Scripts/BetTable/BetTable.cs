@@ -8,12 +8,14 @@ public class BetTable
 {
     public event Action<int, int> ChangeAmountByIndex;
     public event Action<int> ChangeAvailableSum;
+    public event Action<bool> HasActiveBetsChanged;
 
     public IEnumerable<(BetInfo, int)> NotNullBetAmounts => betAmounts
         .Where(bet => bet.Value != 0)
         .Select(bet => (tableInfo.PocketMapping[bet.Key], bet.Value));
 
     public int AvailableSum => availableBetSum;
+    public bool HasActiveBets => betIndexSet.Count > 0;
 
     private readonly HashSet<int> betIndexSet = new();
     private readonly TableInfo tableInfo;
@@ -35,6 +37,7 @@ public class BetTable
     public void AddBet(int index)
     {
         if (CanBet(index) == false) return;
+        bool hadNoBetsBefore = !HasActiveBets;
         betIndexSet.Add(index);
 
         betAmounts[index] += BetStep;
@@ -42,6 +45,10 @@ public class BetTable
 
         availableBetSum -= BetStep;
         ChangeAvailableSum?.Invoke(availableBetSum);
+        if (hadNoBetsBefore)
+        {
+            HasActiveBetsChanged?.Invoke(true);
+        }
     }
 
     public bool CanBet(int index)
@@ -74,12 +81,22 @@ public class BetTable
         betAmounts[index] -= BetStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
 
+        if (betAmounts[index] == 0)
+        {
+            betIndexSet.Remove(index);
+        }
+
         availableBetSum += BetStep;
         ChangeAvailableSum?.Invoke(availableBetSum);
+        if (!HasActiveBets)
+        {
+            HasActiveBetsChanged?.Invoke(false);
+        }
     }
 
     public void ClearBets()
     {
+        bool hadBetsBefore = HasActiveBets;
         var keys = betAmounts.Keys.ToList();
         betIndexSet.Clear();
         foreach (var betIndex in keys)
@@ -89,6 +106,10 @@ public class BetTable
             ChangeAmountByIndex?.Invoke(betIndex, 0);
         }
         ChangeAvailableSum?.Invoke(availableBetSum);
+        if (hadBetsBefore)
+        {
+            HasActiveBetsChanged?.Invoke(false);
+        }
     }
 
 
@@ -98,6 +119,11 @@ public class BetTable
 
         if (newState == RoundState.Start)
         {
+            if (HasActiveBets)
+            {
+                betIndexSet.Clear();
+                HasActiveBetsChanged?.Invoke(false);
+            }
             availableBetSum = tableInfo.StartSum;
             ChangeAvailableSum?.Invoke(availableBetSum);
         }
