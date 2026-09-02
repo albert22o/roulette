@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -20,7 +19,6 @@ public class BetColorsLegendController : MonoBehaviour
 
     private void OnRoundStateChanged(RoundStateManager.RoundState state)
     {
-        Debug.Log(state.ToString());
         gameObject.SetActive(state == RoundStateManager.RoundState.WheelSpining ||
             state == RoundStateManager.RoundState.ChoosingReward);
     }
