@@ -90,5 +90,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CardFactory>().AsSingle();
 
         Container.BindInterfacesTo<RouletteBetFieldsHighlight>().AsSingle();
+        Container.Bind<RunProgress>().AsSingle();
     }
 }
