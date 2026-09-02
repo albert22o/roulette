@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ProgressBarGUI : MonoBehaviour
 {
@@ -17,5 +18,11 @@ public class ProgressBarGUI : MonoBehaviour
     {
         slider.value = value * 0.01f;
         if (showText) tmp.text = $"{value}%";
+    }
+
+    public void SetCurrentAndMaxValue(float currentValue, float maxValue)
+    {
+        slider.value = currentValue / maxValue;
+        if (showText) tmp.text = $"{currentValue}/{maxValue}";
     }
 }

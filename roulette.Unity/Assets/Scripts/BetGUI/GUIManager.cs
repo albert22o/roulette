@@ -88,8 +88,6 @@ public class GUIManager : MonoBehaviour
 
     private void OnQuoteOrGoalChanged(int _)
     {
-        float valueInPercent = (float)roundManager.Quote / (float)roundManager.Goal * 100;
-        valueInPercent = Mathf.Clamp(valueInPercent, 0, 100);
-        quoteProgress.SetValueInPercent(Mathf.FloorToInt(valueInPercent));
+        quoteProgress.SetCurrentAndMaxValue(roundManager.Quote, roundManager.Goal);
     }
 }
