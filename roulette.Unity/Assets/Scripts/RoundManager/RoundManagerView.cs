@@ -10,7 +10,7 @@ public class RoundManagerView : MonoBehaviour
     [SerializeField] TextMeshProUGUI betCountText;
     [SerializeField] TextMeshProUGUI rerollCountText;
 
-    [SerializeField] Button spinButton;
+    [SerializeField] RouletteClickHandler rouletteClickHandler;
     [SerializeField] Button rerollButton;
     [SerializeField] Button confirmWinButton;
 
@@ -44,13 +44,7 @@ public class RoundManagerView : MonoBehaviour
         OnAbleToWinChanged(roundManager.AbleToWin);
         
 
-        if (rerollButton == null || spinButton == null)
-        {
-            Debug.LogError("Не все зависимости проставлены!");
-            return;
-        }
-
-        spinButton.onClick.AddListener(OnSpinButtonClick);
+        rouletteClickHandler.Clicked += OnSpinButtonClick;
         rerollButton.onClick.AddListener(OnRerollButtonClick);
         confirmWinButton.onClick.AddListener(OnConfirmWinClick);
     }
