@@ -8,7 +8,6 @@ public class ChipDependencies
     public IRouletteWheel RouletteWheel { get; }
     public BallResults BallResults { get; }
     public GoldenChips GoldenChips { get; }
-    public Money Money { get; }
     public TableInfo TableInfo { get; }
     public RoundManager RoundManager { get; }
     public RewardCalculator RewardCalculator { get; }

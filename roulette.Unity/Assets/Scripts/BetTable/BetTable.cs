@@ -32,6 +32,7 @@ public class BetTable
         availableBetSum = tableInfo.StartSum;
 
         roundStateManager.StateChanged += OnStateChanged;
+        this.tableInfo.StartSumChanged += OnAvailableSumChanged;
     }
 
     public void AddBet(int index)
@@ -112,6 +113,11 @@ public class BetTable
         }
     }
 
+    public void OnAvailableSumChanged(int newSum)
+    {
+        availableBetSum = newSum;
+        ChangeAvailableSum?.Invoke(availableBetSum);
+    }
 
     private void OnStateChanged(RoundState newState)
     {

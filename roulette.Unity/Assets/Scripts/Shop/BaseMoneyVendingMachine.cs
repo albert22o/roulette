@@ -20,7 +20,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     private int cost;
     private Shop shop;
     private GoldenChips goldenChips;
-    private Money money;
+    private TableInfo tableInfo;
     private ShopFontConfig shopFontConfig;
 
 
@@ -39,11 +39,11 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Shop shop, Money money, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
+    public void Construct(Shop shop, TableInfo tableInfo, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
     {
         this.shop = shop;
+        this.tableInfo = tableInfo;
         this.goldenChips = goldenChips;
-        this.money = money;
         this.shopFontConfig = shopFontConfig;
     }
 
@@ -59,7 +59,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
         {
             goldenChips.Remove(Cost);
             Cost += nextCostDelta;
-            money.Add(purchasedMoney);
+            tableInfo.AddToStartSum(purchasedMoney);
             ShowTooltip();
         }
     }

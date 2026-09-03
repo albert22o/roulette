@@ -17,14 +17,17 @@ public class TableInfo
     private int startSum;
     private PocketData[] startPockets;
 
+    public event Action<int> StartSumChanged;
+
     public TableInfo(TableConfig config)
     {
         startSum = config.StartSum;
+        StartSumChanged?.Invoke(startSum);
         startPockets = config.Pockets;
         MaxBetsAtBoard = config.MaxBetsAtBoard;
         BetCount = config.BetCount;
         RerollCount = config.RerollCount;
-        
+
         pocketMapping = BuildPocketMapping();
     }
 
@@ -51,7 +54,12 @@ public class TableInfo
         }
     }
 
-    public void AddToStartSum(int amount) => startSum += amount;
+    public void AddToStartSum(int amount)
+    {
+        startSum += amount;
+        StartSumChanged?.Invoke(startSum);
+    }
+
     public void AddToBetCount(int amount) => BetCount += amount;
     public void RemoveFromStartSum(int amount) => startSum -= amount;
 
