@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: e414b1aa71e8fc54d99b031db6481e94
+guid: 09ad0cce1208918409488c0ab583a151
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chip
+    second: {fileID: 2100000, guid: d787a2f90de1ea645b364dbc567809ad, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
