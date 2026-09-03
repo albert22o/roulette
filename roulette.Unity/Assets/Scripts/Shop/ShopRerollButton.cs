@@ -17,7 +17,6 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     [SerializeField] private string mainTextKey;
 
     private int cost;
-    private Money money;
     private GoldenChips goldenChips;
     private ShopFontConfig shopFontConfig;
 
@@ -34,10 +33,9 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Money money, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
+    public void Construct(GoldenChips goldenChips, ShopFontConfig shopFontConfig)
     {
         this.goldenChips = goldenChips;
-        this.money = money;
         this.shopFontConfig = shopFontConfig;
 }
 

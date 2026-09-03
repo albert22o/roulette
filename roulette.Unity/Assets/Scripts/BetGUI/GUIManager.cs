@@ -5,7 +5,7 @@ using Zenject;
 
 public class GUIManager : MonoBehaviour
 {
-    [SerializeField] private UICounter goldenChipsCounter, silverChipsCounter;
+    [SerializeField] private UICounter goldenChipsCounter, silverChipsCounter, bossChipsCounter;
     [SerializeField] private BetsGUIDisplay betsDisplay;
     [SerializeField] private ProgressBarGUI quoteProgress;
     [SerializeField] private TextMeshProUGUI rerollPenalty;
@@ -17,11 +17,12 @@ public class GUIManager : MonoBehaviour
     private TableInfo tableInfo;
     private BetCalculator betCalculator;
     private GameStateManager gameStateManager;
+    private BetTable betTable;
 
 
     [Inject]
     private void Construct(GoldenChips goldenChips, RoundManager roundManager, TableInfo tableInfo, BossChips bossChips,
-        BetCalculator betCalculator, GameStateManager gameStateManager)
+        BetCalculator betCalculator, GameStateManager gameStateManager, BetTable betTable)
     {
         this.goldenChips = goldenChips;
         this.roundManager = roundManager;
@@ -29,13 +30,15 @@ public class GUIManager : MonoBehaviour
         this.bossChips = bossChips;
         this.betCalculator = betCalculator;
         this.gameStateManager = gameStateManager;
+        this.betTable = betTable;
     }
 
     private void Start()
     {
         goldenChips.AmountChanged += OnGoldenChipsChanged;
         roundManager.BetCountChanged += OnBetCountChanged;
-        bossChips.AmountChanged += OnSilverChipsChanged;
+        bossChips.AmountChanged += OnBossChipsChanged;
+        betTable.ChangeAvailableSum += OnSilverChipsChanged;
 
         roundManager.QuoteChanged += OnQuoteOrGoalChanged;
         roundManager.GoalChanged += OnQuoteOrGoalChanged;
@@ -46,8 +49,9 @@ public class GUIManager : MonoBehaviour
         OnBetCountChanged(roundManager.BetCount);
         OnQuoteOrGoalChanged(roundManager.Quote);
         OnGoldenChipsChanged(goldenChips.Amount);
-        OnSilverChipsChanged(bossChips.Amount);
+        OnBossChipsChanged(bossChips.Amount);
         OnRerollCoeffChanged(betCalculator.RerollCoeff);
+        OnSilverChipsChanged(betTable.AvailableSum);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
@@ -64,10 +68,13 @@ public class GUIManager : MonoBehaviour
     {
         goldenChips.AmountChanged -= OnGoldenChipsChanged;
         roundManager.BetCountChanged -= OnBetCountChanged;
-        bossChips.AmountChanged -= OnSilverChipsChanged;
+        bossChips.AmountChanged -= OnBossChipsChanged;
+        betTable.ChangeAvailableSum -= OnSilverChipsChanged;
 
         roundManager.QuoteChanged -= OnQuoteOrGoalChanged;
         roundManager.GoalChanged -= OnQuoteOrGoalChanged;
+        betCalculator.RerollCoeffChanged -= OnRerollCoeffChanged;
+
         gameStateManager.GameStateChanged -= OnGameStateChanged;
     }
 
@@ -81,13 +88,18 @@ public class GUIManager : MonoBehaviour
         goldenChipsCounter.SetCount(amount);
     }
 
-    private void OnSilverChipsChanged(int amount)
+    private void OnBossChipsChanged(int amount)
     {
-        silverChipsCounter.SetCount(amount);
+        bossChipsCounter.SetCount(amount);
     }
 
     private void OnQuoteOrGoalChanged(int _)
     {
         quoteProgress.SetCurrentAndMaxValue(roundManager.Quote, roundManager.Goal);
+    }
+
+    private void OnSilverChipsChanged(int money)
+    {
+        silverChipsCounter.SetCount(money);
     }
 }

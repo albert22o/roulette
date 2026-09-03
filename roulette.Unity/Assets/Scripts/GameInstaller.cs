@@ -30,7 +30,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GoldenChips>().AsSingle();
         Container.Bind<BossChips>().AsSingle();
         Container.Bind<Tickets>().AsSingle();
-        Container.Bind<Money>().AsSingle();
 
         Container.Bind<TableInfo>().AsSingle();
 
