@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 using static UnityEngine.Rendering.DebugUI;
@@ -17,13 +17,14 @@ public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
     public void Construct(GameStateManager stateManager)
     {
         this.stateManager = stateManager;
+        stateManager.GameStateChanged += OnGameStateChanged;
     }
 
 
     private void Start()
     {
-        stateManager.GameStateChanged += OnGameStateChanged;
-        if (stateManager.CurrentState is not GameStateManager.GameState.FieldsSelecting) gameObject.SetActive(false);
+        if (stateManager.CurrentState is not GameStateManager.GameState.FieldsSelecting)
+            gameObject.SetActive(false);
     }
 
     private void OnDestroy()

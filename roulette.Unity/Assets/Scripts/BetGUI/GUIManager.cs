@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -31,10 +31,7 @@ public class GUIManager : MonoBehaviour
         this.betCalculator = betCalculator;
         this.gameStateManager = gameStateManager;
         this.betTable = betTable;
-    }
 
-    private void Start()
-    {
         goldenChips.AmountChanged += OnGoldenChipsChanged;
         roundManager.BetCountChanged += OnBetCountChanged;
         bossChips.AmountChanged += OnBossChipsChanged;
@@ -45,6 +42,10 @@ public class GUIManager : MonoBehaviour
         betCalculator.RerollCoeffChanged += OnRerollCoeffChanged;
 
         gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    private void Start()
+    {
 
         OnBetCountChanged(roundManager.BetCount);
         OnQuoteOrGoalChanged(roundManager.Quote);

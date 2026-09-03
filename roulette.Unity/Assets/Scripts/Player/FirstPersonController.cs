@@ -32,9 +32,17 @@ public class FirstPersonController : MonoBehaviour
     {
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
+
+        gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
-    public void Start()
+    private void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+        playerCollider = GetComponent<Collider>();
+    }
+
+    private void Start()
     {
         gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
 
@@ -43,14 +51,11 @@ public class FirstPersonController : MonoBehaviour
             Debug.LogError("Не назначена ссылка на камеру");
             return;
         }
-        controller = GetComponent<CharacterController>();
-        playerCollider = GetComponent<Collider>();
         if (gameStateManager.CurrentState == GameStateManager.GameState.FreeRoam)
             Enable();
         else
             Disable();
 
-        gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)

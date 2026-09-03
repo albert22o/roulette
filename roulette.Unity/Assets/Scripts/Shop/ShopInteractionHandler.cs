@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 using static GameStateManager;
@@ -16,18 +16,8 @@ public class ShopInteractionHandler : MonoBehaviour
     public void Construct(GameStateManager stateManager)
     {
         this.stateManager = stateManager;
-    }
-
-    private void OnEnable()
-    {
         if (stateManager != null)
             stateManager.GameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        if (stateManager != null)
-            stateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     private void StartInteraction()

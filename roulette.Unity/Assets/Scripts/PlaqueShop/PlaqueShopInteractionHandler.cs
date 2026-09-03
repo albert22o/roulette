@@ -18,21 +18,12 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
     public void Construct(GameStateManager stateManager)
     {
         this.stateManager = stateManager;
+        stateManager.GameStateChanged += OnGameStateChanged;
     }
 
     private void Init()
     {
         isInitialized = true;
-    }
-
-    private void OnEnable()
-    {
-        stateManager.GameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        stateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     public void StartInteraction()

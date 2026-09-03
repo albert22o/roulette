@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 
@@ -13,11 +13,6 @@ public class RoundFinishHandler : MonoBehaviour
     public void Construct(GameStateManager stateManager)
     {
         this.stateManager = stateManager;
-    }
-
-
-    private void Start()
-    {
         stateManager.GameStateChanged += OnGameStateChanged;
     }
 

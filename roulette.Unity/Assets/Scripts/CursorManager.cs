@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class CursorManager : MonoBehaviour
@@ -9,24 +9,17 @@ public class CursorManager : MonoBehaviour
     public void Construct(GameStateManager gameStateManager)
     {
         this.gameStateManager = gameStateManager;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
     {
         if (gameStateManager != null)
         {
-            gameStateManager.GameStateChanged += OnGameStateChanged;
             UpdateCursorState(gameStateManager.CurrentState);
         }
     }
 
-    private void OnDestroy()
-    {
-        if (gameStateManager != null)
-        {
-            gameStateManager.GameStateChanged -= OnGameStateChanged;
-        }
-    }
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {

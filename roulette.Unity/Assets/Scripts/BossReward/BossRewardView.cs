@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -34,6 +34,9 @@ public class BossRewardView : MonoBehaviour
         this.gameStateManager = gameStateManager;
         this.cameraEventHandler = cameraEventHandler;
         this.rarityData = rarityData;
+
+        bossReward.RewardCreated += OnRewardReceived;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
@@ -44,18 +47,6 @@ public class BossRewardView : MonoBehaviour
             item.HoverExited += OnItemHoverExit;
             item.Clicked += OnItemClick;
         }
-    }
-
-    private void OnEnable()
-    {
-        bossReward.RewardCreated += OnRewardReceived;
-        gameStateManager.GameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        bossReward.RewardCreated -= OnRewardReceived;
-        gameStateManager.GameStateChanged -= OnGameStateChanged;
     }
 
     private void OnRewardReceived(ItemData[] items)
