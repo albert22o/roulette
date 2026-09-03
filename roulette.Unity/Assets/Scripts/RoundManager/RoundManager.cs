@@ -65,6 +65,7 @@ public class RoundManager
         }
 
     public float GoalModifier => goalModifier;
+    public bool CanReroll => rerollCount > 0 && betState == RoundState.ChoosingReward;
 
     private int betCount = 3;
     private int rerollCount = 5;
@@ -136,12 +137,10 @@ public class RoundManager
         BetCountChanged?.Invoke(betCount);
     }
 
+
     public void Reroll()
     {
-        if (betState != RoundState.ChoosingReward)
-            return;
-        if (rerollCount <= 0)
-            return;
+        if (CanReroll == false) return;
 
         betCalculator.DecreaseRerollCoeff();
         Rerolled?.Invoke();

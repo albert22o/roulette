@@ -11,7 +11,7 @@ public class RoundManagerView : MonoBehaviour
     [SerializeField] TextMeshProUGUI rerollCountText;
 
     [SerializeField] RouletteClickHandler rouletteClickHandler;
-    [SerializeField] Button rerollButton;
+    [SerializeField] TableRerollButton rerollButton;
     [SerializeField] Button confirmWinButton;
 
     [SerializeField] Canvas canvas;
@@ -45,7 +45,7 @@ public class RoundManagerView : MonoBehaviour
         
 
         rouletteClickHandler.Clicked += OnSpinButtonClick;
-        rerollButton.onClick.AddListener(OnRerollButtonClick);
+        rerollButton.Clicked += OnRerollButtonClick;
         confirmWinButton.onClick.AddListener(OnConfirmWinClick);
     }
 
