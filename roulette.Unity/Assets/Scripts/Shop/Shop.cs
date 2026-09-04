@@ -7,9 +7,6 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private ShopTooltip tooltip;
 
-    [SerializeField] private float chipSellMultiplier = 0.5f;
-    [SerializeField] private int ballSellCost = 3;
-
     [SerializeField] private ShopRerollButton rerollButton;
     [SerializeField] private BaseMoneyVendingMachine baseMoneyVendingMachine;
     [SerializeField] private BallsVendingMachine ballsVendingMachine;
@@ -17,13 +14,13 @@ public class Shop : MonoBehaviour
     [SerializeField] private MouseInteraction shopInteraction;
     [SerializeField] private ShopChipPlacesController chipPlacesController;
     [SerializeField] private CancelInputHandler inputHandler;
+    [SerializeField] private ShopConfig config;
 
-    public int BallSellCost => ballSellCost;
+    public ShopConfig Config => config;
 
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
-    private RoundManager roundManager;
     private ProgressionManager progressionManager;
 
     public event Action InteractionStarted, InteractionFinished;
@@ -35,7 +32,6 @@ public class Shop : MonoBehaviour
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
-        this.roundManager = roundManager;
         this.progressionManager = progressionManager;
         roundManager.Win += OnQuotaUpdated;
     }
@@ -51,11 +47,12 @@ public class Shop : MonoBehaviour
         UpdateShop(false);
     }
 
-    private void UpdateShop(bool forceUpdateFood)
+    private void UpdateShop(bool forceUpdate)
     {
-        if (progressionManager.Current.IsBoss|| forceUpdateFood)
+        if (progressionManager.Current.IsBoss|| forceUpdate)
         {
             foodPlace.UpdateItem();
+            ballsVendingMachine.ResetSpinAmount();
         }
         chipPlacesController.Fill();
         rerollButton.ResetCost();
@@ -84,7 +81,7 @@ public class Shop : MonoBehaviour
             }
             if (undestroyableBalls > 1 || ballData.IsDestroyable)
             {
-                goldenChips.Add(ballSellCost);
+                goldenChips.Add(Config.BallSellCost);
                 ballHolder.RemoveBall(index);
                 return true;
             }
@@ -92,8 +89,8 @@ public class Shop : MonoBehaviour
         }
         else if (item is ChipData chipData)
         {
-            float sellCost = (int)(chipData.Cost * chipSellMultiplier);
-            if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * chipSellMultiplier));
+            float sellCost = (int)(chipData.Cost * config.ChipSellMultiplier);
+            if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * config.ChipSellMultiplier));
             chipHolder.RemoveChip(index);
             return true;
         }
@@ -104,11 +101,11 @@ public class Shop : MonoBehaviour
     {
         if (item is BallInfoData)
         {
-            return ballSellCost;
+            return Config.BallSellCost;
         }
         else if (item is ChipData chipData)
         {
-            int sellCost = (int)(chipData.Cost * chipSellMultiplier);
+            int sellCost = (int)(chipData.Cost * Config.ChipSellMultiplier);
             return sellCost;
         }
         else
