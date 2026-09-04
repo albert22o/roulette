@@ -36,7 +36,7 @@ public class FirstPersonController : MonoBehaviour
 
     public void Start()
     {
-        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
 
         if (cameraTransform == null)
         {
@@ -65,12 +65,14 @@ public class FirstPersonController : MonoBehaviour
     {
         active = true;
         playerCollider.enabled = true;
+        cameraTransform.gameObject.SetActive(true);
     }
 
     public void Disable()
     {
         active = false;
         playerCollider.enabled = false;
+        cameraTransform.gameObject.SetActive(false);
     }
 
     private void Update()
