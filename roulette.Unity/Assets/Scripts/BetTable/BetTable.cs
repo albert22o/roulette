@@ -69,6 +69,15 @@ public class BetTable
         return true;
     }
 
+    public bool CanHighlight(int index)
+    {
+        if (CanBet(index))
+            return true;
+        if (betAmounts.ContainsKey(index) && betAmounts[index] > 0)
+            return true;
+        return false;
+    }
+
     public void RemoveBet(int index)
     {
         if (!active)

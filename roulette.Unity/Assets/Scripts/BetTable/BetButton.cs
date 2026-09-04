@@ -39,7 +39,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
                 while (targetChipCount != currentCount)
                 {
                     GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
-                    chip.transform.localRotation = Quaternion.Euler(0,0,0);
+                    chip.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     stackChips.Push(chip);
 
                     currentCount++;
@@ -56,7 +56,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         }
     }
 
-    public DozenType Dozen 
+    public DozenType Dozen
     {
         get
         {
@@ -107,7 +107,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback, int index)
     {
-        this.index = index; 
+        this.index = index;
         Color = betInfo.FieldColor;
 
         if (fieldNumText == null)
@@ -139,6 +139,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             OnLeftClick?.Invoke();
         else if (eventData.button == PointerEventData.InputButton.Right)
             OnRightClick?.Invoke();
+        outline.ToggleMaterial(betTable.CanHighlight(index));
     }
 
     public void Highlight(bool isEnabled, HighlightPhase phase)
@@ -158,7 +159,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
                     break;
             }
             IsHighlighted = true;
-        }   
+        }
         else
         {
             IsHighlighted = false;
@@ -175,12 +176,12 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         HoverEnter?.Invoke(this);
-        if (betTable.CanBet(index))
+        if (betTable.CanHighlight(index))
             outline.ToggleMaterial(true);
     }
 
-    public enum HighlightPhase 
-    { 
+    public enum HighlightPhase
+    {
         Color,
         Dozen,
         Number,
