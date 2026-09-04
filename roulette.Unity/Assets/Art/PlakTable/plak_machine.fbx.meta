@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 23c59d7703f31ae4ca3b2b1e7ddda91b
+guid: eaac45a3e875a004cba7879612d5b720
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: plak_machine
-    second: {fileID: 2100000, guid: 680b406c90f68844f8cbff84f46339a9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: plak_table
-    second: {fileID: 2100000, guid: 045335c2e544e3d46b6b1ccdba0c7f70, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -36,7 +36,7 @@ public class FirstPersonController : MonoBehaviour
 
     public void Start()
     {
-        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
 
         if (cameraTransform == null)
         {
