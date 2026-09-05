@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -42,8 +43,10 @@ public class FirstPersonController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
     }
 
-    private void Start()
+    private async void Start()
     {
+        await Task.Delay(10);
+
         gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
 
         if (cameraTransform == null)
