@@ -10,6 +10,7 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private CancelInputHandler cancelInputHandler;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
+    public bool PlaquesBought { get; private set; }
 
     [Inject]
     public void Construct(PlaqueShop plaqueShop, PlaqueUseController plaqueController)
@@ -52,6 +53,9 @@ public class PlaqueShopView : MonoBehaviour
             {
                 plaquePlaces[i].SetData(boughtItems[i]);
             }
+            ToggleMouseInput(false);
+            cancelInputHandler.enabled = false;
+            PlaquesBought = true;
         }
     }
 
@@ -83,6 +87,11 @@ public class PlaqueShopView : MonoBehaviour
         cancelInputHandler.enabled = false;
     }
 
+    public void ToggleMouseInput(bool value)
+    {
+        mouseInteraction.enabled = value;
+    }
+
     public void OnPlaqueMachineClick()
     {
         TryBuyPlaques();
@@ -95,6 +104,7 @@ public class PlaqueShopView : MonoBehaviour
             plaquePlaces[i].SetData(null);
         }
         cancelInputHandler.enabled = true;
+        PlaquesBought = false;
     }
 }
 

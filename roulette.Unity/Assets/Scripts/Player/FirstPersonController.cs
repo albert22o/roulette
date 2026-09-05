@@ -73,12 +73,14 @@ public class FirstPersonController : MonoBehaviour
     {
         active = true;
         playerCollider.enabled = true;
+        cameraTransform.gameObject.SetActive(true);
     }
 
     public void Disable()
     {
         active = false;
         playerCollider.enabled = false;
+        cameraTransform.gameObject.SetActive(false);
     }
 
     private void Update()

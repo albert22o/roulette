@@ -1,7 +1,13 @@
-﻿public class PlaqueShop
+﻿using System;
+
+public class PlaqueShop
 {
     private ShopItemsRarityGroup items;
     private BossChips bossChips;
+    public event Action PlaquesBought;
+
+    public bool CanBuy => bossChips.AvailableAmount >= Cost;
+    public int Cost { get; private set; } = 1;
 
     public PlaqueShop(PlaqueShopConfig config, BossChips bossChips)
     {
@@ -14,6 +20,7 @@
         if (bossChips.AvailableAmount >= 1)
         {
             bossChips.Remove(1);
+            PlaquesBought?.Invoke();
             return true;
         }
         return false;
