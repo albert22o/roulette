@@ -9,10 +9,32 @@ public class BetCalculator
     public event Action<HitInfo> EndRound;
     public event Action MultipliersUpdated;
 
-    public int ZeroMultiplier { get; set; } = 10;
-    public int NumMultiplier { get; set; } = 5;
-    public int DozenMultiplier { get; set; } = 3;
-    public int ColorMultiplier { get; set; } = 2;
+    private int zeroMultiplier = 10;
+    private int numMultipler = 5;
+    private int dozenMultipler = 3;
+    private int colorMultiplier = 2;
+
+    public int ZeroMultiplier
+    {
+        get { return zeroMultiplier; }
+        set { zeroMultiplier = value; ZeroMultiplierChanged?.Invoke(zeroMultiplier); }
+    }
+    public int NumMultiplier
+    {
+        get { return numMultipler; }
+        set { numMultipler = value; NumMultiplierChanged?.Invoke(numMultipler); }
+    }
+    public int DozenMultiplier
+    {
+        get { return dozenMultipler; }
+        set { DozenMultiplier = value; DozenMultiplierChanged?.Invoke(dozenMultipler); }
+    }
+    public int ColorMultiplier
+    {
+        get { return colorMultiplier; }
+        set { ColorMultiplier = value; ColorMultiplierChanged?.Invoke(colorMultiplier); }
+    }
+
     public float RerollCoeff => rerollCoeff;
 
     private readonly HashSet<int> zeroFields = new HashSet<int>() { 0 };
@@ -26,6 +48,10 @@ public class BetCalculator
     private bool freeReroll = true;
 
     public event Action<float> RerollCoeffChanged;
+    public event Action<int> NumMultiplierChanged;
+    public event Action<int> DozenMultiplierChanged;
+    public event Action<int> ColorMultiplierChanged;
+    public event Action<int> ZeroMultiplierChanged;
 
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
