@@ -86,7 +86,6 @@ public class BetTable
             return;
         if (betAmounts[index] < BetStep)
             return;
-        betIndexSet.Remove(index);
 
         betAmounts[index] -= BetStep;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
