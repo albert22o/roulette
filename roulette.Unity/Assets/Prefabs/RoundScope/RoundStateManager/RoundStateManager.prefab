@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 159393122675463309}
   - component: {fileID: 937380768409914894}
+  - component: {fileID: 4180146342658655644}
   m_Layer: 0
   m_Name: RoundStateManager
   m_TagString: Untagged
@@ -50,6 +51,20 @@ MonoBehaviour:
   roundCamera: {fileID: 7306162223987439921}
   rouletteCamera: {fileID: 2400881397860589377}
   betsCamera: {fileID: 2457018771370284627}
+  inputHandler: {fileID: 0}
+--- !u!114 &4180146342658655644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352139611652427609}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213bd2834798bf14da58b58fa5dc5577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cancelActionReference: {fileID: 7727032971491509709, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &5804536845381282653
 GameObject:
   m_ObjectHideFlags: 0
