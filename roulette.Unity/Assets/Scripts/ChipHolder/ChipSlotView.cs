@@ -1,34 +1,47 @@
 ﻿using System;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+
 public class ChipSlotView : MonoBehaviour
 {
     public int SlotIndex { get; private set; }
     public GameObject ChipObject { get; private set; }
     [SerializeField] private TextMeshProUGUI nameText;
     private Vector3 worldPosition;
+
     public void Init(int slotIndex, Vector3 position)
     {
         SlotIndex = slotIndex;
         worldPosition = position;
         transform.position = position;
     }
+
     public void PlaceChip(GameObject chipObject)
     {
         ChipObject = chipObject;
         chipObject.transform.SetParent(transform);
         chipObject.transform.position = worldPosition;
     }
-    public void DetachChip()
+
+    public GameObject DetachChip()
     {
-        if (ChipObject == null) return;
-        ChipObject.transform.SetParent(null);
+        if (ChipObject == null)
+            return null;
+
+        var chip = ChipObject;
+        chip.transform.SetParent(null);
+        ChipObject = null; // обнуляем ссылку, чтобы слот не считался занятым во время драга
+
+        return chip;
     }
+
     public void ClearChip()
     {
         if (ChipObject == null) return;
+
         Destroy(ChipObject);
         ChipObject = null;
+
         if (nameText != null)
         {
             nameText.text = "";
@@ -45,21 +58,26 @@ public class ChipSlotView : MonoBehaviour
     public void ClearReference()
     {
         ChipObject = null;
+
         if (nameText != null)
         {
             nameText.text = "";
         }
     }
+
     public Vector3 GetWorldPosition() => worldPosition;
+
     public void RestoreChip(GameObject chipObject)
     {
         ChipObject = chipObject;
         chipObject.transform.SetParent(transform);
     }
+
     public void PlayAnimation()
     {
         ChipObject?.GetComponent<Animator>().SetTrigger("start");
     }
+
     public void SetChipName(string name)
     {
         if (nameText != null)

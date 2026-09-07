@@ -99,9 +99,17 @@ public class ChipHolderView : MonoBehaviour
 
         isDragging = true;
         draggedFromSlot = slot;
-        draggedObject = slot.ChipObject;
 
-        draggedFromSlot.DetachChip();
+        // DetachChip возвращает объект и сам обнуляет ChipObject у слота,
+        // чтобы слот не считался занятым, пока фишка находится "в воздухе".
+        draggedObject = draggedFromSlot.DetachChip();
+
+        // Останавливаем Animator на время драга: Idle-анимация может писать
+        // в transform (позицию/масштаб) поверх нашего ручного перемещения
+        // и конфликтовать с ним, из-за чего фишка "пропадает"/дёргается.
+        var animator = draggedObject.GetComponent<Animator>();
+        if (animator != null)
+            animator.enabled = false;
     }
 
     private void UpdateDrag()
@@ -122,6 +130,12 @@ public class ChipHolderView : MonoBehaviour
 
         var targetSlot = hoveredSlot;
         hoveredSlot = null;
+
+        // Включаем Animator обратно — драг закончен, фишка снова "лежит на месте"
+        // и может проигрывать свою Idle-анимацию как обычно.
+        var animator = draggedObject != null ? draggedObject.GetComponent<Animator>() : null;
+        if (animator != null)
+            animator.enabled = true;
 
         if (targetSlot != null && targetSlot != draggedFromSlot)
         {
