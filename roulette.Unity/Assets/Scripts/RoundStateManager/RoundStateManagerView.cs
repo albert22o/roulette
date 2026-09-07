@@ -36,16 +36,11 @@ public class RoundStateManagerView : MonoBehaviour
                 inputHandler.enabled = false;
                 break;
             case RoundStateManager.RoundState.WheelSpining:
-                rouletteCamera.gameObject.SetActive(true);
-                roundCamera.gameObject.SetActive(false);
-                betsCamera.gameObject.SetActive(false);
-                inputHandler.enabled = false;
-                break;
             case RoundStateManager.RoundState.ChoosingReward:
                 rouletteCamera.gameObject.SetActive(true);
                 roundCamera.gameObject.SetActive(false);
                 betsCamera.gameObject.SetActive(false);
-                inputHandler.enabled = true;
+                inputHandler.enabled = false;
                 break;
             case RoundStateManager.RoundState.BetResults:
                 rouletteCamera.gameObject.SetActive(false);
