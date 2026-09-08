@@ -51,10 +51,7 @@ public class TableMultipliersView : MonoBehaviour
 
     private void OnBetChanged(int index, int amount)
     {
-        if (amount > 0)
-        {
-            UpdateUI();
-        }
+        UpdateUI();
     }
 
     public void ForceUpdate()
@@ -86,7 +83,7 @@ public class TableMultipliersView : MonoBehaviour
             if (colorBets.Count > 0)
             {
                 var colorTexts = colorBets.Select(c =>
-                    $"{c}: x{betCalculator.GetEffectiveColorMultiplier(c)}");
+                    $"{c}:\nx{betCalculator.GetEffectiveColorMultiplier(c)}");
                 colorMultiplierText.text = string.Join(", ", colorTexts);
             }
             else
@@ -106,7 +103,7 @@ public class TableMultipliersView : MonoBehaviour
             if (dozenBets.Count > 0)
             {
                 var dozenTexts = dozenBets.Select(d =>
-                    $"{d}: x{betCalculator.GetEffectiveDozenMultiplier(d)}");
+                    $"{d}:\nx{betCalculator.GetEffectiveDozenMultiplier(d)}");
                 dozenMultiplierText.text = string.Join(", ", dozenTexts);
             }
             else
