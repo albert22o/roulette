@@ -8,7 +8,6 @@ public class FirstPersonController : MonoBehaviour
 {
     [Header("Движение")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpHeight = 1.2f;
     [SerializeField] private float gravity = -19.62f;
 
     [Header("Камера")]
@@ -23,7 +22,6 @@ public class FirstPersonController : MonoBehaviour
     private bool active = false;
     private Vector2 moveInput;
     private Vector2 lookInput;
-    private bool jumpPressed;
 
     private GameStateManager gameStateManager;
     private CameraEventHandler cameraEventHandler;
@@ -94,7 +92,6 @@ public class FirstPersonController : MonoBehaviour
 
     public void OnMove(InputValue value) => moveInput = value.Get<Vector2>();
     public void OnLook(InputValue value) => lookInput = value.Get<Vector2>();
-    public void OnJump(InputValue value) { if (value.isPressed) jumpPressed = true; }
 
     private void HandleMouseLook()
     {
@@ -124,12 +121,6 @@ public class FirstPersonController : MonoBehaviour
 
         var speed = moveSpeed;
         controller.Move(move * (speed * Time.deltaTime));
-
-        if (jumpPressed && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            jumpPressed = false;
-        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
