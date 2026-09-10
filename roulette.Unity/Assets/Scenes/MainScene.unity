@@ -9908,6 +9908,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.6084383
       objectReference: {fileID: 0}
+    - target: {fileID: 7651698741100532141, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 3730739055183839060}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: dragHeight
       value: 0.9
@@ -10288,6 +10292,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fc54237d291672944a57db5a13b89733, type: 3}
+--- !u!114 &3730739055183839060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6715053217292720703, guid: fc54237d291672944a57db5a13b89733, type: 3}
+  m_PrefabInstance: {fileID: 3730739055183839058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213bd2834798bf14da58b58fa5dc5577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3956157596183037852
 PrefabInstance:
   m_ObjectHideFlags: 0

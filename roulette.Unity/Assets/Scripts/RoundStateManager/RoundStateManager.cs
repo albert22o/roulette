@@ -10,6 +10,8 @@ public class RoundStateManager
     private bool isProcessing;
     private RoundState? currentState = null;
 
+    private RoundState memoryState = RoundState.Start;
+
     public RoundStateManager(GameStateManager gameStateManager)
     {
         this.gameStateManager = gameStateManager;
@@ -38,7 +40,10 @@ public class RoundStateManager
             if (currentState == RoundState.Lose)
                 gameStateManager.ChangeGameState(GameStateManager.GameState.Lose);
             else if (currentState == RoundState.Win)
+            {
+                currentState = RoundState.Start;
                 gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+            }
         }
 
         isProcessing = false;
@@ -47,9 +52,12 @@ public class RoundStateManager
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
         if (state == GameStateManager.GameState.BettingСycle)
-            ChangeState(RoundState.Start);
+            ChangeState(memoryState);
         else
+        {
+            memoryState = (RoundState)currentState;
             ChangeState(RoundState.NotActive);
+        }
     }
 
     public enum RoundState
