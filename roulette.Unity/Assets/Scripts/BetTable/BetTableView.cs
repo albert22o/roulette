@@ -8,7 +8,6 @@ using static GameStateManager;
 
 class BetTableView : MonoBehaviour
 {
-    [SerializeField] TextMeshPro availableSumText;
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;
@@ -36,14 +35,6 @@ class BetTableView : MonoBehaviour
 
     public void Start()
     {
-        if (availableSumText == null)
-        {
-            Debug.LogError("Не все зависимости проставлены");
-            return;
-        }
-        betTable.ChangeAvailableSum += OnChangeAvailableSum;
-        OnChangeAvailableSum(betTable.AvailableSum);
-
         if (betButtons.Count < tableInfo.PocketMapping.Count)
         {
             Debug.LogError("Не все кнопки для ставок проставлены");
@@ -98,19 +89,12 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
         tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
         tableInfo.PocketColorChanged -= OnPocketColorChanged;
-        betTable.ChangeAvailableSum -= OnChangeAvailableSum;
-
         foreach (var button in betButtons)
         {
             if (button == null) continue;
             button.HoverEnter += OnHoverEnter;
             button.HoverExit += OnHoverExit;
         }
-    }
-
-    private void OnChangeAvailableSum(int newSum)
-    {
-        availableSumText.text = newSum.ToString();
     }
 
     private void OnPocketColorChanged(int index, ColorType color)
