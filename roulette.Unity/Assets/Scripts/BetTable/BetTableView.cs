@@ -13,6 +13,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;
     [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private float betsClearDelay = 2f;
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
@@ -53,6 +54,7 @@ class BetTableView : MonoBehaviour
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
         tableInfo.PocketNumberChanged += OnPocketNumberChanged;
         tableInfo.PocketColorChanged += OnPocketColorChanged;
+        betTable.BetsCleared += OnBetsCleared;
 
         winningSequence.Highlight += OnHighlight;
         winningSequence.EndSequence += OnEndSequence;
@@ -99,13 +101,19 @@ class BetTableView : MonoBehaviour
         tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
         tableInfo.PocketColorChanged -= OnPocketColorChanged;
         betTable.ChangeAvailableSum -= OnChangeAvailableSum;
+        betTable.BetsCleared -= OnBetsCleared;
 
         foreach (var button in betButtons)
         {
             if (button == null) continue;
-            button.HoverEnter += OnHoverEnter;
-            button.HoverExit += OnHoverExit;
+            button.HoverEnter -= OnHoverEnter;
+            button.HoverExit -= OnHoverExit;
         }
+    }
+
+    private void OnBetsCleared()
+    {
+        StartCoroutine(DeleteAllBetChips());
     }
 
     private void OnChangeAvailableSum(int newSum)
@@ -126,6 +134,15 @@ class BetTableView : MonoBehaviour
     private void OnChangeAmountByIndex(int index, int amount)
     {
         betButtons[index].Amount = amount;
+    }
+
+    private IEnumerator DeleteAllBetChips()
+    {
+        yield return new WaitForSeconds(betsClearDelay);
+        foreach (var button in betButtons)
+        {
+            button.Amount = 0;
+        }
     }
 
     private void UpdateAllButtons()

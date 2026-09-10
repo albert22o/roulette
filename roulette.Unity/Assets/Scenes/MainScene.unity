@@ -10157,6 +10157,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.6084383
       objectReference: {fileID: 0}
+    - target: {fileID: 2198447719257135620, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: betsClearDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2442018711780191377, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: wheel
       value: 

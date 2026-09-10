@@ -23,6 +23,7 @@ public class BetTable
     private int availableBetSum;
     private bool active;
     public const int BetStep = 25;
+    public event Action BetsCleared;
 
     public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager)
     {
@@ -113,13 +114,13 @@ public class BetTable
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
-            ChangeAmountByIndex?.Invoke(betIndex, 0);
         }
         ChangeAvailableSum?.Invoke(availableBetSum);
         if (hadBetsBefore)
         {
             HasActiveBetsChanged?.Invoke(false);
         }
+        BetsCleared?.Invoke();
     }
 
     public void OnAvailableSumChanged(int newSum)
