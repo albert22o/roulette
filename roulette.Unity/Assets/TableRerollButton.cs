@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.VFX;
 using Zenject;
 
 public class TableRerollButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
@@ -8,6 +9,7 @@ public class TableRerollButton : MonoBehaviour, IPointerClickHandler, IPointerEn
     public event Action Clicked, HoverEnter, HoverExit;
     [SerializeField] private OutlineController outlineController;
     [SerializeField] private ButtonAnimation3D buttonAnimation;
+    [SerializeField] private VisualEffect vfx;
     private RoundManager roundManager;
     private RoundStateManager roundStateManager;
     private bool isHovered;
@@ -45,6 +47,7 @@ public class TableRerollButton : MonoBehaviour, IPointerClickHandler, IPointerEn
             HoverEnter?.Invoke();
             outlineController.ToggleMaterial(false);
             buttonAnimation.Press();
+            vfx.SendEvent("Explode");
         }
     }
 

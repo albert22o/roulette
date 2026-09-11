@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Animator))]
 public class RouletteBall : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private OutlineController outline;
     [SerializeField] private BallVisual visual;
+    [SerializeField] private VisualEffect vfx;
 
     private Transform rouletteOrigin;
     private Ball ball;
@@ -80,6 +82,8 @@ public class RouletteBall : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         FreezeUpdate();
         transform.rotation = Quaternion.Euler(Vector3.up);
         animator.SetTrigger("jump");
+        vfx.SendEvent("BallActivation");
+
     }
 
     private void OnDestroy()
