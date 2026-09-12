@@ -12,6 +12,9 @@
         this.rouletteWheel = rouletteWheel;
         rouletteWheel.AllBallsStopped += OnAllBallsStopped;
     }
+
+    public override int AppliedMultiplier => 0;
+
     public override bool Apply()
     {
         return effectTriggered;

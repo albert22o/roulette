@@ -9,5 +9,7 @@ public class LeakyChip : ChipHolderDependentChip
         bonusPerFreeSlot = data.BonusPerFreeSlot;
     }
 
+    public override int AppliedMultiplier => Bonus;
+
     protected override int CalculateBonus() => chipHolder.FreeSlotCount * bonusPerFreeSlot;
 }

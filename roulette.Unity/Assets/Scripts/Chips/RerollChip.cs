@@ -5,6 +5,8 @@
     private bool firstReroll = true;
     private bool effectTriggered;
 
+    public override int AppliedMultiplier => 0;
+
     public RerollChip(BetCalculator betCalculator, RoundManager roundManager, 
         RerollChipData rerollChipData) : base(rerollChipData)
     {

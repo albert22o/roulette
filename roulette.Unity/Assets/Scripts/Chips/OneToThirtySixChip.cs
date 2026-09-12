@@ -6,6 +6,8 @@ public class OneToThirtySixChip : Chip
     private readonly int[] pseudoZeroNumbers = { 1, 2, 35, 36 };
     private HitInfo ballHit;
 
+    public override int AppliedMultiplier => 0;
+
     public OneToThirtySixChip(BetCalculator betCalculator, OneToThirtySixChipData data, BallResults results) : base(data)
     {
         this.betCalculator = betCalculator;

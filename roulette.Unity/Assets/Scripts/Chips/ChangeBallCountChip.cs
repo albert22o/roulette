@@ -4,6 +4,8 @@
     private BetCalculator betCalculator;
     private ChangeBallCountChipData changeBallCountChipData;
 
+    public override int AppliedMultiplier => changeBallCountChipData.ModifyAmount;
+
     public ChangeBallCountChip(BallHolder ballHolder, BetCalculator betCalculator,
         ChangeBallCountChipData changeBallCountChipData) : base(changeBallCountChipData)
     {

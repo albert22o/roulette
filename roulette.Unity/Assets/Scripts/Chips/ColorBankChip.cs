@@ -22,6 +22,8 @@ public class ColorBankChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
+    public override int AppliedMultiplier => currentBonus;
+
     public override bool Apply()
     {
         if (!bonusApplied && currentBonus > 0)

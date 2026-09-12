@@ -4,6 +4,8 @@
     private readonly BetCalculator betCalculator;
     private readonly BetCountChipData stackChipData;
 
+    public override int AppliedMultiplier => stackChipData.BonusAmount;
+
     public BetCountChip(TableInfo tableInfo, BetCalculator betCalculator, BetCountChipData stackChipData) : base(stackChipData)
     {
         this.tableInfo = tableInfo;

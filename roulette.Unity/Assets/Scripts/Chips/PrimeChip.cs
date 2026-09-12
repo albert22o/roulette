@@ -9,6 +9,8 @@ public class PrimeChip : Chip
     private bool modifyRequest = false;
     private static readonly int[] primeNumbers = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
 
+    public override int AppliedMultiplier => bonusAmount;
+
     public PrimeChip(BetCalculator betCalculator, BallResults ballResults, PrimeChipData data) : base(data)
     {
         this.betCalculator = betCalculator;

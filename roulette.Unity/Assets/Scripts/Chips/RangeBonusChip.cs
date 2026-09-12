@@ -21,6 +21,8 @@ public class RangeBonusChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
+    public override int AppliedMultiplier => bonusAmount;
+
     public override bool Apply()
     {
         if (modifyRequest)

@@ -11,6 +11,8 @@ public class PassiveChip : Chip
         bonusAmount = data.BonusAmount;
     }
 
+    public override int AppliedMultiplier => bonusAmount;
+
     public override bool Apply()
     {
         betCalculator.ModifyGeneralModifier(bonusAmount);

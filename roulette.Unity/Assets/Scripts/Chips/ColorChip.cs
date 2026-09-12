@@ -8,6 +8,8 @@ public class ColorChip : Chip
 
     private HitInfo ballHit;
 
+    public override int AppliedMultiplier => modifyAmount;
+
     public ColorChip(BetCalculator betCalculator, ColorChipData colorChipData, BallResults ballResults) : base(colorChipData)
     {
         this.betCalculator = betCalculator;

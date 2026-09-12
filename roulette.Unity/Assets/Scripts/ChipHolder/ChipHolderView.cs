@@ -231,6 +231,7 @@ public class ChipHolderView : MonoBehaviour
     private void OnChipAnimated(int index)
     {
         slotViews[index].PlayAnimation();
+        slotViews[index].ShowMultiplier(chipHolder.Chips[index].AppliedMultiplier);
     }
 
     private ChipSlotView RaycastSlot()

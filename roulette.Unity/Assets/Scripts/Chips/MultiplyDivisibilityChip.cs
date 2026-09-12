@@ -21,6 +21,8 @@ public class MultiplyDivisibilityChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
+    public override int AppliedMultiplier => (int)multiplier;
+
     public override bool Apply()
     {
         if (!modifyRequest)

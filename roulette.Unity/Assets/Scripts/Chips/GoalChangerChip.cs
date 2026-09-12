@@ -3,6 +3,8 @@
     private readonly GoalChangerChipData percentChipData;
     private readonly RoundManager roundManager;
 
+    public override int AppliedMultiplier => 0;
+
     public GoalChangerChip(RoundManager roundManager, GoalChangerChipData percentChipData) : base(percentChipData)
     { 
         this.percentChipData = percentChipData;

@@ -3,6 +3,7 @@
     private readonly BallHolder ballHolder;
     private readonly BetCalculator betCalculator;
     private readonly EmptyBallSlotBonusChipData emptyBallSlotBonusChipData;
+    private int bonus;
 
     public EmptyBallSlotBonusChip(BallHolder ballHolder, BetCalculator betCalculator,
         EmptyBallSlotBonusChipData emptyBallSlotBonusChipData) : base(emptyBallSlotBonusChipData)
@@ -12,9 +13,11 @@
         this.emptyBallSlotBonusChipData = emptyBallSlotBonusChipData;
     }
 
+    public override int AppliedMultiplier => bonus;
+
     public override bool Apply()
     {
-        int bonus = ballHolder.FreeSlotsCount * emptyBallSlotBonusChipData.BonusPerBall;
+        bonus = ballHolder.FreeSlotsCount * emptyBallSlotBonusChipData.BonusPerBall;
         if (bonus == 0)
             return false;
 

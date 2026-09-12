@@ -11,6 +11,8 @@ public class GoldenIngotChip : Chip
         this.goldenChips = goldenChips;
     }
 
+    public override int AppliedMultiplier => goldenChips.Amount;
+
     public override bool Apply()
     {
         if (goldenChips.Amount == 0)

@@ -5,6 +5,8 @@
     private readonly MultiplierPerWinChipData multiplierPerWinChipData;
     private float multiplier = 1f;
 
+    public override int AppliedMultiplier => (int)multiplier;
+
     public MultiplierPerWinChip(BetCalculator betCalculator, 
         RewardCalculator rewardCalculator, MultiplierPerWinChipData multiplierPerWinChipData) : base(multiplierPerWinChipData)
     {

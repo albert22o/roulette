@@ -8,6 +8,8 @@ public class DotsChip : ChipHolderDependentChip
         bonusPerChip = data.BonusPerChip;
     }
 
+    public override int AppliedMultiplier => Bonus;
+
     protected override int CalculateBonus()
     {
         var chipCount = 0;

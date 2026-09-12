@@ -4,6 +4,8 @@
     private readonly ChipHolder chipHolder;
     private readonly ChangeChipSlotData changeChipSlotData;
 
+    public override int AppliedMultiplier => changeChipSlotData.Multiplier;
+
     public ChangeChipSlot(BetCalculator betCalculator, ChipHolder chipHolder, ChangeChipSlotData lostChipData) : base(lostChipData)
     {
         this.betCalculator = betCalculator;

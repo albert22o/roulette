@@ -7,6 +7,8 @@ public class DozenChip : Chip
     private readonly int modifyAmount;
     private HitInfo ballHit;
 
+    public override int AppliedMultiplier => modifyAmount;
+
     public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData, BallResults ballResults) : base(dozenChipData)
     {
         this.betCalculator = betCalculator;

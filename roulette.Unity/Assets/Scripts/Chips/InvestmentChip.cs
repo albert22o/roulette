@@ -5,6 +5,8 @@ public class InvestmentChip : Chip
     private readonly BetTable betTable;
     private readonly int bonusAmount;
 
+    public override int AppliedMultiplier => 0;
+
     public InvestmentChip(BetTable betTable, InvestmentChipData data) : base(data)
     {
         this.betTable = betTable;

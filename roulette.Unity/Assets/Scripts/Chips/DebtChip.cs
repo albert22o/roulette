@@ -4,6 +4,8 @@ public class DebtChip : Chip
     private readonly GoldenChips goldenChips;
     private readonly int debtAmount;
 
+    public override int AppliedMultiplier => 0;
+
     public DebtChip(GoldenChips goldenChips, DebtChipData data) : base(data)
     {
         this.goldenChips = goldenChips;

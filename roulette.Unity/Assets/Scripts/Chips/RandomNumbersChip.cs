@@ -12,6 +12,8 @@ public class RandomNumbersChip : Chip
     private bool modifyRequest = false;
     private List<int> selectedNumbers = new List<int>();
 
+    public override int AppliedMultiplier => bonusAmount;
+
     public RandomNumbersChip(BetCalculator betCalculator, BallResults ballResults, RandomNumbersChipData data) : base(data)
     {
         this.betCalculator = betCalculator;

@@ -11,6 +11,8 @@
         this.multiplyPerRareChipData = multiplyPerRareChipData;
     }
 
+    public override int AppliedMultiplier => (int)multiplier;
+
     public override bool Apply()
     {
         multiplier = 1f;

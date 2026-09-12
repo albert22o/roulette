@@ -6,6 +6,7 @@ public abstract class ChipHolderDependentChip : Chip
     protected readonly BetCalculator betCalculator;
     protected readonly ChipHolder chipHolder;
     private bool bonusApplied = false;
+    protected int Bonus;
 
     protected ChipHolderDependentChip(BetCalculator betCalculator, ChipHolder chipHolder, ChipData data) : base(data)
     {
@@ -18,10 +19,10 @@ public abstract class ChipHolderDependentChip : Chip
     public override bool Apply()
     {
         if (bonusApplied) return false;
-        int bonus = CalculateBonus();
-        if (bonus > 0)
+        Bonus = CalculateBonus();
+        if (Bonus > 0)
         {
-            betCalculator.ModifyGeneralModifier(bonus);
+            betCalculator.ModifyGeneralModifier(Bonus);
             bonusApplied = true;
             return true;
         }

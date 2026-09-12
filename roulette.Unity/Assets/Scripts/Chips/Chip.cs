@@ -7,6 +7,8 @@ public abstract class Chip
     {
         ChipData = chipData;
     }
+    public abstract int AppliedMultiplier { get; }
+
     public abstract bool Apply();
     public abstract void Revert();
 

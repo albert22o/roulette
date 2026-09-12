@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class AllInChip : Chip
+﻿public class AllInChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
@@ -8,6 +6,8 @@ public class AllInChip : Chip
     private readonly float multiplier;
 
     private bool modifyRequest = false;
+
+    public override int AppliedMultiplier => (int)multiplier;
 
     public AllInChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable,AllInChipData data) : base(data)
     {

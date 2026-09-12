@@ -9,6 +9,8 @@ public class BlackDozenChip : Chip
     private bool modifyRequest = false;
     private DozenType selectedDozen;
 
+    public override int AppliedMultiplier => bonusAmount;
+
     public BlackDozenChip(BetCalculator betCalculator, BallResults ballResults, BlackDozenChipData data) : base(data)
     {
         this.betCalculator = betCalculator;

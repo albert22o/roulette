@@ -7,6 +7,8 @@ public class FieldChip : Chip
     private readonly int modifyAmount;
     private HitInfo ballHit;
 
+    public override int AppliedMultiplier => modifyAmount;
+
     public FieldChip(BetCalculator betCalculator, FieldChipData fieldChipData, BallResults ballResults) : base(fieldChipData) 
     {
         this.betCalculator = betCalculator;
