@@ -9,6 +9,6 @@ public class RangeBonusChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new RangeBonusChip(deps.BetCalculator, deps.BallResults, this);
+        return new RangeBonusChip(deps.BetCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

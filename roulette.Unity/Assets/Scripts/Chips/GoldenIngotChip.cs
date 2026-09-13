@@ -4,26 +4,48 @@ public class GoldenIngotChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly GoldenChips goldenChips;
+    private readonly BetTable betTable;
+    private HitInfo ballHit;
+    private int appliedAmount;
+    private bool wasApplied;
 
-    public GoldenIngotChip(BetCalculator betCalculator, GoldenChips goldenChips, GoldenIngotChipData data) : base(data)
+    public GoldenIngotChip(BetCalculator betCalculator, GoldenChips goldenChips, BallResults ballResults, BetTable betTable, GoldenIngotChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.goldenChips = goldenChips;
+        this.betTable = betTable;
+        ballResults.BallSelected += OnBallSelected;
     }
 
-    public override int AppliedMultiplier => goldenChips.Amount;
+    private void OnBallSelected(HitInfo info)
+    {
+        ballHit = info;
+    }
+
+    public override int AppliedMultiplier => appliedAmount;
 
     public override bool Apply()
     {
-        if (goldenChips.Amount == 0)
+        bool betMatched = ballHit != null && (
+            BetTableExtentions.CheckColorMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, ballHit));
+
+        if (goldenChips.Amount == 0 || !betMatched)
             return false;
 
-        betCalculator.ModifyGeneralModifier(goldenChips.Amount);
+        appliedAmount = goldenChips.Amount;
+        betCalculator.ModifyGeneralModifier(appliedAmount);
+        wasApplied = true;
         return true;
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyGeneralModifier(-goldenChips.Amount);
+        if (wasApplied)
+        {
+            betCalculator.ModifyGeneralModifier(-appliedAmount);
+            wasApplied = false;
+        }
     }
 }

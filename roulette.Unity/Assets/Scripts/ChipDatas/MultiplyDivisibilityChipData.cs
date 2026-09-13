@@ -9,6 +9,6 @@ public class MultiplyDivisibilityChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new MultiplyDivisibilityChip(deps.BetCalculator, deps.BallResults, this);
+        return new MultiplyDivisibilityChip(deps.BetCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

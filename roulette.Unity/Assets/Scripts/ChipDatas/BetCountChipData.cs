@@ -7,6 +7,6 @@ public class BetCountChipData : ChipData
     public int BonusAmount;
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new BetCountChip(deps.TableInfo, deps.BetCalculator, this);
+        return new BetCountChip(deps.TableInfo, deps.BetCalculator, this, deps.BetTable, deps.BallResults);
     }
 }

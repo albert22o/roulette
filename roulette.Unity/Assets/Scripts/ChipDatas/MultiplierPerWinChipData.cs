@@ -7,6 +7,6 @@ public class MultiplierPerWinChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new MultiplierPerWinChip(deps.BetCalculator, deps.RewardCalculator, this);
+        return new MultiplierPerWinChip(deps.BetCalculator, deps.RewardCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

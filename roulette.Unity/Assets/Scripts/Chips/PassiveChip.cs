@@ -1,26 +1,47 @@
-﻿using UnityEngine;
-
-public class PassiveChip : Chip
+﻿public class PassiveChip : Chip
 {
     private readonly BetCalculator betCalculator;
+    private readonly BetTable betTable;
     private readonly int bonusAmount;
+    private HitInfo ballHit;
+    private bool wasApplied;
 
-    public PassiveChip(BetCalculator betCalculator, PassiveChipData data) : base(data)
+    public PassiveChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, PassiveChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
+        this.betTable = betTable;
         bonusAmount = data.BonusAmount;
+        ballResults.BallSelected += OnBallSelected;
     }
 
     public override int AppliedMultiplier => bonusAmount;
 
+    private void OnBallSelected(HitInfo hit)
+    {
+        ballHit = hit;
+    }
+
     public override bool Apply()
     {
+        bool betMatched = ballHit != null && (
+            BetTableExtentions.CheckColorMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, ballHit));
+
+        if (!betMatched)
+            return false;
+
         betCalculator.ModifyGeneralModifier(bonusAmount);
+        wasApplied = true;
         return true;
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyGeneralModifier(-bonusAmount);
+        if (wasApplied)
+        {
+            betCalculator.ModifyGeneralModifier(-bonusAmount);
+            wasApplied = false;
+        }
     }
 }

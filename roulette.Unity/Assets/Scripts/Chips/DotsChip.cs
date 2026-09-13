@@ -3,7 +3,8 @@
 public class DotsChip : ChipHolderDependentChip
 {
     private readonly int bonusPerChip;
-    public DotsChip(BetCalculator betCalculator, ChipHolder chipHolder, DotsChipData data) : base(betCalculator, chipHolder, data) 
+    public DotsChip(BetCalculator betCalculator, ChipHolder chipHolder,
+        DotsChipData data, BallResults ballResults, BetTable betTable) : base(betCalculator, chipHolder, data, ballResults, betTable) 
     {
         bonusPerChip = data.BonusPerChip;
     }

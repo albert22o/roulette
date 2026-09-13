@@ -8,6 +8,6 @@ public class DozenChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new DozenChip(deps.BetCalculator, this, deps.BallResults);
+        return new DozenChip(deps.BetCalculator, this, deps.BallResults, deps.BetTable);
     }
 }

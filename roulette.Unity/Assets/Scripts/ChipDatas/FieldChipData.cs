@@ -8,6 +8,6 @@ public class FieldChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new FieldChip(deps.BetCalculator, this, deps.BallResults);
+        return new FieldChip(deps.BetCalculator, this, deps.BallResults, deps.BetTable);
     }
 }

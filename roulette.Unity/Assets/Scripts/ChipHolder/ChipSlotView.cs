@@ -87,7 +87,7 @@ public class ChipSlotView : MonoBehaviour
     {
         if (multiplier != 0)
         {
-            multiplierText.text = multiplier.ToString();
+            multiplierText.text = "+" + multiplier.ToString();
             animator.SetTrigger(showMultiplierTrigger);
         }
     }

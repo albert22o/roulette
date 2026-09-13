@@ -7,6 +7,6 @@ public class DotsChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new DotsChip(deps.BetCalculator, deps.ChipHolder, this);
+        return new DotsChip(deps.BetCalculator, deps.ChipHolder, this, deps.BallResults, deps.BetTable);
     }
 }

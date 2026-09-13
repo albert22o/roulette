@@ -5,25 +5,27 @@
     private readonly BetTable betTable;
     private readonly float multiplier;
 
-    private bool modifyRequest = false;
+    private bool applyConditionsMatched;
+    private bool multiplierApplied = false;
 
     public override int AppliedMultiplier => (int)multiplier;
 
-    public AllInChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable,AllInChipData data) : base(data)
+    public AllInChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, AllInChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
         this.betTable = betTable;
-        multiplier = data.Multiplier; 
+        multiplier = data.Multiplier;
 
         this.ballResults.BallSelected += OnBallSelected;
     }
 
     public override bool Apply()
     {
-        if (modifyRequest)
+        if (applyConditionsMatched)
         {
             betCalculator.MuliplyGeneralModifier(multiplier);
+            multiplierApplied = true;
             return true;
         }
         return false;
@@ -31,19 +33,24 @@
 
     public override void Revert()
     {
-        if (modifyRequest)
+        if (multiplierApplied)
+        {
             betCalculator.DivideGeneralModifier(multiplier);
+            multiplierApplied = false;
+        }
     }
 
-    private void OnBallSelected(HitInfo _)
+    private void OnBallSelected(HitInfo hit)
     {
         if (IsBetOnlyOnZero())
         {
-            modifyRequest = true;
+            applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+                BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+                BetTableExtentions.CheckNumberMatch(betTable, hit);
         }
         else
         {
-            modifyRequest = false;
+            applyConditionsMatched = false;
         }
     }
 

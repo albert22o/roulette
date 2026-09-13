@@ -4,6 +4,7 @@ public class PrimeChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
+    private readonly BetTable betTable;
     private readonly int bonusAmount;
 
     private bool modifyRequest = false;
@@ -11,10 +12,11 @@ public class PrimeChip : Chip
 
     public override int AppliedMultiplier => bonusAmount;
 
-    public PrimeChip(BetCalculator betCalculator, BallResults ballResults, PrimeChipData data) : base(data)
+    public PrimeChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, PrimeChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
+        this.betTable = betTable;
         bonusAmount = data.BonusAmount;
 
         this.ballResults.BallSelected += OnBallSelected;
@@ -39,10 +41,14 @@ public class PrimeChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (hit != null && IsPrime(hit.FieldNumber))
-            modifyRequest = true;
-        else
-            modifyRequest = false;
+        bool primeMatched = hit != null && IsPrime(hit.FieldNumber);
+
+        bool betMatched = hit != null && (
+            BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit));
+
+        modifyRequest = primeMatched && betMatched;
     }
 
     private bool IsPrime(int number)

@@ -5,26 +5,32 @@ public class BlackDozenChip : Chip
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
     private readonly int bonusAmount;
+    private readonly BetTable betTable;
 
-    private bool modifyRequest = false;
     private DozenType selectedDozen;
+
+    private bool applyConditionsMatched;
+    private bool multiplierApplied = false;
 
     public override int AppliedMultiplier => bonusAmount;
 
-    public BlackDozenChip(BetCalculator betCalculator, BallResults ballResults, BlackDozenChipData data) : base(data)
+    public BlackDozenChip(BetCalculator betCalculator, BallResults ballResults,
+        BlackDozenChipData data, BetTable betTable) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
         bonusAmount = data.BonusAmount;
 
         this.ballResults.BallSelected += OnBallSelected;
+        this.betTable = betTable;
     }
 
     public override bool Apply()
     {
-        if (modifyRequest)
+        if (applyConditionsMatched)
         {
             betCalculator.ModifyDozenMultiplier(selectedDozen, bonusAmount);
+            multiplierApplied = true;
             return true;
         }
         return false;
@@ -32,22 +38,34 @@ public class BlackDozenChip : Chip
 
     public override void Revert()
     {
-        if (modifyRequest)
+        if (multiplierApplied)
         {
             betCalculator.ModifyDozenMultiplier(selectedDozen, -bonusAmount);
+            multiplierApplied = false;
         }
     }
 
     private void OnBallSelected(HitInfo hit)
     {
         if (hit == null)
+        {
+            applyConditionsMatched = false;
             return;
+        }
+
         selectedDozen = GetRandomDozen();
 
+
         if (IsNumberInDozen(hit.FieldNumber, selectedDozen))
-            modifyRequest = true;
+        {
+            applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+                BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+                BetTableExtentions.CheckNumberMatch(betTable, hit);
+        }
         else
-            modifyRequest = false;
+        {
+            applyConditionsMatched = false;
+        }
     }
 
     private DozenType GetRandomDozen()

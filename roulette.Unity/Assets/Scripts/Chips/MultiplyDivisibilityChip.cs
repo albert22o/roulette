@@ -4,16 +4,18 @@ public class MultiplyDivisibilityChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
+    private readonly BetTable betTable;
     private readonly int divisor;
     private readonly int remainder;
     private readonly float multiplier;
 
     private bool modifyRequest = false;
 
-    public MultiplyDivisibilityChip(BetCalculator betCalculator, BallResults ballResults, MultiplyDivisibilityChipData data) : base(data)
+    public MultiplyDivisibilityChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, MultiplyDivisibilityChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
+        this.betTable = betTable;
         divisor = data.Divisor;
         remainder = data.Remainder;
         multiplier = data.Multiplier;
@@ -42,9 +44,13 @@ public class MultiplyDivisibilityChip : Chip
 
     private void OnBallSelected(HitInfo hit)
     {
-        if (hit?.FieldNumber % divisor == remainder)
-            modifyRequest = true;
-        else
-            modifyRequest = false;
+        bool divisibilityMatched = hit != null && divisor != 0 && hit.FieldNumber % divisor == remainder;
+
+        bool betMatched = hit != null && (
+            BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit));
+
+        modifyRequest = divisibilityMatched && betMatched;
     }
 }

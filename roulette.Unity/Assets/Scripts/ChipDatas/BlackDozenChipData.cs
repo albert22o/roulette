@@ -7,6 +7,6 @@ public class BlackDozenChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new BlackDozenChip(deps.BetCalculator, deps.BallResults, this);
+        return new BlackDozenChip(deps.BetCalculator, deps.BallResults, this,deps.BetTable);
     }
 }

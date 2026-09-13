@@ -6,7 +6,7 @@ public class D6Chip : Chip
     private readonly BallResults ballResults;
     private readonly D6ChipData d6ChipData;
     private readonly BetTable betTable;
-    private HitInfo lastHit;
+    private bool wasApplied;
 
     public override int AppliedMultiplier => d6ChipData.ModifyAmount;
 
@@ -17,21 +17,17 @@ public class D6Chip : Chip
         this.ballResults = ballResults;
         this.d6ChipData = d6ChipData;
         this.ballResults.BallSelected += OnBallSelected;
+        this.betTable = betTable;
     }
 
     private void OnBallSelected(HitInfo hit)
     {
-        lastHit = hit;
-    }
-
-    private bool IsFieldBetOn(int fieldNumber)
-    {
-        foreach ((var betInfo, var amount) in betTable.NotNullBetAmounts)
+        if (BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit))
         {
-            if (amount > 0 && betInfo.FieldNumber == fieldNumber)
-                return true;
+            wasApplied = true;
         }
-        return false;
     }
 
     public override void OnAddedToHolder()
@@ -48,16 +44,17 @@ public class D6Chip : Chip
 
     public override bool Apply()
     {
-        bool wasApplied = lastHit != null && IsFieldBetOn(lastHit.FieldNumber);
-
         if (wasApplied)
             betCalculator.ModifyGeneralModifier(d6ChipData.ModifyAmount);
-
         return wasApplied;
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyGeneralModifier(-d6ChipData.ModifyAmount);
+        if (wasApplied)
+        {
+            betCalculator.ModifyGeneralModifier(-d6ChipData.ModifyAmount);
+            wasApplied = false;
+        }
     }
 }
