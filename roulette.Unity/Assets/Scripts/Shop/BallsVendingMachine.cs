@@ -2,15 +2,16 @@
 using System;
 using UnityEngine;
 using Zenject;
+using Zenject.Asteroids;
 
 public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private ShopItemsRarityGroup ballsTable;
-    [SerializeField] private int initCost = 4;
 
     [Header("Tooltip")]
     [SerializeField] private string titleKey;
     [SerializeField] private string mainTextKey;
+    [SerializeField] private Transform tooltipPoint;
 
     [Space]
     [SerializeField] private OutlineController outline;
@@ -21,6 +22,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
     private ShopFontConfig fontColorsConfig;
+    private int spinsCount;
 
     public bool IsInteractable => boughtBall == null;
     public event Action<BallInfoData> BallBought;
@@ -46,12 +48,17 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     private void Start()
     {
-        Cost = initCost;
+        Cost = shop.Config.BallCost;
+    }
+
+    public void ResetSpinAmount()
+    {
+        spinsCount = shop.Config.BallMachineUseAfterBoss;
     }
 
     public void TryBuy()
     {
-        if (ballHolder.HasFreeSlot)
+        if (ballHolder.HasFreeSlot && spinsCount > 0)
         {
             if (goldenChips.AvailableAmount >= Cost)
             {
@@ -59,6 +66,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
                 boughtBall = ballsTable.GetRandomItem() as BallInfoData;
                 BallBought?.Invoke(boughtBall);
                 shop.SetInteractionAvailable(false);
+                spinsCount--;
             }
         }
     }
@@ -72,7 +80,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
 
     public void SellBall()
     {
-        goldenChips.Add(shop.BallSellCost);
+        goldenChips.Add(shop.Config.BallSellCost);
         boughtBall = null;
         shop.SetInteractionAvailable(true);
     }
@@ -87,7 +95,9 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
         var text = mainTextKey;
         var color = goldenChips.Amount >= Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
         text += $"\nЦена: <color={color}>{Cost}</color>";
-        shop.ShowTooltip(titleKey, text, transform.position);
+        color = spinsCount > 0 ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
+        text += $"\nОсталось прокруток: <color={color}>{spinsCount}</color>";
+        shop.ShowTooltip(titleKey, text, tooltipPoint.position);
         outline.ToggleMaterial(true);
     }
 

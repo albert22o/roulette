@@ -5,7 +5,6 @@ using Zenject;
 public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, IClickable
 {
     [SerializeField] private ShopItemsRarityGroup foodTable;
-    [SerializeField] private int cost = 10;
     [SerializeField] private ItemPlace itemPlace;
 
     [SerializeField] private OutlineController outline;
@@ -34,8 +33,8 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void ShowDescription()
     {
         var description = $"{item.Description}";
-        var color = goldenChips.Amount >= cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{cost}</color>";
+        var color = goldenChips.Amount >= shop.Config.FoodCost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
+        description += $"\nЦена: <color={color}>{shop.Config.FoodCost}</color>";
         shop.ShowTooltip(item.Name, description, transform.position);
     }
 
@@ -46,9 +45,9 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
 
     public void OnClick()
     {
-        if (goldenChips.AvailableAmount >= cost)
+        if (goldenChips.AvailableAmount >= shop.Config.FoodCost)
         {
-            goldenChips.Remove(cost);
+            goldenChips.Remove(shop.Config.FoodCost);
             foodHolder.AddFood(item);
             item = null;
             itemPlace.SetItem(null);
