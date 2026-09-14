@@ -18,7 +18,7 @@ public class AntiColorChip : Chip
 
     public override bool Apply()
     {
-        return rerollAbility == false;
+        return false;
     }
 
     public override void Revert()
