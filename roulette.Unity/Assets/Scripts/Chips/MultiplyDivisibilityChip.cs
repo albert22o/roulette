@@ -8,7 +8,8 @@ public class MultiplyDivisibilityChip : Chip
     private readonly int divisor;
     private readonly int remainder;
     private readonly float multiplier;
-
+    public override OperationType Operation => OperationType.Multiply;
+    public override float AppliedValue => (int)multiplier;
     private bool modifyRequest = false;
 
     public MultiplyDivisibilityChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, MultiplyDivisibilityChipData data) : base(data)
@@ -23,14 +24,12 @@ public class MultiplyDivisibilityChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override int AppliedMultiplier => (int)multiplier;
-
     public override bool Apply()
     {
         if (!modifyRequest)
             return false;
 
-        betCalculator.MuliplyGeneralModifier(multiplier);
+        betCalculator.MultiplyGeneralModifier(multiplier);
         return true;
     }
 

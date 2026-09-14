@@ -10,6 +10,8 @@ public class RangeBonusChip : Chip
     private readonly int bonusAmount;
 
     private bool modifyRequest = false;
+    public override OperationType Operation => OperationType.Add;
+    public override float AppliedValue => bonusAmount;
 
     public RangeBonusChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, RangeBonusChipData data) : base(data)
     {
@@ -22,8 +24,6 @@ public class RangeBonusChip : Chip
 
         this.ballResults.BallSelected += OnBallSelected;
     }
-
-    public override int AppliedMultiplier => bonusAmount;
 
     public override bool Apply()
     {

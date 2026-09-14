@@ -3,7 +3,8 @@
     private readonly GoalChangerChipData percentChipData;
     private readonly RoundManager roundManager;
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
 
     public GoalChangerChip(RoundManager roundManager, GoalChangerChipData percentChipData) : base(percentChipData)
     { 

@@ -11,7 +11,7 @@ public class GlassBall : BallInfo
 
     public override void ApplySelectedEffect(HitInfo hitInfo)
     {
-        Dependencies.BetCalculator.MuliplyGeneralModifier(multiplier);
+        Dependencies.BetCalculator.MultiplyGeneralModifier(multiplier);
     }
 
     public override void RemoveSelectedEffect()

@@ -11,7 +11,8 @@ public class ChangeChipSlot : Chip
     private readonly BetTable betTable;
     private readonly BallResults ballResults;
 
-    public override int AppliedMultiplier => changeChipSlotData.Multiplier;
+    public override float AppliedValue => changeChipSlotData.Multiplier;
+    public override OperationType Operation => OperationType.Multiply;
 
     public ChangeChipSlot(BetCalculator betCalculator, ChipHolder chipHolder, ChangeChipSlotData lostChipData,
         BallResults ballResults, BetTable betTable) : base(lostChipData)
@@ -35,7 +36,7 @@ public class ChangeChipSlot : Chip
     {
         if (applyConditionsMatched)
         {
-            betCalculator.MuliplyGeneralModifier(changeChipSlotData.Multiplier);
+            betCalculator.MultiplyGeneralModifier(changeChipSlotData.Multiplier);
             multiplierApplied = true;
             return true;
         }

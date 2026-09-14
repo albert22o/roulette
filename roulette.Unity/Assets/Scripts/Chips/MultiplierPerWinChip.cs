@@ -9,7 +9,8 @@
     private bool wasApplied;
     private HitInfo ballHit;
 
-    public override int AppliedMultiplier => (int)appliedMultiplier;
+    public override float AppliedValue => appliedMultiplier;
+    public override OperationType Operation => OperationType.Multiply;
 
     public MultiplierPerWinChip(BetCalculator betCalculator,
         RewardCalculator rewardCalculator, BallResults ballResults, BetTable betTable,
@@ -57,7 +58,7 @@
             return false;
 
         appliedMultiplier = multiplier;
-        betCalculator.MuliplyGeneralModifier(appliedMultiplier);
+        betCalculator.MultiplyGeneralModifier(appliedMultiplier);
         wasApplied = true;
         return true;
     }

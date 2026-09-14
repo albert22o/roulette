@@ -6,7 +6,8 @@ public class OneToThirtySixChip : Chip
     private readonly int[] pseudoZeroNumbers = { 1, 2, 35, 36 };
     private HitInfo ballHit;
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
 
     public OneToThirtySixChip(BetCalculator betCalculator, OneToThirtySixChipData data, BallResults results) : base(data)
     {

@@ -10,7 +10,8 @@ public class PrimeChip : Chip
     private bool modifyRequest = false;
     private static readonly int[] primeNumbers = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
 
-    public override int AppliedMultiplier => bonusAmount;
+    public override float AppliedValue => bonusAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public PrimeChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, PrimeChipData data) : base(data)
     {

@@ -9,7 +9,9 @@ public class DotsChip : ChipHolderDependentChip
         bonusPerChip = data.BonusPerChip;
     }
 
-    public override int AppliedMultiplier => Bonus;
+    public override float AppliedValue => Bonus;
+
+    public override OperationType Operation => OperationType.Add;
 
     protected override int CalculateBonus()
     {

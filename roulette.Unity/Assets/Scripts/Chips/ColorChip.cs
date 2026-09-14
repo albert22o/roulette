@@ -10,7 +10,8 @@ public class ColorChip : Chip
 
     private HitInfo ballHit;
 
-    public override int AppliedMultiplier => modifyAmount;
+    public override float AppliedValue => modifyAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public ColorChip(BetCalculator betCalculator, ColorChipData colorChipData, BallResults ballResults, BetTable betTable) : base(colorChipData)
     {

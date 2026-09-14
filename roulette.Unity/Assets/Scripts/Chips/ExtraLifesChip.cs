@@ -5,7 +5,9 @@
     private ExtraLifesChipData extraLifesChipData;
     private bool extraLifeWasTaken;
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
+
+    public override OperationType Operation => OperationType.None;
 
     public ExtraLifesChip(ChipHolder chipHolder,
         LoseManager loseManager, ExtraLifesChipData extraLifesChipData) : base(extraLifesChipData)

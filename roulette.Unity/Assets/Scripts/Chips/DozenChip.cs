@@ -9,7 +9,9 @@ public class DozenChip : Chip
     private HitInfo ballHit;
     private bool wasApplied;
 
-    public override int AppliedMultiplier => modifyAmount;
+    public override float AppliedValue => modifyAmount;
+
+    public override OperationType Operation => OperationType.Add;
 
     public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData, BallResults ballResults, BetTable betTable) : base(dozenChipData)
     {

@@ -9,7 +9,9 @@ public class FieldChip : Chip
     private HitInfo ballHit;
     private bool wasApplied;
 
-    public override int AppliedMultiplier => modifyAmount;
+    public override float AppliedValue => modifyAmount;
+
+    public override OperationType Operation => OperationType.Add;
 
     public FieldChip(BetCalculator betCalculator, FieldChipData fieldChipData, BallResults ballResults, BetTable betTable) : base(fieldChipData)
     {

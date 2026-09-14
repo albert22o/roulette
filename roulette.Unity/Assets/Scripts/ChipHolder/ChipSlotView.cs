@@ -1,7 +1,5 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class ChipSlotView : MonoBehaviour
 {
@@ -83,11 +81,22 @@ public class ChipSlotView : MonoBehaviour
         ChipObject?.GetComponent<Animator>().SetTrigger("start");
     }
 
-    public void ShowMultiplier(int multiplier)
+    public void ShowMultiplier(float value, OperationType operation)
     {
-        if (multiplier != 0)
+        if (value != 0)
         {
-            multiplierText.text = "+" + multiplier.ToString();
+            string sign = "";
+            switch (operation)
+            {
+                case OperationType.Add:
+                    sign = "+";
+                    break;
+                case OperationType.Multiply:
+                    sign = "×";
+                    break;
+            }
+               
+            multiplierText.text = sign + value.ToString();
             animator.SetTrigger(showMultiplierTrigger);
         }
     }

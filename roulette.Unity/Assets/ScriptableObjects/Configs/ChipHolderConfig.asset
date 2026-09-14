@@ -16,3 +16,5 @@ MonoBehaviour:
   StartChips:
   - {fileID: 11400000, guid: ca638bc718bbc3c489e086281c2dfb3b, type: 2}
   - {fileID: 11400000, guid: 08178e9033e980f48bde2ebd06c86874, type: 2}
+  - {fileID: 11400000, guid: a86a2fe5722e461468951800bbf1a5d9, type: 2}
+  - {fileID: 11400000, guid: ef265e17d9917154eb66eb8d2cd1f541, type: 2}

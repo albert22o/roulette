@@ -5,7 +5,8 @@ public class InvestmentChip : Chip
     private readonly BetTable betTable;
     private readonly int bonusAmount;
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
 
     public InvestmentChip(BetTable betTable, InvestmentChipData data) : base(data)
     {

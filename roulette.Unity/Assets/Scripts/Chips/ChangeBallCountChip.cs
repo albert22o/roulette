@@ -7,7 +7,8 @@
     private bool applyConditionsMatched;
     private bool multiplierApplied = false;
 
-    public override int AppliedMultiplier => changeBallCountChipData.ModifyAmount;
+    public override float AppliedValue => changeBallCountChipData.ModifyAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public ChangeBallCountChip(BallHolder ballHolder, BetCalculator betCalculator,
         ChangeBallCountChipData changeBallCountChipData, BetTable betTable, BallResults ballResults) : base(changeBallCountChipData)

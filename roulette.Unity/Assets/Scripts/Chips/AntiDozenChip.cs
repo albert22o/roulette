@@ -5,6 +5,7 @@
     private bool rerollAbility = true;
 
     private bool effectTriggered;
+    public override OperationType Operation => OperationType.None;
 
     public AntiDozenChip(IRouletteWheel rouletteWheel, DozenType targetDozen, AntiDozenChipData antiDozenChipData) : base(antiDozenChipData)
     {
@@ -13,7 +14,7 @@
         rouletteWheel.AllBallsStopped += OnAllBallsStopped;
     }
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
 
     public override bool Apply()
     {

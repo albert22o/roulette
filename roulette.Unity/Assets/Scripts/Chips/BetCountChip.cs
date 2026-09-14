@@ -8,7 +8,8 @@
     private bool multiplierApplied = false;
     private readonly BallResults ballResults;
 
-    public override int AppliedMultiplier => stackChipData.BonusAmount;
+    public override float AppliedValue => stackChipData.BonusAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public BetCountChip(TableInfo tableInfo, BetCalculator betCalculator,
         BetCountChipData stackChipData, BetTable betTable, BallResults ballResults) : base(stackChipData)

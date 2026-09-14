@@ -5,6 +5,8 @@
     private readonly int bonusAmount;
     private HitInfo ballHit;
     private bool wasApplied;
+    public override OperationType Operation => OperationType.Add;
+    public override float AppliedValue => bonusAmount;
 
     public PassiveChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, PassiveChipData data) : base(data)
     {
@@ -13,8 +15,6 @@
         bonusAmount = data.BonusAmount;
         ballResults.BallSelected += OnBallSelected;
     }
-
-    public override int AppliedMultiplier => bonusAmount;
 
     private void OnBallSelected(HitInfo hit)
     {

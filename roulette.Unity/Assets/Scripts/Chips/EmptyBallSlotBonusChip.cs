@@ -19,7 +19,9 @@
         ballResults.BallSelected += OnBallSelected;
     }
 
-    public override int AppliedMultiplier => bonus;
+    public override float AppliedValue => bonus;
+
+    public override OperationType Operation => OperationType.Add;
 
     private void OnBallSelected(HitInfo hit)
     {

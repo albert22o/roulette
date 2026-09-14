@@ -10,6 +10,7 @@ public class ColorBankChip : Chip
     private int currentBonus = 0;
     private bool bonusApplied = false;
     private bool applyConditionsMatched;
+    public override OperationType Operation => OperationType.Add;
 
     public ColorBankChip(
         BetCalculator betCalculator,
@@ -26,7 +27,7 @@ public class ColorBankChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override int AppliedMultiplier => currentBonus;
+    public override float AppliedValue => currentBonus;
 
     public override bool Apply()
     {

@@ -23,7 +23,9 @@ public class DivisibilityChip : Chip
         this.ballResults.BallSelected += OnBallSelected;
     }
 
-    public override int AppliedMultiplier => bonusAmount;
+    public override float AppliedValue => bonusAmount;
+
+    public override OperationType Operation => OperationType.Add;
 
     public override bool Apply()
     {

@@ -3,7 +3,8 @@
     private readonly RewardCalculator rewardCalculator;
     private readonly BaseRewardChangeChipData baseRewardChangeChipData;
 
-    public override int AppliedMultiplier => 0;
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
 
     public BaseRewardChangeChip(RewardCalculator rewardCalculator, BaseRewardChangeChipData baseRewardChangeChipData) : base(baseRewardChangeChipData)
     {

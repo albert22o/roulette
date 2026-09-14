@@ -8,7 +8,8 @@
     private bool applyConditionsMatched;
     private bool multiplierApplied = false;
 
-    public override int AppliedMultiplier => (int)multiplier;
+    public override float AppliedValue => multiplier;
+    public override OperationType Operation => OperationType.Multiply;
 
     public AllInChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, AllInChipData data) : base(data)
     {
@@ -24,7 +25,7 @@
     {
         if (applyConditionsMatched)
         {
-            betCalculator.MuliplyGeneralModifier(multiplier);
+            betCalculator.MultiplyGeneralModifier(multiplier);
             multiplierApplied = true;
             return true;
         }

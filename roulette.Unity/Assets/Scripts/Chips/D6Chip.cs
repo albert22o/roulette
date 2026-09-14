@@ -8,7 +8,8 @@ public class D6Chip : Chip
     private readonly BetTable betTable;
     private bool wasApplied;
 
-    public override int AppliedMultiplier => d6ChipData.ModifyAmount;
+    public override float AppliedValue => d6ChipData.ModifyAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public D6Chip(BetCalculator betCalculator, BallResults ballResults,
         D6ChipData d6ChipData, BetTable betTable) : base(d6ChipData)

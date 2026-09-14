@@ -12,7 +12,8 @@ public class BlackDozenChip : Chip
     private bool applyConditionsMatched;
     private bool multiplierApplied = false;
 
-    public override int AppliedMultiplier => bonusAmount;
+    public override float AppliedValue => bonusAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public BlackDozenChip(BetCalculator betCalculator, BallResults ballResults,
         BlackDozenChipData data, BetTable betTable) : base(data)

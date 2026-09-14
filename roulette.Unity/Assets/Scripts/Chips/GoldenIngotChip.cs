@@ -8,6 +8,7 @@ public class GoldenIngotChip : Chip
     private HitInfo ballHit;
     private int appliedAmount;
     private bool wasApplied;
+    public override OperationType Operation => OperationType.Add;
 
     public GoldenIngotChip(BetCalculator betCalculator, GoldenChips goldenChips, BallResults ballResults, BetTable betTable, GoldenIngotChipData data) : base(data)
     {
@@ -22,7 +23,7 @@ public class GoldenIngotChip : Chip
         ballHit = info;
     }
 
-    public override int AppliedMultiplier => appliedAmount;
+    public override float AppliedValue => appliedAmount;
 
     public override bool Apply()
     {

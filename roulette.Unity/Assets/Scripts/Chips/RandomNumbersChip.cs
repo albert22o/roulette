@@ -13,7 +13,8 @@ public class RandomNumbersChip : Chip
     private bool modifyRequest = false;
     private List<int> selectedNumbers = new List<int>();
 
-    public override int AppliedMultiplier => bonusAmount;
+    public override float AppliedValue => bonusAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public RandomNumbersChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, RandomNumbersChipData data) : base(data)
     {

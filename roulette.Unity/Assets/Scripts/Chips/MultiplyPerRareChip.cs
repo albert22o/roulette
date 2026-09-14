@@ -8,7 +8,8 @@
     private float appliedMultiplier;
     private bool wasApplied;
     private HitInfo ballHit;
-
+    public override OperationType Operation => OperationType.Multiply;
+    public override float AppliedValue => appliedMultiplier;
     public MultiplyPerRareChip(BetCalculator betCalculator, ChipHolder chipHolder, BallResults ballResults, BetTable betTable, MultiplyPerRareChipData multiplyPerRareChipData) : base(multiplyPerRareChipData)
     {
         this.betCalculator = betCalculator;
@@ -17,8 +18,6 @@
         this.multiplyPerRareChipData = multiplyPerRareChipData;
         ballResults.BallSelected += OnBallSelected;
     }
-
-    public override int AppliedMultiplier => (int)appliedMultiplier;
 
     private void OnBallSelected(HitInfo hit)
     {
@@ -44,7 +43,7 @@
             return false;
 
         appliedMultiplier = multiplier;
-        betCalculator.MuliplyGeneralModifier(appliedMultiplier);
+        betCalculator.MultiplyGeneralModifier(appliedMultiplier);
         wasApplied = true;
         return true;
     }
