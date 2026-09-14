@@ -24,7 +24,8 @@ public class OneToThirtySixChip : Chip
     {
         foreach (int number in pseudoZeroNumbers)
             betCalculator.AddToZeroFields(number);
-        return ballHit != null && System.Array.IndexOf(pseudoZeroNumbers, ballHit.FieldNumber) >= 0;
+        return false;
+        //return ballHit != null && System.Array.IndexOf(pseudoZeroNumbers, ballHit.FieldNumber) >= 0;
     }
 
     public override void Revert()

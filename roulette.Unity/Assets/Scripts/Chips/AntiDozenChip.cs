@@ -18,7 +18,7 @@
 
     public override bool Apply()
     {
-        return effectTriggered;
+        return false;
     }
 
     public override void Revert()

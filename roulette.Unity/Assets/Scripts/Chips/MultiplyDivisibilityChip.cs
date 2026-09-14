@@ -9,7 +9,7 @@ public class MultiplyDivisibilityChip : Chip
     private readonly int remainder;
     private readonly float multiplier;
     public override OperationType Operation => OperationType.Multiply;
-    public override float AppliedValue => (int)multiplier;
+    public override float AppliedValue => multiplier;
     private bool modifyRequest = false;
 
     public MultiplyDivisibilityChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, MultiplyDivisibilityChipData data) : base(data)
