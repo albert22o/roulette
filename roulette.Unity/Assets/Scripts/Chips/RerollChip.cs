@@ -3,7 +3,6 @@
     private readonly BetCalculator betCalculator;
     private readonly RoundManager roundManager;
     private bool firstReroll = true;
-    private bool effectTriggered;
 
     public override float AppliedValue => 0;
     public override OperationType Operation => OperationType.None;
@@ -33,7 +32,6 @@
             return;
         firstReroll = false;
         betCalculator.ResetRerollCoeff();
-        effectTriggered = true;
     }
 
     public override bool Apply()
@@ -43,6 +41,6 @@
 
     public override void Revert()
     {
-        effectTriggered = false;
+
     }
 }
