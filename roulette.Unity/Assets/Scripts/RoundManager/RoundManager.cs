@@ -173,7 +173,6 @@ public class RoundManager
     private void OnGetReward(int reward)
     {
         quote += reward;
-        betTable.ClearBets();
         QuoteChanged?.Invoke(quote);
         if (quote >= goal)
             AbleToWin = true;
