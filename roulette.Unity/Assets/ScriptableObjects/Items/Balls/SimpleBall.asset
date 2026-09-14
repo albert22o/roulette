@@ -20,5 +20,5 @@ MonoBehaviour:
   Icon: {fileID: 0}
   ballPrefab: {fileID: 4563755349166495531, guid: 3652028bf1924db47827b66cfc949158, type: 3}
   visualComponent:
-    <Material>k__BackingField: {fileID: 2100000, guid: 993b964cdd804b8418dd8a226134945e, type: 2}
+    <Material>k__BackingField: {fileID: 2100000, guid: 8c97952ae15b7fe4f88c95b655730126, type: 2}
   isDestroyable: 0
