@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "\u041F\u0435\u0440\u0435\u043A\u0440\u0430\u0448\u0438\u0432\u0430\u0435\u0442
     5 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0445 \u0447\u0435\u0440\u043D\u044B\u0445
     \u0447\u0438\u0441\u0435\u043B \u0432 \u043A\u0440\u0430\u0441\u043D\u044B\u0439."
-  shopPrefab: {fileID: 4657025761638334603, guid: cf73410da87e0dd4d917f9f138750601, type: 3}
+  shopPrefab: {fileID: 2205378151117432610, guid: 4e53d5a3254b64b4d880c3110108d919, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
   <SelectionCount>k__BackingField: 5
