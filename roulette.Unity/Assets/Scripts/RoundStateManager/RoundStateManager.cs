@@ -55,7 +55,8 @@ public class RoundStateManager
             ChangeState(memoryState);
         else
         {
-            memoryState = (RoundState)currentState;
+            memoryState = currentState ?? RoundState.NotActive;
+            //memoryState = (RoundState)currentState;
             ChangeState(RoundState.NotActive);
         }
     }
