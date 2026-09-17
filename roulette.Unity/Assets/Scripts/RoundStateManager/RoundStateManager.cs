@@ -52,7 +52,10 @@ public class RoundStateManager
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
         if (state == GameStateManager.GameState.BettingСycle)
-            ChangeState(memoryState);
+            if (memoryState == RoundState.NotActive)
+                ChangeState(RoundState.Start);
+            else
+                ChangeState(memoryState);
         else
         {
             memoryState = (RoundState)currentState;
