@@ -14,6 +14,11 @@ public class Door : MonoBehaviour, IInteractable
 
     public bool CanInteract => true;
 
+    private void Start()
+    {
+        tooltip = isOpened ? openedTooltip : closedTooltip;
+    }
+
     public void Interact()
     {
         Toggle();

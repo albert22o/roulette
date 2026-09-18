@@ -50,7 +50,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         var interactable = other.GetComponentInParent<IInteractable>();
         if (interactable != null && !nearbyInteractables.Contains(interactable))
         {
@@ -60,7 +59,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.gameObject.name + "removed");
         var interactable = other.GetComponentInParent<IInteractable>();
         if (interactable != null)
         {
@@ -106,9 +104,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UpdateCurrentTarget(IInteractable newTarget)
     {
-        if (newTarget == currentTarget)
-            return;
-
         currentTarget = newTarget;
 
         if (tooltip == null)
