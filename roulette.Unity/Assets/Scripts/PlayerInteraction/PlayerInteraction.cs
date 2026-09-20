@@ -58,7 +58,8 @@ public class PlayerInteraction : MonoBehaviour
 
         nearbyInteractables.Clear();
         currentTarget = null;
-        tooltip.Hide();
+        if (tooltip != null)
+            tooltip.Hide();
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext context)
