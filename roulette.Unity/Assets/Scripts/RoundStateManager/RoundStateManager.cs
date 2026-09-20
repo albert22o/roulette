@@ -35,7 +35,7 @@ public class RoundStateManager
                 continue;
 
             currentState = nextState;
-            StateChanged?.Invoke((RoundState)currentState); 
+            StateChanged?.Invoke((RoundState)currentState);
 
             if (currentState == RoundState.Lose)
                 gameStateManager.ChangeGameState(GameStateManager.GameState.Lose);
@@ -51,9 +51,11 @@ public class RoundStateManager
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        UnityEngine.Debug.Log(state);
         if (state == GameStateManager.GameState.BettingСycle)
-            ChangeState(memoryState);
+            if (memoryState == RoundState.NotActive)
+                ChangeState(RoundState.Start);
+            else
+                ChangeState(memoryState);
         else
         {
             memoryState = (RoundState)currentState;

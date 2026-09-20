@@ -27,7 +27,6 @@ public class RoundStateManagerView : MonoBehaviour
 
     private void OnStateChanged(RoundStateManager.RoundState state)
     {
-        Debug.Log(state);
         switch (state) 
         {
             case RoundStateManager.RoundState.NotActive:
