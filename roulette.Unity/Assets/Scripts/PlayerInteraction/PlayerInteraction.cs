@@ -1,15 +1,43 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private InteractionTooltip tooltip;
     [SerializeField] private InputActionReference interactAction;
 
+    private GameStateManager gameStateManager;
+
     private readonly List<IInteractable> nearbyInteractables = new List<IInteractable>();
     private IInteractable currentTarget;
 
+    [Inject]
+    private void Construct(GameStateManager gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+    }
+
+    private void Start()
+    {
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        if (gameStateManager != null)
+        {
+            gameStateManager.GameStateChanged -= OnGameStateChanged;
+        }
+    }
+
+
+    private void OnGameStateChanged(GameStateManager.GameState state)
+    {
+        gameObject.SetActive(state == GameStateManager.GameState.FreeRoam);
+    }
 
     private void OnEnable()
     {
@@ -27,25 +55,27 @@ public class PlayerInteraction : MonoBehaviour
             interactAction.action.performed -= OnInteractPerformed;
             interactAction.action.Disable();
         }
+
+        nearbyInteractables.Clear();
+        currentTarget = null;
+        tooltip.Hide();
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        if (currentTarget == null)
+        var target = currentTarget;
+        if (target == null)
             return;
 
-        currentTarget.Interact();
+        target.Interact();
 
-        if (!currentTarget.CanInteract)
+        if (this == null || !isActiveAndEnabled)
+            return;
+
+        if (ReferenceEquals(target, currentTarget) && !target.CanInteract)
         {
             UpdateCurrentTarget(null);
         }
-    }
-
-    private void Reset()
-    {
-        var col = GetComponent<Collider>();
-        col.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -70,6 +100,7 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
     }
+
 
     private void Update()
     {

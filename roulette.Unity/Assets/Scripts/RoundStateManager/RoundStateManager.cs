@@ -51,12 +51,12 @@ public class RoundStateManager
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
+        UnityEngine.Debug.Log(state);
         if (state == GameStateManager.GameState.BettingСycle)
             ChangeState(memoryState);
         else
         {
-            memoryState = currentState ?? RoundState.NotActive;
-            //memoryState = (RoundState)currentState;
+            memoryState = (RoundState)currentState;
             ChangeState(RoundState.NotActive);
         }
     }

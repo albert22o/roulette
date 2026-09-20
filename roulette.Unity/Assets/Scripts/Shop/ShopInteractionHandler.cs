@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 using static GameStateManager;
 
-public class ShopInteractionHandler : MonoBehaviour
+public class ShopInteractionHandler : MonoBehaviour, IInteractable
 {
     [SerializeField] private CinemachineCamera shopCamera;
     [SerializeField] private Shop shop;
@@ -11,6 +11,10 @@ public class ShopInteractionHandler : MonoBehaviour
 
     private GameStateManager stateManager;
     private bool isInteraction;
+
+    public string Tooltip => "Магазин";
+
+    public bool CanInteract => true;
 
     [Inject]
     public void Construct(GameStateManager stateManager)
@@ -27,6 +31,7 @@ public class ShopInteractionHandler : MonoBehaviour
         isInteraction = true;
         if (shopCamera != null) shopCamera.gameObject.SetActive(true);
         if (shop != null) shop.StartInteraction();
+        stateManager.ChangeGameState(GameStateManager.GameState.Shopping);
     }
 
     private void FinishInteraction()
@@ -40,13 +45,14 @@ public class ShopInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        if (state == GameState.Shopping)
-        {
-            StartInteraction();
-        }
-        else if (isInteraction)
+        if (state != GameState.Shopping && isInteraction)
         {
             FinishInteraction();
         }
+    }
+
+    public void Interact()
+    {
+        StartInteraction();
     }
 }
