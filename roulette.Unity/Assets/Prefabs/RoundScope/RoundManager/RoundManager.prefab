@@ -325,8 +325,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3e98ce50e2685aa40809884f1c38ff39, type: 2}
-  m_sharedMaterial: {fileID: -2404813431375338964, guid: 3e98ce50e2685aa40809884f1c38ff39, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d12c1ebfe86f97c4e961fdf72796463c, type: 2}
+  m_sharedMaterial: {fileID: 6034117982710812191, guid: d12c1ebfe86f97c4e961fdf72796463c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1393,11 +1393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fda6912114ee34b9e04ce68383b4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quoteText: {fileID: 2541181235058432482}
-  betCountText: {fileID: 8754011166459521976}
-  rerollCountText: {fileID: 2862224832437879025}
-  spinButton: {fileID: 3126827958378859951}
-  rerollButton: {fileID: 8751496853963270093}
+  rouletteClickHandler: {fileID: 0}
+  rerollButton: {fileID: 0}
   confirmWinButton: {fileID: 5785150311015207582}
   canvas: {fileID: 6823918271752619599}
 --- !u!1 &6870187559904986951
