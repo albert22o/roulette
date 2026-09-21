@@ -16,14 +16,24 @@ public class BetTable
 
     public int AvailableSum => availableBetSum;
     public bool HasActiveBets => betIndexSet.Count > 0;
+    public int CurrentBetStep => IsAllIn ? availableBetSum : BetStep;
 
     private readonly HashSet<int> betIndexSet = new();
     private readonly TableInfo tableInfo;
     private readonly Dictionary<int, int> betAmounts;
+    private int betsAvailable = 1;
     private int availableBetSum;
     private bool active;
     public const int BetStep = 25;
     public event Action BetsCleared;
+
+    public int BetsAvailable
+    {
+        get => betsAvailable;
+        set => betsAvailable = Mathf.Max(1, value);
+    }
+
+    private bool IsAllIn => betsAvailable == 1;
 
     public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager)
     {
@@ -40,12 +50,13 @@ public class BetTable
     {
         if (CanBet(index) == false) return;
         bool hadNoBetsBefore = !HasActiveBets;
+        int step = CurrentBetStep; // считаем до изменения availableBetSum
         betIndexSet.Add(index);
 
-        betAmounts[index] += BetStep;
+        betAmounts[index] += step;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
 
-        availableBetSum -= BetStep;
+        availableBetSum -= step;
         ChangeAvailableSum?.Invoke(availableBetSum);
         if (hadNoBetsBefore)
         {
@@ -62,7 +73,8 @@ public class BetTable
         if (tableInfo.PocketMapping[index].FieldColor == ColorType.White || 
             tableInfo.PocketMapping[index].FieldColor == ColorType.Grey)
             return false;
-        if (availableBetSum < BetStep)
+        int minRequired = IsAllIn ? 1 : BetStep;
+        if (availableBetSum < minRequired)
             return false;
         if (!betIndexSet.Contains(index)
             && betIndexSet.Count >= tableInfo.MaxBetsAtBoard)
@@ -85,10 +97,14 @@ public class BetTable
             return;
         if (!betAmounts.ContainsKey(index))
             return;
-        if (betAmounts[index] < BetStep)
+
+        int current = betAmounts[index];
+        if (current <= 0)
             return;
 
-        betAmounts[index] -= BetStep;
+        int step = IsAllIn ? current : Mathf.Min(BetStep, current);
+
+        betAmounts[index] -= step;
         ChangeAmountByIndex?.Invoke(index, betAmounts[index]);
 
         if (betAmounts[index] == 0)
@@ -96,7 +112,7 @@ public class BetTable
             betIndexSet.Remove(index);
         }
 
-        availableBetSum += BetStep;
+        availableBetSum += step;
         ChangeAvailableSum?.Invoke(availableBetSum);
         if (!HasActiveBets)
         {
