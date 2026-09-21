@@ -4,10 +4,50 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
-
+using System.Collections;
 
 public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+
+    
+
+    public bool IsHighlighted { get; private set; }
+
+    [SerializeField] TextMeshPro fieldNumText;
+    [SerializeField] Transform spawnChipPoint;
+    [SerializeField] GameObject chipPrefab;
+    [SerializeField] Material blackMaterial;
+    [SerializeField] Material redMaterial;
+    [SerializeField] Material greenMaterial;
+    [SerializeField] Material whiteMaterial;
+    [SerializeField] Material greyMaterial;
+
+    [SerializeField] Material colorHighlight;
+    [SerializeField] Material dozenHighlight;
+    [SerializeField] Material numberHighlight;
+
+    [SerializeField] private MeshRenderer BG;
+
+    [SerializeField] private OutlineController outline;
+
+    [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
+
+    [Header("Chip spawn")]
+    [SerializeField] private float spawnDelay = 0.05f; 
+    [SerializeField] private float maxSpawnDuration = 1.5f; 
+
+
+    private int targetChipCount;
+    private Coroutine spawnRoutine;
+    private event Action OnRightClick;
+    private event Action OnLeftClick;
+    private readonly Stack<GameObject> stackChips = new();
+    private ColorType color;
+    private int index;
+    private BetTable betTable;
+
+    public event Action<BetButton> HoverEnter, HoverExit;
+
     public ColorType Color
     {
         get => color;
@@ -32,27 +72,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     {
         set
         {
-            var targetChipCount = Mathf.Max(0, value / 25);
-            var currentCount = stackChips.Count;
-            if (targetChipCount > currentCount)
-            {
-                while (targetChipCount != currentCount)
-                {
-                    GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
-                    chip.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    stackChips.Push(chip);
+            targetChipCount = Mathf.Max(0, value / 25);
 
-                    currentCount++;
-                }
-            }
-            else if (targetChipCount < currentCount)
-            {
-                while (targetChipCount != currentCount)
-                {
-                    Destroy(stackChips.Pop());
-                    currentCount--;
-                }
-            }
+            while (stackChips.Count > targetChipCount)
+                Destroy(stackChips.Pop());
+
+            if (stackChips.Count < targetChipCount)
+                StartSpawning();
         }
     }
 
@@ -71,40 +97,13 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         }
     }
 
-    public bool IsHighlighted { get; private set; }
-
-    [SerializeField] TextMeshPro fieldNumText;
-    [SerializeField] Transform spawnChipPoint;
-    [SerializeField] GameObject chipPrefab;
-    [SerializeField] Material blackMaterial;
-    [SerializeField] Material redMaterial;
-    [SerializeField] Material greenMaterial;
-    [SerializeField] Material whiteMaterial;
-    [SerializeField] Material greyMaterial;
-
-    [SerializeField] Material colorHighlight;
-    [SerializeField] Material dozenHighlight;
-    [SerializeField] Material numberHighlight;
-
-    [SerializeField] private MeshRenderer BG;
-
-    [SerializeField] private OutlineController outline;
-    private event Action OnRightClick;
-    private event Action OnLeftClick;
-    private readonly Stack<GameObject> stackChips = new();
-    private ColorType color;
-    private int index;
-    private BetTable betTable;
-
-    public event Action<BetButton> HoverEnter, HoverExit;
-
     [Inject]
     private void Construct(BetTable table)
     {
         this.betTable = table;
     }
 
-    [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
+
     public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback, int index)
     {
         this.index = index;
@@ -121,6 +120,52 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
         OnLeftClick += leftClickCallback;
         OnRightClick += rightClickCallback;
+    }
+
+    private void StartSpawning()
+    {
+        if (!isActiveAndEnabled)
+        {
+            while (stackChips.Count < targetChipCount)
+                SpawnChip();
+            return;
+        }
+
+        spawnRoutine ??= StartCoroutine(SpawnChipsRoutine());
+    }
+
+    private IEnumerator SpawnChipsRoutine()
+    {
+        while (stackChips.Count < targetChipCount)
+        {
+            SpawnChip();
+
+            int remaining = targetChipCount - stackChips.Count;
+            if (remaining <= 0)
+                break;
+
+            yield return new WaitForSeconds(Mathf.Min(spawnDelay, maxSpawnDuration / remaining));
+        }
+
+        spawnRoutine = null;
+    }
+
+    private void SpawnChip()
+    {
+        GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
+        chip.transform.localRotation = Quaternion.identity;
+        stackChips.Push(chip);
+    }
+
+    private void OnEnable()
+    {
+        if (stackChips.Count < targetChipCount)
+            StartSpawning();
+    }
+
+    private void OnDisable()
+    {
+        spawnRoutine = null;
     }
 
     private Material GetColorMaterial(ColorType fieldColor) => fieldColor switch
