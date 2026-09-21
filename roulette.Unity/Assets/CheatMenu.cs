@@ -7,11 +7,27 @@ public class CheatMenu : MonoBehaviour
     private GoldenChips goldenChips;
     private BossChips bossChips;
     private BetTable betTable;
-    [Inject] private void Construct(GoldenChips goldenChips, BossChips bossChips, BetTable betTable)
+    private CursorManager cursorManager;
+
+    [Inject] private void Construct(GoldenChips goldenChips, BossChips bossChips,
+        BetTable betTable, CursorManager cursorLockMode)
     {
         this.goldenChips = goldenChips;
         this.bossChips = bossChips;
+        this.betTable = betTable;
+        this.cursorManager = cursorLockMode;
     }
+
+    private void OnEnable()
+    {
+        cursorManager.RemoveCursorLock();
+    }
+
+    private void OnDisable()
+    {
+        cursorManager.AddCursorLock();
+    }
+
     public void AddGoldenChips()
     {
         goldenChips.Add(currencyAmount);
