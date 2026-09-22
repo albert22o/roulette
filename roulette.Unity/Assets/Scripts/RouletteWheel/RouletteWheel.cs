@@ -84,12 +84,14 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
 
     private void OnBallHover(string hash)
     {
-        BallHover?.Invoke(hash);
+        if (ballsManager.IsSpinning == false)
+            BallHover?.Invoke(hash);
     }
 
     private void OnBallClicked(string hash)
     {
-        BallClicked?.Invoke(hash);
+        if (ballsManager.IsSpinning == false)
+            BallClicked?.Invoke(hash);
     }
 
     private void OnDisable()
