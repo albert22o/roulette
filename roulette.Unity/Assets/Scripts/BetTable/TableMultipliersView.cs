@@ -67,7 +67,7 @@ public class TableMultipliersView : MonoBehaviour
 
         if (activeBets.Count == 0)
         {
-            SetEmptyTexts();
+            ShowGeneralMultipliers();
             return;
         }
 
@@ -154,5 +154,13 @@ public class TableMultipliersView : MonoBehaviour
         if (dozenMultiplierText != null) dozenMultiplierText.text = "—";
         if (numberMultiplierText != null) numberMultiplierText.text = "—";
         if (zeroMultiplierText != null) zeroMultiplierText.text = "—";
+    }
+
+    private void ShowGeneralMultipliers()
+    {
+        if (colorMultiplierText != null) colorMultiplierText.text = $"Color:\n×{betCalculator.ColorMultiplier}";
+        if (dozenMultiplierText != null) dozenMultiplierText.text = $"Dozen:\n×{betCalculator.DozenMultiplier}";
+        if (numberMultiplierText != null) numberMultiplierText.text = $"Number:\n×{betCalculator.NumMultiplier}";
+        if (zeroMultiplierText != null) zeroMultiplierText.text = $"Zero:\n×{betCalculator.ZeroMultiplier}";
     }
 }
