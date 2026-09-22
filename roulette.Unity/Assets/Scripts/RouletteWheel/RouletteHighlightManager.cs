@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class RouletteHighlightManager : MonoBehaviour
@@ -10,7 +11,7 @@ public class RouletteHighlightManager : MonoBehaviour
     private BallResults ballResults;
 
     [Inject]
-    public void Construct(BallResults ballResults, RoundStateManager roundStateManager)
+    public void Construct(BallResults ballResults, RoundStateManager roundStateManager, IRouletteWheel rouletteWheel)
     {
         this.ballResults = ballResults;
         this.roundStateManager = roundStateManager;
@@ -21,13 +22,16 @@ public class RouletteHighlightManager : MonoBehaviour
         ballsManager.AllBallsStopped += OnAllBallsStopped;
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnRoundStateChanged;
+        rouletteWheel.Rerolled += OnReroll;
     }
+
 
     private void OnDisable()
     {
         ballsManager.AllBallsStopped -= OnAllBallsStopped;
         ballResults.BallSelected -= OnBallSelected;
         roundStateManager.StateChanged -= OnRoundStateChanged;
+        rouletteWheel.Rerolled -= OnReroll;
     }
 
     private void OnRoundStateChanged(RoundStateManager.RoundState newState)
@@ -70,6 +74,11 @@ public class RouletteHighlightManager : MonoBehaviour
         {
             rouletteWheel.HighlightStates[positionOnWheel].IsRimHighlighted = true;
         }
+    }
+
+    private void OnReroll()
+    {
+        ResetAllHighlights();
     }
 
     private void ResetAllHighlights()

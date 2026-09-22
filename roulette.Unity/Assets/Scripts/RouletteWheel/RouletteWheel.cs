@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -17,10 +18,12 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     [SerializeField] private Transform physicsModel;
     [SerializeField] private RouletteFieldsGenerator fieldsGenerator;
     [SerializeField] private RouletteBallsManager ballsManager;
+    [SerializeField] private float rerollDelay = 0.5f;
 
     private HitInfo[] hitsInfo;
     private TableInfo tableInfo;
     private List<string> ballsToAutoReroll = new();
+    private Coroutine rerollCoroutine;
 
     public RouletteWheelField[] Fields { get; set; } = new RouletteWheelField[37];
     public FieldHighlightState[] HighlightStates { get; private set; } = new FieldHighlightState[37];
@@ -29,6 +32,8 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public Vector2 PhysicsModelPosition => physicsModel.position;
 
     public event Action<HitInfo[]> AllBallsStopped;
+    public event Action Rerolled;
+
 
     public int[] FieldsOrder = new int[]
 {
@@ -106,9 +111,17 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         AllBallsStopped?.Invoke(hitsInfo);
         if (ballsToAutoReroll.Count > 0)
         {
-            Reroll(ballsToAutoReroll.ToArray());
+             if (rerollCoroutine != null) StopCoroutine(rerollCoroutine);
+            rerollCoroutine = StartCoroutine(RerollWithDelayRoutine(ballsToAutoReroll.ToArray()));
             ballsToAutoReroll.Clear();
         }
+    }
+
+    private IEnumerator RerollWithDelayRoutine(string[] ballNames)
+    {
+        yield return new WaitForSeconds(rerollDelay);
+        Reroll(ballNames);
+        rerollCoroutine = null;
     }
 
     public void OnPocketColorChanged(int index, ColorType color)
@@ -148,6 +161,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         ballsManager.Clear(ballNames);
         ballsLauncher.Reroll(ballNames);
         spinController.Spin();
+        Rerolled?.Invoke();
     }
 
     public void SetFieldColor(int fieldPosition, ColorType color)
