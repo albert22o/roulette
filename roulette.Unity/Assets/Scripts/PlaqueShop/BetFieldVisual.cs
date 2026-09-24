@@ -12,7 +12,7 @@ public class BetFieldVisual : MonoBehaviour
     [SerializeField] Material greenMaterial;
     [SerializeField] Material colorHighlight;
     [SerializeField] Material whiteMaterial;
-    [SerializeField] Material greyMaterial;
+    [SerializeField] Material violetMaterial;
 
     public ColorType Color { get; private set; }
     public int Number { get; private set; }
@@ -26,7 +26,7 @@ public class BetFieldVisual : MonoBehaviour
             ColorType.Black => blackMaterial,
             ColorType.Green => greenMaterial,
             ColorType.White => whiteMaterial,
-            ColorType.Grey => greyMaterial,
+            ColorType.Violet => violetMaterial,
             _ => greenMaterial,
         };
     }
@@ -55,7 +55,7 @@ public class BetFieldVisual : MonoBehaviour
         ColorType.Black => blackMaterial,
         ColorType.Green => greenMaterial,
         ColorType.White => whiteMaterial,
-        ColorType.Grey => greyMaterial,
+        ColorType.Violet => violetMaterial,
         _ => greenMaterial,
     };
 }

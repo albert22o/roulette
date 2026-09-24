@@ -60,7 +60,7 @@ public class BetTable
         if (!betAmounts.ContainsKey(index))
             return false;
         if (tableInfo.PocketMapping[index].FieldColor == ColorType.White || 
-            tableInfo.PocketMapping[index].FieldColor == ColorType.Grey)
+            tableInfo.PocketMapping[index].FieldColor == ColorType.Violet)
             return false;
         if (availableBetSum < BetStep)
             return false;

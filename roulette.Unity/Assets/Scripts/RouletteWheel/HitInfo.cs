@@ -27,7 +27,7 @@ public enum ColorType
     Black,
     Green,
     White,
-    Grey
+    Violet
 }
 
 [System.Flags]

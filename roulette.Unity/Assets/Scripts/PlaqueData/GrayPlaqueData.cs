@@ -5,6 +5,6 @@ public class GrayPlaqueData : PlaqueData
 {
     public override Plaque CreatePlaque(PlaqueDependencies dependencies)
     {
-        return new GrayPlaque(this, dependencies);
+        return new VioletPlaque(this, dependencies);
     }
 }
