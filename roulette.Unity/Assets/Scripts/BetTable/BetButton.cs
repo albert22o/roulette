@@ -89,13 +89,14 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField] private MeshRenderer BG;
 
     [SerializeField] private OutlineController outline;
-    private event Action OnRightClick;
-    private event Action OnLeftClick;
+    public event Action<BetButton> RightClick;
+    public event Action<BetButton> LeftClick;
     private readonly Stack<GameObject> stackChips = new();
     private ColorType color;
     private int index;
     private BetTable betTable;
 
+    public int Index => index;
     public event Action<BetButton> HoverEnter, HoverExit;
 
     [Inject]
@@ -105,7 +106,7 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     }
 
     [SerializeField] private Color customGreen = new Color(0.11f, 0.37f, 0.13f, 1f);
-    public void Init(BetInfo betInfo, Action leftClickCallback, Action rightClickCallback, int index)
+    public void Init(BetInfo betInfo, int index)
     {
         this.index = index;
         Color = betInfo.FieldColor;
@@ -119,8 +120,6 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         if (chipPrefab == null)
             Debug.LogError("ChipPrefab is not assigned in BetButton");
 
-        OnLeftClick += leftClickCallback;
-        OnRightClick += rightClickCallback;
     }
 
     private Material GetColorMaterial(ColorType fieldColor) => fieldColor switch
@@ -136,9 +135,9 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
-            OnLeftClick?.Invoke();
+            LeftClick?.Invoke(this);
         else if (eventData.button == PointerEventData.InputButton.Right)
-            OnRightClick?.Invoke();
+            RightClick?.Invoke(this);
         outline.ToggleMaterial(betTable.CanHighlight(index));
     }
 

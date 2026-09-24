@@ -20,12 +20,13 @@ public class BetTable
     private readonly HashSet<int> betIndexSet = new();
     private readonly TableInfo tableInfo;
     private readonly Dictionary<int, int> betAmounts;
+    private readonly GameStateManager gameStateManager;
     private int availableBetSum;
     private bool active;
     public const int BetStep = 25;
-    public event Action BetsCleared;
+    public event Action<bool> BetsCleared; // if true - bets clear immediately;
 
-    public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager)
+    public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager, GameStateManager gameStateManager)
     {
         this.tableInfo = tableInfo;
         betAmounts = tableInfo.PocketMapping
@@ -34,6 +35,13 @@ public class BetTable
 
         roundStateManager.StateChanged += OnStateChanged;
         this.tableInfo.StartSumChanged += OnAvailableSumChanged;
+        this.gameStateManager = gameStateManager;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState state)
+    {
+        ClearBets(true);
     }
 
     public void AddBet(int index)
@@ -59,7 +67,7 @@ public class BetTable
             return false;
         if (!betAmounts.ContainsKey(index))
             return false;
-        if (tableInfo.PocketMapping[index].FieldColor == ColorType.White || 
+        if (tableInfo.PocketMapping[index].FieldColor == ColorType.White ||
             tableInfo.PocketMapping[index].FieldColor == ColorType.Grey)
             return false;
         if (availableBetSum < BetStep)
@@ -104,7 +112,7 @@ public class BetTable
         }
     }
 
-    public void ClearBets()
+    public void ClearBets(bool isImmediately)
     {
         bool hadBetsBefore = HasActiveBets;
         var keys = betAmounts.Keys.ToList();
@@ -113,13 +121,14 @@ public class BetTable
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
+            ChangeAmountByIndex?.Invoke(betIndex, 0);
         }
         ChangeAvailableSum?.Invoke(availableBetSum);
         if (hadBetsBefore)
         {
             HasActiveBetsChanged?.Invoke(false);
         }
-        BetsCleared?.Invoke();
+        BetsCleared?.Invoke(isImmediately);
     }
 
     public void OnAvailableSumChanged(int newSum)
