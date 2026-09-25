@@ -8,13 +8,13 @@ public class RoundWinManager
     private readonly RoundStateManager roundStateManager;
 
     public RoundWinManager(RoundManager roundManager, BossReward bossReward,
-        ProgressionManager progressionManager, RoundStateManager roundStateManager)
+        ProgressionManager progressionManager, RoundStateManager roundStateManager, RewardCalculator rewardCalculator)
     {
         this.roundManager = roundManager;
         this.bossReward = bossReward;
         this.progressionManager = progressionManager;
         this.roundStateManager = roundStateManager;
-        roundManager.Win += OnRoundWin;
+        rewardCalculator.RewardReceived += OnRoundWin;
     }
 
     private void OnRoundWin()

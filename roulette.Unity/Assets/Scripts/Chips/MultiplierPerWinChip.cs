@@ -26,7 +26,7 @@
         rewardCalculator.GoalBeaten -= OnGoalBeaten;
     }
 
-    private void OnGoalBeaten(int x)
+    private void OnGoalBeaten(float x)
     {
         if (x < 2)
             return;
