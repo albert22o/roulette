@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using static RoundStateManager;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class RewardCalculator
 {
