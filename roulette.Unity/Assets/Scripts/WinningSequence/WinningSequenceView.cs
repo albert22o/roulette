@@ -7,11 +7,10 @@ public class WinningSequenceView : MonoBehaviour
 {
     [SerializeField] TextMeshPro betText;
     [SerializeField] TextMeshPro generalMultiplierText;
-    [SerializeField] Animator dealerAnimator;
+    [SerializeField] DealerAnimation dealerAnimator;
     [SerializeField] private Animator dealerCollectAnimator;
     [SerializeField] float timeBeforeChipApply = 1f;
     [SerializeField] float timeBetweenChipAnimations = 0.5f;
-
     private WinningSequence winningSequence;
     private ChipHolder chipHolder;
     private BetCalculator betCalculator;
@@ -91,7 +90,7 @@ public class WinningSequenceView : MonoBehaviour
         if (isWin)
         {
             dealerCollectAnimator.SetTrigger("collect");
-            dealerAnimator.SetTrigger("collect");
+            dealerAnimator.PlayCollectAnimation();
         }
     }
 }
