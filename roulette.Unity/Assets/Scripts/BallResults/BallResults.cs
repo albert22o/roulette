@@ -62,7 +62,7 @@ public class BallResults
         if (hitInfo.FieldColor == ColorType.White)
         {
             tableInfo.ResetPocketColor(hitInfo.FieldIndex);
-            betTable.ClearBets();
+            betTable.ClearBets(false);
             Win?.Invoke();
             return;
         }

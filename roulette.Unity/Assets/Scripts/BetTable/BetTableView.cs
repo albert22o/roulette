@@ -14,6 +14,7 @@ class BetTableView : MonoBehaviour
     [SerializeField] private ShopTooltip tooltip;
     [SerializeField] private float betsClearDelay = 2f;
 
+
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
 
@@ -22,6 +23,7 @@ class BetTableView : MonoBehaviour
     private BetCalculator betCalculator;
     private WinningSequence winningSequence;
     private ColorsDescription colorsDescription;
+    private bool isBetAvailable = true;
 
     [Inject]
     public void Construct(BetTable betTable, TableInfo tableInfo, BetCalculator betCalculator, WinningSequence winningSequence,
@@ -53,14 +55,29 @@ class BetTableView : MonoBehaviour
         foreach (var pocket in tableInfo.PocketMapping)
         {
             betButtons[pocket.Key].Init(pocket.Value,
-                () => betTable.AddBet(pocket.Key),
-                () => betTable.RemoveBet(pocket.Key),
                 pocket.Key);
         }
-        foreach( var button in betButtons)
+        foreach (var button in betButtons)
         {
             button.HoverEnter += OnHoverEnter;
             button.HoverExit += OnHoverExit;
+            button.RightClick += OnRightButtonClick;
+            button.LeftClick += OnLeftButtonClick;
+        }
+    }
+    private void OnRightButtonClick(BetButton button)
+    {
+        if (isBetAvailable)
+        {
+            betTable.RemoveBet(button.Index);
+        }
+    }
+
+    private void OnLeftButtonClick(BetButton button)
+    {
+        if (isBetAvailable)
+        {
+            betTable.AddBet(button.Index);
         }
     }
 
@@ -101,9 +118,16 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void OnBetsCleared()
+    private void OnBetsCleared(bool isImmediately)
     {
-        StartCoroutine(DeleteAllBetChips());
+        if (isImmediately)
+        {
+            DeleteAllBetChipImmediately();
+        }
+        else
+        {
+            StartCoroutine(DeleteAllBetChips());
+        }
     }
 
     private void OnPocketColorChanged(int index, ColorType color)
@@ -123,7 +147,14 @@ class BetTableView : MonoBehaviour
 
     private IEnumerator DeleteAllBetChips()
     {
+        isBetAvailable = false;
         yield return new WaitForSeconds(betsClearDelay);
+        DeleteAllBetChipImmediately();
+        isBetAvailable = true;
+    }
+
+    private void DeleteAllBetChipImmediately()
+    {
         foreach (var button in betButtons)
         {
             button.Amount = 0;
@@ -155,7 +186,7 @@ class BetTableView : MonoBehaviour
             winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyBall);
             yield break;
         }
-    
+
         HighlightButtonsWhere(button => button.Color == hitInfo.FieldColor, BetButton.HighlightPhase.Color);
         HighlightBottomSectionColor(hitInfo);
         winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.ColorMultiplier);
@@ -225,7 +256,7 @@ class BetTableView : MonoBehaviour
             button.Highlight(false, BetButton.HighlightPhase.None);
 
         foreach (BottomSectionZone bottomSectionZone in bottomSectionColorZones)
-             bottomSectionZone.Highlight(false);
+            bottomSectionZone.Highlight(false);
 
         foreach (BottomSectionZone bottomSectionZone in bottomSectionDozenZones)
             bottomSectionZone.Highlight(false);

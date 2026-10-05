@@ -182,7 +182,7 @@ public class RoundManager
             return;
         }
 
-        betTable.ClearBets();
+        betTable.ClearBets(false);
 
         ballHolder.RemoveSelectedBallsEffect();
         roundStateManager.ChangeState(RoundState.PlacingBets);
