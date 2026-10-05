@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 using static GameStateManager;
 
-public class PlaqueShopInteractionHandler : MonoBehaviour
+public class PlaqueShopInteractionHandler : MonoBehaviour, IInteractable
 {
     [SerializeField] private new CinemachineCamera camera;
     [SerializeField] private PlaqueShopView shop;
@@ -13,6 +13,10 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
     private bool isInteraction;
 
     private bool isInitialized;
+
+    public string Tooltip => "Вендинговая машина с плаками";
+
+    public bool CanInteract => true;
 
     [Inject]
     public void Construct(GameStateManager stateManager)
@@ -28,6 +32,7 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
 
     public void StartInteraction()
     {
+        stateManager.ChangeGameState(GameState.PlaqueShopping);
         camera.gameObject.SetActive(true);
         isInteraction = true;
         shop.StartInteraction();
@@ -44,13 +49,14 @@ public class PlaqueShopInteractionHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        if (state == GameState.PlaqueShopping)
-        {
-            StartInteraction();
-        }
-        else if (isInteraction == true)
+        if (state != GameState.PlaqueShopping && isInteraction)
         {
             FinishInteraction();
         }
+    }
+
+    public void Interact()
+    {
+        StartInteraction();
     }
 }

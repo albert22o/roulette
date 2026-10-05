@@ -35,7 +35,7 @@ public class RoundStateManager
                 continue;
 
             currentState = nextState;
-            StateChanged?.Invoke((RoundState)currentState); 
+            StateChanged?.Invoke((RoundState)currentState);
 
             if (currentState == RoundState.Lose)
                 gameStateManager.ChangeGameState(GameStateManager.GameState.Lose);
