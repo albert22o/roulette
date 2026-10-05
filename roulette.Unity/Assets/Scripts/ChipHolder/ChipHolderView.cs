@@ -10,6 +10,7 @@ public class ChipHolderView : MonoBehaviour
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
     [SerializeField] private LayerMask slotLayerMask;
+    [SerializeField] private ShopTooltip tooltip;
 
     private Camera mainCamera;
     private ChipHolder chipHolder;
@@ -21,6 +22,7 @@ public class ChipHolderView : MonoBehaviour
     private InputAction clickAction;
     private InputAction pointAction;
     private ChipSlotView hoveredSlot;
+    private ChipSlotView hoverTooltipSlot;
 
 
     [Inject]
@@ -88,7 +90,40 @@ public class ChipHolderView : MonoBehaviour
     private void Update()
     {
         if (isDragging)
+        {
             UpdateDrag();
+            return;
+        }
+
+        UpdateHover();
+    }
+
+    private void UpdateHover()
+    {
+        var slot = RaycastSlot();
+
+        if (slot != null && slot.ChipObject == null)
+            slot = null;
+
+        if (slot == hoverTooltipSlot)
+        {
+            return;
+        }
+
+        hoverTooltipSlot = slot;
+
+        if (tooltip == null)
+            return;
+
+        if (hoverTooltipSlot == null)
+        {
+            tooltip.Hide();
+        }
+        else
+        {
+            var chipData = chipHolder.Chips[hoverTooltipSlot.SlotIndex]?.ChipData;
+            tooltip.Show(chipData.Name, chipData.Description, slot.transform.position);
+        }
     }
 
     private void TryBeginDrag()
@@ -99,14 +134,9 @@ public class ChipHolderView : MonoBehaviour
 
         isDragging = true;
         draggedFromSlot = slot;
-
-        // DetachChip возвращает объект и сам обнуляет ChipObject у слота,
-        // чтобы слот не считался занятым, пока фишка находится "в воздухе".
         draggedObject = draggedFromSlot.DetachChip();
+        tooltip.Hide();
 
-        // Останавливаем Animator на время драга: Idle-анимация может писать
-        // в transform (позицию/масштаб) поверх нашего ручного перемещения
-        // и конфликтовать с ним, из-за чего фишка "пропадает"/дёргается.
         var animator = draggedObject.GetComponent<Animator>();
         if (animator != null)
             animator.enabled = false;
