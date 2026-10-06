@@ -49,7 +49,11 @@ public class PlaqueShopInteractionHandler : MonoBehaviour, IInteractable
 
     private void OnGameStateChanged(GameState state)
     {
-        if (state != GameState.PlaqueShopping && isInteraction)
+        if (state == GameState.PlaqueShopping)
+        {
+            StartInteraction();
+        }
+        else if (isInteraction == true)
         {
             FinishInteraction();
         }
