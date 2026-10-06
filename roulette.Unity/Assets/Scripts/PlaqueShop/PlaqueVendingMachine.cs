@@ -18,25 +18,23 @@ public class PlaqueVendingMachine : MonoBehaviour, IMouseInteractable, IClickabl
         Clicked?.Invoke();
     }
 
-    [Inject] private void Construct(PlaqueShop plaqueShop, ShopFontConfig fontColorsConfig)
+    [Inject]
+    private void Construct(PlaqueShop plaqueShop, ShopFontConfig fontColorsConfig)
     {
         this.plaqueShop = plaqueShop;
         this.fontColorsConfig = fontColorsConfig;
     }
     public void OnHoverEnter()
     {
-        if (plaqueShopView.PlaquesBought == false)
-        {
-            outline.ToggleMaterial(true);
+        outline.ToggleMaterial(true);
 
-            string title = "Магазин плаков";
-            string description = "Купить 1 плак";
+        string title = "Магазин плаков";
+        string description = "Купить 1 плак";
 
-            var color = plaqueShop.CanBuy ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-            description += $"\nЦена: <color={color}>{plaqueShop.Cost}</color>" + " босс фишка";
+        var color = plaqueShop.CanBuy ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
+        description += $"\nЦена: <color={color}>{plaqueShop.Cost}</color>" + " босс фишка";
 
-            tooltip.Show(title, description, transform.position);
-        }
+        tooltip.Show(title, description, transform.position);
     }
 
     public void OnHoverExit()
