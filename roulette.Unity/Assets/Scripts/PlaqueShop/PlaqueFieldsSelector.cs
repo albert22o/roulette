@@ -46,6 +46,13 @@ public class PlaqueFieldsSelector
         return true;
     }
 
+    public bool CanUse(int index)
+    {
+        if (currentSelectionRequest.Filter != null && !currentSelectionRequest.Filter(tableInfo.PocketMapping[index]))
+            return false;
+        return true;
+    }
+
     public bool ToggleField(int index)
     {
         if (currentSelectionRequest == null)
@@ -72,6 +79,19 @@ public class PlaqueFieldsSelector
             if (currentSelectedFields.Count == currentSelectionRequest.Count)
             {
                 IsSelectionValidChanged?.Invoke(true);
+            }
+            else
+            {
+                int availableToUseFields = 0;
+                for (int i = 0; i < tableInfo.PocketMapping.Count; i++)
+                {
+                    if (currentSelectedFields.Contains(i))
+                        continue;
+                    if (CanUse(i))
+                        availableToUseFields++;
+                }
+                if (availableToUseFields == 0)
+                    IsSelectionValidChanged?.Invoke(true);
             }
             return true;
         }

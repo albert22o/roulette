@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,4 +46,6 @@ public class ShopItemsRarityGroup : ScriptableObject
         int randomIndex = Random.Range(0, items.Length);
         return items[randomIndex];
     }
+
+    public IReadOnlyCollection<ItemData> Items => items;
 }

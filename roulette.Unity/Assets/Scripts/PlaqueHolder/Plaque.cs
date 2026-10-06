@@ -13,5 +13,4 @@ public abstract class Plaque
     public abstract void OnSelectionPhaseCompleted(int phaseIndex, int[] selectedFields);
     public abstract SelectionRequest[] SelectionRequests { get; }
     public abstract void Apply(int[][] selectedFields);
-
 }
