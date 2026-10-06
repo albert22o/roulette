@@ -1,10 +1,19 @@
 ﻿using System;
-using static RoundStateManager;
+using UnityEngine;
 
 public class RewardCalculator
 {
+    private int unusedBetMultiplier = 3;
     public int BaseReward { get; set; } = 3;
-    public Action<int> GoalBeaten;
+    public int UnusedBets { get; set; }
+    public int UnusedBetsReward { get; set; }
+    public float QuotaExceed { get; set; }
+    public int QuotaExceededReward { get; set; } 
+    public int BonusReward { get; private set; }
+    public int TotalReward { get; set; }
+    public event Action<float> GoalBeaten;
+    public event Action RewardCalculated;
+    public event Action RewardReceived;
 
     private readonly RoundManager roundManager;
     private readonly GoldenChips goldenChips;
@@ -22,22 +31,27 @@ public class RewardCalculator
 
     private void OnWin()
     {
-        int reward = CalculateReward(roundManager.BetCount, roundManager.Quote, roundManager.Goal);
-        goldenChips.Add(reward);
+        CalculateReward(roundManager.BetCount, roundManager.Quote, roundManager.Goal);
     }
 
-    public int CalculateReward(int betCount, int quote, int goal)
+    public void ReceiveReward()
     {
-        var reward = BaseReward;
+        RewardReceived?.Invoke();
+        goldenChips.Add(TotalReward);
+    }
 
-        reward += 2 * betCount;
+    public void CalculateReward(int betCount, int quote, int goal)
+    {
+        UnusedBets = betCount;
+        UnusedBetsReward = unusedBetMultiplier * betCount;
 
-        var x = quote / goal;
+        QuotaExceed = quote / goal;
+        GoalBeaten?.Invoke(QuotaExceed);
 
-        GoalBeaten?.Invoke(x);
+        QuotaExceededReward = Math.Min(Mathf.FloorToInt(QuotaExceed) - 1, 9);
 
-        reward += Math.Min(x - 1, 9);
+        TotalReward = BaseReward + UnusedBetsReward + QuotaExceededReward + BonusReward;
 
-        return reward;
+        RewardCalculated?.Invoke();
     }
 }
