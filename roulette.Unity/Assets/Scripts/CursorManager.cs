@@ -34,6 +34,7 @@ public class CursorManager : MonoBehaviour
     public void RemoveCursorLock()
     {
         cursorLockCount--;
+        cursorLockCount = Mathf.Max(0, cursorLockCount);
         if (cursorLockCount == 0)
         {
             Cursor.lockState = CursorLockMode.None;
