@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using Zenject;
-using static GameStateManager;
 
 class BetTableView : MonoBehaviour
 {
@@ -13,7 +11,6 @@ class BetTableView : MonoBehaviour
     [SerializeField] float timeBeforeBetsHighlight = 3f;
     [SerializeField] private ShopTooltip tooltip;
     [SerializeField] private float betsClearDelay = 2f;
-
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
@@ -169,8 +166,6 @@ class BetTableView : MonoBehaviour
             betButtons[i].FieldNum = tableInfo.PocketMapping[i].FieldNumber;
         }
     }
-
-
 
     private void OnHighlight(BetInfo betInfo, HitInfo hitInfo)
     {

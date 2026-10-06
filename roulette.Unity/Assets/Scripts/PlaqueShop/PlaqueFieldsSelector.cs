@@ -17,8 +17,6 @@ public class PlaqueFieldsSelector
 
     public SelectionRequest CurrentRequest => currentSelectionRequest;
 
-
-
     public PlaqueFieldsSelector(TableInfo tableInfo)
     {
         this.tableInfo = tableInfo;
