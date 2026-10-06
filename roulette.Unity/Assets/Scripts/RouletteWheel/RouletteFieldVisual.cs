@@ -20,7 +20,7 @@ public class RouletteFieldVisual : MonoBehaviour
     private Material originalMaterial;
 
     private MaterialPropertyBlock propertyBlock;
-    private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
+    private static readonly int сolorPropertyId = Shader.PropertyToID("_BaseColor");
     private Color currentRuntimeColor;
     private Coroutine blinkRoutine;
 
@@ -37,7 +37,7 @@ public class RouletteFieldVisual : MonoBehaviour
         highlight.RimHighlightChanged += OnRimHighlightChanged;
 
         if (meshRenderer != null)
-            originalMaterial = meshRenderer.sharedMaterial;
+            originalMaterial = meshRenderer.material;
 
         OnColorChanged(field.Color);
         OnNumberChanged(field.Number);
@@ -93,7 +93,7 @@ public class RouletteFieldVisual : MonoBehaviour
         if (meshRenderer == null || propertyBlock == null) return;
 
         meshRenderer.GetPropertyBlock(propertyBlock);
-        propertyBlock.SetColor(ColorPropertyId, currentRuntimeColor.linear);
+        meshRenderer.material.SetColor(сolorPropertyId, currentRuntimeColor);
         meshRenderer.SetPropertyBlock(propertyBlock);
     }
 

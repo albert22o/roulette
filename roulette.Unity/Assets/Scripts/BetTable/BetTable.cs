@@ -76,8 +76,8 @@ public class BetTable
             return false;
         if (!betAmounts.ContainsKey(index))
             return false;
-        if (tableInfo.PocketMapping[index].FieldColor == ColorType.White ||
-            tableInfo.PocketMapping[index].FieldColor == ColorType.Grey)
+        if (tableInfo.PocketMapping[index].FieldColor == ColorType.White || 
+            tableInfo.PocketMapping[index].FieldColor == ColorType.Violet)
             return false;
         int minRequired = IsAllIn ? 1 : BetStep;
         if (availableBetSum < minRequired)

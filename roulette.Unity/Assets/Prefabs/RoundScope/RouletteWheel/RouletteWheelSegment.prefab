@@ -53,6 +53,7 @@ MonoBehaviour:
   numberBetMaterial: {fileID: 2100000, guid: 20834dc1675a76144a5b5d84689995c7, type: 2}
   dozenBetMaterial: {fileID: 2100000, guid: 052430cb022a1b148b0db55e5e8362a5, type: 2}
   colorBetMaterial: {fileID: 2100000, guid: 3cdd4b3e49966334c95b889e99ea3ab5, type: 2}
+  rimBlinkInterval: 0.3
 --- !u!1 &7279419000284010393
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1c6bfef95a8c034469964ed10c4ef663, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c4adb9ded6e223c4593b58650c44f545, type: 2}
+      objectReference: {fileID: 2100000, guid: 9f1e2a590a18d7044906d45e3a260fb3, type: 2}
     - target: {fileID: 919132149155446097, guid: 1c6bfef95a8c034469964ed10c4ef663, type: 3}
       propertyPath: m_Name
       value: RouletteWheelInnerSegment

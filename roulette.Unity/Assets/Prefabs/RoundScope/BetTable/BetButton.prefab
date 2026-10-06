@@ -398,7 +398,7 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: 991ae47d0f265e94780c1b078841eed6, type: 2}
   greenMaterial: {fileID: 2100000, guid: ae424ce627fa7cc4bb81438311b0c501, type: 2}
   whiteMaterial: {fileID: 2100000, guid: a6f83a7edbae7e24bb176171a94e87a5, type: 2}
-  greyMaterial: {fileID: 2100000, guid: af0a38ad6c38138489bb3cc5f39ca488, type: 2}
+  violetMaterial: {fileID: 2100000, guid: af0a38ad6c38138489bb3cc5f39ca488, type: 2}
   colorHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   dozenHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   numberHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}

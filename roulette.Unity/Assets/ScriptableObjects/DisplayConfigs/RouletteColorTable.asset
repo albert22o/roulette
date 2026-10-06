@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorsList:
   - ColorName: 0
-    Color: {r: 0.95, g: 0.04750001, b: 0.04750001, a: 1}
+    Color: {r: 1, g: 0.119205296, b: 0, a: 1}
   - ColorName: 2
-    Color: {r: 0.27747935, g: 0.85, b: 0.042148758, a: 1}
+    Color: {r: 0.1875, g: 0.75, b: 0.39930558, a: 1}
   - ColorName: 1
-    Color: {r: 0, g: 0, b: 0, a: 1}
+    Color: {r: 0.4, g: 0.3272727, b: 0.3272727, a: 1}
   - ColorName: 3
     Color: {r: 1, g: 1, b: 1, a: 1}
   - ColorName: 4
-    Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    Color: {r: 0.6192941, g: 0.16, b: 0.8, a: 1}

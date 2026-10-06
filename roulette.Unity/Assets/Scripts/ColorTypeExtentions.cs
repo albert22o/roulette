@@ -1,4 +1,4 @@
-public static class ColorTypeExtensions
+﻿public static class ColorTypeExtensions
 {
     public static ColorMask ToMask(this ColorType color) => color switch
     {
@@ -6,7 +6,7 @@ public static class ColorTypeExtensions
         ColorType.Black => ColorMask.Black,
         ColorType.Green => ColorMask.Green,
         ColorType.White => ColorMask.White,
-        ColorType.Grey => ColorMask.Grey,
+        ColorType.Violet => ColorMask.Violet,
         _ => ColorMask.None
     };
 }

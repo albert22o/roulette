@@ -27,7 +27,7 @@ public enum ColorType
     Black,
     Green,
     White,
-    Grey
+    Violet
 }
 
 [System.Flags]
@@ -38,6 +38,6 @@ public enum ColorMask
     Black = 1 << 1,
     Green = 1 << 2,
     White = 1 << 3,
-    Grey = 1 << 4
+    Violet = 1 << 4
 }
 

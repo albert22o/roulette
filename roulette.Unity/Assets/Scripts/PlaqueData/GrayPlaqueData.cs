@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GrayPlaqueData", menuName = "Plaques/GrayPlaqueData")]
@@ -8,14 +8,14 @@ public class GrayPlaqueData : PlaqueData
     {
         for (int i = 0; i < pocketMapping.Count; i++)
         {
-            if (pocketMapping[i].FieldColor != ColorType.Grey) return true;
+            if (pocketMapping[i].FieldColor != ColorType.Violet) return true;
         }
         return false;
     }
 
     public override Plaque CreatePlaque(PlaqueDependencies dependencies)
     {
-        return new GrayPlaque(this, dependencies);
+        return new VioletPlaque(this, dependencies);
     }
 
 }

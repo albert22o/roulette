@@ -78,7 +78,7 @@ public class BallResults
         roundStateManager.ChangeState(RoundState.ChoosingReward);
         currentBalls.Clear();
         currentBalls.AddRange(balls);
-        if (balls.Any(ball => ball.FieldColor == ColorType.Grey))
+        if (balls.Any(ball => ball.FieldColor == ColorType.Violet))
         {
             // Отправляем выбор нулевого шара для проигрыша
             BallSelected?.Invoke(null);
