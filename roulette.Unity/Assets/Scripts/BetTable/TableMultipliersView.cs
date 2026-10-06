@@ -67,7 +67,7 @@ public class TableMultipliersView : MonoBehaviour
 
         if (activeBets.Count == 0)
         {
-            SetEmptyTexts();
+            ShowGeneralMultipliers();
             return;
         }
 
@@ -83,7 +83,7 @@ public class TableMultipliersView : MonoBehaviour
             if (colorBets.Count > 0)
             {
                 var colorTexts = colorBets.Select(c =>
-                    $"{c}:\nx{betCalculator.GetEffectiveColorMultiplier(c)}");
+                    $"{c}:\n×{betCalculator.GetEffectiveColorMultiplier(c)}");
                 colorMultiplierText.text = string.Join(", ", colorTexts);
             }
             else
@@ -103,7 +103,7 @@ public class TableMultipliersView : MonoBehaviour
             if (dozenBets.Count > 0)
             {
                 var dozenTexts = dozenBets.Select(d =>
-                    $"{d}:\nx{betCalculator.GetEffectiveDozenMultiplier(d)}");
+                    $"{d}:\n×{betCalculator.GetEffectiveDozenMultiplier(d)}");
                 dozenMultiplierText.text = string.Join(", ", dozenTexts);
             }
             else
@@ -123,7 +123,7 @@ public class TableMultipliersView : MonoBehaviour
             if (numberBets.Count > 0)
             {
                 var numberTexts = numberBets.Select(n =>
-                    $"{n}: x{betCalculator.GetFieldMultiplier(n, betCalculator.NumMultiplier)}");
+                    $"{n}: ×{betCalculator.GetFieldMultiplier(n, betCalculator.NumMultiplier)}");
                 numberMultiplierText.text = string.Join(", ", numberTexts);
             }
             else
@@ -139,7 +139,7 @@ public class TableMultipliersView : MonoBehaviour
             if (hasZeroBet)
             {
                 int multiplier = betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier);
-                zeroMultiplierText.text = $"Zero: x{multiplier}";
+                zeroMultiplierText.text = $"Zero: ×{multiplier}";
             }
             else
             {
@@ -154,5 +154,13 @@ public class TableMultipliersView : MonoBehaviour
         if (dozenMultiplierText != null) dozenMultiplierText.text = "—";
         if (numberMultiplierText != null) numberMultiplierText.text = "—";
         if (zeroMultiplierText != null) zeroMultiplierText.text = "—";
+    }
+
+    private void ShowGeneralMultipliers()
+    {
+        if (colorMultiplierText != null) colorMultiplierText.text = $"Color:\n×{betCalculator.ColorMultiplier}";
+        if (dozenMultiplierText != null) dozenMultiplierText.text = $"Dozen:\n×{betCalculator.DozenMultiplier}";
+        if (numberMultiplierText != null) numberMultiplierText.text = $"Number:\n×{betCalculator.NumMultiplier}";
+        if (zeroMultiplierText != null) zeroMultiplierText.text = $"Zero:\n×{betCalculator.ZeroMultiplier}";
     }
 }
