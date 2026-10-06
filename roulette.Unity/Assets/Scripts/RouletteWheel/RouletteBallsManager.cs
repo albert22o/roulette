@@ -25,9 +25,11 @@ public class RouletteBallsManager : MonoBehaviour
 
     public event Action<HitInfo[]> AllBallsStopped;
 
-    private bool isSimulating;
+    private bool isSpinning;
 
     public event Action<string> BallInvalid;
+
+    public bool IsSpinning => isSpinning;
 
     [Inject]
     public void Construct(TableInfo tableInfo)
@@ -103,13 +105,13 @@ public class RouletteBallsManager : MonoBehaviour
         balls.Add(ball);
         prevSectors.Add(-1);
         stableTimes.Add(0);
-        isSimulating = true;
+        isSpinning = true;
 
     }
 
     void Update()
     {
-        if (isSimulating == false) return;
+        if (isSpinning == false) return;
 
         invalidBalls.Clear();
 
@@ -125,7 +127,7 @@ public class RouletteBallsManager : MonoBehaviour
                 ball.Stop();
             }
             AllBallsStopped?.Invoke(hitsInfo.Values.ToArray());
-            isSimulating = false;
+            isSpinning = false;
 
             foreach (var hit in hitsInfo.Values)
             {

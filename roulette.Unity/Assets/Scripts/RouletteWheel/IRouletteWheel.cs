@@ -51,4 +51,5 @@ public interface IRouletteWheel
     /// Вызывается при клике на шар
     /// </summary>
     public event Action<string> BallClicked;
+    public event Action Rerolled;
 }
