@@ -1,13 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.VFX;
 
-public class BallTrailBinder : MonoBehaviour
+public class BallPosition : MonoBehaviour
 {
     [SerializeField] private VisualEffect trailVFX;
-    [SerializeField] private Transform ball;
+    private const string POSITION_PROPERTY_NAME = "BallPosition";
+
+    private void Awake()
+    {
+        if (trailVFX == null)
+            trailVFX = GetComponent<VisualEffect>();
+    }
 
     private void Update()
     {
-        trailVFX.SetVector3("BallPosition", ball.position);
+        //if (trailVFX != null && trailVFX.isActiveAndEnabled && transform != null)
+        //    trailVFX.SetVector3(POSITION_PROPERTY_NAME, transform.position);
     }
 }

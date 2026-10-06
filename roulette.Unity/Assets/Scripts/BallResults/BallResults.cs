@@ -9,7 +9,6 @@ public class BallResults
 
     public event Action<BallInfoData> BallHovered;
     public event Action BallUnHovered;
-
     public event Action Win;
 
     private readonly RoundStateManager roundStateManager;
