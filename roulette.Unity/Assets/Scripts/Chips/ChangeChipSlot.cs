@@ -1,25 +1,55 @@
-﻿public class ChangeChipSlot : Chip
+﻿using TMPro;
+
+public class ChangeChipSlot : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly ChipHolder chipHolder;
     private readonly ChangeChipSlotData changeChipSlotData;
 
-    public ChangeChipSlot(BetCalculator betCalculator, ChipHolder chipHolder, ChangeChipSlotData lostChipData) : base(lostChipData)
+    private bool applyConditionsMatched;
+    private bool multiplierApplied = false;
+    private readonly BetTable betTable;
+    private readonly BallResults ballResults;
+
+    public override float AppliedValue => changeChipSlotData.Multiplier;
+    public override OperationType Operation => OperationType.Multiply;
+
+    public ChangeChipSlot(BetCalculator betCalculator, ChipHolder chipHolder, ChangeChipSlotData lostChipData,
+        BallResults ballResults, BetTable betTable) : base(lostChipData)
     {
         this.betCalculator = betCalculator;
         this.chipHolder = chipHolder;
         this.changeChipSlotData = lostChipData;
+        this.ballResults = ballResults;
+        this.betTable = betTable;   
+        ballResults.BallSelected += OnBallSelected;
+    }
+
+    private void OnBallSelected(HitInfo hit)
+    {
+        applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit);
     }
 
     public override bool Apply()
     {
-        betCalculator.MuliplyGeneralModifier(changeChipSlotData.Multiplier);
-        return true;
+        if (applyConditionsMatched)
+        {
+            betCalculator.MultiplyGeneralModifier(changeChipSlotData.Multiplier);
+            multiplierApplied = true;
+            return true;
+        }
+        return false;
     }
 
     public override void Revert()
     {
-        betCalculator.DivideGeneralModifier(changeChipSlotData.Multiplier);
+        if (multiplierApplied)
+        {
+            betCalculator.DivideGeneralModifier(changeChipSlotData.Multiplier);
+            multiplierApplied = false;
+        }
     }
 
     public override void OnAddedToHolder()

@@ -7,6 +7,6 @@ public class EmptyBallSlotBonusChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new EmptyBallSlotBonusChip(deps.BallHolder, deps.BetCalculator, this);
+        return new EmptyBallSlotBonusChip(deps.BallHolder, deps.BetCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

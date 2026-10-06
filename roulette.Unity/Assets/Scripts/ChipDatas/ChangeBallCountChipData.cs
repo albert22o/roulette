@@ -8,6 +8,6 @@ public class ChangeBallCountChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new ChangeBallCountChip(deps.BallHolder, deps.BetCalculator, this);
+        return new ChangeBallCountChip(deps.BallHolder, deps.BetCalculator, this,deps.BetTable, deps.BallResults);
     }
 }

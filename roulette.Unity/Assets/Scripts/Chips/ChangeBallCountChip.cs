@@ -3,24 +3,49 @@
     private BallHolder ballHolder;
     private BetCalculator betCalculator;
     private ChangeBallCountChipData changeBallCountChipData;
+    private readonly BetTable betTable;
+    private bool applyConditionsMatched;
+    private bool multiplierApplied = false;
+
+    public override float AppliedValue => changeBallCountChipData.ModifyAmount;
+    public override OperationType Operation => OperationType.Add;
 
     public ChangeBallCountChip(BallHolder ballHolder, BetCalculator betCalculator,
-        ChangeBallCountChipData changeBallCountChipData) : base(changeBallCountChipData)
+        ChangeBallCountChipData changeBallCountChipData, BetTable betTable, BallResults ballResults) : base(changeBallCountChipData)
     {
         this.ballHolder = ballHolder;
         this.betCalculator = betCalculator;
         this.changeBallCountChipData = changeBallCountChipData;
+        this.betTable = betTable;
+
+        ballResults.BallSelected += OnBallSelected;
     }
 
-    public override bool Apply() 
+    private void OnBallSelected(HitInfo hit)
     {
-        betCalculator.ModifyGeneralModifier(changeBallCountChipData.ModifyAmount);
-        return true;
+        applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit);
     }
 
-    public override void Revert() 
+    public override bool Apply()
     {
-        betCalculator.ModifyGeneralModifier(-changeBallCountChipData.ModifyAmount);
+        if (applyConditionsMatched)
+        {
+            betCalculator.ModifyGeneralModifier(changeBallCountChipData.ModifyAmount);
+            multiplierApplied = true;
+            return true;
+        }
+        return false;
+    }
+
+    public override void Revert()
+    {
+        if (multiplierApplied)
+        {
+            betCalculator.ModifyGeneralModifier(-changeBallCountChipData.ModifyAmount);
+            multiplierApplied = false;
+        }
     }
 
     public override void OnAddedToHolder()

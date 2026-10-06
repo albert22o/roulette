@@ -3,6 +3,9 @@
     private readonly RewardCalculator rewardCalculator;
     private readonly BaseRewardChangeChipData baseRewardChangeChipData;
 
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
+
     public BaseRewardChangeChip(RewardCalculator rewardCalculator, BaseRewardChangeChipData baseRewardChangeChipData) : base(baseRewardChangeChipData)
     {
         this.rewardCalculator = rewardCalculator;
@@ -11,7 +14,7 @@
 
     public override bool Apply()
     {
-        return true;
+        return false;
     }
 
     public override void Revert()

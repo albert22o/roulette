@@ -8,6 +8,6 @@ public class RandomNumbersChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new RandomNumbersChip(deps.BetCalculator, deps.BallResults, this);
+        return new RandomNumbersChip(deps.BetCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

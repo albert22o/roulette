@@ -94,7 +94,7 @@ public class BetCalculator
         modifySequence.Add((x => x + delta, "Add", delta));
     }
 
-    public void MuliplyGeneralModifier(float multiplier)
+    public void MultiplyGeneralModifier(float multiplier)
     {
         var inverseIndex = modifySequence.FindLastIndex(item =>
             item.OperationType == "Divide" && Math.Abs(item.Value - multiplier) < 0.0001f);

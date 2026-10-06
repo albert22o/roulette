@@ -5,6 +5,10 @@
     private ExtraLifesChipData extraLifesChipData;
     private bool extraLifeWasTaken;
 
+    public override float AppliedValue => 0;
+
+    public override OperationType Operation => OperationType.None;
+
     public ExtraLifesChip(ChipHolder chipHolder,
         LoseManager loseManager, ExtraLifesChipData extraLifesChipData) : base(extraLifesChipData)
     {
@@ -15,7 +19,7 @@
 
     public override bool Apply() 
     {
-        return true;
+        return false;
     }
 
     public override void Revert() { }

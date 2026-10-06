@@ -7,6 +7,6 @@ public class PassiveChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new PassiveChip(deps.BetCalculator, this);
+        return new PassiveChip(deps.BetCalculator, deps.BallResults, deps.BetTable, this);
     }
 }

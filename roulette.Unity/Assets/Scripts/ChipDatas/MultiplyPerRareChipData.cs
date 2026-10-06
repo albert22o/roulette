@@ -7,6 +7,6 @@ public class MultiplyPerRareChipData : ChipData
     public RarityType RarityTypeEffect;
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new MultiplyPerRareChip(deps.BetCalculator, deps.ChipHolder, this);
+        return new MultiplyPerRareChip(deps.BetCalculator, deps.ChipHolder, deps.BallResults, deps.BetTable, this);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class ChipSlotView : MonoBehaviour
@@ -7,6 +6,10 @@ public class ChipSlotView : MonoBehaviour
     public int SlotIndex { get; private set; }
     public GameObject ChipObject { get; private set; }
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI multiplierText;
+    [SerializeField] private Animator animator;
+
+    private readonly int showMultiplierTrigger = Animator.StringToHash("ShowMultiplier");
     private Vector3 worldPosition;
 
     public void Init(int slotIndex, Vector3 position)
@@ -76,6 +79,26 @@ public class ChipSlotView : MonoBehaviour
     public void PlayAnimation()
     {
         ChipObject?.GetComponent<Animator>().SetTrigger("start");
+    }
+
+    public void ShowMultiplier(float value, OperationType operation)
+    {
+        if (value != 0)
+        {
+            string sign = "";
+            switch (operation)
+            {
+                case OperationType.Add:
+                    sign = "+";
+                    break;
+                case OperationType.Multiply:
+                    sign = "×";
+                    break;
+            }
+               
+            multiplierText.text = sign + value.ToString();
+            animator.SetTrigger(showMultiplierTrigger);
+        }
     }
 
     public void SetChipName(string name)

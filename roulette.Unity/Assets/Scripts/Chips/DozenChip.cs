@@ -3,13 +3,20 @@
 public class DozenChip : Chip
 {
     private readonly BetCalculator betCalculator;
+    private readonly BetTable betTable;
     private readonly DozenType dozenType;
     private readonly int modifyAmount;
     private HitInfo ballHit;
+    private bool wasApplied;
 
-    public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData, BallResults ballResults) : base(dozenChipData)
+    public override float AppliedValue => modifyAmount;
+
+    public override OperationType Operation => OperationType.Add;
+
+    public DozenChip(BetCalculator betCalculator, DozenChipData dozenChipData, BallResults ballResults, BetTable betTable) : base(dozenChipData)
     {
         this.betCalculator = betCalculator;
+        this.betTable = betTable;
         dozenType = dozenChipData.DozenType;
         modifyAmount = dozenChipData.ModifyAmount;
         ballResults.BallSelected += OnBallSelected;
@@ -22,12 +29,28 @@ public class DozenChip : Chip
 
     public override bool Apply()
     {
-        betCalculator.ModifyDozenMultiplier(dozenType, modifyAmount);
-        return ballHit != null && ballHit.Dozen == dozenType;
+        bool dozenMatched = ballHit != null && ballHit.Dozen == dozenType;
+
+        bool betMatched = ballHit != null && (
+            BetTableExtentions.CheckColorMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, ballHit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, ballHit));
+
+        if (dozenMatched && betMatched)
+        {
+            betCalculator.ModifyDozenMultiplier(dozenType, modifyAmount);
+            wasApplied = true;
+            return true;
+        }
+        return false;
     }
 
     public override void Revert()
     {
-        betCalculator.ModifyDozenMultiplier(dozenType, -modifyAmount);
+        if (wasApplied)
+        {
+            betCalculator.ModifyDozenMultiplier(dozenType, -modifyAmount);
+            wasApplied = false;
+        }
     }
 }

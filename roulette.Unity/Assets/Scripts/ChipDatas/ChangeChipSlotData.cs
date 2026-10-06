@@ -8,6 +8,6 @@ public class ChangeChipSlotData : ChipData
     public int Multiplier = 2;
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new ChangeChipSlot(deps.BetCalculator, deps.ChipHolder, this);
+        return new ChangeChipSlot(deps.BetCalculator, deps.ChipHolder, this, deps.BallResults, deps.BetTable);
     }
 }

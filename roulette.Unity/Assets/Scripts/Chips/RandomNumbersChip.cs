@@ -6,16 +6,21 @@ public class RandomNumbersChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
+    private readonly BetTable betTable;
     private readonly int bonusAmount;
     private readonly int numbersCount;
 
     private bool modifyRequest = false;
     private List<int> selectedNumbers = new List<int>();
 
-    public RandomNumbersChip(BetCalculator betCalculator, BallResults ballResults, RandomNumbersChipData data) : base(data)
+    public override float AppliedValue => bonusAmount;
+    public override OperationType Operation => OperationType.Add;
+
+    public RandomNumbersChip(BetCalculator betCalculator, BallResults ballResults, BetTable betTable, RandomNumbersChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
+        this.betTable = betTable;
         bonusAmount = data.BonusAmount;
         numbersCount = data.NumbersCount;
 
@@ -51,10 +56,13 @@ public class RandomNumbersChip : Chip
         if (selectedNumbers == null || selectedNumbers.Count == 0)
             selectedNumbers = GetRandomNumbers(numbersCount);
 
-        if (selectedNumbers.Contains(hit.FieldNumber))
-            modifyRequest = true;
-        else
-            modifyRequest = false;
+        bool numberMatched = selectedNumbers.Contains(hit.FieldNumber);
+
+        bool betMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit);
+
+        modifyRequest = numberMatched && betMatched;
     }
 
     private List<int> GetRandomNumbers(int count)

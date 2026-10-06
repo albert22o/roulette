@@ -7,6 +7,6 @@ public class LeakyChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new LeakyChip(deps.BetCalculator, deps.ChipHolder, this);
+        return new LeakyChip(deps.BetCalculator, deps.ChipHolder, this,deps.BallResults, deps.BetTable);
     }
 }

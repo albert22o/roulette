@@ -13,9 +13,12 @@ public class AntiColorChip : Chip
         rouletteWheel.AllBallsStopped += OnAllBallsStopped;
     }
 
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
+
     public override bool Apply()
     {
-        return rerollAbility == false;
+        return false;
     }
 
     public override void Revert()

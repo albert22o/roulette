@@ -5,6 +5,9 @@ public class InvestmentChip : Chip
     private readonly BetTable betTable;
     private readonly int bonusAmount;
 
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
+
     public InvestmentChip(BetTable betTable, InvestmentChipData data) : base(data)
     {
         this.betTable = betTable;
@@ -13,7 +16,7 @@ public class InvestmentChip : Chip
 
     public override bool Apply()
     {
-        return true;
+        return false;
     }
 
     public override void Revert()

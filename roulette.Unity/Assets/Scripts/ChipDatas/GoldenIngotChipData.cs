@@ -6,6 +6,6 @@ public class GoldenIngotChipData : ChipData
 {
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new GoldenIngotChip(deps.BetCalculator, deps.GoldenChips, this);
+        return new GoldenIngotChip(deps.BetCalculator, deps.GoldenChips, deps.BallResults, deps.BetTable, this);
     }
 }

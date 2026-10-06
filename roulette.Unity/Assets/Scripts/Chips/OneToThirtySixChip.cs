@@ -6,6 +6,9 @@ public class OneToThirtySixChip : Chip
     private readonly int[] pseudoZeroNumbers = { 1, 2, 35, 36 };
     private HitInfo ballHit;
 
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
+
     public OneToThirtySixChip(BetCalculator betCalculator, OneToThirtySixChipData data, BallResults results) : base(data)
     {
         this.betCalculator = betCalculator;
@@ -21,7 +24,8 @@ public class OneToThirtySixChip : Chip
     {
         foreach (int number in pseudoZeroNumbers)
             betCalculator.AddToZeroFields(number);
-        return ballHit != null && System.Array.IndexOf(pseudoZeroNumbers, ballHit.FieldNumber) >= 0;
+        return false;
+        //return ballHit != null && System.Array.IndexOf(pseudoZeroNumbers, ballHit.FieldNumber) >= 0;
     }
 
     public override void Revert()

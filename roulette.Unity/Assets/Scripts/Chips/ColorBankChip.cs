@@ -4,26 +4,34 @@ public class ColorBankChip : Chip
 {
     private readonly BetCalculator betCalculator;
     private readonly BallResults ballResults;
+    private readonly BetTable betTable;
     private readonly ColorType targetColor;
 
     private int currentBonus = 0;
     private bool bonusApplied = false;
+    private bool applyConditionsMatched;
+    public override OperationType Operation => OperationType.Add;
 
     public ColorBankChip(
         BetCalculator betCalculator,
         BallResults ballResults,
+        BetTable betTable,
         ColorType targetColor,
         ColorBankChipData data) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
+        this.betTable = betTable;
         this.targetColor = targetColor;
 
         this.ballResults.BallSelected += OnBallSelected;
     }
 
+    public override float AppliedValue => currentBonus;
+
     public override bool Apply()
     {
+        if (!applyConditionsMatched) return false;
         if (!bonusApplied && currentBonus > 0)
         {
             betCalculator.ModifyGeneralModifier(currentBonus);
@@ -35,7 +43,6 @@ public class ColorBankChip : Chip
 
     public override void Revert()
     {
-
         if (bonusApplied && currentBonus > 0)
         {
             betCalculator.ModifyGeneralModifier(-currentBonus);
@@ -49,5 +56,9 @@ public class ColorBankChip : Chip
         {
             currentBonus++;
         }
+
+        applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||
+            BetTableExtentions.CheckDozenMatch(betTable, hit) ||
+            BetTableExtentions.CheckNumberMatch(betTable, hit);
     }
 }

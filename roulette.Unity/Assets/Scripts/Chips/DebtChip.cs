@@ -4,6 +4,9 @@ public class DebtChip : Chip
     private readonly GoldenChips goldenChips;
     private readonly int debtAmount;
 
+    public override float AppliedValue => 0;
+    public override OperationType Operation => OperationType.None;
+
     public DebtChip(GoldenChips goldenChips, DebtChipData data) : base(data)
     {
         this.goldenChips = goldenChips;
@@ -12,7 +15,7 @@ public class DebtChip : Chip
 
     public override bool Apply()
     {
-        return true;
+        return false;
     }
 
     public override void Revert()
