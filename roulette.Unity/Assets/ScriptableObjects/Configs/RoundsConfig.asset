@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rounds:
   - Goal: 400
-    isBoss: 0
+    isBoss: 1
   - Goal: 600
     isBoss: 0
   - Goal: 800
