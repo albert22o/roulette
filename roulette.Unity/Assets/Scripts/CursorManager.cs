@@ -4,6 +4,7 @@ using Zenject;
 public class CursorManager : MonoBehaviour
 {
     private GameStateManager gameStateManager;
+    private int cursorLockCount = 0;
 
     [Inject]
     public void Construct(GameStateManager gameStateManager)
@@ -17,6 +18,26 @@ public class CursorManager : MonoBehaviour
         if (gameStateManager != null)
         {
             UpdateCursorState(gameStateManager.CurrentState);
+        }
+    }
+
+    public void AddCursorLock()
+    {
+        cursorLockCount++;
+        if (cursorLockCount > 0)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void RemoveCursorLock()
+    {
+        cursorLockCount--;
+        if (cursorLockCount == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -38,13 +59,11 @@ public class CursorManager : MonoBehaviour
     {
         if (state == GameStateManager.GameState.FreeRoam)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            AddCursorLock();
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            RemoveCursorLock();
         }
     }
 }

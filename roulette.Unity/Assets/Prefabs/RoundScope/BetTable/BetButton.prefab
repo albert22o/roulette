@@ -405,6 +405,8 @@ MonoBehaviour:
   BG: {fileID: 7152392826193973797}
   outline: {fileID: 7507879617637945546}
   customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
+  spawnDelay: 0.02
+  maxSpawnDuration: 1.5
 --- !u!65 &658725084393326555
 BoxCollider:
   m_ObjectHideFlags: 0
