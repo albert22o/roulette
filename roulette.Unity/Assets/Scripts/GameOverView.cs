@@ -28,7 +28,6 @@ public class GameOverView : MonoBehaviour
     [SerializeField] private float powerTo = 20f;
     [SerializeField] private float blackFrom = -1f;
     [SerializeField] private float blackTo = 0f;
-    [SerializeField] private float delayToChangeCamera = 3f;
 
     private int powerId;
     private int blackId;

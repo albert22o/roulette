@@ -16,7 +16,7 @@ MonoBehaviour:
   - Goal: 400
     isBoss: 1
   - Goal: 600
-    isBoss: 0
+    isBoss: 1
   - Goal: 800
     isBoss: 1
   - Goal: 1600
