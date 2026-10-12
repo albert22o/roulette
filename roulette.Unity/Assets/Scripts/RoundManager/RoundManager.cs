@@ -121,7 +121,6 @@ public class RoundManager
         if (!betTable.NotNullBetAmounts.Any())
             return;
 
-        betCalculator.ResetRerollCoeff();
         Spun?.Invoke();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
