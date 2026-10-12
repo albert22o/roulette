@@ -161,7 +161,6 @@ public class RoundManager
         if (!AbleToWin)
             return;
         Win?.Invoke();
-        progressionManager.Advance();
     }
 
     public void ForceWin()

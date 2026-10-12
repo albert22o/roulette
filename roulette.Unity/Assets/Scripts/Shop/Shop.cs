@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
         this.progressionManager = progressionManager;
-        roundManager.Win += OnQuotaUpdated;
+        roundManager.Win += OnWin;
     }
 
     private void Start()
@@ -42,21 +42,20 @@ public class Shop : MonoBehaviour
     }
 
 
-    public void OnQuotaUpdated()
+    public void OnWin()
     {
         UpdateShop(false);
     }
 
     private void UpdateShop(bool forceUpdate)
     {
-        if (progressionManager.Current.IsBoss|| forceUpdate)
+        if (progressionManager.Current.IsBoss || forceUpdate)
         {
             foodPlace.UpdateItem();
             ballsVendingMachine.ResetSpinAmount();
         }
         chipPlacesController.Fill();
         rerollButton.ResetCost();
-        baseMoneyVendingMachine.ResetCost();
     }
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
