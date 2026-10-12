@@ -91,6 +91,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesTo<RouletteBetFieldsHighlight>().AsSingle();
         Container.Bind<RunProgress>().AsSingle();
 
-        Container.Bind<CursorManager>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<CursorManager>().AsSingle();
+        Container.Bind<FreeroamCursorHandler>().AsSingle().NonLazy();
     }
 }
