@@ -46,9 +46,16 @@ public class RewardCalculator
         UnusedBetsReward = unusedBetMultiplier * betCount;
 
         QuotaExceed = quote / goal;
-        GoalBeaten?.Invoke(QuotaExceed);
+        if (QuotaExceed > 1)
+        {
+            GoalBeaten?.Invoke(QuotaExceed);
+            QuotaExceededReward = Math.Min(Mathf.FloorToInt(QuotaExceed) - 1, 9);
+        }
+        else
+        {
+            QuotaExceededReward = 0;
+        }
 
-        QuotaExceededReward = Math.Min(Mathf.FloorToInt(QuotaExceed) - 1, 9);
 
         TotalReward = BaseReward + UnusedBetsReward + QuotaExceededReward + BonusReward;
 
