@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7098198642120723423}
   - component: {fileID: 7078309309706119466}
   - component: {fileID: 7152392826193973797}
-  - component: {fileID: 6412623573665108966}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -87,28 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6412623573665108966
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029528267457568821}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5428965525501952293
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +381,6 @@ MonoBehaviour:
   numberHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   BG: {fileID: 7152392826193973797}
   outline: {fileID: 7507879617637945546}
-  customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
   spawnDelay: 0.02
   maxSpawnDuration: 1.5
 --- !u!65 &658725084393326555

@@ -1281,7 +1281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cf90354ec978b41ba9c45ecd6a7663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableSumText: {fileID: 1060608308285132481}
   betButtons:
   - {fileID: 5149553570520496478}
   - {fileID: 5762141070238446474}
@@ -1323,6 +1322,7 @@ MonoBehaviour:
   timeBetweenHighlights: 1
   timeBeforeBetsHighlight: 3
   tooltip: {fileID: 22632761665396014}
+  betsClearDelay: 2
   bottomSectionColorZones:
   - {fileID: 3258340430882644816}
   - {fileID: 7588085295408872345}
