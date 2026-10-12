@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8916723542507914944}
   - component: {fileID: 9059582665939850213}
   - component: {fileID: 7022344572684702427}
+  - component: {fileID: -3993258841870139607}
   m_Layer: 3
   m_Name: BallVisual
   m_TagString: Untagged
@@ -445,6 +446,21 @@ MonoBehaviour:
   _renderers:
   - {fileID: 7294033075474326488}
   findRenderersEveryToggle: 0
+--- !u!114 &-3993258841870139607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090357027309566939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87c956520a94b3479b95fbafb9c8505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnMaterial: {fileID: -876546973899608171, guid: 87bbdca55a06de34d915145264803578, type: 3}
+  burnDuration: 1.5
+  dissolveProperty: _Dissolve
 --- !u!1 &6550808890342214493
 GameObject:
   m_ObjectHideFlags: 0

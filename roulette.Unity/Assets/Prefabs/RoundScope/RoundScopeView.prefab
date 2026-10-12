@@ -1354,6 +1354,9 @@ MonoBehaviour:
   tooltipHeight: 0.5
   delayBetweenChipPickupAndItemsSpawn: 1
   delayBetweenItemsSpawn: 0.2
+  defaultBurnMaterial: {fileID: -876546973899608171, guid: 87bbdca55a06de34d915145264803578, type: 3}
+  defaultBurnDuration: 1.5
+  defaultDissolveProperty: _Disolve
 --- !u!114 &4361522066738140594
 MonoBehaviour:
   m_ObjectHideFlags: 0

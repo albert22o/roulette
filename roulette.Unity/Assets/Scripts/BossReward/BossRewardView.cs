@@ -23,6 +23,11 @@ public class BossRewardView : MonoBehaviour
     private bool isInteractable;
     private RarityData rarityData;
 
+    [Header("Default Burn Settings")]
+    [SerializeField] private Material defaultBurnMaterial;
+    [SerializeField] private float defaultBurnDuration = 1.5f;
+    [SerializeField] private string defaultDissolveProperty = "_Disolve";
+
     public event Action RewardReceived;
 
     [Inject]
@@ -56,7 +61,6 @@ public class BossRewardView : MonoBehaviour
         cameraEventHandler.TransitionFinished += OnCameraTransitionFinished;
     }
 
-
     private void OnItemHoverEnter(PlaqueItem item)
     {
         string description = item.Data.Description;
@@ -76,18 +80,48 @@ public class BossRewardView : MonoBehaviour
     private void OnItemClick(PlaqueItem item)
     {
         if (isInteractable == false) return;
+
+        isInteractable = false;
         itemReceiver.ReceiveItem(item.Data);
-        ClearAllItems();
-        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
+
+        foreach (var place in itemPlaces)
+        {
+            if (!place.gameObject.activeSelf) continue;
+
+            if (place == item)
+            {
+                StartCoroutine(DelayedHide(place.gameObject, 1.5f));
+                continue;
+            }
+
+            var burnEffect = place.GetComponentInChildren<BurnEffect>();
+            Action onComplete = null;
+
+            if (burnEffect == null)
+            {
+                // Эффекта нет — вешаем временный с настройками по умолчанию
+                var temp = place.gameObject.AddComponent<BurnEffect>();
+                temp.Configure(defaultBurnMaterial, defaultBurnDuration, defaultDissolveProperty);
+                burnEffect = temp;
+                onComplete = () => Destroy(temp); // убираем после горения
+            }
+
+            burnEffect.StartBurn(onComplete);
+        }
+
+        StartCoroutine(WaitForBurnAndChangeState(2.5f));
     }
 
-    private void ClearAllItems()
+    private System.Collections.IEnumerator DelayedHide(GameObject obj, float delay)
     {
-        foreach (var item in itemPlaces)
-        {
-            item.gameObject.SetActive(false);
-            item.SetData(null);
-        }
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator WaitForBurnAndChangeState(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.FreeRoam);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newState)
