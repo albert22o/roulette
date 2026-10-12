@@ -20,12 +20,12 @@ public class CheatMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        cursorManager.RemoveCursorLock();
+        cursorManager.ShowCursorRequest();
     }
 
     private void OnDisable()
     {
-        cursorManager.AddCursorLock();
+        cursorManager.HideCursorRequest();
     }
 
     public void AddGoldenChips()

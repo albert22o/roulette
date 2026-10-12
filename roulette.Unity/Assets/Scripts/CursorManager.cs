@@ -1,70 +1,36 @@
 ﻿using UnityEngine;
-using Zenject;
 
-public class CursorManager : MonoBehaviour
+public class CursorManager
 {
-    private GameStateManager gameStateManager;
-    private int cursorLockCount = 0;
+    private int cursorShowCount = 0;
 
-    [Inject]
-    public void Construct(GameStateManager gameStateManager)
+    public void ShowCursorRequest()
     {
-        this.gameStateManager = gameStateManager;
-        gameStateManager.GameStateChanged += OnGameStateChanged;
+        cursorShowCount++;
+        ApplyCursorState();
     }
 
-    private void Start()
+    public void HideCursorRequest()
     {
-        if (gameStateManager != null)
-        {
-            UpdateCursorState(gameStateManager.CurrentState);
-        }
+        cursorShowCount--;
+        ApplyCursorState();
     }
 
-    public void AddCursorLock()
+    public void ApplyCursorState()
     {
-        cursorLockCount++;
-        if (cursorLockCount > 0)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
-
-    public void RemoveCursorLock()
-    {
-        cursorLockCount--;
-        cursorLockCount = Mathf.Max(0, cursorLockCount);
-        if (cursorLockCount == 0)
+        if (cursorShowCount > 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-    }
-
-
-    private void OnGameStateChanged(GameStateManager.GameState state)
-    {
-        UpdateCursorState(state);
-    }
-
-    private void OnApplicationFocus(bool hasFocus)
-    {
-        if (hasFocus && gameStateManager != null)
+        else if (cursorShowCount == 0)
         {
-            UpdateCursorState(gameStateManager.CurrentState);
-        }
-    }
-
-    private void UpdateCursorState(GameStateManager.GameState? state)
-    {
-        if (state == GameStateManager.GameState.FreeRoam)
-        {
-            AddCursorLock();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
-            RemoveCursorLock();
+            Debug.LogError("Cursor lock count is negative. This should not happen.");
         }
     }
 }
