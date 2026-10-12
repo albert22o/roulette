@@ -404,7 +404,6 @@ MonoBehaviour:
   numberHighlight: {fileID: 2100000, guid: 9a994257f2f594a41b7332feb3967b58, type: 2}
   BG: {fileID: 7152392826193973797}
   outline: {fileID: 7507879617637945546}
-  customGreen: {r: 0.11, g: 0.37, b: 0.13, a: 1}
   spawnDelay: 0.02
   maxSpawnDuration: 1.5
 --- !u!65 &658725084393326555
@@ -441,8 +440,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMaterial: {fileID: -876546973899608171, guid: b4622244f5b2dd547b46b15696478d5e, type: 3}
-  autoFindRenderers: 1
-  _renderers: []
+  autoFindRenderers: 0
+  _renderers:
+  - {fileID: 1584103670993536186}
+  - {fileID: 7152392826193973797}
   findRenderersEveryToggle: 0
 --- !u!1 &6656800096395598255
 GameObject:
