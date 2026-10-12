@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossChipItemData
   itemName: "\u0411\u043E\u0441\u0441 \u0444\u0438\u0448\u043A\u0430"
   description: 
-  shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
+  shopPrefab: {fileID: 2593338886803912469, guid: b7e7f808c416039478051e8696826d5c, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
   amount: 1
