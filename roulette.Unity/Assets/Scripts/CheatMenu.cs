@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class CheatMenu : MonoBehaviour
 {
     [SerializeField] private int currencyAmount = 100;
+    [SerializeField] private TextMeshProUGUI currentTimeSpeed;
     private GoldenChips goldenChips;
     private BossChips bossChips;
     private BetTable betTable;
@@ -41,5 +43,11 @@ public class CheatMenu : MonoBehaviour
     public void AddSilverChips()
     {
         betTable.AddAvailableSum(currencyAmount);
+    }
+
+    public void OnTimeScaleChanged(float value)
+    {
+        currentTimeSpeed.text = value.ToString();
+        Time.timeScale = value;
     }
 }
