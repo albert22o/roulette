@@ -245,8 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMaterial: {fileID: -876546973899608171, guid: b4622244f5b2dd547b46b15696478d5e, type: 3}
-  autoFindRenderers: 1
-  _renderers: []
+  autoFindRenderers: 0
+  _renderers:
+  - {fileID: 5088510610892540091}
   findRenderersEveryToggle: 0
 --- !u!1 &3677169515874465057
 GameObject:
