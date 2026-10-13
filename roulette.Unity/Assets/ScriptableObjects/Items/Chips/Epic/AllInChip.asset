@@ -22,4 +22,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   cost: 10
   Prefab: {fileID: 8416957006747050054, guid: 8c0adb4d15fa6a0458b2eea8653e6209, type: 3}
-  Multiplier: 3
+  Multiplier: 10

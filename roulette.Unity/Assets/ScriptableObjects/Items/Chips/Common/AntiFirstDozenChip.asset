@@ -21,6 +21,6 @@ MonoBehaviour:
   shopPrefab: {fileID: 2236746890652368393, guid: e5a2446e525d14c4a8aa7d2b08eff4b7, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
-  cost: 6
+  cost: 4
   Prefab: {fileID: 2236746890652368393, guid: e5a2446e525d14c4a8aa7d2b08eff4b7, type: 3}
   targetDozen: 1

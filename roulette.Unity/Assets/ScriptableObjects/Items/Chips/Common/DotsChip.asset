@@ -19,6 +19,6 @@ MonoBehaviour:
   shopPrefab: {fileID: 534555234240698326, guid: e58665d6d6e925347a667ebd52f18936, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
-  cost: 6
+  cost: 4
   Prefab: {fileID: 534555234240698326, guid: e58665d6d6e925347a667ebd52f18936, type: 3}
   BonusPerChip: 1

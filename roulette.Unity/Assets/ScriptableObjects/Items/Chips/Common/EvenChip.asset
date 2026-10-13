@@ -19,7 +19,7 @@ MonoBehaviour:
   shopPrefab: {fileID: 3840028314884938284, guid: b35659d0be1d0ff4e8c9ad75cda15ea1, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
-  cost: 6
+  cost: 4
   Prefab: {fileID: 3840028314884938284, guid: b35659d0be1d0ff4e8c9ad75cda15ea1, type: 3}
   Divisor: 2
   Remainder: 0

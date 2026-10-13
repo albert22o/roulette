@@ -21,6 +21,6 @@ MonoBehaviour:
   Icon: {fileID: 0}
   cost: 6
   Prefab: {fileID: 5849885920245971868, guid: d1abc992d2b82a1479278467d66fe07c, type: 3}
-  Divisor: 2
+  Divisor: 4
   Remainder: 1
   BonusAmount: 1
