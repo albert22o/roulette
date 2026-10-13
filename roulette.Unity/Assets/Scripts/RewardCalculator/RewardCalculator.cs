@@ -18,13 +18,15 @@ public class RewardCalculator
     private readonly RoundManager roundManager;
     private readonly GoldenChips goldenChips;
     private readonly RoundStateManager roundStateManager;
+    private readonly ProgressionManager progressionManager;
 
     public RewardCalculator(RoundManager roundManager, GoldenChips goldenChips,
-        RoundStateManager roundStateManager, BallResults ballResults)
+        RoundStateManager roundStateManager, BallResults ballResults, ProgressionManager progressionManager)
     {
         this.roundManager = roundManager;
         this.goldenChips = goldenChips;
         this.roundStateManager = roundStateManager;
+        this.progressionManager = progressionManager;
         ballResults.Win += OnWin;
         roundManager.Win += OnWin;
     }
@@ -38,6 +40,7 @@ public class RewardCalculator
     {
         RewardReceived?.Invoke();
         goldenChips.Add(TotalReward);
+        progressionManager.Advance();
     }
 
     public void CalculateReward(int betCount, int quote, int goal)

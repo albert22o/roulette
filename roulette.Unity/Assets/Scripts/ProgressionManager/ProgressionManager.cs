@@ -16,6 +16,7 @@
 
     public void Advance()
     {
+        UnityEngine.Debug.Log("Advance");
         if (!HasNext)
         {
             gameStateManager.ChangeGameState(GameStateManager.GameState.Win);
