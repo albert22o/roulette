@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u0424\u0438\u0448\u043A\u0430 \"X\""
   description: "+1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
-  shopPrefab: {fileID: 3583542216113658131, guid: e4e3d7c03fb8b7946974f2fc25d1234a, type: 3}
+  shopPrefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
-  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  Prefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
   BonusAmount: 1

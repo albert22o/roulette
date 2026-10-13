@@ -17,10 +17,10 @@ MonoBehaviour:
     \u0434\u043B\u044F \u0444\u0438\u0448\u0435\u043A \u043D\u0430 1, \u043D\u043E
     \u0443\u043C\u043D\u043E\u0436\u0430\u0435\u0442 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044C
     \u043D\u0430 2."
-  shopPrefab: {fileID: 3583542216113658131, guid: e4e3d7c03fb8b7946974f2fc25d1234a, type: 3}
+  shopPrefab: {fileID: 1505972630640902305, guid: 8b919f941c7ba7e49b4c974b1b425ec7, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
   cost: 6
-  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  Prefab: {fileID: 1505972630640902305, guid: 8b919f941c7ba7e49b4c974b1b425ec7, type: 3}
   SlotsToRemove: 1
   Multiplier: 2

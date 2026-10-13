@@ -17,8 +17,8 @@ MonoBehaviour:
   description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
     \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0437\u043E\u043B\u043E\u0442\u044B\u0445
     \u0444\u0438\u0448\u0435\u043A."
-  shopPrefab: {fileID: 3583542216113658131, guid: e4e3d7c03fb8b7946974f2fc25d1234a, type: 3}
+  shopPrefab: {fileID: 7911735891904598820, guid: 169ada1bbbb799e47b776a26d3999bbf, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
   cost: 6
-  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  Prefab: {fileID: 7911735891904598820, guid: 169ada1bbbb799e47b776a26d3999bbf, type: 3}
