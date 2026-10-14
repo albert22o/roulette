@@ -4,7 +4,7 @@
 
 public class D6ChipData : ChipData
 {
-    public int ModifyAmount;
+    public int MultiplyAmount;
 
     public override Chip CreateChip(ChipDependencies deps)
     {

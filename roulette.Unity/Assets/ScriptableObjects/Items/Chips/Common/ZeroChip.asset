@@ -16,7 +16,7 @@ MonoBehaviour:
     0"
   description: "0 \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442 +10 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
   shopPrefab: {fileID: 655282887680727992, guid: 472b02291fb3e294085a4e3ec5a982f3, type: 3}
-  rarityType: 2
+  rarityType: 1
   Icon: {fileID: 0}
   cost: 6
   Prefab: {fileID: 655282887680727992, guid: 472b02291fb3e294085a4e3ec5a982f3, type: 3}

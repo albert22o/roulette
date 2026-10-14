@@ -8,8 +8,8 @@ public class D6Chip : Chip
     private readonly BetTable betTable;
     private bool wasApplied;
 
-    public override float AppliedValue => d6ChipData.ModifyAmount;
-    public override OperationType Operation => OperationType.Add;
+    public override float AppliedValue => d6ChipData.MultiplyAmount;
+    public override OperationType Operation => OperationType.Multiply;
 
     public D6Chip(BetCalculator betCalculator, BallResults ballResults,
         D6ChipData d6ChipData, BetTable betTable) : base(d6ChipData)
@@ -46,7 +46,7 @@ public class D6Chip : Chip
     public override bool Apply()
     {
         if (wasApplied)
-            betCalculator.ModifyGeneralModifier(d6ChipData.ModifyAmount);
+            betCalculator.MultiplyGeneralModifier(d6ChipData.MultiplyAmount);
         return wasApplied;
     }
 
@@ -54,7 +54,7 @@ public class D6Chip : Chip
     {
         if (wasApplied)
         {
-            betCalculator.ModifyGeneralModifier(-d6ChipData.ModifyAmount);
+            betCalculator.DivideGeneralModifier(d6ChipData.MultiplyAmount);
             wasApplied = false;
         }
     }

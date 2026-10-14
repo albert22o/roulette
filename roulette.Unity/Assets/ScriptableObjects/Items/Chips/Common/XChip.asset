@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: XChip
   m_EditorClassIdentifier: 
   itemName: "\u0424\u0438\u0448\u043A\u0430 \"X\""
-  description: "+1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  description: "+2 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
   shopPrefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
   Prefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
-  BonusAmount: 1
+  BonusAmount: 2

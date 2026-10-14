@@ -15,10 +15,10 @@ MonoBehaviour:
   itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0418\u043D\u0432\u0435\u0441\u0442\u0438\u0446\u0438\u044F\""
   description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
     \u0431\u0430\u0437\u043E\u0432\u044B\u0435 \u0434\u0435\u043D\u044C\u0433\u0438
-    \u043D\u0430 200."
+    \u043D\u0430 300."
   shopPrefab: {fileID: 406664394180527974, guid: f6b7726454ed2474ab54d9667d2b60c4, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
   Prefab: {fileID: 406664394180527974, guid: f6b7726454ed2474ab54d9667d2b60c4, type: 3}
-  BonusAmount: 200
+  BonusAmount: 300
