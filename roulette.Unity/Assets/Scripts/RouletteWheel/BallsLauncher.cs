@@ -8,6 +8,8 @@ public class BallsLauncher : MonoBehaviour
     public event Action<string> Hover;
     public event Action<string> UnHover;
     public event Action<string> Clicked;
+    public event Action<int, float> RollIntensityChanged; // ballId, 0..1
+    public event Action<int, float> BallCollided;         // ballId, 0..1
 
     [SerializeField] private float launchVelocityMin;
     [SerializeField] private float launchVelocityMax;
@@ -27,6 +29,11 @@ public class BallsLauncher : MonoBehaviour
         ballsManager.BallInvalid += OnBallInvalid;
     }
 
+    private void OnDestroy()
+    {
+        if (ballsManager != null)
+            ballsManager.BallInvalid -= OnBallInvalid;
+    }
 
     public void AddBall(string ballHash, VisualComponent visualComponent)
     {
@@ -36,21 +43,24 @@ public class BallsLauncher : MonoBehaviour
             VisualComponent = visualComponent
         });
     }
+
     public void StartLaunch()
     {
-        ballLaunching = StartCoroutine(BallLaunching(ballsToSpawn));
+        if (ballLaunching != null) StopCoroutine(ballLaunching);
+        ballLaunching = StartCoroutine(BallLaunching());
     }
 
-    private IEnumerator BallLaunching(List<BallData> balls)
+    private IEnumerator BallLaunching()
     {
         int index = 0;
-        while(ballsToSpawn.Count > index)
+        while (ballsToSpawn.Count > index)
         {
             var ballData = ballsToSpawn[index];
             SpawnBall(ballData);
             index++;
             yield return new WaitForSeconds(delayBetweenBalls);
         }
+        ballLaunching = null;
     }
 
     private void SpawnBall(BallData ballData)
@@ -62,15 +72,17 @@ public class BallsLauncher : MonoBehaviour
         ballsManager.AddBall(ball);
 
         var rouletteBall = Instantiate(ballVisualPrefab, transform.position, Quaternion.identity);
-        {
-            rouletteBall.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
-            rouletteBall.SetVisualComponent(ballData.VisualComponent);
-            rouletteBall.Clicked += OnBallClicked;
-            rouletteBall.Hover += OnBallHover;
-            rouletteBall.UnHover += OnBallUnHover;
-            rouletteBall.Destroyed += () => OnBallDestroyed(rouletteBall);
-        }
+        rouletteBall.Initialize(ball, visualRoulette.lossyScale.x / physicalRoulette.lossyScale.x, visualRoulette);
+        rouletteBall.SetVisualComponent(ballData.VisualComponent);
+
+        rouletteBall.Clicked += OnBallClicked;
+        rouletteBall.Hover += OnBallHover;
+        rouletteBall.UnHover += OnBallUnHover;
+        rouletteBall.RollIntensityChanged += OnBallRollIntensityChanged;
+        rouletteBall.Collided += OnBallCollided;
+        rouletteBall.Destroyed += () => OnBallDestroyed(rouletteBall);
     }
+
     public void Clear()
     {
         ballsToSpawn.Clear();
@@ -82,7 +94,8 @@ public class BallsLauncher : MonoBehaviour
         foreach (var ballName in ballNames)
         {
             var ballData = ballsToSpawn.Find(ball => ball.BallHash == ballName);
-            newBallsToSpawn.Add(ballData);
+            if (ballData != null)
+                newBallsToSpawn.Add(ballData);
         }
         ballsToSpawn = newBallsToSpawn;
     }
@@ -92,7 +105,7 @@ public class BallsLauncher : MonoBehaviour
         Debug.Log($"Rerolling invalid ball: {ballHash}");
 
         var data = ballsToSpawn.Find(b => b.BallHash == ballHash);
-        if (data.BallHash == null)
+        if (data == null)
         {
             Debug.LogError("BallData not found for invalid ball!");
             return;
@@ -101,26 +114,23 @@ public class BallsLauncher : MonoBehaviour
         SpawnBall(data);
     }
 
-    private void OnBallUnHover(string hash)
-    {
-        UnHover?.Invoke(hash);
-    }
+    private void OnBallUnHover(string hash) => UnHover?.Invoke(hash);
 
-    private void OnBallHover(string hash)
-    {
-        Hover?.Invoke(hash);
-    }
+    private void OnBallHover(string hash) => Hover?.Invoke(hash);
 
-    private void OnBallClicked(string hash)
-    {
-        Clicked?.Invoke(hash);
-    }
+    private void OnBallClicked(string hash) => Clicked?.Invoke(hash);
+
+    private void OnBallRollIntensityChanged(int ballId, float value) => RollIntensityChanged?.Invoke(ballId, value);
+
+    private void OnBallCollided(int ballId, float impact) => BallCollided?.Invoke(ballId, impact);
 
     private void OnBallDestroyed(RouletteBall ball)
     {
         ball.Clicked -= OnBallClicked;
         ball.Hover -= OnBallHover;
         ball.UnHover -= OnBallUnHover;
+        ball.RollIntensityChanged -= OnBallRollIntensityChanged;
+        ball.Collided -= OnBallCollided;
     }
 }
 

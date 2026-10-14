@@ -6092,6 +6092,75 @@ PrefabInstance:
       addedObject: {fileID: 2105758298}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a842418bee06d5648b277ccd8188bccb, type: 3}
+--- !u!1001 &4041195009159660408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 430584866607355381, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Name
+      value: RouletteRoll
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646892235978336483, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077215323494653231, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Name
+      value: BallHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427149434164448218, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Name
+      value: BallRoll
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.287503
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7462034
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -23.34332
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
 --- !u!1001 &5040259577969825154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6225,3 +6294,4 @@ SceneRoots:
   - {fileID: 8891527018710684053}
   - {fileID: 1434459010}
   - {fileID: 176679937}
+  - {fileID: 4041195009159660408}

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +10,8 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public event Action<string> BallHover;
     public event Action<string> BallUnHover;
     public event Action<string> BallClicked;
+    public event Action<int, float> BallRollIntensityChanged; // ballId, 0..1
+    public event Action<int, float> BallCollided;             // ballId, 0..1
     public event Action FieldsUpdated;
 
     [SerializeField] private SpinController spinController;
@@ -29,20 +30,19 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public FieldHighlightState[] HighlightStates { get; private set; } = new FieldHighlightState[37];
 
     public Transform InnerWheel => spinController.transform;
-    public Vector2 PhysicsModelPosition => physicsModel.position;
+    public Vector2 PhysicsModelPosition => physicsModel.position; // Vector3 -> Vector2 (x, y), как и раньше
 
     public event Action<HitInfo[]> AllBallsStopped;
     public event Action Rerolled;
 
-
     public int[] FieldsOrder = new int[]
-{
-    0,
-    32, 15, 19, 4, 21, 2, 25, 17, 34, 6,
-    27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
-    16, 33, 1, 20, 14, 31, 9, 22, 18, 29,
-    7, 28, 12, 35, 3, 26
-};
+    {
+        0,
+        32, 15, 19, 4, 21, 2, 25, 17, 34, 6,
+        27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
+        16, 33, 1, 20, 14, 31, 9, 22, 18, 29,
+        7, 28, 12, 35, 3, 26
+    };
 
     [Inject]
     public void Construct(TableInfo tableInfo)
@@ -80,6 +80,22 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         ballsLauncher.Clicked += OnBallClicked;
         ballsLauncher.Hover += OnBallHover;
         ballsLauncher.UnHover += OnBallUnHover;
+        ballsLauncher.RollIntensityChanged += OnBallRollIntensityChanged;
+        ballsLauncher.BallCollided += OnBallCollided;
+    }
+
+    private void OnDisable()
+    {
+        spinController.TargetSpeedReached -= LaunchBalls;
+        ballsManager.AllBallsStopped -= OnAllBallsStopped;
+        tableInfo.PocketColorChanged -= OnPocketColorChanged;
+        tableInfo.PocketNumberChanged -= OnPocketNumberChanged;
+
+        ballsLauncher.Clicked -= OnBallClicked;
+        ballsLauncher.Hover -= OnBallHover;
+        ballsLauncher.UnHover -= OnBallUnHover;
+        ballsLauncher.RollIntensityChanged -= OnBallRollIntensityChanged;
+        ballsLauncher.BallCollided -= OnBallCollided;
     }
 
     private void OnBallUnHover(string hash)
@@ -99,10 +115,14 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
             BallClicked?.Invoke(hash);
     }
 
-    private void OnDisable()
+    private void OnBallRollIntensityChanged(int ballId, float value)
     {
-        spinController.TargetSpeedReached -= LaunchBalls;
-        ballsManager.AllBallsStopped -= OnAllBallsStopped;
+        BallRollIntensityChanged?.Invoke(ballId, value);
+    }
+
+    private void OnBallCollided(int ballId, float impact)
+    {
+        BallCollided?.Invoke(ballId, impact);
     }
 
     private void OnAllBallsStopped(HitInfo[] hitsInfo)
@@ -111,7 +131,7 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         AllBallsStopped?.Invoke(hitsInfo);
         if (ballsToAutoReroll.Count > 0)
         {
-             if (rerollCoroutine != null) StopCoroutine(rerollCoroutine);
+            if (rerollCoroutine != null) StopCoroutine(rerollCoroutine);
             rerollCoroutine = StartCoroutine(RerollWithDelayRoutine(ballsToAutoReroll.ToArray()));
             ballsToAutoReroll.Clear();
         }
@@ -137,7 +157,6 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
         Fields[pos].Number = number;
         FieldsUpdated?.Invoke();
     }
-
 
     public void AddBall(string ballHash, VisualComponent visualComponent)
     {
