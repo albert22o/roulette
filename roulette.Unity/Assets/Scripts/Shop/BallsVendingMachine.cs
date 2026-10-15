@@ -94,10 +94,10 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     {
         var text = mainTextKey;
         var color = goldenChips.Amount >= Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        text += $"\nЦена: <color={color}>{Cost}</color>";
+        var cost =$"<color={color}>{Cost}</color>";
         color = spinsCount > 0 ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
         text += $"\nОсталось прокруток: <color={color}>{spinsCount}</color>";
-        shop.ShowTooltip(titleKey, text, tooltipPoint.position);
+        shop.ShowTooltip(titleKey, text, cost, tooltipPoint.position);
         outline.ToggleMaterial(true);
     }
 

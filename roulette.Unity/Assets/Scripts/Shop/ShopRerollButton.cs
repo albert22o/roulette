@@ -59,9 +59,9 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     {
         var description = $"{mainTextKey}";
         var color = goldenChips.Amount >= cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{cost}</color>";
+        var costText = $"<color={color}>{cost}</color>";
 
-        shop.ShowTooltip(titleKey, description, transform.position);
+        shop.ShowTooltip(titleKey, description, costText, transform.position);
         outline.ToggleMaterial(true);
     }
 

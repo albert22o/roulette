@@ -8,7 +8,7 @@ using Zenject.Asteroids;
 public class BossRewardView : MonoBehaviour
 {
     [SerializeField] private PlaqueItem[] itemPlaces;
-    [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private SimpleTooltip tooltip;
     [SerializeField] private CinemachineCamera bossRewardCamera;
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private float tooltipHeight;

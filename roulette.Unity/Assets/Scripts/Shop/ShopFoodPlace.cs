@@ -34,8 +34,8 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     {
         var description = $"{item.Description}";
         var color = goldenChips.Amount >= shop.Config.FoodCost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{shop.Config.FoodCost}</color>";
-        shop.ShowTooltip(item.Name, description, transform.position);
+        var cost = $"<color={color}>{shop.Config.FoodCost}</color>";
+        shop.ShowTooltip(item.Name, description, cost, transform.position);
     }
 
     public void HideDescription()

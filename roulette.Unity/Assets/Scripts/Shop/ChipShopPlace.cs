@@ -48,15 +48,9 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     public void ShowDescription()
     {
         if (Item == null) return;
-        string description = Item.Description;
-        if (Item.RarityType != RarityType.None)
-        {
-            var rarity = rarityData.GetRarityDisplayData(Item.RarityType);
-            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
-        }
         var color = goldenChips.Amount >= Item.Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{Item.Cost}</color>";
-        shop.ShowTooltip(Item.Name, description, transform.position);
+        var cost = $"\n<color={color}>{Item.Cost}</color>";
+        shop.ShowTooltip(Item.Name, Item.Description, cost, transform.position, item.RarityType);
     }
 
     public void HideDescription()

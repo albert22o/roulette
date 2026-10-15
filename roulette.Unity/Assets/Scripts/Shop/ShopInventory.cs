@@ -79,13 +79,8 @@ public class ShopInventory : MonoBehaviour
     private void OnHoverEnter(PlaqueItem item)
     {
         string description = item.Data.Description;
-        if (item.Data.RarityType != RarityType.None)
-        {
-            var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
-            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
-        }
-        description += "\nЦена продажи: " + shop.GetSellPrice(item.Data);
-        shop.ShowTooltip(item.Data.Name, description, item.transform.position);
+        string cost = shop.GetSellPrice(item.Data).ToString();
+        shop.ShowTooltip(item.Data.Name, description, cost, item.transform.position, item.Data.RarityType);
     }
 
     private void UpdateChips()

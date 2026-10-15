@@ -10,7 +10,7 @@ public class ChipHolderView : MonoBehaviour
     [Header("Layout")]
     [SerializeField] private float dragHeight = 0.5f;
     [SerializeField] private LayerMask slotLayerMask;
-    [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private SimpleTooltip tooltip;
 
     private Camera mainCamera;
     private ChipHolder chipHolder;
