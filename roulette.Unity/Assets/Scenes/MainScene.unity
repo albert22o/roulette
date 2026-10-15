@@ -6157,10 +6157,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1109625051674753022, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: 23ef48ac3ec9c8740bd3496da09e9ba4, type: 3}
     - target: {fileID: 2646892235978336483, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
       propertyPath: m_Name
       value: MusicManager
