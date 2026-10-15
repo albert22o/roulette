@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &28353644715830864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1928161245629164763}
+  - component: {fileID: 5115065090604205944}
+  m_Layer: 0
+  m_Name: AudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1928161245629164763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28353644715830864}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7896328274521926323}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5115065090604205944
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28353644715830864}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &430584866607355381
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +140,7 @@ GameObject:
   - component: {fileID: 8627926585403682015}
   - component: {fileID: 1109625051674753022}
   m_Layer: 0
-  m_Name: Audio Source (2)
+  m_Name: RouletteRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +172,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: b636e628cd8d7ba4dbdd47b6a5f26355, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -139,6 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7896328274521926323}
   - component: {fileID: 5850494550960977534}
+  - component: {fileID: 5900374786078967482}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -159,6 +289,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1928161245629164763}
   - {fileID: 5605531454906680873}
   - {fileID: 108476391429109251}
   - {fileID: 8627926585403682015}
@@ -177,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRoll:
-    source: {fileID: 4257280468768608431}
+    source: {fileID: 6796317105125321005}
     volumeByIntensity:
       serializedVersion: 2
       m_Curve:
@@ -205,8 +336,11 @@ MonoBehaviour:
     pitchRange: {x: 0.8, y: 1.3}
     maxVolume: 1
     fadeSpeed: 8
-  hitSource: {fileID: 4257280468768608431}
-  hitClips: []
+    pitchSmoothing: 10
+  hitSourceTemplate: {fileID: 4257280468768608431}
+  hitVoices: 8
+  hitClips:
+  - {fileID: 8300000, guid: b4bcbe36f64bd744387d1941f02cd1d1, type: 3}
   hitVolumeByImpact:
     serializedVersion: 2
     m_Curve:
@@ -232,10 +366,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   hitPitchRange: {x: 0.9, y: 1.1}
-  minHitInterval: 0.03
+  minHitIntervalPerBall: 0.05
   minHitImpact: 0.05
   wheelSpin:
-    source: {fileID: 4257280468768608431}
+    source: {fileID: 1109625051674753022}
     volumeByIntensity:
       serializedVersion: 2
       m_Curve:
@@ -263,7 +397,38 @@ MonoBehaviour:
     pitchRange: {x: 0.8, y: 1.3}
     maxVolume: 1
     fadeSpeed: 8
+    pitchSmoothing: 10
   maxWheelSpeed: 360
+--- !u!114 &5900374786078967482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646892235978336483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98987e1cf024374089f0a54b706b58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundSettings:
+    chipHitClips:
+    - {fileID: 8300000, guid: e9d47625c7229ec42b696b8b126c5df2, type: 3}
+    floorHitClips:
+    - {fileID: 8300000, guid: e9d47625c7229ec42b696b8b126c5df2, type: 3}
+    floorMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    minImpactVelocity: 0.5
+    maxImpactVelocity: 6
+    minVolume: 0.1
+    maxVolume: 0.8
+    pitchRange: {x: 0.9, y: 1.15}
+    perChipCooldown: 0.06
+    spawnGraceTime: 0.15
+    audioSourcesCount: 12
+    maxSoundsPer100ms: 8
+  audioSourceTemplate: {fileID: 5115065090604205944}
 --- !u!1 &4077215323494653231
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +440,7 @@ GameObject:
   - component: {fileID: 5605531454906680873}
   - component: {fileID: 4257280468768608431}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BallHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,8 +472,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: fdc48a3fac5383843bb6d18456687dca, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -404,7 +569,7 @@ GameObject:
   - component: {fileID: 108476391429109251}
   - component: {fileID: 6796317105125321005}
   m_Layer: 0
-  m_Name: Audio Source (1)
+  m_Name: BallRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,8 +601,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 78e0405e1e1f7834cb80f44b25041cfb, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -61,11 +61,25 @@ public class ChipSpawnerView : MonoBehaviour
 
     public List<ChipThresholdData> Thresholds => thresholds;
 
+    [Header("Collision Sound")]
+    [SerializeField] private ChipSoundSettings soundSettings = new ChipSoundSettings();
+    [SerializeField] private AudioSource audioSourceTemplate; 
+
+    private AudioSource[] audioPool;
+    private int audioPoolIndex;
+    private float soundWindowStart;
+    private int soundsInWindow;
+    private readonly Random random = new Random();
+
+    public ChipSoundSettings SoundSettings => soundSettings;
+    private ChipSoundPlayer chipSoundPlayer;
+
     [Inject]
-    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence)
+    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence, ChipSoundPlayer chipSoundPlayer)
     {
         this.chipSpawner = chipSpawner;
         this.winningSequence = winningSequence;
+        this.chipSoundPlayer = chipSoundPlayer;
     }
 
     private void Start()
@@ -109,18 +123,16 @@ public class ChipSpawnerView : MonoBehaviour
 
     private void SpawnChip(int denomination)
     {
-        Random randomX = new Random();
-        Random randomZ = new Random();
-
-        Vector3 offsetPos = new Vector3(
-            (float)randomX.NextDouble() * randomSpawnPositionMultiplier,
-            0,
-            (float)randomZ.NextDouble() * randomSpawnPositionMultiplier);
-
         GameObject prefab = GetChipPrefab(denomination);
         if (prefab == null) return;
 
+        Vector3 offsetPos = new Vector3(
+            (float)random.NextDouble() * randomSpawnPositionMultiplier,
+            0,
+            (float)random.NextDouble() * randomSpawnPositionMultiplier);
+
         GameObject chip = Instantiate(prefab, spawnPoint.position + offsetPos, prefab.transform.rotation);
+        chipSoundPlayer.Attach(chip);
         spawnedChips.Add(chip);
     }
 
@@ -207,5 +219,33 @@ public class ChipSpawnerView : MonoBehaviour
 
         spawnCoroutine = null;
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.Finish);
+    }
+
+    public bool PlayCollisionSound(bool chipOnChip, float impact, Vector3 position)
+    {
+        if (Time.time - soundWindowStart > 0.1f)
+        {
+            soundWindowStart = Time.time;
+            soundsInWindow = 0;
+        }
+        if (soundsInWindow >= soundSettings.maxSoundsPer100ms) return false;
+
+        AudioClip[] pool = chipOnChip ? soundSettings.chipHitClips : soundSettings.floorHitClips;
+        if (pool == null || pool.Length == 0) return false;
+
+        float t = Mathf.InverseLerp(soundSettings.minImpactVelocity, soundSettings.maxImpactVelocity, impact);
+
+        // Round-robin: при нехватке источников перебиваем самый старый
+        var src = audioPool[audioPoolIndex];
+        audioPoolIndex = (audioPoolIndex + 1) % audioPool.Length;
+
+        src.transform.position = position;
+        src.clip = pool[UnityEngine.Random.Range(0, pool.Length)];
+        src.volume = Mathf.Lerp(soundSettings.minVolume, soundSettings.maxVolume, t);
+        src.pitch = UnityEngine.Random.Range(soundSettings.pitchRange.x, soundSettings.pitchRange.y);
+        src.Play();
+
+        soundsInWindow++;
+        return true;
     }
 }

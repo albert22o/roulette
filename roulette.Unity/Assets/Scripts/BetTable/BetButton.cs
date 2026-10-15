@@ -93,12 +93,22 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public event Action<BetButton> RightClick;
     public event Action<BetButton> LeftClick;
 
+    private ChipSoundPlayer chipSoundPlayer;
+
     [Inject]
-    public void Construct(BetTable table)
+    public void Construct(BetTable table, ChipSoundPlayer chipSoundPlayer)
     {
-        this.betTable = table;
+        betTable = table;
+        this.chipSoundPlayer = chipSoundPlayer;
     }
 
+    private void SpawnChip()
+    {
+        GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
+        chip.transform.localRotation = Quaternion.identity;
+        chipSoundPlayer.Attach(chip);
+        stackChips.Push(chip);
+    }
     public void Init(BetInfo betInfo, int index)
     {
         this.index = index;
@@ -141,13 +151,6 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         }
 
         spawnRoutine = null;
-    }
-
-    private void SpawnChip()
-    {
-        GameObject chip = Instantiate(chipPrefab, spawnChipPoint);
-        chip.transform.localRotation = Quaternion.identity;
-        stackChips.Push(chip);
     }
 
     private void OnEnable()
