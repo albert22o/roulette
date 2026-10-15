@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class GUIManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField] private BetsGUIDisplay betsDisplay;
     [SerializeField] private ProgressBarGUI quoteProgress;
     [SerializeField] private TextMeshProUGUI rerollPenalty;
+    [SerializeField] private Slider rerollPenaltySlider;
     [SerializeField] private GameObject betPanel;
 
     private GoldenChips goldenChips;
@@ -62,7 +64,8 @@ public class GUIManager : MonoBehaviour
 
     private void OnRerollCoeffChanged(float rerollCoef)
     {
-        rerollPenalty.text = $"{(1 - rerollCoef) * 100}%";
+        rerollPenaltySlider.value = 1 - rerollCoef;
+        rerollPenalty.text = $"{(1 - rerollCoef) * 100}/100";
     }
 
     private void OnDestroy()
