@@ -6,6 +6,13 @@ public class ChipHolderSoundPlayer : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip startDragSound;
     [SerializeField] AudioClip endDragSound;
+    [SerializeField] AudioClip chipActiveSound;
+
+    [Inject]
+    public void Construct(ChipHolder chipHolder)
+    {
+        chipHolder.ChipAnimated += PlayChipActivatedSound;
+    }
 
     public void PlayDragStartSound() 
     {
@@ -14,5 +21,10 @@ public class ChipHolderSoundPlayer : MonoBehaviour
     public void PlayDragEndSound()
     {
         audioSource.PlayOneShot(endDragSound);
+    }
+    private void PlayChipActivatedSound(int index)
+    {
+
+        audioSource.PlayOneShot(chipActiveSound);
     }
 }
