@@ -49,7 +49,7 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     {
         if (Item == null) return;
         var color = goldenChips.Amount >= Item.Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        var cost = $"\n<color={color}>{Item.Cost}</color>";
+        var cost = $"<color={color}>{Item.Cost}</color>";
         shop.ShowTooltip(Item.Name, Item.Description, cost, transform.position, item.RarityType);
     }
 

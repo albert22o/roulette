@@ -37,7 +37,6 @@ public class PlaqueShop
         {
             if (item is PlaqueData plaqueData)
             {
-                Debug.Log(item);
                 if (plaqueData.CanUse(tableInfo.PocketMapping))
                     availableToUsePlaques.Add(plaqueData);
             }

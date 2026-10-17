@@ -1,22 +1,23 @@
+using System.Diagnostics.Contracts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(WorldSpaceTooltip))]
 public class SimpleTooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI title, mainText;
-    private WorldSpaceTooltip worldSpaceTooltip;
-
-    private void Start()
-    {
-        worldSpaceTooltip = GetComponent<WorldSpaceTooltip>();
-    }
+    [SerializeField] private RectTransform titleRect, mainTextRect, tooltipRect;
+    [SerializeField] private WorldSpaceTooltip worldSpaceTooltip;
 
     public void Show(string title, string  mainText, Vector3 position)
     {
         this.title.text = title;
         this.mainText.text = mainText;
         worldSpaceTooltip.Show(position);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(titleRect);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(mainTextRect);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipRect);
     }
 
     public void Hide()

@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         UpdateShop(true);
+        baseMoneyVendingMachine.ResetCost();
     }
 
 
