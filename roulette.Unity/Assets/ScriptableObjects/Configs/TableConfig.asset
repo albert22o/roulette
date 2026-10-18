@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc16f85bd811d54d86398628d55b469, type: 3}
   m_Name: TableConfig
   m_EditorClassIdentifier: 
-  startSum: 200
+  startSum: 100
   maxBetsAtBoard: 1
-  betCount: 3
+  betCount: 1
   rerollCount: 5
   pockets:
   - Number: 0
