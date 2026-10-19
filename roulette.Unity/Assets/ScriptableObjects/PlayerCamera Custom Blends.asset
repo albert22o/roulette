@@ -39,7 +39,7 @@ MonoBehaviour:
     To: DealerLookCamera
     Blend:
       Style: 1
-      Time: 4
+      Time: 1
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
