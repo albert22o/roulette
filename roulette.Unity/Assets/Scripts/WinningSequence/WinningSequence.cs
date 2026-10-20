@@ -24,12 +24,10 @@ public class WinningSequence
     private readonly BetTable betTable;
     private readonly RoundStateManager roundStateManager;
     private readonly BetCalculator betCalculator;
-    private readonly GameStateManager gameStateManager;
     private EndSequenceType endSequenceType;
 
     private BetInfo betInfo;
     private HitInfo hitInfo;
-    private bool isRoundWon;
     private int betSum;
     private float generalMultiplier;
     private float rerollCoeff;
@@ -40,7 +38,6 @@ public class WinningSequence
     {
         this.betTable = betTable;
         this.roundStateManager = roundStateManager;
-        this.gameStateManager = gameStateManager;
         this.betCalculator = betCalculator;
         betCalculator.EndRound += CallSequenceStart;
         roundStateManager.StateChanged += OnStateChanged;
@@ -71,7 +68,6 @@ public class WinningSequence
     {
         if (!betTable.NotNullBetAmounts.Any()) return;
 
-        isRoundWon = false;
         roundStateManager.ChangeState(RoundStateManager.RoundState.BetResults);
         CompareAndDisplayMaxMultiplier(0);
 

@@ -73,7 +73,7 @@ public class GrayFieldLoseView : MonoBehaviour
 
     private RouletteBall FindVisualBallByHash(string hash)
     {
-        var allVisualBalls = FindObjectsOfType<RouletteBall>();
+        var allVisualBalls = FindObjectsByType<RouletteBall>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var visualBall in allVisualBalls)
         {
             if (visualBall != null && visualBall.GetBallHash() == hash)
