@@ -22,6 +22,7 @@ public class Shop : MonoBehaviour
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
     private ProgressionManager progressionManager;
+    [Inject] private readonly SignalBus signalBus;
 
     public event Action InteractionStarted, InteractionFinished;
 
@@ -82,6 +83,7 @@ public class Shop : MonoBehaviour
             {
                 goldenChips.Add(Config.BallSellCost);
                 ballHolder.RemoveBall(index);
+                signalBus.Fire(new ItemSoldSignal());
                 return true;
             }
             return false;
@@ -91,6 +93,7 @@ public class Shop : MonoBehaviour
             float sellCost = (int)(chipData.Cost * config.ChipSellMultiplier);
             if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * config.ChipSellMultiplier));
             chipHolder.RemoveChip(index);
+            signalBus.Fire(new ItemSoldSignal());
             return true;
         }
         return false;

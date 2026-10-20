@@ -15,6 +15,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private GoldenChips goldenChips;
     private FoodHolder foodHolder;
     private ShopFontConfig shopFontConfig;
+    [Inject] private readonly SignalBus signalBus;
 
     public bool IsInteractable => item != null;
 
@@ -53,6 +54,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             itemPlace.SetItem(null);
             HideDescription();
             HasItemChanged?.Invoke(false);
+            signalBus.Fire(new ItemPucharedSignal());
         }
     }
 

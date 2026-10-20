@@ -14,6 +14,8 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private ChipData boughtItem;
     private RarityData rarityData;
     private ShopFontConfig fontColorsConfig;
+    [Inject] private SignalBus signalBus;
+
     public ChipData Item
     {
         get => item;
@@ -72,6 +74,8 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             HideDescription();
             costView.SetNumber(0);
             IsAnimationPlaying = true;
+            signalBus.Fire(new ChipBoughtSignal());
+            signalBus.Fire(new ItemPucharedSignal());
         }
     }
 

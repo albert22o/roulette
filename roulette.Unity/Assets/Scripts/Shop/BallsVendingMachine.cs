@@ -25,6 +25,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     private int spinsCount;
 
     public bool IsInteractable => boughtBall == null;
+    [Inject] private readonly SignalBus signalBus;
     public event Action<BallInfoData> BallBought;
     public int Cost
     {
@@ -65,6 +66,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
                 goldenChips.Remove(Cost);
                 boughtBall = ballsTable.GetRandomItem() as BallInfoData;
                 BallBought?.Invoke(boughtBall);
+                signalBus.Fire(new ItemPucharedSignal());
                 shop.SetInteractionAvailable(false);
                 spinsCount--;
             }

@@ -22,6 +22,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     private GoldenChips goldenChips;
     private TableInfo tableInfo;
     private ShopFontConfig shopFontConfig;
+    [Inject] private readonly SignalBus signalBus;
 
 
     public int Cost
@@ -61,6 +62,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
             Cost += nextCostDelta;
             tableInfo.AddToStartSum(purchasedMoney);
             ShowTooltip();
+            signalBus.Fire(new ItemPucharedSignal());
         }
     }
 
