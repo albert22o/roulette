@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -11,6 +12,7 @@ public class ChipHolderView : MonoBehaviour
     [SerializeField] private float dragHeight = 0.5f;
     [SerializeField] private LayerMask slotLayerMask;
     [SerializeField] private ShopTooltip tooltip;
+    private GameStateManager gameStateManager;
 
     private Camera mainCamera;
     private ChipHolder chipHolder;
@@ -23,13 +25,15 @@ public class ChipHolderView : MonoBehaviour
     private InputAction pointAction;
     private ChipSlotView hoveredSlot;
     private ChipSlotView hoverTooltipSlot;
+    private bool canInteract;
 
 
     [Inject]
-    public void Construct(ChipHolder holder, Camera mainCamera)
+    public void Construct(ChipHolder holder, Camera mainCamera, GameStateManager gameStateManager)
     {
         chipHolder = holder;
         this.mainCamera = mainCamera;
+        this.gameStateManager = gameStateManager;
     }
 
     public void Start()
@@ -41,6 +45,7 @@ public class ChipHolderView : MonoBehaviour
         chipHolder.ChipAnimated += OnChipAnimated;
         chipHolder.SlotAdded += OnSlotAdded;
         chipHolder.SlotRemoved += OnSlotRemoved;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
 
         InitSlots();
         SetupInput();
@@ -51,6 +56,16 @@ public class ChipHolderView : MonoBehaviour
                 continue;
 
             OnChipAdded(index, chipHolder.Chips[index]);
+        }
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState state)
+    {
+        canInteract = state == GameStateManager.GameState.BettingСycle;
+        if (state != GameStateManager.GameState.BettingСycle)
+        {
+            EndDrag();
+            tooltip.Hide();
         }
     }
 
@@ -89,6 +104,7 @@ public class ChipHolderView : MonoBehaviour
 
     private void Update()
     {
+        if (canInteract == false) return;
         if (isDragging)
         {
             UpdateDrag();
