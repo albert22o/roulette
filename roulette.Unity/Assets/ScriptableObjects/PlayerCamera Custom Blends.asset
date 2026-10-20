@@ -39,7 +39,7 @@ MonoBehaviour:
     To: DealerLookCamera
     Blend:
       Style: 1
-      Time: 4
+      Time: 1
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -51,6 +51,28 @@ MonoBehaviour:
     Blend:
       Style: 1
       Time: 0.3
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - From: ApproachPlayerCamera
+    To: DeathCamera
+    Blend:
+      Style: 1
+      Time: 0.3
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - From: DealerLookCamera
+    To: ApproachPlayerCamera
+    Blend:
+      Style: 1
+      Time: 0.6
       CustomCurve:
         serializedVersion: 2
         m_Curve: []

@@ -8,7 +8,7 @@ public class GameOverView : MonoBehaviour
 {
     [Header("Scene refs")]
     [SerializeField] private CinemachineCamera defeatCamera;
-    [SerializeField] private CinemachineCamera deathCamera;
+    [SerializeField] private CinemachineCamera deathCamera, approachCamera;
     [SerializeField] private DealerAnimation dealerAnimation;
 
     [Header("GameOver prefab (children)")]
@@ -28,6 +28,7 @@ public class GameOverView : MonoBehaviour
     [SerializeField] private float powerTo = 20f;
     [SerializeField] private float blackFrom = -1f;
     [SerializeField] private float blackTo = 0f;
+
 
     private int powerId;
     private int blackId;
@@ -69,11 +70,19 @@ public class GameOverView : MonoBehaviour
 
         dealerAnimation.GameOverAnimationFinished += OnGameOverAnimationFinished;
         dealerAnimation.KillPlayer += OnKillPlayer;
+        dealerAnimation.ApproachPlayer += OnApproachPlayer;
     }
 
     private void OnKillPlayer()
     {
-        ChangeCamera();
+        approachCamera.gameObject.SetActive(false);
+        deathCamera.gameObject.SetActive(true);
+    }
+
+    private void OnApproachPlayer()
+    {
+        defeatCamera.gameObject.SetActive(false);
+        approachCamera.gameObject.SetActive(true);
     }
 
     private void OnDestroy()
@@ -99,11 +108,6 @@ public class GameOverView : MonoBehaviour
         loseText.SetActive(!isWin);
     }
 
-    private void ChangeCamera()
-    {
-        defeatCamera.gameObject.SetActive(false);
-        deathCamera.gameObject.SetActive(true);
-    }
 
     public void ShowEnding(bool isWin)
     {

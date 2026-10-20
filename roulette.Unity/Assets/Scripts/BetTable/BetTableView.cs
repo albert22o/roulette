@@ -248,11 +248,8 @@ class BetTableView : MonoBehaviour
         }
     }
 
-    private void OnEndSequence(bool isRoundWon)
+    private void OnEndSequence(EndSequenceType endSequenceType)
     {
-        if (!isRoundWon)
-            return;
-
         foreach (BetButton button in betButtons)
             button.Highlight(false, BetButton.HighlightPhase.None);
 

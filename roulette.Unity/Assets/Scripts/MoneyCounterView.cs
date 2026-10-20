@@ -72,7 +72,7 @@ public class MoneyCounterView : MonoBehaviour
         animator.SetTrigger("fade");
     }
 
-    private void OnEndSequence(bool _)
+    private void OnEndSequence(EndSequenceType endSequenceType)
     {
         animator.SetTrigger("fade");
         chipSpawner.RequestClear();

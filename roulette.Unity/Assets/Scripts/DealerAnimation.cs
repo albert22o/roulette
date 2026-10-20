@@ -9,7 +9,7 @@ public class DealerAnimation : MonoBehaviour
     private readonly int gameOverTrigger = Animator.StringToHash("GameOver");
 
     public event Action GameOverAnimationFinished;
-    public event Action KillPlayer;
+    public event Action KillPlayer, ApproachPlayer;
 
     public void PlayCollectAnimation()
     {
@@ -24,6 +24,11 @@ public class DealerAnimation : MonoBehaviour
     public void OnGameOverAnimationFinish()
     {
         GameOverAnimationFinished?.Invoke();
+    }
+
+    public void OnApproachPlayer()
+    {
+        ApproachPlayer?.Invoke();
     }
 
     public void OnKillPlayer()

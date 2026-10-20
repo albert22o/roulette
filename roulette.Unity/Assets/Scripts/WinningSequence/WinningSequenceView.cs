@@ -83,11 +83,12 @@ public class WinningSequenceView : MonoBehaviour
         generalMultiplierText.text = multiplier.ToString("0.##");
     }
 
-    private void OnEndSequence(bool isWin)
+    private void OnEndSequence(EndSequenceType endSequenceType)
     {
         generalMultiplierText.text = "";
         betText.text = "";
-        if (isWin)
+        if (endSequenceType == EndSequenceType.FinishBet ||
+            endSequenceType == EndSequenceType.WinRound)
         {
             dealerCollectAnimator.SetTrigger("collect");
             dealerAnimator.PlayCollectAnimation();

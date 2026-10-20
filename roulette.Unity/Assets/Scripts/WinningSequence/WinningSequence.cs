@@ -3,6 +3,14 @@ using System.Linq;
 using UnityEngine;
 using static RoundStateManager;
 
+public enum EndSequenceType
+{
+    WinGame,
+    LoseGame,
+    WinRound,
+    FinishBet
+    
+}
 public class WinningSequence
 {
     public event Action<int, int, float> SequenceStart;
@@ -10,12 +18,14 @@ public class WinningSequence
     public event Action<HitInfo> ApplyBall;
     public event Action<BetInfo, HitInfo> ApplyChips;
     public event Action<int, float, int> CountMoney;
-    public event Action<bool> EndSequence;
+    public event Action<EndSequenceType> EndSequence;
     public event Action<float> DisplayMultiplier;
 
     private readonly BetTable betTable;
     private readonly RoundStateManager roundStateManager;
     private readonly BetCalculator betCalculator;
+    private readonly GameStateManager gameStateManager;
+    private EndSequenceType endSequenceType;
 
     private BetInfo betInfo;
     private HitInfo hitInfo;
@@ -24,12 +34,37 @@ public class WinningSequence
     private float generalMultiplier;
     private float rerollCoeff;
 
-    public WinningSequence(BetTable betTable, RoundStateManager roundStateManager, BetCalculator betCalculator)
+    public WinningSequence(BetTable betTable, RoundStateManager roundStateManager,
+        GameStateManager gameStateManager, BetCalculator betCalculator,
+        RoundManager roundManager)
     {
         this.betTable = betTable;
         this.roundStateManager = roundStateManager;
+        this.gameStateManager = gameStateManager;
         this.betCalculator = betCalculator;
         betCalculator.EndRound += CallSequenceStart;
+        roundStateManager.StateChanged += OnStateChanged;
+        gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState state)
+    {
+        if (state == GameStateManager.GameState.Win)
+        {
+            endSequenceType = EndSequenceType.WinGame;
+        }
+        else if (state == GameStateManager.GameState.Lose)
+        {
+            endSequenceType = EndSequenceType.LoseGame;
+        }
+    }
+
+    private void OnStateChanged(RoundState state)
+    {
+        if (state == RoundState.Win)
+        {
+            endSequenceType = EndSequenceType.WinRound;
+        }
     }
 
     public void CallSequenceStart(HitInfo hitInfo)
@@ -49,6 +84,7 @@ public class WinningSequence
 
     public void CallPhaseExecution(SequencePhase sequencePhase)
     {
+        endSequenceType = EndSequenceType.FinishBet;
         switch (sequencePhase)
         {
             case SequencePhase.Init:
@@ -57,7 +93,6 @@ public class WinningSequence
                 Highlight?.Invoke(betInfo, hitInfo);
                 break;
             case SequencePhase.ApplyBall:
-                isRoundWon = true;
                 ApplyBall?.Invoke(hitInfo);
                 break;
             case SequencePhase.ApplyChips:
@@ -70,10 +105,12 @@ public class WinningSequence
             case SequencePhase.Finish:
                 betCalculator.GetRewardAction(betCalculator.GetRewardForBet(betInfo, betSum, hitInfo));
                 generalMultiplier = 0;
-                EndSequence?.Invoke(isRoundWon);
+                EndSequence?.Invoke(endSequenceType);
                 break;
         }
     }
+
+
 
     public void CompareAndDisplayMaxMultiplier(float multiplier)
     {
