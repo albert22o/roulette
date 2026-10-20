@@ -93,5 +93,7 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<CursorManager>().AsSingle();
         Container.Bind<FreeroamCursorHandler>().AsSingle().NonLazy();
+
+        Container.Bind<TimeScaleManager>().AsSingle();
     }
 }

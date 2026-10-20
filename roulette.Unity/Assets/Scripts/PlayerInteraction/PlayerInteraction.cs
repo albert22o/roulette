@@ -36,30 +36,27 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        gameObject.SetActive(state == GameStateManager.GameState.FreeRoam);
-    }
-
-    private void OnEnable()
-    {
-        if (interactAction != null)
+        if (state == GameStateManager.GameState.FreeRoam)
         {
-            interactAction.action.Enable();
-            interactAction.action.performed += OnInteractPerformed;
+            gameObject.SetActive(true);
+            if (interactAction != null)
+            {
+                interactAction.action.performed += OnInteractPerformed;
+            }
         }
-    }
-
-    private void OnDisable()
-    {
-        if (interactAction != null)
+        else
         {
-            interactAction.action.performed -= OnInteractPerformed;
-            interactAction.action.Disable();
-        }
+            gameObject.SetActive(false);
+            if (interactAction != null)
+            {
+                interactAction.action.performed -= OnInteractPerformed;
+            }
 
-        nearbyInteractables.Clear();
-        currentTarget = null;
-        if (tooltip != null)
-            tooltip.Hide();
+            nearbyInteractables.Clear();
+            currentTarget = null;
+            if (tooltip != null)
+                tooltip.Hide();
+        }
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext context)

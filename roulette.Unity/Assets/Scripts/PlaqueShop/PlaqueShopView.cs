@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,7 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private ShopTooltip tooltip;
     [SerializeField] private CancelInputHandler cancelInputHandler;
+    [SerializeField] private float cancelDelay = 2f;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
     public bool PlaquesBought { get; private set; }
@@ -103,8 +105,14 @@ public class PlaqueShopView : MonoBehaviour
         {
             plaquePlaces[i].SetData(null);
         }
-        cancelInputHandler.enabled = true;
+        StartCoroutine(CancelDelay());
         PlaquesBought = false;
+    }
+
+    private IEnumerator CancelDelay()
+    {
+        yield return new WaitForSeconds(cancelDelay);
+        cancelInputHandler.enabled = true;
     }
 }
 

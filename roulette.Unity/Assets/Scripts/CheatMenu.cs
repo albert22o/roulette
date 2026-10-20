@@ -11,13 +11,16 @@ public class CheatMenu : MonoBehaviour
     private BetTable betTable;
     private CursorManager cursorManager;
 
+    private TimeScaleManager timeScaleManager;
+
     [Inject] private void Construct(GoldenChips goldenChips, BossChips bossChips,
-        BetTable betTable, CursorManager cursorLockMode)
+        BetTable betTable, CursorManager cursorLockMode, TimeScaleManager timeScaleManager)
     {
         this.goldenChips = goldenChips;
         this.bossChips = bossChips;
         this.betTable = betTable;
         this.cursorManager = cursorLockMode;
+        this.timeScaleManager = timeScaleManager;
     }
 
     private void OnEnable()
@@ -48,6 +51,6 @@ public class CheatMenu : MonoBehaviour
     public void OnTimeScaleChanged(float value)
     {
         currentTimeSpeed.text = value.ToString();
-        Time.timeScale = value;
+        timeScaleManager.SetTimeScale(value);
     }
 }
