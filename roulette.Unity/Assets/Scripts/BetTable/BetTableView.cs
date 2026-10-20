@@ -15,6 +15,11 @@ class BetTableView : MonoBehaviour
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;
     [SerializeField] BottomSectionZone[] bottomSectionDozenZones;
 
+    [Header("Default Burn Settings")]
+    [SerializeField] private Material defaultBurnMaterial;
+    [SerializeField] private float defaultBurnDuration = 1.5f;
+    [SerializeField] private string defaultDissolveProperty = "_Disolve";
+
     private BetTable betTable;
     private TableInfo tableInfo;
     private BetCalculator betCalculator;
@@ -51,8 +56,7 @@ class BetTableView : MonoBehaviour
 
         foreach (var pocket in tableInfo.PocketMapping)
         {
-            betButtons[pocket.Key].Init(pocket.Value,
-                pocket.Key);
+            betButtons[pocket.Key].Init(pocket.Value, pocket.Key);
         }
         foreach (var button in betButtons)
         {
@@ -62,37 +66,30 @@ class BetTableView : MonoBehaviour
             button.LeftClick += OnLeftButtonClick;
         }
     }
+
     private void OnRightButtonClick(BetButton button)
     {
         if (isBetAvailable)
-        {
             betTable.RemoveBet(button.Index);
-        }
     }
 
     private void OnLeftButtonClick(BetButton button)
     {
         if (isBetAvailable)
-        {
             betTable.AddBet(button.Index);
-        }
     }
 
     private void OnHoverExit(BetButton button)
     {
         if (colorsDescription.GetColorData(button.Color) != null)
-        {
             tooltip.Hide();
-        }
     }
 
     private void OnHoverEnter(BetButton button)
     {
         var colorData = colorsDescription.GetColorData(button.Color);
         if (colorData != null)
-        {
             tooltip.Show(colorData.ColorName, colorData.ColorDescription, button.transform.position);
-        }
     }
 
     private void OnEnable()
@@ -118,13 +115,9 @@ class BetTableView : MonoBehaviour
     private void OnBetsCleared(bool isImmediately)
     {
         if (isImmediately)
-        {
             DeleteAllBetChipImmediately();
-        }
         else
-        {
             StartCoroutine(DeleteAllBetChips());
-        }
     }
 
     private void OnPocketColorChanged(int index, ColorType color)
@@ -145,7 +138,20 @@ class BetTableView : MonoBehaviour
     private IEnumerator DeleteAllBetChips()
     {
         isBetAvailable = false;
+
         yield return new WaitForSeconds(betsClearDelay);
+
+        float maxBurnDuration = 0f;
+        foreach (var button in betButtons)
+        {
+            float d = button.BurnAllChips(defaultBurnMaterial, defaultBurnDuration, defaultDissolveProperty);
+            if (d > maxBurnDuration)
+                maxBurnDuration = d;
+        }
+
+        if (maxBurnDuration > 0f)
+            yield return new WaitForSeconds(maxBurnDuration);
+
         DeleteAllBetChipImmediately();
         isBetAvailable = true;
     }
@@ -153,9 +159,7 @@ class BetTableView : MonoBehaviour
     private void DeleteAllBetChipImmediately()
     {
         foreach (var button in betButtons)
-        {
-            button.Amount = 0;
-        }
+            button.ClearChipsImmediately();
     }
 
     private void UpdateAllButtons()

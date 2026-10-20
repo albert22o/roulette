@@ -29,8 +29,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField] private OutlineController outline;
 
     [Header("Chip spawn")]
-    [SerializeField] private float spawnDelay = 0.05f; 
-    [SerializeField] private float maxSpawnDuration = 1.5f; 
+    [SerializeField] private float spawnDelay = 0.05f;
+    [SerializeField] private float maxSpawnDuration = 1.5f;
 
     private int targetChipCount;
     private Coroutine spawnRoutine;
@@ -52,14 +52,8 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     }
     public int FieldNum
     {
-        get
-        {
-            return Convert.ToInt32(fieldNumText.text);
-        }
-        set
-        {
-            fieldNumText.text = value.ToString();
-        }
+        get => Convert.ToInt32(fieldNumText.text);
+        set => fieldNumText.text = value.ToString();
     }
     public int Amount
     {
@@ -112,8 +106,103 @@ public class BetButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             Debug.LogError("BetText is not assigned in BetButton.");
         if (chipPrefab == null)
             Debug.LogError("ChipPrefab is not assigned in BetButton");
-
     }
+
+    // ---- Новые методы для работы с фишками ----
+
+    /// <summary>Возвращает список текущих (активных) фишек на кнопке.</summary>
+    public List<GameObject> GetActiveChips()
+    {
+        var result = new List<GameObject>(stackChips.Count);
+        foreach (var chip in stackChips)
+        {
+            if (chip != null)
+                result.Add(chip);
+        }
+        return result;
+    }
+
+    /// <summary>Мгновенно удаляет все фишки и сбрасывает счётчик.</summary>
+    public void ClearChipsImmediately()
+    {
+        if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+            spawnRoutine = null;
+        }
+
+        while (stackChips.Count > 0)
+        {
+            var chip = stackChips.Pop();
+            if (chip != null)
+                Destroy(chip);
+        }
+
+        targetChipCount = 0;
+    }
+
+    /// <summary>
+    /// Запускает горение на всех фишках. Возвращает максимальную длительность горения
+    /// (или 0, если гореть нечему).
+    /// </summary>
+    public float BurnAllChips(Material burnMaterial, float burnDuration, string dissolveProperty)
+    {
+        if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+            spawnRoutine = null;
+        }
+
+        var chips = GetActiveChips();
+        if (chips.Count == 0)
+        {
+            targetChipCount = 0;
+            return 0f;
+        }
+
+        // Новые фишки во время горения не нужны
+        targetChipCount = 0;
+
+        float maxDuration = 0f;
+        foreach (var chip in chips)
+        {
+            if (chip == null) continue;
+
+            var burnEffect = chip.GetComponentInChildren<BurnEffect>();
+            Action onComplete = null;
+
+            if (burnEffect == null)
+            {
+                var temp = chip.AddComponent<BurnEffect>();
+                temp.Configure(burnMaterial, burnDuration, dissolveProperty);
+                burnEffect = temp;
+                onComplete = () => Destroy(temp);
+            }
+
+            burnEffect.StartBurn(onComplete);
+
+            if (burnDuration > maxDuration)
+                maxDuration = burnDuration;
+        }
+
+        // После горения фишки нужно убрать из стека и уничтожить
+        StartCoroutine(FinalizeBurnedChips(maxDuration));
+        return maxDuration;
+    }
+
+    private IEnumerator FinalizeBurnedChips(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        while (stackChips.Count > 0)
+        {
+            var chip = stackChips.Pop();
+            if (chip != null)
+                Destroy(chip);
+        }
+    }
+
+    // ---- Конец новых методов ----
 
     private void StartSpawning()
     {

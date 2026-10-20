@@ -135,7 +135,6 @@ public class BetTable
         {
             availableBetSum += betAmounts[betIndex];
             betAmounts[betIndex] = 0;
-            ChangeAmountByIndex?.Invoke(betIndex, 0);
         }
         ChangeAvailableSum?.Invoke(availableBetSum);
         if (hadBetsBefore)
