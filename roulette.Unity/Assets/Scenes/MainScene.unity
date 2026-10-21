@@ -8629,6 +8629,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2138416918463930868, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.181
+      objectReference: {fileID: 0}
     - target: {fileID: 3018790839437435595, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_Name
       value: RoundScope
@@ -8765,6 +8769,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8288554727040910296, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_text
+      value: Finish
+      objectReference: {fileID: 0}
     - target: {fileID: 8397803098541854384, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8798,12 +8806,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7369597583945539661, guid: fc54237d291672944a57db5a13b89733, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6518028412997379247, guid: fc54237d291672944a57db5a13b89733, type: 3}
       insertIndex: 2
       addedObject: {fileID: 800154926}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3255287558479090024, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 7293032493054278594, guid: fc54237d291672944a57db5a13b89733, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}

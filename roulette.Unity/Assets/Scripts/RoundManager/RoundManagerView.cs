@@ -8,7 +8,7 @@ public class RoundManagerView : MonoBehaviour
 {
     [SerializeField] RouletteClickHandler rouletteClickHandler;
     [SerializeField] TableRerollButton rerollButton;
-    [SerializeField] Button confirmWinButton;
+    [SerializeField] TableWinButton confirmWinButton;
 
     [SerializeField] Canvas canvas;
     private RoundManager roundManager;
@@ -29,13 +29,12 @@ public class RoundManagerView : MonoBehaviour
 
         rouletteClickHandler.Clicked += OnSpinButtonClick;
         rerollButton.Clicked += OnRerollButtonClick;
-        confirmWinButton.onClick.AddListener(OnConfirmWinClick);
+        confirmWinButton.Clicked += OnConfirmWinClick;
     }
 
     private void OnConfirmWinClick()
     {
-        roundManager.ConfirmWin();
-        confirmWinButton.gameObject.SetActive(false);   
+        roundManager.ConfirmWin(); 
     }
 
     private void OnSpinButtonClick()
@@ -50,6 +49,5 @@ public class RoundManagerView : MonoBehaviour
 
     private void OnAbleToWinChanged(bool ableToWin)
     {
-        confirmWinButton.gameObject.SetActive(ableToWin);
     }
 }

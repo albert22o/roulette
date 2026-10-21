@@ -5701,6 +5701,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2832380713194387569}
     - target: {fileID: 8061388274333662976, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: confirmWinButton
+      value: 
+      objectReference: {fileID: 7009004533522388844}
+    - target: {fileID: 8061388274333662976, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: rouletteClickHandler
       value: 
       objectReference: {fileID: 1982008706935360287}
@@ -5733,6 +5737,17 @@ PrefabInstance:
       addedObject: {fileID: 3352072975792968187}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+--- !u!114 &7009004533522388844 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4590449427733727767, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+  m_PrefabInstance: {fileID: 6841092156145442171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654b7d88877332748b955d69f3fb8fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7259977220961211227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4193114875055083040, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
