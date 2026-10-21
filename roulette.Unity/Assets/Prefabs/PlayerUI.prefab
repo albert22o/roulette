@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1550103372831302790}
   - component: {fileID: 3189353609188918121}
   - component: {fileID: 2866718868513078132}
+  - component: {fileID: 7056972904569357422}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -416,6 +417,25 @@ MonoBehaviour:
   rerollPenalty: {fileID: 2476391120744745162}
   rerollPenaltySlider: {fileID: 87183859216057155}
   betPanel: {fileID: 2855359628190999789}
+--- !u!114 &7056972904569357422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382555948359977570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538dc0b344b23174296ae7930bcef135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  _outline: {fileID: 0}
+  _uiEffects: []
+  _tintGraphics:
+  - {fileID: 9090073731708956393}
+  _tintColor: {r: 1, g: 0.85, b: 0.2, a: 1}
+  _blinkInterval: 0.5
 --- !u!1 &2855359628190999789
 GameObject:
   m_ObjectHideFlags: 0

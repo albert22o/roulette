@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -13,6 +13,8 @@ public class BetColorsLegendController : MonoBehaviour
     private BetCalculator betCalculator;
     private BetTable betTable;
     private TableInfo tableInfo;
+    private bool visibleByState;
+    private bool forcedVisible;
 
     [Inject]
     private void Construct(RoundStateManager roundStateManager, BetCalculator betCalculator, BetTable betTable, TableInfo tableInfo)
@@ -22,6 +24,16 @@ public class BetColorsLegendController : MonoBehaviour
         this.betTable = betTable;
         this.tableInfo = tableInfo;
     }
+
+    /// <summary>Для обучения: показать легенду вне зависимости от состояния раунда.</summary>
+    public void SetForcedVisible(bool value)
+    {
+        forcedVisible = value;
+        RefreshVisibility();
+    }
+
+    private void RefreshVisibility() => gameObject.SetActive(visibleByState || forcedVisible);
+
 
     void Start()
     {
@@ -82,10 +94,10 @@ public class BetColorsLegendController : MonoBehaviour
         colorText.text = $"×{obj}";
     }
 
-
     private void OnRoundStateChanged(RoundStateManager.RoundState state)
     {
-        gameObject.SetActive(state == RoundStateManager.RoundState.WheelSpining ||
-            state == RoundStateManager.RoundState.ChoosingReward);
+        visibleByState = state == RoundStateManager.RoundState.WheelSpining ||
+                         state == RoundStateManager.RoundState.ChoosingReward;
+        RefreshVisibility();
     }
 }

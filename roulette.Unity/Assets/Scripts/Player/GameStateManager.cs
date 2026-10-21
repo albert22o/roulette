@@ -37,7 +37,7 @@ public class GameStateManager
     public enum GameState
     {
         FreeRoam,
-        BettingСycle,
+        BettingCycle,
         Shopping,
         Lose,
         PlaqueShopping,

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6983751628640398099}
   - component: {fileID: 1260821769150077766}
+  - component: {fileID: 747107540357639015}
   m_Layer: 0
   m_Name: RouletteWheel
   m_TagString: Untagged
@@ -53,6 +54,22 @@ MonoBehaviour:
   ballsManager: {fileID: 3412863194499273880}
   rerollDelay: 1
   FieldsOrder: 00000000200000000f00000013000000040000001500000002000000190000001100000022000000060000001b0000000d000000240000000b0000001e00000008000000170000000a0000000500000018000000100000002100000001000000140000000e0000001f0000000900000016000000120000001d000000070000001c0000000c00000023000000030000001a000000
+--- !u!114 &747107540357639015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877207088369082302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538dc0b344b23174296ae7930bcef135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 1
+  _outline: {fileID: 0}
+  _highlightVisual: {fileID: 0}
+  _blinkInterval: 0.5
 --- !u!1 &7349720817602706610
 GameObject:
   m_ObjectHideFlags: 0

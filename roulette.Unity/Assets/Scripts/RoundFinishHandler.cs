@@ -34,7 +34,7 @@ public class RoundFinishHandler : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        if (state == GameStateManager.GameState.BettingСycle)
+        if (state == GameStateManager.GameState.BettingCycle)
         {
             StartInteraction();
             gameObject.SetActive(true);

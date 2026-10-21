@@ -61,8 +61,8 @@ public class ChipHolderView : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        canInteract = state == GameStateManager.GameState.BettingСycle;
-        if (state != GameStateManager.GameState.BettingСycle)
+        canInteract = state == GameStateManager.GameState.BettingCycle;
+        if (state != GameStateManager.GameState.BettingCycle)
         {
             EndDrag();
             tooltip.Hide();

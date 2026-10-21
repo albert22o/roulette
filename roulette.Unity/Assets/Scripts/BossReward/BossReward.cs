@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 public class BossReward
 {
@@ -9,6 +9,7 @@ public class BossReward
     private BossChips bossChips;
 
     public event Action<ItemData[]> RewardCreated;
+    public event Action BossChipsGiven;
 
     public BossReward(BossRewardConfig config, GameStateManager gameStateManager, BossChips bossChips)
     {
@@ -34,5 +35,6 @@ public class BossReward
     public void GiveBossChips()
     {
         bossChips.Add(config.BossChipsCount);
+        BossChipsGiven?.Invoke();
     }
 }

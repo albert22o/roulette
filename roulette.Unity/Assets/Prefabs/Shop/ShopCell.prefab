@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5629685725155172507}
   - component: {fileID: 3487868063113150467}
   - component: {fileID: 2056419730390468535}
+  - component: {fileID: 7043948358501497332}
   m_Layer: 3
   m_Name: ShopCell
   m_TagString: Untagged
@@ -73,6 +74,24 @@ CapsuleCollider:
   m_Height: 0.51
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7043948358501497332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109728677892846997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538dc0b344b23174296ae7930bcef135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4
+  _outline: {fileID: 645462469606250527}
+  _uiEffects: []
+  _tintGraphics: []
+  _tintColor: {r: 1, g: 0.85, b: 0.2, a: 1}
+  _blinkInterval: 0.5
 --- !u!1 &2371971831667358204
 GameObject:
   m_ObjectHideFlags: 0

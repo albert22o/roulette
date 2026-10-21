@@ -45,7 +45,7 @@ public class FirstPersonController : MonoBehaviour
     {
         await Task.Delay(10);
 
-        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingCycle);
 
         if (cameraTransform == null)
         {

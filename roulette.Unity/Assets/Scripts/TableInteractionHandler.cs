@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class TableInteractionHandler : MonoBehaviour, IInteractable
@@ -16,6 +16,6 @@ public class TableInteractionHandler : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingСycle);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.BettingCycle);
     }
 }

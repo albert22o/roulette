@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-class BetTableView : MonoBehaviour
+public class BetTableView : MonoBehaviour
 {
+    public IReadOnlyList<BetButton> Buttons => betButtons;
+    public IReadOnlyList<BottomSectionZone> ColorZones => bottomSectionColorZones;
+    public IReadOnlyList<BottomSectionZone> DozenZones => bottomSectionDozenZones;
+
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;

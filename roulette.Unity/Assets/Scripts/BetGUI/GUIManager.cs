@@ -59,7 +59,7 @@ public class GUIManager : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
-        betPanel.SetActive(state is GameStateManager.GameState.BettingСycle);
+        betPanel.SetActive(state is GameStateManager.GameState.BettingCycle);
     }
 
     private void OnRerollCoeffChanged(float rerollCoef)
