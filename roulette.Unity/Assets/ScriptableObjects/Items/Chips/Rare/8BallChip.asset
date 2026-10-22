@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7901b78afa383e4bad8faa083314367, type: 3}
   m_Name: 8BallChip
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"8Ball\""
-  description: "+1 \u0441\u043B\u043E\u0442 \u0434\u043B\u044F \u0448\u0430\u0440\u0438\u043A\u0430."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544558
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544559
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 5833898240547550519, guid: f61e74df2d0f11249a9baf2d73293c3b, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
@@ -21,3 +37,6 @@ MonoBehaviour:
   Prefab: {fileID: 5833898240547550519, guid: f61e74df2d0f11249a9baf2d73293c3b, type: 3}
   ModifyAmount: 0
   BallSlotToRemove: -1
+  references:
+    version: 2
+    RefIds: []

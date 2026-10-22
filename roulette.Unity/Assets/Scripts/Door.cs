@@ -7,17 +7,9 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private Animator animator;
     private bool isOpened = false;
     private int isOpenedHash = Animator.StringToHash("IsOpened");
-    private string tooltip;
-    private string openedTooltip = "Закрыть дверь";
-    private string closedTooltip = "Открыть дверь";
-    public string Tooltip => tooltip;
+    public string Tooltip => Loc.Get(isOpened ? "interact.door_close" : "interact.door_open");
 
     public bool CanInteract => true;
-
-    private void Start()
-    {
-        tooltip = isOpened ? openedTooltip : closedTooltip;
-    }
 
     public void Interact()
     {
@@ -28,6 +20,5 @@ public class Door : MonoBehaviour, IInteractable
     {
         isOpened = !isOpened;
         animator.SetBool(isOpenedHash, isOpened);
-        tooltip = isOpened ? openedTooltip : closedTooltip;
     }
 }

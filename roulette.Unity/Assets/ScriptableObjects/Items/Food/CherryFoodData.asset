@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6138da90599424687a3c7731e74396, type: 3}
   m_Name: CherryFoodData
   m_EditorClassIdentifier: 
-  itemName: "\u0412\u0438\u0448\u043D\u044F"
-  description: "+400 \u043A \u0431\u0430\u0437\u043E\u0432\u044B\u043C \u0434\u0435\u043D\u044C\u0433\u0430\u043C
-    \u043F\u0435\u0440\u043C\u0430\u043D\u0435\u043D\u0442\u043D\u043E"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544592
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544593
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 919132149155446097, guid: 3b0e349a4b039b24a90bdb17cb42ebce, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []

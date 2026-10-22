@@ -12,10 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a7a80c83d4244498565f917b39ba81, type: 3}
   m_Name: SixOfClubs
   m_EditorClassIdentifier: 
-  itemName: "6 \u043A\u0440\u0435\u0441\u0442\u0438"
-  description: "+1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
-    \u0447\u0438\u0441\u0435\u043B"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544598
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544599
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 4243324379214917624, guid: 15906b6b56e83de4fb0ed60f4647fc53, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   multiplier: 1
+  references:
+    version: 2
+    RefIds: []

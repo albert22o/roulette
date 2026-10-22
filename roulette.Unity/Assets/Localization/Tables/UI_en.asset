@@ -1,0 +1,384 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: dc46035491a3d034a91e72bf86a313f3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 900718592
+    m_Localized: '
+
+      Price: <color={0}>{1}</color>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 930078720
+    m_Localized: '
+
+      Price: <color={0}>{1}</color> boss chip'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273024
+    m_Localized: '
+
+      Sell price: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273025
+    m_Localized: '
+
+      Rarity: <color=#{0}>{1}</color>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273026
+    m_Localized: '
+
+      Spins left: <color={0}>{1}</color>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273027
+    m_Localized: Table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273028
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273029
+    m_Localized: Plaque vending machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273030
+    m_Localized: Open door
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273031
+    m_Localized: Close door
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273032
+    m_Localized: Reroll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273033
+    m_Localized: Refresh chips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273034
+    m_Localized: Ball machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273035
+    m_Localized: Buy a random ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273036
+    m_Localized: Conversion machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273037
+    m_Localized: Buy 100 base money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273038
+    m_Localized: Plaque shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273039
+    m_Localized: Buy 1 plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273040
+    m_Localized: Take
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273041
+    m_Localized: Sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273042
+    m_Localized: Round won
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273043
+    m_Localized: Quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273044
+    m_Localized: Unused bets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273045
+    m_Localized: Unused bets ({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273046
+    m_Localized: Quota exceeded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273047
+    m_Localized: "Quota exceeded (\xD7{0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273048
+    m_Localized: Extra bonuses (food, chips)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273049
+    m_Localized: Total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273050
+    m_Localized: Claim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273051
+    m_Localized: Number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273052
+    m_Localized: Dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273053
+    m_Localized: Color
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273054
+    m_Localized: "Color:\n\xD7{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273055
+    m_Localized: "Dozen:\n\xD7{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273056
+    m_Localized: "Number:\n\xD7{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273057
+    m_Localized: "Zero:\n\xD7{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273058
+    m_Localized: "Zero: \xD7{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273059
+    m_Localized: "{0}:\n\xD7{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273060
+    m_Localized: "Dozen {0}:\n\xD7{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273061
+    m_Localized: Red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273062
+    m_Localized: Black
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273063
+    m_Localized: Green
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273064
+    m_Localized: White
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273065
+    m_Localized: Violet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273066
+    m_Localized: Red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273067
+    m_Localized: Black
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273068
+    m_Localized: 1st Dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273069
+    m_Localized: 2nd Dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273070
+    m_Localized: 3rd Dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273071
+    m_Localized: 'BETS:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273072
+    m_Localized: 'REROLL PENALTY:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273073
+    m_Localized: Reroll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273074
+    m_Localized: Finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273075
+    m_Localized: Spin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273076
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273077
+    m_Localized: Confirm Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273078
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273079
+    m_Localized: Select 1 number to copy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273080
+    m_Localized: Select 3 numbers to replace with the chosen one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273081
+    m_Localized: Select 3 numbers to replace with {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273082
+    m_Localized: You Win!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273083
+    m_Localized: You Lose!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273084
+    m_Localized: 'Quotas completed: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273085
+    m_Localized: 'Current quota: {0}/{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273086
+    m_Localized: Card x{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273087
+    m_Localized: '{0} (x{1})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273088
+    m_Localized: Show stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273089
+    m_Localized: Place your bet (LMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273090
+    m_Localized: When you bet on a number, you are also betting on its dozen, color
+      and the number itself
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273091
+    m_Localized: Each of these has its own multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273092
+    m_Localized: You can cancel a bet (RMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273093
+    m_Localized: Your goal is to beat the quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273094
+    m_Localized: Spin the roulette
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273095
+    m_Localized: You can finish the bet by clicking a ball, or spin again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273096
+    m_Localized: The first reroll is free; after that you lose 25% of the winnings
+      for each new spin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273097
+    m_Localized: You won! Finish the bet by pressing the button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273098
+    m_Localized: Find the shop, you can buy upgrades there
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273099
+    m_Localized: With the golden chips you earn you can buy special chips, more silver
+      for betting, food and balls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273100
+    m_Localized: Each category has its own limits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273101
+    m_Localized: There are only 5 chip slots, choose wisely
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273102
+    m_Localized: Food in the shop is restocked after every third quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273103
+    m_Localized: The price of silver goes up with every purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273104
+    m_Localized: Only two balls are available every 3 quotas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273105
+    m_Localized: After shopping, return to the table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273106
+    m_Localized: After every third quota you get an extra reward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273107
+    m_Localized: You got a boss chip, find the plaque shrine to spend it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273108
+    m_Localized: A plaque is an upgrade that changes the board, choose wisely
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -12,13 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2832e93ca66f32f44916d7061d0aefc8, type: 3}
   m_Name: InvestmentChip
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0418\u043D\u0432\u0435\u0441\u0442\u0438\u0446\u0438\u044F\""
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u0431\u0430\u0437\u043E\u0432\u044B\u0435 \u0434\u0435\u043D\u044C\u0433\u0438
-    \u043D\u0430 300."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544536
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544537
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 406664394180527974, guid: f6b7726454ed2474ab54d9667d2b60c4, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
   Prefab: {fileID: 406664394180527974, guid: f6b7726454ed2474ab54d9667d2b60c4, type: 3}
   BonusAmount: 300
+  references:
+    version: 2
+    RefIds: []

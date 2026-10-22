@@ -12,11 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0684811d5f3364c850bc044d3d90be, type: 3}
   m_Name: SixOfDiamonds
   m_EditorClassIdentifier: 
-  itemName: "6 \u0431\u0443\u0431\u0438"
-  description: "+1 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
-    \u0446\u0432\u0435\u0442\u043E\u0432"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544601
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 5095590712939832790, guid: 058cf0fed30227742985d11c50fbdaee, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   multiplier: 1
   color: 0
+  references:
+    version: 2
+    RefIds: []

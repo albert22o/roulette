@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization;
 using AYellowpaper.SerializedCollections;
 
 [CreateAssetMenu(fileName = "ColorsDescription", menuName = "Scriptable Objects/ColorsDescription")]
@@ -13,9 +14,9 @@ public class ColorsDescription : ScriptableObject
 [System.Serializable]
 public class ColorDescriptionData
 {
-    [SerializeField][TextArea(1,3)] private string colorName;
-    [SerializeField][TextArea(1,3)] private string colorDescription;
+    [SerializeField] private LocalizedString colorName;
+    [SerializeField] private LocalizedString colorDescription;
 
-    public string ColorName => colorName;
-    public string ColorDescription => colorDescription;
+    public string ColorName => colorName.Resolve();
+    public string ColorDescription => colorDescription.Resolve();
 }

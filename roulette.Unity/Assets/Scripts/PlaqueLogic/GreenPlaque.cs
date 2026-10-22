@@ -10,12 +10,12 @@
         new() {
             Count = 1,
             Filter = _ => true,
-            Hint = "Выберите 1 число для замены"
+            Hint = Loc.Get("plaque.green.hint_pick")
         },
         new() {
             Count = 3,
             Filter = _ => true,
-            Hint = "Выберите 3 числа, которые нужно заменить на выбранное"
+            Hint = Loc.Get("plaque.green.hint_replace")
         }
     };
 
@@ -41,7 +41,7 @@
             selectionRequests[1].Filter = betInfo => betInfo.Index != firstPhaseSelectedIndex;
 
             int displayNum = PlaqueDependencies.TableInfo.PocketMapping[firstPhaseSelectedIndex].FieldNumber;
-            selectionRequests[1].Hint = $"Выберите 3 числа, которые нужно заменить на {displayNum}";
+            selectionRequests[1].Hint = Loc.Get("plaque.green.hint_replace_num", displayNum);
         }
     }
 }

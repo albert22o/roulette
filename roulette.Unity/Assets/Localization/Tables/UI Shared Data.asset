@@ -1,0 +1,376 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: dc46035491a3d034a91e72bf86a313f3
+  m_Entries:
+  - m_Id: 900718592
+    m_Key: tooltip.price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 930078720
+    m_Key: tooltip.price_boss_chips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273024
+    m_Key: tooltip.sell_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273025
+    m_Key: tooltip.rarity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273026
+    m_Key: tooltip.spins_left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273027
+    m_Key: interact.table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273028
+    m_Key: interact.shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273029
+    m_Key: interact.plaque_machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273030
+    m_Key: interact.door_open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273031
+    m_Key: interact.door_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273032
+    m_Key: shop.reroll.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273033
+    m_Key: shop.reroll.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273034
+    m_Key: shop.ball_machine.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273035
+    m_Key: shop.ball_machine.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273036
+    m_Key: shop.converter.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273037
+    m_Key: shop.converter.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273038
+    m_Key: shop.plaque_machine.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273039
+    m_Key: shop.plaque_machine.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273040
+    m_Key: shop.ball.take
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273041
+    m_Key: shop.ball.sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273042
+    m_Key: reward.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273043
+    m_Key: reward.quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273044
+    m_Key: reward.unused_bets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273045
+    m_Key: reward.unused_bets_count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273046
+    m_Key: reward.quota_exceeded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273047
+    m_Key: reward.quota_exceeded_value
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273048
+    m_Key: reward.bonus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273049
+    m_Key: reward.total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273050
+    m_Key: reward.claim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273051
+    m_Key: legend.number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273052
+    m_Key: legend.dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273053
+    m_Key: legend.color
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273054
+    m_Key: multipliers.color
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273055
+    m_Key: multipliers.dozen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273056
+    m_Key: multipliers.number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273057
+    m_Key: multipliers.zero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273058
+    m_Key: multipliers.zero_bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273059
+    m_Key: multipliers.color_bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273060
+    m_Key: multipliers.dozen_bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273061
+    m_Key: color.Red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273062
+    m_Key: color.Black
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273063
+    m_Key: color.Green
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273064
+    m_Key: color.White
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273065
+    m_Key: color.Violet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273066
+    m_Key: table.red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273067
+    m_Key: table.black
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273068
+    m_Key: table.dozen1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273069
+    m_Key: table.dozen2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273070
+    m_Key: table.dozen3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273071
+    m_Key: hud.bets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273072
+    m_Key: hud.reroll_penalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273073
+    m_Key: round.reroll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273074
+    m_Key: round.finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273075
+    m_Key: round.spin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273076
+    m_Key: round.confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273077
+    m_Key: round.confirm_win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273078
+    m_Key: plaque.apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273079
+    m_Key: plaque.green.hint_pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273080
+    m_Key: plaque.green.hint_replace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273081
+    m_Key: plaque.green.hint_replace_num
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273082
+    m_Key: game.win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273083
+    m_Key: game.lose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273084
+    m_Key: progress.completed_quotas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273085
+    m_Key: progress.current_quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273086
+    m_Key: progress.card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273087
+    m_Key: progress.card_named
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273088
+    m_Key: progress.stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273089
+    m_Key: tutorial.place_bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273090
+    m_Key: tutorial.bet_explain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273091
+    m_Key: tutorial.multipliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273092
+    m_Key: tutorial.cancel_bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273093
+    m_Key: tutorial.beat_quota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273094
+    m_Key: tutorial.spin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273095
+    m_Key: tutorial.finish_or_reroll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273096
+    m_Key: tutorial.reroll_penalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273097
+    m_Key: tutorial.won
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273098
+    m_Key: tutorial.find_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273099
+    m_Key: tutorial.shop_explain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273100
+    m_Key: tutorial.shop_limits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273101
+    m_Key: tutorial.chip_slots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273102
+    m_Key: tutorial.food_refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273103
+    m_Key: tutorial.silver_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273104
+    m_Key: tutorial.ball_limit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273105
+    m_Key: tutorial.return_table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273106
+    m_Key: tutorial.boss_reward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273107
+    m_Key: tutorial.boss_chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934273108
+    m_Key: tutorial.plaque_explain
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8459180077707952620
+  references:
+    version: 2
+    RefIds:
+    - rid: 8459180077707952620
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1792665412704

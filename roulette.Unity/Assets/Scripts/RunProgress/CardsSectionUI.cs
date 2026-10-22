@@ -30,8 +30,8 @@ public class CardsSectionUI : MonoBehaviour
             {
                 Sprite icon = cardData.Icon != null ? cardData.Icon : defaultIcon;
                 string displayName = string.IsNullOrEmpty(cardData.Name)
-                    ? $"Карта x{cardData.Multiplier}"
-                    : $"{cardData.Name} (x{cardData.Multiplier})";
+                    ? Loc.Get("progress.card", cardData.Multiplier)
+                    : Loc.Get("progress.card_named", cardData.Name, cardData.Multiplier);
 
                 SpawnItem(icon, displayName);
             }

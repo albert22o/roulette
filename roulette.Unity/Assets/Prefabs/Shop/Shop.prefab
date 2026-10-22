@@ -756,10 +756,28 @@ MonoBehaviour:
   purchasedMoney: 100
   buttonAnimation: {fileID: 7821689138088978137}
   outline: {fileID: 4742246572518968186}
-  titleKey: "\u041C\u0430\u0448\u0438\u043D\u0430 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0430\u0446\u0438\u0438"
-  mainTextKey: "\u041A\u0443\u043F\u0438\u0442\u044C 100 \u0431\u0430\u0437\u043E\u0432\u044B\u0445
-    \u0434\u0435\u043D\u0435\u0433"
+  title:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273036
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  mainText:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273037
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   tooltipPosition: {fileID: 7026222789712552149}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7821689138088978137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,6 +2142,7 @@ GameObject:
   - component: {fileID: 8164686632325208876}
   - component: {fileID: 2505299800048583684}
   - component: {fileID: 8813790298900442441}
+  - component: {fileID: 6199242433984336005}
   m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2250,6 +2269,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6199242433984336005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296115825054482239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273041
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8813790298900442441}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1305926145609353224
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,8 +6279,27 @@ MonoBehaviour:
   costDelta: 1
   buttonAnimation: {fileID: 5544543675275915185}
   outline: {fileID: 6175186929891627215}
-  titleKey: "\u0420\u0435\u0440\u043E\u043B\u043B"
-  mainTextKey: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0444\u0438\u0448\u043A\u0438"
+  title:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  mainText:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273033
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &6423985040050167099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7914,6 +7992,7 @@ GameObject:
   - component: {fileID: 412177720742388859}
   - component: {fileID: 338551538909680656}
   - component: {fileID: 8172635045619759084}
+  - component: {fileID: 2574047847180270975}
   m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8040,6 +8119,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2574047847180270975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974100619675923935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273040
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8172635045619759084}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &3999743128138462639
 GameObject:
   m_ObjectHideFlags: 0
@@ -11382,12 +11501,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballsTable: {fileID: 11400000, guid: 492f70ec01275a84f97e1bae806dc468, type: 2}
-  titleKey: "\u041C\u0430\u0448\u0438\u043D\u0430 \u0441 \u0448\u0430\u0440\u0438\u043A\u0430\u043C\u0438"
-  mainTextKey: "\u041F\u043E\u043A\u0443\u043F\u043A\u0430 \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u0433\u043E
-    \u0448\u0430\u0440\u0438\u043A\u0430. \u0426\u0435\u043D\u0430 5 \u0437\u043E\u043B\u043E\u0442\u044B\u0445
-    \u0444\u0438\u0448\u0435\u043A"
+  title:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273034
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  mainText:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc46035491a3d034a91e72bf86a313f3
+    m_TableEntryReference:
+      m_KeyId: 934273035
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   tooltipPoint: {fileID: 7076077574534793198}
   outline: {fileID: 360964644500027323}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &975419727333709998
 MonoBehaviour:
   m_ObjectHideFlags: 0

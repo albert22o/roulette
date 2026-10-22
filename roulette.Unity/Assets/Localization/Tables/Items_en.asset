@@ -1,0 +1,513 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Items_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 116cde72b6e19f54381c778510ef85d4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 279961600
+    m_Localized: Epic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544512
+    m_Localized: Common
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544513
+    m_Localized: Rare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544514
+    m_Localized: When picked, the quota is won instantly and the white cell returns
+      to its original color.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544515
+    m_Localized: If the ball lands here, the bet is lost instantly.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544516
+    m_Localized: Black Ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544517
+    m_Localized: When picked, gives +3 to the multiplier if it landed on a black
+      number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544518
+    m_Localized: Glass Ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544519
+    m_Localized: When picked, multiplies the multiplier by 2. Then breaks with a
+      50% chance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544520
+    m_Localized: Red Ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544521
+    m_Localized: When picked, gives +3 to the multiplier if it landed on a red number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544522
+    m_Localized: Regular Ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544523
+    m_Localized: A regular ball, nothing special.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544524
+    m_Localized: Anti-Black Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544525
+    m_Localized: The first time a black number comes up during a bet, the ball that
+      landed on black is rerolled for free.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544526
+    m_Localized: Anti-Red Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544527
+    m_Localized: The first time a red number comes up during a bet, the ball that
+      landed on red is rerolled for free.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544528
+    m_Localized: Dark Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544529
+    m_Localized: When points are scored for black, increases the multiplier by 3.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544530
+    m_Localized: Dotted Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544531
+    m_Localized: Adds +2 to the multiplier for every other chip.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544532
+    m_Localized: '"Ball" Chip'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544533
+    m_Localized: Gives +2 to the multiplier for each of your empty ball slots.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544534
+    m_Localized: Even Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544535
+    m_Localized: An even number adds +3 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544536
+    m_Localized: Investment Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544537
+    m_Localized: Increases base money by 300.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544538
+    m_Localized: Chip with a hole
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544539
+    m_Localized: +3 to the multiplier for each empty chip slot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544540
+    m_Localized: Odd Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544541
+    m_Localized: An odd number adds +3 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544542
+    m_Localized: Prime Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544543
+    m_Localized: A prime number adds +5 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544544
+    m_Localized: Crimson Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544545
+    m_Localized: When points are scored for red, increases the multiplier by 3.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544546
+    m_Localized: Loot Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544547
+    m_Localized: Increases the base reward per quota by 2.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544548
+    m_Localized: X Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544549
+    m_Localized: +2 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544550
+    m_Localized: Zero Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544551
+    m_Localized: 0 gets +10 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544552
+    m_Localized: All-In Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544553
+    m_Localized: Multiplies the multiplier by 3 if the bet is placed on 0.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544554
+    m_Localized: Multiplier Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544555
+    m_Localized: Each rare chip you own gives x1.5 to the multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544556
+    m_Localized: 1-36 Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544557
+    m_Localized: Numbers 1, 2, 35 and 36 also count as 0.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544558
+    m_Localized: 8Ball Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544559
+    m_Localized: +1 ball slot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544560
+    m_Localized: Anti-Ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544561
+    m_Localized: -1 ball slot, +6 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544562
+    m_Localized: Black Bank Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544563
+    m_Localized: +0 to the multiplier. Adds +1 every time a black number comes up.
+      A number counts when you pick a ball that landed on it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544564
+    m_Localized: Champion Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544565
+    m_Localized: x1 to the multiplier, adds +0.25 to this value for every quota beaten
+      twice over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544566
+    m_Localized: D6 Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544567
+    m_Localized: Rerolls are disabled, balls are picked at random, the multiplier
+      is multiplied by 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544568
+    m_Localized: Empty Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544569
+    m_Localized: Increases the number of chip slots by 2.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544570
+    m_Localized: Skull Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544571
+    m_Localized: If you run out of bets without beating the quota, the quota counts
+      as beaten and the chip is destroyed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544572
+    m_Localized: Gold Bar Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544573
+    m_Localized: Adds your number of golden chips to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544574
+    m_Localized: Lower Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544575
+    m_Localized: A number below 18 adds +4 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544576
+    m_Localized: Loss Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544577
+    m_Localized: Reduces chip slots by 1, but multiplies the multiplier by 2.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544578
+    m_Localized: Luck/4 Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544579
+    m_Localized: Multiplies the multiplier by 2 if the number is divisible by 4.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544580
+    m_Localized: Coin Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544581
+    m_Localized: Reduces bets by 1, but adds +5 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544582
+    m_Localized: Higher Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544583
+    m_Localized: A number above 18 adds +4 to the multiplier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544584
+    m_Localized: '% Chip'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544585
+    m_Localized: Reduces the quota by 25%.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544586
+    m_Localized: Red Bank Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544587
+    m_Localized: +0 to the multiplier. Adds +1 every time a red number comes up.
+      A number counts when you pick a ball that landed on it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544588
+    m_Localized: Stack Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544589
+    m_Localized: Adds 1 extra bet per quota.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544590
+    m_Localized: Boss Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544591
+    m_Localized: Golden Chip x5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544592
+    m_Localized: Cherry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544593
+    m_Localized: +400 base money permanently
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544594
+    m_Localized: Lemon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544595
+    m_Localized: +1 bet per quota permanently
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544596
+    m_Localized: Green Six
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544597
+    m_Localized: +1 to the 0 multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544598
+    m_Localized: Six of Clubs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544599
+    m_Localized: +1 to the number multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544600
+    m_Localized: Six of Diamonds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544601
+    m_Localized: +1 to the color multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544602
+    m_Localized: Six of Hearts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544603
+    m_Localized: +1 to the dozen multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544604
+    m_Localized: Ace of Clubs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544605
+    m_Localized: +2 to the number multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544606
+    m_Localized: Ace of Diamonds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544607
+    m_Localized: +2 to the color multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544608
+    m_Localized: Ace of Hearts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544609
+    m_Localized: +2 to the dozen multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544610
+    m_Localized: Black Joker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544611
+    m_Localized: +2 to all multipliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544612
+    m_Localized: Green Ace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544613
+    m_Localized: +2 to the 0 multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544614
+    m_Localized: Red Joker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544615
+    m_Localized: +1 to all multipliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544616
+    m_Localized: Black Plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544617
+    m_Localized: Repaints 5 chosen red numbers black.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544618
+    m_Localized: Select 5 red fields to repaint black
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544619
+    m_Localized: Green Plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544620
+    m_Localized: Select 1 number. Then select 3 numbers that will be replaced with
+      it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544621
+    m_Localized: Red Plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544622
+    m_Localized: Repaints 5 chosen black numbers red.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544623
+    m_Localized: Select 5 black fields to repaint red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544624
+    m_Localized: Violet Plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544625
+    m_Localized: 'Repaints a random number violet. Permanently adds 3 to the multiplier.
+
+      If
+      a ball lands on violet, the bet is lost instantly.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544626
+    m_Localized: White Plaque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544627
+    m_Localized: 'Repaints two chosen numbers white.
+
+      If you pick a ball that
+      landed on white, the quota is won instantly and the white cell returns to its
+      original color.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544628
+    m_Localized: Select two fields to repaint white
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

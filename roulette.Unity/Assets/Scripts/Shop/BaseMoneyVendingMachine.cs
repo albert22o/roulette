@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Localization;
 using Zenject;
 
 public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
@@ -13,8 +14,8 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     [SerializeField] private OutlineController outline;
 
     [Header("Tooltip")]
-    [SerializeField] private string titleKey;
-    [SerializeField] private string mainTextKey;
+    [SerializeField] private LocalizedString title;
+    [SerializeField] private LocalizedString mainText;
     [SerializeField] private Transform tooltipPosition;
 
     private int cost;
@@ -77,10 +78,10 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     private void ShowTooltip()
     {
-        var text = mainTextKey;
+        var text = mainText.Resolve();
         var color = goldenChips.Amount >= Cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        text += $"\nЦена: <color={color}>{Cost}</color>";
-        shop.ShowTooltip(titleKey, text, tooltipPosition.position);
+        text += Loc.Get("tooltip.price", color, Cost);
+        shop.ShowTooltip(title.Resolve(), text, tooltipPosition.position);
     }
 
     public void OnHoverExit()

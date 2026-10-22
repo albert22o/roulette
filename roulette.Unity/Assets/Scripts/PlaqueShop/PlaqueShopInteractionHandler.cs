@@ -14,7 +14,7 @@ public class PlaqueShopInteractionHandler : MonoBehaviour, IInteractable
 
     private bool isInitialized;
 
-    public string Tooltip => "Вендинговая машина с плаками";
+    public string Tooltip => Loc.Get("interact.plaque_machine");
 
     public bool CanInteract => true;
 

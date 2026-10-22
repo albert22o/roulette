@@ -12,14 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0586260c09b68d4db090cd7434d47ba, type: 3}
   m_Name: D6ChipData
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"D6\""
-  description: "\u0420\u0435\u0440\u043E\u043B\u043B\u044B \u0437\u0430\u043F\u0440\u0435\u0449\u0435\u043D\u044B,
-    \u0448\u0430\u0440\u0438\u043A\u0438 \u0432\u044B\u0431\u0438\u0440\u0430\u044E\u0441\u044F
-    \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E, \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044C
-    \u0443\u043C\u043D\u043E\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0430 3"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544566
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544567
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 62019413656224619, guid: 0b299c30cc503f5459e1cf24de8f3426, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
   cost: 6
   Prefab: {fileID: 62019413656224619, guid: 0b299c30cc503f5459e1cf24de8f3426, type: 3}
   MultiplyAmount: 3
+  references:
+    version: 2
+    RefIds: []

@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff99f72d2f8f23438c2b20439037f51, type: 3}
   m_Name: LostChipData
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u041F\u043E\u0442\u0435\u0440\u044F\""
-  description: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0441\u043B\u043E\u0442\u044B
-    \u0434\u043B\u044F \u0444\u0438\u0448\u0435\u043A \u043D\u0430 1, \u043D\u043E
-    \u0443\u043C\u043D\u043E\u0436\u0430\u0435\u0442 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044C
-    \u043D\u0430 2."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544576
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544577
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 1505972630640902305, guid: 8b919f941c7ba7e49b4c974b1b425ec7, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
@@ -24,3 +37,6 @@ MonoBehaviour:
   Prefab: {fileID: 1505972630640902305, guid: 8b919f941c7ba7e49b4c974b1b425ec7, type: 3}
   SlotsToRemove: 1
   Multiplier: 2
+  references:
+    version: 2
+    RefIds: []

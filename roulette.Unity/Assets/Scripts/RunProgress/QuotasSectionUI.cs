@@ -20,9 +20,9 @@ public class QuotasSectionUI : MonoBehaviour
     public void UpdateData()
     {
         if (completedQuotasText != null)
-            completedQuotasText.text = $"Пройдено квот: {progressionManager.CurrentIndex}";
+            completedQuotasText.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex);
 
         if (currentQuotaText != null)
-            currentQuotaText.text = $"Текущая квота: {roundManager.Quote}/{roundManager.Goal}";
+            currentQuotaText.text = Loc.Get("progress.current_quota", roundManager.Quote, roundManager.Goal);
     }
 }

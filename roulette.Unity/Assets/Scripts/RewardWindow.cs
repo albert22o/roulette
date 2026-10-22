@@ -55,7 +55,7 @@ public class RewardWindow : MonoBehaviour
         if (rewardCalculator.UnusedBetsReward != 0)
         {
             unusedBetsRow.SetActive(true);
-            unusedBetsCount.text = $"Неиспользованные ставки ({rewardCalculator.UnusedBets})";
+            unusedBetsCount.text = Loc.Get("reward.unused_bets_count", rewardCalculator.UnusedBets);
             unusedBetsBonus.text = rewardCalculator.UnusedBetsReward.ToString() + " <sprite name=\"gold\">";
         }
         else
@@ -65,7 +65,7 @@ public class RewardWindow : MonoBehaviour
         if (rewardCalculator.QuotaExceededReward != 0)
         {
             quotaExceededRow.SetActive(true);
-            quotaExceededValue.text = $"Превышение квоты (×{rewardCalculator.QuotaExceed})";
+            quotaExceededValue.text = Loc.Get("reward.quota_exceeded_value", rewardCalculator.QuotaExceed);
             quotaExceededBonus.text = rewardCalculator.QuotaExceededReward.ToString() + " <sprite name=\"gold\">";
         }
         else

@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d588fa77f49f6d943926926774fc9c41, type: 3}
   m_Name: BlackBall
   m_EditorClassIdentifier: 
-  itemName: "\u0427\u0435\u0440\u043D\u044B\u0439 \u0448\u0430\u0440\u0438\u043A"
-  description: "\u041F\u0440\u0438 \u0432\u044B\u0431\u043E\u0440\u0435 \u044D\u0442\u043E\u0433\u043E
-    \u0448\u0430\u0440\u0438\u043A\u0430 \u0434\u0430\u0435\u0442 +3 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E
-    \u0435\u0441\u043B\u0438 \u043E\u043D \u0432\u044B\u043F\u0430\u043B \u043D\u0430
-    \u0447\u0435\u0440\u043D\u043E\u0435 \u0447\u0438\u0441\u043B\u043E"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544516
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544517
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 4657025761638334603, guid: a297e167ec978534d867ad032a6d75b5, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
@@ -26,3 +39,6 @@ MonoBehaviour:
   isDestroyable: 0
   multiplier: 3
   color: 1
+  references:
+    version: 2
+    RefIds: []

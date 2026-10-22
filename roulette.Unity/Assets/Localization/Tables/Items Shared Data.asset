@@ -1,0 +1,500 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Items Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Items
+  m_TableCollectionNameGuidString: 116cde72b6e19f54381c778510ef85d4
+  m_Entries:
+  - m_Id: 279961600
+    m_Key: rarity.Epic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544512
+    m_Key: rarity.Common
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544513
+    m_Key: rarity.Rare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544514
+    m_Key: color.White.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544515
+    m_Key: color.Violet.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544516
+    m_Key: item.BlackBall.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544517
+    m_Key: item.BlackBall.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544518
+    m_Key: item.GlassBall.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544519
+    m_Key: item.GlassBall.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544520
+    m_Key: item.RedBall.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544521
+    m_Key: item.RedBall.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544522
+    m_Key: item.SimpleBall.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544523
+    m_Key: item.SimpleBall.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544524
+    m_Key: item.AntiBlackChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544525
+    m_Key: item.AntiBlackChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544526
+    m_Key: item.AntiiRedChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544527
+    m_Key: item.AntiiRedChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544528
+    m_Key: item.BlackChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544529
+    m_Key: item.BlackChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544530
+    m_Key: item.DotsChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544531
+    m_Key: item.DotsChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544532
+    m_Key: item.EmptyBallSlotBonusChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544533
+    m_Key: item.EmptyBallSlotBonusChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544534
+    m_Key: item.EvenChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544535
+    m_Key: item.EvenChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544536
+    m_Key: item.InvestmentChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544537
+    m_Key: item.InvestmentChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544538
+    m_Key: item.LeakyChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544539
+    m_Key: item.LeakyChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544540
+    m_Key: item.OddChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544541
+    m_Key: item.OddChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544542
+    m_Key: item.PrimeChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544543
+    m_Key: item.PrimeChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544544
+    m_Key: item.RedChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544545
+    m_Key: item.RedChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544546
+    m_Key: item.RewardChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544547
+    m_Key: item.RewardChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544548
+    m_Key: item.XChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544549
+    m_Key: item.XChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544550
+    m_Key: item.ZeroChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544551
+    m_Key: item.ZeroChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544552
+    m_Key: item.AllInChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544553
+    m_Key: item.AllInChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544554
+    m_Key: item.MultipliChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544555
+    m_Key: item.MultipliChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544556
+    m_Key: item.OneToThirtySixChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544557
+    m_Key: item.OneToThirtySixChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544558
+    m_Key: item.8BallChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544559
+    m_Key: item.8BallChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544560
+    m_Key: item.AntiBallChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544561
+    m_Key: item.AntiBallChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544562
+    m_Key: item.BlackBankChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544563
+    m_Key: item.BlackBankChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544564
+    m_Key: item.ChampionChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544565
+    m_Key: item.ChampionChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544566
+    m_Key: item.D6ChipData.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544567
+    m_Key: item.D6ChipData.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544568
+    m_Key: item.EmptyChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544569
+    m_Key: item.EmptyChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544570
+    m_Key: item.ExtraLifesChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544571
+    m_Key: item.ExtraLifesChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544572
+    m_Key: item.GoldenIngotChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544573
+    m_Key: item.GoldenIngotChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544574
+    m_Key: item.LessChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544575
+    m_Key: item.LessChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544576
+    m_Key: item.LostChipData.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544577
+    m_Key: item.LostChipData.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544578
+    m_Key: item.Luck4Chip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544579
+    m_Key: item.Luck4Chip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544580
+    m_Key: item.MoneyChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544581
+    m_Key: item.MoneyChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544582
+    m_Key: item.MoreChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544583
+    m_Key: item.MoreChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544584
+    m_Key: item.PercentChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544585
+    m_Key: item.PercentChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544586
+    m_Key: item.RedBankChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544587
+    m_Key: item.RedBankChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544588
+    m_Key: item.StackChip.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544589
+    m_Key: item.StackChip.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544590
+    m_Key: item.BossChip1.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544591
+    m_Key: item.GoldenChips5.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544592
+    m_Key: item.CherryFoodData.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544593
+    m_Key: item.CherryFoodData.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544594
+    m_Key: item.LemonFoodData.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544595
+    m_Key: item.LemonFoodData.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544596
+    m_Key: item.Green6.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544597
+    m_Key: item.Green6.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544598
+    m_Key: item.SixOfClubs.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544599
+    m_Key: item.SixOfClubs.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544600
+    m_Key: item.SixOfDiamonds.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544601
+    m_Key: item.SixOfDiamonds.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544602
+    m_Key: item.SixOfHearts.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544603
+    m_Key: item.SixOfHearts.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544604
+    m_Key: item.AceOfClubs.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544605
+    m_Key: item.AceOfClubs.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544606
+    m_Key: item.AceOfDiamonds.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544607
+    m_Key: item.AceOfDiamonds.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544608
+    m_Key: item.AceOfHearts.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544609
+    m_Key: item.AceOfHearts.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544610
+    m_Key: item.BlackJoker.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544611
+    m_Key: item.BlackJoker.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544612
+    m_Key: item.GreenAce.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544613
+    m_Key: item.GreenAce.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544614
+    m_Key: item.RedJoker.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544615
+    m_Key: item.RedJoker.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544616
+    m_Key: item.BlackPlaque.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544617
+    m_Key: item.BlackPlaque.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544618
+    m_Key: item.BlackPlaque.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544619
+    m_Key: item.GreenPlaque.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544620
+    m_Key: item.GreenPlaque.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544621
+    m_Key: item.RedPlaque.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544622
+    m_Key: item.RedPlaque.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544623
+    m_Key: item.RedPlaque.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544624
+    m_Key: item.VioletPlaqueData.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544625
+    m_Key: item.VioletPlaqueData.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544626
+    m_Key: item.WhitePlaque.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544627
+    m_Key: item.WhitePlaque.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292544628
+    m_Key: item.WhitePlaque.hint
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8459180077707952621
+  references:
+    version: 2
+    RefIds:
+    - rid: 8459180077707952621
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1792665412927

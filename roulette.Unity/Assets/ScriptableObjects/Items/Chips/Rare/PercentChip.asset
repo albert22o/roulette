@@ -12,12 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c1946b44e2cca4297dad80fce0a5ff, type: 3}
   m_Name: PercentChip
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"%\""
-  description: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u043A\u0432\u043E\u0442\u0443
-    \u043D\u0430 25%."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544584
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544585
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 1587637863355107474, guid: 74d2dd61e9d742f42b458644e778248d, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
   cost: 6
   Prefab: {fileID: 1587637863355107474, guid: 74d2dd61e9d742f42b458644e778248d, type: 3}
   GoalModifierDelta: -0.25
+  references:
+    version: 2
+    RefIds: []

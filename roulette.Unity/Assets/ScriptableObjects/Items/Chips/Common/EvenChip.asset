@@ -12,10 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c687063d9090447bdacb48778ca254, type: 3}
   m_Name: EvenChip
   m_EditorClassIdentifier: 
-  itemName: "\u0427\u0435\u0442\u043D\u0430\u044F \u0444\u0438\u0448\u043A\u0430"
-  description: "\u0412\u044B\u043F\u0430\u0434\u0435\u043D\u0438\u0435 \u0447\u0435\u0442\u043D\u043E\u0433\u043E
-    \u0447\u0438\u0441\u043B\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442
-    +3 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544534
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544535
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 3840028314884938284, guid: b35659d0be1d0ff4e8c9ad75cda15ea1, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
@@ -24,3 +38,6 @@ MonoBehaviour:
   Divisor: 2
   Remainder: 0
   BonusAmount: 3
+  references:
+    version: 2
+    RefIds: []

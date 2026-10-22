@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName = "ColorChangeSelectedPlaque", menuName = "Plaques/ColorChangeSelectedPlaque")]
 public class ColorChangeSelectedPlaqueData : PlaqueData
@@ -7,9 +8,8 @@ public class ColorChangeSelectedPlaqueData : PlaqueData
     [field: SerializeField] public int SelectionCount { get; private set; }
     [field: SerializeField] public ColorMask Filter { get; private set; }
     [field: SerializeField] public ColorType TargetColor { get; private set; }
-    [TextArea(1, 5)]
-    [SerializeField] public string hint;
-    public string Hint => hint;
+    [SerializeField] private LocalizedString hint;
+    public string Hint => hint.Resolve();
 
     public override Plaque CreatePlaque(PlaqueDependencies dependencies)
     {

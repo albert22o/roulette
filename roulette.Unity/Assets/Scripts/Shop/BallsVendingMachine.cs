@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
+using UnityEngine.Localization;
 using Zenject;
 using Zenject.Asteroids;
 
@@ -9,8 +10,8 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     [SerializeField] private ShopItemsRarityGroup ballsTable;
 
     [Header("Tooltip")]
-    [SerializeField] private string titleKey;
-    [SerializeField] private string mainTextKey;
+    [SerializeField] private LocalizedString title;
+    [SerializeField] private LocalizedString mainText;
     [SerializeField] private Transform tooltipPoint;
 
     [Space]
@@ -92,12 +93,12 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
        
     public void OnHoverEnter()
     {
-        var text = mainTextKey;
+        var text = mainText.Resolve();
         var color = goldenChips.Amount >= Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        text += $"\nЦена: <color={color}>{Cost}</color>";
+        text += Loc.Get("tooltip.price", color, Cost);
         color = spinsCount > 0 ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        text += $"\nОсталось прокруток: <color={color}>{spinsCount}</color>";
-        shop.ShowTooltip(titleKey, text, tooltipPoint.position);
+        text += Loc.Get("tooltip.spins_left", color, spinsCount);
+        shop.ShowTooltip(title.Resolve(), text, tooltipPoint.position);
         outline.ToggleMaterial(true);
     }
 

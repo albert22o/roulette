@@ -28,11 +28,11 @@ public class PlaqueVendingMachine : MonoBehaviour, IMouseInteractable, IClickabl
     {
         outline.ToggleMaterial(true);
 
-        string title = "Магазин плаков";
-        string description = "Купить 1 плак";
+        string title = Loc.Get("shop.plaque_machine.title");
+        string description = Loc.Get("shop.plaque_machine.desc");
 
         var color = plaqueShop.CanBuy ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{plaqueShop.Cost}</color>" + " босс фишка";
+        description += Loc.Get("tooltip.price_boss_chips", color, plaqueShop.Cost);
 
         tooltip.Show(title, description, transform.position);
     }

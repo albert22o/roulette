@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d918585ff65e64783aff52e4251d94, type: 3}
   m_Name: Luck4Chip
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"\u0423\u0434\u0430\u0447\u0430/4\""
-  description: "\u0423\u043C\u043D\u043E\u0436\u0430\u0435\u0442 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044C
-    \u043D\u0430 2, \u0435\u0441\u043B\u0438 \u0432\u044B\u043F\u0430\u0432\u0448\u0435\u0435
-    \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0434\u0435\u043B\u0438\u0442\u0441\u044F
-    \u043D\u0430 4."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544578
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544579
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 2006656940924654961, guid: 977f3d91c0da8d24ea509e42c23dc5d0, type: 3}
   rarityType: 2
   Icon: {fileID: 0}
@@ -25,3 +38,6 @@ MonoBehaviour:
   Divisor: 4
   Remainder: 0
   Multiplier: 2
+  references:
+    version: 2
+    RefIds: []

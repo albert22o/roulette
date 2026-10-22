@@ -12,10 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a07e84d75f0314aa7405f7c0305fc2, type: 3}
   m_Name: GoldenChips5
   m_EditorClassIdentifier: Assembly-CSharp::GoldenChipItemData
-  itemName: "\u0417\u043E\u043B\u043E\u0442\u0430\u044F \u0444\u0438\u0448\u043A\u0430
-    x5"
-  description: 
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544591
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 4657025761638334603, guid: 0dd95762f3ff67d4c8e224473dbabe6c, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
   amount: 5
+  references:
+    version: 2
+    RefIds: []

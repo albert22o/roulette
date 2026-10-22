@@ -82,9 +82,9 @@ public class ShopInventory : MonoBehaviour
         if (item.Data.RarityType != RarityType.None)
         {
             var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
-            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
+            description += Loc.Get("tooltip.rarity", UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color), rarity.Name);
         }
-        description += "\nЦена продажи: " + shop.GetSellPrice(item.Data);
+        description += Loc.Get("tooltip.sell_price", shop.GetSellPrice(item.Data));
         shop.ShowTooltip(item.Data.Name, description, item.transform.position);
     }
 

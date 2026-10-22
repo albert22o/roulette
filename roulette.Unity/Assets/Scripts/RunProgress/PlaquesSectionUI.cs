@@ -29,7 +29,7 @@ public class PlaquesSectionUI : MonoBehaviour
             foreach (var group in groupedPlaque)
             {
                 Sprite icon = GetPlaqueIcon(group.FirstPlaqueData);
-                string text = $"{group.PlaqueType.Name} x{group.Count}";
+                string text = $"{group.FirstPlaqueData.Name} x{group.Count}";
                 SpawnItem(icon, text);
             }
         }

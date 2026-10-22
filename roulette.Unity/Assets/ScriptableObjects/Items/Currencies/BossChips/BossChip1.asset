@@ -12,9 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85970b14034ab8d4b8a80ca66aa856a5, type: 3}
   m_Name: BossChip1
   m_EditorClassIdentifier: Assembly-CSharp::BossChipItemData
-  itemName: "\u0411\u043E\u0441\u0441 \u0444\u0438\u0448\u043A\u0430"
-  description: 
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544590
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 2593338886803912469, guid: b7e7f808c416039478051e8696826d5c, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
   amount: 1
+  references:
+    version: 2
+    RefIds: []

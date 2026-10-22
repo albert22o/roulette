@@ -83,7 +83,7 @@ public class TableMultipliersView : MonoBehaviour
             if (colorBets.Count > 0)
             {
                 var colorTexts = colorBets.Select(c =>
-                    $"{c}:\n×{betCalculator.GetEffectiveColorMultiplier(c)}");
+                    Loc.Get("multipliers.color_bet", Loc.Color(c), betCalculator.GetEffectiveColorMultiplier(c)));
                 colorMultiplierText.text = string.Join(", ", colorTexts);
             }
             else
@@ -103,7 +103,7 @@ public class TableMultipliersView : MonoBehaviour
             if (dozenBets.Count > 0)
             {
                 var dozenTexts = dozenBets.Select(d =>
-                    $"{d}:\n×{betCalculator.GetEffectiveDozenMultiplier(d)}");
+                    Loc.Get("multipliers.dozen_bet", d, betCalculator.GetEffectiveDozenMultiplier(d)));
                 dozenMultiplierText.text = string.Join(", ", dozenTexts);
             }
             else
@@ -139,7 +139,7 @@ public class TableMultipliersView : MonoBehaviour
             if (hasZeroBet)
             {
                 int multiplier = betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier);
-                zeroMultiplierText.text = $"Zero: ×{multiplier}";
+                zeroMultiplierText.text = Loc.Get("multipliers.zero_bet", multiplier);
             }
             else
             {
@@ -158,9 +158,9 @@ public class TableMultipliersView : MonoBehaviour
 
     private void ShowGeneralMultipliers()
     {
-        if (colorMultiplierText != null) colorMultiplierText.text = $"Color:\n×{betCalculator.ColorMultiplier}";
-        if (dozenMultiplierText != null) dozenMultiplierText.text = $"Dozen:\n×{betCalculator.DozenMultiplier}";
-        if (numberMultiplierText != null) numberMultiplierText.text = $"Number:\n×{betCalculator.NumMultiplier}";
-        if (zeroMultiplierText != null) zeroMultiplierText.text = $"Zero:\n×{betCalculator.ZeroMultiplier}";
+        if (colorMultiplierText != null) colorMultiplierText.text = Loc.Get("multipliers.color", betCalculator.ColorMultiplier);
+        if (dozenMultiplierText != null) dozenMultiplierText.text = Loc.Get("multipliers.dozen", betCalculator.DozenMultiplier);
+        if (numberMultiplierText != null) numberMultiplierText.text = Loc.Get("multipliers.number", betCalculator.NumMultiplier);
+        if (zeroMultiplierText != null) zeroMultiplierText.text = Loc.Get("multipliers.zero", betCalculator.ZeroMultiplier);
     }
 }

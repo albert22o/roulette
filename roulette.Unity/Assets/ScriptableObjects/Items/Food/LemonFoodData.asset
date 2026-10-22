@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58447d237e681443a3e6c0cfec7c806, type: 3}
   m_Name: LemonFoodData
   m_EditorClassIdentifier: 
-  itemName: "\u041B\u0438\u043C\u043E\u043D"
-  description: "+1 \u043A \u0441\u0442\u0430\u0432\u043A\u0430\u043C \u0432 \u0440\u0430\u043C\u043A\u0430\u0445
-    \u043A\u0432\u043E\u0442\u044B \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544594
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544595
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 919132149155446097, guid: 49850aadbcd076345888d8d3bcf2d6fe, type: 3}
   rarityType: 3
   Icon: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []

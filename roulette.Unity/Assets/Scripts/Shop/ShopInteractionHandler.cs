@@ -12,7 +12,7 @@ public class ShopInteractionHandler : MonoBehaviour, IInteractable
     private GameStateManager stateManager;
     private bool isInteraction;
 
-    public string Tooltip => "Магазин";
+    public string Tooltip => Loc.Get("interact.shop");
 
     public bool CanInteract => true;
 

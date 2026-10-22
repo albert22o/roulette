@@ -12,11 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4200e3b8bded9e04397474ae2a26232a, type: 3}
   m_Name: XChip
   m_EditorClassIdentifier: 
-  itemName: "\u0424\u0438\u0448\u043A\u0430 \"X\""
-  description: "+2 \u043A \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u044E."
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544548
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+    m_TableEntryReference:
+      m_KeyId: 292544549
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   shopPrefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
   Prefab: {fileID: 3659585706479221829, guid: 11ebcf2270f4422488449aa44b0a01f0, type: 3}
   BonusAmount: 2
+  references:
+    version: 2
+    RefIds: []

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName = "RarityData", menuName = "Scriptable Objects/RarityData")]
 public class RarityData : ScriptableObject
@@ -35,10 +36,10 @@ public class RarityData : ScriptableObject
 public class RarityDisplayData
 {
     [SerializeField] private RarityType type;
-    [SerializeField][TextArea(1, 3)] private string name;
+    [SerializeField] private LocalizedString name;
     [SerializeField] private Color color = Color.white;
 
-    public string Name => name;
+    public string Name => name.Resolve();
     public RarityType Type => type;
     public Color Color => color;
 }

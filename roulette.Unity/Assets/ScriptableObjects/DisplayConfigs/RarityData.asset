@@ -14,11 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raritiesList:
   - type: 0
-    name: "\u042D\u043F\u0438\u0447\u0435\u0441\u043A\u0430\u044F"
+    name:
+      m_TableReference:
+        m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+      m_TableEntryReference:
+        m_KeyId: 279961600
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     color: {r: 0.8961482, g: 0, b: 1, a: 1}
   - type: 1
-    name: "\u041E\u0431\u044B\u0447\u043D\u0430\u044F"
+    name:
+      m_TableReference:
+        m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+      m_TableEntryReference:
+        m_KeyId: 292544512
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     color: {r: 0, g: 0, b: 0, a: 1}
   - type: 2
-    name: "\u0420\u0435\u0434\u043A\u0430\u044F"
+    name:
+      m_TableReference:
+        m_TableCollectionName: GUID:116cde72b6e19f54381c778510ef85d4
+      m_TableEntryReference:
+        m_KeyId: 292544513
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     color: {r: 1, g: 0.5182636, b: 0, a: 1}
+  references:
+    version: 2
+    RefIds: []

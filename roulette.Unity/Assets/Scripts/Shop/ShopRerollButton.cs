@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Localization;
 using Zenject;
 
 public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
@@ -13,8 +14,8 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     [SerializeField] private OutlineController outline;
 
     [Header("Tooltip")]
-    [SerializeField] private string titleKey;
-    [SerializeField] private string mainTextKey;
+    [SerializeField] private LocalizedString title;
+    [SerializeField] private LocalizedString mainText;
 
     private int cost;
     private GoldenChips goldenChips;
@@ -57,11 +58,11 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
 
     public void OnHoverEnter()
     {
-        var description = $"{mainTextKey}";
+        var description = mainText.Resolve();
         var color = goldenChips.Amount >= cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        description += $"\nЦена: <color={color}>{cost}</color>";
+        description += Loc.Get("tooltip.price", color, cost);
 
-        shop.ShowTooltip(titleKey, description, transform.position);
+        shop.ShowTooltip(title.Resolve(), description, transform.position);
         outline.ToggleMaterial(true);
     }
 

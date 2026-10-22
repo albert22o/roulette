@@ -4,7 +4,7 @@ using Zenject;
 public class TableInteractionHandler : MonoBehaviour, IInteractable
 {
     private GameStateManager gameStateManager;
-    public string Tooltip => "Стол";
+    public string Tooltip => Loc.Get("interact.table");
 
     public bool CanInteract => true;
 
