@@ -13,7 +13,7 @@ public class BetTableView : MonoBehaviour
     [SerializeField] List<BetButton> betButtons = new();
     [SerializeField] float timeBetweenHighlights = 1f;
     [SerializeField] float timeBeforeBetsHighlight = 3f;
-    [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private SimpleTooltip tooltip;
     [SerializeField] private float betsClearDelay = 2f;
 
     [SerializeField] BottomSectionZone[] bottomSectionColorZones;

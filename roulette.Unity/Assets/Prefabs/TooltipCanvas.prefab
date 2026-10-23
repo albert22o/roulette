@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7748760340245566351}
   - component: {fileID: 8501944531572826875}
   - component: {fileID: 4238260421715987227}
+  - component: {fileID: 2836088881515076368}
   m_Layer: 0
   m_Name: Tooltip
   m_TagString: Untagged
@@ -125,7 +126,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1016.4537, y: -539.46045}
-  m_SizeDelta: {x: 256.5, y: 126.189995}
+  m_SizeDelta: {x: 256.5, y: 98.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7317077433687533490
 MonoBehaviour:
@@ -139,8 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531d69c91455ecf4fb58059b7d2dc4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 7540110774572472963}
-  mainText: {fileID: 3517589292057494266}
   offset: {x: 0, y: 100}
   screenPadding: {x: 10, y: 10}
   rect: {fileID: 1505648898131038897}
@@ -179,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.76470596, g: 0.7058824, b: 0.60784316, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -236,6 +235,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2836088881515076368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421154262081016888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034256e47d1732649a8d342d5f1143bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 7540110774572472963}
+  mainText: {fileID: 3517589292057494266}
+  titleRect: {fileID: 2472305447010801580}
+  mainTextRect: {fileID: 4874005264035007630}
+  tooltipRect: {fileID: 1505648898131038897}
+  worldSpaceTooltip: {fileID: 7317077433687533490}
 --- !u!1 &8183830115256478290
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,8 +288,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 128.25, y: -93.84999}
-  m_SizeDelta: {x: 246.5, y: 54.68}
+  m_AnchoredPosition: {x: 128.25, y: -68.06}
+  m_SizeDelta: {x: 246.5, y: 50.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3113378153521781985
 CanvasRenderer:
@@ -304,15 +321,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2e4d47758bf26f40aa9a177c832accc, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: c989004f006d6744993c37ad43bdbc91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -423,8 +440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 128.25, y: -35.754997}
-  m_SizeDelta: {x: 242.4, y: 61.51}
+  m_AnchoredPosition: {x: 128.25, y: -23.81}
+  m_SizeDelta: {x: 242.4, y: 37.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2533683064376156814
 CanvasRenderer:
@@ -456,15 +473,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: NameNameNameNameNameNameNameNameNameName
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2e4d47758bf26f40aa9a177c832accc, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: c989004f006d6744993c37ad43bdbc91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

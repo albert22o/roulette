@@ -138,7 +138,7 @@ public class ChipHolderView : MonoBehaviour
         else
         {
             var chipData = chipHolder.Chips[hoverTooltipSlot.SlotIndex]?.ChipData;
-            tooltip.Show(chipData.Name, chipData.Description, slot.transform.position);
+            tooltip.Show(chipData.Name, chipData.Description, chipData.Cost.ToString(), chipData.RarityType, slot.transform.position);
         }
     }
 

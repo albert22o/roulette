@@ -80,8 +80,8 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     {
         var text = mainText.Resolve();
         var color = goldenChips.Amount >= Cost ? shopFontConfig.CanBuyColorHex : shopFontConfig.CantBuyColorHex;
-        text += Loc.Get("tooltip.price", color, Cost);
-        shop.ShowTooltip(title.Resolve(), text, tooltipPosition.position);
+        var cost = $"<color={color}>{Cost}</color>";
+        shop.ShowTooltip(title.Resolve(), text, cost, tooltipPosition.position);
     }
 
     public void OnHoverExit()

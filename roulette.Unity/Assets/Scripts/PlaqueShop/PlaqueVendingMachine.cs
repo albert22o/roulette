@@ -6,7 +6,7 @@ using Zenject;
 public class PlaqueVendingMachine : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
 {
     [SerializeField] private OutlineController outline;
-    [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private SimpleTooltip tooltip;
     [SerializeField] private PlaqueShopView plaqueShopView;
     private PlaqueShop plaqueShop;
     private ShopFontConfig fontColorsConfig;

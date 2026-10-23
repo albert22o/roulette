@@ -55,8 +55,8 @@ public class ChipShopPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             description += Loc.Get("tooltip.rarity", UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color), rarity.Name);
         }
         var color = goldenChips.Amount >= Item.Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        description += Loc.Get("tooltip.price", color, Item.Cost);
-        shop.ShowTooltip(Item.Name, description, transform.position);
+        var cost = Loc.Get("tooltip.price", color, Item.Cost);
+        shop.ShowTooltip(Item.Name, description, cost, transform.position, item.RarityType);
     }
 
     public void HideDescription()

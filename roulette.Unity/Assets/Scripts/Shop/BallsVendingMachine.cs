@@ -95,10 +95,9 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     {
         var text = mainText.Resolve();
         var color = goldenChips.Amount >= Cost ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
-        text += Loc.Get("tooltip.price", color, Cost);
-        color = spinsCount > 0 ? fontColorsConfig.CanBuyColorHex : fontColorsConfig.CantBuyColorHex;
         text += Loc.Get("tooltip.spins_left", color, spinsCount);
-        shop.ShowTooltip(title.Resolve(), text, tooltipPoint.position);
+        var cost = Loc.Get("tooltip.price", color, Cost);
+        shop.ShowTooltip(title.Resolve(), text, cost, tooltipPoint.position);
         outline.ToggleMaterial(true);
     }
 

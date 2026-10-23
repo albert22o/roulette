@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         UpdateShop(true);
+        baseMoneyVendingMachine.ResetCost();
     }
 
 
@@ -58,9 +59,9 @@ public class Shop : MonoBehaviour
         rerollButton.ResetCost();
     }
 
-    public void ShowTooltip(string title, string mainText, Vector3 position)
+    public void ShowTooltip(string title, string mainText, string cost, Vector3 position, RarityType rarityType = RarityType.None)
     {
-        tooltip.Show(title, mainText,position);
+        tooltip.Show(title, mainText, cost, rarityType, position);
         tooltip.gameObject.SetActive(true);
     }
 

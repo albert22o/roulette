@@ -6,7 +6,7 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private PlaqueItem[] plaquePlaces;
     [SerializeField] private PlaqueVendingMachine vendingMachine;
     [SerializeField] private MouseInteraction mouseInteraction;
-    [SerializeField] private ShopTooltip tooltip;
+    [SerializeField] private SimpleTooltip tooltip;
     [SerializeField] private CancelInputHandler cancelInputHandler;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;

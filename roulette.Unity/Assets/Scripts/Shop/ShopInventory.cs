@@ -84,8 +84,8 @@ public class ShopInventory : MonoBehaviour
             var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
             description += Loc.Get("tooltip.rarity", UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color), rarity.Name);
         }
-        description += Loc.Get("tooltip.sell_price", shop.GetSellPrice(item.Data));
-        shop.ShowTooltip(item.Data.Name, description, item.transform.position);
+        var cost = Loc.Get("tooltip.sell_price", shop.GetSellPrice(item.Data));
+        shop.ShowTooltip(item.Data.Name, description, cost, item.transform.position, item.Data.RarityType);
     }
 
     private void UpdateChips()

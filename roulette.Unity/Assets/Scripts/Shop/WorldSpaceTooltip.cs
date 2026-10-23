@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class ShopTooltip : MonoBehaviour
+public class WorldSpaceTooltip : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI title, mainText;
-
     [Header("Position Settings")]
     [SerializeField] private Vector2 offset = new Vector2(0f, 50f);
     [SerializeField] private Vector2 screenPadding = new Vector2(20f, 20f);
@@ -25,8 +23,6 @@ public class ShopTooltip : MonoBehaviour
 
     private void Awake()
     {
-
-        // Гарантируем, что Pivot Y установлен в 0 для расширения снизу вверх
         rect.pivot = new Vector2(rect.pivot.x, 0f);
 
         parentCanvas = GetComponentInParent<Canvas>();
@@ -41,30 +37,16 @@ public class ShopTooltip : MonoBehaviour
         UpdateTooltipPosition();
     }
 
-    public void Show(string title, string mainText, Vector3 worldPosition)
+    public void Show(Vector3 worldPosition)
     {
-        SetupTextAndLayout(title, mainText);
-
         currentTargetWorldPosition = worldPosition;
         UpdateTooltipPosition();
-    }
-
-    private void SetupTextAndLayout(string titleText, string bodyText)
-    {
         gameObject.SetActive(true);
-        this.title.text = titleText;
-        this.mainText.text = bodyText;
-
-        this.title.ForceMeshUpdate();
-        this.mainText.ForceMeshUpdate();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(this.title.rectTransform);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(this.mainText.rectTransform);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
     }
+
 
     private void UpdateTooltipPosition()
     {
-        // Принудительно обновляем геометрию UI перед расчетами, чтобы избежать задержек в 1 кадр
         Canvas.ForceUpdateCanvases();
 
         Vector3 screenPoint = mainCamera.WorldToScreenPoint(currentTargetWorldPosition);
