@@ -22,9 +22,11 @@ public class Shop : MonoBehaviour
     private BallHolder ballHolder;
     private ChipHolder chipHolder;
     private ProgressionManager progressionManager;
-    [Inject] private readonly SignalBus signalBus;
+
 
     public event Action InteractionStarted, InteractionFinished;
+
+    public event Action ItemPurchased, ItemSold;
 
     [Inject]
     public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder,
@@ -40,8 +42,27 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         UpdateShop(true);
+        baseMoneyVendingMachine.BaseMoneyPurchased += OnItemPurchased;
+        ballsVendingMachine.BallBought += OnBallBought;
+        foodPlace.FoodPurchased += OnFoodBought;
+        chipPlacesController.ChipBought += OnChipBought;
+        rerollButton.RerollUsed += OnItemPurchased;
     }
 
+    private void OnChipBought()
+    {
+        ItemPurchased?.Invoke();
+    }
+
+    private void OnFoodBought()
+    {
+        OnItemPurchased();
+    }
+
+    private void OnBallBought(BallInfoData data)
+    {
+        OnItemPurchased();
+    }
 
     public void OnWin()
     {
@@ -61,7 +82,7 @@ public class Shop : MonoBehaviour
 
     public void ShowTooltip(string title, string mainText, Vector3 position)
     {
-        tooltip.Show(title, mainText,position);
+        tooltip.Show(title, mainText, position);
         tooltip.gameObject.SetActive(true);
     }
 
@@ -83,7 +104,7 @@ public class Shop : MonoBehaviour
             {
                 goldenChips.Add(Config.BallSellCost);
                 ballHolder.RemoveBall(index);
-                signalBus.Fire(new ItemSoldSignal());
+                ItemSold?.Invoke();
                 return true;
             }
             return false;
@@ -93,7 +114,7 @@ public class Shop : MonoBehaviour
             float sellCost = (int)(chipData.Cost * config.ChipSellMultiplier);
             if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * config.ChipSellMultiplier));
             chipHolder.RemoveChip(index);
-            signalBus.Fire(new ItemSoldSignal());
+            ItemSold?.Invoke();
             return true;
         }
         return false;
@@ -116,6 +137,8 @@ public class Shop : MonoBehaviour
         }
     }
 
+
+
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;
@@ -133,4 +156,6 @@ public class Shop : MonoBehaviour
         SetInteractionAvailable(false);
         InteractionFinished?.Invoke();
     }
+
+    public void OnItemPurchased() => ItemPurchased?.Invoke();
 }

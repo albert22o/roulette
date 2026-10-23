@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,9 +9,15 @@ public class ShopChipPlacesController : MonoBehaviour
 
     private ShopItemsPool itemsPool;
 
+    public event Action ChipBought;
+
     private void Awake()
     {
         itemsPool = new ShopItemsPool(itemsTable);
+        foreach (ChipShopPlace place in shopPlaces)
+        {
+            place.ItemBought += OnChipBought;
+        }
     }
 
     public void Fill()
@@ -20,6 +27,8 @@ public class ShopChipPlacesController : MonoBehaviour
             place.SetItem(itemsPool.GetRandomItem() as ChipData);
         }
     }
+
+    private void OnChipBought() => ChipBought?.Invoke();
 
     public void Reroll()
     {

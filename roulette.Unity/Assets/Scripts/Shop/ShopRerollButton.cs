@@ -19,6 +19,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     private int cost;
     private GoldenChips goldenChips;
     private ShopFontConfig shopFontConfig;
+    public event Action RerollUsed;
 
     public bool IsInteractable => chipPlacesController.CheckRerollAvailable();
     public int Cost
@@ -52,6 +53,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
             goldenChips.Remove(Cost);
             Cost += costDelta;
             chipPlacesController.Reroll();
+            RerollUsed?.Invoke();
         }
     }
 

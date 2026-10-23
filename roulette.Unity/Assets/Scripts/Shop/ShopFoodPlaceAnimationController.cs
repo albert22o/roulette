@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ShopFoodPlaceAnimationController : MonoBehaviour
@@ -7,6 +8,8 @@ public class ShopFoodPlaceAnimationController : MonoBehaviour
 
     private readonly int isHoverHash = Animator.StringToHash("IsHover");
     private readonly int hasItemHash = Animator.StringToHash("HasItem");
+
+    public event Action CapRised;
 
     private void OnEnable()
     {
@@ -29,4 +32,6 @@ public class ShopFoodPlaceAnimationController : MonoBehaviour
     {
         animator.SetBool(hasItemHash, hasItem);
     }
+
+    public void OnCapRise() => CapRised?.Invoke();
 }
