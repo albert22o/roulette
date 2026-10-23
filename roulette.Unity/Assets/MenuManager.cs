@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class PauseManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuPanel; 
+    [SerializeField] private GameObject menuPanel; 
     [SerializeField] private InputActionReference pauseAction;
 
     private bool isPaused;
@@ -62,9 +62,9 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
         timeScaleManager.SetPauseState(true);
         cursorManager.ShowCursorRequest();
-        if (pauseMenuPanel != null)
+        if (menuPanel != null)
         {
-            pauseMenuPanel.SetActive(true);
+            menuPanel.SetActive(true);
         }
     }
 
@@ -73,9 +73,9 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         cursorManager.HideCursorRequest();
         timeScaleManager.SetPauseState(false);
-        if (pauseMenuPanel != null)
+        if (menuPanel != null)
         {
-            pauseMenuPanel.SetActive(false);
+            menuPanel.SetActive(false);
         }
     }
 }
