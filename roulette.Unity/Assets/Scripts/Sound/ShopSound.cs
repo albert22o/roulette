@@ -6,37 +6,23 @@ using Zenject;
 
 public class ShopSound : MonoBehaviour
 {
-    [SerializeField] private float soundCooldown = 0.1f;
-    [Header("Purchase")]
-    [SerializeField] private AudioSource buyAudioSource;
-    [SerializeField] private AudioClip itemPurchasedClip;
-
-    [Header("Chip Places")]
-    [SerializeField] private AudioSource chipPlaceAudioSource;
     [SerializeField] private ChipPlaceAnimationController[] chipPlaces;
-    [SerializeField] private AudioClip chipPlaceMoveClip;
 
-    [Header("Food Cap")]
-    [SerializeField] private AudioSource foodCapRiseSource;
     [SerializeField] private ShopFoodPlaceAnimationController foodCap;
-    [SerializeField] private AudioClip foodCapRiseClip;
-
-    [Header("Counters")]
     [SerializeField] private DrumNumberWheel[] shopDrumWheels;
-    [SerializeField] private AudioClip drumWheelStepClip;
-    [SerializeField] private AudioSource DrumWheelTickSource;
-    private readonly Dictionary<AudioClip, float> _lastPlayTimes = new Dictionary<AudioClip, float>();
 
     private Shop shop;
     private GameStateManager gameStateManager;
     private bool isSoundEnabled;
+    private SFXManager soundManager;
 
 
     [Inject]
-    private void Construct(Shop shop, GameStateManager gameStateManager)
+    private void Construct(Shop shop, GameStateManager gameStateManager, SFXManager soundManager)
     {
         this.shop = shop;
         this.gameStateManager = gameStateManager;
+        this.soundManager = soundManager;
     }
 
     private void Start()
@@ -89,36 +75,24 @@ public class ShopSound : MonoBehaviour
     }
     private void OnFoodCapRise()
     {
-        PlaySound(foodCapRiseSource, foodCapRiseClip);
+        if (isSoundEnabled == false) return;
+        soundManager.Play("FoodCapRise");
     }
 
     private void OnChipPlaceMovingStarted()
     {
-        PlaySound(chipPlaceAudioSource, chipPlaceMoveClip);
+        if (isSoundEnabled == false) return;
+        soundManager.Play("ChipPlaceMove");
     }
 
     private void OnItemPurchased()
     {
-        PlaySound(buyAudioSource, itemPurchasedClip);
+        if (isSoundEnabled == false) return;
+        soundManager.Play("Purchase");
     }
     private void OnWheelStepPassed()
     {
-        PlaySound(DrumWheelTickSource, drumWheelStepClip);
-    }
-
-    private void PlaySound(AudioSource source, AudioClip clip)
-    {
         if (isSoundEnabled == false) return;
-        if (source == null || clip == null) return;
-
-        if (_lastPlayTimes.TryGetValue(clip, out float lastTime))
-        {
-            if (Time.time - lastTime < soundCooldown)
-            {
-                return;
-            }
-        }
-        source.PlayOneShot(clip);
-        _lastPlayTimes[clip] = Time.time;
+        soundManager.Play("CounterClick");
     }
 }

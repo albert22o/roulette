@@ -1228,6 +1228,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f34db21d98395ed45892b2543dd6d065, type: 3}
+--- !u!1 &545610885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1723424273269335378, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+  m_PrefabInstance: {fileID: 783434622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &545610892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545610885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4a84e1929b3a846b1d3bd522f89a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipPlaces:
+  - {fileID: 1873597322}
+  - {fileID: 1896031045}
+  - {fileID: 1654802945}
+  - {fileID: 2003595077}
+  - {fileID: 1521550503}
+  foodCap: {fileID: 783434623}
+  shopDrumWheels:
+  - {fileID: 1010142116}
+  - {fileID: 970238730}
+  - {fileID: 1904126642}
+  - {fileID: 1438550445}
+  - {fileID: 1752320528}
+  - {fileID: 564416738}
+  - {fileID: 767673057}
+  - {fileID: 813209602}
+  - {fileID: 322344397}
+  - {fileID: 1531210096}
+  - {fileID: 290763303}
+  - {fileID: 1795533954}
+  - {fileID: 1088233912}
+  - {fileID: 683759755}
+  - {fileID: 1941004806}
+  - {fileID: 184300261}
+  - {fileID: 2137901487}
+  - {fileID: 308319388}
+  - {fileID: 111805864}
+  - {fileID: 1068260147}
+  - {fileID: 1312698582}
+  - {fileID: 1531199095}
+  - {fileID: 758249647}
+  - {fileID: 101139854}
+  - {fileID: 1490615674}
+  - {fileID: 291610026}
+  - {fileID: 1255587155}
+  - {fileID: 1024830919}
+  - {fileID: 1861852594}
+  - {fileID: 1629514726}
+  - {fileID: 600953243}
+  - {fileID: 330003673}
 --- !u!114 &564416738 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2576407069474745518, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
@@ -1809,6 +1866,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1723424273269335378, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 545610892}
     - targetCorrespondingSourceObject: {fileID: 2510851644267044756, guid: 2e3643a3f98c6b64f8ae830ed115de52, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -6578,166 +6638,6 @@ PrefabInstance:
     - target: {fileID: 2646892235978336483, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
       propertyPath: m_Name
       value: MusicManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: foodCap
-      value: 
-      objectReference: {fileID: 783434623}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'chipPlaces.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1873597322}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'chipPlaces.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1896031045}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'chipPlaces.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1654802945}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'chipPlaces.Array.data[3]'
-      value: 
-      objectReference: {fileID: 2003595077}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'chipPlaces.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1521550503}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1752320528}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1010142116}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[2]'
-      value: 
-      objectReference: {fileID: 564416738}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1438550445}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[4]'
-      value: 
-      objectReference: {fileID: 767673057}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[5]'
-      value: 
-      objectReference: {fileID: 813209602}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[6]'
-      value: 
-      objectReference: {fileID: 1904126642}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[7]'
-      value: 
-      objectReference: {fileID: 1531210096}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[8]'
-      value: 
-      objectReference: {fileID: 970238730}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[9]'
-      value: 
-      objectReference: {fileID: 322344397}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[10]'
-      value: 
-      objectReference: {fileID: 111805864}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[11]'
-      value: 
-      objectReference: {fileID: 1941004806}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[12]'
-      value: 
-      objectReference: {fileID: 290763303}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[13]'
-      value: 
-      objectReference: {fileID: 1795533954}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[14]'
-      value: 
-      objectReference: {fileID: 1068260147}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[15]'
-      value: 
-      objectReference: {fileID: 184300261}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[16]'
-      value: 
-      objectReference: {fileID: 2137901487}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[17]'
-      value: 
-      objectReference: {fileID: 683759755}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[18]'
-      value: 
-      objectReference: {fileID: 308319388}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[19]'
-      value: 
-      objectReference: {fileID: 1088233912}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[20]'
-      value: 
-      objectReference: {fileID: 1255587155}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[21]'
-      value: 
-      objectReference: {fileID: 1629514726}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[22]'
-      value: 
-      objectReference: {fileID: 1490615674}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[23]'
-      value: 
-      objectReference: {fileID: 1531199095}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[24]'
-      value: 
-      objectReference: {fileID: 101139854}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[25]'
-      value: 
-      objectReference: {fileID: 758249647}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[26]'
-      value: 
-      objectReference: {fileID: 1024830919}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[27]'
-      value: 
-      objectReference: {fileID: 291610026}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[28]'
-      value: 
-      objectReference: {fileID: 1861852594}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[29]'
-      value: 
-      objectReference: {fileID: 1312698582}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[30]'
-      value: 
-      objectReference: {fileID: 330003673}
-    - target: {fileID: 4430744917730489106, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: 'shopDrumWheels.Array.data[31]'
-      value: 
-      objectReference: {fileID: 600953243}
-    - target: {fileID: 5589895722329016910, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5689800071133044942, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
-      propertyPath: m_Volume
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
       propertyPath: m_LocalPosition.x

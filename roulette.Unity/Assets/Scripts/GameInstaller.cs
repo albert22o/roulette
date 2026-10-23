@@ -96,5 +96,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<FreeroamCursorHandler>().AsSingle().NonLazy();
         Container.Bind<ChipSoundPlayer>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ChipHolderSoundPlayer>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<SFXManager>().FromComponentInHierarchy().AsSingle();
     }
 }
