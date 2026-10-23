@@ -95,6 +95,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CursorManager>().AsSingle();
         Container.Bind<FreeroamCursorHandler>().AsSingle().NonLazy();
 
+        Container.Bind<TimeScaleManager>().AsSingle();
         Container.BindInterfacesTo<TutorialSignalBridge>().AsSingle().NonLazy();
         Container.Bind<TutorialTableHighlight>().AsSingle();
         Container.Bind<TutorialLog>().AsSingle();

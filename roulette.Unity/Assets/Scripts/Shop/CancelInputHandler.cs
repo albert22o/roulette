@@ -18,7 +18,6 @@ public class CancelInputHandler : MonoBehaviour
     {
         if (cancelActionReference != null)
         {
-            cancelActionReference.action.Enable();
             cancelActionReference.action.performed += OnCancelPressed;
         }
     }
@@ -28,7 +27,6 @@ public class CancelInputHandler : MonoBehaviour
         if (cancelActionReference != null)
         {
             cancelActionReference.action.performed -= OnCancelPressed;
-            cancelActionReference.action.Disable();
         }
     }
 

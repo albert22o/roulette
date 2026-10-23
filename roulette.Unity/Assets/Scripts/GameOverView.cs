@@ -15,6 +15,7 @@ public class GameOverView : MonoBehaviour
     [SerializeField] private GameObject gameOverRoot;
     [SerializeField] private GameObject winText;
     [SerializeField] private GameObject loseText;
+    [SerializeField] private GameObject mainMenuButton;
 
     [Header("Material WinMat")]
     [SerializeField] private Material winMat;
@@ -106,6 +107,7 @@ public class GameOverView : MonoBehaviour
         gameOverRoot.SetActive(true);
         winText.SetActive(isWin);
         loseText.SetActive(!isWin);
+        mainMenuButton.gameObject.SetActive(true);
     }
 
 
