@@ -3,12 +3,11 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
 
 public class BossRewardView : MonoBehaviour
 {
     [SerializeField] private PlaqueItem[] itemPlaces;
-    [SerializeField] private SimpleTooltip tooltip;
+    [SerializeField] private BossRewardTooltip tooltip;
     [SerializeField] private CinemachineCamera bossRewardCamera;
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private float tooltipHeight;
@@ -64,12 +63,7 @@ public class BossRewardView : MonoBehaviour
     private void OnItemHoverEnter(PlaqueItem item)
     {
         string description = item.Data.Description;
-        if (item.Data.RarityType != RarityType.None)
-        {
-            var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
-            description += "\nРедкость: <color=#" + UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color) + ">" + rarity.Name + "</color>";
-        }
-        tooltip.Show(item.Data.Name, description, item.transform.position);
+        tooltip.Show(item.Data.Name, description, item.Data.RarityType, item.transform.position);
     }
 
     private void OnItemHoverExit(PlaqueItem item)
