@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.VFX;
 using Zenject;
 
 public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClickable, IHoverable
@@ -22,6 +23,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     private GoldenChips goldenChips;
     private TableInfo tableInfo;
     private ShopFontConfig shopFontConfig;
+    private SFXManager sfxManager;
     public event Action BaseMoneyPurchased;
 
 
@@ -40,12 +42,13 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Shop shop, TableInfo tableInfo, GoldenChips goldenChips, ShopFontConfig shopFontConfig)
+    public void Construct(Shop shop, TableInfo tableInfo, GoldenChips goldenChips, ShopFontConfig shopFontConfig, SFXManager sfxManager)
     {
         this.shop = shop;
         this.tableInfo = tableInfo;
         this.goldenChips = goldenChips;
         this.shopFontConfig = shopFontConfig;
+        this.sfxManager = sfxManager;
     }
 
     public void ResetCost()
@@ -68,6 +71,7 @@ public class BaseMoneyVendingMachine : MonoBehaviour, IMouseInteractable, IClick
 
     public void OnClick()
     {
+        sfxManager.Play("ButtonClick");
         TryBuy();
     }
 

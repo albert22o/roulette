@@ -10,15 +10,18 @@ public class TableRerollButton : MonoBehaviour, IPointerClickHandler, IPointerEn
     [SerializeField] private OutlineController outlineController;
     [SerializeField] private ButtonAnimation3D buttonAnimation;
     [SerializeField] private VisualEffect vfx;
+
     private RoundManager roundManager;
     private RoundStateManager roundStateManager;
     private bool isHovered;
+    private SFXManager sfxManager;
 
     [Inject]
-    private void Construct(RoundManager roundManager, RoundStateManager roundStateManager)
+    private void Construct(RoundManager roundManager, RoundStateManager roundStateManager, SFXManager sfxManager)
     {
         this.roundManager = roundManager;
         this.roundStateManager = roundStateManager; 
+        this.sfxManager = sfxManager;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -43,11 +46,13 @@ public class TableRerollButton : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         if (roundManager.CanReroll)
         {
+
             Clicked?.Invoke();
             HoverEnter?.Invoke();
             outlineController.ToggleMaterial(false);
             buttonAnimation.Press();
             vfx.SendEvent("Explode");
+            sfxManager.Play("ButtonClick");
         }
     }
 

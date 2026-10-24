@@ -19,6 +19,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     private int cost;
     private GoldenChips goldenChips;
     private ShopFontConfig shopFontConfig;
+    private SFXManager sfxManager;
     public event Action RerollUsed;
 
     public bool IsInteractable => chipPlacesController.CheckRerollAvailable();
@@ -34,10 +35,11 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(GoldenChips goldenChips, ShopFontConfig shopFontConfig)
+    public void Construct(GoldenChips goldenChips, ShopFontConfig shopFontConfig, SFXManager sfxManager)
     {
         this.goldenChips = goldenChips;
         this.shopFontConfig = shopFontConfig;
+        this.sfxManager = sfxManager;
 }
 
     public void ResetCost()
@@ -47,6 +49,7 @@ public class ShopRerollButton : MonoBehaviour, IMouseInteractable, IClickable, I
 
     public void OnClick()
     {
+        sfxManager.Play("ButtonClick");
         buttonAnimation.Press();
         if (goldenChips.AvailableAmount >= Cost)
         {
