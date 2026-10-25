@@ -8841,6 +8841,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: activeColor.b
+      value: 0.16457057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: activeColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: activeColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: inactiveColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: inactiveColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009004533522388844, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: inactiveColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7049205510631024313, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

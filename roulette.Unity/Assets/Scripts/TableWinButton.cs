@@ -6,8 +6,19 @@ using Zenject;
 public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public event Action Clicked, HoverEnter, HoverExit;
+
     [SerializeField] private OutlineController outlineController;
     [SerializeField] private ButtonAnimation3D buttonAnimation;
+
+    [Header("Visual")]
+    [SerializeField] private Renderer buttonRenderer;
+    [SerializeField] private Color activeColor = new Color(1f, 0.85f, 0.1f);   // жёлтый
+    [SerializeField] private Color inactiveColor = new Color(0.5f, 0.5f, 0.5f); // серый
+
+    private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor"); // URP / HDRP
+    private static readonly int ColorId = Shader.PropertyToID("_Color");         // Built-in
+
+    private MaterialPropertyBlock propertyBlock;
     private RoundManager roundManager;
     private RoundStateManager roundStateManager;
     private bool isHovered;
@@ -20,8 +31,21 @@ public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
         roundStateManager.StateChanged += OnStateChanged;
     }
 
+    private void Start()
+    {
+        UpdateColor(); // начальное состояние
+    }
+
+    private void OnDestroy()
+    {
+        if (roundStateManager != null)
+            roundStateManager.StateChanged -= OnStateChanged;
+    }
+
     private void OnStateChanged(RoundStateManager.RoundState state)
     {
+        UpdateColor();
+
         if (roundManager.AbleToWin)
         {
             if (isHovered)
@@ -30,11 +54,24 @@ public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
                 outlineController.ToggleMaterial(true);
             }
         }
-        else if (isHovered == true)
+        else if (isHovered)
         {
             HoverExit?.Invoke();
             outlineController.ToggleMaterial(false);
         }
+    }
+
+    private void UpdateColor()
+    {
+        if (buttonRenderer == null || roundManager == null) return;
+
+        propertyBlock ??= new MaterialPropertyBlock();
+        Color color = roundManager.AbleToWin ? activeColor : inactiveColor;
+
+        buttonRenderer.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetColor(BaseColorId, color);
+        propertyBlock.SetColor(ColorId, color);
+        buttonRenderer.SetPropertyBlock(propertyBlock);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -56,7 +93,6 @@ public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
             HoverEnter?.Invoke();
             outlineController.ToggleMaterial(true);
         }
-
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -225,6 +225,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineController: {fileID: 9160637737697107653}
   buttonAnimation: {fileID: 3270222838727784447}
+  buttonRenderer: {fileID: 634259462978404957}
+  activeColor: {r: 1, g: 0.85, b: 0.1, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1868226445404322472
 MonoBehaviour:
   m_ObjectHideFlags: 0
