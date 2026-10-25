@@ -3,12 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(WorldSpaceTooltip))]
+[RequireComponent(typeof(ScreenSpaceTooltip))]
 public class SimpleTooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI title, mainText;
     [SerializeField] private RectTransform titleRect, mainTextRect, tooltipRect;
-    [SerializeField] private WorldSpaceTooltip worldSpaceTooltip;
+    [SerializeField] private ScreenSpaceTooltip worldSpaceTooltip;
 
     public void Show(string title, string  mainText, Vector3 position)
     {

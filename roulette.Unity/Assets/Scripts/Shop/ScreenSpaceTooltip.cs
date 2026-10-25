@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class WorldSpaceTooltip : MonoBehaviour
+public class ScreenSpaceTooltip : MonoBehaviour
 {
     [Header("Position Settings")]
     [SerializeField] private Vector2 offset = new Vector2(0f, 50f);
