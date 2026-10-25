@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -51,12 +51,12 @@ public class RewardWindow : MonoBehaviour
 
     private void UpdateRewardWindow()
     {
-        quota.text = rewardCalculator.BaseReward.ToString() + " <sprite name=\"gold\">";
+        quota.text = rewardCalculator.BaseReward.ToString();
         if (rewardCalculator.UnusedBetsReward != 0)
         {
             unusedBetsRow.SetActive(true);
             unusedBetsCount.text = Loc.Get("reward.unused_bets_count", rewardCalculator.UnusedBets);
-            unusedBetsBonus.text = rewardCalculator.UnusedBetsReward.ToString() + " <sprite name=\"gold\">";
+            unusedBetsBonus.text = rewardCalculator.UnusedBetsReward.ToString();
         }
         else
         {
@@ -66,7 +66,7 @@ public class RewardWindow : MonoBehaviour
         {
             quotaExceededRow.SetActive(true);
             quotaExceededValue.text = Loc.Get("reward.quota_exceeded_value", rewardCalculator.QuotaExceed);
-            quotaExceededBonus.text = rewardCalculator.QuotaExceededReward.ToString() + " <sprite name=\"gold\">";
+            quotaExceededBonus.text = rewardCalculator.QuotaExceededReward.ToString();
         }
         else
         {
@@ -75,14 +75,14 @@ public class RewardWindow : MonoBehaviour
         if (rewardCalculator.BonusReward != 0)
         {
             additionalBonusRow.SetActive(true);
-            additionalBonus.text = rewardCalculator.BonusReward.ToString() + " <sprite name=\"gold\">";
+            additionalBonus.text = rewardCalculator.BonusReward.ToString();
         }
         else
         {
             additionalBonusRow.SetActive(false);
         }
         
-        total.text = rewardCalculator.TotalReward.ToString() + " <sprite name=\"gold\">";
+        total.text = rewardCalculator.TotalReward.ToString();
         Show();
     }
 }
