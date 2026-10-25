@@ -6,14 +6,19 @@ public class Ball : MonoBehaviour
     [SerializeField] private Rigidbody ballRigidbody;
 
     private Transform rouletteOrigin;
+    private float lastContactTime = float.NegativeInfinity;
 
     public event Action Destroyed;
     public event Action Animated;
     public event Action Stopped;
+    public event Action<float> Collided; // сила удара (относительная скорость, м/с)
+
     public string Hash { get; private set; }
 
     public Vector3 RelativeToRoulettePosition => transform.position - rouletteOrigin.position;
 
+    /// <summary>Шарик касается поверхности (катится, а не летит).</summary>
+    public bool IsInContact => Time.time - lastContactTime < 0.1f;
 
     public void Launch(Vector3 velocity, Transform rouletteOrigin)
     {
@@ -24,6 +29,17 @@ public class Ball : MonoBehaviour
     public void SetHash(string hash)
     {
         Hash = hash;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        lastContactTime = Time.time;
+        Collided?.Invoke(collision.relativeVelocity.magnitude);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        lastContactTime = Time.time;
     }
 
     public void OnDestroy()

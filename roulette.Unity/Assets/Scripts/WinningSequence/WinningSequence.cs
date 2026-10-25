@@ -11,6 +11,7 @@ public enum EndSequenceType
     FinishBet
     
 }
+
 public class WinningSequence
 {
     public event Action<int, int, float> SequenceStart;

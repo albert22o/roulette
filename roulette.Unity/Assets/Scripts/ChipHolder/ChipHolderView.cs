@@ -15,6 +15,7 @@ public class ChipHolderView : MonoBehaviour
     private GameStateManager gameStateManager;
 
     private Camera mainCamera;
+    private ChipHolderSoundPlayer soundPlayer;
     private ChipHolder chipHolder;
 
     private ChipSlotView draggedFromSlot;
@@ -29,11 +30,12 @@ public class ChipHolderView : MonoBehaviour
 
 
     [Inject]
-    public void Construct(ChipHolder holder, Camera mainCamera, GameStateManager gameStateManager)
+    public void Construct(ChipHolder holder, Camera mainCamera, GameStateManager gameStateManager, ChipHolderSoundPlayer soundPlayer)
     {
         chipHolder = holder;
         this.mainCamera = mainCamera;
         this.gameStateManager = gameStateManager;
+        this.soundPlayer = soundPlayer;
     }
 
     public void Start()
@@ -148,7 +150,9 @@ public class ChipHolderView : MonoBehaviour
         if (slot == null || slot.ChipObject == null)
             return;
 
+        soundPlayer.PlayDragStartSound();
         isDragging = true;
+
         draggedFromSlot = slot;
         draggedObject = draggedFromSlot.DetachChip();
         tooltip.Hide();
@@ -172,6 +176,7 @@ public class ChipHolderView : MonoBehaviour
     {
         if (!isDragging)
             return;
+        soundPlayer.PlayDragEndSound();
         isDragging = false;
 
         var targetSlot = hoveredSlot;

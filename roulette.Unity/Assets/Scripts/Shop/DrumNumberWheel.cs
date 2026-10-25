@@ -1,6 +1,6 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class DrumNumberWheel : MonoBehaviour
 {
@@ -11,6 +11,12 @@ public class DrumNumberWheel : MonoBehaviour
     private const float DegreesPerDigit = 36f;
 
     public int CurrentDigit => currentDigit;
+
+
+    private int lastTriggeredDigit;
+
+    public event Action WheelStepPassed;
+    public event Action GoalNumberReached;
 
     private void Start()
     {
@@ -35,8 +41,24 @@ public class DrumNumberWheel : MonoBehaviour
         float targetAngle = currentDigit * DegreesPerDigit;
 
         rotationTween?.Kill();
+
         rotationTween = transform.DOLocalRotate(new Vector3(0f, 0f, targetAngle), duration, RotateMode.Fast)
-            .SetEase(Ease.InOutElastic, 0.2f);
+            .SetEase(Ease.InOutElastic, 0.2f)
+            .OnUpdate(CheckForClick)
+            .OnComplete(() => GoalNumberReached?.Invoke());
+    }
+
+    private void CheckForClick()
+    {
+        float currentAngle = transform.localEulerAngles.z;
+
+        int closestDigit = Mathf.RoundToInt(currentAngle / DegreesPerDigit) % 10;
+
+        if (closestDigit != lastTriggeredDigit)
+        {
+            lastTriggeredDigit = closestDigit;
+            WheelStepPassed?.Invoke(); 
+        }
     }
 
     private void UpdateRotationImmediately()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ChipPlaceAnimationController : MonoBehaviour
@@ -8,6 +9,8 @@ public class ChipPlaceAnimationController : MonoBehaviour
 
     private ItemData item;
     private int isRaisedHash = Animator.StringToHash("IsRaised");
+
+    public event Action MovingStarted;
 
     private void OnEnable()
     {
@@ -35,6 +38,11 @@ public class ChipPlaceAnimationController : MonoBehaviour
         animator.SetBool(isRaisedHash, true);
         itemPlace.SetItem(item);
         shopPlace.UpdateInventory();
+    }
+
+    public void OnMovingStarted()
+    {
+        MovingStarted?.Invoke();
     }
 
     

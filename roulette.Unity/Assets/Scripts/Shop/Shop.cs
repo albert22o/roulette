@@ -23,7 +23,10 @@ public class Shop : MonoBehaviour
     private ChipHolder chipHolder;
     private ProgressionManager progressionManager;
 
+
     public event Action InteractionStarted, InteractionFinished;
+
+    public event Action ItemPurchased, ItemSold;
 
     [Inject]
     public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder,
@@ -40,8 +43,27 @@ public class Shop : MonoBehaviour
     {
         UpdateShop(true);
         baseMoneyVendingMachine.ResetCost();
+        baseMoneyVendingMachine.BaseMoneyPurchased += OnItemPurchased;
+        ballsVendingMachine.BallBought += OnBallBought;
+        foodPlace.FoodPurchased += OnFoodBought;
+        chipPlacesController.ChipBought += OnChipBought;
+        rerollButton.RerollUsed += OnItemPurchased;
     }
 
+    private void OnChipBought()
+    {
+        ItemPurchased?.Invoke();
+    }
+
+    private void OnFoodBought()
+    {
+        OnItemPurchased();
+    }
+
+    private void OnBallBought(BallInfoData data)
+    {
+        OnItemPurchased();
+    }
 
     public void OnWin()
     {
@@ -83,6 +105,7 @@ public class Shop : MonoBehaviour
             {
                 goldenChips.Add(Config.BallSellCost);
                 ballHolder.RemoveBall(index);
+                ItemSold?.Invoke();
                 return true;
             }
             return false;
@@ -92,6 +115,7 @@ public class Shop : MonoBehaviour
             float sellCost = (int)(chipData.Cost * config.ChipSellMultiplier);
             if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * config.ChipSellMultiplier));
             chipHolder.RemoveChip(index);
+            ItemSold?.Invoke();
             return true;
         }
         return false;
@@ -114,6 +138,8 @@ public class Shop : MonoBehaviour
         }
     }
 
+
+
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;
@@ -131,4 +157,6 @@ public class Shop : MonoBehaviour
         SetInteractionAvailable(false);
         InteractionFinished?.Invoke();
     }
+
+    public void OnItemPurchased() => ItemPurchased?.Invoke();
 }

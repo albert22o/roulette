@@ -15,11 +15,13 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
     private GoldenChips goldenChips;
     private FoodHolder foodHolder;
     private ShopFontConfig shopFontConfig;
+    [Inject] private readonly SignalBus signalBus;
 
     public bool IsInteractable => item != null;
 
     public event Action<bool> IsHoverChanged;
     public event Action<bool> HasItemChanged;
+    public event Action FoodPurchased;
 
 
     [Inject] public void Construct(Shop shop, GoldenChips goldenChips, FoodHolder foodHolder, ShopFontConfig shopFontConfig)
@@ -53,6 +55,7 @@ public class ShopFoodPlace : MonoBehaviour, IMouseInteractable, IHoverable, ICli
             itemPlace.SetItem(null);
             HideDescription();
             HasItemChanged?.Invoke(false);
+            FoodPurchased?.Invoke();
         }
     }
 
