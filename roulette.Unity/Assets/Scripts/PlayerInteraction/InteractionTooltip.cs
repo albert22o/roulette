@@ -7,7 +7,7 @@ public class InteractionTooltip : MonoBehaviour
 
     public void ShowTooltip(string message)
     {
-        text.text = message;
+        text.text = "[E] - " + message;
         gameObject.SetActive(true);
     }
 
