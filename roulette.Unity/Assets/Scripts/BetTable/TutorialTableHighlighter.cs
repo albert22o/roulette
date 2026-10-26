@@ -87,7 +87,7 @@ public class TutorialTableHighlighter : MonoBehaviour
         while (true)
         {
             Apply(on);
-            yield return new WaitForSecondsRealtime(_blinkInterval);
+            yield return new WaitForSeconds(_blinkInterval);
             on = !on;
         }
     }

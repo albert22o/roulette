@@ -106,7 +106,8 @@ public class ChipHolderView : MonoBehaviour
 
     private void Update()
     {
-        if (canInteract == false) return;
+        if (canInteract == false || Time.timeScale == 0f) return;
+
         if (isDragging)
         {
             UpdateDrag();
@@ -146,6 +147,8 @@ public class ChipHolderView : MonoBehaviour
 
     private void TryBeginDrag()
     {
+        if (canInteract == false || Time.timeScale == 0f) return;
+
         var slot = RaycastSlot();
         if (slot == null || slot.ChipObject == null)
             return;

@@ -83,6 +83,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         if (active && cameraEventHandler.IsTransitioning == false)
         {
             HandleMouseLook();

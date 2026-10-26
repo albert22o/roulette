@@ -81,7 +81,7 @@ public class TutorialHighlightTarget : MonoBehaviour
         bool on = true;
         while (true)
         {
-            yield return new WaitForSecondsRealtime(_blinkInterval);
+            yield return new WaitForSeconds(_blinkInterval);
             on = !on;
             Apply(on);
         }

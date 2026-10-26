@@ -48,7 +48,7 @@ public class TutorialLogView : MonoBehaviour
         yield return FadeTo(1f, TutorialLog.FadeInDuration);
         if (duration > 0f)
         {
-            yield return new WaitForSecondsRealtime(duration);
+            yield return new WaitForSeconds(duration);
             yield return FadeTo(0f, TutorialLog.FadeOutDuration);
         }
         _routine = null;

@@ -53,6 +53,7 @@ public class TutorialSequence : MonoBehaviour
         Debug.Log("[Tutorial] Run started");
         yield return WaitSignal(TutorialSignal.TableEntered);
 
+        yield return new WaitForSeconds(1);
         // 1. Ставка
         _table.BlinkAllNumbers();
         log.ShowLog(Loc.Get("tutorial.place_bet"), 0f);
@@ -61,7 +62,7 @@ public class TutorialSequence : MonoBehaviour
 
         // 2. Медленное исчезновение
         log.HideLog(_slowFade);
-        yield return new WaitForSecondsRealtime(_slowFade + _gap);
+        yield return new WaitForSeconds(_slowFade + _gap);
 
         // 3. Число, цвет, дюжина
         _table.BlinkBet(_lastBetIndex);
@@ -133,7 +134,7 @@ public class TutorialSequence : MonoBehaviour
     private IEnumerator Say(string msg, float duration)
     {
         log.ShowLog(msg, duration);
-        yield return new WaitForSecondsRealtime(
+        yield return new WaitForSeconds(
             TutorialLog.FadeInDuration + duration + TutorialLog.FadeOutDuration + _gap);
     }
 
@@ -147,7 +148,7 @@ public class TutorialSequence : MonoBehaviour
     private IEnumerator HideFast()
     {
         log.HideLog();
-        yield return new WaitForSecondsRealtime(TutorialLog.FadeOutDuration + _gap);
+        yield return new WaitForSeconds(TutorialLog.FadeOutDuration + _gap);
     }
 
     private IEnumerator WaitSignal(TutorialSignal signal)

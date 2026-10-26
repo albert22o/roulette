@@ -1,5 +1,6 @@
 ﻿using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -105,5 +106,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TutorialLog>().AsSingle();
         Container.Bind<TutorialSignals>().AsSingle();
         Container.Bind<TutorialHighlight>().AsSingle();
+
+        Container.Bind<PhysicsRaycaster>().FromComponentInHierarchy().AsSingle();
     }
 }
