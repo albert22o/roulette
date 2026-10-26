@@ -64,7 +64,7 @@ public class BetColorsLegendController : MonoBehaviour
         if (betSum > 0)
         {
             numValue.text = $"({tableInfo.PocketMapping[fieldIndex].FieldNumber})";
-            dozenValue.text = $"({tableInfo.PocketMapping[fieldIndex].Dozen})";
+            dozenValue.text = $"({(int)tableInfo.PocketMapping[fieldIndex].Dozen})";
             colorValue.text = $"({Loc.Color(tableInfo.PocketMapping[fieldIndex].FieldColor)})";
             currentBetDisplay.SetFieldData(tableInfo.PocketMapping[fieldIndex].FieldNumber,
                 tableInfo.PocketMapping[fieldIndex].FieldColor, betSum);

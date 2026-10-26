@@ -2,6 +2,8 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using Zenject;
 
 public class TableMultipliersView : MonoBehaviour
@@ -33,6 +35,8 @@ public class TableMultipliersView : MonoBehaviour
             betTable.ChangeAmountByIndex += OnBetChanged;
         }
 
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
         UpdateUI();
     }
 
@@ -47,9 +51,16 @@ public class TableMultipliersView : MonoBehaviour
         {
             betTable.ChangeAmountByIndex -= OnBetChanged;
         }
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 
     private void OnBetChanged(int index, int amount)
+    {
+        UpdateUI();
+    }
+
+    private void OnLocaleChanged(Locale locale)
     {
         UpdateUI();
     }
@@ -103,7 +114,7 @@ public class TableMultipliersView : MonoBehaviour
             if (dozenBets.Count > 0)
             {
                 var dozenTexts = dozenBets.Select(d =>
-                    Loc.Get("multipliers.dozen_bet", d, betCalculator.GetEffectiveDozenMultiplier(d)));
+                    Loc.Get("multipliers.dozen_bet", (int)d,betCalculator.GetEffectiveDozenMultiplier(d)));
                 dozenMultiplierText.text = string.Join(", ", dozenTexts);
             }
             else
