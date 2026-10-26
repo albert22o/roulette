@@ -379,6 +379,22 @@ MonoBehaviour:
     m_Localized: A plaque is an upgrade that changes the board, choose wisely
     m_Metadata:
       m_Items: []
+  - m_Id: 1472416889954304
+    m_Localized: DEADLY ROULETTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314432
+    m_Localized: Start game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314433
+    m_Localized: Change language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314434
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

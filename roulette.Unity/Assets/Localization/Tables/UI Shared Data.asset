@@ -363,6 +363,22 @@ MonoBehaviour:
     m_Key: tutorial.plaque_explain
     m_Metadata:
       m_Items: []
+  - m_Id: 1472416889954304
+    m_Key: menu.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314432
+    m_Key: menu.start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314433
+    m_Key: menu.change_language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1472416919314434
+    m_Key: menu.quit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
