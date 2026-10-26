@@ -343,7 +343,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.25
   m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -972,7 +972,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.087
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.0435
   m_fontSizeMax: 0.087
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -1742,7 +1742,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.087
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.0435
   m_fontSizeMax: 0.087
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.087
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.0435
   m_fontSizeMax: 0.087
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -2606,7 +2606,7 @@ MonoBehaviour:
   m_fontSizeBase: 0.087
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1
+  m_fontSizeMin: 0.0435
   m_fontSizeMax: 0.087
   m_fontStyle: 0
   m_HorizontalAlignment: 2
