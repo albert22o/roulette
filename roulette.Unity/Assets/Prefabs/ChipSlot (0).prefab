@@ -95,9 +95,9 @@ MonoBehaviour:
   m_fontSize: 0.03
   m_fontSizeBase: 0.03
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1
+  m_fontSizeMax: 0.03
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 457028308596967195}
+  multiplierText: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!65 &8151319405303212443
 BoxCollider:
   m_ObjectHideFlags: 0

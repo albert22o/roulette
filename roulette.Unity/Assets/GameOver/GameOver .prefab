@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatCamera: {fileID: 0}
   deathCamera: {fileID: 0}
+  approachCamera: {fileID: 0}
   dealerAnimation: {fileID: 0}
   gameOverRoot: {fileID: 1808479889418085428}
   winText: {fileID: 8358163667986569041}
@@ -345,6 +346,14 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: d12c1ebfe86f97c4e961fdf72796463c, type: 2}
+    - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
       propertyPath: m_fontSizeBase
       value: 80
@@ -484,6 +493,14 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: d12c1ebfe86f97c4e961fdf72796463c, type: 2}
+    - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8140636209982192243, guid: 99e3bc58681e8854abbdcd51a7158fb0, type: 3}
       propertyPath: m_fontSizeBase
       value: 80
@@ -761,6 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f13eaf0bd18d84db1fa074a9879821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointer: {fileID: 0}
 --- !u!224 &3099078674575194712 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2047912125484199242, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
