@@ -23,6 +23,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     private GoldenChips goldenChips;
     private BallHolder ballHolder;
     private ShopFontConfig fontColorsConfig;
+    private SFXManager sfxManager;
     private int spinsCount;
 
     public bool IsInteractable => boughtBall == null;
@@ -39,12 +40,14 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
     public event Action<int> CostChanged;
 
     [Inject]
-    public void Construct(Shop shop, GoldenChips goldenChips, BallHolder ballHolder, ShopFontConfig fontColorsConfig)
+    public void Construct(Shop shop, GoldenChips goldenChips, BallHolder ballHolder,
+        ShopFontConfig fontColorsConfig, SFXManager sfxManager)
     {
         this.shop = shop;
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.fontColorsConfig = fontColorsConfig;
+        this.sfxManager = sfxManager;
     }
 
     private void Start()
@@ -99,6 +102,16 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
         var cost = Loc.Get("tooltip.price", color, Cost);
         shop.ShowTooltip(title.Resolve(), text, cost, tooltipPoint.position);
         outline.ToggleMaterial(true);
+    }
+
+    public void PlayEjectBallSound()
+    {
+        sfxManager.Play("BallMachine");
+    }
+
+    public void PlayBallFellSound()
+    {
+        sfxManager.Play("BallMachineBallFell");
     }
 
     public void OnHoverExit()
