@@ -12,16 +12,43 @@ public class MenuManager : MonoBehaviour
     private TimeScaleManager timeScaleManager;
     private CursorManager cursorManager;
     private PhysicsRaycaster physicsRaycaster;
+    private MenuMusicPlayer menuMusic;
 
     [Inject]
     private void Construct(
         TimeScaleManager timeScaleManager,
         CursorManager cursorManager,
-        PhysicsRaycaster physicsRaycaster)
+        PhysicsRaycaster physicsRaycaster,
+        MenuMusicPlayer menuMusic)
     {
         this.timeScaleManager = timeScaleManager;
         this.cursorManager = cursorManager;
         this.physicsRaycaster = physicsRaycaster;
+        this.menuMusic = menuMusic;
+    }
+
+    public void TogglePause()
+    {
+        isPaused = true;
+        timeScaleManager.SetPauseState(true);
+        cursorManager.ShowCursorRequest();
+        SetPhysicsRaycasterEnabled(false);
+        menuMusic.Play();
+
+        if (menuPanel != null)
+            menuPanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        cursorManager.HideCursorRequest();
+        timeScaleManager.SetPauseState(false);
+        SetPhysicsRaycasterEnabled(true);
+        menuMusic.Pause();
+
+        if (menuPanel != null)
+            menuPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -62,28 +89,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 #endif
-
-    public void TogglePause()
-    {
-        isPaused = true;
-        timeScaleManager.SetPauseState(true);
-        cursorManager.ShowCursorRequest();
-        SetPhysicsRaycasterEnabled(false);
-
-        if (menuPanel != null)
-            menuPanel.SetActive(true);
-    }
-
-    public void ResumeGame()
-    {
-        isPaused = false;
-        cursorManager.HideCursorRequest();
-        timeScaleManager.SetPauseState(false);
-        SetPhysicsRaycasterEnabled(true);
-
-        if (menuPanel != null)
-            menuPanel.SetActive(false);
-    }
 
     private void SetPhysicsRaycasterEnabled(bool value)
     {

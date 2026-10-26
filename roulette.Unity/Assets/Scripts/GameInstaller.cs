@@ -108,5 +108,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TutorialHighlight>().AsSingle();
 
         Container.Bind<PhysicsRaycaster>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<MenuMusicPlayer>().FromComponentInHierarchy().AsSingle();
     }
 }
