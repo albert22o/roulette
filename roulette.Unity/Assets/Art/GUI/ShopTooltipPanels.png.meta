@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ShopTooltipPanels_rare
+      name: ShopTooltipPanels_epic
       rect:
         serializedVersion: 2
         x: 0
@@ -141,7 +141,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShopTooltipPanels_epic
+      name: ShopTooltipPanels_rare
       rect:
         serializedVersion: 2
         x: 0
@@ -177,8 +177,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       ShopTooltipPanels_common: -771279010
-      ShopTooltipPanels_epic: -1574212790
-      ShopTooltipPanels_rare: -1373930655
+      ShopTooltipPanels_epic: -1373930655
+      ShopTooltipPanels_rare: -1574212790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -17,6 +17,7 @@ public class ShopItemsRarityGroup : ScriptableObject
 #endif
 
     [SerializeField] private ItemData[] items;
+    public RarityType RarityType => rarityType;
 
 #if UNITY_EDITOR
     private void OnValidate()
