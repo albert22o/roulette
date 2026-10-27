@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
@@ -49,6 +50,7 @@ public class WinningSequenceSound : MonoBehaviour
     [Tooltip("Играет при завершении выигрышного раунда (деньги начислены)")]
     [SerializeField] private AudioClip moneyReceivedClip;
     [SerializeField, Range(0f, 1f)] private float moneyVolume = 0.9f;
+    [SerializeField] float countMoneySoundDelay = 0.8f;
 
     private static readonly BetButton.HighlightPhase[] StageOrder =
     {
@@ -80,8 +82,9 @@ public class WinningSequenceSound : MonoBehaviour
         winningSequence.SequenceStart += OnSequenceStart;
         winningSequence.Highlight += OnHighlightStarted;
         winningSequence.DisplayMultiplier += OnMultiplierChanged;
-        winningSequence.CountMoney += OnCountMoney;
+        winningSequence.MoneyCountStarted += OnCountMoney;
         winningSequence.EndSequence += OnEndSequence;
+        winningSequence.StageMatched += OnStageMatched;
         subscribed = true;
     }
 
@@ -92,8 +95,15 @@ public class WinningSequenceSound : MonoBehaviour
         winningSequence.SequenceStart -= OnSequenceStart;
         winningSequence.Highlight -= OnHighlightStarted;
         winningSequence.DisplayMultiplier -= OnMultiplierChanged;
-        winningSequence.CountMoney -= OnCountMoney;
+        winningSequence.MoneyCountStarted -= OnCountMoney;
         winningSequence.EndSequence -= OnEndSequence;
+        winningSequence.StageMatched -= OnStageMatched;
+    }
+
+    private void OnStageMatched(BetButton.HighlightPhase phase)
+    {
+        if (!hasHit) return;
+        PlayStage(phase, currentHit);
     }
 
     private void ResetState()
@@ -113,17 +123,8 @@ public class WinningSequenceSound : MonoBehaviour
         stageIndex = 0;
     }
 
-    // DisplayMultiplier вызывается один раз на каждый этап подсветки
     private void OnMultiplierChanged(float multiplier)
     {
-        // в) звук сектора (до раннего return, чтобы играл и без роста множителя)
-        if (hasHit && stageIndex < StageOrder.Length)
-        {
-            PlayStage(StageOrder[stageIndex], currentHit);
-            stageIndex++;
-        }
-
-        // а) звук роста множителя
         if (multiplier <= lastMultiplier) return;
 
         lastMultiplier = multiplier;
@@ -188,14 +189,14 @@ public class WinningSequenceSound : MonoBehaviour
         return clip != null ? clip : defaultStageClip;
     }
 
-    // г) итоговое умножение денег
-    private void OnCountMoney(int betSum, float generalMultiplier, int reward)
+    private void OnCountMoney(float duration)
     {
         if (countMoneyClip == null) return;
 
-        moneySource.pitch = 1f;
+        float pitch = duration > 0f ? countMoneyClip.length / duration : 1f;
+        moneySource.pitch = Mathf.Clamp(pitch, 0.5f, 2f);
         moneySource.PlayOneShot(countMoneyClip, moneyVolume);
-    }
+    } 
 
     private void OnEndSequence(EndSequenceType endSequenceType)
     {

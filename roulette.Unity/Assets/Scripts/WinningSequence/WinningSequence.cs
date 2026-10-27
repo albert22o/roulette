@@ -21,6 +21,8 @@ public class WinningSequence
     public event Action<int, float, int> CountMoney;
     public event Action<EndSequenceType> EndSequence;
     public event Action<float> DisplayMultiplier;
+    public event Action<float> MoneyCountStarted;
+    public event Action<BetButton.HighlightPhase> StageMatched;
 
     private readonly BetTable betTable;
     private readonly RoundStateManager roundStateManager;
@@ -43,6 +45,17 @@ public class WinningSequence
         betCalculator.EndRound += CallSequenceStart;
         roundStateManager.StateChanged += OnStateChanged;
         gameStateManager.GameStateChanged += OnGameStateChanged;
+    }
+
+    // Вызывать из подсветки, когда этап ДЕЙСТВИТЕЛЬНО совпал
+    public void NotifyStageMatched(BetButton.HighlightPhase phase)
+    {
+        StageMatched?.Invoke(phase);
+    }
+
+    public void NotifyMoneyCountStarted(float duration)
+    {
+        MoneyCountStarted?.Invoke(duration);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)

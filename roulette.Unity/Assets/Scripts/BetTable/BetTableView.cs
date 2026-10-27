@@ -189,11 +189,12 @@ public class BetTableView : MonoBehaviour
         if (hitInfo.FieldColor != betInfo.FieldColor && hitInfo.Dozen != betInfo.Dozen)
         {
             winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyBall);
-            yield break;
+            yield break; // совпадений нет: ни подсветки, ни звука
         }
 
         HighlightButtonsWhere(button => button.Color == hitInfo.FieldColor, BetButton.HighlightPhase.Color);
         HighlightBottomSectionColor(hitInfo);
+        winningSequence.NotifyStageMatched(BetButton.HighlightPhase.Color);
         winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.ColorMultiplier);
 
         if (hitInfo.Dozen != betInfo.Dozen)
@@ -206,6 +207,7 @@ public class BetTableView : MonoBehaviour
 
         HighlightButtonsWhere(button => button.Dozen == hitInfo.Dozen, BetButton.HighlightPhase.Dozen);
         HighlightBottomSectionDozen(hitInfo);
+        winningSequence.NotifyStageMatched(BetButton.HighlightPhase.Dozen);
         winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.DozenMultiplier);
 
         if (hitInfo.FieldNumber != betInfo.FieldNumber)
@@ -217,6 +219,7 @@ public class BetTableView : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenHighlights);
 
         HighlightButtonsWhere(button => button.FieldNum == hitInfo.FieldNumber, BetButton.HighlightPhase.Number);
+        winningSequence.NotifyStageMatched(BetButton.HighlightPhase.Number);
         if (hitInfo.FieldNumber == 0)
             winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.ZeroMultiplier);
         else

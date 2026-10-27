@@ -50,6 +50,7 @@ public class MoneyCounterView : MonoBehaviour
 
     public IEnumerator ProcessCounting()
     {
+        winningSequence.NotifyMoneyCountStarted(timeToCountMoney);
         while (currentDisplayedMoney < reward)
         {
             currentDisplayedMoney += (int)Mathf.Lerp(0, reward, 1 / timeToCountMoney * Time.fixedDeltaTime);
