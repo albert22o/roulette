@@ -7327,9 +7327,9 @@ MonoBehaviour:
     - Key: 3
       Value: {fileID: -771279010, guid: c7727bb161a23d44396b906147cace19, type: 3}
     - Key: 2
-      Value: {fileID: -1373930655, guid: c7727bb161a23d44396b906147cace19, type: 3}
-    - Key: 0
       Value: {fileID: -1574212790, guid: c7727bb161a23d44396b906147cace19, type: 3}
+    - Key: 0
+      Value: {fileID: -1373930655, guid: c7727bb161a23d44396b906147cace19, type: 3}
   title: {fileID: 546092452613636784}
   mainText: {fileID: 6910556127218113225}
   mainRect: {fileID: 8922445943274277506}

@@ -184,19 +184,19 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        bg: {fileID: -608381207, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
+        bg: {fileID: -1373930655, guid: c7727bb161a23d44396b906147cace19, type: 3}
         costPlace: {fileID: -123366289, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
     - Key: 2
       Value:
-        bg: {fileID: -1934479187, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
+        bg: {fileID: -1574212790, guid: c7727bb161a23d44396b906147cace19, type: 3}
         costPlace: {fileID: 1985833353, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
     - Key: 1
       Value:
-        bg: {fileID: -686367180, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
+        bg: {fileID: -771279010, guid: c7727bb161a23d44396b906147cace19, type: 3}
         costPlace: {fileID: 1996572860, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
     - Key: 3
       Value:
-        bg: {fileID: -686367180, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
+        bg: {fileID: -771279010, guid: c7727bb161a23d44396b906147cace19, type: 3}
         costPlace: {fileID: 1996572860, guid: f6e278c451f909a4e85efa02892e9724, type: 3}
   title: {fileID: 8233038062171233272}
   mainText: {fileID: 773897857532061485}
