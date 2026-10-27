@@ -17,17 +17,18 @@ public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor"); // URP / HDRP
     private static readonly int ColorId = Shader.PropertyToID("_Color");         // Built-in
-
     private MaterialPropertyBlock propertyBlock;
     private RoundManager roundManager;
     private RoundStateManager roundStateManager;
+    private SFXManager sfxManager;
     private bool isHovered;
 
     [Inject]
-    public void Construct(RoundManager roundManager, RoundStateManager roundStateManager)
+    public void Construct(RoundManager roundManager, RoundStateManager roundStateManager, SFXManager sFXManager)
     {
         this.roundManager = roundManager;
         this.roundStateManager = roundStateManager;
+        this.sfxManager = sFXManager;
         roundStateManager.StateChanged += OnStateChanged;
     }
 
@@ -78,6 +79,7 @@ public class TableWinButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
     {
         if (roundManager.AbleToWin)
         {
+            sfxManager.Play("ButtonClick");
             Clicked?.Invoke();
             HoverEnter?.Invoke();
             outlineController.ToggleMaterial(false);

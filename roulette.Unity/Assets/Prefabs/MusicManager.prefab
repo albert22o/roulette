@@ -787,6 +787,18 @@ MonoBehaviour:
         volume: 1
         pitch: 1
         minDelay: 0.1
+    - Key: BallMachine
+      Value:
+        clip: {fileID: 8300000, guid: 7779674bb0eba044fb2cf82e68d7d944, type: 3}
+        volume: 1
+        pitch: 1
+        minDelay: 0.1
+    - Key: BallMachineBallFell
+      Value:
+        clip: {fileID: 8300000, guid: c1f35ece983fd344385b11c3bd451d5e, type: 3}
+        volume: 0.8
+        pitch: 1
+        minDelay: 0.1
 --- !u!114 &8359983112616915509
 MonoBehaviour:
   m_ObjectHideFlags: 0
