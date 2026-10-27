@@ -10369,6 +10369,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1109625051674753022, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109625051674753022, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: e2dd526ef2f5b3046b6e0b7593c69455, type: 3}
     - target: {fileID: 2646892235978336483, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
       propertyPath: m_Name
       value: MusicManager
@@ -10381,6 +10389,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.533
       objectReference: {fileID: 0}
+    - target: {fileID: 6796317105125321005, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796317105125321005, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 1efddd8334947bc4c97f2addab31d578, type: 3}
     - target: {fileID: 7896328274521926323, guid: ea34e517bab5df84db12ff2b3e5793c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.287503
