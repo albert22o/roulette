@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.Settings;
 using Zenject;
 
 public class MenuManager : MonoBehaviour
@@ -13,18 +16,42 @@ public class MenuManager : MonoBehaviour
     private CursorManager cursorManager;
     private PhysicsRaycaster physicsRaycaster;
     private MenuMusicPlayer menuMusic;
+    private SFXManager SFXManager;
 
     [Inject]
-    private void Construct(
+    public void Construct(
         TimeScaleManager timeScaleManager,
         CursorManager cursorManager,
         PhysicsRaycaster physicsRaycaster,
-        MenuMusicPlayer menuMusic)
+        MenuMusicPlayer menuMusic,
+        SFXManager SFXManager)
     {
         this.timeScaleManager = timeScaleManager;
         this.cursorManager = cursorManager;
         this.physicsRaycaster = physicsRaycaster;
         this.menuMusic = menuMusic;
+        this.SFXManager = SFXManager;
+    }
+
+    public void ChangeLanguage()
+    {
+        SFXManager.Play("ButtonClick");
+        StartCoroutine(NextLanguage());
+    }
+
+    public IEnumerator NextLanguage()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
+        var locales = LocalizationSettings.AvailableLocales.Locales;
+        int current = locales.IndexOf(LocalizationSettings.SelectedLocale);
+        LocalizationSettings.SelectedLocale = locales[(current + 1) % locales.Count];
+    }
+
+    public void Quit()
+    {
+        SFXManager.Play("ButtonClick");
+        Application.Quit();
     }
 
     public void TogglePause()
@@ -41,6 +68,7 @@ public class MenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        SFXManager.Play("ButtonClick");
         isPaused = false;
         cursorManager.HideCursorRequest();
         timeScaleManager.SetPauseState(false);

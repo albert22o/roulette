@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Sound
@@ -31,12 +31,12 @@ public class Sound
 
     public void Play()
     {
-        if (Time.time - lastPlayedTime < minDelay)
+        if (Time.unscaledTime - lastPlayedTime < minDelay)
         {
             return; 
         }
 
-        lastPlayedTime = Time.time;
+        lastPlayedTime = Time.unscaledTime;
         source.Play();
     }
 }

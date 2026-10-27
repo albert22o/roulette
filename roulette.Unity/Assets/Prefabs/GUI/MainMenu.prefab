@@ -978,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6621133623185210752}
+      objectReference: {fileID: 2294822210855483635}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -989,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenuQuit, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1179,7 +1179,7 @@ PrefabInstance:
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6621133623185210752}
+      objectReference: {fileID: 2294822210855483635}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1190,7 +1190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenuQuit, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4724251881270262133, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
