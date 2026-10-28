@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -41,22 +42,26 @@ public class FirstPersonController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
     }
 
-    private async void Start()
+    private void Start()
     {
-        await Task.Delay(10);
+        StartCoroutine(StartCoroutine());
+    }
+
+    private IEnumerator StartCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         gameStateManager.ChangeGameState(GameStateManager.GameState.BettingCycle);
 
         if (cameraTransform == null)
         {
             Debug.LogError("Не назначена ссылка на камеру");
-            return;
+            yield break;
         }
         if (gameStateManager.CurrentState == GameStateManager.GameState.FreeRoam)
             Enable();
         else
             Disable();
-
     }
 
     private void OnGameStateChanged(GameStateManager.GameState state)

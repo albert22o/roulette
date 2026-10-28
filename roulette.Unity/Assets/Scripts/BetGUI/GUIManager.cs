@@ -12,6 +12,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rerollPenalty;
     [SerializeField] private Slider rerollPenaltySlider;
     [SerializeField] private GameObject betPanel;
+    [SerializeField] private GameObject currenciesPanel;
 
     private GoldenChips goldenChips;
     private BossChips bossChips;
@@ -60,6 +61,7 @@ public class GUIManager : MonoBehaviour
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
         betPanel.SetActive(state is GameStateManager.GameState.BettingCycle);
+        currenciesPanel.SetActive(true);
     }
 
     private void OnRerollCoeffChanged(float rerollCoef)

@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private InputActionReference pauseAction;
+    [SerializeField] private GameObject startCam;
 
     private bool isPaused;
     private TimeScaleManager timeScaleManager;
@@ -68,6 +69,7 @@ public class MenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        startCam.SetActive(false);
         SFXManager.Play("ButtonClick");
         isPaused = false;
         cursorManager.HideCursorRequest();

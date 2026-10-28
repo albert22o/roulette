@@ -458,6 +458,7 @@ MonoBehaviour:
   rerollPenalty: {fileID: 2476391120744745162}
   rerollPenaltySlider: {fileID: 87183859216057155}
   betPanel: {fileID: 2855359628190999789}
+  currenciesPanel: {fileID: 7978239584823622548}
 --- !u!114 &7056972904569357422
 MonoBehaviour:
   m_ObjectHideFlags: 0
