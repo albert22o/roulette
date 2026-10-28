@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 100}
-  screenPadding: {x: 10, y: 10}
+  screenPadding: {x: 10, y: 30}
   rect: {fileID: 1505648898131038897}
 --- !u!222 &7125771523461705192
 CanvasRenderer:
