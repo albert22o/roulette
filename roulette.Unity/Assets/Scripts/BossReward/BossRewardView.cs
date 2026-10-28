@@ -63,11 +63,6 @@ public class BossRewardView : MonoBehaviour
     private void OnItemHoverEnter(PlaqueItem item)
     {
         string description = item.Data.Description;
-        if (item.Data.RarityType != RarityType.None)
-        {
-            var rarity = rarityData.GetRarityDisplayData(item.Data.RarityType);
-            description += Loc.Get("tooltip.rarity", UnityEngine.ColorUtility.ToHtmlStringRGB(rarity.Color), rarity.Name);
-        }
         tooltip.Show(item.Data.Name, description, item.Data.RarityType, item.transform.position);
     }
 
