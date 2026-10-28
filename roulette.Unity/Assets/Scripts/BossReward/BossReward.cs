@@ -29,19 +29,27 @@ public class BossReward
 
     public void GiveReward()
     {
-        gameStateManager.ChangeGameState(GameStateManager.GameState.BossReward);
-        items[0] = cardsPool.GetRandomItem();
-        items[1] = cardsPool.GetRandomItem();
-        items[2] = cardsPool.GetRandomItem();
+        HashSet<ItemData> chosenItems = new HashSet<ItemData>();
+        for (int i = 0; i < 3; i++)
+        {
+            ItemData card = GetValidItemFromPool(config.GeneralMultiplierCardsTable, chosenItems);
+            items[i] = card;
+            if (card != null) chosenItems.Add(card);
+        }
 
-        items[3] = GetValidItemFromPool(otherItemsPool, config.OtherItemsTable);
-        items[4] = GetValidItemFromPool(otherItemsPool, config.OtherItemsTable);
+        for (int i = 3; i < 5; i++)
+        {
+            ItemData otherItem = GetValidItemFromPool(config.OtherItemsTable, chosenItems);
+            items[i] = otherItem;
+            if (otherItem != null) chosenItems.Add(otherItem);
+        }
         RewardCreated?.Invoke(items);
     }
 
-    private ItemData GetValidItemFromPool(ShopItemsPool pool, ShopItemsTable table)
+    private ItemData GetValidItemFromPool(ShopItemsTable table, HashSet<ItemData> excludedItems)
     {
         if (table == null || table.Tables == null || table.Tables.Length == 0) return null;
+
         var validElements = new List<ItemsTableElement>();
         float totalWeight = 0f;
 
@@ -49,14 +57,14 @@ public class BossReward
         {
             if (element == null || element.RarityGroup == null || element.RarityGroup.Items == null) continue;
 
-            bool hasAllowedItems = element.RarityGroup.Items.Any(item => IsItemAllowed(item));
-
+            bool hasAllowedItems = element.RarityGroup.Items.Any(item => IsItemAllowed(item) && !excludedItems.Contains(item));
             if (hasAllowedItems)
             {
                 validElements.Add(element);
                 totalWeight += element.Rarity;
             }
         }
+
         if (validElements.Count == 0) return null;
 
         ShopItemsRarityGroup selectedGroup = null;
@@ -76,8 +84,10 @@ public class BossReward
         if (selectedGroup == null) selectedGroup = validElements.Last().RarityGroup;
 
         var allowedItemsInGroup = selectedGroup.Items
-            .Where(item => IsItemAllowed(item))
+            .Where(item => IsItemAllowed(item) && !excludedItems.Contains(item))
             .ToList();
+
+        if (allowedItemsInGroup.Count == 0) return null;
 
         int randomIndex = UnityEngine.Random.Range(0, allowedItemsInGroup.Count);
         return allowedItemsInGroup[randomIndex];
