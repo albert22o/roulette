@@ -799,6 +799,12 @@ MonoBehaviour:
         volume: 0.8
         pitch: 1
         minDelay: 0.1
+    - Key: Sell
+      Value:
+        clip: {fileID: 8300000, guid: 1e1a3a6e96e72804a8c19ab0adbaca96, type: 3}
+        volume: 1
+        pitch: 1
+        minDelay: 0.1
 --- !u!114 &8359983112616915509
 MonoBehaviour:
   m_ObjectHideFlags: 0
