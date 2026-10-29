@@ -4899,6 +4899,7 @@ Transform:
   - {fileID: 4899922153989864}
   - {fileID: 4952469026434132}
   - {fileID: 4576311280471634}
+  - {fileID: 4702789105895569964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 63.528004, z: 0}
 --- !u!33 &33749003975207038
@@ -10050,4 +10051,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5101868196039748762, guid: 3b0db8d198d5f6e4bb5a2b078d0209a9, type: 3}
   m_PrefabInstance: {fileID: 5105976297912633970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5961773799166909133
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4018167444763176}
+    m_Modifications:
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954434945048106386, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+      propertyPath: m_Name
+      value: CandleAudioSource
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+--- !u!4 &4702789105895569964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1441099553106845921, guid: 0d531832f7684834ba12e9f8bd3f1135, type: 3}
+  m_PrefabInstance: {fileID: 5961773799166909133}
   m_PrefabAsset: {fileID: 0}

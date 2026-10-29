@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class Sound
@@ -11,6 +12,7 @@ public class Sound
     [Range(-3f, 3f)]
     [SerializeField] private float pitch = 1f;
     [SerializeField] private float minDelay = 0.1f;
+    [SerializeField] AudioMixerGroup group;
 
     private AudioSource source;
 
@@ -27,6 +29,7 @@ public class Sound
         source.volume = volume;
         source.pitch = pitch;
         lastPlayedTime = -minDelay;
+        source.outputAudioMixerGroup = group;
     }
 
     public void Play()
