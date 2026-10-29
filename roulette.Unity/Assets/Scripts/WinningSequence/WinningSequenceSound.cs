@@ -50,14 +50,6 @@ public class WinningSequenceSound : MonoBehaviour
     [Tooltip("Играет при завершении выигрышного раунда (деньги начислены)")]
     [SerializeField] private AudioClip moneyReceivedClip;
     [SerializeField, Range(0f, 1f)] private float moneyVolume = 0.9f;
-    [SerializeField] float countMoneySoundDelay = 0.8f;
-
-    private static readonly BetButton.HighlightPhase[] StageOrder =
-    {
-        BetButton.HighlightPhase.Color,
-        BetButton.HighlightPhase.Dozen,
-        BetButton.HighlightPhase.Number
-    };
 
     private WinningSequence winningSequence;
     [SerializeField] private AudioSource stageSource;
@@ -66,7 +58,6 @@ public class WinningSequenceSound : MonoBehaviour
 
     private HitInfo currentHit;
     private bool hasHit;
-    private int stageIndex;
     private float lastMultiplier;
     private int multiplierIncreases;
     private bool subscribed;
@@ -110,7 +101,6 @@ public class WinningSequenceSound : MonoBehaviour
     {
         lastMultiplier = 0f;
         multiplierIncreases = 0;
-        stageIndex = 0;
         hasHit = false;
     }
 
@@ -120,7 +110,6 @@ public class WinningSequenceSound : MonoBehaviour
     {
         currentHit = hitInfo;
         hasHit = true;
-        stageIndex = 0;
     }
 
     private void OnMultiplierChanged(float multiplier)
