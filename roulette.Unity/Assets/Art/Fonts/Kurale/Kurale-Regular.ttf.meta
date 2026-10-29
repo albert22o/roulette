@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 31b4600627ab9c24da8308ac5c4c1322
+guid: bd4371dd13e58944cbb12d7740d3f825
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Amita
+  - Kurale
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
