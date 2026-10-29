@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3121713387499114736}
   - component: {fileID: 8318481937531008272}
   - component: {fileID: 5442807928320256136}
+  - component: {fileID: 9184340309065805738}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -73,6 +74,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8318481937531008272}
   plaqueShopView: {fileID: 5488097197043197413}
+--- !u!114 &9184340309065805738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677044150459394739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660364af9531e5041b03531fe024a337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1139093653707973891
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +794,7 @@ MonoBehaviour:
   mouseInteraction: {fileID: 594637285728232552}
   tooltip: {fileID: 1010193716010825481}
   cancelInputHandler: {fileID: 8915644331122591063}
+  cancelDelay: 2
 --- !u!114 &594637285728232552
 MonoBehaviour:
   m_ObjectHideFlags: 0
