@@ -33,8 +33,6 @@ public class BallHolder
         balls.Add(ballInfo);
         BallAdded?.Invoke(balls.Count - 1, ballInfo);
         ballInfo.OnAddedToHolder();
-
-        BallAdded?.Invoke(balls.Count -1, ballInfo);
     }
 
     public void RemoveBall(int index)
@@ -46,6 +44,18 @@ public class BallHolder
         balls[index].OnRemovedFromHolder();
         balls.RemoveAt(index);
         BallRemoved?.Invoke(index);
+    }
+
+    public void RemoveBall(BallInfoData ballData)
+    {
+        if (ballData == null)
+            return;
+
+        int index = balls.FindIndex(b => b != null && b.BallInfoData == ballData);
+        if (index != -1)
+        {
+            RemoveBall(index);
+        }
     }
 
     public void ChangeCapacity(int delta)
