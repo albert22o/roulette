@@ -87,6 +87,7 @@ public class BallsVendingMachine : MonoBehaviour, IMouseInteractable, IClickable
         goldenChips.Add(shop.Config.BallSellCost);
         boughtBall = null;
         shop.SetInteractionAvailable(true);
+        sfxManager.Play("Sell");
     }
 
     public void OnClick()

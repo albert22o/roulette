@@ -15,14 +15,17 @@ public class ShopInventory : MonoBehaviour
     private ChipHolder chipHolder;
     private Shop shop;
     private RarityData rarityData;
+    private SFXManager sfxManager;
 
     [Inject]
-    public void Construct(BallHolder ballHolder, ChipHolder chipHolder, Shop shop, RarityData rarityData)
+    public void Construct(BallHolder ballHolder, ChipHolder chipHolder, Shop shop,
+        RarityData rarityData, SFXManager sfxManager)
     {
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
         this.shop = shop;
         this.rarityData = rarityData;
+        this.sfxManager = sfxManager;
     }
 
     private void OnEnable()
@@ -63,11 +66,17 @@ public class ShopInventory : MonoBehaviour
     {
         if (item.Data is BallInfoData)
         {
-            shop.TrySell(item.Data, balls.IndexOf(item));
+            if (shop.TrySell(item.Data, balls.IndexOf(item)))
+            {
+                sfxManager.Play("Sell");
+            }
         }
         else
         {
-            shop.TrySell(item.Data, chips.IndexOf(item));
+            if (shop.TrySell(item.Data, chips.IndexOf(item)))
+            {
+                sfxManager.Play("Sell");
+            }
         }
     }
 
