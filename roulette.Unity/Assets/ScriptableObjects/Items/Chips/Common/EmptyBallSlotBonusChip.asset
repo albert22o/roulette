@@ -30,11 +30,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  shopPrefab: {fileID: 3583542216113658131, guid: e4e3d7c03fb8b7946974f2fc25d1234a, type: 3}
+  shopPrefab: {fileID: 4505870496236621301, guid: 426ba3ca39b921d4ca2f016ae19e52db, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
   cost: 4
-  Prefab: {fileID: 3583542216113658131, guid: 9f22d5506bc40854190f80d4092407a5, type: 3}
+  Prefab: {fileID: 4505870496236621301, guid: 426ba3ca39b921d4ca2f016ae19e52db, type: 3}
   BonusPerBall: 2
   references:
     version: 2
