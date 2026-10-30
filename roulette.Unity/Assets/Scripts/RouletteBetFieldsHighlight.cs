@@ -24,18 +24,35 @@ public class RouletteBetFieldsHighlight : IInitializable, IDisposable
     public void Initialize()
     {
         betTable.ChangeAmountByIndex += OnChangeAmountByIndex;
+        betTable.BetsCleared += OnBetsCleared;
     }
 
     public void Dispose()
     {
         betTable.ChangeAmountByIndex -= OnChangeAmountByIndex;
+        betTable.BetsCleared -= OnBetsCleared;
+    }
+
+    private void OnBetsCleared(bool obj)
+    {
+        activeBetIndices.Clear();
+        colorBetCounts.Clear();
+        dozenBetCounts.Clear();
+        numberBetCounts.Clear();
+
+        for (int i = 0; i < wheel.Fields.Length; i++)
+        {
+            wheel.HighlightStates[i].IsNumberBetHighlighted = false;
+            wheel.HighlightStates[i].IsColorBetHighlighted = false;
+            wheel.HighlightStates[i].IsDozenBetHighlighted = false;
+        }
     }
 
     private void OnChangeAmountByIndex(int index, int betSum)
     {
         var pocketField = tableInfo.PocketMapping[index];
         int pocketNumber = pocketField.FieldNumber;
-       
+
 
         bool isActive = betSum > 0;
         bool wasActive = activeBetIndices.Contains(index);
