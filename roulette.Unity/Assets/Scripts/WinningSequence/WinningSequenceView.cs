@@ -5,8 +5,6 @@ using Zenject;
 
 public class WinningSequenceView : MonoBehaviour
 {
-    [SerializeField] TextMeshPro betText;
-    [SerializeField] TextMeshPro generalMultiplierText;
     [SerializeField] DealerAnimation dealerAnimator;
     [SerializeField] private Animator dealerCollectAnimator;
     [SerializeField] float timeBeforeChipApply = 1f;
@@ -48,7 +46,6 @@ public class WinningSequenceView : MonoBehaviour
 
     private void OnSequenceStart(int betSum, int _a1, float _a2)
     {
-        betText.text = betSum.ToString();
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.BetHighlight);
     }
 
@@ -80,13 +77,10 @@ public class WinningSequenceView : MonoBehaviour
 
     private void OnDisplayMultiplier(float multiplier)
     {
-        generalMultiplierText.text = multiplier.ToString("0.##");
     }
 
     private void OnEndSequence(EndSequenceType endSequenceType)
     {
-        generalMultiplierText.text = "";
-        betText.text = "";
         if (endSequenceType == EndSequenceType.FinishBet ||
             endSequenceType == EndSequenceType.WinRound)
         {
