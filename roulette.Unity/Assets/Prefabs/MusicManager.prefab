@@ -732,7 +732,7 @@ MonoBehaviour:
   stageVolume: 0.7
   stageBasePitch: 1
   stagePitchStep: 0.1
-  multiplierUpClip: {fileID: 8300000, guid: f919545d1ea55f8479c3af20054f694c, type: 3}
+  multiplierUpClip: {fileID: 8300000, guid: 7f084edcd08a61548a20a3e19fc5ba25, type: 3}
   multiplierVolume: 0.8
   multiplierBasePitch: 1
   multiplierPitchStep: 0.15
