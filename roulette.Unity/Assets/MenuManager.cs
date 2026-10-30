@@ -75,7 +75,6 @@ public class MenuManager : MonoBehaviour
         cursorManager.HideCursorRequest();
         timeScaleManager.SetPauseState(false);
         SetPhysicsRaycasterEnabled(true);
-        menuMusic.Pause();
 
         if (menuPanel != null)
             menuPanel.SetActive(false);

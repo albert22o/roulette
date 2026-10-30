@@ -808,16 +808,25 @@ MonoBehaviour:
         group: {fileID: 1851655208455168867, guid: 0e048b79a16a1ea49b1b0106b7e9d389, type: 2}
     - Key: PlaqueShopMoving
       Value:
-        clip: {fileID: 8300000, guid: a866400c59d825e4ab21d62795a89d99, type: 3}
+        clip: {fileID: 8300000, guid: 3c8759455fb06774db327284d201211c, type: 3}
         volume: 1
-        pitch: 1
+        pitch: 2
         minDelay: 0.1
-    - Key: Sell
+        group: {fileID: 0}
+    - Key: PlaqueFall
       Value:
-        clip: {fileID: 8300000, guid: 1e1a3a6e96e72804a8c19ab0adbaca96, type: 3}
+        clip: {fileID: 8300000, guid: dc0bda2bc417da64b986579ed17a8bef, type: 3}
         volume: 1
         pitch: 1
         minDelay: 0.1
+        group: {fileID: 0}
+    - Key: ChipInsert
+      Value:
+        clip: {fileID: 8300000, guid: d7767886b2a61384ab2c6d6ad52a08f5, type: 3}
+        volume: 1
+        pitch: 1
+        minDelay: 0.1
+        group: {fileID: 0}
 --- !u!114 &8359983112616915509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,7 +1401,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 239aacae1f09ad04eab5f7725cdd726b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.646
   m_Pitch: 1
   Loop: 0
   Mute: 0
