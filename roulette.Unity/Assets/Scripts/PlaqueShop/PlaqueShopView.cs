@@ -8,17 +8,18 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private PlaqueVendingMachine vendingMachine;
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private SimpleTooltip tooltip;
-    [SerializeField] private CancelInputHandler cancelInputHandler;
+    private CancelInputHandler cancelInputHandler;
     [SerializeField] private float cancelDelay = 2f;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
     public bool PlaquesBought { get; private set; }
 
     [Inject]
-    public void Construct(PlaqueShop plaqueShop, PlaqueUseController plaqueController)
+    public void Construct(PlaqueShop plaqueShop, PlaqueUseController plaqueController, CancelInputHandler cancelInputHandler)
     {
         this.plaqueShop = plaqueShop;
         this.plaqueController = plaqueController;
+        this.cancelInputHandler = cancelInputHandler;
     }
 
     private void OnEnable()
@@ -56,7 +57,7 @@ public class PlaqueShopView : MonoBehaviour
                 plaquePlaces[i].SetData(boughtItems[i]);
             }
             ToggleMouseInput(false);
-            cancelInputHandler.enabled = false;
+            cancelInputHandler.Toggle(false);
             PlaquesBought = true;
         }
     }
@@ -73,20 +74,20 @@ public class PlaqueShopView : MonoBehaviour
 
     private void OnPlaqueClicked(PlaqueItem item)
     {
-        cancelInputHandler.enabled = false;
+        cancelInputHandler.Toggle(false);
         plaqueController.UsePlaque(item.Data as PlaqueData);
     }
 
     public void StartInteraction()
     {
         mouseInteraction.enabled = true;
-        cancelInputHandler.enabled = true;
+        cancelInputHandler.Toggle(true);
     }
 
     public void FinishInteraction()
     {
         mouseInteraction.enabled = false;
-        cancelInputHandler.enabled = false;
+        cancelInputHandler.Toggle(false);
     }
 
     public void ToggleMouseInput(bool value)

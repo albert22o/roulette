@@ -726,7 +726,6 @@ GameObject:
   - component: {fileID: 5648249951077684233}
   - component: {fileID: 5488097197043197413}
   - component: {fileID: 594637285728232552}
-  - component: {fileID: 8915644331122591063}
   m_Layer: 0
   m_Name: PlaqueShop
   m_TagString: Untagged
@@ -793,7 +792,6 @@ MonoBehaviour:
   vendingMachine: {fileID: 4917708094728016038}
   mouseInteraction: {fileID: 594637285728232552}
   tooltip: {fileID: 1010193716010825481}
-  cancelInputHandler: {fileID: 8915644331122591063}
   cancelDelay: 2
 --- !u!114 &594637285728232552
 MonoBehaviour:
@@ -811,19 +809,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &8915644331122591063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7371882905257473652}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213bd2834798bf14da58b58fa5dc5577, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cancelActionReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &8443321631029447409
 GameObject:
   m_ObjectHideFlags: 0

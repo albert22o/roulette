@@ -5,6 +5,7 @@ using Zenject;
 public class CancelInputHandler : MonoBehaviour
 {
     [SerializeField] private InputActionReference cancelActionReference;
+    [SerializeField] private InteractionTooltip tooltip;
 
     private GameStateManager gameStateManager;
 
@@ -14,18 +15,16 @@ public class CancelInputHandler : MonoBehaviour
         this.gameStateManager = gameStateManager;
     }
 
-    private void OnEnable()
+    public void Toggle(bool isCancelAvailable)
     {
-        if (cancelActionReference != null)
+        if (isCancelAvailable)
         {
             cancelActionReference.action.performed += OnCancelPressed;
+            tooltip.ShowTooltip(Loc.Get("playerInteraction.exit"));
         }
-    }
-
-    private void OnDisable()
-    {
-        if (cancelActionReference != null)
+        else
         {
+            tooltip.Hide();
             cancelActionReference.action.performed -= OnCancelPressed;
         }
     }

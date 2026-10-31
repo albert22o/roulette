@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopFoodPlace foodPlace;
     [SerializeField] private MouseInteraction shopInteraction;
     [SerializeField] private ShopChipPlacesController chipPlacesController;
-    [SerializeField] private CancelInputHandler inputHandler;
+    private CancelInputHandler cancelInputHandler;
     [SerializeField] private ShopConfig config;
 
     public ShopConfig Config => config;
@@ -30,12 +30,13 @@ public class Shop : MonoBehaviour
 
     [Inject]
     public void Construct(GoldenChips goldenChips, BallHolder ballHolder, ChipHolder chipHolder,
-        RoundManager roundManager, ProgressionManager progressionManager)
+        RoundManager roundManager, ProgressionManager progressionManager, CancelInputHandler cancelInputHandler)
     {
         this.goldenChips = goldenChips;
         this.ballHolder = ballHolder;
         this.chipHolder = chipHolder;
         this.progressionManager = progressionManager;
+        this.cancelInputHandler = cancelInputHandler;
         roundManager.Win += OnWin;
     }
 
@@ -143,7 +144,7 @@ public class Shop : MonoBehaviour
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;
-        inputHandler.enabled = value;
+        cancelInputHandler.Toggle(value);
     }
 
     public void StartInteraction()
