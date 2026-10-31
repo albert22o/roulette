@@ -133,7 +133,7 @@ public class FirstPersonController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    public void SetPositionAndRotation(Vector3 position, Quaternion rotation, float cameraPitch)
+    public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
     {
         if (controller != null)
         {
@@ -145,7 +145,7 @@ public class FirstPersonController : MonoBehaviour
         Vector3 euler = rotation.eulerAngles;
         transform.SetPositionAndRotation(position, Quaternion.Euler(0, euler.y, 0));
 
-        xRotation = Mathf.Clamp(cameraPitch, -verticalClamp, verticalClamp);
+        xRotation = 0;
         if (cameraTransform != null)
         {
             cameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
