@@ -20,6 +20,7 @@ public class BetTable
 
     private readonly HashSet<int> betIndexSet = new();
     private readonly TableInfo tableInfo;
+    private readonly SFXManager sFXManager;
     private readonly Dictionary<int, int> betAmounts;
     private int betsAvailable = 1;
     private int availableBetSum;
@@ -35,9 +36,10 @@ public class BetTable
 
     private bool IsAllIn => betsAvailable == 1;
 
-    public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager, GameStateManager gameStateManager)
+    public BetTable(TableInfo tableInfo, RoundStateManager roundStateManager, GameStateManager gameStateManager, SFXManager sFXManager)
     {
         this.tableInfo = tableInfo;
+        this.sFXManager = sFXManager;
         betAmounts = tableInfo.PocketMapping
             .ToDictionary(pocket => pocket.Key, _ => 0);
         availableBetSum = tableInfo.StartSum;
@@ -103,6 +105,7 @@ public class BetTable
             return;
         if (!betAmounts.ContainsKey(index))
             return;
+        sFXManager.Play("DeleteChips");
 
         int current = betAmounts[index];
         if (current <= 0)
