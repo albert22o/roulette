@@ -92,7 +92,7 @@ public class Shop : MonoBehaviour
         tooltip.Hide();
     }
 
-    public bool TrySell(ItemData item, int index)
+    public bool TrySell(ItemData item)
     {
         if (item is BallInfoData ballData)
         {
@@ -104,7 +104,7 @@ public class Shop : MonoBehaviour
             if (undestroyableBalls > 1 || ballData.IsDestroyable)
             {
                 goldenChips.Add(Config.BallSellCost);
-                ballHolder.RemoveBall(index);
+                ballHolder.RemoveBall(ballData);
                 ItemSold?.Invoke();
                 return true;
             }
@@ -114,7 +114,7 @@ public class Shop : MonoBehaviour
         {
             float sellCost = (int)(chipData.Cost * config.ChipSellMultiplier);
             if (sellCost > 0) goldenChips.Add((int)(chipData.Cost * config.ChipSellMultiplier));
-            chipHolder.RemoveChip(index);
+            chipHolder.RemoveChip(chipData);
             ItemSold?.Invoke();
             return true;
         }

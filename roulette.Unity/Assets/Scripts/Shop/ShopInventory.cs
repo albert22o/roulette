@@ -66,14 +66,14 @@ public class ShopInventory : MonoBehaviour
     {
         if (item.Data is BallInfoData)
         {
-            if (shop.TrySell(item.Data, balls.IndexOf(item)))
+            if (shop.TrySell(item.Data))
             {
                 sfxManager.Play("Sell");
             }
         }
         else
         {
-            if (shop.TrySell(item.Data, chips.IndexOf(item)))
+            if (shop.TrySell(item.Data))
             {
                 sfxManager.Play("Sell");
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ChipHolder
 {
@@ -71,9 +72,7 @@ public class ChipHolder
         {
             if (chips[i] != null && chips[i].ChipData == data)
             {
-                chips[i].OnRemovedFromHolder();
-                chips[i] = null;
-                ChipRemoved?.Invoke(i);
+                RemoveChip(i);
                 return;
             }
         }
