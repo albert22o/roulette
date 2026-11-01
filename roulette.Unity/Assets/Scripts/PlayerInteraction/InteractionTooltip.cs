@@ -1,5 +1,6 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class InteractionTooltip : MonoBehaviour
 {

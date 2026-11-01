@@ -6360,6 +6360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3689245728801581520, guid: be690299a3f2cbb42943d45c1109787d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6638745980654234908, guid: be690299a3f2cbb42943d45c1109787d, type: 3}
       propertyPath: m_Name
       value: PlayerInteractionExitCanvas
