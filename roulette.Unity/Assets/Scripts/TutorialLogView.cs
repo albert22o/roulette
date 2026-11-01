@@ -1,37 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class TutorialLogView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private TMP_Text text;
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private RectTransform bettingLayout;   
+    [SerializeField] private RectTransform defaultLayout;
+    [SerializeField] private RectTransform rectTransform;
 
-    private TutorialLog _log;
-    private Coroutine _routine;
+    private TutorialLog log;
+    private Coroutine routine;
 
     [Inject]
-    public void Construct(TutorialLog log)
+    public void Construct(TutorialLog log, GameStateManager gameStateManager)
     {
-        _log = log;
-        _log.LogRequested += OnLogRequested;
-        _log.HideRequested += OnHideRequested;
+        gameStateManager.GameStateChanged += OnStateChanged;
+        this.log = log;
+        this.log.LogRequested += OnLogRequested;
+        this.log.HideRequested += OnHideRequested;
     }
 
-    private void Awake() => _canvasGroup.alpha = 0f;
+    private void Awake()
+    {
+        canvasGroup.alpha = 0f;
+    }
+
+    private void OnStateChanged(GameStateManager.GameState state)
+    {
+        ApplyLayout(state == GameStateManager.GameState.BettingCycle
+            ? bettingLayout
+            : defaultLayout);
+    }
+
+    private void ApplyLayout(RectTransform src)
+    {
+        rectTransform.anchorMin = src.anchorMin;
+        rectTransform.anchorMax = src.anchorMax;
+        rectTransform.pivot = src.pivot;
+        rectTransform.anchoredPosition = src.anchoredPosition;
+        rectTransform.sizeDelta = src.sizeDelta;
+    }
 
     private void OnDestroy()
     {
-        if (_log == null) return;
-        _log.LogRequested -= OnLogRequested;
-        _log.HideRequested -= OnHideRequested;
+        if (log == null) return;
+        log.LogRequested -= OnLogRequested;
+        log.HideRequested -= OnHideRequested;
     }
 
     private void OnLogRequested(string msg, float duration)
     {
         Debug.Log(msg);
-        _text.text = msg;
+        text.text = msg;
         Restart(ShowRoutine(duration));
     }
 
@@ -39,8 +63,8 @@ public class TutorialLogView : MonoBehaviour
 
     private void Restart(IEnumerator routine)
     {
-        if (_routine != null) StopCoroutine(_routine);
-        _routine = StartCoroutine(routine);
+        if (this.routine != null) StopCoroutine(this.routine);
+        this.routine = StartCoroutine(routine);
     }
 
     private IEnumerator ShowRoutine(float duration)
@@ -51,17 +75,17 @@ public class TutorialLogView : MonoBehaviour
             yield return new WaitForSeconds(duration);
             yield return FadeTo(0f, TutorialLog.FadeOutDuration);
         }
-        _routine = null;
+        routine = null;
     }
 
     private IEnumerator FadeTo(float target, float time)
     {
-        float start = _canvasGroup.alpha;
+        float start = canvasGroup.alpha;
         for (float t = 0f; t < time; t += Time.unscaledDeltaTime)
         {
-            _canvasGroup.alpha = Mathf.Lerp(start, target, t / time);
+            canvasGroup.alpha = Mathf.Lerp(start, target, t / time);
             yield return null;
         }
-        _canvasGroup.alpha = target;
+        canvasGroup.alpha = target;
     }
 }
