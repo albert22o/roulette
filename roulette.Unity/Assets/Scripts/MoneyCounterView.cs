@@ -14,6 +14,7 @@ public class MoneyCounterView : MonoBehaviour
 
     private ChipSpawner chipSpawner;
     private WinningSequence winningSequence;
+    private SFXManager soundManager;
     private Animator animator;
     private int currentDisplayedMoney;
     private int bet;
@@ -21,10 +22,11 @@ public class MoneyCounterView : MonoBehaviour
     private float rerollCoeff;
 
     [Inject]
-    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence)
+    public void Construct(ChipSpawner chipSpawner, WinningSequence winningSequence, SFXManager soundManager)
     {
         this.chipSpawner = chipSpawner;
         this.winningSequence = winningSequence;
+        this.soundManager = soundManager;
     }
 
     private void Start()
@@ -62,6 +64,11 @@ public class MoneyCounterView : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeChipSpawn);
 
         chipSpawner.RequestSpawn(reward);
+    }
+
+    public void PlayTextVFXSound()
+    {
+        soundManager.Play("Whoosh");
     }
 
     private void OnSequenceStart(int bet, int multiplier, float rerollCoeff)
