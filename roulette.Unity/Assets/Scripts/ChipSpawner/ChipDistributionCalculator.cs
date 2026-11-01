@@ -34,7 +34,7 @@ public static class ChipDistributionCalculator
     private static void LogError(string message) => Debug.LogError($"<color=red>[ChipDistribution]</color> {message}");
     private static void LogWarning(string message) => Debug.LogWarning($"<color=orange>[ChipDistribution]</color> {message}");
 
-    private static readonly int[] Denominations = { 1000, 500, 100, 50, 25 };
+    private static readonly int[] Denominations = { 1000000, 100000, 10000, 1000, 100 };
 
     public static List<int> CalculateDistribution(int totalAmount, List<ChipThresholdData> thresholds, float mainChipRatio, float midChipRatio, int minimumMainChipsThreshold)
     {

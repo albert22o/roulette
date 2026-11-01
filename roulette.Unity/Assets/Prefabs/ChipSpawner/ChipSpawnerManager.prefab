@@ -77,23 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipPrefabs:
-  - denomination: 25
-    prefab: {fileID: 6925182978877584918, guid: 7cfdd63a6833422478d8dd12a93cb317, type: 3}
-  - denomination: 50
-    prefab: {fileID: 7639186905714719954, guid: fb708d3ac9ca98b46b86dd09d3a75a25, type: 3}
   - denomination: 100
-    prefab: {fileID: 1495576812300856905, guid: 051085fd712cd1d40bbbe998f4a3dd6b, type: 3}
-  - denomination: 500
-    prefab: {fileID: 3239344363843224179, guid: d640c8d45de79014584553996c8a4dee, type: 3}
+    prefab: {fileID: 6925182978877584918, guid: 7cfdd63a6833422478d8dd12a93cb317, type: 3}
   - denomination: 1000
+    prefab: {fileID: 7639186905714719954, guid: fb708d3ac9ca98b46b86dd09d3a75a25, type: 3}
+  - denomination: 10000
+    prefab: {fileID: 1495576812300856905, guid: 051085fd712cd1d40bbbe998f4a3dd6b, type: 3}
+  - denomination: 100000
+    prefab: {fileID: 3239344363843224179, guid: d640c8d45de79014584553996c8a4dee, type: 3}
+  - denomination: 1000000
     prefab: {fileID: 5369454331506477411, guid: f1f8d001a29dfe847a95cd6aaccf4da2, type: 3}
   thresholds:
-  - maxAmount: 100
-    mainDenomination: 25
+  - maxAmount: 1000
+    mainDenomination: 100
     minChips: 4
-  - maxAmount: 500
-    mainDenomination: 50
-    minChips: 6
+  - maxAmount: 5000
+    mainDenomination: 100
+    minChips: 8
   - maxAmount: 1000
     mainDenomination: 100
     minChips: 8
@@ -111,3 +111,26 @@ MonoBehaviour:
   startBatchSize: 1
   maxBatchSize: 5
   iterationsPerBatchIncrease: 3
+  viewingTime: 3
+  chipLifetime: 2
+  mainChipRatio: 0.6
+  midChipRatio: 0.3
+  minimumMainChipsThreshold: 2
+  enableGeneralLogs: 0
+  enableDetailedLogs: 0
+  soundSettings:
+    chipHitClips: []
+    floorHitClips: []
+    floorMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    minImpactVelocity: 0.5
+    maxImpactVelocity: 6
+    minVolume: 0.1
+    maxVolume: 0.8
+    pitchRange: {x: 0.9, y: 1.15}
+    perChipCooldown: 0.06
+    spawnGraceTime: 0.15
+    audioSourcesCount: 12
+    maxSoundsPer100ms: 8
+  audioSourceTemplate: {fileID: 0}

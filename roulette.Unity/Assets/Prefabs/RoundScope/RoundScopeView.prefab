@@ -3596,6 +3596,38 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[3].minChips
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[4].minChips
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[5].minChips
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[2].maxAmount
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[3].maxAmount
+      value: 500000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[4].maxAmount
+      value: 5000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[5].maxAmount
+      value: 50000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
       propertyPath: soundSettings.chipHitClips.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3611,6 +3643,22 @@ PrefabInstance:
       propertyPath: 'soundSettings.floorHitClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: f51922de977ee254dbd69d9f4de56c40, type: 3}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[2].mainDenomination
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[3].mainDenomination
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[4].mainDenomination
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210498803101622, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
+      propertyPath: thresholds.Array.data[5].mainDenomination
+      value: 1000000
+      objectReference: {fileID: 0}
     - target: {fileID: 4817683116597590315, guid: d61aceffac6a38746b76aa62edc006fb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.14
@@ -6590,6 +6638,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3593906385390282129}
     m_Modifications:
+    - target: {fileID: 173275590047426107, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0440\u043E\u0439\u0434\u0435\u043D\u043E \u043A\u0432\u043E\u0442:
+        0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 173275590047426107, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 173275590047426107, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232445071208328682, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_fontSize
       value: 0.45
@@ -6695,12 +6756,16 @@ PrefabInstance:
       value: -1.9567
       objectReference: {fileID: 0}
     - target: {fileID: 3185319739331992433, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185319739331992433, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.309
       objectReference: {fileID: 0}
     - target: {fileID: 3185319739331992433, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.8987
+      value: -0.3824
       objectReference: {fileID: 0}
     - target: {fileID: 3312025401582821027, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_text
@@ -6769,6 +6834,18 @@ PrefabInstance:
     - target: {fileID: 4590449427733727767, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: inactiveColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763838361565324922, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -3.4192
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763838361565324922, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763838361565324922, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.010999918
       objectReference: {fileID: 0}
     - target: {fileID: 4854141292490849423, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6839,6 +6916,10 @@ PrefabInstance:
       value: -0.47940004
       objectReference: {fileID: 0}
     - target: {fileID: 8061388274333662976, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+      propertyPath: quoteNum
+      value: 
+      objectReference: {fileID: 6672056636498475840}
+    - target: {fileID: 8061388274333662976, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
       propertyPath: rerollButton
       value: 
       objectReference: {fileID: 2832380713194387569}
@@ -6880,6 +6961,17 @@ PrefabInstance:
       addedObject: {fileID: 3352072975792968187}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+--- !u!114 &6672056636498475840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 173275590047426107, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
+  m_PrefabInstance: {fileID: 6841092156145442171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7009004533522388844 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4590449427733727767, guid: a6e3f0cdedb862048bcde4cc6e4c883c, type: 3}
@@ -7240,7 +7332,7 @@ PrefabInstance:
     - target: {fileID: 937380768409914894, guid: 0f1f9c22255d54041a03494b79e15060, type: 3}
       propertyPath: inputHandler
       value: 
-      objectReference: {fileID: 6715053217292720703}
+      objectReference: {fileID: 0}
     - target: {fileID: 1861093714995740680, guid: 0f1f9c22255d54041a03494b79e15060, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.88644606
@@ -7298,17 +7390,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6715053217292720703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4180146342658655644, guid: 0f1f9c22255d54041a03494b79e15060, type: 3}
-  m_PrefabInstance: {fileID: 7436135270296248227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213bd2834798bf14da58b58fa5dc5577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7278998500911926062 stripped
