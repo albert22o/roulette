@@ -5991,6 +5991,10 @@ PrefabInstance:
       propertyPath: tooltip
       value: 
       objectReference: {fileID: 1017860263}
+    - target: {fileID: 5488097197043197413, guid: 9c536ec7b8760cb43a66077b60b8c3c8, type: 3}
+      propertyPath: cancelDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5536147914032991147, guid: 9c536ec7b8760cb43a66077b60b8c3c8, type: 3}
       propertyPath: screenPadding.y
       value: 30
@@ -9335,6 +9339,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4649873481609917601, guid: 9bac636530b7a644782fc65b07b66304, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4833341454546656625, guid: 9bac636530b7a644782fc65b07b66304, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -9568,6 +9576,14 @@ PrefabInstance:
     - target: {fileID: 3593906385390282129, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017120847605855486, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238692332899314770, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7049205510631024313, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_AnchorMax.y

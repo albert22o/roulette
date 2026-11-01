@@ -9,27 +9,56 @@ public class CancelInputHandler : MonoBehaviour
     [SerializeField] private InteractionTooltip tooltip;
 
     private GameStateManager gameStateManager;
-    private bool isCancelAvailable = false;
+    private int lockCount = 0;
+    private bool isActionSubscribed = false;
 
     [Inject]
     public void Construct(GameStateManager gameStateManager)
     {
         this.gameStateManager = gameStateManager;
-        LocalizationSettings.SelectedLocaleChanged += (_) => Toggle(isCancelAvailable);
+        LocalizationSettings.SelectedLocaleChanged += (_) => UpdateTooltipState();
     }
 
-    public void Toggle(bool isCancelAvailable)
+    public void LockCancel()
     {
-        this.isCancelAvailable = isCancelAvailable;
-        if (isCancelAvailable)
+        lockCount++;
+        EvaluateState();
+    }
+
+    public void UnlockCancel()
+    {
+        lockCount--;
+        if (lockCount < 0)
         {
-            cancelActionReference.action.performed += OnCancelPressed;
-            tooltip.ShowTooltip(Loc.Get("playerInteraction.exit"));
+            Debug.LogError("lockCount shouldn't be < 0");
         }
-        else
+        EvaluateState();
+    }
+
+    private void EvaluateState()
+    {
+        Debug.Log(lockCount);
+        bool shouldBeActive = lockCount == 0;
+
+        if (shouldBeActive && !isActionSubscribed)
         {
+            isActionSubscribed = true;
+            cancelActionReference.action.performed += OnCancelPressed;
+            UpdateTooltipState();
+        }
+        else if (!shouldBeActive && isActionSubscribed)
+        {
+            isActionSubscribed = false;
             tooltip.Hide();
             cancelActionReference.action.performed -= OnCancelPressed;
+        }
+    }
+
+    private void UpdateTooltipState()
+    {
+        if (isActionSubscribed)
+        {
+            tooltip.ShowTooltip(Loc.Get("playerInteraction.exit"));
         }
     }
 
