@@ -44,6 +44,7 @@ public class BossReward
             if (otherItem != null) chosenItems.Add(otherItem);
         }
         RewardCreated?.Invoke(items);
+        gameStateManager.ChangeGameState(GameStateManager.GameState.BossReward);
     }
 
     private ItemData GetValidItemFromPool(ShopItemsTable table, HashSet<ItemData> excludedItems)
