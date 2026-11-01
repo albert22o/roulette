@@ -15,12 +15,6 @@ public class FPCInteractionPositionSetter : MonoBehaviour
 
     public void ChangePlayerPositionAndRotation()
     {
-        Vector3 camEuler = cinemachineCamera.transform.rotation.eulerAngles;
-        float pitch = camEuler.x;
-
-        if (pitch > 180f) pitch -= 360f;
-
-
-        fpc.SetPositionAndRotation(transform.position, transform.rotation, pitch);
+        fpc.SetPositionAndRotation(transform.position, transform.rotation);
     }
 }
