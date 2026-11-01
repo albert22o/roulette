@@ -52,7 +52,10 @@ public class MoneyCounterView : MonoBehaviour
 
     public IEnumerator ProcessCounting()
     {
-        winningSequence.NotifyMoneyCountStarted(timeToCountMoney);
+        if (reward == 0)
+            winningSequence.NotifyMoneyCountStarted(0);
+        else
+            winningSequence.NotifyMoneyCountStarted(timeToCountMoney);
         while (currentDisplayedMoney < reward)
         {
             currentDisplayedMoney += (int)Mathf.Lerp(0, reward, 1 / timeToCountMoney * Time.fixedDeltaTime);

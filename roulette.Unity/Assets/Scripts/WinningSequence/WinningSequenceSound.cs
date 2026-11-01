@@ -182,6 +182,7 @@ public class WinningSequenceSound : MonoBehaviour
     {
         if (countMoneyClip == null) return;
 
+        if (duration == 0) return;
         float pitch = duration > 0f ? countMoneyClip.length / duration : 1f;
         moneySource.pitch = Mathf.Clamp(pitch, 0.5f, 2f);
         moneySource.PlayOneShot(countMoneyClip, moneyVolume);
