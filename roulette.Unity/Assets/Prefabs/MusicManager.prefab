@@ -820,6 +820,13 @@ MonoBehaviour:
         pitch: 2
         minDelay: 0.1
         group: {fileID: 1851655208455168867, guid: 0e048b79a16a1ea49b1b0106b7e9d389, type: 2}
+    - Key: ShopEnter
+      Value:
+        clip: {fileID: 8300000, guid: 82cae3d4e0580884584d8c31a4ec3b46, type: 3}
+        volume: 1
+        pitch: 1
+        minDelay: 0.1
+        group: {fileID: -6080219369278504105, guid: 0e048b79a16a1ea49b1b0106b7e9d389, type: 2}
     - Key: PlaqueFall
       Value:
         clip: {fileID: 8300000, guid: dc0bda2bc417da64b986579ed17a8bef, type: 3}

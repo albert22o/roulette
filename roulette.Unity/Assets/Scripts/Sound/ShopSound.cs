@@ -43,6 +43,10 @@ public class ShopSound : MonoBehaviour
     private void OnGameStateChanged(GameStateManager.GameState state)
     {
         isSoundEnabled = state == GameStateManager.GameState.Shopping;
+        if (state == GameStateManager.GameState.Shopping)
+        {
+           soundManager.Play("ShopEnter");
+        }
     }
 
     private void OnDestroy()
@@ -90,6 +94,7 @@ public class ShopSound : MonoBehaviour
         if (isSoundEnabled == false) return;
         soundManager.Play("Purchase");
     }
+
     private void OnWheelStepPassed()
     {
         if (isSoundEnabled == false) return;
