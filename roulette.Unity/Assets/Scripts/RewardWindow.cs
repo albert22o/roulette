@@ -15,12 +15,14 @@ public class RewardWindow : MonoBehaviour
 
     private RewardCalculator rewardCalculator;
     private GameStateManager gameStateManager;
+    private CancelInputHandler cancelInputHandler;
 
     [Inject]
-    private void Construct(RewardCalculator rewardCalculator, GameStateManager gameStateManager)
+    private void Construct(RewardCalculator rewardCalculator, GameStateManager gameStateManager, CancelInputHandler cancelInputHandler)
     {
         this.rewardCalculator = rewardCalculator;
         this.gameStateManager = gameStateManager;
+        this.cancelInputHandler = cancelInputHandler;
     }
 
     private void Start()
@@ -36,11 +38,13 @@ public class RewardWindow : MonoBehaviour
     public void Show()
     {
         window.SetActive(true);
+        cancelInputHandler.LockCancel();
     }
 
     public void Hide()
     {
         window.SetActive(false);
+        cancelInputHandler.UnlockCancel();
     }
 
     public void ApplyButtonClick()

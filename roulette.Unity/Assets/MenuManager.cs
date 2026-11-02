@@ -69,7 +69,8 @@ public class MenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        startCam.SetActive(false);
+        if (startCam.activeInHierarchy)
+            StartCoroutine(DisableStartCamWithDelay(0.1f));
         SFXManager.Play("ButtonClick");
         isPaused = false;
         cursorManager.HideCursorRequest();
@@ -128,5 +129,11 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         TogglePause();
+    }
+
+    private IEnumerator DisableStartCamWithDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        startCam.SetActive(false);
     }
 }

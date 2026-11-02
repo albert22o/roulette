@@ -11,6 +11,7 @@ public class RoundStateManager
     private RoundState? currentState = null;
 
     private RoundState memoryState = RoundState.Start;
+    public RoundState CurrentState => currentState ?? RoundState.NotActive;
 
     public RoundStateManager(GameStateManager gameStateManager)
     {

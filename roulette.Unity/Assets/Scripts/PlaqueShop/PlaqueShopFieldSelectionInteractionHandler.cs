@@ -1,7 +1,6 @@
 ﻿using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlaqueShopFieldSelectionInteractionHandler : MonoBehaviour
 {

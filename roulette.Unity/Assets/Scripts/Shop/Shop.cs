@@ -144,7 +144,10 @@ public class Shop : MonoBehaviour
     public void SetInteractionAvailable(bool value)
     {
         shopInteraction.enabled = value;
-        cancelInputHandler.Toggle(value);
+        if (value)
+            cancelInputHandler.UnlockCancel();
+        else
+            cancelInputHandler.LockCancel();
     }
 
     public void StartInteraction()

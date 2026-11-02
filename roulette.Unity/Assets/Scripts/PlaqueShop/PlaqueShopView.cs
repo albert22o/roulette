@@ -12,6 +12,7 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private float cancelDelay = 2f;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
+    private bool isCancelLocked = true;
     public bool PlaquesBought { get; private set; }
 
     [Inject]
@@ -57,7 +58,7 @@ public class PlaqueShopView : MonoBehaviour
                 plaquePlaces[i].SetData(boughtItems[i]);
             }
             ToggleMouseInput(false);
-            cancelInputHandler.Toggle(false);
+            ApplyCancelLock(true);
             PlaquesBought = true;
         }
     }
@@ -74,20 +75,20 @@ public class PlaqueShopView : MonoBehaviour
 
     private void OnPlaqueClicked(PlaqueItem item)
     {
-        cancelInputHandler.Toggle(false);
+        ApplyCancelLock(true);
         plaqueController.UsePlaque(item.Data as PlaqueData);
     }
 
     public void StartInteraction()
     {
         mouseInteraction.enabled = true;
-        cancelInputHandler.Toggle(true);
+        ApplyCancelLock(false);
     }
 
     public void FinishInteraction()
     {
         mouseInteraction.enabled = false;
-        cancelInputHandler.Toggle(false);
+        ApplyCancelLock(true);
     }
 
     public void ToggleMouseInput(bool value)
@@ -106,14 +107,21 @@ public class PlaqueShopView : MonoBehaviour
         {
             plaquePlaces[i].SetData(null);
         }
-        StartCoroutine(CancelDelay());
         PlaquesBought = false;
     }
 
-    private IEnumerator CancelDelay()
+    private void ApplyCancelLock(bool shouldLock)
     {
-        yield return new WaitForSeconds(cancelDelay);
-        cancelInputHandler.enabled = true;
+        if (shouldLock && !isCancelLocked)
+        {
+            isCancelLocked = true;
+            cancelInputHandler.LockCancel();
+        }
+        else if (!shouldLock && isCancelLocked)
+        {
+            isCancelLocked = false;
+            cancelInputHandler.UnlockCancel();
+        }
     }
 }
 
