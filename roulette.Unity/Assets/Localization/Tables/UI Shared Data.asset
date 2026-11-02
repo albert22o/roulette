@@ -383,6 +383,10 @@ MonoBehaviour:
     m_Key: playerInteraction.exit
     m_Metadata:
       m_Items: []
+  - m_Id: 3944231558176768
+    m_Key: menu.restart
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
