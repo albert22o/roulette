@@ -9317,6 +9317,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 843388996192470997, guid: 9bac636530b7a644782fc65b07b66304, type: 3}
+      propertyPath: mouseSensitivity
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1609949904664403543, guid: 9bac636530b7a644782fc65b07b66304, type: 3}
       propertyPath: tooltip
       value: 
