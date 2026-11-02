@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class RoundConfig
 {
-    public int Goal;
+    public long Goal;
 
     [SerializeField] private bool isBoss;
     public bool IsBoss => isBoss;

@@ -99,7 +99,7 @@ public class GUIManager : MonoBehaviour
         bossChipsCounter.SetCount(amount);
     }
 
-    private void OnQuoteOrGoalChanged(int _)
+    private void OnQuoteOrGoalChanged(long _)
     {
         quoteProgress.SetCurrentAndMaxValue(roundManager.Quote, roundManager.Goal);
     }

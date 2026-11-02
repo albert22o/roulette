@@ -43,7 +43,7 @@ public class RewardCalculator
         progressionManager.Advance();
     }
 
-    public void CalculateReward(int betCount, int quote, int goal)
+    public void CalculateReward(int betCount, long quote, long goal)
     {
         UnusedBets = betCount;
         UnusedBetsReward = unusedBetMultiplier * betCount;

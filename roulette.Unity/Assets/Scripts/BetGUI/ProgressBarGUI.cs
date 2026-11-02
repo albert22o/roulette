@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
@@ -20,9 +20,9 @@ public class ProgressBarGUI : MonoBehaviour
         if (showText) tmp.text = $"{value}%";
     }
 
-    public void SetCurrentAndMaxValue(float currentValue, float maxValue)
+    public void SetCurrentAndMaxValue(long currentValue, long maxValue)
     {
-        slider.value = currentValue / maxValue;
+        slider.value = (float) currentValue / maxValue;
         if (showText) tmp.text = $"{currentValue}/{maxValue}";
     }
 }

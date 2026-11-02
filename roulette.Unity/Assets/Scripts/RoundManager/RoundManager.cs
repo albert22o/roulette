@@ -5,8 +5,8 @@ using static RoundStateManager;
 public class RoundManager
 {
     public event Action<int> BetCountChanged;
-    public event Action<int> QuoteChanged;
-    public event Action<int> GoalChanged;
+    public event Action<long> QuoteChanged;
+    public event Action<long> GoalChanged;
     public event Action<bool> AbleToWinChanged;
 
     public event Action Win;
@@ -14,7 +14,7 @@ public class RoundManager
     public event Action Rerolled;
     public event Action Spun;
 
-    public int Goal
+    public long Goal
     {
         get => goal;
         set
@@ -34,7 +34,7 @@ public class RoundManager
         }
     }
 
-    public int Quote
+    public long Quote
     {
         get => quote;
         private set
@@ -57,8 +57,8 @@ public class RoundManager
     public bool CanReroll => betState == RoundState.ChoosingReward;
 
     private int betCount = 3;
-    private int quote = 0;
-    private int goal = 1000;
+    private long quote = 0;
+    private long goal = 1000;
     private float goalModifier = 1f;
 
     private RoundState betState = RoundState.PlacingBets;
@@ -90,7 +90,7 @@ public class RoundManager
     {
         Quote = 0;
         BetCount = tableInfo.BetCount;
-        Goal = (int)Math.Round(progressionManager.Current.Goal * GoalModifier);
+        Goal = (long)(progressionManager.Current.Goal * GoalModifier);
         AbleToWin = false;
     }
 
