@@ -17,12 +17,19 @@ public class RoundManagerView : MonoBehaviour
     private RoundManager roundManager;
 
     [Inject]
-    public void Construct(RoundManager roundManager, Camera camera, ProgressionManager progressionManager)
+    public void Construct(RoundManager roundManager, Camera camera, ProgressionManager progressionManager, GameStateManager gameStateManager)
     {
+        gameStateManager.GameStateChanged += OnGameStateChanged;
         this.progressionManager = progressionManager;
         this.roundManager = roundManager;
         canvas.worldCamera = camera;
         LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState gameState)
+    {
+        if (gameState == GameStateManager.GameState.BettingCycle)
+           quoteNum.gameObject.SetActive(true);
     }
 
     private void LocalizationSettings_SelectedLocaleChanged(UnityEngine.Localization.Locale obj)
