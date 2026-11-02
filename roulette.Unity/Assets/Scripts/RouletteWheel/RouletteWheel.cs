@@ -13,6 +13,8 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     public event Action<int, float> BallRollIntensityChanged; // ballId, 0..1
     public event Action<int, float> BallCollided;             // ballId, 0..1
     public event Action FieldsUpdated;
+    public bool IsCurrentlyHovered => !string.IsNullOrEmpty(CurrentHoveredBallHash);
+    public string CurrentHoveredBallHash { get; private set; }
 
     [SerializeField] private SpinController spinController;
     [SerializeField] private BallsLauncher ballsLauncher;
@@ -100,11 +102,16 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
 
     private void OnBallUnHover(string hash)
     {
+        if (CurrentHoveredBallHash == hash)
+        {
+            CurrentHoveredBallHash = null;
+        }
         BallUnHover?.Invoke(hash);
     }
 
     private void OnBallHover(string hash)
     {
+        CurrentHoveredBallHash = hash;
         if (ballsManager.IsSpinning == false)
             BallHover?.Invoke(hash);
     }
@@ -129,11 +136,19 @@ public class RouletteWheel : MonoBehaviour, IRouletteWheel, IAnimateBalls
     {
         this.hitsInfo = hitsInfo.ToArray();
         AllBallsStopped?.Invoke(hitsInfo);
+
         if (ballsToAutoReroll.Count > 0)
         {
             if (rerollCoroutine != null) StopCoroutine(rerollCoroutine);
             rerollCoroutine = StartCoroutine(RerollWithDelayRoutine(ballsToAutoReroll.ToArray()));
             ballsToAutoReroll.Clear();
+        }
+        else
+        {
+            if (IsCurrentlyHovered)
+            {
+                BallHover?.Invoke(CurrentHoveredBallHash);
+            }
         }
     }
 

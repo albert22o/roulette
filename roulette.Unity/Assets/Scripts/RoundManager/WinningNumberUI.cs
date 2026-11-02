@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -48,6 +49,7 @@ public class WinningNumberUI : MonoBehaviour
             rouletteWheel.BallUnHover += OnBallUnHovered;
             rouletteWheel.BallClicked += OnBallClicked;
             rouletteWheel.AllBallsStopped += OnBallsStopped;
+            rouletteWheel.Rerolled += OnReroll;
         }
 
         if (roundStateManager != null)
@@ -64,12 +66,18 @@ public class WinningNumberUI : MonoBehaviour
             rouletteWheel.BallUnHover -= OnBallUnHovered;
             rouletteWheel.BallClicked -= OnBallClicked;
             rouletteWheel.AllBallsStopped -= OnBallsStopped;
+            rouletteWheel.Rerolled -= OnReroll;
         }
 
         if (roundStateManager != null)
         {
             roundStateManager.StateChanged -= OnRoundStateChanged;
         }
+    }
+
+    private void OnReroll()
+    {
+        Hide();
     }
 
     private void OnBallsStopped(HitInfo[] hitsInfo)
