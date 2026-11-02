@@ -53,7 +53,7 @@ public class RoundManagerView : MonoBehaviour
     private void OnConfirmWinClick()
     {
         roundManager.ConfirmWin(); 
-        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex);
+        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex + 1);
     }
 
     private void OnSpinButtonClick()
