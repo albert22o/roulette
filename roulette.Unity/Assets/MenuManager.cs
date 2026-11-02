@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class MenuManager : MonoBehaviour
@@ -53,6 +54,13 @@ public class MenuManager : MonoBehaviour
     {
         SFXManager.Play("ButtonClick");
         Application.Quit();
+    }
+
+    public void Restart()
+    {
+        SFXManager.Play("ButtonClick");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        timeScaleManager.ResetTimeScale();
     }
 
     public void TogglePause()
