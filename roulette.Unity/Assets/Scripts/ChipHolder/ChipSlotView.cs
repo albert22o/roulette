@@ -5,7 +5,6 @@ public class ChipSlotView : MonoBehaviour
 {
     public int SlotIndex { get; private set; }
     public GameObject ChipObject { get; private set; }
-    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI multiplierText;
     [SerializeField] private Animator animator;
 
@@ -44,11 +43,6 @@ public class ChipSlotView : MonoBehaviour
 
         Destroy(ChipObject);
         ChipObject = null;
-
-        if (nameText != null)
-        {
-            nameText.text = "";
-        }
     }
 
     /// <summary>
@@ -61,11 +55,6 @@ public class ChipSlotView : MonoBehaviour
     public void ClearReference()
     {
         ChipObject = null;
-
-        if (nameText != null)
-        {
-            nameText.text = "";
-        }
     }
 
     public Vector3 GetWorldPosition() => worldPosition;
@@ -103,9 +92,5 @@ public class ChipSlotView : MonoBehaviour
 
     public void SetChipName(string name)
     {
-        if (nameText != null)
-        {
-            nameText.text = name;
-        }
     }
 }
