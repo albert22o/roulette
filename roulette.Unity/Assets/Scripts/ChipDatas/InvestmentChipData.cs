@@ -7,6 +7,6 @@ public class InvestmentChipData : ChipData
 
     public override Chip CreateChip(ChipDependencies deps)
     {
-        return new InvestmentChip(deps.BetTable, this);
+        return new InvestmentChip(deps.TableInfo, this);
     }
 }

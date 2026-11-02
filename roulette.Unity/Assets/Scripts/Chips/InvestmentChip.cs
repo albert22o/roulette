@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class InvestmentChip : Chip
 {
-    private readonly BetTable betTable;
     private readonly int bonusAmount;
+    private readonly TableInfo tableInfo;
 
     public override float AppliedValue => 0;
     public override OperationType Operation => OperationType.None;
 
-    public InvestmentChip(BetTable betTable, InvestmentChipData data) : base(data)
+    public InvestmentChip(TableInfo tableInfo, InvestmentChipData data) : base(data)
     {
-        this.betTable = betTable;
         bonusAmount = data.BonusAmount;
+        this.tableInfo = tableInfo;
     }
 
     public override bool Apply()
@@ -25,11 +26,11 @@ public class InvestmentChip : Chip
 
     public override void OnAddedToHolder()
     {
-        betTable.AddAvailableSum(bonusAmount);
+        tableInfo.AddToStartSum(bonusAmount);
     }
 
     public override void OnRemovedFromHolder()
     {
-        betTable.RemoveAvailableSum(bonusAmount);
+        tableInfo.RemoveFromStartSum(bonusAmount);
     }
 }
