@@ -9375,6 +9375,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2080346184696114700, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3018790839437435595, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_Name
       value: RoundScope
@@ -9483,6 +9487,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8251862457571750364, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.249
+      objectReference: {fileID: 0}
     - target: {fileID: 8343762536128858548, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: tooltip
       value: 
@@ -9517,6 +9525,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8493249141765727303, guid: fc54237d291672944a57db5a13b89733, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800674424850705460, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_Size.z
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943043293656482780, guid: fc54237d291672944a57db5a13b89733, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8974089214672392561, guid: fc54237d291672944a57db5a13b89733, type: 3}
