@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +9,6 @@ public class PlaqueShopView : MonoBehaviour
     [SerializeField] private MouseInteraction mouseInteraction;
     [SerializeField] private SimpleTooltip tooltip;
     private CancelInputHandler cancelInputHandler;
-    [SerializeField] private float cancelDelay = 2f;
     private PlaqueShop plaqueShop;
     private PlaqueUseController plaqueController;
     private bool isCancelLocked = true;

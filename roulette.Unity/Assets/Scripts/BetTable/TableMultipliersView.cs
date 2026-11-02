@@ -99,7 +99,7 @@ public class TableMultipliersView : MonoBehaviour
             }
             else
             {
-                colorMultiplierText.text = "—";
+                colorMultiplierText.text = "";
             }
         }
 
@@ -119,7 +119,7 @@ public class TableMultipliersView : MonoBehaviour
             }
             else
             {
-                dozenMultiplierText.text = "—";
+                dozenMultiplierText.text = "";
             }
         }
 
@@ -139,7 +139,7 @@ public class TableMultipliersView : MonoBehaviour
             }
             else
             {
-                numberMultiplierText.text = "—";
+                numberMultiplierText.text = "";
             }
         }
 
@@ -149,22 +149,13 @@ public class TableMultipliersView : MonoBehaviour
         {
             if (hasZeroBet)
             {
-                int multiplier = betCalculator.GetFieldMultiplier(0, betCalculator.ZeroMultiplier);
-                zeroMultiplierText.text = Loc.Get("multipliers.zero_bet", multiplier);
+                zeroMultiplierText.text = Loc.Get("multipliers.zero", betCalculator.ZeroMultiplier);
             }
             else
             {
-                zeroMultiplierText.text = "—";
+                zeroMultiplierText.text = "";
             }
         }
-    }
-
-    private void SetEmptyTexts()
-    {
-        if (colorMultiplierText != null) colorMultiplierText.text = "—";
-        if (dozenMultiplierText != null) dozenMultiplierText.text = "—";
-        if (numberMultiplierText != null) numberMultiplierText.text = "—";
-        if (zeroMultiplierText != null) zeroMultiplierText.text = "—";
     }
 
     private void ShowGeneralMultipliers()
