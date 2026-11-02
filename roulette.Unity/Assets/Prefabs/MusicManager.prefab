@@ -636,7 +636,7 @@ MonoBehaviour:
   minHitIntervalPerBall: 0.05
   minHitImpact: 0.05
   wheelSpin:
-    source: {fileID: 1109625051674753022}
+    source: {fileID: 0}
     volumeByIntensity:
       serializedVersion: 2
       m_Curve:
