@@ -5,7 +5,6 @@ using static RoundStateManager;
 public class RoundManager
 {
     public event Action<int> BetCountChanged;
-    public event Action<int> RerollCountChanged;
     public event Action<int> QuoteChanged;
     public event Action<int> GoalChanged;
     public event Action<bool> AbleToWinChanged;
@@ -35,16 +34,6 @@ public class RoundManager
         }
     }
 
-    public int RerollCount
-    {
-        get => rerollCount;
-        private set
-        {
-            rerollCount = value;
-            RerollCountChanged?.Invoke(rerollCount);
-        }
-    }
-
     public int Quote
     {
         get => quote;
@@ -65,10 +54,9 @@ public class RoundManager
         }
 
     public float GoalModifier => goalModifier;
-    public bool CanReroll => rerollCount > 0 && betState == RoundState.ChoosingReward;
+    public bool CanReroll => betState == RoundState.ChoosingReward;
 
     private int betCount = 3;
-    private int rerollCount = 5;
     private int quote = 0;
     private int goal = 1000;
     private float goalModifier = 1f;
@@ -102,7 +90,6 @@ public class RoundManager
     {
         Quote = 0;
         BetCount = tableInfo.BetCount;
-        RerollCount = tableInfo.RerollCount;
         Goal = (int)Math.Round(progressionManager.Current.Goal * GoalModifier);
         AbleToWin = false;
     }
@@ -152,8 +139,6 @@ public class RoundManager
         }
         
         rouletteWheel.Spin();
-        rerollCount--;
-        RerollCountChanged?.Invoke(rerollCount);
     }
 
     public void ConfirmWin()
@@ -184,12 +169,6 @@ public class RoundManager
 
         ballHolder.RemoveSelectedBallsEffect();
         roundStateManager.ChangeState(RoundState.PlacingBets);
-    }
-
-    public void AddRerollCount(int amount)
-    {
-        rerollCount += amount;
-        RerollCountChanged?.Invoke(rerollCount);
     }
 
     private void OnStateChanged(RoundState newState)

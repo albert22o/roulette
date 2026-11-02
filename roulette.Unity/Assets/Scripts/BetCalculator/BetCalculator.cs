@@ -53,9 +53,8 @@ public class BetCalculator
     public event Action<int> ColorMultiplierChanged;
     public event Action<int> ZeroMultiplierChanged;
 
-    public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager, RouletteWheel rouletteWheel)
+    public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
-        rouletteWheel.BallClicked += (_) => ResetRerollCoeff();
         ballResults.BallSelected += OnBallSelected;
         roundStateManager.StateChanged += OnStateChanged;
     }

@@ -115,6 +115,7 @@ public class WinningSequence
             case SequencePhase.Finish:
                 betCalculator.GetRewardAction(betCalculator.GetRewardForBet(betInfo, betSum, hitInfo));
                 generalMultiplier = 0;
+                betCalculator.ResetRerollCoeff();
                 EndSequence?.Invoke(endSequenceType);
                 break;
         }
