@@ -56,6 +56,7 @@ public class RoundManager
     public float GoalModifier => goalModifier;
     public bool CanReroll => betState == RoundState.ChoosingReward;
 
+    private int completedBets;
     private int betCount = 3;
     private long quote = 0;
     private long goal = 1000;
@@ -84,10 +85,18 @@ public class RoundManager
         this.ballHolder = ballHolder;
         betCalculator.GetReward += OnGetReward;
         roundStateManager.StateChanged += OnStateChanged;
+        tableInfo.BetCountChanged += OnBetCountChange;
+    }
+
+    private void OnBetCountChange(int betCount)
+    {
+        this.betCount = betCount - completedBets;
+        BetCountChanged?.Invoke(this.betCount);
     }
 
     public void Reset()
     {
+        completedBets = 0;
         Quote = 0;
         BetCount = tableInfo.BetCount;
         Goal = (long)(progressionManager.Current.Goal * GoalModifier);
@@ -121,6 +130,7 @@ public class RoundManager
 
         rouletteWheel.Spin();
         betCount--;
+        completedBets++;
         BetCountChanged?.Invoke(betCount);
     }
 
