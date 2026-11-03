@@ -16,7 +16,7 @@ public class WinningSequence
 {
     public event Action<int, int, float> SequenceStart;
     public event Action<BetInfo, HitInfo> Highlight;
-    public event Action<HitInfo> ApplyBall;
+    public event Action<BetInfo, HitInfo> ApplyBall;
     public event Action<BetInfo, HitInfo> ApplyChips;
     public event Action<int, float, int> CountMoney;
     public event Action<EndSequenceType> EndSequence;
@@ -103,7 +103,7 @@ public class WinningSequence
                 Highlight?.Invoke(betInfo, hitInfo);
                 break;
             case SequencePhase.ApplyBall:
-                ApplyBall?.Invoke(hitInfo);
+                ApplyBall?.Invoke(betInfo, hitInfo);
                 break;
             case SequencePhase.ApplyChips:
                 ApplyChips?.Invoke(betInfo, hitInfo);

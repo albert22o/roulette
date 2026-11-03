@@ -68,9 +68,10 @@ public class WinningSequenceView : MonoBehaviour
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.CountMoney);
     }
 
-    private void OnApplyBall(HitInfo hitInfo)
+    private void OnApplyBall(BetInfo betInfo, HitInfo hitInfo)
     {
         ballHolder.ApplySelectedBall(hitInfo.BallHash, hitInfo);
+        winningSequence.CompareAndDisplayMaxMultiplier(betCalculator.GetMaxWinningMultiplier(betInfo, hitInfo));
         animateBalls.AnimateBall(hitInfo.BallHash);
         winningSequence.CallPhaseExecution(WinningSequence.SequencePhase.ApplyChips);
     }
