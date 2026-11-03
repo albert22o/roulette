@@ -107,6 +107,8 @@ public class RoundManager
     {
         goalModifier += delta;
         Goal = (long)(progressionManager.Current.Goal * GoalModifier);
+        if (quote >= goal)
+            AbleToWin = true;
     }
 
     public void Spin()
