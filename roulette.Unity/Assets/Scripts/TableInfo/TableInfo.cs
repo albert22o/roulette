@@ -19,6 +19,7 @@ public class TableInfo
     private PocketData[] startPockets;
 
     public event Action<int> StartSumChanged;
+    public event Action<int> BetCountChanged;
 
     public TableInfo(TableConfig config)
     {
@@ -61,7 +62,12 @@ public class TableInfo
         StartSumChanged?.Invoke(startSum);
     }
 
-    public void AddToBetCount(int amount) => BetCount += amount;
+    public void AddToBetCount(int amount)
+    {
+        BetCount += amount;
+        BetCountChanged?.Invoke(BetCount);
+    }
+
     public void RemoveFromStartSum(int amount) => startSum -= amount;
 
     private Dictionary<int, BetInfo> BuildPocketMapping()

@@ -16,13 +16,16 @@ public class RewardWindow : MonoBehaviour
     private RewardCalculator rewardCalculator;
     private GameStateManager gameStateManager;
     private CancelInputHandler cancelInputHandler;
+    private RoundManager roundManager;
 
     [Inject]
-    private void Construct(RewardCalculator rewardCalculator, GameStateManager gameStateManager, CancelInputHandler cancelInputHandler)
+    private void Construct(RewardCalculator rewardCalculator, GameStateManager gameStateManager,
+        CancelInputHandler cancelInputHandler, RoundManager roundManager)
     {
         this.rewardCalculator = rewardCalculator;
         this.gameStateManager = gameStateManager;
         this.cancelInputHandler = cancelInputHandler;
+        this.roundManager = roundManager;
     }
 
     private void Start()
@@ -51,6 +54,7 @@ public class RewardWindow : MonoBehaviour
     {
         rewardCalculator.ReceiveReward();
         Hide();
+        roundManager.Reset();
     }
 
     private void UpdateRewardWindow()
