@@ -97,6 +97,7 @@ public class RoundManager
     public void ModifiGoalModifier(float delta)
     {
         goalModifier += delta;
+        Goal = (long)(progressionManager.Current.Goal * GoalModifier);
     }
 
     public void Spin()
@@ -176,7 +177,6 @@ public class RoundManager
         betState = newState;
         if (newState == RoundState.Start)
         {
-            Reset();
             roundStateManager.ChangeState(RoundState.PlacingBets);
         }
     }
