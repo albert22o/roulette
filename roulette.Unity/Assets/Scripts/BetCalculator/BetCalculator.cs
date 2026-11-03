@@ -56,7 +56,13 @@ public class BetCalculator
     public BetCalculator(BallResults ballResults, RoundStateManager roundStateManager)
     {
         ballResults.BallSelected += OnBallSelected;
+        ballResults.Win += OnRoundWin;
         roundStateManager.StateChanged += OnStateChanged;
+    }
+
+    private void OnRoundWin()
+    {
+        ResetRerollCoeff();
     }
 
     public void DecreaseRerollCoeff()
@@ -177,6 +183,8 @@ public class BetCalculator
             return;
         EndRound?.Invoke(info);
     }
+
+
 
     public int GetRewardForBet(BetInfo betInfo, int amount, HitInfo hitInfo)
     {
