@@ -43,7 +43,7 @@
     }
     public override bool Apply()
     {
-        if (applyConditionsMatched)
+        if (applyConditionsMatched && stackChipData.BonusAmount != 0)
         {
             betCalculator.ModifyGeneralModifier(stackChipData.BonusAmount);
             multiplierApplied = true;
