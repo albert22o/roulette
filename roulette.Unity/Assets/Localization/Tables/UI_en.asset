@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 934273084
-    m_Localized: 'Quotas completed: {0}'
+    m_Localized: 'Quotas completed: {0} / {1}'
     m_Metadata:
       m_Items: []
   - m_Id: 934273085

@@ -4,6 +4,7 @@
     public int CurrentIndex => currentIndex;
     public bool HasNext => currentIndex < roundsConfig.Rounds.Count - 1;
 
+    public int RoundsCount => roundsConfig.Rounds.Count;
     private readonly RoundsConfig roundsConfig;
     private readonly GameStateManager gameStateManager;
     private int currentIndex = 0;

@@ -34,13 +34,13 @@ public class RoundManagerView : MonoBehaviour
 
     private void LocalizationSettings_SelectedLocaleChanged(UnityEngine.Localization.Locale obj)
     {
-        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex);
+        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex, progressionManager.RoundsCount);
     }
 
     public void Start()
     {
         roundManager.AbleToWinChanged += OnAbleToWinChanged;
-        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex);
+        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex, progressionManager.RoundsCount);
 
         OnAbleToWinChanged(roundManager.AbleToWin);
         
@@ -52,8 +52,8 @@ public class RoundManagerView : MonoBehaviour
 
     private void OnConfirmWinClick()
     {
-        roundManager.ConfirmWin(); 
-        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex + 1);
+        roundManager.ConfirmWin();
+        quoteNum.text = Loc.Get("progress.completed_quotas", progressionManager.CurrentIndex + 1, progressionManager.RoundsCount);
     }
 
     private void OnSpinButtonClick()
