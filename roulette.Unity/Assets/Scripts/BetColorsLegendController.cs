@@ -37,10 +37,12 @@ public class BetColorsLegendController : MonoBehaviour
 
     void Start()
     {
+        OnBetChanged(0, 0);
         roundStateManager.StateChanged += OnRoundStateChanged;
         betCalculator.ColorMultiplierChanged += OnColorMultiplierChanged;
         betCalculator.DozenMultiplierChanged += OnDozenMultiplierChanged;
         betCalculator.NumMultiplierChanged += OnNumMultiplierChanged;
+        betTable.BetsCleared += (_) => OnBetChanged(0, 0);
         betTable.ChangeAmountByIndex += OnBetChanged;
          OnNumMultiplierChanged(betCalculator.NumMultiplier);
         OnDozenMultiplierChanged(betCalculator.DozenMultiplier);
@@ -96,8 +98,7 @@ public class BetColorsLegendController : MonoBehaviour
 
     private void OnRoundStateChanged(RoundStateManager.RoundState state)
     {
-        visibleByState = state == RoundStateManager.RoundState.WheelSpining ||
-                         state == RoundStateManager.RoundState.ChoosingReward;
+        visibleByState = state != RoundStateManager.RoundState.NotActive;
         RefreshVisibility();
     }
 }
