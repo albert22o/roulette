@@ -1249,7 +1249,7 @@ MonoBehaviour:
   - {fileID: 1889428634186802230}
   - {fileID: 8989331756827094103}
   defaultBurnMaterial: {fileID: 0}
-  defaultBurnDuration: 1.5
+  defaultBurnDuration: 0
   defaultDissolveProperty: _Disolve
 --- !u!114 &5987045372018444018
 MonoBehaviour:
