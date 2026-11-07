@@ -1,15 +1,22 @@
-using System;
+﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class DealerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-
+    private SFXManager SfxManager;
     private readonly int collectTrigger = Animator.StringToHash("Collect");
     private readonly int gameOverTrigger = Animator.StringToHash("GameOver");
 
     public event Action GameOverAnimationFinished;
     public event Action KillPlayer, ApproachPlayer;
+
+    [Inject]
+    public void Construct(SFXManager SfxManager)
+    {
+        this.SfxManager = SfxManager;
+    }
 
     public void PlayCollectAnimation()
     {
@@ -29,6 +36,11 @@ public class DealerAnimation : MonoBehaviour
     public void OnApproachPlayer()
     {
         ApproachPlayer?.Invoke();
+    }
+
+    public void OnPlaySound()
+    {
+        SfxManager.Play("Scream");
     }
 
     public void OnKillPlayer()
