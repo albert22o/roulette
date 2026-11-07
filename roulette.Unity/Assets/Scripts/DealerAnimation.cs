@@ -38,9 +38,14 @@ public class DealerAnimation : MonoBehaviour
         ApproachPlayer?.Invoke();
     }
 
+    public void OnStartCutscene()
+    {
+        SfxManager.Play("CreepyMusic");
+    }
+
     public void OnPlaySound()
     {
-        SfxManager.Play("Scream");
+        SfxManager.Play("HitTheTable");
     }
 
     public void OnKillPlayer()
