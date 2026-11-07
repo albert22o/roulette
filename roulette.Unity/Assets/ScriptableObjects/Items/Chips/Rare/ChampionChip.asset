@@ -35,7 +35,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   cost: 6
   Prefab: {fileID: 5349637715982527649, guid: c146ebf2872e16045ac584c5b9bbbf27, type: 3}
-  MultiplierPerWin: 0.25
+  MultiplierPerWin: 0.5
   references:
     version: 2
     RefIds: []

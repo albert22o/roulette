@@ -33,7 +33,7 @@ MonoBehaviour:
   shopPrefab: {fileID: 4243324379214917624, guid: 15906b6b56e83de4fb0ed60f4647fc53, type: 3}
   rarityType: 1
   Icon: {fileID: 0}
-  multiplier: 1
+  multiplier: 2
   references:
     version: 2
     RefIds: []

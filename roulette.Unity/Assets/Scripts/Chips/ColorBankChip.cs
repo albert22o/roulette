@@ -10,6 +10,8 @@ public class ColorBankChip : Chip
     private int currentBonus = 0;
     private bool bonusApplied = false;
     private bool applyConditionsMatched;
+    private int bonusDelta;
+
     public override OperationType Operation => OperationType.Add;
 
     public ColorBankChip(
@@ -17,7 +19,8 @@ public class ColorBankChip : Chip
         BallResults ballResults,
         BetTable betTable,
         ColorType targetColor,
-        ColorBankChipData data) : base(data)
+        ColorBankChipData data,
+        int bonusDelta) : base(data)
     {
         this.betCalculator = betCalculator;
         this.ballResults = ballResults;
@@ -25,6 +28,7 @@ public class ColorBankChip : Chip
         this.targetColor = targetColor;
 
         this.ballResults.BallSelected += OnBallSelected;
+        this.bonusDelta = bonusDelta;
     }
 
     public override float AppliedValue => currentBonus;
@@ -54,7 +58,7 @@ public class ColorBankChip : Chip
     {
         if (hit?.FieldColor == targetColor)
         {
-            currentBonus++;
+            currentBonus += bonusDelta;
         }
 
         applyConditionsMatched = BetTableExtentions.CheckColorMatch(betTable, hit) ||

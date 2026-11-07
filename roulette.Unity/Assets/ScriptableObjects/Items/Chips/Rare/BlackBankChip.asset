@@ -36,6 +36,7 @@ MonoBehaviour:
   cost: 6
   Prefab: {fileID: 4080567295898956292, guid: 4fb70a8c8065a0a4ca843cbd100e616f, type: 3}
   targetColor: 1
+  bonusDelta: 2
   references:
     version: 2
     RefIds: []

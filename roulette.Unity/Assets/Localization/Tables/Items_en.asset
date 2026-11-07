@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544563
-    m_Localized: +0 to the multiplier. Adds +1 every time a black number comes up.
+    m_Localized: +0 to the multiplier. Adds +2 every time a black number comes up.
       A number counts when you pick a ball that landed on it
     m_Metadata:
       m_Items: []
@@ -241,7 +241,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544565
-    m_Localized: x1 to the multiplier, adds +0.25 to this value for every quota beaten
+    m_Localized: x1 to the multiplier, adds +0.5 to this value for every quota beaten
       twice over
     m_Metadata:
       m_Items: []
@@ -332,7 +332,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544587
-    m_Localized: +0 to the multiplier. Adds +1 every time a red number comes up.
+    m_Localized: +0 to the multiplier. Adds +2 every time a red number comes up.
       A number counts when you pick a ball that landed on it
     m_Metadata:
       m_Items: []
@@ -373,7 +373,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544597
-    m_Localized: +1 to the 0 multiplier
+    m_Localized: +2 to the 0 multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544598
@@ -381,7 +381,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544599
-    m_Localized: +1 to the number multiplier
+    m_Localized: +2 to the number multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544600
@@ -389,7 +389,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544601
-    m_Localized: +1 to the color multiplier
+    m_Localized: +2 to the color multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544602
@@ -397,7 +397,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544603
-    m_Localized: +1 to the dozen multiplier
+    m_Localized: +2 to the dozen multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544604
@@ -405,7 +405,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544605
-    m_Localized: +2 to the number multiplier
+    m_Localized: +3 to the number multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544606
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544607
-    m_Localized: +2 to the color multiplier
+    m_Localized: +3 to the color multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544608
@@ -421,7 +421,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544609
-    m_Localized: +2 to the dozen multiplier
+    m_Localized: +3 to the dozen multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544610
@@ -429,7 +429,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544611
-    m_Localized: +2 to all multipliers
+    m_Localized: +3 to all multipliers
     m_Metadata:
       m_Items: []
   - m_Id: 292544612
@@ -437,7 +437,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544613
-    m_Localized: +2 to the 0 multiplier
+    m_Localized: +3 to the 0 multiplier
     m_Metadata:
       m_Items: []
   - m_Id: 292544614
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 292544615
-    m_Localized: +1 to all multipliers
+    m_Localized: +2 to all multipliers
     m_Metadata:
       m_Items: []
   - m_Id: 292544616
