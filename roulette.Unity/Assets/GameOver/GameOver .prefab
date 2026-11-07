@@ -634,6 +634,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4717036346623647593}
     m_Modifications:
+    - target: {fileID: 715102171681768961, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2047912125484199242, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -910,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950130970576923185, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_text
-      value: "\u041D\u0430\u0447\u0430\u0442\u044C \u0441\u043D\u0430\u0447\u0430\u043B\u0430"
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 3950130970576923185, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -958,7 +962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064765126272586059, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -167
+      value: -192
       objectReference: {fileID: 0}
     - target: {fileID: 6561123493750137310, guid: a0c14af9ade2dcb4a9a201730e16f5c9, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
