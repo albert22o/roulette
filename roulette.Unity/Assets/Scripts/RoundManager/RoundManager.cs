@@ -23,7 +23,7 @@ public class RoundManager
             GoalChanged?.Invoke(goal);
         }
     }
-    
+
     public int BetCount
     {
         get => betCount;
@@ -44,14 +44,15 @@ public class RoundManager
         }
     }
 
-    public bool AbleToWin {
-        get => ableToWin; 
+    public bool AbleToWin
+    {
+        get => ableToWin;
         set
-            {
-                ableToWin = value;
-                AbleToWinChanged?.Invoke(value);
-            }
+        {
+            ableToWin = value;
+            AbleToWinChanged?.Invoke(value);
         }
+    }
 
     public float GoalModifier => goalModifier;
     public bool CanReroll => betState == RoundState.ChoosingReward;
@@ -74,7 +75,7 @@ public class RoundManager
 
     public RoundManager(IRouletteWheel rouletteWheel, RoundStateManager roundStateManager,
         TableInfo tableInfo, ProgressionManager progressionManager, BetCalculator betCalculator,
-        BallHolder ballHolder, BetTable betTable)
+        BallHolder ballHolder, BetTable betTable, BallResults ballResults)
     {
         this.rouletteWheel = rouletteWheel;
         this.betTable = betTable;
@@ -86,6 +87,7 @@ public class RoundManager
         betCalculator.GetReward += OnGetReward;
         roundStateManager.StateChanged += OnStateChanged;
         tableInfo.BetCountChanged += OnBetCountChange;
+        ballResults.Win += ForceWin;
     }
 
     private void OnBetCountChange(int betCount)
@@ -146,11 +148,11 @@ public class RoundManager
         rouletteWheel.ClearBalls();
         roundStateManager.ChangeState(RoundState.WheelSpining);
 
-        foreach(var ballInfo in ballHolder.Balls)
+        foreach (var ballInfo in ballHolder.Balls)
         {
             rouletteWheel.AddBall(ballInfo.Hash, ballInfo.BallInfoData.VisualComponent);
         }
-        
+
         rouletteWheel.Spin();
     }
 

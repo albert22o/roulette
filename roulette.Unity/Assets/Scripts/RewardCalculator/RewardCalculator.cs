@@ -21,13 +21,12 @@ public class RewardCalculator
     private readonly ProgressionManager progressionManager;
 
     public RewardCalculator(RoundManager roundManager, GoldenChips goldenChips,
-        RoundStateManager roundStateManager, BallResults ballResults, ProgressionManager progressionManager)
+        RoundStateManager roundStateManager, ProgressionManager progressionManager)
     {
         this.roundManager = roundManager;
         this.goldenChips = goldenChips;
         this.roundStateManager = roundStateManager;
         this.progressionManager = progressionManager;
-        ballResults.Win += OnWin;
         roundManager.Win += OnWin;
     }
 
