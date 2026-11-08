@@ -36,7 +36,7 @@ MonoBehaviour:
   cost: 6
   Prefab: {fileID: 6150449734775391988, guid: bed20a51b3cb2734889fa22ad92a7a1b, type: 3}
   SlotsToRemove: -2
-  Multiplier: 0
+  Multiplier: 1
   references:
     version: 2
     RefIds: []

@@ -34,7 +34,7 @@ public class ChangeChipSlot : Chip
 
     public override bool Apply()
     {
-        if (applyConditionsMatched)
+        if (applyConditionsMatched && changeChipSlotData.Multiplier != 1)
         {
             betCalculator.MultiplyGeneralModifier(changeChipSlotData.Multiplier);
             multiplierApplied = true;
