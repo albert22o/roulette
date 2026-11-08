@@ -55,12 +55,18 @@ public class ChangeChipSlot : Chip
     public override void OnAddedToHolder()
     {
         base.OnAddedToHolder();
-        chipHolder.RemoveLastSlots(changeChipSlotData.SlotsToRemove);
+        if (changeChipSlotData.SlotsToRemove < 0)
+            chipHolder.AddSlots(-changeChipSlotData.SlotsToRemove);
+        else
+            chipHolder.RemoveLastSlots(changeChipSlotData.SlotsToRemove);
     }
 
     public override void OnRemovedFromHolder()
     {
         base.OnRemovedFromHolder();
-        chipHolder.AddSlots(changeChipSlotData.SlotsToRemove);
+        if (changeChipSlotData.SlotsToRemove < 0)
+            chipHolder.RemoveLastSlots(changeChipSlotData.SlotsToRemove);
+        else
+            chipHolder.AddSlots(changeChipSlotData.SlotsToRemove);
     }
 }
