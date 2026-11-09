@@ -65,7 +65,7 @@ public class ChangeChipSlot : Chip
     {
         base.OnRemovedFromHolder();
         if (changeChipSlotData.SlotsToRemove < 0)
-            chipHolder.RemoveLastSlots(changeChipSlotData.SlotsToRemove);
+            chipHolder.RemoveLastSlots(-changeChipSlotData.SlotsToRemove);
         else
             chipHolder.AddSlots(changeChipSlotData.SlotsToRemove);
     }
